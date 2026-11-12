@@ -8,7 +8,7 @@ import { PageShell } from '@/components/layout/PageShell';
 import { MoneyInput } from '@/components/money/MoneyInput';
 import { MoneyText } from '@/components/money/MoneyText';
 import { PercentInput } from '@/components/money/PercentInput';
-import { formatPercent } from '@/lib/money';
+import { formatPercent, NBSP } from '@/lib/money';
 import { Fuerte, FUERTE_STATES } from '@/features/companion/Fuerte';
 import { Avatar } from '@/components/ui/Avatar';
 import { BentoCard } from '@/components/ui/BentoCard';
@@ -481,9 +481,9 @@ export function StyleguidePage() {
 
       <Section id="progreso" title="Progreso y carga">
         <Panel className="flex flex-col gap-4">
-          <ProgressBar value={progress} label="Fondo de emergencia" valueText={`${progress} %`} />
+          <ProgressBar value={progress} label="Fondo de emergencia" valueText={`${progress}${NBSP}%`} />
           <ProgressBar value={100} label="Guías del nivel 1" valueText={'100 %'} tone="success" />
-          <ProgressBar value={progress} size="lg" label="Meta de ahorro (barra gruesa)" valueText={`${progress} %`} />
+          <ProgressBar value={progress} size="lg" label="Meta de ahorro (barra gruesa)" valueText={`${progress}${NBSP}%`} />
           <div className="flex flex-col gap-2">
             <p className="text-label-medium text-on-surface">Barra segmentada</p>
             <SegmentedProgress
