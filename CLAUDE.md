@@ -30,7 +30,7 @@
 | D-50 | **Todo el entorno del participante simula ser una billetera virtual y plataforma de inversión.** Se aprende usándola y cada sección se **desbloquea por logros y metas** (1.3, 5.0). Las lecciones, evaluaciones, simuladores y metas pasan a vivir dentro de esas secciones | Confirmada |
 | D-52 | **El naranja de Fuerte es la única excepción a la paleta fría**, en todo el entorno del participante (no solo en el escape room), con relleno plano, sin degradés, y solo en el personaje y sus luces (2.1.1, 5.0.1; antes D-32 de Claude Code) | Confirmada |
 | D-53 | **Apartado "Ahorro" básico desde el nivel 1:** la misión 1 crea un único apartado sin meta; el nivel 4 suma apartados con meta y el fondo de emergencia (5.0, 5.3) | Confirmada |
-| D-54 | **Recibo de sueldo de demo:** se usa el recibo del taller, con empleador Andina Servicios S.A. y **neto de $ 1.284.958,86**; ese neto es el sueldo que se cobra en la misión 1 (antes D-31 de Claude Code) | Confirmada |
+| D-54 | **Recibo de sueldo de demo:** se usa el recibo del taller, con empleador Andina Servicios S.A. y **neto de $ 1.284.958,86**; ese neto es el sueldo que se cobra en la misión 1 (antes D-31 de Claude Code). El recibo se muestra **tal como está en el taller, con su nombre ficticio y rotulado "Recibo de ejemplo"**, no a nombre de Mariana ni de Diego: tienen puestos distintos y el mismo sueldo de práctica es una simplificación (respuesta a Q-11) | Confirmada |
 | D-55 | **Evento sorpresa de la misión 1:** una suscripción ficticia de **$ 4.990** que se debita sin aviso, para trabajar gastos hormiga y débitos programados (antes D-38 de Claude Code) | Confirmada |
 | D-56 | **Crédito vive dentro de Pagar** como subsección "Tarjeta y préstamos" (nivel 5); los destinos siguen siendo 5 (5.3) | Confirmada |
 | D-57 | **Desafío de nivel armado con los bancos de sus módulos:** toma preguntas del banco de cada módulo del nivel; la insignia de un módulo sale de su parte del desafío. Si se agotan los intentos, no se bloquea para siempre: el desbloqueo pasa al tutor y no se pierde nada (5.0, 5.1) | Confirmada |
@@ -40,6 +40,8 @@
 | D-59 | **Misiones de fase A: 13** (las 7 numeradas de 5.3 y las 6 de la tabla de 5.0). Las 6 adicionales son cortas, de 2 a 4 minutos | Confirmada |
 | D-60 | **Fecha de la demo:** `DEMO_TODAY` = 16/11/2026; programa "Bienestar financiero 2026", iniciado el 03/08/2026, coherente con la verificación de los Anexos B, C y D (11/11/2026) | Confirmada |
 | D-61 | **Alcance del contenido en fase A:** cada uno de los 16 módulos tiene objetivo, **una guía completa** y su parte del banco de preguntas; las guías 2 y 3 de cada módulo pasan a fase B. Claude Code escribe el borrador de cada tanda junto con su sección y Lourdes lo revisa por tanda, con las ampliaciones marcadas para Kevin | Provisoria, Lourdes puede ampliar |
+| D-64 | **La quinta dimensión de "Conocerte" es "Metas e inversión"** (antes "Metas"), porque agrupa los módulos 12 a 15 (D-116 de Claude Code). En el código sigue siendo `goals` | Confirmada |
+| D-65 | **El módulo 17 tiene una sola guía en fase A, en el nivel 2.** La parte "cuenta o fondo" del nivel 6 la cubren la guía del módulo 11 y las tarjetas de la misión 4 (D-117 de Claude Code, opción a) | Confirmada |
 | D-29 | **Invertir (cuenta comitente de práctica, SIM-14)** pasa a la **fase A** como nivel 7 (5.0, 5.4); cripto queda en fase B | Confirmada |
 | D-24 | La presentación del taller **no se sube** al repositorio: la base de contenido es su resumen en el Anexo A | Confirmada |
 | D-25 | Los datos regulatorios salen de fuentes oficiales (BCRA, CNV, BYMA, Caja de Valores, argentina.gob.ar, INDEC) y se registran en el Anexo B con fecha de verificación | Confirmada |
@@ -485,7 +487,7 @@ Priorizadas con la misma matriz de decisión que Rumbo (valor para el usuario 40
 
 - Flujo por pasos de **10 a 12 preguntas**: hábitos (¿llevas registro de gastos?, ¿tienes ahorro para imprevistos?, ¿cómo pagas la tarjeta?) y conocimientos (qué es la TNA, qué pasa con el dinero con inflación).
 - Preguntas de hábitos **sin respuestas correctas ni juicio**; preguntas de conocimiento con retroalimentación al final, no durante.
-- Resultado por **cinco dimensiones**: presupuesto, ahorro y emergencias, deudas y crédito, inflación y tasas, metas. Gráfico de barras horizontales (no radar: se lee mejor y es más accesible) con su tabla.
+- Resultado por **cinco dimensiones**: presupuesto, ahorro y emergencias, deudas y crédito, inflación y tasas, metas e inversión (D-64). Gráfico de barras horizontales (no radar: se lee mejor y es más accesible) con su tabla.
 - Nivel por dimensión (inicial, intermedio, avanzado) y **ruta propuesta**: orden de módulos según las dimensiones más débiles, explicada ("Empezamos por presupuesto porque es la base de todo lo demás").
 - La persona puede reordenar las guías **dentro de un nivel ya desbloqueado**; saltar un nivel equivale a hacer su desafío de suficiencia ("Ya sé esto"); el diagnóstico se puede repetir al final para medir el avance (pre y post).
 
@@ -631,7 +633,7 @@ Cada simulador sigue la anatomía de 2.2.1 (datos, resultado, frase, gráfico, "
 | 3 | **Presupuesto** | 10 movimientos categorizados y desafío del nivel 2 | 3 Presupuesto y gastos hormiga | 7 Mes completo (se puede hacer desde acá) | SIM-1 |
 | 4 | **Apartados y metas** (varios apartados con meta, incluido el fondo de emergencia; el apartado "Ahorro" del nivel 1 se puede convertir en uno con meta) | Un mes cerrado con presupuesto en verde y desafío del nivel 3 | 4 Fondo de emergencia | Crea tu fondo de emergencia | SIM-2, SIM-8 |
 | 5 | **Crédito** (tarjeta, préstamos, cuotas) | Desafío del nivel 4 | 5 El orden importa; 6 Tarjeta y CFT; 7 Salir de deudas; 8 Cuotas o contado | 5 El préstamo tentador; Sal de tus deudas | SIM-6, SIM-7, SIM-9 |
-| 6 | **Rendir** (cuenta remunerada, fondo money market, plazo fijo y UVA de práctica) | Apartado de emergencia creado y desafío del nivel 5 | 9 Inflación; 10 Tasas; 11 Plazo fijo, UVA y money market; 17 Billeteras (parte cuenta o fondo) | 4 ¿Cuenta o fondo? | SIM-3, SIM-4, SIM-5, SIM-12 |
+| 6 | **Rendir** (cuenta remunerada, fondo money market, plazo fijo y UVA de práctica) | Apartado de emergencia creado y desafío del nivel 5 | 9 Inflación; 10 Tasas; 11 Plazo fijo, UVA y money market (la parte "cuenta o fondo" del 17 va en la misión 4, D-65) | 4 ¿Cuenta o fondo? | SIM-3, SIM-4, SIM-5, SIM-12 |
 | 7 | **Invertir** (cuenta comitente de práctica, SIM-14) | **Fondo de emergencia de al menos 3 meses de gastos, sin deudas de tasa alta en la simulación, desafío del nivel 6 y test de perfil de inversor** | 12 Ahorrar e invertir; 13 Perfil y bróker; 14 Mercado de capitales; 15 CEDEARs | Abre tu cuenta comitente; Tu primer CEDEAR de ETF; Aguanta la caída | SIM-10, SIM-11 |
 | 8 | **Cripto** (fase B) | Nivel 7 completo y guía de riesgos | 16 Criptomonedas | Ninguna | Ninguna |
 
