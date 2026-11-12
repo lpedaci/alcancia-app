@@ -1,4 +1,5 @@
-import { useState, type ReactNode } from 'react';
+import { InPageLink, SkipLink } from '@/components/layout/InPageLink';
+import { type ReactNode, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 import { CASE_STUDY_URL, DOCS_URL, GITHUB_PROFILE_URL, LINKEDIN_URL, PORTFOLIO_URL } from '@/app/links';
@@ -6,6 +7,7 @@ import { Logo } from '@/components/layout/Logo';
 import { Avatar, ROLE_ACCENT } from '@/components/ui/Avatar';
 import { Button } from '@/components/ui/Button';
 import { Icon } from '@/components/ui/Icon';
+import { IconButton } from '@/components/ui/IconButton';
 import { ProgressBar } from '@/components/ui/ProgressBar';
 import { SegmentedButton } from '@/components/ui/SegmentedButton';
 import levels from '@/data/levels.json';
@@ -13,6 +15,7 @@ import seed from '@/data/seed.json';
 import { InflationSimulator } from '@/features/simulators/InflationSimulator';
 import { installmentsPresentValue } from '@/lib/finance';
 import { formatMoney } from '@/lib/money';
+import { useShouldReduceMotion } from '@/lib/motion';
 import { cn } from '@/lib/utils';
 import type { Role } from '@/types/domain';
 import { AppPhone, AppTopBar, BottomNav, type PhoneScreen, PhoneFrame, StatusBar } from './PhoneMockup';
@@ -112,12 +115,7 @@ export function LandingPage() {
 
   return (
     <div className="bg-surface-container-lowest">
-      <a
-        href="#main-content"
-        className="sr-only rounded-sm bg-surface-container-lowest px-4 py-3 text-label-large text-primary focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:shadow-elevation-1"
-      >
-        {t('app.skipToContent')}
-      </a>
+      <SkipLink />
 
       {/* 1 · Top bar: logo, sections in the center, one filled action */}
       <header className="sticky top-0 z-40 border-b border-outline-variant bg-surface-container-lowest">
@@ -129,15 +127,15 @@ export function LandingPage() {
             <ul className="flex items-center gap-1">
               {NAV.map(([id, key]) => (
                 <li key={id}>
-                  <a href={`#${id}`} className="rounded-full px-3 py-2 text-label-large text-on-surface-variant hover:bg-surface-container hover:text-on-surface">
+                  <InPageLink to={id} className="rounded-full px-3 py-2 text-label-large text-on-surface-variant hover:bg-surface-container hover:text-on-surface">
                     {t(`landing.${key}`)}
-                  </a>
+                  </InPageLink>
                 </li>
               ))}
             </ul>
           </nav>
           <Button asChild size="s" className="col-start-3">
-            <a href="#recorridos">{t('landing.chooseJourney')}</a>
+            <InPageLink to="recorridos">{t('landing.chooseJourney')}</InPageLink>
           </Button>
         </div>
       </header>
@@ -165,7 +163,7 @@ export function LandingPage() {
               <Reveal delay={STAGGER * 3} className="w-full sm:w-auto">
                 <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
                   <Button asChild size="m">
-                    <a href="#recorridos">{t('landing.chooseJourney')}</a>
+                    <InPageLink to="recorridos">{t('landing.chooseJourney')}</InPageLink>
                   </Button>
                   <Button asChild size="m" variant="outlined" trailingIcon="open_in_new">
                     <External href={CASE_STUDY_URL}>{t('landing.hero.caseStudy')}</External>
@@ -338,7 +336,7 @@ export function LandingPage() {
         <Section id="simulador">
           <SectionTitle id="simulador" eyebrow={t('landing.simulator.eyebrow')} title={t('landing.simulator.title')} intro={t('landing.simulator.intro')} />
           <Reveal>
-            <InflationSimulator headingLevel="h3" idPrefix="g0-sim3" />
+            <InflationSimulator headingLevel="h3" idPrefix="g0-sim3" compare={false} />
           </Reveal>
         </Section>
 
@@ -383,7 +381,7 @@ export function LandingPage() {
                 {t('landing.final.title')}
               </h2>
               <Button asChild size="m" variant="tonal">
-                <a href="#recorridos">{t('landing.chooseJourney')}</a>
+                <InPageLink to="recorridos">{t('landing.chooseJourney')}</InPageLink>
               </Button>
             </div>
           </Reveal>
@@ -399,9 +397,9 @@ export function LandingPage() {
           <nav aria-labelledby="footer-explore" className="flex flex-col gap-2">
             <h2 id="footer-explore" className="text-title-small text-on-surface">{t('landing.footer.explore')}</h2>
             {NAV.map(([id, key]) => (
-              <a key={id} href={`#${id}`} className={footerLink}>
+              <InPageLink key={id} to={id} className={footerLink}>
                 {t(`landing.${key}`)}
-              </a>
+              </InPageLink>
             ))}
           </nav>
           <nav aria-labelledby="footer-project" className="flex flex-col gap-2">
@@ -447,11 +445,38 @@ export function LandingPage() {
  * its edges from 1280 px, and a segmented button to see three real screens. The cards enter after
  * the phone, once; nothing floats in a loop (2.6).
  */
+const SCREEN_ORDER: PhoneScreen[] = ['home', 'levels', 'tool'];
+/** Time on each screen: long enough to read it (about 30 words each). */
+export const SCREEN_MS = 6000;
+
 function HeroPhone() {
   const { t } = useTranslation();
+  const reduce = useShouldReduceMotion();
   const [screen, setScreen] = useState<PhoneScreen>('home');
+  // Auto-rotation (WCAG 2.2.2): it stops with the pause button, while the pointer or the focus is on
+  // the phone, after choosing a screen by hand, and it never starts with reduced motion.
+  const [paused, setPaused] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  const running = !paused && !hovered && !reduce;
+
+  useEffect(() => {
+    if (!running) return;
+    const id = window.setTimeout(() => {
+      setScreen((current) => SCREEN_ORDER[(SCREEN_ORDER.indexOf(current) + 1) % SCREEN_ORDER.length]!);
+    }, SCREEN_MS);
+    return () => window.clearTimeout(id);
+  }, [running, screen]);
+
   return (
-    <div className="flex min-w-0 flex-col items-center gap-6">
+    <div
+      className="flex min-w-0 flex-col items-center gap-6"
+      onPointerEnter={() => setHovered(true)}
+      onPointerLeave={() => setHovered(false)}
+      onFocus={() => setHovered(true)}
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setHovered(false);
+      }}
+    >
       <div className="relative">
         {/* Flat tinted shape behind the phone (instead of the reference's gradient glow) */}
         <span aria-hidden className="absolute inset-x-[-15%] top-[12%] bottom-[8%] rounded-2xl bg-primary-container" />
@@ -476,13 +501,25 @@ function HeroPhone() {
           </div>
         </Reveal>
       </div>
-      <Reveal delay={0.2}>
+      <Reveal delay={0.2} className="flex items-center gap-2">
         <SegmentedButton
           label={t('landing.phone.switcher')}
           value={screen}
-          onValueChange={setScreen}
-          options={(['home', 'levels', 'tool'] as const).map((value) => ({ value, label: t(`landing.phone.screens.${value}`) }))}
+          onValueChange={(value) => {
+            setScreen(value);
+            setPaused(true);
+          }}
+          options={SCREEN_ORDER.map((value) => ({ value, label: t(`landing.phone.screens.${value}`) }))}
         />
+        {!reduce && (
+          <IconButton
+            icon={paused ? 'play_arrow' : 'pause'}
+            label={paused ? t('landing.phone.play') : t('landing.phone.pause')}
+            variant="outlined"
+            size="s"
+            onClick={() => setPaused((value) => !value)}
+          />
+        )}
       </Reveal>
     </div>
   );

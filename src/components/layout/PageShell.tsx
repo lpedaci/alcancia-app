@@ -1,5 +1,5 @@
+import { SkipLink } from '@/components/layout/InPageLink';
 import type { ReactNode } from 'react';
-import { useTranslation } from 'react-i18next';
 import { cn } from '@/lib/utils';
 
 interface PageShellProps {
@@ -10,16 +10,10 @@ interface PageShellProps {
 
 /** Minimal shell until the G6 layout (step 5): skip link and a single `main` landmark. */
 export function PageShell({ children, width = 'narrow' }: PageShellProps) {
-  const { t } = useTranslation();
 
   return (
     <>
-      <a
-        href="#main-content"
-        className="sr-only rounded-sm bg-surface-container-lowest px-4 py-3 text-label-large text-primary focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:shadow-elevation-1"
-      >
-        {t('app.skipToContent')}
-      </a>
+      <SkipLink />
       <main
         id="main-content"
         tabIndex={-1}

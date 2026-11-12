@@ -1,3 +1,4 @@
+import { SkipLink } from '@/components/layout/InPageLink';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 import { DEMO_TODAY } from '@/app/config';
@@ -25,12 +26,7 @@ export function StaffHomePage() {
 
   return (
     <div className="min-h-dvh bg-surface">
-      <a
-        href="#main-content"
-        className="sr-only rounded-sm bg-surface-container-lowest px-4 py-3 text-label-large text-primary focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:shadow-elevation-1"
-      >
-        {t('app.skipToContent')}
-      </a>
+      <SkipLink />
       <header className="sticky top-0 z-30 border-b border-outline-variant bg-surface-container-lowest">
         <div className="mx-auto flex h-16 max-w-[90rem] items-center gap-2 px-(--space-gutter)">
           <Link to="/" className="inline-flex min-w-0 rounded-sm">

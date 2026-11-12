@@ -19,7 +19,7 @@ describe('G0 landing (F0)', () => {
     expect(screen.getAllByRole('heading', { level: 1 })).toHaveLength(1);
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(es.landing.hero.titleKey);
     expect(document.documentElement.lang).toBe('es');
-    expect(screen.getByRole('link', { name: es.app.skipToContent })).toHaveAttribute('href', '#main-content');
+    expect(screen.getByRole('link', { name: es.app.skipToContent })).toHaveAttribute('data-target', 'main-content');
   });
 
   it('offers one journey per role, each opening the login with that person preselected', () => {
@@ -58,6 +58,34 @@ describe('G0 landing (F0)', () => {
     const external = screen.getAllByRole('link').filter((a) => a.getAttribute('target') === '_blank');
     expect(external.length).toBeGreaterThan(0);
     for (const a of external) expect(a).toHaveAttribute('rel', 'noopener noreferrer');
+  });
+});
+
+describe('G0 in-page links and phone (INC-11, D-155, D-157)', () => {
+  it('"Elegir un recorrido" and the section menu stay on the landing (hash routing)', () => {
+    const { router } = renderAt('/');
+    for (const link of screen.getAllByRole('link', { name: es.landing.chooseJourney })) {
+      fireEvent.click(link);
+      expect(router.state.location.pathname).toBe('/');
+    }
+    fireEvent.click(screen.getByRole('link', { name: es.app.skipToContent }));
+    expect(router.state.location.pathname).toBe('/');
+    expect(document.activeElement).toBe(document.getElementById('main-content'));
+  });
+
+  it('the landing simulator has no "Guardar escenario" and keeps the assumptions next to the data', () => {
+    renderAt('/');
+    const sim = screen.getByRole('region', { name: es.landing.simulator.title });
+    expect(within(sim).queryByRole('button', { name: es.sim3.compare.save })).not.toBeInTheDocument();
+    const form = within(sim).getByRole('form', { name: es.sim3.dataLabel });
+    expect(form.parentElement?.querySelector('details')).not.toBeNull();
+  });
+
+  it('the hero phone can pause its automatic screen change', () => {
+    renderAt('/');
+    const pause = screen.getByRole('button', { name: es.landing.phone.pause });
+    fireEvent.click(pause);
+    expect(screen.getByRole('button', { name: es.landing.phone.play })).toBeInTheDocument();
   });
 });
 

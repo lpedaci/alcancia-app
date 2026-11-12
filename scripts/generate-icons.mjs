@@ -29,7 +29,7 @@ const ICONS = [
   'more_vert', 'more_horiz', 'drag_indicator', 'arrow_upward', 'arrow_downward', 'arrow_back',
   'arrow_forward', 'arrow_outward', 'chevron_left', 'chevron_right', 'keyboard_arrow_down', 'keyboard_arrow_up',
   'open_in_new', 'visibility', 'visibility_off', 'refresh', 'send', 'table_view', 'print', 'save',
-  'compare_arrows', 'swap_vert', 'tune', 'restart_alt', 'link',
+  'compare_arrows', 'swap_vert', 'tune', 'restart_alt', 'link', 'pause', 'play_arrow',
   // Status
   'check_circle', 'radio_button_unchecked', 'pending', 'hourglass_empty', 'error', 'warning', 'info',
   'block', 'progress_activity', 'trending_down', 'trending_flat',

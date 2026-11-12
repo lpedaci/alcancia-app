@@ -20,7 +20,7 @@
       "titleStart": "The wallet where your team",
       "titleKey": "learns finance",
       "titleEnd": "by using it",
-      "body": "A corporate learning platform shaped like a digital wallet: each person gets a practice salary, pays, budgets, saves and invests with fictitious money, and learns at the right moment. The company sees learning progress, never the amounts.",
+      "body": "A personal finance simulator shaped like a digital wallet: each person gets a practice salary, pays, budgets, saves and invests with fictitious money, and learns at the right moment. The company sees learning progress, never the amounts.",
       "caseStudy": "Read the case study"
     },
     "pieces": {
@@ -205,7 +205,7 @@
       "title": "Choose a person and explore the wallet"
     },
     "footer": {
-      "tagline": "Corporate learning platform for personal finance. Prototype with fictitious data.",
+      "tagline": "Personal finance simulator for work teams. Prototype with fictitious data.",
       "explore": "Explore",
       "project": "The project",
       "demo": "The demo",
@@ -231,7 +231,7 @@
       "activity": "Recent activity"
     },
     "eyebrowTag": "B2B UX/UI case study",
-    "eyebrowText": "Corporate learning in personal finance",
+    "eyebrowText": "Personal finance simulator",
     "phone": {
       "label": "Screen of the practice wallet on a phone: {{screen}}",
       "switcher": "See a screen of the app",
@@ -278,7 +278,9 @@
       "toolResult": "What your money buys in 12 months",
       "toolPhrase": "With 3 % a month, in 12 months your money buys {{loss}} less.",
       "toolScenario": "Scenario",
-      "toolExample": "Example values"
+      "toolExample": "Example values",
+      "pause": "Pause the automatic screen change",
+      "play": "Resume the automatic screen change"
     },
     "floating": {
       "unlockLabel": "Next unlock",

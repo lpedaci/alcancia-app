@@ -20,7 +20,7 @@
       "titleStart": "La billetera donde tu equipo",
       "titleKey": "aprende finanzas",
       "titleEnd": "usándola",
-      "body": "Una plataforma de aprendizaje corporativo con forma de billetera virtual: cada persona cobra un sueldo de práctica, paga, presupuesta, ahorra e invierte con dinero ficticio, y aprende en el momento justo. La empresa ve el avance de aprendizaje, nunca los montos.",
+      "body": "Un simulador de finanzas personales con forma de billetera virtual: cada persona cobra un sueldo de práctica, paga, presupuesta, ahorra e invierte con dinero ficticio, y aprende en el momento justo. La empresa ve el avance de aprendizaje, nunca los montos.",
       "caseStudy": "Ver el case study"
     },
     "pieces": {
@@ -205,7 +205,7 @@
       "title": "Elige una persona y recorre la billetera"
     },
     "footer": {
-      "tagline": "Plataforma corporativa de aprendizaje en finanzas personales. Prototipo con datos ficticios.",
+      "tagline": "Simulador de finanzas personales para equipos de trabajo. Prototipo con datos ficticios.",
       "explore": "Explorar",
       "project": "El proyecto",
       "demo": "La demo",
@@ -231,7 +231,7 @@
       "activity": "Últimos movimientos"
     },
     "eyebrowTag": "Caso de diseño UX/UI B2B",
-    "eyebrowText": "Aprendizaje corporativo en finanzas personales",
+    "eyebrowText": "Simulador de finanzas personales",
     "phone": {
       "label": "Pantalla de la billetera de práctica en un celular: {{screen}}",
       "switcher": "Ver una pantalla de la app",
@@ -278,7 +278,9 @@
       "toolResult": "Lo que compra tu dinero dentro de 12 meses",
       "toolPhrase": "Con 3 % mensual, en 12 meses tu dinero compra un {{loss}} menos.",
       "toolScenario": "Escenario",
-      "toolExample": "Valores de ejemplo"
+      "toolExample": "Valores de ejemplo",
+      "pause": "Pausar el cambio automático de pantallas",
+      "play": "Reanudar el cambio automático de pantallas"
     },
     "floating": {
       "unlockLabel": "Próximo desbloqueo",

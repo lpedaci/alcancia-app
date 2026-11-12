@@ -1,3 +1,4 @@
+import { SkipLink } from '@/components/layout/InPageLink';
 import type { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router';
@@ -102,12 +103,7 @@ export function WalletShell({
 
   return (
     <div className="min-h-dvh bg-surface">
-      <a
-        href="#main-content"
-        className="sr-only rounded-sm bg-surface-container-lowest px-4 py-3 text-label-large text-primary focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:shadow-elevation-1"
-      >
-        {t('app.skipToContent')}
-      </a>
+      <SkipLink />
 
       {/* Practice banner, always visible (5.3) */}
       <p className="flex items-center justify-center gap-2 bg-inverse-surface px-4 py-1.5 text-center text-label-medium text-inverse-on-surface">

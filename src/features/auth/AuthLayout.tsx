@@ -1,5 +1,5 @@
+import { SkipLink } from '@/components/layout/InPageLink';
 import type { ReactNode } from 'react';
-import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 import { Logo } from '@/components/layout/Logo';
 import { cn } from '@/lib/utils';
@@ -17,7 +17,6 @@ interface AuthLayoutProps {
  * with an optional right column. Flat surfaces, no gradients (2.2).
  */
 export function AuthLayout({ children, aside, showcase }: AuthLayoutProps) {
-  const { t } = useTranslation();
 
   return (
     <div
@@ -27,12 +26,7 @@ export function AuthLayout({ children, aside, showcase }: AuthLayoutProps) {
         showcase && 'lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:p-3',
       )}
     >
-      <a
-        href="#main-content"
-        className="sr-only rounded-sm bg-surface-container-lowest px-4 py-3 text-label-large text-primary focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:shadow-elevation-1"
-      >
-        {t('app.skipToContent')}
-      </a>
+      <SkipLink />
       <main
         id="main-content"
         tabIndex={-1}
