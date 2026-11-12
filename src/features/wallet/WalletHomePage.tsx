@@ -226,10 +226,13 @@ export function WalletHomePage() {
                 <p className="text-body-small text-on-surface-variant">{t('wallet.home.pockets.empty')}</p>
               ) : (
                 <>
-                  <div className="flex items-center justify-between gap-2 text-body-small">
-                    <span className="text-on-surface-variant">{t('wallet.home.pockets.total')}</span>
-                    <MoneyText value={pocketsTotal(wallet).toFixed(2)} className="text-label-large text-on-surface" />
-                  </div>
+                  {/* The total only adds something with two pockets or more */}
+                  {wallet.pockets.length > 1 && (
+                    <div className="flex items-center justify-between gap-2 text-body-small">
+                      <span className="text-on-surface-variant">{t('wallet.home.pockets.total')}</span>
+                      <MoneyText value={pocketsTotal(wallet).toFixed(2)} className="text-label-large text-on-surface" />
+                    </div>
+                  )}
                   {wallet.pockets.map((p) => (
                     <div key={p.id} className="flex items-center justify-between gap-2 text-body-medium">
                       <span className="flex min-w-0 items-center gap-2">
@@ -257,7 +260,7 @@ export function WalletHomePage() {
           ) : (
             <ul className="flex flex-col divide-y divide-outline-variant">
               {recent.map((m) => (
-                <li key={m.id} className="flex items-center gap-3 py-3">
+                <li key={m.id} className="flex items-center gap-4 py-4">
                   <span
                     className={cn(
                       'inline-flex size-10 shrink-0 items-center justify-center rounded-full',
@@ -266,10 +269,10 @@ export function WalletHomePage() {
                   >
                     <Icon name={MOVEMENT_ICON[m.type]} />
                   </span>
-                  <span className="flex min-w-0 flex-1 flex-col gap-1 @md:flex-row @md:items-center @md:gap-3">
+                  <span className="flex min-w-0 flex-1 flex-col gap-2 @md:flex-row @md:items-center @md:gap-4">
                     <span className="min-w-0 flex-1">
-                      <span className="line-clamp-2 block text-body-medium text-on-surface">{m.counterparty}</span>
-                      <span className="flex flex-wrap items-center gap-2 text-body-small text-on-surface-variant">
+                      <span className="line-clamp-2 block text-body-large text-on-surface">{m.counterparty}</span>
+                      <span className="mt-1.5 flex flex-wrap items-center gap-2 text-body-small text-on-surface-variant">
                         {formatDate(walletDate(m.day))}
                         {CATEGORIZABLE.includes(m.type) && (
                           <CategoryChip movement={m} onChoose={(category) => {

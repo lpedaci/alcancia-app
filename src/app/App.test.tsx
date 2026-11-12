@@ -141,7 +141,7 @@ describe('P1 and SIM-3 in the wallet (visual pilot)', () => {
     expect(screen.getByText(es.wallet.practiceBanner)).toBeInTheDocument();
     const nav = screen.getAllByRole('navigation', { name: es.wallet.nav.label })[0]!;
     for (const key of ['home', 'pay', 'save', 'invest', 'learn'] as const) {
-      expect(within(nav).getByRole('link', { name: new RegExp(es.wallet.nav[key]) })).toBeInTheDocument();
+      expect(within(nav).getByRole('link', { name: new RegExp(`^${es.wallet.nav[key]}`) })).toBeInTheDocument();
     }
     expect(within(nav).getByRole('link', { name: /Invertir, bloqueado/ })).toBeInTheDocument();
   });

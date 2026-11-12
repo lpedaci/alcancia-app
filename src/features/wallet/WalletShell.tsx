@@ -7,7 +7,6 @@ import { UserMenu } from '@/components/layout/UserMenu';
 import { ViewAsMenu } from '@/components/layout/ViewAsMenu';
 import { Icon, type IconName } from '@/components/ui/Icon';
 import { IconButton } from '@/components/ui/IconButton';
-import { ProgressBar } from '@/components/ui/ProgressBar';
 import { FuerteFab } from '@/features/companion/FuerteFab';
 import type { FuerteState } from '@/features/companion/Fuerte';
 import { completedLights } from '@/features/levels/engine';
@@ -157,11 +156,13 @@ export function WalletShell({ section, children, fuerte }: { section: string; ch
     return (
       <li key={d.id} className="flex flex-col">
         <div className={cn('flex items-center rounded-full', active ? 'bg-secondary-container text-on-secondary-container' : 'text-on-surface-variant hover:bg-surface-container hover:text-on-surface')}>
-          <Link to={d.to} aria-current={active ? 'page' : undefined} className="flex h-12 min-w-0 flex-1 items-center gap-3 rounded-full pl-4 text-label-large">
+          <Link to={d.to} aria-current={active ? 'page' : undefined} className="flex h-12 min-w-0 flex-1 items-center gap-3 rounded-full pr-2 pl-4 text-label-large">
             <Icon name={d.icon} size={24} filled={active} />
             <span className="min-w-0 flex-1 truncate">{label}</span>
             {locked && <Icon name="lock" size={18} />}
           </Link>
+          {/* Items without subsections keep the same slot, so locks and labels line up (balance) */}
+          {!d.subsections && <span aria-hidden className="mr-2 size-8 shrink-0" />}
           {d.subsections && (
             <IconButton
               icon={groupOpen ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}
@@ -218,38 +219,32 @@ export function WalletShell({ section, children, fuerte }: { section: string; ch
         {t('wallet.practiceBanner')}
       </p>
 
-      {/* Top bar: menu button and logo on the left; demo, help, notifications and the avatar on the right */}
-      <header className="sticky top-0 z-30 border-b border-outline-variant bg-surface-container-lowest">
-        <div className="flex h-16 items-center gap-1 px-(--space-gutter) medium:gap-2">
-          <IconButton
-            icon={expanded ? 'menu_open' : 'menu'}
-            label={expanded ? t('wallet.nav.menuCollapse') : t('wallet.nav.menuExpand')}
-            aria-expanded={expanded}
-            aria-controls="wallet-nav"
-            className="-ml-2 hidden medium:inline-flex"
-            onClick={toggleNav}
-          />
-          <Link to="/app" className="inline-flex shrink-0 rounded-sm">
-            <Logo />
-          </Link>
-          <span className="mx-2 hidden h-6 w-px bg-outline-variant medium:hidden" />
-          <p className="ml-2 min-w-0 flex-1 truncate text-title-small text-on-surface-variant medium:hidden">{section}</p>
-          <span className="hidden flex-1 medium:block" />
-          <ViewAsMenu />
-          <IconButton icon="help" label={t('wallet.help')} className="hidden sm:inline-flex" />
-          <IconButton icon="notifications" label={t('wallet.notifications', { count: 2 })} />
-          <UserMenu />
-        </div>
-      </header>
-
-      <div className="flex">
-        {/* Side menu (tablet and desktop): groups, expandable subsections and the level card */}
+      {/* Floating panels (2.2.1, pattern 5): the side menu reaches the top and holds the menu button and
+          the logo; the top bar floats beside it. On phones, a plain top bar and the bottom navigation. */}
+      <div className="medium:flex medium:items-start medium:gap-3 medium:p-3">
         <nav
           id="wallet-nav"
           aria-label={t('wallet.nav.label')}
-          className={cn('hidden shrink-0 border-r border-outline-variant bg-surface-container-lowest medium:block', expanded ? 'w-64' : 'w-24')}
+          className={cn(
+            'sticky top-3 hidden h-[calc(100dvh-1.5rem)] shrink-0 flex-col overflow-hidden rounded-xl border border-outline-variant bg-surface-container-lowest medium:flex',
+            expanded ? 'w-64' : 'w-24',
+          )}
         >
-          <div className="sticky top-16 flex h-[calc(100dvh-4rem)] flex-col gap-2 overflow-y-auto px-3 py-4">
+          <div className={cn('flex h-16 shrink-0 items-center gap-1 border-b border-outline-variant px-3', !expanded && 'justify-center')}>
+            <IconButton
+              icon={expanded ? 'menu_open' : 'menu'}
+              label={expanded ? t('wallet.nav.menuCollapse') : t('wallet.nav.menuExpand')}
+              aria-expanded={expanded}
+              aria-controls="wallet-nav-items"
+              onClick={toggleNav}
+            />
+            {expanded && (
+              <Link to="/app" className="inline-flex min-w-0 rounded-sm">
+                <Logo />
+              </Link>
+            )}
+          </div>
+          <div id="wallet-nav-items" className="flex min-h-0 flex-1 flex-col gap-2 overflow-y-auto px-3 py-4">
             {expanded && <p className="px-4 pb-1 text-label-medium text-on-surface-variant">{t('wallet.nav.groupWallet')}</p>}
             <ul className="flex flex-col gap-1">{walletDestinations.map(renderItem)}</ul>
             <div className="mx-2 my-2 h-px bg-outline-variant" />
@@ -257,31 +252,60 @@ export function WalletShell({ section, children, fuerte }: { section: string; ch
             <ul className="flex flex-col gap-1">{renderItem(learn)}</ul>
 
             {expanded && (
-              <div className="mt-auto flex flex-col gap-2 rounded-lg bg-surface-container p-3">
-                <p className="text-label-medium text-on-surface-variant">{t('wallet.levelCard.level', { level: lights })}</p>
+              // Progress card (one link): the levels completed as 7 segments, one per light of Fuerte,
+              // and the next unlock with how many of its conditions are met.
+              <Link
+                to={next ? (LEVEL_ROUTE[next.level.id] ?? '/app/learn') : '/app/learn'}
+                className="group mt-auto flex flex-col gap-3 rounded-lg bg-surface-container p-3 hover:bg-surface-container-high"
+              >
+                <span className="flex items-baseline justify-between gap-2">
+                  <span className="text-label-medium text-on-surface-variant">{t('wallet.levelCard.title')}</span>
+                  <span className="text-title-small text-on-surface tabular-nums">{t('wallet.levelCard.levels', { level: lights })}</span>
+                </span>
+                <span aria-hidden className="flex gap-1">
+                  {Array.from({ length: 7 }, (_, i) => (
+                    <span key={i} className={cn('h-1.5 flex-1 rounded-full', i < lights ? 'bg-tertiary' : 'bg-outline-variant')} />
+                  ))}
+                </span>
                 {next ? (
-                  <>
-                    <p className="text-title-small text-on-surface">{t('wallet.levelCard.next', { section: t(`wallet.sections.${next.level.id}`) })}</p>
-                    <ProgressBar
-                      value={(nextMet / next.conditions.length) * 100}
-                      label={t('wallet.unlock.progressLabel', { section: t(`wallet.sections.${next.level.id}`) })}
-                      valueText={t('wallet.levelCard.progress', { met: nextMet, total: next.conditions.length })}
-                      tone="tertiary"
-                    />
-                    <Link to={LEVEL_ROUTE[next.level.id] ?? '/app/learn'} className="w-fit text-label-large text-primary underline-offset-4 hover:underline">
-                      {t('wallet.levelCard.see')}
-                    </Link>
-                  </>
+                  <span className="flex items-center gap-2 border-t border-outline-variant pt-3">
+                    <span className="flex size-8 shrink-0 items-center justify-center rounded-md bg-surface-container-lowest text-on-surface-variant">
+                      <Icon name="lock" size={16} />
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block text-label-small text-on-surface-variant">{t('wallet.levelCard.nextLabel')}</span>
+                      <span className="block truncate text-title-small text-on-surface">{t(`wallet.sections.${next.level.id}`)}</span>
+                    </span>
+                    <span aria-hidden className="shrink-0 rounded-full bg-tertiary-container px-2 py-0.5 text-label-medium text-on-tertiary-container tabular-nums">
+                      {nextMet}/{next.conditions.length}
+                    </span>
+                    <Icon name="chevron_right" size={20} className="shrink-0 text-on-surface-variant transition-transform group-hover:translate-x-0.5 motion-reduce:transform-none" />
+                    <span className="sr-only">{t('wallet.levelCard.linkHint', { met: nextMet, total: next.conditions.length })}</span>
+                  </span>
                 ) : (
-                  <p className="text-title-small text-on-surface">{t('wallet.levelCard.allOpen')}</p>
+                  <span className="text-title-small text-on-surface">{t('wallet.levelCard.allOpen')}</span>
                 )}
-              </div>
+              </Link>
             )}
           </div>
         </nav>
 
         <div className="min-w-0 flex-1">
-          <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-[75rem] px-(--space-gutter) pt-6 pb-36 focus:outline-none medium:pb-24">
+          {/* Top bar: on phones the logo and the section; from tablets, a floating bar with the section title */}
+          {/* From tablets, the header covers the gap above the floating bar so content never shows behind it */}
+          <header className="sticky top-0 z-30 border-b border-outline-variant bg-surface-container-lowest medium:-mt-3 medium:border-0 medium:bg-surface medium:pt-3">
+            <div className="flex h-16 items-center gap-1 px-(--space-gutter) medium:gap-2 medium:rounded-xl medium:border medium:border-outline-variant medium:bg-surface-container-lowest medium:px-4">
+              <Link to="/app" className="inline-flex shrink-0 rounded-sm medium:hidden">
+                <Logo compact />
+              </Link>
+              <p className="ml-2 min-w-0 flex-1 truncate text-title-medium text-on-surface medium:ml-0">{section}</p>
+              <ViewAsMenu />
+              <IconButton icon="help" label={t('wallet.help')} className="hidden sm:inline-flex" />
+              <IconButton icon="notifications" label={t('wallet.notifications', { count: 2 })} />
+              <UserMenu />
+            </div>
+          </header>
+          <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-[75rem] px-(--space-gutter) pt-6 pb-40 focus:outline-none medium:px-0 medium:pt-4 medium:pb-28">
             {children}
           </main>
         </div>

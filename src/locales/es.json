@@ -523,11 +523,11 @@
       "level-7": "Invertir"
     },
     "levelCard": {
-      "level": "Niveles completados: {{level}} de 7",
-      "next": "Próximo: {{section}}",
-      "progress": "{{met}} de {{total}} condiciones",
+      "title": "Tu avance",
+      "levels": "{{level}} de 7 niveles",
+      "nextLabel": "Próximo",
       "allOpen": "Todas las secciones abiertas",
-      "see": "Ver qué falta"
+      "linkHint": ": {{met}} de {{total}} condiciones cumplidas. Ver qué falta"
     },
     "unlock": {
       "kicker": "Próximo desbloqueo · Nivel {{level}}",

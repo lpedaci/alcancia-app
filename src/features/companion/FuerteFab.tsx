@@ -44,11 +44,14 @@ export function FuerteFab({
         <button
           type="button"
           aria-label={unread ? t('wallet.fuerte.unread') : t('wallet.fuerte.open')}
-          className="fixed right-4 bottom-20 z-30 flex size-14 items-center justify-center rounded-full border border-outline-variant bg-surface-container-lowest outline-offset-2 hover:bg-surface-container focus-visible:outline-2 focus-visible:outline-primary medium:right-6 medium:bottom-6"
+          className="group fixed right-3 bottom-20 z-30 flex size-20 items-center justify-center rounded-full outline-offset-2 focus-visible:outline-2 focus-visible:outline-primary medium:right-6 medium:bottom-6"
         >
-          <Fuerte state={state} lights={lights} size={2.5} />
+          {/* Fuerte alone, bigger and without a background: an 80 px target that is easy to tap */}
+          <span className="transition-transform duration-150 ease-standard group-hover:-translate-y-0.5 motion-reduce:transform-none">
+            <Fuerte state={state} lights={lights} size={4.5} />
+          </span>
           {unread && (
-            <span aria-hidden className="absolute top-1 right-1 size-3 rounded-full border-2 border-surface-container-lowest bg-primary" />
+            <span aria-hidden className="absolute top-2 right-2 size-3.5 rounded-full border-2 border-surface-container-lowest bg-primary" />
           )}
         </button>
       </PopoverPrimitive.Trigger>
