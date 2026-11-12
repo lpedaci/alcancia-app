@@ -689,7 +689,7 @@ Fuerte, la caja fuerte naranja del escape room "Tu primer sueldo", pasa a ser el
 - **Aprendizaje en el momento justo:** cada pantalla tiene un botón "¿Por qué importa?" y ciertas acciones disparan una **tarjeta de aprendizaje** de 20 a 40 segundos (concepto + dato oficial con su código B-xx + una pregunta de un toque). No se interrumpe más de una vez por acción ni se repite si ya se respondió bien.
 - **Dos modos:** **Misiones** (guiado, con objetivos y pasos) y **Libre** (explorar con el saldo que haya). El modo libre igual registra lo aprendido.
 - **Fuerte como compañero (5.0.1):** acompaña toda la experiencia con personalidad propia; se puede silenciar.
-- **Marca propia y evidente:** se llama Alcancía (D-28), con la paleta y los componentes del sistema de diseño, cartel fijo "Billetera de práctica · dinero ficticio". Nada imita los colores, íconos, tipografía ni flujos de una billetera real (1.1.1).
+- **Marca propia y evidente:** se llama Alcancía (D-28), con la paleta y los componentes del sistema de diseño, cartel fijo "Simulador de finanzas personales" (D-154). Nada imita los colores, íconos, tipografía ni flujos de una billetera real (1.1.1).
 - **Sin datos reales:** nunca pide DNI, CUIT, CBU, tarjetas, contraseñas ni datos de contacto reales. El CVU se muestra como `0000000 0000000 EJEMPLO 00` (formato visual, no un número válido) y el alias es `alcancia.practica.mariana` según la persona de demo.
 - **Control del tiempo:** "Avanzar un día / una semana / un mes" para ver rendimientos, inflación del escenario, vencimientos y eventos. El escenario de inflación sale de `scenarios.json`.
 

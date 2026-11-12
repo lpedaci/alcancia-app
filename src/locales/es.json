@@ -241,7 +241,6 @@
         "tool": "Herramientas"
       },
       "time": "9:41",
-      "banner": "Billetera de práctica · dinero ficticio",
       "hello": "Hola, Mariana",
       "balance": "Saldo disponible",
       "power": "Poder de compra hoy",
@@ -407,7 +406,7 @@
     "legal": "Contenido educativo. No es asesoramiento financiero ni una recomendación de inversión."
   },
   "wallet": {
-    "practiceBanner": "Billetera de práctica · dinero ficticio",
+    "practiceBanner": "Simulador de finanzas personales",
     "help": "Ayuda",
     "notifications": "Notificaciones, {{count}} sin leer",
     "profileMenu": "Menú de {{name}}: perfil, seguridad y comprobantes",

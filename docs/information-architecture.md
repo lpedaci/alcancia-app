@@ -25,7 +25,7 @@
 | Fuentes oficiales | Las del Anexo B | Panel "Dónde ver los valores reales" | `sources.ts` |
 | Mensajes de Fuerte | Por evento y estado, con variantes | `fuerte-lines.json` | 5.0.1 |
 | Logros e insignias | Por módulo y por conducta financiera sana | Aprender > Logros | 5.0 |
-| Avisos legales | Pie de cada herramienta, landing y cartel fijo "Billetera de práctica · dinero ficticio" | `legal.ts` | 1.2 |
+| Avisos legales | Pie de cada herramienta, landing y cartel fijo "Simulador de finanzas personales" | `legal.ts` | 1.2 |
 | Contenido corporativo | Programa, cohortes, personas, desafíos semanales, consultas, métricas | Paneles de tutor, admin y decisor | F1, F6 a F8 |
 
 ## 3. Sistema de organización
