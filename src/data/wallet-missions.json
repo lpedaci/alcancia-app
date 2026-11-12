@@ -1,0 +1,18 @@
+{
+  "note": "Phase A missions (CLAUDE.md 5.3, D-59): 7 numbered and 6 short ones. Declarative catalog read by the mission engine; steps and learning cards are added with each level (steps 6 to 9). L&D can add missions here without touching code.",
+  "missions": [
+    { "id": "mission-security", "levelId": "level-0", "title": "Configura tu seguridad", "minutes": 2, "objective": "Activar el segundo factor y fijar un límite diario de práctica." },
+    { "id": "mission-1", "levelId": "level-1", "title": "Tu primer cobro", "minutes": 5, "objective": "Cobrar el sueldo, identificar el neto y separar el 20 % en el apartado \"Ahorro\"." },
+    { "id": "mission-2", "levelId": "level-2", "title": "Transfiere sin errores", "minutes": 4, "objective": "Pagarle a un compañero por alias, revisando el titular antes de confirmar." },
+    { "id": "mission-3", "levelId": "level-2", "title": "Paga con QR", "minutes": 3, "objective": "Comprar en un comercio ficticio y verificar el comprobante." },
+    { "id": "mission-6", "levelId": "level-2", "title": "El mensaje falso", "minutes": 4, "objective": "Reconocer y reportar el mensaje fraudulento sin compartir el código." },
+    { "id": "mission-7", "levelId": "level-3", "title": "Mes completo", "minutes": 6, "objective": "Cerrar un mes con imprevistos con el presupuesto en verde." },
+    { "id": "mission-emergency-fund", "levelId": "level-4", "title": "Crea tu fondo de emergencia", "minutes": 3, "objective": "Crear el apartado de emergencia con una meta de 3 a 6 meses de gastos básicos." },
+    { "id": "mission-5", "levelId": "level-5", "title": "El préstamo tentador", "minutes": 5, "objective": "Encontrar el CFT de una oferta preaprobada y calcular su costo total antes de decidir." },
+    { "id": "mission-debts", "levelId": "level-5", "title": "Sal de tus deudas", "minutes": 4, "objective": "Elegir bola de nieve o avalancha y aplicar el plan." },
+    { "id": "mission-4", "levelId": "level-6", "title": "¿Cuenta o fondo?", "minutes": 5, "objective": "Elegir dónde dejar el saldo después de leer la ficha de cada opción, y explicar la diferencia." },
+    { "id": "mission-broker-account", "levelId": "level-7", "title": "Abre tu cuenta comitente", "minutes": 3, "objective": "Abrir una cuenta de práctica en un bróker ficticio y fondearla desde la billetera." },
+    { "id": "mission-first-cedear", "levelId": "level-7", "title": "Tu primer CEDEAR de ETF", "minutes": 4, "objective": "Comprar un CEDEAR de ejemplo y leer el ratio, el tipo de cambio implícito y los costos." },
+    { "id": "mission-hold-the-drop", "levelId": "level-7", "title": "Aguanta la caída", "minutes": 3, "objective": "Seguir la inversión en una caída de ejemplo sin vender en pánico." }
+  ]
+}

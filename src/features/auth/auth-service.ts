@@ -11,6 +11,7 @@ import { LOCKOUT_ATTEMPTS, PRIVACY_NOTICE_VERSION } from '@/app/config';
 import { homePath } from '@/lib/permissions';
 import { useDataStore } from '@/store/data-store';
 import { clearLocal } from '@/store/local-store';
+import { clearWallet } from '@/store/wallet-store';
 import { type LogoutReason, useSessionStore } from '@/store/session-store';
 import type { AccessRequest, AccessRequestReason, AuthMethod, Person, Role, Session } from '@/types/domain';
 
@@ -168,7 +169,10 @@ export function switchPerson(personId: string): string {
  */
 export function resetDemo() {
   data().resetData();
-  for (const person of data().people) clearLocal(person.id);
+  for (const person of data().people) {
+    clearLocal(person.id);
+    clearWallet(person.id);
+  }
   session().resetSessionState();
   session().endSession('reset');
 }

@@ -1,21 +1,24 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 import { Icon } from '@/components/ui/Icon';
-import { FuerteMessage } from '@/features/companion/FuerteMessage';
-import { PILOT } from '@/features/wallet/pilot-fixture';
+import { useCurrentUser } from '@/store/session-store';
+import { useWallet } from '@/store/wallet-store';
 import { WalletShell } from '@/features/wallet/WalletShell';
 import { InflationSimulator } from './InflationSimulator';
 
 /**
  * P13 · SIM-3 inside the wallet (Aprender > Herramientas). The page h1 comes first, then the
- * description and Fuerte. With a session, the amount starts with the practice salary (F4); the
- * pilot takes it from the fixture until the wallet engine exists (step 6).
+ * description. With a session, the amount starts with the last practice salary of the wallet (F4,
+ * D-142). Fuerte talks from his floating button (D-160).
  */
 export function InflationToolPage() {
   const { t } = useTranslation();
-  const salary = PILOT.movements.find((m) => m.kind === 'income')?.amount ?? '1284958.86';
+  const user = useCurrentUser();
+  const [wallet] = useWallet(user?.personId ?? '');
+  // F4: inside the wallet the amount starts with the last practice salary (D-142).
+  const salary = [...wallet.movements].reverse().find((m) => m.type === 'income')?.amount.replace('-', '') ?? wallet.salary;
   return (
-    <WalletShell section={t('wallet.nav.learn')} completedLevels={PILOT.completedLevels}>
+    <WalletShell section={t('wallet.nav.learn')} fuerte={{ state: 'neutral', message: t('sim3.fuerte') }}>
       <div className="flex flex-col gap-4">
         <nav aria-label={t('wallet.breadcrumbs')} className="text-body-small text-on-surface-variant">
           <ol className="flex flex-wrap items-center gap-1">
@@ -34,9 +37,6 @@ export function InflationToolPage() {
           {t('sim3.title')}
         </h1>
         <p className="max-w-prose text-body-large text-on-surface-variant">{t('sim3.intro')}</p>
-        <FuerteMessage state="neutral" lights={PILOT.completedLevels} size={3} className="max-w-xl">
-          {t('sim3.fuerte')}
-        </FuerteMessage>
         <InflationSimulator
           labelledBy="p13-sim3-title"
           idPrefix="p13-sim3"

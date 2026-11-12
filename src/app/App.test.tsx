@@ -4,6 +4,7 @@ import en from '@/locales/en.json';
 import es from '@/locales/es.json';
 import { renderAt } from '@/test/render-app';
 import { resetAll, signInAs } from '@/test/session';
+import { readLocal } from '@/store/local-store';
 import { useSessionStore } from '@/store/session-store';
 import i18n from './i18n';
 
@@ -89,6 +90,48 @@ describe('G0 in-page links and phone (INC-11, D-155, D-157)', () => {
   });
 });
 
+describe('the wallet of each person (step 6)', () => {
+  it('Diego sees his own wallet, not the one of Mariana (INC-09)', async () => {
+    signInAs('p-diego');
+    renderAt('/app');
+    expect(await screen.findByRole('heading', { level: 1 })).toHaveTextContent('Diego');
+    expect(screen.getAllByText('$ 459.477,09').length).toBeGreaterThan(0);
+    expect(screen.getByText(/día 12 de la billetera/)).toBeInTheDocument();
+    expect(screen.getByText('Transfiere sin errores')).toBeInTheDocument();
+    const card = screen.getByRole('region', { name: 'Presupuesto' });
+    expect(within(card).getByText(/Movimientos categorizados · 4 de 10/)).toBeInTheDocument();
+  });
+
+  it('confirming a category moves Diego closer to Presupuesto (D-114)', async () => {
+    signInAs('p-diego');
+    renderAt('/app');
+    const chip = (await screen.findAllByRole('button', { name: /Sin categoría$/ }))[0]!;
+    fireEvent.click(chip);
+    fireEvent.click(await screen.findByRole('button', { name: /^Necesidades/ }));
+    const card = screen.getByRole('region', { name: 'Presupuesto' });
+    expect(await within(card).findByText(/Movimientos categorizados · 5 de 10/)).toBeInTheDocument();
+  });
+
+  it('a locked section shows what is missing instead of an error (5.0)', async () => {
+    signInAs('p-diego');
+    renderAt('/app/invest');
+    expect(await screen.findByRole('heading', { level: 1 })).toHaveTextContent('Invertir está bloqueado');
+    expect(screen.getByRole('region', { name: 'Invertir' })).toBeInTheDocument();
+  });
+
+  it('the investor profile test saves a result and meets its condition (D-67)', async () => {
+    signInAs('p-mariana');
+    renderAt('/app/learn/investor-profile');
+    await screen.findByRole('heading', { level: 1, name: es.wallet.profile.title });
+    for (const q of ['horizon', 'drop', 'priority', 'knowledge', 'base'] as const) {
+      fireEvent.click(screen.getByLabelText(es.wallet.profile.q[q].o1));
+    }
+    fireEvent.click(screen.getByRole('button', { name: es.wallet.profile.submit }));
+    expect(await screen.findByText(/Tu perfil de práctica: moderado/)).toBeInTheDocument();
+    expect(readLocal('p-mariana').investorProfile).toBe('moderate');
+  });
+});
+
 describe('P1 and SIM-3 in the wallet (visual pilot)', () => {
   beforeEach(() => signInAs('p-mariana'));
 
@@ -131,12 +174,24 @@ describe('P1 and SIM-3 in the wallet (visual pilot)', () => {
     expect(screen.getByText(es.wallet.practiceBanner)).toHaveTextContent('dinero ficticio');
   });
 
-  it('P1 offers to advance a day, a week and a month', async () => {
+  it('P1 offers to advance a day, a week and a month, and advancing changes the day', async () => {
     renderAt('/app');
     await screen.findByRole('heading', { level: 1 });
+    const group = screen.getByRole('group', { name: es.wallet.home.time.label });
     for (const key of ['day', 'week', 'month'] as const) {
-      expect(screen.getByRole('button', { name: es.wallet.home.advance[key] })).toBeInTheDocument();
+      expect(within(group).getByRole('button', { name: es.wallet.home.time[key] })).toBeInTheDocument();
     }
+    expect(screen.getByText(/día 154 de la billetera/)).toBeInTheDocument();
+    fireEvent.click(within(group).getByRole('button', { name: es.wallet.home.time.day }));
+    expect(await screen.findByText(/día 155 de la billetera/)).toBeInTheDocument();
+  });
+
+  it('Mariana sees Invertir locked with its conditions as chips and the profile test (D-67)', async () => {
+    renderAt('/app');
+    const card = await screen.findByRole('region', { name: 'Invertir' });
+    expect(within(card).getByText(/Fondo de emergencia · 2,3 de 3 meses/)).toBeInTheDocument();
+    expect(within(card).getByText(/2 de 4 condiciones cumplidas/)).toBeInTheDocument();
+    expect(within(card).getByRole('link', { name: new RegExp(es.wallet.unlock.doProfile) })).toHaveAttribute('href', '/app/learn/investor-profile');
   });
 });
 

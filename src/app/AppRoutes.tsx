@@ -16,6 +16,8 @@ const ConsentPage = lazyPage(() => import('@/features/auth/ConsentPage'), 'Conse
 const WalletHomePage = lazyPage(() => import('@/features/wallet/WalletHomePage'), 'WalletHomePage');
 const InflationToolPage = lazyPage(() => import('@/features/simulators/ToolPage'), 'InflationToolPage');
 const StaffHomePage = lazyPage(() => import('@/features/staff/StaffHomePage'), 'StaffHomePage');
+const InvestorProfilePage = lazyPage(() => import('@/features/levels/InvestorProfilePage'), 'InvestorProfilePage');
+const WalletSectionPage = lazy(() => import('@/features/wallet/WalletSectionPage').then((m) => ({ default: m.WalletSectionPage })));
 
 // The internal style guide (CLAUDE.md 2.8) exists only in development: it is never bundled in production.
 const StyleguidePage = import.meta.env.DEV ? lazyPage(() => import('@/features/styleguide/StyleguidePage'), 'StyleguidePage') : null;
@@ -38,6 +40,17 @@ export function AppRoutes() {
         <Route element={<RequireSession />}>
           <Route path="/app" element={<WalletHomePage />} />
           <Route path="/app/tools/SIM-3" element={<InflationToolPage />} />
+          <Route path="/app/learn/investor-profile" element={<InvestorProfilePage />} />
+          {/* Wallet sections built in later steps: locked ones show what is missing (5.0) */}
+          <Route path="/app/pay" element={<WalletSectionPage area="pay" />} />
+          <Route path="/app/pay/:flow" element={<WalletSectionPage area="pay-flow" />} />
+          <Route path="/app/save/budget" element={<WalletSectionPage area="budget" />} />
+          <Route path="/app/save/pockets" element={<WalletSectionPage area="pockets" />} />
+          <Route path="/app/save/yield" element={<WalletSectionPage area="yield" />} />
+          <Route path="/app/invest" element={<WalletSectionPage area="invest" />} />
+          <Route path="/app/learn" element={<WalletSectionPage area="learn" />} />
+          <Route path="/app/tools" element={<WalletSectionPage area="tools" />} />
+          <Route path="/app/missions/:missionId" element={<WalletSectionPage area="mission" />} />
           <Route path="/tutor" element={<StaffHomePage />} />
           <Route path="/admin" element={<StaffHomePage />} />
           <Route path="/sponsor" element={<StaffHomePage />} />

@@ -414,11 +414,7 @@
     "help": "Ayuda",
     "notifications": "Notificaciones, {{count}} sin leer",
     "profileMenu": "Menú de {{name}}: perfil, seguridad y comprobantes",
-    "missionPanel": "Misión activa y Fuerte",
     "breadcrumbs": "Estás en",
-    "levelIndicator": "Nivel {{level}} de 7 completado",
-    "nextUnlock": "Próximo desbloqueo: Invertir",
-    "nextUnlockDetail": "Fondo de emergencia: 2 de 3 meses",
     "nav": {
       "label": "Navegación principal",
       "home": "Inicio",
@@ -426,7 +422,13 @@
       "save": "Ahorrar",
       "invest": "Invertir",
       "learn": "Aprender",
-      "locked": "bloqueado"
+      "locked": "bloqueado",
+      "groupWallet": "Tu billetera",
+      "groupLearn": "Aprendizaje",
+      "menuCollapse": "Contraer el menú",
+      "menuExpand": "Expandir el menú",
+      "showSub": "Mostrar las opciones de {{name}}",
+      "hideSub": "Ocultar las opciones de {{name}}"
     },
     "sub": {
       "transfer": "Transferir",
@@ -437,16 +439,17 @@
       "pockets": "Apartados y metas",
       "yield": "Rendir",
       "map": "Mapa de niveles",
-      "tools": "Herramientas"
+      "tools": "Herramientas",
+      "profile": "Perfil"
     },
     "home": {
-      "date": "19/04/2027",
+      "date": "{{date}}",
       "day": "día {{day}} de la billetera",
       "hello": "Hola,",
       "fuerteLine": "Tu fondo de emergencia ya cubre 2 meses. Falta uno para desbloquear Invertir.",
       "context": "Tu progreso",
-      "chipLevel": "Nivel {{level}} · Rendir",
-      "chipNext": "Próximo desbloqueo: Invertir",
+      "chipLevel": "Nivel {{level}} · {{section}}",
+      "chipNext": "Próximo desbloqueo: {{section}}",
       "advance": {
         "day": "Avanzar un día",
         "month": "Avanzar un mes",
@@ -466,22 +469,16 @@
         "pockets": "Apartar"
       },
       "pockets": {
-        "total": "En apartados"
+        "total": "En apartados",
+        "empty": "Todavía no separaste dinero en apartados."
       },
       "unlock": {
-        "kicker": "Próximo desbloqueo · Nivel 7",
-        "title": "Invertir",
-        "body": "Primero lo que te protege, después lo que te hace crecer. Esto es lo que falta:",
-        "go": "Ir a Apartados y metas",
-        "emergency": "Fondo de emergencia",
-        "monthsOf": "{{months}} de {{goal}} meses",
-        "challengeDone": "Desafío del nivel 6 aprobado",
-        "noDebt": "Sin deudas de tasa alta",
-        "profile": "Test de perfil de inversor"
+        "go": "Ir a {{section}}"
       },
       "movements": {
         "title": "Últimos movimientos",
-        "all": "Ver todos"
+        "all": "Ver todos",
+        "empty": "Todavía no hay movimientos. El primero llega con tu sueldo."
       },
       "mission": {
         "kicker": "Misión activa",
@@ -491,11 +488,169 @@
         "progress": "Avance de la misión",
         "stepOf": "Paso {{step}} de {{steps}}",
         "continue": "Seguir la misión",
-        "fuerte": "Ojo con esto: \"cuenta remunerada\" y \"fondo\" no son lo mismo. Mira qué protección tiene cada una."
+        "fuerte": "Ojo con esto: \"cuenta remunerada\" y \"fondo\" no son lo mismo. Mira qué protección tiene cada una.",
+        "kickerMinutes": "Misión activa · {{minutes}} min",
+        "start": "Empezar la misión",
+        "none": "No tienes misiones pendientes en las secciones abiertas."
       },
       "why": {
         "title": "¿Por qué importa?",
         "body": "En una billetera, la mayor parte del dinero \"que rinde\" suele estar en un fondo money market, no en la cuenta: no tiene la garantía de los depósitos."
+      },
+      "fuerteInvest": "Tu fondo de emergencia ya cubre {{months}} meses. Con 3, y el test de perfil, se abre Invertir.",
+      "fuerteBudget": "Categorizaste {{current}} de 10 movimientos. Con 10 y el desafío del nivel 2, se abre Presupuesto.",
+      "fuerteGeneric": "Tu próximo desbloqueo es {{section}}. Mira lo que falta en la tarjeta de abajo.",
+      "fuerteAllOpen": "Abriste todas las secciones. Ahora, a practicar sin apuro.",
+      "time": {
+        "label": "Avanzar el tiempo",
+        "day": "Un día",
+        "week": "Una semana",
+        "month": "Un mes",
+        "done_one": "Avanzaste {{count}} día: {{movements}} movimientos nuevos.",
+        "done_other": "Avanzaste {{count}} días: {{movements}} movimientos nuevos.",
+        "pending": "No alcanzó el saldo para pagar {{name}} ({{amount}}). Pasa dinero de un apartado para seguir.",
+        "notYet": "El tiempo avanza después de tu primer cobro (misión 1)."
+      }
+    },
+    "sections": {
+      "level-0": "Abrir tu cuenta",
+      "level-1": "Cuenta",
+      "level-2": "Pagar",
+      "level-3": "Presupuesto",
+      "level-4": "Apartados y metas",
+      "level-5": "Tarjeta y préstamos",
+      "level-6": "Rendir",
+      "level-7": "Invertir"
+    },
+    "levelCard": {
+      "level": "Niveles completados: {{level}} de 7",
+      "next": "Próximo: {{section}}",
+      "progress": "{{met}} de {{total}} condiciones",
+      "allOpen": "Todas las secciones abiertas",
+      "see": "Ver qué falta"
+    },
+    "unlock": {
+      "kicker": "Próximo desbloqueo · Nivel {{level}}",
+      "met": "{{met}} de {{total}} condiciones cumplidas",
+      "progressLabel": "Condiciones para abrir {{section}}",
+      "investBody": "Primero lo que te protege, después lo que te hace crecer.",
+      "body": "Esto es lo que falta para abrir esta sección.",
+      "metLabel": "cumplido",
+      "pendingLabel": "pendiente",
+      "doProfile": "Hacer el test de perfil",
+      "c": {
+        "first_sign_in": "Iniciar sesión",
+        "level_completed": "Completar el nivel {{level}}",
+        "mission_completed": "Misión: {{title}}",
+        "challenge_passed": "Desafío del nivel {{level}}",
+        "challengeScore": "Desafío del nivel {{level}} · mejor: {{score}}",
+        "categorized_movements": "Movimientos categorizados · {{current}} de {{goal}}",
+        "months_closed_green": "Meses en verde · {{current}} de {{goal}}",
+        "emergency_pocket": "Fondo de emergencia creado",
+        "emergency_months": "Fondo de emergencia · {{current}} de {{goal}} meses",
+        "high_rate_debt": "Sin deudas de tasa alta",
+        "investor_profile_done": "Test de perfil de inversor"
+      },
+      "goTo": "Ir a {{section}}"
+    },
+    "categorize": {
+      "none": "Sin categoría",
+      "suggested": "Sugerida: {{category}}",
+      "button": "Categoría de {{name}}: {{state}}",
+      "legend": "¿En qué categoría va?",
+      "help": "Confirmar la categoría te acerca a Presupuesto.",
+      "needs": "Necesidades",
+      "wants": "Deseos",
+      "savings": "Ahorro",
+      "saved": "Categoría guardada",
+      "suggestedShort": "sugerida"
+    },
+    "fuerte": {
+      "open": "Abrir el mensaje de Fuerte",
+      "unread": "Fuerte tiene un mensaje para ti",
+      "title": "Fuerte",
+      "close": "Cerrar",
+      "whyTitle": "¿Por qué importa?",
+      "why": {
+        "account": "Tu recibo dice cuánto cobras en bruto, pero lo que entra en la cuenta es el neto: con ese número se arma el presupuesto del mes.",
+        "pay": "Las transferencias inmediatas se acreditan en segundos y no se pueden deshacer desde la app: revisar el titular antes de confirmar es la mejor protección.",
+        "budget": "Anotar todo durante un mes muestra los gastos hormiga, que pueden llegar al 15 % del ingreso.",
+        "pockets": "Un fondo de emergencia de 3 a 6 meses de gastos básicos evita endeudarte cuando aparece un imprevisto.",
+        "credit": "La TNA no dice todo: el costo financiero total (CFT) suma comisiones y cargos, y es el número para comparar.",
+        "yield": "En una billetera, la mayor parte del dinero \"que rinde\" suele estar en un fondo money market, no en la cuenta: no tiene la garantía de los depósitos.",
+        "invest": "Invertir viene después de protegerte: con fondo de emergencia y sin deudas caras, una caída no te obliga a vender."
+      }
+    },
+    "placeholder": {
+      "lockedTitle": "{{section}} está bloqueado",
+      "pendingTitle": "{{section}} se construye en el paso {{step}}",
+      "pending": "Esta pantalla llega en el paso {{step}} del plan de trabajo. Mientras tanto, puedes seguir en Inicio.",
+      "backHome": "Volver a Inicio"
+    },
+    "expenses": {
+      "rent": "el alquiler",
+      "groceries": "el supermercado",
+      "electricity": "la luz",
+      "gas": "el gas",
+      "phone": "el celular",
+      "transport": "el transporte",
+      "outings": "las salidas",
+      "clothes": "la ropa",
+      "streaming": "el streaming",
+      "subscription": "la suscripción"
+    },
+    "profile": {
+      "kicker": "Módulo 13 · Perfil de inversor",
+      "title": "Test de perfil de inversor",
+      "intro": "Los brókers lo piden antes de abrir una cuenta para ofrecerte productos acordes a tu horizonte y a cuánto riesgo toleras. Hacerlo acá te muestra cómo es y para qué sirve.",
+      "notAdvice": "Contenido educativo. Tu resultado no es una recomendación ni se traduce en una cartera: solo te ayuda a entender qué preguntas te van a hacer.",
+      "fuerte": "Este test no tiene respuestas correctas. Contesta lo que harías de verdad, no lo que suena mejor.",
+      "required": "Elige una opción.",
+      "submit": "Ver mi perfil",
+      "again": "Hacer el test de nuevo",
+      "resultTitle": "Tu perfil de práctica: {{profile}}",
+      "names": {
+        "conservative": "conservador",
+        "moderate": "moderado",
+        "aggressive": "agresivo"
+      },
+      "meaning": {
+        "conservative": "Priorizas no perder lo que pones, aunque crezca menos. Los brókers suelen mostrar primero instrumentos de bajo riesgo y alta liquidez.",
+        "moderate": "Buscas un equilibrio: aceptas algunas subas y bajas a cambio de que tu dinero pueda crecer en el mediano plazo.",
+        "aggressive": "Toleras caídas fuertes en busca de más crecimiento a largo plazo. Igual conviene invertir solo el dinero que no vas a necesitar pronto."
+      },
+      "why": "Tu resultado queda solo en este navegador. Cuando abras tu cuenta comitente de práctica en Invertir, se reutiliza.",
+      "q": {
+        "horizon": {
+          "legend": "¿Para cuándo podrías necesitar este dinero?",
+          "o0": "En menos de 1 año",
+          "o1": "Entre 1 y 3 años",
+          "o2": "En más de 3 años"
+        },
+        "drop": {
+          "legend": "Si tu inversión bajara un 20 % en un mes, ¿qué harías?",
+          "o0": "Vendería todo para no perder más",
+          "o1": "Esperaría a que se recupere",
+          "o2": "Compraría más, si puedo"
+        },
+        "priority": {
+          "legend": "¿Qué te importa más?",
+          "o0": "No perder lo que puse",
+          "o1": "Un equilibrio entre cuidar y crecer",
+          "o2": "Que crezca, aunque varíe mucho"
+        },
+        "knowledge": {
+          "legend": "¿Cuánto sabes de acciones, bonos o fondos?",
+          "o0": "Poco",
+          "o1": "Algo",
+          "o2": "Bastante"
+        },
+        "base": {
+          "legend": "¿Tienes fondo de emergencia y no tienes deudas caras?",
+          "o0": "No",
+          "o1": "En parte",
+          "o2": "Sí"
+        }
       }
     }
   },

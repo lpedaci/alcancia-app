@@ -5,13 +5,21 @@ import { MoneyText } from '@/components/money/MoneyText';
 import { Avatar } from '@/components/ui/Avatar';
 import { Icon, type IconName } from '@/components/ui/Icon';
 import { Fuerte } from '@/features/companion/Fuerte';
-import { PILOT } from '@/features/wallet/pilot-fixture';
-import { D, priceIndex, purchasingPower } from '@/lib/finance';
+import { buildMariana } from '@/features/wallet/engine/demo';
+import { purchasingPowerToday } from '@/features/wallet/engine/engine';
+import { formatDate, walletDate } from '@/lib/dates';
+import { D, purchasingPower } from '@/lib/finance';
 import { formatPercent } from '@/lib/money';
 import { duration, easing, useShouldReduceMotion } from '@/lib/motion';
 import { cn } from '@/lib/utils';
 
 export type PhoneScreen = 'home' | 'levels' | 'tool';
+
+/** Mariana's demo wallet, generated once by the engine (wallet-engine.md, section 12). */
+const MARIANA = buildMariana();
+const MARIANA_NAME = 'Mariana López';
+const LIGHTS = 6;
+const ACTIVE_MISSION = 'El préstamo tentador';
 
 /**
  * A smartphone at real size (20 rem wide, 9:19 screen) with screens drawn with the same
@@ -81,11 +89,11 @@ export function AppTopBar({ section }: { section: string }) {
         {t('wallet.practiceBanner')}
       </p>
       <div className="flex h-12 shrink-0 items-center gap-2 border-b border-outline-variant bg-surface-container-lowest px-3">
-        <Fuerte state="neutral" lights={PILOT.completedLevels} size={1.75} />
+        <Fuerte state="neutral" lights={LIGHTS} size={1.75} />
         <span className="min-w-0 flex-1 truncate text-title-small text-on-surface">{section}</span>
         <Icon name="help" size={20} className="text-on-surface-variant" />
         <Icon name="notifications" size={20} className="text-on-surface-variant" />
-        <Avatar name={PILOT.personName} role="participant" size="sm" />
+        <Avatar name={MARIANA_NAME} role="participant" size="sm" />
       </div>
     </>
   );
@@ -96,7 +104,7 @@ const card = 'flex flex-col gap-2 rounded-lg border border-outline-variant bg-su
 /** P1 on a phone, as the wallet draws it at 320 px: mission card, greeting, balance and quick actions. */
 function HomeScreen() {
   const { t } = useTranslation();
-  const power = D(PILOT.balance).div(priceIndex(PILOT.day, PILOT.monthlyInflation));
+  const power = purchasingPowerToday(MARIANA);
   const actions: { key: 'transfer' | 'qr' | 'bills' | 'pockets'; icon: IconName }[] = [
     { key: 'transfer', icon: 'send_money' },
     { key: 'qr', icon: 'qr_code_scanner' },
@@ -114,26 +122,26 @@ function HomeScreen() {
           </span>
           <span className="min-w-0 flex-1">
             <span className="block truncate text-label-small text-primary">
-              {t('wallet.home.mission.kicker')} · {t('wallet.home.mission.stepOf', { step: PILOT.mission.step, steps: PILOT.mission.steps })}
+              {t('wallet.home.mission.kickerMinutes', { minutes: 5 })}
             </span>
-            <span className="block truncate text-title-small text-on-surface">{PILOT.mission.title}</span>
+            <span className="block truncate text-title-small text-on-surface">{ACTIVE_MISSION}</span>
           </span>
           <Icon name="keyboard_arrow_up" size={20} className="text-on-surface-variant" />
         </div>
         {/* Greeting */}
         <div className="flex flex-col gap-1.5 rounded-lg bg-primary-container p-3 text-on-primary-container">
           <p className="text-label-small">
-            {t('wallet.home.date')} · {t('wallet.home.day', { day: PILOT.day })}
+            {formatDate(walletDate(MARIANA.day))} · {t('wallet.home.day', { day: MARIANA.day })}
           </p>
           <p className="text-title-large">
-            {t('wallet.home.hello')} <span className="text-primary">{PILOT.firstName}</span>
+            {t('wallet.home.hello')} <span className="text-primary">Mariana</span>
           </p>
-          <p className="text-body-small">{t('wallet.home.fuerteLine')}</p>
+          <p className="text-body-small">{t('wallet.home.fuerteInvest', { months: '2,3' })}</p>
           <div className="flex flex-wrap gap-1.5 pt-0.5">
             <span className="rounded-full bg-surface-container-lowest px-2 py-0.5 text-label-small text-on-surface">
-              {t('wallet.home.chipLevel', { level: PILOT.currentLevel })}
+              {t('wallet.home.chipLevel', { level: 6, section: t('wallet.sections.level-6') })}
             </span>
-            <span className="rounded-full bg-tertiary-container px-2 py-0.5 text-label-small text-on-tertiary-container">{t('wallet.home.chipNext')}</span>
+            <span className="rounded-full bg-tertiary-container px-2 py-0.5 text-label-small text-on-tertiary-container">{t('wallet.home.chipNext', { section: t('wallet.sections.level-7') })}</span>
           </div>
           <div className="flex flex-wrap gap-1.5 pt-1">
             <span className="inline-flex items-center gap-1 rounded-sm bg-secondary-container px-2 py-1 text-label-small text-on-secondary-container">
@@ -155,7 +163,7 @@ function HomeScreen() {
             </span>
           </div>
           <p className="text-headline-small text-on-surface">
-            <MoneyText value={PILOT.balance} />
+            <MoneyText value={MARIANA.balance} />
           </p>
           <p className="flex flex-wrap items-center gap-x-2 gap-y-1">
             <span className="inline-flex items-center gap-1 rounded-full bg-warning-container px-2 py-0.5 text-label-small whitespace-nowrap text-on-warning-container">
