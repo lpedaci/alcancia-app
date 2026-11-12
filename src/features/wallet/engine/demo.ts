@@ -79,19 +79,21 @@ export function buildMariana(): WalletState {
   s = goTo(s, 31);
   s = createPocket(s, { id: POCKET_EMERGENCY, name: 'Fondo de emergencia', isEmergencyFund: true, goal: '1950000.00' });
   s = createPocket(s, { id: POCKET_GOAL, name: 'Vacaciones de invierno', goal: '2138641.00' });
-  s = completeMission(s, 'mission-emergency');
+  s = completeMission(s, 'mission-emergency-fund');
 
   // Every month, on salary day: 25 % to the emergency fund and 5 % to the goal.
   for (let month = 1; month <= 5; month += 1) {
     s = goTo(s, month * 30 + 1);
     s = moveToPocket(s, POCKET_EMERGENCY, percentOf(s.salary, '0.25'));
     s = moveToPocket(s, POCKET_GOAL, percentOf(s.salary, '0.05'));
-    if (month === 3) for (const id of ['mission-5', 'mission-debts']) s = completeMission(s, id); // level 5
+    if (month === 3) s = completeMission(s, 'mission-debts'); // level 5 (mission 5 is still pending, as in the seed)
     if (month === 4) {
-      // Level 6 (Rendir): mission 4 "¿Cuenta o fondo?" in progress, the remunerated account chosen on day 125.
+      // Level 6 (Rendir): mission 4 "¿Cuenta o fondo?": she chooses the remunerated account on day 125
+      // and, after 30 days, explains the difference (completed on day 151, as in the seed).
       s = goTo(s, 125);
       s = setYieldMode(s, 'remunerated');
     }
+    if (month === 5) s = completeMission(s, 'mission-4');
     s = confirmCategories(s);
   }
   s = goTo(s, DEMO_DAYS['p-mariana']);

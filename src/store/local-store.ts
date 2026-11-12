@@ -15,7 +15,11 @@ export interface LocalData {
   reflections: Record<string, string>;
   /** Level lock states: only the person sees them (D-58). */
   levelProgress: LevelProgress[];
+  /** D-67: result of the educational investor profile test. Never a portfolio recommendation (1.2). */
+  investorProfile?: InvestorProfile;
 }
+
+export type InvestorProfile = 'conservative' | 'moderate' | 'aggressive';
 
 export const LOCAL_PREFIX = 'alcancia-local:';
 export const localKey = (personId: string) => `${LOCAL_PREFIX}${personId}`;
