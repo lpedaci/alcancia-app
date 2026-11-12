@@ -24,3 +24,6 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Third-party shots used only as local visual reference (D-66). Never published.
+design-references/
