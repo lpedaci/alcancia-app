@@ -131,4 +131,10 @@ describe('content and reference data', () => {
     }
     expect(fintech).toHaveLength(11);
   });
+
+  it('PPI keeps its row with a dated note about the announced merger (Annex C, Q-15)', () => {
+    const ppi = brokers.find((b) => b.nombreComercial === 'PPI') as (typeof brokers)[number] & { nota?: string; notaFecha?: string };
+    expect(ppi.nota).toMatch(/Banco de Valores/);
+    expect(ppi.notaFecha).toBe('2026-11');
+  });
 });

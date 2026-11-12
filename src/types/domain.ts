@@ -319,6 +319,10 @@ export interface BrokerEntry {
   matricula: string;
   fuente: string;
   verificadoEl: IsoDate;
+  /** Dated context shown in the card, for example an announced merger (Annex C). */
+  nota?: string;
+  /** AAAA-MM of the note. */
+  notaFecha?: string;
 }
 
 /** Annex D: wallets and fintech classified by the kind of account they give you (D-26). */

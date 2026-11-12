@@ -25,6 +25,7 @@ export const OFFICIAL_SOURCES = [
   { id: 'cnv-psav', name: 'CNV, Registro de proveedores de servicios de activos virtuales (PSAV)', url: 'https://www.cnv.gov.ar/SitioWeb/RegistrosPublicos/Psav' },
   { id: 'byma-cedears', name: 'BYMA, CEDEARs y ratios de conversión', url: 'https://byma.com.ar/productos/productos-financieros/cedears' },
   { id: 'byma-horarios', name: 'BYMA, horarios de negociación', url: 'https://byma.com.ar/mercado/horarios' },
+  { id: 'cajval-cedears', name: 'Caja de Valores, CEDEARs y CEDEARs de ETF', url: 'https://cajadevalores.com.ar/Servicios/Cedears' },
   { id: 'byma-alycs', name: 'BYMA, nómina de ALyC', url: 'https://www.byma.com.ar/mercado/para-agentes-miembros/listado-de-alycs' },
   { id: 'indec', name: 'INDEC, índice de precios al consumidor', url: 'https://www.indec.gob.ar' },
 ].map((source) => ({ ...source, verifiedAt: VERIFIED })) satisfies OfficialSource[];
