@@ -27,15 +27,15 @@
 | 9 | Inflación y poder de compra | 6 | Inflación y tasas | A-21, T | Validado |
 | 10 | Tasas sin misterio | 6 | Inflación y tasas | B-04 | Ampliación |
 | 11 | Plazo fijo, UVA y money market | 6 | Inflación y tasas | A-36, B-01 a B-03, B-12 a B-14, B-26 | Validado (A-36) + ampliación |
-| 12 | Ahorrar e invertir no son lo mismo | 7 | Metas | A-19, A-20, A-38, A-39, A-55 | Validado (A-20 ⚠) |
-| 13 | Tu perfil de inversor y cómo elegir un bróker | 7 | Metas | A-53, A-54, B-20 a B-23, Anexo C | Validado + ampliación |
-| 14 | Mercado de capitales | 7 | Metas | A-40, A-42 a A-45, B-25 | Validado (A-40 y A-42 ⚠) + ampliación |
-| 15 | CEDEARs | 7 | Metas | A-46, B-30 a B-36 | Ampliación |
-| 16 | Criptomonedas | 8 (fase B) | Metas | A-48 a A-51, B-18, B-27 | Fase B |
-| 17 | Billeteras virtuales y fintech | 2 (y 6, D-117) | Ahorro y emergencias | B-10 a B-19, Anexo D | Ampliación |
+| 12 | Ahorrar e invertir no son lo mismo | 7 | Metas e inversión | A-19, A-20, A-38, A-39, A-55 | Validado (A-20 ⚠) |
+| 13 | Tu perfil de inversor y cómo elegir un bróker | 7 | Metas e inversión | A-53, A-54, B-20 a B-23, Anexo C | Validado + ampliación |
+| 14 | Mercado de capitales | 7 | Metas e inversión | A-40, A-42 a A-45, B-25 | Validado (A-40 y A-42 ⚠) + ampliación |
+| 15 | CEDEARs | 7 | Metas e inversión | A-46, B-30 a B-36 | Ampliación |
+| 16 | Criptomonedas | 8 (fase B) | Metas e inversión | A-48 a A-51, B-18, B-27 | Fase B |
+| 17 | Billeteras virtuales y fintech | 2 (D-65) | Ahorro y emergencias | B-10 a B-19, Anexo D | Ampliación |
 | 18 | Estafas y mensajes sospechosos (guía base) | 2 | Ahorro y emergencias | T (sala 5 del escape room), B-24 | Validado (T) + ampliación |
 
-Dimensiones: propuesta D-116 (`learning-design.md`, sección 4).
+Dimensiones: D-116, aprobada; la quinta se llama "Metas e inversión" (D-64; en el código, `goals`).
 
 ---
 
@@ -57,14 +57,14 @@ Las de **hábitos** no tienen respuesta correcta ni juicio, y **nunca salen del 
 | 2 | Hábito | Ahorro y emergencias | Si mañana tuvieras un gasto imprevisto grande, ¿cómo lo cubrirías? (Con ahorros · Con la tarjeta o un préstamo · Pidiendo prestado · No sé) |
 | 3 | Hábito | Deudas y crédito | ¿Cómo pagas habitualmente la tarjeta? (El total · Más del mínimo · El mínimo · No tengo tarjeta) |
 | 4 | Hábito | Inflación y tasas | Cuando te sobra dinero a fin de mes, ¿qué haces con él? (Lo dejo en la cuenta · Lo pongo a rendir · Lo gasto · No me suele sobrar) |
-| 5 | Hábito | Metas | ¿Tienes una meta de ahorro con monto y fecha? (Sí · Tengo una idea · No) |
+| 5 | Hábito | Metas e inversión | ¿Tienes una meta de ahorro con monto y fecha? (Sí · Tengo una idea · No) |
 | 6 | Conocimiento | Presupuesto | En un recibo, ¿qué es el sueldo neto? (opción única) |
 | 7 | Conocimiento | Ahorro y emergencias | ¿Cuántos meses de gastos básicos se suele recomendar para un fondo de emergencia? (opción única, A-35) |
 | 8 | Conocimiento | Deudas y crédito | ¿Qué incluye el CFT que no incluye la TNA? (opción única, B-04) |
 | 9 | Conocimiento | Deudas y crédito | Si pagas solo el mínimo de la tarjeta, ¿qué pasa con el resto? (opción única) |
 | 10 | Conocimiento | Inflación y tasas | Si la inflación es del 3 % mensual, ¿$ 100.000 guardados un año compran más, lo mismo o menos? (opción única) |
 | 11 | Conocimiento | Inflación y tasas | ¿Qué indica la TNA? (opción única) |
-| 12 | Conocimiento | Metas | ¿Cuál es la diferencia entre ahorrar e invertir? (opción única, A-38) |
+| 12 | Conocimiento | Metas e inversión | ¿Cuál es la diferencia entre ahorrar e invertir? (opción única, A-38) |
 
 ---
 
@@ -76,7 +76,7 @@ Las de **hábitos** no tienen respuesta correcta ni juicio, y **nunca salen del 
 - **Guía de fase A:** "Del bruto al neto", con el recibo del taller (D-54): bruto $ 1.559.263,32 (remunerativo $ 1.469.263,32 y no remunerativo $ 90.000), descuentos $ 274.304,46 (jubilación 11 %, Ley 19.032 3 %, obra social 3 %, aporte solidario), neto **$ 1.284.958,86**; costo total para el empleador $ 2.171.180,60.
 - **Actividades:** recibo interactivo con los números del taller; "Para tu vida": revisar tu recibo y verificar que bruto menos descuentos dé el neto (T).
 - **Fuentes:** T, sección "El recibo de sueldo". **Estado:** validado.
-- **Pregunta abierta (Q-11):** el recibo del taller está a nombre de una persona ficticia con categoría "Administrativa". ¿Se muestra con el nombre de cada persona de demo (Mariana y Diego), con la misma categoría, o con un nombre genérico?
+- **Cómo se muestra (D-54, respuesta a Q-11):** tal como está en el taller, con su nombre ficticio y el rótulo "Recibo de ejemplo", no a nombre de Mariana ni de Diego (tienen puestos distintos; el mismo sueldo de práctica es una simplificación).
 
 ### Módulo 2 · Tu cerebro y el dinero
 - **Objetivo:** identificar la gratificación inmediata y el sesgo de descuento hiperbólico en situaciones de consumo, y aplicar la regla de las 48 horas para decidir una compra no esencial.
@@ -184,7 +184,7 @@ Las de **hábitos** no tienen respuesta correcta ni juicio, y **nunca salen del 
 - **Guía de fase A:** "Dónde guardar sin perder": garantía de los depósitos hasta $ 50.000.000 (B-01), plazo mínimo de 30 días (B-02), UVA no obligatorio desde 2025 y condiciones de cada banco (B-03), cuenta de pago o fondo (B-12 a B-14), fondos money market (B-26), mayor parte del dinero de las billeteras en fondos (B-17).
 - **Fuentes:** A-36, B-01 a B-03, B-12 a B-14, B-17, B-26. ⚠ Sin tasa mínima (Q-01) ni nombres de variantes de fondos (Q-03). **Estado:** validado (A-36) + ampliación.
 
-**Desafío del nivel 6:** bancos de los módulos 9 a 11 (y 17 si se aprueba la alternativa de D-117).
+**Desafío del nivel 6:** bancos de los módulos 9 a 11. La parte "cuenta o fondo" del módulo 17 se practica en la misión 4 (D-65).
 
 ---
 

@@ -1,6 +1,6 @@
 # Fórmulas
 
-> Fecha: 12/11/2026 · Segunda tanda del paso 0. Cada fórmula de `src/lib/finance/` está acá con su explicación, supuestos, simplificaciones y casos de prueba. Los casos se calcularon paso a paso y se verificaron con aritmética decimal de 40 dígitos (no con punto flotante); en el paso 3 se convierten en tests de Vitest con los mismos números.
+> Fecha: 12/11/2026 · Segunda tanda del paso 0. Cada fórmula de `src/lib/finance/` está acá con su explicación, supuestos, simplificaciones y 28 casos de prueba. Los casos se calcularon paso a paso y se verificaron con aritmética decimal de 40 dígitos (no con punto flotante); en el paso 3 se convierten en tests de Vitest con los mismos números.
 
 ## 0. Convenciones comunes
 
@@ -14,13 +14,13 @@
 | Inflación de un período de `d` días | `(1 + π_m)^(d / 30) − 1` | Convierte la inflación mensual del escenario a cualquier plazo |
 | Escenarios | Inflación mensual baja 1,5 %, media 3 %, alta 6 % (`scenarios.json`), siempre rotulados "Valores de ejemplo" | Spec F4 |
 
-**Tasas de ejemplo de cada escenario (propuesta, D-110, pendiente de Lourdes y Kevin):** valores coherentes con la inflación de cada escenario, nunca presentados como actuales.
+**Tasas de ejemplo de cada escenario (D-110, ajustada por Lourdes el 12/11/2026, pendiente de Kevin):** valores coherentes con la inflación de cada escenario, nunca presentados como actuales. En el escenario bajo, el plazo fijo y el fondo le ganan a la inflación por poco, para que SIM-4 y la misión 4 muestren también una tasa real positiva (caso F-28).
 
 | Tasa de ejemplo (TNA) | Baja (1,5 %) | Media (3 %) | Alta (6 %) |
 | --- | --- | --- | --- |
 | Cuenta remunerada | 15 % | 30 % | 60 % |
-| Fondo money market | 16 % | 31 % | 62 % |
-| Plazo fijo tradicional | 18 % | 34 % | 68 % |
+| Fondo money market | 20 % | 31 % | 62 % |
+| Plazo fijo tradicional | 22 % | 34 % | 68 % |
 | Tasa adicional del plazo fijo UVA | 1 % | 1 % | 1 % |
 | Financiación de la tarjeta | 45 % | 60 % | 120 % |
 | Préstamo personal | 40 % | 55 % | 110 % |
@@ -212,6 +212,16 @@ Muestra las dos fuentes de variación y que se multiplican (`1,1 × 1,1 = 1,21`)
 
 Ninguna le gana a la inflación del escenario medio en 30 días. Se presenta como comparación de características, no como recomendación; el panel dice qué opción tiene garantía de los depósitos (B-01, B-12, B-14).
 
+**Caso F-28** · $ 3.000.000, 30 días, escenario bajo (1,5 % mensual), con las tasas de D-110
+
+| Opción (valores de ejemplo) | TNA | A los 30 días | Rendimiento del período | Tasa real (F-03) | En poder de compra |
+| --- | --- | --- | --- | --- | --- |
+| Cuenta remunerada | 15 % | **$ 3.037.207,55** | 1,2403 % | **−0,2559 %** | $ 2.992.322,71 |
+| Fondo money market | 20 % | **$ 3.049.708,90** | 1,6570 % | **+0,1546 %** | $ 3.004.639,31 |
+| Plazo fijo tradicional | 22 % | **$ 3.054.246,58** | 1,8082 % | **+0,3037 %** | $ 3.009.109,93 |
+
+En este escenario, el fondo y el plazo fijo le ganan a la inflación por poco y la cuenta remunerada no: la persona ve los dos casos (D-110).
+
 ## 12. Meta de ahorro con inflación (SIM-8)
 
 **Fórmulas:**
@@ -275,7 +285,7 @@ Detalle del motor en `wallet-engine.md`. Fórmulas:
 | F-16, F-17 | `debtPayoff(debts, extra, method)` | ver tablas |
 | F-18, F-19 | `compoundGrowth(...)` | USD 2.593,74 · USD 1.008.712,49 |
 | F-20 | `cedearTheoreticalPrice(...)` | $ 45.000 |
-| F-21 | `emergencyFundOptions(...)` | ver tabla |
+| F-21, F-28 | `emergencyFundOptions(...)` | ver tablas |
 | F-22 | `savingsGoal(...)` | $ 2.138.641,33 · $ 155.023,97 |
 | F-23 | `emergencyFundTarget(...)` | $ 1.800.000 · 10 meses |
 | F-24, F-25 | `budgetSplit(...)` | ver caso |

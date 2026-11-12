@@ -28,7 +28,7 @@
 | Ingreso | Regla |
 | --- | --- |
 | Sueldo | Neto de **$ 1.284.958,86** (D-54), de Andina Servicios S.A., el día 1 de cada mes simulado |
-| Actualización del sueldo (propuesta, D-111) | Cada 3 meses simulados, el sueldo sube por la inflación acumulada del trimestre en el escenario (`(1 + π_m)^3 − 1`), como un acuerdo salarial de ejemplo. Se puede desactivar en Perfil. Sin esta regla, con inflación del 3 % mensual el presupuesto se pondría en rojo en pocos meses solo por el paso del tiempo |
+| Actualización del sueldo (D-111, aprobada) | Cada 3 meses simulados, el sueldo sube por la inflación acumulada del trimestre en el escenario (`(1 + π_m)^3 − 1`), como un acuerdo salarial de ejemplo. No se puede desactivar en fase A. Sin esta regla, con inflación del 3 % mensual el presupuesto se pondría en rojo en pocos meses solo por el paso del tiempo |
 | Aguinaldo | No se simula en fase A (solo aparece como opción prorrateada en SIM-1, Q-12) |
 | Transferencias recibidas | Solo las que generan las misiones (por ejemplo, un compañero que devuelve un préstamo de práctica) |
 
@@ -136,13 +136,13 @@ Solo estas métricas, calculadas en el navegador de la persona y consumidas por 
 | `emergency_months` | Sección 7 |
 | `high_rate_debt` | Sección 9 |
 
-## 14. Decisiones pendientes de confirmación
+## 14. Decisiones de este documento
 
-| ID | Qué | Dónde |
-| --- | --- | --- |
-| D-110 | Tasas de ejemplo de cada escenario | `formulas.md`, sección 0 |
-| D-111 | Actualización trimestral del sueldo y del alquiler por la inflación del escenario | Secciones 3 y 5 |
-| D-112 | La tarjeta de práctica llega con un resumen emitido al habilitarse el nivel 5, y el caso de A-29 como respaldo de "Sal de tus deudas" | Sección 9 |
-| D-113 | "Deuda de tasa alta" = TEA mayor que la inflación anual del escenario | Sección 9 |
-| D-114 | Categorizar desde Inicio en los niveles 1 y 2, con categorías sugeridas que se confirman | Sección 8 |
-| D-115 | Definición de "mes en verde" | Sección 8 |
+| ID | Qué | Dónde | Estado |
+| --- | --- | --- | --- |
+| D-110 | Tasas de ejemplo de cada escenario (escenario bajo ajustado: plazo fijo 22 %, fondo 20 %) | `formulas.md`, sección 0 | Aprobada por Lourdes; pendiente de Kevin |
+| D-111 | Actualización trimestral del sueldo y del alquiler por la inflación del escenario, sin interruptor en fase A | Secciones 3 y 5 | Aprobada |
+| D-112 | La tarjeta de práctica llega con un resumen emitido al habilitarse el nivel 5, y el caso de A-29 como respaldo de "Sal de tus deudas" | Sección 9 | Aprobada |
+| D-113 | "Deuda de tasa alta" = TEA mayor que la inflación anual del escenario | Sección 9 | Aprobada, provisoria hasta que la confirme Kevin |
+| D-114 | Categorizar desde Inicio en los niveles 1 y 2, con categorías sugeridas que se confirman | Sección 8 | Aprobada |
+| D-115 | Definición de "mes en verde" | Sección 8 | Aprobada |

@@ -90,12 +90,12 @@ Las cinco dimensiones de "Conocerte" (F2) ordenan la ruta; los niveles (5.0) son
 | 3 | Presupuesto | 3 Presupuesto y gastos hormiga | Presupuesto | 7 Mes completo |
 | 4 | Apartados y metas | 4 Fondo de emergencia | Ahorro y emergencias | Crea tu fondo de emergencia |
 | 5 | Tarjeta y préstamos | 5 El orden importa · 6 Tarjeta y CFT · 7 Salir de deudas · 8 Cuotas o contado | Deudas y crédito | 5 El préstamo tentador · Sal de tus deudas |
-| 6 | Rendir | 9 Inflación · 10 Tasas · 11 Plazo fijo, UVA y money market · 17 (parte cuenta o fondo) | Inflación y tasas | 4 ¿Cuenta o fondo? |
-| 7 | Invertir | 12 Ahorrar e invertir · 13 Perfil y bróker · 14 Mercado de capitales · 15 CEDEARs | Metas | Abre tu cuenta comitente · Tu primer CEDEAR de ETF · Aguanta la caída |
+| 6 | Rendir | 9 Inflación · 10 Tasas · 11 Plazo fijo, UVA y money market (la parte "cuenta o fondo" del 17, en la misión 4, D-65) | Inflación y tasas | 4 ¿Cuenta o fondo? |
+| 7 | Invertir | 12 Ahorrar e invertir · 13 Perfil y bróker · 14 Mercado de capitales · 15 CEDEARs | Metas e inversión | Abre tu cuenta comitente · Tu primer CEDEAR de ETF · Aguanta la caída |
 
-**Dimensión de cada módulo** (`Module.dimension`): presupuesto 1, 2 y 3; ahorro y emergencias 4, 17 y 18; deudas y crédito 5, 6, 7 y 8; inflación y tasas 9, 10 y 11; metas 12, 13, 14 y 15 (planificar el largo plazo). Propuesta D-116.
+**Dimensión de cada módulo** (`Module.dimension`): presupuesto 1, 2 y 3; ahorro y emergencias 4, 17 y 18; deudas y crédito 5, 6, 7 y 8; inflación y tasas 9, 10 y 11; metas e inversión 12, 13, 14 y 15 (planificar el largo plazo; D-64, en el código `goals`). D-116, aprobada.
 
-**Pregunta abierta (D-117):** el módulo 17 aparece en los niveles 2 y 6, pero D-61 da una guía por módulo en fase A. Propuesta: la guía de fase A va en el nivel 2 (pagos, CVU y CBU, protección por tipo de cuenta) y la parte "cuenta o fondo" del nivel 6 se cubre con la guía del módulo 11 y las tarjetas de la misión 4. Alternativa: dos guías del módulo 17 en fase A.
+**Módulo 17 (D-65):** una sola guía en fase A, en el nivel 2 (pagos, CVU y CBU, protección por tipo de cuenta). La parte "cuenta o fondo" del nivel 6 la cubren la guía del módulo 11 y las tarjetas de la misión 4.
 
 ### 4.1 Ruta adaptativa
 
