@@ -37,9 +37,10 @@ flowchart LR
 | --- | --- | --- |
 | **Dinero de la billetera** (saldo, movimientos, apartados, metas, decisiones en misiones, tenencia de la cuenta comitente) | `walletStore`, en `localStorage`, en un espacio separado por persona | Solo la persona, en su navegador |
 | **Datos de herramientas** (`LocalScenario`, `LocalGoal`) | `localStorage`, espacio separado por persona | Solo la persona |
-| **Respuestas de hábitos** de "Conocerte" | Navegador de la persona | Solo la persona. Agregadas por dimensión y con umbral, para L&D y el decisor (Kirkpatrick 2) |
-| **Respuestas de conocimiento** de "Conocerte" y puntajes de desafíos de nivel | Datos de aprendizaje | Persona; tutor de forma individual; admin y decisor agregados |
-| **Estado de cada nivel** (bloqueado, en curso, completado) y cómo se desbloqueó | Datos de aprendizaje | Persona; tutor de forma individual **sin el motivo de un bloqueo de la billetera** (D-58); admin agregado |
+| **Respuestas de hábitos** de "Conocerte" | Navegador de la persona | **Solo la persona.** Nunca salen del navegador, ni siquiera agregadas (D-62), como promete el aviso de G5 |
+| **Respuestas de conocimiento** de "Conocerte" y puntajes de desafíos de nivel | Datos de aprendizaje | Persona; tutor de forma individual; admin y decisor agregados (Kirkpatrick 2 usa solo estas, D-62) |
+| **Estado de cada nivel** (bloqueado o desbloqueado) | Navegador de la persona | **Solo la persona.** Combinado con el desafío aprobado, revelaría una condición de la billetera (D-58) |
+| **Avance de aprendizaje de cada nivel** (guías leídas, estado del desafío de nivel, habilitación por suficiencia o por un tutor, nivel completado) | Datos de aprendizaje | Persona; tutor de forma individual (D-58); admin agregado |
 | **Misiones** (completadas, intentos, aciertos) | Datos de aprendizaje | Persona; tutor y admin **solo agregado por cohorte**, con umbral de 5 (5.3) |
 | **Desafíos semanales** (cumplido, parcial, no) | Datos de aprendizaje | Persona; tutor individual; admin agregado. La **reflexión** opcional solo la ve la persona |
 | **Satisfacción y seguimiento a 30 días** | Datos de aprendizaje | Persona; admin y decisor agregados |
@@ -47,18 +48,29 @@ flowchart LR
 
 Regla de implementación: ninguna vista de tutor, admin o decisor importa ni lee `walletStore`, `LocalScenario` ni `LocalGoal`. Un test lo verifica (criterio de aceptación de la sección 11).
 
-### 2.1 Cómo se respeta D-58 en el mapa del tutor
+### 2.1 Qué ve el tutor de cada nivel (D-58)
 
-El estado de un nivel puede depender de una condición de la billetera (`wallet_metric`), por ejemplo "fondo de emergencia de al menos 3 meses" para Invertir. El tutor ve:
+El desbloqueo de un nivel puede depender de condiciones de la billetera (`wallet_metric`), por ejemplo "fondo de emergencia de al menos 3 meses" para Invertir. Si el tutor viera "desafío del nivel 6 aprobado" y "nivel 7 bloqueado", podría deducir que a la persona le falta fondo o tiene deudas. Por eso **el tutor nunca ve si un nivel está bloqueado o desbloqueado**: ve solo avance de aprendizaje.
 
-| Lo que pasa en la billetera | Lo que ve la persona | Lo que ve el tutor |
+| Dato del nivel | Lo ve la persona | Lo ve el tutor | Valores que puede ver el tutor |
+| --- | --- | --- | --- |
+| Bloqueado o desbloqueado | ✔ | ✖ | Ninguno |
+| Qué falta y su progreso ("Fondo de emergencia: 2 de 3 meses") | ✔ | ✖ | Ninguno |
+| Guías leídas | ✔ | ✔ | "3 de 4 guías" |
+| Estado del desafío de nivel | ✔ | ✔ | Sin empezar · En curso (con intentos) · Aprobado (mejor puntaje y primero) · Intentos agotados |
+| Cómo se habilitó, si no fue por la regla | ✔ | ✔ | "Por suficiencia" · "Habilitado por Andrés Molina: [motivo]" |
+| Nivel completado | ✔ | ✔ | Completado (guías leídas y desafío aprobado) |
+
+Ejemplos con los estados de demo:
+
+| Situación en la billetera | Lo que ve la persona | Lo que ve el tutor |
 | --- | --- | --- |
-| Invertir bloqueado por fondo de 2 de 3 meses | "Fondo de emergencia: 2 de 3 meses" con barra | "Nivel 7 · Bloqueado" |
-| Invertir bloqueado porque falta el desafío del nivel 6 | "Te falta: desafío del nivel 6" | "Nivel 7 · Bloqueado · Desafío del nivel 6 pendiente" (es aprendizaje) |
-| Nivel desbloqueado por suficiencia | "Desbloqueado con 'Ya sé esto'" | "Nivel 3 · En curso · por suficiencia" |
-| Nivel desbloqueado por el tutor | "Te lo habilitó tu tutor" | "Nivel 5 · En curso · habilitado por Andrés Molina: [motivo]" |
+| Mariana: desafío del nivel 6 aprobado, Invertir bloqueado por fondo de 2 de 3 meses | "Invertir · Fondo de emergencia: 2 de 3 meses" | Nivel 6: "Completado". Nivel 7: "0 de 4 guías · Desafío sin empezar" |
+| Diego: desafío del nivel 1 aprobado y misión 1 completa | "Pagar desbloqueado" | Nivel 1: "Completado". Nivel 2: "1 de 2 guías · Desafío sin empezar" |
+| Intentos agotados en el nivel 5 | "Tu tutor puede habilitarte este nivel" | Nivel 5: "Intentos agotados", con la acción "Habilitar nivel" |
+| Nivel habilitado por suficiencia | "Desbloqueado con 'Ya sé esto'" | "Por suficiencia" |
 
-Cuando un nivel tiene condiciones de los dos tipos, el tutor solo ve las de aprendizaje. Si la única condición pendiente es de la billetera, ve "Bloqueado" sin más detalle.
+**Habilitar con motivo:** el tutor puede habilitar **cualquier** nivel para una persona o una cohorte, con un motivo obligatorio que queda registrado con fecha y autor. Como no ve el estado, la acción está siempre disponible; si el nivel ya estaba abierto para la persona, la habilitación no cambia nada visible para ella y el tutor ve el mismo mensaje de confirmación ("Nivel habilitado para Mariana López"), para no filtrar el estado por la respuesta.
 
 ## 3. Matriz de permisos
 
@@ -71,11 +83,13 @@ Leyenda: ✔ permitido · ◐ solo agregado con umbral de privacidad (mínimo 5)
 | `wallet.use` (usar la billetera, misiones, herramientas) | ✔ propio | ✖ | ✖ | ✖ |
 | `wallet.read` (saldos, movimientos, apartados, metas) | ✔ propio | ✖ | ✖ | ✖ |
 | `learning.take` (guías, desafíos de nivel, "Conocerte") | ✔ propio | ✖ | ✖ | ✖ |
-| `learning.readIndividual` (avance por persona y módulo, puntajes de desafíos de nivel, estado de niveles sin motivo de billetera) | ✔ propio | ✔ sus cohortes | ✖ | ✖ |
+| `learning.readIndividual` (avance por persona y módulo, guías leídas, estado y puntajes de desafíos de nivel, habilitaciones, niveles completados; nunca bloqueado o desbloqueado, D-58) | ✔ propio | ✔ sus cohortes | ✖ | ✖ |
+| `levels.readLockState` (bloqueado o desbloqueado, qué falta) | ✔ propio | ✖ | ✖ | ✖ |
 | `learning.readAggregate` | ✖ | ◐ sus cohortes | ◐ toda la organización | ◐ toda la organización |
 | `missions.readAggregate` (completadas, intentos, aciertos) | ✖ | ◐ sus cohortes | ◐ | ✖ |
-| `diagnostic.readHabits` (respuestas de hábitos) | ✔ propio | ✖ | ◐ por dimensión | ◐ por dimensión |
-| `levels.unlockForPerson` / `levels.unlockForCohort` (con motivo) | ✖ | ✔ sus cohortes | ✖ | ✖ |
+| `diagnostic.readHabits` (respuestas de hábitos, D-62) | ✔ propio | ✖ | ✖ | ✖ |
+| `diagnostic.readKnowledge` (preguntas de conocimiento, pre y post) | ✔ propio | ✔ sus cohortes | ◐ por dimensión | ◐ por dimensión |
+| `levels.unlockForPerson` / `levels.unlockForCohort` (cualquier nivel, con motivo) | ✖ | ✔ sus cohortes | ✖ | ✖ |
 | `program.freeMode` (todo desbloqueado) | ✖ | ✖ | ✔ | ✖ |
 
 ### 3.2 Tutoría
@@ -138,5 +152,6 @@ Comunes: error de credenciales genérico, bloqueo tras 5 intentos sin autodesblo
 | `permissions.test.ts` | Cada permiso de las tablas 3.1 a 3.3 para cada rol |
 | `metrics.test.ts` | Umbral: 4 personas devuelve "datos insuficientes"; 5 devuelve el valor |
 | `privacy-boundaries.test.ts` | Ningún módulo de `features/tutor`, `features/organization` ni `features/sponsor` importa `walletStore` ni lee las claves locales de la persona |
-| `tutor-level-status.test.ts` | La vista del tutor nunca recibe condiciones `wallet_metric` ni su progreso (D-58) |
+| `tutor-level-status.test.ts` | Los datos que recibe la vista del tutor no incluyen `status` `locked` ni `unlocked` de `LevelProgress`, ni condiciones `wallet_metric` ni su progreso (D-58); la confirmación de "Habilitar nivel" es la misma esté o no abierto el nivel |
+| `habits-local.test.ts` | Ninguna métrica agregada ni vista de otro rol lee las respuestas de hábitos de "Conocerte" (D-62) |
 | E2E de rutas | Cada rol recibe "Acceso no permitido" en los prefijos ajenos |

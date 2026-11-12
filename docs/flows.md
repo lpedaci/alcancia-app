@@ -142,7 +142,9 @@ flowchart TD
   Q -- "Sí" --> EV["Evento sorpresa: débito de una suscripción<br/>de $ 4.990 sin aviso"]
   EV --> LC2["Tarjeta: gastos hormiga y débitos programados"]
   LC2 --> END["Cierre: resumen, logro y Fuerte<br/>'Guardado.'"]
-  END --> UNL["Desbloquea nivel 2 · Pagar"]
+  END --> CH1{"¿Desafío del nivel 1<br/>aprobado? (D-63)"}
+  CH1 -- "Sí" --> UNL["Desbloquea nivel 2 · Pagar"]
+  CH1 -- "No" --> FAL["Tarjeta 'qué falta':<br/>desafío del nivel 1"]
   S -. "Salir y retomar" .-> S
 ```
 
@@ -211,14 +213,24 @@ Sigue la secuencia de Gagné de F3, adaptada a 5 a 8 minutos: situación con nú
 ```mermaid
 flowchart TD
   T1["T1 Inicio: KPIs y alertas"] --> AL{"Alerta"}
-  AL -- "'4 personas no empezaron el nivel 3'" --> T2["T2 Detalle de cohorte<br/>mapa de calor persona × nivel y módulo"]
+  AL -- "'4 personas no leyeron<br/>las guías del nivel 3'" --> T2["T2 Detalle de cohorte<br/>mapa de calor de avance de aprendizaje:<br/>persona × nivel y módulo"]
   AL -- "'Intentos agotados en el nivel 5'" --> T2
   T2 --> P{"Acción"}
-  P -- "Desbloquear nivel" --> U["Diálogo: persona o cohorte,<br/>nivel y motivo (obligatorio)"] --> LOG["Queda registrado con fecha y autor"]
+  P -- "Habilitar nivel" --> U["Diálogo: persona o cohorte,<br/>cualquier nivel y motivo (obligatorio)"] --> LOG["Queda registrado con fecha y autor;<br/>la confirmación es la misma<br/>esté o no abierto el nivel"]
   P -- "Asignar desafío semanal" --> T3["T3 Asignar desafío"]
   T1 --> T4["T4 Resultados: preguntas con más errores"]
   T1 --> T5["T5 Consultas"]
 ```
+
+**Qué muestra cada celda del mapa de calor (D-58):** solo avance de aprendizaje. Nunca muestra si el nivel está bloqueado o desbloqueado para la persona.
+
+| Estado de la celda | Ícono y texto | Significado |
+| --- | --- | --- |
+| Sin actividad | Círculo vacío · "Sin empezar" | 0 guías leídas y desafío sin empezar (puede estar bloqueado o no: el tutor no lo sabe) |
+| En curso | Medio círculo · "2 de 4 guías" | Guías leídas o desafío con intentos |
+| Intentos agotados | Signo de atención · "Intentos agotados" | Ofrece "Habilitar nivel" |
+| Completado | Tilde · "Completado" | Guías leídas y desafío aprobado (con mejor puntaje y primero en el detalle) |
+| Habilitación | Etiqueta adicional · "Por suficiencia" o "Habilitado por tutor" | Cómo se abrió, si no fue por la regla |
 
 ### 3.2 Task flow · Asignar un desafío semanal (T3)
 

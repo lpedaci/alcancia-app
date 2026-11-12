@@ -72,16 +72,16 @@ Acompañar a sus cohortes para que nadie quede atrás y reforzar en los encuentr
 Revisa sus cohortes una o dos veces por semana, en la computadora. Prefiere alertas accionables ("4 personas no empezaron el nivel 3") a tablas largas. Necesita límites claros sobre qué puede ver para no incomodar a nadie.
 
 **Criterios de éxito**
-- Sabe en un vistazo quién está atrasado y en qué nivel.
+- Sabe en un vistazo quién está atrasado con las guías o los desafíos de nivel.
 - Prepara un encuentro con las 3 preguntas que más fallan.
-- Nunca ve un monto, un saldo ni el motivo financiero de un bloqueo (D-58), y puede decirlo con tranquilidad.
+- Nunca ve un monto, un saldo ni si un nivel está bloqueado para alguien (D-58), y puede decirlo con tranquilidad.
 
 **Supuestos**
 
 | Supuesto | Riesgo si es falso | Cómo validarlo |
 | --- | --- | --- |
 | La tutoría la hace una persona interna formada en el tema (no un asesor externo). | Medio | Entrevistas a L&D sobre cómo se dictan hoy los talleres de bienestar. |
-| Ver el estado de cada nivel (sin el motivo) le alcanza para acompañar. | Alto | Test de la pantalla T2 con 2 o 3 tutores: qué harían ante "nivel 7 bloqueado". |
+| Ver solo el avance de aprendizaje de cada nivel (sin saber si está bloqueado) le alcanza para acompañar. | Alto | Test de la pantalla T2 con 2 o 3 tutores: qué harían ante "desafío del nivel 6 aprobado, nivel 7 sin empezar". |
 | Los encuentros grupales son el principal momento de refuerzo. | Medio | Revisar la agenda de un programa similar: frecuencia y formato de encuentros. |
 | Las consultas escritas son pocas y sobre conceptos, no sobre casos personales. | Medio | Piloto de 4 semanas con una cohorte: contar y clasificar las consultas. |
 
@@ -92,7 +92,7 @@ Revisa sus cohortes una o dos veces por semana, en la computadora. Prefiere aler
 > Proto-persona: hipótesis sin validar · 12/11/2026 · Rol `participant` · Analista de Operaciones · Computadora
 
 **Objetivo principal**
-Ordenar su plata con criterio propio: saber si le alcanza, armarse un fondo de emergencia y entender qué hacer con lo que le sobra, sin que nadie le venda nada.
+Ordenar su dinero con criterio propio: saber si le alcanza, armarse un fondo de emergencia y entender qué hacer con lo que le sobra, sin que nadie le venda nada.
 
 **Tareas clave**
 - Usar la billetera de práctica en ratos de 10 a 20 minutos, desde la computadora y a veces desde el celular.
@@ -145,7 +145,7 @@ Llegar a fin de mes con menos sobresaltos y no caer en deudas que no entiende. A
 **Cómo encara el aprendizaje**
 Práctico: aprende haciendo y con ejemplos concretos. Necesita retomar donde dejó, con botones grandes y una sola acción por pantalla. Puede tener conexión inestable y un celular de gama media.
 
-**Estado de demo (D-60, 16/11/2026):** nivel 2 (Pagar), con "Conocerte" hecho, las guías del nivel 1 leídas desde el celular y un desafío semanal cumplido.
+**Estado de demo (D-60, 16/11/2026):** nivel 2 (Pagar), con "Conocerte" hecho, las guías y el desafío del nivel 1 hechos desde el celular (D-63) y un desafío semanal cumplido.
 
 **Criterios de éxito**
 - Completa una guía y su práctica en 5 minutos, en un celular de 320 a 375 px, sin desbordes.
