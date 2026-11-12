@@ -21,7 +21,7 @@
 | Avanzar | "Avanzar un día", "Avanzar una semana" (7 días) y "Avanzar un mes" (hasta el último día del mes simulado en curso) |
 | Disponible desde | Nivel 1, después de la misión 1 |
 
-**Procesamiento:** "Avanzar" procesa día por día, en este orden: (1) rendimiento del día; (2) débitos programados del día; (3) cobro del sueldo si corresponde; (4) eventos del escenario y de la misión activa; (5) cierre de mes si es el último día. **Se detiene** en el primer evento que pide una decisión (vencimiento de la tarjeta, una oferta, un mensaje, un débito que no se pudo cobrar) y muestra lo procesado hasta ahí. El resumen del período se anuncia en una región en vivo (spec 2.10).
+**Procesamiento:** "Avanzar" procesa día por día, en este orden (D-158): (1) rendimiento del día; (2) nuevo mes: precios y cobro del sueldo, a primera hora; (3) débitos programados del día; (4) eventos del escenario y de la misión activa; (5) cierre de mes si es el último día. **Se detiene** en el primer evento que pide una decisión (vencimiento de la tarjeta, una oferta, un mensaje, un débito que no se pudo cobrar) y muestra lo procesado hasta ahí. El resumen del período se anuncia en una región en vivo (spec 2.10).
 
 ## 3. Ingresos
 
@@ -78,7 +78,7 @@ Perfil de gastos ficticio, igual para Mariana y Diego (las diferencias entre ell
 - **Apartados con meta** (nivel 4): nombre, monto objetivo ajustado por inflación (SIM-8) y fecha estimada. Uno de ellos puede marcarse como **fondo de emergencia** (solo uno).
 - **Gastos esenciales mensuales** (`essentialMonthlyExpenses`): suma de los movimientos categorizados como **Necesidades** en el último mes cerrado. Si todavía no hay un mes cerrado, se usa la suma de necesidades del perfil a precios del día (tabla 4).
 - **`emergency_months`** = saldo del apartado marcado como fondo de emergencia ÷ gastos esenciales mensuales, con un decimal, hacia abajo. Con el perfil del mes 1: 3 meses = **$ 1.950.000**.
-- Estado de demo de Mariana: fondo de **2 de 3 meses** (spec 7). **Pendiente para el paso 6 (INC-08):** "2 de 3 meses" se calcula con los gastos esenciales del último mes cerrado, ajustados por inflación, no con los del mes 1. En el día 154 (mes 5 de la simulación) el último mes cerrado es el 4: alquiler $ 415.236,26 (ajuste trimestral) y el resto de las necesidades $ 303.887,38, en total **$ 719.123,64 por mes**. Para que el fondo marque 2 de 3 meses, el motor tiene que generar un apartado de al menos **$ 1.438.247,28** (y menos de $ 2.157.370,92). Los $ 1.300.000 del piloto equivalen a 2 meses a precios del mes 1 y a 1,8 meses en el día 154.
+- Estado de demo de Mariana: fondo de **2 de 3 meses** (spec 7). **Pendiente para el paso 6 (INC-08):** "2 de 3 meses" se calcula con los gastos esenciales del último mes cerrado, ajustados por inflación, no con los del mes 1. En el día 154 (mes 5 de la simulación) el último mes cerrado es el 4: alquiler $ 415.236,26 (ajuste trimestral) y el resto de las necesidades $ 303.887,38, en total **$ 719.123,64 por mes**. Para que el fondo marque 2 de 3 meses, el motor tiene que generar un apartado de al menos **$ 1.438.247,28** (y menos de $ 2.157.370,92). Los $ 1.300.000 del piloto equivalen a 2 meses a precios del mes 1 y a 1,8 meses en el día 154. **Resuelto en el paso 6:** el guion de Mariana (`engine/demo.ts`) separa cada mes el 25 % del sueldo en el fondo y el 5 % en una meta; en el día 154 el fondo tiene $ 1.695.561,37 (2,3 meses) y los gastos esenciales del mes 4 dan exactamente $ 719.123,64.
 
 ## 8. Presupuesto y cierre de mes
 
@@ -146,3 +146,10 @@ Solo estas métricas, calculadas en el navegador de la persona y consumidas por 
 | D-113 | "Deuda de tasa alta" = TEA mayor que la inflación anual del escenario | Sección 9 | Aprobada, provisoria hasta que la confirme Kevin |
 | D-114 | Categorizar desde Inicio en los niveles 1 y 2, con categorías sugeridas que se confirman | Sección 8 | Aprobada |
 | D-115 | Definición de "mes en verde" | Sección 8 | Aprobada |
+## 15. Implementación (paso 6)
+
+- Código en `src/features/wallet/engine/`: `types.ts` (estado), `profile.ts` (tabla 4), `engine.ts` (tiempo, precios, sueldo, débitos, rendimiento, apartados, categorías, cierre de mes y métricas) y `demo.ts` (guiones de Diego y Mariana). Tests en `engine.test.ts`, con casos calculados a mano.
+- **Estados de demo generados por el motor:**
+  - **Diego, día 12:** un sueldo, apartado "Ahorro" con el 20 % ($ 256.991,77), suscripción sorpresa activa (todavía no la canceló), 4 movimientos categorizados de 10, saldo $ 459.477,09.
+  - **Mariana, día 154:** cinco meses cerrados en verde, 83 movimientos categorizados, suscripción cancelada en la misión 1, "Ahorro" $ 256.991,77, fondo de emergencia $ 1.695.561,37 (2,3 meses), meta "Vacaciones de invierno" $ 339.112,26 de $ 2.138.641, cuenta remunerada desde el día 125, saldo $ 1.372.112,09.
+- **Pendiente para los pasos 7 y 8:** la serie diaria del fondo money market (por ahora usa la TNA de ejemplo sin el factor diario), la tarjeta y el préstamo de práctica (sección 9) y los plazos fijos de práctica.
