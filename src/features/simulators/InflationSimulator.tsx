@@ -12,7 +12,7 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableHeaderCell
 import { sourceById } from '@/app/sources';
 import scenarios from '@/data/scenarios.json';
 import { D, purchasingPower } from '@/lib/finance';
-import { formatMoney, formatNumber, formatPercent, parseDecimalInput } from '@/lib/money';
+import { formatMoney, formatNumber, formatPercent, NBSP, parseDecimalInput } from '@/lib/money';
 import { cn } from '@/lib/utils';
 
 /**
@@ -282,7 +282,7 @@ export function InflationSimulator({
                         axisLine={false}
                         width={72}
                         tick={{ fill: 'var(--md-sys-color-on-surface-variant)', fontSize: 12 }}
-                        tickFormatter={(v: number) => `$ ${formatNumber(String(Math.round(v / 1000)), 0)} mil`}
+                        tickFormatter={(v: number) => `$${NBSP}${formatNumber(String(Math.round(v / 1000)), 0)}${NBSP}mil`}
                       />
                       <Tooltip
                         cursor={{ stroke: 'var(--md-sys-color-outline)' }}

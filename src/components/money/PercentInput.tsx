@@ -2,7 +2,7 @@ import { type FocusEvent, forwardRef, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { TextField, type TextFieldProps } from '@/components/ui/TextField';
 import { percentMask } from '@/lib/input-masks';
-import { MINUS, parseDecimalInput } from '@/lib/money';
+import { MINUS, NBSP, parseDecimalInput } from '@/lib/money';
 
 export interface PercentInputProps extends Omit<TextFieldProps, 'mask' | 'trailing' | 'inputMode' | 'type'> {
   /** Allows a leading minus (for example, a negative real rate). */
@@ -32,7 +32,7 @@ export const PercentInput = forwardRef<HTMLInputElement, PercentInputProps>(func
         setter?.call(input, formatted);
         input.dispatchEvent(new Event('input', { bubbles: true }));
       }
-      setAnnounce(t('ui.valueAnnounce', { value: `${formatted.replace('-', MINUS)} %` }));
+      setAnnounce(t('ui.valueAnnounce', { value: `${formatted.replace('-', MINUS)}${NBSP}%` }));
     } else {
       setAnnounce('');
     }

@@ -6,13 +6,13 @@
 
 | Archivo local | Publicación original | Autor | Qué es |
 | --- | --- | --- | --- |
-| `f9c298e7481e7822669ebf9d6a8ef447.webp` | "Cognify" (panel de exámenes). **Enlace por confirmar:** no se encontró en Dribbble una publicación con este diseño (las que se llaman Cognify son otros paneles) | Por confirmar (Lourdes) | Panel de resultados de exámenes con navegación superior en píldoras |
+| `f9c298e7481e7822669ebf9d6a8ef447.webp` | "Cognify" (panel de exámenes). Captura de Dribbble, sin enlace: no se encontró la publicación original (las que se llaman Cognify en Dribbble son otros paneles) | Autor sin identificar | Panel de resultados de exámenes con navegación superior en píldoras |
 | `original-7a0529b60b5bbbc5da39f5fd285ea2ca.webp` | [Coursify – Learning Management System Dashboard](https://dribbble.com/shots/26180945-Coursify-Learning-Management-System-Dashboard-Figma) | Peterdraw Studio (el pie de la imagen dice "Copyright © 2025 Peterdraw") | Panel de un LMS con menú lateral y columna derecha fija |
 | `original-ef0e125169848c60c815fee0cdbc3e04.webp` y `original-f51fa752dd69b8648c4cb23257f85314.webp` | [Educo – eLearning Dashboard](https://dribbble.com/shots/14789537-Educo-eLearning-Dashboard) | RH LeadCraft Studio | Inicio de un estudiante: banner de saludo, lista de cursos y KPIs chicos (la primera es un recorte de la segunda) |
 | `videoframe_6496.png` | [Avenra – AI Neurology Clinical Dashboard](https://dribbble.com/shots/27719176-Avenra-AI-Neurology-Clinical-Dashboard) | DESH. Group | Panel clínico con saludo grande, tarjetas con flecha y agenda por días |
-| `original-d624f662813f72270d07325f96f4c17a.mp4` | Referencia heredada de Rumbo (D-101). **Enlace por confirmar** | Por confirmar (Lourdes) | Video de una bienvenida guiada de 3 pasos en un modal |
+| `original-d624f662813f72270d07325f96f4c17a.mp4` | Captura de Dribbble heredada de Rumbo (D-101), sin enlace: la documentación de Rumbo tampoco registra su autor | Autor sin identificar | Video de una bienvenida guiada de 3 pasos en un modal |
 
-Autores verificados en Dribbble el 12/11/2026, comparando la publicación con la imagen local.
+Autores verificados en Dribbble el 12/11/2026, comparando la publicación con la imagen local. Las dos referencias sin autor identificado se describen solo con palabras; como las imágenes no se publican (D-66), alcanza con la descripción (indicación de Lourdes).
 
 ## 2. Qué se toma y qué no, por referencia
 
@@ -72,7 +72,7 @@ Autores verificados en Dribbble el 12/11/2026, comparando la publicación con la
 | **G0 Landing** | Estructura de página de producto B2B de Rumbo (F0); Educo para el banner del hero | Hero con piezas reales del producto a los costados desde 1280 px (resultado de SIM-3, tarjeta de meta, KPI). SIM-3 embebido y funcionando. Fuerte presenta la billetera en la sección de solución. Bandas alternadas de `surface` y blanco, sin degradés |
 | **P1 Inicio de la cuenta** | Coursify (menú lateral, columna derecha fija, actividad), Educo (saludo), Avenra (saludo con acciones, flecha en tarjetas), Cognify (KPIs con contexto) | Saldo grande con poder de compra al lado y cartel "Billetera de práctica · dinero ficticio"; tarjeta de misión activa; próximo desbloqueo con progreso; últimos movimientos con `MoneyText` y signo. En celular, barra inferior de 5 destinos y misión como tarjeta fija (5.3) |
 | **SIM-3** | Ninguna directa: anatomía del simulador de 2.2.1 | Datos a la izquierda y resultado en `display-medium` a la derecha en escritorio; en celular, resultado en una franja fija. Gráfico de área con relleno plano, "Ver como tabla", supuestos plegables, comparar escenarios, "Prueba cambiar…" y aviso legal |
-| **Fuerte** | Diseño original del escape room "Tu primer sueldo" (Lourdes) | Mismo cuerpo, visor, ojos, cejas, perilla y bisagras, **con relleno plano** (el original usa degradés de metal): naranja `#f08c3e` y luces `#ffc387` (D-108). Siete luces, una por nivel de la billetera (el original tiene cinco, una por candado). Seis estados (5.0.1) |
+| **Fuerte** | Diseño original del escape room "Tu primer sueldo" (Lourdes) | Mismo cuerpo, visor, ojos, cejas, perilla y bisagras, **con relleno plano** (el original usa degradés de metal): naranja `#f08c3e` y luces `#ffc387` (D-108). Siete luces, una por nivel de la billetera (el original tiene cinco, una por candado; D-134, confirmada). Seis estados (5.0.1) |
 
 ## 4. Celular sin referencia propia
 

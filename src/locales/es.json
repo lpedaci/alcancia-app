@@ -26,7 +26,7 @@
       "fuerte": "Hola, soy Fuerte. En esta billetera el dinero es de práctica, así que equivocarte sale gratis."
     },
     "pieces": {
-      "simLabel": "$ 100.000 en 12 meses con 3 % de inflación mensual",
+      "simLabel": "$ 100.000 en 12 meses con 3 % de inflación mensual",
       "simLoss": "Pierdes poder de compra: {{loss}}",
       "goalName": "Meta: vacaciones de invierno",
       "goalTarget": "Ajustada por inflación: {{amount}}",
@@ -50,13 +50,13 @@
         "title": "La inflación se come mis ahorros",
         "body": "El dinero quieto pierde poder de compra mes a mes.",
         "today": "Hoy",
-        "later": "En 12 meses, al 3 % mensual"
+        "later": "En 12 meses, al 3 % mensual"
       },
       "card": {
         "title": "No entiendo cuánto me cuesta la tarjeta",
         "body": "Cuotas, TNA y CFT parecen lo mismo y no lo son.",
-        "cash": "Contado con 15 % de descuento",
-        "installments": "12 cuotas, valor presente al 3 %"
+        "cash": "Contado con 15 % de descuento",
+        "installments": "12 cuotas, valor presente al 3 %"
       }
     },
     "solution": {
@@ -102,7 +102,7 @@
       "mobile": "Diego, Operario de depósito, en el celular",
       "guideKicker": "Guía · 5 minutos",
       "guideTitle": "¿Cuotas sin interés o contado con descuento?",
-      "guideBody": "Te ofrecen 12 cuotas sin interés o 15 % de descuento. ¿Qué conviene si la inflación es del 3 % mensual?",
+      "guideBody": "Te ofrecen 12 cuotas sin interés o 15 % de descuento. ¿Qué conviene si la inflación es del 3 % mensual?",
       "optionA": "Las cuotas",
       "optionB": "El contado"
     },
@@ -244,9 +244,9 @@
       "medium": "inflación media",
       "high": "inflación alta",
       "custom": "valor propio",
-      "lowShort": "1,5 %",
-      "mediumShort": "3 %",
-      "highShort": "6 %",
+      "lowShort": "1,5 %",
+      "mediumShort": "3 %",
+      "highShort": "6 %",
       "customShort": "Otro"
     },
     "custom": {

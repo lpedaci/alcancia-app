@@ -15,6 +15,9 @@ export type DecimalLike = Decimal | string | number;
 /** U+2212, the typographic minus sign: easier to read than a hyphen next to a currency symbol. */
 export const MINUS = '−';
 
+/** U+00A0: keeps the currency or the % sign on the same line as the number (D-68). */
+export const NBSP = ' ';
+
 const toDecimal = (value: DecimalLike) => (value instanceof Decimal ? value : new Decimal(value));
 
 /** Groups the integer part with dots and uses a comma for decimals: 1234567.8 → "1.234.567,80". */
@@ -44,7 +47,7 @@ export interface MoneyFormatOptions {
 export function formatMoney(value: DecimalLike, { currency = 'ARS', decimals = 2, sign = 'auto' }: MoneyFormatOptions = {}): string {
   const d = toDecimal(value);
   const symbol = currency === 'ARS' ? '$' : 'USD';
-  return `${signPrefix(d, sign)}${symbol} ${formatNumber(d, decimals)}`;
+  return `${signPrefix(d, sign)}${symbol}${NBSP}${formatNumber(d, decimals)}`;
 }
 
 /**
@@ -56,8 +59,8 @@ export function formatCompactMoney(value: DecimalLike, { currency = 'ARS' }: { c
   const abs = d.abs();
   const symbol = currency === 'ARS' ? '$' : 'USD';
   const prefix = signPrefix(d, 'auto');
-  if (abs.gte(1e9)) return `${prefix}${symbol} ${trimZeros(formatNumber(abs.div(1e9), 1))} mil M`;
-  if (abs.gte(1e6)) return `${prefix}${symbol} ${trimZeros(formatNumber(abs.div(1e6), 1))} M`;
+  if (abs.gte(1e9)) return `${prefix}${symbol}${NBSP}${trimZeros(formatNumber(abs.div(1e9), 1))}${NBSP}mil${NBSP}M`;
+  if (abs.gte(1e6)) return `${prefix}${symbol}${NBSP}${trimZeros(formatNumber(abs.div(1e6), 1))}${NBSP}M`;
   return formatMoney(d, { currency, decimals: 0 });
 }
 
@@ -73,7 +76,7 @@ export interface PercentFormatOptions {
 /** Rates are fractions (0.03) and show as percentages ("3 %"). Always say the period next to it (2.9). */
 export function formatPercent(fraction: DecimalLike, { decimals = 2, sign = 'auto' }: PercentFormatOptions = {}): string {
   const pct = toDecimal(fraction).times(100);
-  return `${signPrefix(pct, sign)}${trimZeros(formatNumber(pct, decimals))} %`;
+  return `${signPrefix(pct, sign)}${trimZeros(formatNumber(pct, decimals))}${NBSP}%`;
 }
 
 /**

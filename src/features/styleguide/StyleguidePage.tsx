@@ -481,9 +481,9 @@ export function StyleguidePage() {
 
       <Section id="progreso" title="Progreso y carga">
         <Panel className="flex flex-col gap-4">
-          <ProgressBar value={progress} label="Fondo de emergencia" valueText={`${progress} %`} />
-          <ProgressBar value={100} label="Guías del nivel 1" valueText="100 %" tone="success" />
-          <ProgressBar value={progress} size="lg" label="Meta de ahorro (barra gruesa)" valueText={`${progress} %`} />
+          <ProgressBar value={progress} label="Fondo de emergencia" valueText={`${progress} %`} />
+          <ProgressBar value={100} label="Guías del nivel 1" valueText={'100 %'} tone="success" />
+          <ProgressBar value={progress} size="lg" label="Meta de ahorro (barra gruesa)" valueText={`${progress} %`} />
           <div className="flex flex-col gap-2">
             <p className="text-label-medium text-on-surface">Barra segmentada</p>
             <SegmentedProgress

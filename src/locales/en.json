@@ -26,7 +26,7 @@
       "fuerte": "Hi, I'm Fuerte. Money in this wallet is for practice, so making mistakes is free."
     },
     "pieces": {
-      "simLabel": "$ 100.000 in 12 months at 3 % monthly inflation",
+      "simLabel": "$ 100.000 in 12 months at 3 % monthly inflation",
       "simLoss": "Purchasing power lost: {{loss}}",
       "goalName": "Goal: winter vacation",
       "goalTarget": "Adjusted for inflation: {{amount}}",
@@ -50,13 +50,13 @@
         "title": "Inflation eats my savings",
         "body": "Idle money loses purchasing power month after month.",
         "today": "Today",
-        "later": "In 12 months, at 3 % monthly"
+        "later": "In 12 months, at 3 % monthly"
       },
       "card": {
         "title": "I don't know what my card really costs",
         "body": "Installments, nominal rate (TNA) and total financial cost (CFT) look alike, and they are not.",
-        "cash": "Cash with 15 % off",
-        "installments": "12 installments, present value at 3 %"
+        "cash": "Cash with 15 % off",
+        "installments": "12 installments, present value at 3 %"
       }
     },
     "solution": {
@@ -102,7 +102,7 @@
       "mobile": "Diego, Warehouse Operator, on the phone",
       "guideKicker": "Guide · 5 minutes",
       "guideTitle": "Interest-free installments or a cash discount?",
-      "guideBody": "You are offered 12 interest-free installments or 15 % off. Which is better with 3 % monthly inflation?",
+      "guideBody": "You are offered 12 interest-free installments or 15 % off. Which is better with 3 % monthly inflation?",
       "optionA": "Installments",
       "optionB": "Cash"
     },
@@ -244,9 +244,9 @@
       "medium": "medium inflation",
       "high": "high inflation",
       "custom": "your own value",
-      "lowShort": "1,5 %",
-      "mediumShort": "3 %",
-      "highShort": "6 %",
+      "lowShort": "1,5 %",
+      "mediumShort": "3 %",
+      "highShort": "6 %",
       "customShort": "Other"
     },
     "custom": {
