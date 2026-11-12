@@ -113,6 +113,7 @@ En todos: destino activo con el indicador de Material 3 y `aria-current="page"`;
 ### 5.2 Local y contextual
 
 - **Pestañas** dentro de un destino con subsecciones (por ejemplo, Ahorrar: Presupuesto · Apartados y metas · Rendir) en celular y tablet; en escritorio, las subsecciones están en el menú lateral.
+- **Navegación principal del participante (D-164):** barra inferior con los 5 destinos solo con íconos en celular y tablet (menos de 1200 px); menú lateral plegable en escritorio, con el logo arriba y el control de plegar abajo (D-163).
 - **Tarjeta de misión activa:** acceso contextual permanente a la misión en curso.
 - **"¿Por qué importa?"** en cada pantalla de la billetera: abre la tarjeta de aprendizaje de esa pantalla.
 - **Chips del glosario** en el primer uso de cada término.

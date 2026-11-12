@@ -109,7 +109,7 @@ export function ConsentPage() {
     <AuthLayout>
       <div className="flex flex-col gap-2">
         <p className="text-label-large text-primary">{t("consent.eyebrow")}</p>
-        <h1 className="text-headline-small text-on-surface">
+        <h1 className="text-headline-medium text-on-surface">
           {t("consent.title")}
         </h1>
         <p className="text-body-large text-on-surface">

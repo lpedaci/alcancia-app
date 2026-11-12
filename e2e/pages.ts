@@ -10,7 +10,7 @@ export interface CheckedPage {
   /** Hash route. */
   path: string;
   /** Demo person signed in before loading the page (simulated session, step 5). */
-  as?: 'p-mariana' | 'p-diego' | 'p-andres' | 'p-paula' | 'p-ricardo';
+  as?: 'p-mariana' | 'p-diego' | 'p-kevin' | 'p-paula' | 'p-ricardo';
   /** Sign in without the accepted privacy notice (to check G5). */
   noConsent?: boolean;
   /** A sign-in waiting for the second step (to check G3). */
@@ -30,7 +30,7 @@ export const PAGES: CheckedPage[] = [
   { id: 'p8-invest-locked', path: '/#/app/invest', as: 'p-mariana' },
   { id: 'p3-pay-diego', path: '/#/app/pay', as: 'p-diego' },
   { id: 'investor-profile', path: '/#/app/learn/investor-profile', as: 'p-mariana' },
-  { id: 't1-tutor', path: '/#/tutor', as: 'p-andres' },
+  { id: 't1-tutor', path: '/#/tutor', as: 'p-kevin' },
   { id: 'o1-admin', path: '/#/admin', as: 'p-paula' },
   { id: 'd1-sponsor', path: '/#/sponsor', as: 'p-ricardo' },
   { id: 'g7-forbidden', path: '/#/admin', as: 'p-mariana' },
@@ -44,7 +44,7 @@ export const WIDTHS = [320, 375, 768, 1024, 1280, 1440] as const;
 const ROLES = {
   'p-mariana': 'participant',
   'p-diego': 'participant',
-  'p-andres': 'tutor',
+  'p-kevin': 'tutor',
   'p-paula': 'ld_admin',
   'p-ricardo': 'sponsor',
 } as const;

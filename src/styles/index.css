@@ -89,6 +89,10 @@
   --text-display-small--line-height: 2.75rem;
   --text-display-small--font-weight: 600;
   --text-display-small--letter-spacing: -0.01em;
+  --text-headline-medium: 1.75rem;
+  --text-headline-medium--line-height: 2.25rem;
+  --text-headline-medium--font-weight: 600;
+  --text-headline-medium--letter-spacing: -0.005em;
   --text-headline-small: 1.5rem;
   --text-headline-small--line-height: 2rem;
   --text-headline-small--font-weight: 600;
@@ -163,6 +167,16 @@
 }
 
 @layer base {
+  /* Phones and tablets: no visible scrollbar, scrolling is understood there (D-164). Scrolling still
+     works with touch, wheel and keyboard; desktop keeps its scrollbar. */
+  @media (max-width: 74.99rem) {
+    html {
+      scrollbar-width: none;
+    }
+    html::-webkit-scrollbar {
+      display: none;
+    }
+  }
   html {
     color-scheme: light;
     -webkit-text-size-adjust: 100%;

@@ -143,7 +143,7 @@
         "does": "Aprende en pausas de 5 minutos desde el celular.",
         "explore": "Misiones cortas, guías con práctica y la barra de navegación inferior."
       },
-      "andres": {
+      "kevin": {
         "chip": "Tutoría",
         "does": "Acompaña a sus cohortes sin ver montos ni bloqueos de la billetera.",
         "explore": "Mapa de calor del avance, desafíos semanales y preguntas con más errores."
@@ -581,7 +581,10 @@
         "credit": "La TNA no dice todo: el costo financiero total (CFT) suma comisiones y cargos, y es el número para comparar.",
         "yield": "En una billetera, la mayor parte del dinero \"que rinde\" suele estar en un fondo money market, no en la cuenta: no tiene la garantía de los depósitos.",
         "invest": "Invertir viene después de protegerte: con fondo de emergencia y sin deudas caras, una caída no te obliga a vender."
-      }
+      },
+      "dragHint": "Puedes arrastrarme a otro lugar.",
+      "moveLeft": "Mover a la izquierda",
+      "moveRight": "Mover a la derecha"
     },
     "placeholder": {
       "lockedTitle": "{{section}} está bloqueado",
@@ -868,7 +871,7 @@
     "people": {
       "p-mariana": "Participante · oficina · nivel 6",
       "p-diego": "Participante · celular · nivel 2",
-      "p-andres": "Tutor de bienestar financiero",
+      "p-kevin": "Tutor de bienestar financiero",
       "p-paula": "Admin de L&D y Beneficios",
       "p-ricardo": "Decisor"
     },

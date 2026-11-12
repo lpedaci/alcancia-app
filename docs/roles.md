@@ -9,7 +9,7 @@ Alcancía sigue el principio de **mínimo privilegio** y de **privacidad por dis
 | Rol (código) | Persona de demo | Color de rol | Para qué entra |
 | --- | --- | --- | --- |
 | `ld_admin` | Paula Gómez, Líder de Aprendizaje y Beneficios | `role-org-admin` `#3D4FA8` | Configurar el programa, cargar personas, armar cohortes, seguir la adopción |
-| `tutor` | Andrés Molina, tutor de bienestar financiero | `role-tutor` `#00796B` | Acompañar cohortes, asignar desafíos semanales, reforzar temas, desbloquear con motivo |
+| `tutor` | Kevin Giovanni, tutor de bienestar financiero | `role-tutor` `#00796B` | Acompañar cohortes, asignar desafíos semanales, reforzar temas, desbloquear con motivo |
 | `participant` | Mariana López (oficina) y Diego Suárez (operativo, celular) | `role-participant` `#7A4FB0` | Usar la billetera de práctica y aprender en ella |
 | `sponsor` | Ricardo Benítez, Gerente de Compensaciones | `role-sponsor` `#5D6B2F` | Leer el reporte de impacto agregado |
 
@@ -58,7 +58,7 @@ El desbloqueo de un nivel puede depender de condiciones de la billetera (`wallet
 | Qué falta y su progreso ("Fondo de emergencia: 2 de 3 meses") | ✔ | ✖ | Ninguno |
 | Guías leídas | ✔ | ✔ | "3 de 4 guías" |
 | Estado del desafío de nivel | ✔ | ✔ | Sin empezar · En curso (con intentos) · Aprobado (mejor puntaje y primero) · Intentos agotados |
-| Cómo se habilitó, si no fue por la regla | ✔ | ✔ | "Por suficiencia" · "Habilitado por Andrés Molina: [motivo]" |
+| Cómo se habilitó, si no fue por la regla | ✔ | ✔ | "Por suficiencia" · "Habilitado por Kevin Giovanni: [motivo]" |
 | Nivel completado | ✔ | ✔ | Completado (guías leídas y desafío aprobado) |
 
 Ejemplos con los estados de demo:

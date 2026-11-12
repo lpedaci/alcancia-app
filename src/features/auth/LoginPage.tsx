@@ -100,7 +100,7 @@ export function LoginPage() {
   return (
     <AuthLayout showcase={<LoginShowcase />}>
       <header className="flex flex-col gap-1">
-        <h1 className="text-headline-small text-on-surface">{t('auth.login.title')}</h1>
+        <h1 className="text-headline-medium text-on-surface">{t('auth.login.title')}</h1>
         <p className="text-body-large text-on-surface-variant">{t('auth.login.subtitle')}</p>
       </header>
 

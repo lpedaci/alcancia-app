@@ -23,7 +23,7 @@
 
 | ID | Requerimiento | Prioridad | Criterio de aceptación | Estado |
 | --- | --- | --- | --- | --- |
-| RF-20 | Navegación de 5 destinos con barra inferior, riel o menú lateral según el ancho | M | Verificado en los 6 anchos; `aria-current`; foco al título al cambiar de destino | Pendiente |
+| RF-20 | Navegación de 5 destinos: barra inferior con íconos en celular y tablet, menú lateral plegable en escritorio (D-164) | M | Verificado en los 6 anchos; `aria-current`; foco al título al cambiar de destino | Pendiente |
 | RF-21 | Motor de niveles con las condiciones de 5.0, incluida la del nivel 2 (D-63) | M | Cada condición tiene test; un nivel nunca vuelve a bloquearse | Pendiente |
 | RF-22 | Secciones bloqueadas visibles con candado, para qué sirven y qué falta con progreso | M | Un toque lleva a la acción que acerca el desbloqueo | Pendiente |
 | RF-23 | "Ya sé esto": desafío de suficiencia que desbloquea | M | Aprobar con 70 % desbloquea con `unlockedBy: mastery` | Pendiente |

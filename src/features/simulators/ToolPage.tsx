@@ -33,7 +33,7 @@ export function InflationToolPage() {
             <li aria-current="page" className="text-on-surface">{t('sim3.title')}</li>
           </ol>
         </nav>
-        <h1 id="p13-sim3-title" className="text-headline-small text-on-surface">
+        <h1 id="p13-sim3-title" className="text-headline-medium text-on-surface">
           {t('sim3.title')}
         </h1>
         <p className="max-w-prose text-body-large text-on-surface-variant">{t('sim3.intro')}</p>

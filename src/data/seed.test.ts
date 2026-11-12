@@ -38,7 +38,7 @@ describe('seed data (CLAUDE.md 7)', () => {
   it('has the four demo roles with their personas', () => {
     const byId = Object.fromEntries(seed.people.map((p) => [p.id, p]));
     expect(byId['p-paula']).toMatchObject({ role: 'ld_admin', name: 'Paula Gómez' });
-    expect(byId['p-andres']).toMatchObject({ role: 'tutor', name: 'Andrés Molina' });
+    expect(byId['p-kevin']).toMatchObject({ role: 'tutor', name: 'Kevin Giovanni' });
     expect(byId['p-mariana']).toMatchObject({ role: 'participant', device: 'desktop', status: 'active' });
     expect(byId['p-diego']).toMatchObject({ role: 'participant', device: 'mobile', status: 'active' });
     expect(byId['p-ricardo']).toMatchObject({ role: 'sponsor', name: 'Ricardo Benítez' });

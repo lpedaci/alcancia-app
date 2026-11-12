@@ -55,7 +55,7 @@ export function VerifyPage() {
   return (
     <AuthLayout>
       <header className="flex flex-col gap-2">
-        <h1 className="text-headline-small text-on-surface">{t('auth.mfa.title')}</h1>
+        <h1 className="text-headline-medium text-on-surface">{t('auth.mfa.title')}</h1>
         <p className="text-body-large text-on-surface-variant">{t('auth.mfa.subtitle')}</p>
         {person && (
           <p className="text-body-medium text-on-surface-variant">

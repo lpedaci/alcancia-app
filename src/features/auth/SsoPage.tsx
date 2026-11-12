@@ -41,7 +41,7 @@ export function SsoPage() {
   return (
     <AuthLayout>
       <header className="flex flex-col gap-2">
-        <h1 className="text-headline-small text-on-surface">{t('auth.sso.title', { provider: providerName })}</h1>
+        <h1 className="text-headline-medium text-on-surface">{t('auth.sso.title', { provider: providerName })}</h1>
       </header>
 
       <div className="flex gap-4 rounded-lg border border-dashed border-outline bg-surface-container p-5">

@@ -30,7 +30,7 @@ describe('G0 landing (F0)', () => {
     expect(links.map((l) => l.getAttribute('href'))).toEqual([
       '/login?demo=mariana',
       '/login?demo=diego',
-      '/login?demo=andres',
+      '/login?demo=kevin',
       '/login?demo=paula',
       '/login?demo=ricardo',
     ]);
@@ -224,13 +224,13 @@ describe('route guards (F0, roles.md 3.4)', () => {
   });
 
   it('gives G7 before "not found" inside another role\'s area', async () => {
-    signInAs('p-andres');
+    signInAs('p-kevin');
     renderAt('/app/save/budget');
     expect(await screen.findByRole('heading', { level: 1, name: es.forbidden.title })).toBeInTheDocument();
   });
 
   for (const [personId, path, name] of [
-    ['p-andres', '/tutor', 'Andrés'],
+    ['p-kevin', '/tutor', 'Kevin'],
     ['p-paula', '/admin', 'Paula'],
     ['p-ricardo', '/sponsor', 'Ricardo'],
   ] as const) {

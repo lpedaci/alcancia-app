@@ -116,7 +116,7 @@ export function UnlockCard({ status, headingLevel: Heading = 'h2', className }: 
         </span>
         <div className="min-w-0 flex-1">
           <p className="text-label-medium text-on-surface-variant">{t('wallet.unlock.kicker', { level: status.level.order })}</p>
-          <Heading id={titleId} className="text-title-medium text-on-surface">
+          <Heading id={titleId} className="text-title-large text-on-surface">
             {section}
           </Heading>
           <p className="text-body-medium text-on-surface-variant">

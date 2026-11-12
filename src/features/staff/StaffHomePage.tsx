@@ -50,7 +50,7 @@ export function StaffHomePage() {
               { icon: 'apartment', label: t('staff.org') },
             ]}
           />
-          <h1 className="text-headline-small text-on-surface">
+          <h1 className="text-headline-medium text-on-surface">
             {t('staff.hello')}{' '}
             <span className="text-primary">{person.name.split(' ')[0]}</span>
           </h1>

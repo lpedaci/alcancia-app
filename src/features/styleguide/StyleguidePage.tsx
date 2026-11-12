@@ -19,6 +19,7 @@ import { FilterChip } from '@/components/ui/FilterChip';
 import { Icon } from '@/components/ui/Icon';
 import { IconButton } from '@/components/ui/IconButton';
 import { IconTile } from '@/components/ui/IconTile';
+import { MetaChips } from '@/components/ui/MetaChips';
 import { KpiCard, KpiRow } from '@/components/ui/KpiCard';
 import { type IconName, iconPaths } from '@/components/ui/icon-paths.generated';
 import { ProgressBar } from '@/components/ui/ProgressBar';
@@ -135,7 +136,8 @@ const chartClasses = ['bg-chart-1', 'bg-chart-2', 'bg-chart-3', 'bg-chart-4', 'b
 const typeRoles = [
   ['text-display-medium', 'display-medium', '45 / 52 · 600', 'Resultado de una herramienta: $ 70.137,99'],
   ['text-display-small', 'display-small', '36 / 44 · 600', 'KPIs: 1.248'],
-  ['text-headline-small', 'headline-small', '24 / 32 · 600', 'Título de página (h1)'],
+  ['text-headline-medium', 'headline-medium', '28 / 36 · 600', 'Título de página (h1)'],
+  ['text-headline-small', 'headline-small', '24 / 32 · 600', 'Título destacado dentro de una página'],
   ['text-title-large', 'title-large', '22 / 28 · 600', 'Título de sección (h2)'],
   ['text-title-medium', 'title-medium', '16 / 24 · 600', 'Título de tarjeta o modal (h3)'],
   ['text-title-small', 'title-small', '14 / 20 · 500', 'Subtítulo, encabezado de tabla'],
@@ -153,6 +155,7 @@ const radii = [
   ['rounded-md', 'md · 12 px: menús, tooltips'],
   ['rounded-lg', 'lg · 16 px: diálogos, paneles internos'],
   ['rounded-xl', 'xl · 24 px: tarjetas'],
+  ['rounded-2xl', '2xl · 48 px: solo el marco del celular'],
   ['rounded-full', 'full: píldoras'],
 ] as const;
 
@@ -332,6 +335,7 @@ export function StyleguidePage() {
             <IconButton icon="filter_list" label="Filtros" variant="outlined" />
             <IconButton icon="dashboard" label="Panel (seleccionado)" selected />
             <IconButton icon="drag_indicator" label="Reordenar" size="xs" />
+            <IconButton icon="chevron_left" label="Contraer el menú (tooltip a la derecha, en menús laterales)" tooltipSide="right" />
           </div>
           <p className="text-body-small text-on-surface-variant">
             Un solo botón filled por región. Los deshabilitados con motivo siguen siendo enfocables y muestran el
@@ -438,6 +442,11 @@ export function StyleguidePage() {
             Relleno plano, sin degradés. El naranja vive solo en Fuerte (D-52). Las luces del panel muestran los niveles
             completados (una por nivel, siete en total); en Celebración se encienden todas.
           </p>
+          <p className="text-body-small text-on-surface-variant">
+            En la billetera, Fuerte flota (80 px de área táctil, sin círculo de fondo) y se puede arrastrar: al soltarlo se
+            pega al lado más cercano, entre la barra superior y la inferior, sin taparlas. Su panel ofrece &quot;Mover a la
+            izquierda / a la derecha&quot; como alternativa al arrastre (D-164).
+          </p>
         </Panel>
       </Section>
 
@@ -475,6 +484,27 @@ export function StyleguidePage() {
             <StatusPill tone="warning" icon="lock" label="Bloqueado" />
             <StatusPill tone="error" icon="error" label="Error de validación" />
             <StatusPill tone="primary" icon="flag" label="Nivel actual" />
+          </div>
+          <div className="flex flex-col gap-2">
+            <p className="text-label-medium text-on-surface">Chips de contexto (fecha, programa, nivel): blancos, color solo en el ícono</p>
+            <MetaChips
+              label="Contexto de ejemplo"
+              items={[
+                { icon: 'calendar_month', label: '16/11/2026', dateTime: '2026-11-16' },
+                { icon: 'route', label: 'Nivel 2 · Pagar', strong: true },
+                { icon: 'lock', label: 'Próximo: Presupuesto' },
+              ]}
+            />
+          </div>
+          <div className="flex flex-col gap-2">
+            <p className="text-label-medium text-on-surface">
+              Aviso fijo de práctica (D-69): píldora oscura en la barra superior de escritorio; debajo de 1200 px, una línea
+              liviana de texto con su ícono (D-164)
+            </p>
+            <p className="inline-flex w-fit items-center gap-1.5 rounded-full bg-inverse-surface px-3 py-1 text-label-medium text-inverse-on-surface">
+              <Icon name="info" size={16} />
+              Simulador de finanzas personales · dinero ficticio
+            </p>
           </div>
         </Panel>
       </Section>
@@ -531,7 +561,7 @@ export function StyleguidePage() {
               {(
                 [
                   ['Paula Gómez', 'ld_admin', 'Admin de L&D: role-org-admin'],
-                  ['Andrés Molina', 'tutor', 'Tutor: role-tutor'],
+                  ['Kevin Giovanni', 'tutor', 'Tutor: role-tutor'],
                   ['Mariana López', 'participant', 'Participante: role-participant'],
                   ['Diego Suárez', 'participant', 'Participante (celular): role-participant'],
                   ['Ricardo Benítez', 'sponsor', 'Decisor: role-sponsor'],

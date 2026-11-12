@@ -19,8 +19,8 @@ import { useCurrentUser } from '@/store/session-store';
 
 /**
  * The participant's only navigation (CLAUDE.md 5.3): the same 5 destinations at every size.
- * Phones (< 600 px): top bar and bottom navigation bar. Tablets and desktop: a side menu that folds
- * into a rail of icons with the menu button of the top bar (2.2.1, pattern 5). Locks come from the
+ * Phones and tablets (< 1200 px): top bar and a bottom navigation bar with icons only (D-164).
+ * Desktop: a side menu that folds into a rail of icons (2.2.1, pattern 5). Locks come from the
  * level engine; a locked destination still opens, to show what is missing (5.0).
  */
 export interface Destination {
@@ -222,36 +222,23 @@ export function WalletShell({ section, children, fuerte }: { section: string; ch
     <div className="min-h-dvh bg-surface">
       <SkipLink />
 
-      {/* Fixed banner (5.3, D-69): "dinero ficticio" is never removed */}
-      <p className="flex items-center justify-center gap-2 bg-inverse-surface px-4 py-1.5 text-center text-label-medium text-inverse-on-surface">
-        <Icon name="info" size={16} />
-        {t('wallet.practiceBanner')}
-      </p>
-
       {/* Floating panels (2.2.1, pattern 5): the side menu reaches the top and holds the menu button and
           the logo; the top bar floats beside it. On phones, a plain top bar and the bottom navigation. */}
-      <div className="medium:flex medium:items-start medium:gap-3 medium:p-3">
+      <div className="large:flex large:items-start large:gap-3 large:p-3">
         <nav
           id="wallet-nav"
+          data-wallet-side-nav
           aria-label={t('wallet.nav.label')}
           className={cn(
-            'sticky top-3 hidden h-[calc(100dvh-1.5rem)] shrink-0 flex-col overflow-hidden rounded-xl border border-outline-variant bg-surface-container-lowest medium:flex',
+            'sticky top-3 hidden h-[calc(100dvh-1.5rem)] shrink-0 flex-col overflow-hidden rounded-xl border border-outline-variant bg-surface-container-lowest large:flex',
             expanded ? 'w-64' : 'w-20',
           )}
         >
-          <div className={cn('flex h-16 shrink-0 items-center gap-1 border-b border-outline-variant px-3', !expanded && 'justify-center')}>
-            <IconButton
-              icon={expanded ? 'menu_open' : 'menu'}
-              label={expanded ? t('wallet.nav.menuCollapse') : t('wallet.nav.menuExpand')}
-              aria-expanded={expanded}
-              aria-controls="wallet-nav-items"
-              onClick={toggleNav}
-            />
-            {expanded && (
-              <Link to="/app" className="inline-flex min-w-0 rounded-sm">
-                <Logo />
-              </Link>
-            )}
+          {/* The brand on top, always a link to Inicio (common pattern: the logo leads home) */}
+          <div className={cn('flex h-16 shrink-0 items-center border-b border-outline-variant', expanded ? 'px-4' : 'justify-center')}>
+            <Link to="/app" className="inline-flex min-h-10 min-w-10 items-center justify-center rounded-sm">
+              <Logo compact={!expanded} />
+            </Link>
           </div>
           <div id="wallet-nav-items" className="flex min-h-0 flex-1 flex-col gap-2 overflow-y-auto px-3 py-4">
             {expanded && <p className="px-4 pb-1 text-label-medium text-on-surface-variant">{t('wallet.nav.groupWallet')}</p>}
@@ -297,16 +284,34 @@ export function WalletShell({ section, children, fuerte }: { section: string; ch
               </Link>
             )}
           </div>
+          {/* Fold control at the bottom of the panel, away from the brand */}
+          <div className={cn('flex shrink-0 border-t border-outline-variant p-2', expanded ? 'justify-end' : 'justify-center')}>
+            <IconButton
+              icon={expanded ? 'chevron_left' : 'chevron_right'}
+              label={expanded ? t('wallet.nav.menuCollapse') : t('wallet.nav.menuExpand')}
+              tooltipSide="right"
+              aria-expanded={expanded}
+              aria-controls="wallet-nav-items"
+              onClick={toggleNav}
+            />
+          </div>
         </nav>
 
         <div className="min-w-0 flex-1">
           {/* Top bar: on phones the logo and the section; from tablets, a floating bar with the section title */}
           {/* From tablets, the header covers the gap above the floating bar so content never shows behind it */}
-          <header className="sticky top-0 z-30 border-b border-outline-variant bg-surface-container-lowest medium:-mt-3 medium:border-0 medium:bg-surface medium:pt-3">
-            <div className="flex h-16 items-center gap-1 px-(--space-gutter) medium:gap-2 medium:rounded-xl medium:border medium:border-outline-variant medium:bg-surface-container-lowest medium:px-4">
-              <Link to="/app" className="inline-flex shrink-0 rounded-sm medium:hidden">
+          <header data-wallet-header className="sticky top-0 z-30 border-b border-outline-variant bg-surface-container-lowest large:-mt-3 large:border-0 large:bg-surface large:pt-3">
+            <div className="flex min-h-16 flex-wrap items-center gap-x-1 gap-y-2 px-(--space-gutter) py-2 medium:px-6 large:flex-nowrap large:gap-2 large:rounded-xl large:border large:border-outline-variant large:bg-surface-container-lowest large:px-4">
+              <Link to="/app" className="inline-flex shrink-0 rounded-sm large:hidden">
                 <Logo compact />
               </Link>
+              {/* Fixed notice (5.3, D-69): always in sight inside the sticky top bar, so the side panel
+                  fits the screen. Below 1200 px it is a light line of its own under the bar (a dark pill
+                  there weighed too much, D-164), so it never wraps or pushes the actions out. "dinero ficticio" is never removed. */}
+              <p className="order-last -mt-1 flex w-full items-center justify-center gap-1 text-center text-label-medium text-on-surface-variant large:order-none large:mt-0 large:w-auto large:shrink-0 large:justify-start large:gap-1.5 large:rounded-full large:bg-inverse-surface large:px-3 large:py-1 large:whitespace-nowrap large:text-inverse-on-surface">
+                <Icon name="info" size={16} className="shrink-0" />
+                {t('wallet.practiceBanner')}
+              </p>
               <span className="flex-1" />
               <ViewAsMenu />
               <IconButton icon="help" label={t('wallet.help')} className="hidden sm:inline-flex" />
@@ -314,15 +319,19 @@ export function WalletShell({ section, children, fuerte }: { section: string; ch
               <UserMenu />
             </div>
           </header>
-          <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-[120rem] px-(--space-gutter) pt-6 pb-40 focus:outline-none medium:px-6 medium:pt-6 medium:pb-28">
+          <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-[120rem] px-(--space-gutter) pt-6 pb-28 focus:outline-none medium:px-6 large:pb-28">
             {children}
           </main>
         </div>
       </div>
 
-      {/* Bottom navigation bar (phones) */}
-      <nav aria-label={t('wallet.nav.label')} className="fixed inset-x-0 bottom-0 z-30 border-t border-outline-variant bg-surface-container-lowest medium:hidden">
-        <ul className="grid grid-cols-5">
+      {/* Bottom navigation bar (phones and tablets): icons only, D-164. Each name stays for assistive tech. */}
+      <nav
+        data-wallet-bottom-nav
+        aria-label={t('wallet.nav.label')}
+        className="fixed inset-x-0 bottom-0 z-30 border-t border-outline-variant bg-surface-container-lowest pb-[env(safe-area-inset-bottom)] large:hidden"
+      >
+        <ul className="mx-auto grid max-w-xl grid-cols-5">
           {DESTINATIONS.map((d) => {
             const active = isDestinationActive(d, pathname);
             const locked = destinationLocked(d);
@@ -331,15 +340,15 @@ export function WalletShell({ section, children, fuerte }: { section: string; ch
                 <Link
                   to={d.to}
                   aria-current={active ? 'page' : undefined}
-                  className="flex min-h-16 flex-col items-center justify-center gap-1 px-1 py-2 text-label-medium text-on-surface-variant aria-[current=page]:text-on-surface"
+                  className="flex min-h-16 items-center justify-center px-1 py-2 text-on-surface-variant aria-[current=page]:text-on-surface"
                 >
-                  <span className={cn('relative flex h-8 w-14 items-center justify-center rounded-full', active && 'bg-secondary-container text-on-secondary-container')}>
+                  <span className={cn('relative flex h-10 w-16 items-center justify-center rounded-full', active && 'bg-secondary-container text-on-secondary-container')}>
                     <Icon name={d.icon} size={24} filled={active} />
-                    {locked && <Icon name="lock" size={16} className="absolute right-1 bottom-0 rounded-full bg-surface-container-lowest" />}
+                    {locked && <Icon name="lock" size={16} className="absolute right-2 bottom-0.5 rounded-full bg-surface-container-lowest" />}
                   </span>
-                  <span className="max-w-full truncate">
+                  <span className="sr-only">
                     {t(`wallet.nav.${d.id}`)}
-                    {locked && <span className="sr-only">, {t('wallet.nav.locked')}</span>}
+                    {locked && `, ${t('wallet.nav.locked')}`}
                   </span>
                 </Link>
               </li>

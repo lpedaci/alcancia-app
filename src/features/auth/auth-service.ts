@@ -28,7 +28,7 @@ export const MFA_REQUIRED_ROLES: Role[] = ['ld_admin', 'sponsor'];
 export const DEMO_KEYS = {
   mariana: 'p-mariana',
   diego: 'p-diego',
-  andres: 'p-andres',
+  kevin: 'p-kevin',
   paula: 'p-paula',
   ricardo: 'p-ricardo',
 } as const;

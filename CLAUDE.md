@@ -189,7 +189,8 @@ Los "on" de las bases son `#FFFFFF`. Contraste verificado: bases sobre blanco de
 | --- | --- | --- | --- |
 | `display-medium` (enfatizado) | 45 / 52 | 600 | Resultado principal de un simulador desde 1024 px |
 | `display-small` (enfatizado) | 36 / 44 | 600 | KPIs desde 1280 px, resultado del simulador en mobile, títulos de sección de la landing |
-| `headline-small` (enfatizado) | 24 / 32 | 600 | Título de página (único `h1`) |
+| `headline-medium` (enfatizado) | 28 / 36 | 600 | Título de página (único `h1`) en la app y el acceso (D-163 de Claude Code) |
+| `headline-small` (enfatizado) | 24 / 32 | 600 | Título destacado dentro de una página; títulos de la landing en mobile |
 | `title-large` (enfatizado) | 22 / 28 | 600 | Título de sección (`h2`) |
 | `title-medium` (enfatizado) | 16 / 24 | 600 | Título de tarjeta, modal y grupo (`h3`) |
 | `title-small` | 14 / 20 | 500 | Subtítulos, encabezados de tabla |
@@ -434,7 +435,7 @@ Esto obliga a diseñar para públicos distintos dentro de la misma empresa, como
 | Rol | Persona de ejemplo | Qué hace en el MVP |
 | --- | --- | --- |
 | **Admin de L&D y Beneficios** | Paula Gómez, Líder de Aprendizaje y Beneficios | Configura el programa, carga personas, arma cohortes, asigna módulos y sigue la adopción |
-| **Tutor** | Andrés Molina, tutor de bienestar financiero | Acompaña a sus cohortes: sigue el avance de aprendizaje, asigna desafíos, responde consultas y refuerza los temas con más errores |
+| **Tutor** | Kevin Giovanni, tutor de bienestar financiero | Acompaña a sus cohortes: sigue el avance de aprendizaje, asigna desafíos, responde consultas y refuerza los temas con más errores |
 | **Participante** | Mariana López, Analista de Operaciones (oficina), y Diego Suárez, Operario de depósito (celular) | Hace el diagnóstico, cursa su ruta, usa simuladores, define metas y responde evaluaciones |
 | **Decisor** | Ricardo Benítez, Gerente de Compensaciones | Ve el reporte de impacto agregado, sin datos individuales |
 
@@ -733,8 +734,8 @@ Las misiones se habilitan desde el mapa de niveles (P9) y desde la sección de l
 - Accesibilidad: cambios de saldo anunciados con región en vivo, todo operable con teclado, alternativa al escaneo de QR, sin límite de tiempo y con "reducir animaciones".
 - **Navegación por tamaño de pantalla** (clases de ventana de Material 3, verificadas en los 6 anchos de 2.7). Hay una sola navegación, la de la billetera; los roles de tutor, admin y decisor conservan su propio layout:
   - **Destinos principales (los mismos en todos los tamaños):** Inicio · Pagar (transferir, QR, servicios y "Tarjeta y préstamos", D-56) · Ahorrar (presupuesto, apartados y rendir) · Invertir · Aprender (mapa de niveles, logros, guías, desafíos y herramientas). Perfil, seguridad y comprobantes van en el avatar de la barra superior. Los destinos bloqueados se muestran con candado y abren su tarjeta de "qué falta".
-  - **Celular (menos de 600 px; 320 y 375):** la app a pantalla completa. Barra superior con el nombre de la sección, Fuerte y avatar. **Barra de navegación inferior** con los 5 destinos. La misión activa es una tarjeta fija arriba del contenido que se expande como hoja inferior.
-  - **Tablet (600 a 1199 px; 768 y 1024):** **riel de navegación** a la izquierda con los 5 destinos y el logo arriba. Contenido en dos columnas desde 840 px: la sección a la izquierda y la misión activa con las tarjetas de aprendizaje a la derecha; por debajo de 840 px, la misión va como hoja inferior.
+  - **Celular (menos de 600 px; 320 y 375):** la app a pantalla completa. Barra superior con el nombre de la sección, Fuerte y avatar. **Barra de navegación inferior** con los 5 destinos, solo con íconos (el nombre queda para lectores de pantalla, D-164). La misión activa es una tarjeta fija arriba del contenido que se expande como hoja inferior.
+  - **Tablet (600 a 1199 px; 768 y 1024):** igual que en celular, **barra de navegación inferior** con los 5 destinos solo con íconos (D-164 de Claude Code, pedido de Lourdes). La misión activa es una tarjeta compacta arriba del contenido.
   - **Escritorio (1200 px o más; 1280 y 1440):** **menú lateral** con los 5 destinos y sus subsecciones desplegables (por ejemplo, Pagar > Transferir, QR, Servicios, Tarjeta y préstamos; Ahorrar > Presupuesto, Apartados, Rendir), más el indicador de nivel. Layout bento en tres zonas: saldo y acciones rápidas, movimientos o sección activa, y panel fijo de la misión con Fuerte. Ancho máximo de lectura de 1200 px, centrado.
   - En todos los tamaños: el destino activo se marca con el indicador de Material 3 y `aria-current`; el foco vuelve al título de la sección al cambiar de destino; objetivos táctiles de 48 × 48 px; las hojas inferiores se cierran con Escape y devuelven el foco.
 

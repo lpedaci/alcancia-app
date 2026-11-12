@@ -41,15 +41,17 @@ export interface IconButtonProps
   icon: IconName;
   /** Required: becomes the accessible name and the tooltip (CLAUDE.md 2.3). */
   label: string;
+  /** Where the tooltip opens; `right` in side rails so it never covers the content. */
+  tooltipSide?: 'top' | 'right' | 'bottom' | 'left';
 }
 
 /** Icon-only button. Always labelled and always with a tooltip. */
 export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(function IconButton(
-  { icon, label, variant, size, selected, className, type, ...props },
+  { icon, label, tooltipSide, variant, size, selected, className, type, ...props },
   ref,
 ) {
   return (
-    <Tooltip content={label}>
+    <Tooltip content={label} side={tooltipSide}>
       <button
         ref={ref}
         type={type ?? 'button'}

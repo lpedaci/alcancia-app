@@ -78,7 +78,7 @@ const LAST = [
   'Sosa', 'Toledo', 'Torres', 'Vega', 'Vera', 'Villalba', 'Zárate',
 ];
 
-const usedNames = new Set(['Paula Gómez', 'Andrés Molina', 'Mariana López', 'Diego Suárez', 'Ricardo Benítez']);
+const usedNames = new Set(['Paula Gómez', 'Kevin Giovanni', 'Mariana López', 'Diego Suárez', 'Ricardo Benítez']);
 function newName() {
   for (;;) {
     const name = `${pick(FIRST)} ${pick(LAST)}`;
@@ -135,7 +135,7 @@ const COHORTS = [
 
 const staff = [
   { id: 'p-paula', role: 'ld_admin', name: 'Paula Gómez', jobOrProgram: 'Líder de Aprendizaje y Beneficios', area: 'administration', cohortIds: [], device: 'desktop' },
-  { id: 'p-andres', role: 'tutor', name: 'Andrés Molina', jobOrProgram: 'Tutor de bienestar financiero', area: 'administration', cohortIds: COHORTS.map((c) => c.id), device: 'desktop' },
+  { id: 'p-kevin', role: 'tutor', name: 'Kevin Giovanni', jobOrProgram: 'Tutor de bienestar financiero', area: 'administration', cohortIds: COHORTS.map((c) => c.id), device: 'desktop' },
   { id: 'p-ricardo', role: 'sponsor', name: 'Ricardo Benítez', jobOrProgram: 'Gerente de Compensaciones', area: 'administration', cohortIds: [], device: 'desktop' },
 ].map((p) => ({
   ...p,
@@ -150,7 +150,7 @@ const cohorts = COHORTS.map((c) => ({
   id: c.id,
   orgId: organization.id,
   name: c.name,
-  tutorId: 'p-andres',
+  tutorId: 'p-kevin',
   area: c.area,
   moduleIds: phaseAModules,
   startDate: iso(PROGRAM_START),
@@ -345,7 +345,7 @@ if (exhausted) {
     id: 'unlock-1',
     levelId: next,
     target: { kind: 'person', personId: exhausted.personId },
-    tutorId: 'p-andres',
+    tutorId: 'p-kevin',
     reason: 'Agotó los intentos y repasamos juntos los temas en el encuentro del 05/11/2026.',
     at: '2026-11-06T15:00:00.000Z',
   });

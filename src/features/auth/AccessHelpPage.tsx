@@ -109,7 +109,7 @@ export function AccessHelpPage() {
       }
     >
       <header className="flex flex-col gap-2">
-        <h1 className="text-headline-small text-on-surface">{t('accessHelp.title')}</h1>
+        <h1 className="text-headline-medium text-on-surface">{t('accessHelp.title')}</h1>
         <p className="text-body-large text-on-surface-variant">{t('accessHelp.intro')}</p>
       </header>
 

@@ -56,7 +56,7 @@ export function SystemMessage({
               <Icon name={icon} size={24} />
             </span>
             <p className="text-label-large text-primary">{code}</p>
-            <h1 className="text-headline-small text-balance text-on-surface">{title}</h1>
+            <h1 className="text-headline-medium text-balance text-on-surface">{title}</h1>
             <p className="text-body-large text-on-surface-variant">{body}</p>
             <div className="flex w-full flex-col gap-3 pt-2 sm:w-auto sm:flex-row">{actions}</div>
             {children}

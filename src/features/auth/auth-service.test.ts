@@ -56,7 +56,7 @@ describe('two-step verification (G3)', () => {
     resetAll();
     expect(signInWithSso('p-ricardo', 'sso_google', false)).toEqual({ status: 'mfa' });
     resetAll();
-    expect(signInWithSso('p-andres', 'sso_google', true).status).toBe('signed_in');
+    expect(signInWithSso('p-kevin', 'sso_google', true).status).toBe('signed_in');
   });
 
   it('accepts only the demo code, also pasted with spaces', () => {

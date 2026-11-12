@@ -52,7 +52,7 @@
    "id": "cohort-operations",
    "orgId": "org-andina",
    "name": "Operaciones · Centro de distribución y oficina",
-   "tutorId": "p-andres",
+   "tutorId": "p-kevin",
    "area": "operations",
    "moduleIds": [
     "module-01",
@@ -80,7 +80,7 @@
    "id": "cohort-administration",
    "orgId": "org-andina",
    "name": "Administración",
-   "tutorId": "p-andres",
+   "tutorId": "p-kevin",
    "area": "administration",
    "moduleIds": [
     "module-01",
@@ -108,7 +108,7 @@
    "id": "cohort-technology",
    "orgId": "org-andina",
    "name": "Tecnología",
-   "tutorId": "p-andres",
+   "tutorId": "p-kevin",
    "area": "technology",
    "moduleIds": [
     "module-01",
@@ -136,7 +136,7 @@
    "id": "cohort-commercial",
    "orgId": "org-andina",
    "name": "Comercial",
-   "tutorId": "p-andres",
+   "tutorId": "p-kevin",
    "area": "commercial",
    "moduleIds": [
     "module-01",
@@ -177,9 +177,9 @@
    "activatedAt": "2026-07-24"
   },
   {
-   "id": "p-andres",
+   "id": "p-kevin",
    "role": "tutor",
-   "name": "Andrés Molina",
+   "name": "Kevin Giovanni",
    "jobOrProgram": "Tutor de bienestar financiero",
    "area": "administration",
    "cohortIds": [
@@ -190,7 +190,7 @@
    ],
    "device": "desktop",
    "orgId": "org-andina",
-   "email": "andres.molina@andina.demo",
+   "email": "kevin.giovanni@andina.demo",
    "status": "active",
    "invitedAt": "2026-07-20",
    "activatedAt": "2026-07-24"
@@ -10730,7 +10730,7 @@
     "kind": "person",
     "personId": "p-camila-zarate"
    },
-   "tutorId": "p-andres",
+   "tutorId": "p-kevin",
    "reason": "Agotó los intentos y repasamos juntos los temas en el encuentro del 05/11/2026.",
    "at": "2026-11-06T15:00:00.000Z"
   }

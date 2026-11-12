@@ -49,7 +49,7 @@ Panel primero, detalle después. Quiere ver en una pantalla dónde está el prob
 
 ---
 
-## 2. Andrés Molina · Tutor de bienestar financiero
+## 2. Kevin Giovanni · Tutor de bienestar financiero
 
 > Proto-persona: hipótesis sin validar · 12/11/2026 · Rol `tutor`
 

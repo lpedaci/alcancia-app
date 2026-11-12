@@ -44,7 +44,7 @@ const NAV = [
 const ROLES: { id: string; name: string; role: Role }[] = [
   { id: 'mariana', name: 'Mariana López', role: 'participant' },
   { id: 'diego', name: 'Diego Suárez', role: 'participant' },
-  { id: 'andres', name: 'Andrés Molina', role: 'tutor' },
+  { id: 'kevin', name: 'Kevin Giovanni', role: 'tutor' },
   { id: 'paula', name: 'Paula Gómez', role: 'ld_admin' },
   { id: 'ricardo', name: 'Ricardo Benítez', role: 'sponsor' },
 ];

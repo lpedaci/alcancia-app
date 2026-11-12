@@ -43,7 +43,7 @@ export function WalletSectionPage({ area }: { area: string }) {
       <div className="flex max-w-3xl flex-col gap-6">
         {status && status.status === 'locked' ? (
           <>
-            <h1 className="text-headline-small text-on-surface">{t('wallet.placeholder.lockedTitle', { section: title })}</h1>
+            <h1 className="text-headline-medium text-on-surface">{t('wallet.placeholder.lockedTitle', { section: title })}</h1>
             <UnlockCard status={status} />
           </>
         ) : (
@@ -51,7 +51,7 @@ export function WalletSectionPage({ area }: { area: string }) {
             <span className="flex size-10 items-center justify-center rounded-lg bg-info-container text-on-info-container">
               <Icon name="hourglass_empty" />
             </span>
-            <h1 className="text-headline-small text-on-surface">{t('wallet.placeholder.pendingTitle', { section: title, step: STEP[key] ?? 7 })}</h1>
+            <h1 className="text-headline-medium text-on-surface">{t('wallet.placeholder.pendingTitle', { section: title, step: STEP[key] ?? 7 })}</h1>
             {mission && <p className="text-body-large text-on-surface">{mission.objective}</p>}
             <p className="text-body-medium text-on-surface-variant">{t('wallet.placeholder.pending', { step: STEP[key] ?? 7 })}</p>
             <Button asChild variant="outlined" leadingIcon="home">

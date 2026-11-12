@@ -109,21 +109,22 @@ export function WalletHomePage() {
         {activeMission && (
           <Link
             to={`/app/missions/${activeMission.id}`}
-            className="flex items-center gap-3 rounded-xl border border-primary bg-surface-container-lowest p-3 hover:bg-surface-container"
+            className="flex items-center gap-3 rounded-xl border border-primary bg-surface-container-lowest p-4 hover:bg-surface-container"
           >
-            <IconTile icon="flag" size="sm" />
-            <span className="min-w-0 flex-1">
-              <span className="block text-label-medium text-primary">{t('wallet.home.mission.kickerMinutes', { minutes: activeMission.minutes })}</span>
-              <span className="block truncate text-title-small text-on-surface">{activeMission.title}</span>
-              <span className="hidden truncate text-body-small text-on-surface-variant md:block">{activeMission.objective}</span>
+            <IconTile icon="flag" size="sm" className="self-start" />
+            {/* The objective wraps up to two lines instead of being cut (2.7) */}
+            <span className="flex min-w-0 flex-1 flex-col gap-0.5">
+              <span className="text-label-medium text-primary">{t('wallet.home.mission.kickerMinutes', { minutes: activeMission.minutes })}</span>
+              <span className="text-title-medium text-pretty text-on-surface">{activeMission.title}</span>
+              <span className="hidden text-body-small text-pretty text-on-surface-variant md:line-clamp-2">{activeMission.objective}</span>
             </span>
-            <span className="hidden text-label-large text-primary sm:inline">{t('wallet.home.mission.start')}</span>
-            <Icon name="arrow_forward" className="text-primary" />
+            <span className="hidden shrink-0 text-label-large text-primary expanded:inline">{t('wallet.home.mission.start')}</span>
+            <Icon name="arrow_forward" className="shrink-0 text-primary" />
           </Link>
         )}
 
         {/* Greeting (2.2.1, pattern 2) with the controls of time on a white surface, so they read clearly */}
-        <section aria-labelledby="home-title" className="flex flex-col gap-4 rounded-xl bg-primary-container p-(--space-card-padding) text-on-primary-container lg:flex-row lg:items-end lg:justify-between">
+        <section aria-labelledby="home-title" className="flex flex-col gap-4 rounded-xl bg-primary-container p-(--space-card-padding) text-on-primary-container expanded:flex-row expanded:flex-wrap expanded:items-end expanded:justify-between">
           <div className="flex min-w-0 flex-col gap-3">
             <MetaChips
               label={t('wallet.home.dateLabel')}
@@ -132,7 +133,7 @@ export function WalletHomePage() {
                 { icon: 'today', label: t('wallet.home.dayChip', { day: wallet.day }) },
               ]}
             />
-            <h1 id="home-title" className="text-headline-small">
+            <h1 id="home-title" className="text-headline-medium">
               {t('wallet.home.hello')} <span className="text-primary">{firstName}</span>
             </h1>
             <MetaChips
@@ -181,7 +182,7 @@ export function WalletHomePage() {
           {/* Balance */}
           <section aria-labelledby="balance-title" className={cn(card, '@container')}>
             <div className="flex items-start justify-between gap-2">
-              <h2 id="balance-title" className="text-title-small text-on-surface-variant">{t('wallet.home.balance.title')}</h2>
+              <h2 id="balance-title" className="text-title-medium text-on-surface">{t('wallet.home.balance.title')}</h2>
               <IconTile icon="account_balance_wallet" size="sm" />
             </div>
             <p className="text-display-small text-on-surface">
@@ -194,7 +195,7 @@ export function WalletHomePage() {
               </span>
               <MoneyText value={power.toFixed(2)} className="text-label-large text-on-surface" />
             </p>
-            <dl className="grid grid-cols-1 gap-1 border-t border-outline-variant pt-3 text-body-small">
+            <dl className="mt-auto grid grid-cols-1 gap-1 border-t border-outline-variant pt-3 text-body-small">
               <div className="flex flex-wrap justify-between gap-x-3">
                 <dt className="text-on-surface-variant">{t('wallet.home.balance.alias')}</dt>
                 <dd className="truncate text-on-surface">{alias}</dd>
@@ -208,8 +209,8 @@ export function WalletHomePage() {
 
           {/* Quick actions and pockets */}
           <section aria-labelledby="actions-title" className={cn(card, '@container')}>
-            <h2 id="actions-title" className="text-title-small text-on-surface-variant">{t('wallet.home.actions.title')}</h2>
-            <ul className="grid grid-cols-2 gap-2 @sm:grid-cols-4">
+            <h2 id="actions-title" className="text-title-medium text-on-surface">{t('wallet.home.actions.title')}</h2>
+            <ul className="grid grid-cols-2 gap-2 @xs:grid-cols-4">
               {QUICK_ACTIONS.map((a) => (
                 <li key={a.key}>
                   <Link to={a.to} className="flex min-h-12 flex-col items-center gap-1 rounded-lg p-2 text-center text-label-medium text-on-surface hover:bg-surface-container">
@@ -253,7 +254,7 @@ export function WalletHomePage() {
         {/* Recent movements, with the category to confirm (D-114) */}
         <section aria-labelledby="movements-title" className={cn(card, '@container')}>
           <div className="flex items-center justify-between gap-2">
-            <h2 id="movements-title" className="text-title-medium text-on-surface">{t('wallet.home.movements.title')}</h2>
+            <h2 id="movements-title" className="text-title-large text-on-surface">{t('wallet.home.movements.title')}</h2>
           </div>
           {recent.length === 0 ? (
             <p className="text-body-medium text-on-surface-variant">{t('wallet.home.movements.empty')}</p>
