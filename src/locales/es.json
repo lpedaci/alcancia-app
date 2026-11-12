@@ -205,18 +205,21 @@
       "title": "Elige una persona y recorre la billetera"
     },
     "footer": {
-      "tagline": "Simulador de finanzas personales para equipos de trabajo. Prototipo con datos ficticios.",
+      "tagline": "Simulador de finanzas personales para equipos de trabajo.",
       "explore": "Explorar",
       "project": "El proyecto",
       "demo": "La demo",
       "caseStudy": "Case study",
       "docs": "Documentación",
-      "portfolio": "Portfolio",
+      "portfolio": "Portfolio de Lourdes Pedaci",
       "credit": "Diseño y desarrollo: Lourdes Pedaci, Experience Designer (Learning y UX/UI).",
       "reset": "Restablecer demo",
       "resetTitle": "Restablecer la demo",
       "resetBody": "Vuelven los datos de ejemplo de todas las personas y se cierra la sesión. Lo que hiciste en esta demo se borra de este navegador.",
-      "resetDone": "Demo restablecida"
+      "resetDone": "Demo restablecida",
+      "profiles": "Perfiles de Lourdes Pedaci",
+      "linkedin": "LinkedIn de Lourdes Pedaci",
+      "github": "GitHub de Lourdes Pedaci"
     },
     "visual": {
       "account": "Cuenta de práctica",
@@ -234,7 +237,6 @@
     "eyebrowText": "Simulador de finanzas personales",
     "phone": {
       "label": "Pantalla de la billetera de práctica en un celular: {{screen}}",
-      "switcher": "Ver una pantalla de la app",
       "screens": {
         "home": "Tu cuenta",
         "levels": "Niveles",
@@ -278,9 +280,7 @@
       "toolResult": "Lo que compra tu dinero dentro de 12 meses",
       "toolPhrase": "Con 3 % mensual, en 12 meses tu dinero compra un {{loss}} menos.",
       "toolScenario": "Escenario",
-      "toolExample": "Valores de ejemplo",
-      "pause": "Pausar el cambio automático de pantallas",
-      "play": "Reanudar el cambio automático de pantallas"
+      "toolExample": "Valores de ejemplo"
     },
     "floating": {
       "unlockLabel": "Próximo desbloqueo",

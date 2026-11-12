@@ -205,18 +205,21 @@
       "title": "Choose a person and explore the wallet"
     },
     "footer": {
-      "tagline": "Personal finance simulator for work teams. Prototype with fictitious data.",
+      "tagline": "Personal finance simulator for work teams.",
       "explore": "Explore",
       "project": "The project",
       "demo": "The demo",
       "caseStudy": "Case study",
       "docs": "Documentation",
-      "portfolio": "Portfolio",
+      "portfolio": "Lourdes Pedaci's portfolio",
       "credit": "Design and development: Lourdes Pedaci, Experience Designer (Learning and UX/UI).",
       "reset": "Reset demo",
       "resetTitle": "Reset the demo",
       "resetBody": "The example data of every person comes back and the session closes. What you did in this demo is erased from this browser.",
-      "resetDone": "Demo reset"
+      "resetDone": "Demo reset",
+      "profiles": "Lourdes Pedaci's profiles",
+      "linkedin": "Lourdes Pedaci on LinkedIn",
+      "github": "Lourdes Pedaci on GitHub"
     },
     "visual": {
       "account": "Practice account",
@@ -234,7 +237,6 @@
     "eyebrowText": "Personal finance simulator",
     "phone": {
       "label": "Screen of the practice wallet on a phone: {{screen}}",
-      "switcher": "See a screen of the app",
       "screens": {
         "home": "Your account",
         "levels": "Levels",
@@ -278,9 +280,7 @@
       "toolResult": "What your money buys in 12 months",
       "toolPhrase": "With 3 % a month, in 12 months your money buys {{loss}} less.",
       "toolScenario": "Scenario",
-      "toolExample": "Example values",
-      "pause": "Pause the automatic screen change",
-      "play": "Resume the automatic screen change"
+      "toolExample": "Example values"
     },
     "floating": {
       "unlockLabel": "Next unlock",

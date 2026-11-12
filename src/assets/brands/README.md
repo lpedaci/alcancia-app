@@ -12,3 +12,14 @@ Reglas aplicadas en `SsoButton.tsx`:
 - Los dos botones tienen el mismo tamaño, estilo y peso visual (Google pide igual prominencia).
 - Fondo blanco con borde, como el tema claro de ambas guías. El logo es decorativo (`alt=""`): el texto del botón ya nombra al proveedor.
 Copiados desde Rumbo el 12/11/2026, sin cambios.
+
+## Marcas de LinkedIn y GitHub (pie de la landing)
+
+Únicos otros elementos de marca permitidos (CLAUDE.md 2.1): solo en los enlaces a los perfiles de Lourdes en el pie de la landing, en `src/components/ui/BrandIcon.tsx`, como trazado SVG monocromo dibujado con el color del texto, sin modificar su forma.
+
+| Marca | Versión | Referencia |
+| --- | --- | --- |
+| LinkedIn | Logotipo "in" en un solo color | Guía de marca de LinkedIn (brand.linkedin.com): permite la versión de un solo color |
+| GitHub | Marca "Invertocat" en un solo color | Guía de logos de GitHub (github.com/logos): permite la marca en negro o blanco, y en el color del texto sobre fondos claros |
+
+Cada ícono es un enlace con nombre accesible ("LinkedIn de Lourdes Pedaci (se abre en una pestaña nueva)") y tooltip. El portfolio usa el ícono "palette" de Material Symbols, porque no es una marca.

@@ -81,11 +81,11 @@ describe('G0 in-page links and phone (INC-11, D-155, D-157)', () => {
     expect(form.parentElement?.querySelector('details')).not.toBeNull();
   });
 
-  it('the hero phone can pause its automatic screen change', () => {
+  it('the hero phone has no buttons and stops its rotation on hover, focus or tap (D-157)', () => {
     renderAt('/');
-    const pause = screen.getByRole('button', { name: es.landing.phone.pause });
-    fireEvent.click(pause);
-    expect(screen.getByRole('button', { name: es.landing.phone.play })).toBeInTheDocument();
+    const phone = screen.getByRole('img', { name: /Tu cuenta$/ });
+    expect(screen.queryByRole('radiogroup', { name: /pantalla de la app/ })).not.toBeInTheDocument();
+    expect(phone.parentElement).toHaveAttribute('tabindex', '0');
   });
 });
 

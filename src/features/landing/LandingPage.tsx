@@ -5,11 +5,11 @@ import { Link } from 'react-router';
 import { CASE_STUDY_URL, DOCS_URL, GITHUB_PROFILE_URL, LINKEDIN_URL, PORTFOLIO_URL } from '@/app/links';
 import { Logo } from '@/components/layout/Logo';
 import { Avatar, ROLE_ACCENT } from '@/components/ui/Avatar';
+import { BrandIcon } from '@/components/ui/BrandIcon';
 import { Button } from '@/components/ui/Button';
 import { Icon } from '@/components/ui/Icon';
-import { IconButton } from '@/components/ui/IconButton';
 import { ProgressBar } from '@/components/ui/ProgressBar';
-import { SegmentedButton } from '@/components/ui/SegmentedButton';
+import { Tooltip } from '@/components/ui/Tooltip';
 import levels from '@/data/levels.json';
 import seed from '@/data/seed.json';
 import { InflationSimulator } from '@/features/simulators/InflationSimulator';
@@ -393,6 +393,8 @@ export function LandingPage() {
           <div className="flex max-w-sm flex-col gap-3">
             <Logo />
             <p className="text-body-medium text-on-surface-variant">{t('landing.footer.tagline')}</p>
+            {/* Legal notice of 1.2, next to the product name */}
+            <p className="text-body-small text-on-surface-variant">{t('landing.disclaimer')}</p>
           </div>
           <nav aria-labelledby="footer-explore" className="flex flex-col gap-2">
             <h2 id="footer-explore" className="text-title-small text-on-surface">{t('landing.footer.explore')}</h2>
@@ -423,16 +425,36 @@ export function LandingPage() {
           </nav>
         </div>
         <div className="border-t border-outline-variant">
-          <div className={cn(container, 'flex flex-col gap-3 py-6 text-body-small text-on-surface-variant md:flex-row md:items-center md:justify-between')}>
-            <p>
-              {t('landing.footer.credit')}{' '}
-              <External href={LINKEDIN_URL} className="text-primary underline underline-offset-4">LinkedIn</External>
-              {' · '}
-              <External href={PORTFOLIO_URL} className="text-primary underline underline-offset-4">{t('landing.footer.portfolio')}</External>
-              {' · '}
-              <External href={GITHUB_PROFILE_URL} className="text-primary underline underline-offset-4">GitHub</External>
-            </p>
-            <p>{t('landing.disclaimer')} © 2026</p>
+          {/* One row: the credit and the profile icons. */}
+          <div className={cn(container, 'flex flex-col gap-3 py-6 text-body-small text-on-surface-variant')}>
+            <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+              <p>
+                {t('landing.footer.credit')} © 2026
+              </p>
+              <ul className="-ml-3 flex items-center gap-1 md:ml-0 md:-mr-3" aria-label={t('landing.footer.profiles')}>
+                {(
+                  [
+                    [LINKEDIN_URL, t('landing.footer.linkedin'), <BrandIcon key="l" name="linkedin" />],
+                    [PORTFOLIO_URL, t('landing.footer.portfolio'), <Icon key="p" name="palette" size={20} />],
+                    [GITHUB_PROFILE_URL, t('landing.footer.github'), <BrandIcon key="g" name="github" />],
+                  ] as const
+                ).map(([href, label, icon]) => (
+                  <li key={href}>
+                    <Tooltip content={label}>
+                      <a
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${label} ${t('landing.newTab')}`}
+                        className="flex size-12 items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container hover:text-on-surface md:size-10"
+                      >
+                        {icon}
+                      </a>
+                    </Tooltip>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </footer>
@@ -453,8 +475,8 @@ function HeroPhone() {
   const { t } = useTranslation();
   const reduce = useShouldReduceMotion();
   const [screen, setScreen] = useState<PhoneScreen>('home');
-  // Auto-rotation (WCAG 2.2.2): it stops with the pause button, while the pointer or the focus is on
-  // the phone, after choosing a screen by hand, and it never starts with reduced motion.
+  // Auto-rotation (D-157, WCAG 2.2.2): it stops while the pointer or the keyboard focus is on the
+  // phone, a tap on it pauses and resumes it, and it never starts with reduced motion.
   const [paused, setPaused] = useState(false);
   const [hovered, setHovered] = useState(false);
   const running = !paused && !hovered && !reduce;
@@ -481,7 +503,14 @@ function HeroPhone() {
         {/* Flat tinted shape behind the phone (instead of the reference's gradient glow) */}
         <span aria-hidden className="absolute inset-x-[-15%] top-[12%] bottom-[8%] rounded-2xl bg-primary-container" />
         <Reveal delay={0.1} className="relative">
-          <AppPhone screen={screen} />
+          {/* Focusable and tappable so keyboard and touch can stop the rotation too (WCAG 2.2.2). */}
+          <div
+            tabIndex={0}
+            onClick={() => setPaused((value) => !value)}
+            className="rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+          >
+            <AppPhone screen={screen} />
+          </div>
         </Reveal>
         <Reveal delay={0.3} className="absolute top-28 -left-36 hidden w-44 xl:block">
           <div aria-hidden>
@@ -501,26 +530,6 @@ function HeroPhone() {
           </div>
         </Reveal>
       </div>
-      <Reveal delay={0.2} className="flex items-center gap-2">
-        <SegmentedButton
-          label={t('landing.phone.switcher')}
-          value={screen}
-          onValueChange={(value) => {
-            setScreen(value);
-            setPaused(true);
-          }}
-          options={SCREEN_ORDER.map((value) => ({ value, label: t(`landing.phone.screens.${value}`) }))}
-        />
-        {!reduce && (
-          <IconButton
-            icon={paused ? 'play_arrow' : 'pause'}
-            label={paused ? t('landing.phone.play') : t('landing.phone.pause')}
-            variant="outlined"
-            size="s"
-            onClick={() => setPaused((value) => !value)}
-          />
-        )}
-      </Reveal>
     </div>
   );
 }
