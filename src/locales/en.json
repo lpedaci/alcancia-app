@@ -5,10 +5,192 @@
   },
   "landing": {
     "eyebrow": "Corporate learning platform for personal finance · B2B UX/UI design case",
-    "title": "The wallet where your team learns finance by using it",
-    "status": "We are building the demo. Meanwhile, you can read the project documentation.",
-    "docsLink": "Read the documentation",
-    "disclaimer": "Educational content. It is not financial advice or an investment recommendation."
+    "disclaimer": "Educational content. It is not financial advice or an investment recommendation.",
+    "newTab": "(opens in a new tab)",
+    "homeLabel": "Alcancía, home",
+    "chooseJourney": "Choose a journey",
+    "nav": {
+      "label": "Sections",
+      "problem": "The problem",
+      "solution": "The solution",
+      "roles": "Journeys",
+      "simulator": "Simulator",
+      "faq": "Questions"
+    },
+    "hero": {
+      "titleStart": "The wallet where your team",
+      "titleKey": "learns finance",
+      "titleEnd": "by using it",
+      "body": "A corporate learning platform shaped like a digital wallet: each person gets a practice salary, pays, budgets, saves and invests with fictitious money, and learns at the right moment. The company sees learning progress, never the amounts.",
+      "caseStudy": "Read the case study",
+      "fuerte": "Hi, I'm Fuerte. Money in this wallet is for practice, so making mistakes is free."
+    },
+    "pieces": {
+      "simLabel": "$ 100.000 in 12 months at 3 % monthly inflation",
+      "simLoss": "Purchasing power lost: {{loss}}",
+      "goalName": "Goal: winter vacation",
+      "goalTarget": "Adjusted for inflation: {{amount}}",
+      "goalProgress": "Goal progress",
+      "kpiLabel": "People who passed the level 1 challenge",
+      "kpiTrend": "+12 points this month",
+      "practice": "Practice wallet",
+      "practiceBody": "Fictitious money, real decisions: every mistake ends in an explanation."
+    },
+    "problem": {
+      "eyebrow": "The problem",
+      "title": "Three questions many people ask at the end of the month",
+      "budget": {
+        "title": "Will my salary last the month?",
+        "body": "Without tracking expenses, the salary goes without knowing where.",
+        "needs": "Needs",
+        "wants": "Wants",
+        "savings": "Savings"
+      },
+      "inflation": {
+        "title": "Inflation eats my savings",
+        "body": "Idle money loses purchasing power month after month.",
+        "today": "Today",
+        "later": "In 12 months, at 3 % monthly"
+      },
+      "card": {
+        "title": "I don't know what my card really costs",
+        "body": "Installments, nominal rate (TNA) and total financial cost (CFT) look alike, and they are not.",
+        "cash": "Cash with 15 % off",
+        "installments": "12 installments, present value at 3 %"
+      }
+    },
+    "solution": {
+      "eyebrow": "The solution",
+      "title": "Not a course: a wallet that teaches",
+      "intro": "Each section unlocks with achievements and goals. The unlock order is the content: first what protects you, then what makes you grow.",
+      "diagnostic": {
+        "title": "Diagnostic and a path by levels",
+        "body": "\"Conocerte\" finds what you already know and proposes the path; \"Ya sé esto\" skips what you master."
+      },
+      "guides": {
+        "title": "5-minute guides with practice",
+        "body": "A situation with numbers, a worked example and a question with an explained answer."
+      },
+      "challenges": {
+        "title": "Nine kinds of challenges",
+        "body": "Calculations, branching cases, ordering and sorting, all accessible without dragging."
+      },
+      "tools": {
+        "title": "Tools to try scenarios",
+        "body": "Twelve simulators with visible assumptions and example values, never \"current rates\"."
+      },
+      "goals": {
+        "title": "Pockets and goals",
+        "body": "Emergency fund and goals adjusted for inflation, in the same wallet."
+      },
+      "panel": {
+        "title": "Tracking for tutors and L&D",
+        "body": "Aggregated learning progress, with at least 5 people per group. No amount leaves the browser."
+      },
+      "levels": {
+        "l1": "Level 1 · Account",
+        "l2": "Level 2 · Pay",
+        "l3": "Level 3 · Budget",
+        "l4": "Level 4 · Pockets and goals"
+      }
+    },
+    "anywhere": {
+      "eyebrow": "Learn anywhere",
+      "title": "The same guide on Mariana's computer and on Diego's phone",
+      "intro": "Office staff learn in 15-minute slots; operational staff, in 5-minute breaks on their phones. The interface adapts to each one.",
+      "desktop": "Mariana, Operations Analyst, on the computer",
+      "mobile": "Diego, Warehouse Operator, on the phone",
+      "guideKicker": "Guide · 5 minutes",
+      "guideTitle": "Interest-free installments or a cash discount?",
+      "guideBody": "You are offered 12 interest-free installments or 15 % off. Which is better with 3 % monthly inflation?",
+      "optionA": "Installments",
+      "optionB": "Cash"
+    },
+    "roles": {
+      "eyebrow": "A journey for each role",
+      "title": "Explore the demo as the person you choose",
+      "intro": "Each journey signs in with a fictitious work account of Andina Servicios S.A.",
+      "cta": "Explore as {{name}}",
+      "mariana": {
+        "chip": "Participant · computer",
+        "does": "Uses the wallet to organize her money and reach Invest.",
+        "explore": "Account home, tools, pockets and the Invest lock with what is missing."
+      },
+      "diego": {
+        "chip": "Participant · phone",
+        "does": "Learns in 5-minute breaks on his phone.",
+        "explore": "Short missions, guides with practice and the bottom navigation bar."
+      },
+      "andres": {
+        "chip": "Tutoring",
+        "does": "Supports his cohorts without seeing amounts or wallet locks.",
+        "explore": "Progress heat map, weekly challenges and most-missed questions."
+      },
+      "paula": {
+        "chip": "L&D and Benefits admin",
+        "does": "Sets up the program, uploads people and tracks adoption.",
+        "explore": "Dashboard with a privacy threshold, CSV upload and settings."
+      },
+      "ricardo": {
+        "chip": "Sponsor",
+        "does": "Reads the program impact in aggregated data.",
+        "explore": "Report with reaction, learning and behavior (Kirkpatrick 1 to 3)."
+      }
+    },
+    "simulator": {
+      "eyebrow": "Try a simulator without signing in",
+      "title": "How much does your money buy if you keep it idle?",
+      "intro": "Change the amount, the scenario or the months and see how the result changes."
+    },
+    "figures": {
+      "title": "The demo in numbers",
+      "levels": "wallet levels",
+      "missions": "practice missions",
+      "tools": "tools",
+      "people": "people in the demo company"
+    },
+    "steps": {
+      "eyebrow": "Explore the demo in three steps",
+      "title": "From sign-in to the wallet in a minute",
+      "s1": {
+        "title": "Choose a journey",
+        "body": "Each role signs in with one click, with a simulated sign-in."
+      },
+      "s2": {
+        "title": "Explore as that person",
+        "body": "Use \"Ver como\" to switch roles or load an example state."
+      },
+      "s3": {
+        "title": "Read the case study",
+        "body": "The design process, the decisions and the documentation are published."
+      }
+    },
+    "faq": {
+      "title": "Frequently asked questions",
+      "q1": "Is this financial advice?",
+      "a1": "No. It is educational content: it teaches concepts and lets you practice with scenarios. It never recommends specific products, institutions or investments.",
+      "q2": "What does the company see about each person?",
+      "a2": "Their learning progress: guides, challenges and completed levels. Never amounts, balances, habit answers or why a level is still locked.",
+      "q3": "Are the values real?",
+      "a3": "No. Scenarios use example values labeled as such, with links to official sources to check the current ones.",
+      "q4": "Who is Fuerte?",
+      "a4": "The wallet companion: it warns before an avoidable mistake, explains after one and celebrates progress. It can be muted.",
+      "q5": "Is this a real product?",
+      "a5": "It is a portfolio prototype with fictitious data and no backend: everything you enter stays in your browser."
+    },
+    "final": {
+      "title": "Choose a person and explore the wallet"
+    },
+    "footer": {
+      "tagline": "Corporate learning platform for personal finance. Prototype with fictitious data.",
+      "explore": "Explore",
+      "project": "The project",
+      "demo": "The demo",
+      "caseStudy": "Case study",
+      "docs": "Documentation",
+      "portfolio": "Portfolio",
+      "credit": "Design and development: Lourdes Pedaci, Experience Designer (Learning and UX/UI)."
+    }
   },
   "notFound": {
     "title": "We could not find this page",
@@ -45,5 +227,80 @@
     "amountRange": "That amount is out of the allowed range. Check the range in the field help",
     "percent": "Enter a percentage, numbers only, for example: 3 or 2,5",
     "percentRange": "That percentage is out of the allowed range. Check the range in the field help"
+  },
+  "sim3": {
+    "title": "Inflation and purchasing power",
+    "intro": "See how much your money loses if you keep it idle, with an example inflation scenario.",
+    "fuerte": "Try it with your practice salary. Then compare it with another scenario.",
+    "dataLabel": "Scenario data",
+    "amount": {
+      "label": "Amount",
+      "help": "Amount in pesos, for example: 100.000"
+    },
+    "scenario": {
+      "label": "Monthly inflation (example values)",
+      "help": "Chosen scenario: {{scenario}}. Choose another or enter your own value.",
+      "low": "low inflation",
+      "medium": "medium inflation",
+      "high": "high inflation",
+      "custom": "your own value",
+      "lowShort": "1,5 %",
+      "mediumShort": "3 %",
+      "highShort": "6 %",
+      "customShort": "Other"
+    },
+    "custom": {
+      "label": "Your monthly inflation",
+      "help": "Monthly percentage between 0 and 50, for example: 2,5"
+    },
+    "months": {
+      "label": "Months",
+      "sliderLabel": "Months, slider",
+      "valueText": "{{count}} months",
+      "help": "Between 1 and 60 months. Use the slider or type the number."
+    },
+    "tryChanging": "Try changing: go from medium to high inflation and see how much less the same money buys.",
+    "resultLabel": "What your money buys in {{months}} months",
+    "sentence": "With {{inflation}} monthly inflation, in {{months}} months your {{amount}} buy what costs {{power}} today: {{loss}} less.",
+    "invalid": "Enter a valid amount and inflation to see the result.",
+    "notSet": "not set",
+    "lossPill": "Purchasing power lost: {{loss}}",
+    "futurePrice": "Something that costs the same today would cost {{price}}",
+    "stickyLabel": "In {{months}} months it buys",
+    "chart": {
+      "title": "Purchasing power month by month",
+      "conclusion": "In {{months}} months, the same money buys {{loss}} less.",
+      "showTable": "View as table",
+      "hideTable": "View as chart",
+      "tableLabel": "Purchasing power month by month, as a table",
+      "month": "Month",
+      "power": "Purchasing power",
+      "today": "Today",
+      "todayShort": "Today",
+      "monthN_one": "Month {{count}}",
+      "monthN_other": "Month {{count}}"
+    },
+    "meaning": {
+      "title": "What this means",
+      "body": "Inflation makes the same bill pay for fewer things. If you keep money without a return, you lose purchasing power even if the balance does not change. That is why it pays to compare your savings return with inflation."
+    },
+    "assumptions": {
+      "summary": "Scenario: {{scenario}}, {{inflation}} monthly · Example values",
+      "constant": "Inflation is the same every month.",
+      "noInterest": "The money earns nothing: it is kept idle.",
+      "examples": "Example values for learning. Check current values in official sources.",
+      "whereReal": "Where to see real values:",
+      "indec": "consumer price index of INDEC"
+    },
+    "newTab": "(opens in a new tab)",
+    "compare": {
+      "save": "Save scenario",
+      "help": "Save up to two scenarios to compare them side by side. They stay on this screen only.",
+      "listLabel": "Saved scenarios",
+      "name": "Scenario {{n}}",
+      "remove": "Remove scenario {{n}}",
+      "detail": "{{amount}} · {{inflation}} monthly · {{months}} months"
+    },
+    "legal": "Educational content. It is not financial advice or an investment recommendation."
   }
 }

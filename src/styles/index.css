@@ -56,6 +56,7 @@
   /* Fuerte only (D-52): used by the character illustration, nowhere else. */
   --color-fuerte-body: var(--fuerte-body);
   --color-fuerte-light: var(--fuerte-light);
+  --color-fuerte-shade: var(--fuerte-shade);
 
   --color-surface: var(--md-sys-color-surface);
   --color-surface-container-lowest: var(--md-sys-color-surface-container-lowest);

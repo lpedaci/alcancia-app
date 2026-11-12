@@ -1,0 +1,53 @@
+{
+  "note": "Fuerte's lines by event and state (CLAUDE.md 5.0.1). L&D can edit them without touching code. Two sentences at most, no judgment, no product recommendations, no promises. Variants avoid repeating the same line.",
+  "events": {
+    "welcome": {
+      "state": "greeting",
+      "variants": [
+        "Hola, {{name}}. Soy Fuerte. Acá manejas dinero de práctica, así que equivocarte sale gratis. Empecemos por tu primer cobro.",
+        "Hola, {{name}}. Soy Fuerte y te acompaño en esta billetera de práctica. Todo es dinero ficticio: probar no cuesta nada."
+      ]
+    },
+    "home_greeting": {
+      "state": "greeting",
+      "variants": [
+        "Hola de nuevo, {{name}}. Tu próxima meta está a la vista.",
+        "Qué bueno verte, {{name}}. Hoy hay una misión esperándote."
+      ]
+    },
+    "before_mistake": {
+      "state": "attention",
+      "variants": [
+        "Ojo con esto: el titular no coincide con el nombre que buscabas. ¿Lo revisamos?",
+        "Ojo con esto: antes de aceptar, busca el CFT en la oferta."
+      ]
+    },
+    "achievement": {
+      "state": "celebration",
+      "variants": [
+        "Guardado. Tu fondo de emergencia ya cubre un mes. Faltan dos para desbloquear Invertir.",
+        "Guardado. Ese hábito suma más de lo que parece."
+      ]
+    },
+    "mistake_feedback": {
+      "state": "thinking",
+      "variants": [
+        "Pasó lo mismo que en la vida real: el préstamo salió casi el doble. Veamos por qué en 30 segundos."
+      ]
+    },
+    "locked_invest": {
+      "state": "thinking",
+      "variants": [
+        "Invertir se abre cuando tengas tu \"colchón\" armado. Primero lo que te protege, después lo que te hace crecer."
+      ]
+    },
+    "question": {
+      "state": "thinking",
+      "variants": ["Pensemos esta juntos. No hay apuro."]
+    },
+    "silenced": {
+      "state": "sleeping",
+      "variants": ["Me quedo en silencio. Las tarjetas de aprendizaje siguen apareciendo."]
+    }
+  }
+}

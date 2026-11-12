@@ -9,6 +9,7 @@ import { MoneyInput } from '@/components/money/MoneyInput';
 import { MoneyText } from '@/components/money/MoneyText';
 import { PercentInput } from '@/components/money/PercentInput';
 import { formatPercent } from '@/lib/money';
+import { Fuerte, FUERTE_STATES } from '@/features/companion/Fuerte';
 import { Avatar } from '@/components/ui/Avatar';
 import { BentoCard } from '@/components/ui/BentoCard';
 import { BentoGrid } from '@/components/ui/BentoGrid';
@@ -47,6 +48,7 @@ const sections = [
   ['botones', 'Botones'],
   ['campos', 'Campos'],
   ['dinero', 'Dinero'],
+  ['fuerte', 'Fuerte'],
   ['chips', 'Chips y estados'],
   ['progreso', 'Progreso y carga'],
   ['datos', 'Datos y personas'],
@@ -418,6 +420,25 @@ export function StyleguidePage() {
             </div>
           </Panel>
         </div>
+      </Section>
+
+      <Section id="fuerte" title="Fuerte: seis estados (5.0.1)">
+        <Panel className="flex flex-col gap-4">
+          <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 xl:grid-cols-6">
+            {FUERTE_STATES.map((state, i) => (
+              <li key={state} className="flex flex-col items-center gap-2 rounded-lg bg-surface p-3">
+                <Fuerte state={state} lights={i + 1} size={7} />
+                <span className="text-label-medium text-on-surface">
+                  {{ neutral: 'Neutral', greeting: 'Saludo', thinking: 'Pensativo', attention: 'Atención', celebration: 'Celebración', sleeping: 'Dormido' }[state]}
+                </span>
+              </li>
+            ))}
+          </ul>
+          <p className="text-body-small text-on-surface-variant">
+            Relleno plano, sin degradés. El naranja vive solo en Fuerte (D-52). Las luces del panel muestran los niveles
+            completados (una por nivel, siete en total); en Celebración se encienden todas.
+          </p>
+        </Panel>
       </Section>
 
       <Section id="chips" title="Chips, botones segmentados y píldoras de estado">

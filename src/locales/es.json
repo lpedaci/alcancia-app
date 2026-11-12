@@ -5,10 +5,192 @@
   },
   "landing": {
     "eyebrow": "Plataforma de aprendizaje corporativo en finanzas personales · Caso de diseño UX/UI B2B",
-    "title": "La billetera donde tu equipo aprende finanzas usándola",
-    "status": "Estamos construyendo la demo. Mientras tanto, puedes leer la documentación del proyecto.",
-    "docsLink": "Ver la documentación",
-    "disclaimer": "Contenido educativo. No es asesoramiento financiero ni una recomendación de inversión."
+    "disclaimer": "Contenido educativo. No es asesoramiento financiero ni una recomendación de inversión.",
+    "newTab": "(se abre en una pestaña nueva)",
+    "homeLabel": "Alcancía, inicio",
+    "chooseJourney": "Elegir un recorrido",
+    "nav": {
+      "label": "Secciones",
+      "problem": "El problema",
+      "solution": "La solución",
+      "roles": "Recorridos",
+      "simulator": "Simulador",
+      "faq": "Preguntas"
+    },
+    "hero": {
+      "titleStart": "La billetera donde tu equipo",
+      "titleKey": "aprende finanzas",
+      "titleEnd": "usándola",
+      "body": "Una plataforma de aprendizaje corporativo con forma de billetera virtual: cada persona cobra un sueldo de práctica, paga, presupuesta, ahorra e invierte con dinero ficticio, y aprende en el momento justo. La empresa ve el avance de aprendizaje, nunca los montos.",
+      "caseStudy": "Ver el case study",
+      "fuerte": "Hola, soy Fuerte. En esta billetera el dinero es de práctica, así que equivocarte sale gratis."
+    },
+    "pieces": {
+      "simLabel": "$ 100.000 en 12 meses con 3 % de inflación mensual",
+      "simLoss": "Pierdes poder de compra: {{loss}}",
+      "goalName": "Meta: vacaciones de invierno",
+      "goalTarget": "Ajustada por inflación: {{amount}}",
+      "goalProgress": "Avance de la meta",
+      "kpiLabel": "Personas que aprobaron el desafío del nivel 1",
+      "kpiTrend": "+12 puntos este mes",
+      "practice": "Billetera de práctica",
+      "practiceBody": "Dinero ficticio, decisiones reales: cada error termina en una explicación."
+    },
+    "problem": {
+      "eyebrow": "El problema",
+      "title": "Tres preguntas que muchas personas se hacen a fin de mes",
+      "budget": {
+        "title": "¿Me alcanza hasta fin de mes?",
+        "body": "Sin un registro de gastos, el sueldo se va sin saber adónde.",
+        "needs": "Necesidades",
+        "wants": "Deseos",
+        "savings": "Ahorro"
+      },
+      "inflation": {
+        "title": "La inflación se come mis ahorros",
+        "body": "El dinero quieto pierde poder de compra mes a mes.",
+        "today": "Hoy",
+        "later": "En 12 meses, al 3 % mensual"
+      },
+      "card": {
+        "title": "No entiendo cuánto me cuesta la tarjeta",
+        "body": "Cuotas, TNA y CFT parecen lo mismo y no lo son.",
+        "cash": "Contado con 15 % de descuento",
+        "installments": "12 cuotas, valor presente al 3 %"
+      }
+    },
+    "solution": {
+      "eyebrow": "La solución",
+      "title": "No es un curso: es una billetera que enseña",
+      "intro": "Cada sección se desbloquea por logros y metas. El orden de desbloqueo es el contenido: primero lo que te protege, después lo que te hace crecer.",
+      "diagnostic": {
+        "title": "Diagnóstico y ruta por niveles",
+        "body": "\"Conocerte\" detecta lo que ya sabes y propone el camino; con \"Ya sé esto\" saltas lo que dominas."
+      },
+      "guides": {
+        "title": "Guías de 5 minutos con práctica",
+        "body": "Una situación con números, un ejemplo resuelto y una pregunta con respuesta explicada."
+      },
+      "challenges": {
+        "title": "Desafíos de nueve tipos",
+        "body": "Cálculos, casos con decisiones, ordenar y clasificar, todos accesibles sin arrastrar."
+      },
+      "tools": {
+        "title": "Herramientas para probar escenarios",
+        "body": "Doce simuladores con supuestos visibles y valores de ejemplo, nunca \"tasas actuales\"."
+      },
+      "goals": {
+        "title": "Apartados y metas",
+        "body": "Fondo de emergencia y metas ajustadas por inflación, en la misma billetera."
+      },
+      "panel": {
+        "title": "Seguimiento para tutoría y L&D",
+        "body": "Avance de aprendizaje agregado, con un mínimo de 5 personas por grupo. Ningún monto sale del navegador."
+      },
+      "levels": {
+        "l1": "Nivel 1 · Cuenta",
+        "l2": "Nivel 2 · Pagar",
+        "l3": "Nivel 3 · Presupuesto",
+        "l4": "Nivel 4 · Apartados y metas"
+      }
+    },
+    "anywhere": {
+      "eyebrow": "Aprende en cualquier lugar",
+      "title": "La misma guía en la computadora de Mariana y en el celular de Diego",
+      "intro": "El personal de oficina aprende en ratos de 15 minutos; el operativo, en pausas de 5 desde el celular. La interfaz se adapta a cada uno.",
+      "desktop": "Mariana, Analista de Operaciones, en la computadora",
+      "mobile": "Diego, Operario de depósito, en el celular",
+      "guideKicker": "Guía · 5 minutos",
+      "guideTitle": "¿Cuotas sin interés o contado con descuento?",
+      "guideBody": "Te ofrecen 12 cuotas sin interés o 15 % de descuento. ¿Qué conviene si la inflación es del 3 % mensual?",
+      "optionA": "Las cuotas",
+      "optionB": "El contado"
+    },
+    "roles": {
+      "eyebrow": "Un recorrido para cada rol",
+      "title": "Recorre la demo con la persona que quieras",
+      "intro": "Cada recorrido entra con una cuenta de trabajo ficticia de Andina Servicios S.A.",
+      "cta": "Recorrer como {{name}}",
+      "mariana": {
+        "chip": "Participante · computadora",
+        "does": "Usa la billetera para ordenar su dinero y llegar a Invertir.",
+        "explore": "Inicio de la cuenta, herramientas, apartados y el bloqueo de Invertir con lo que falta."
+      },
+      "diego": {
+        "chip": "Participante · celular",
+        "does": "Aprende en pausas de 5 minutos desde el celular.",
+        "explore": "Misiones cortas, guías con práctica y la barra de navegación inferior."
+      },
+      "andres": {
+        "chip": "Tutoría",
+        "does": "Acompaña a sus cohortes sin ver montos ni bloqueos de la billetera.",
+        "explore": "Mapa de calor del avance, desafíos semanales y preguntas con más errores."
+      },
+      "paula": {
+        "chip": "Admin de L&D y Beneficios",
+        "does": "Configura el programa, carga personas y sigue la adopción.",
+        "explore": "Panel con umbral de privacidad, carga por CSV y configuración."
+      },
+      "ricardo": {
+        "chip": "Decisor",
+        "does": "Lee el impacto del programa en datos agregados.",
+        "explore": "Reporte con reacción, aprendizaje y conducta (Kirkpatrick 1 a 3)."
+      }
+    },
+    "simulator": {
+      "eyebrow": "Prueba un simulador sin iniciar sesión",
+      "title": "¿Cuánto compra tu dinero si lo guardas sin moverlo?",
+      "intro": "Cambia el monto, el escenario o los meses y mira cómo cambia el resultado."
+    },
+    "figures": {
+      "title": "La demo en cifras",
+      "levels": "niveles de la billetera",
+      "missions": "misiones prácticas",
+      "tools": "herramientas",
+      "people": "personas en la empresa de demo"
+    },
+    "steps": {
+      "eyebrow": "Recorre la demo en tres pasos",
+      "title": "Del acceso a la billetera en un minuto",
+      "s1": {
+        "title": "Elige un recorrido",
+        "body": "Cada rol entra con un clic, con inicio de sesión simulado."
+      },
+      "s2": {
+        "title": "Explora como esa persona",
+        "body": "Usa \"Ver como\" para cambiar de rol o cargar un estado de ejemplo."
+      },
+      "s3": {
+        "title": "Lee el case study",
+        "body": "El proceso de diseño, las decisiones y la documentación están publicados."
+      }
+    },
+    "faq": {
+      "title": "Preguntas frecuentes",
+      "q1": "¿Es asesoramiento financiero?",
+      "a1": "No. Es contenido educativo: enseña conceptos y deja practicar con escenarios. Nunca recomienda productos, entidades ni inversiones concretas.",
+      "q2": "¿Qué ve la empresa de cada persona?",
+      "a2": "Su avance de aprendizaje: guías, desafíos y niveles completados. Nunca los montos, los saldos, las respuestas sobre hábitos ni por qué un nivel sigue bloqueado.",
+      "q3": "¿Los valores son reales?",
+      "a3": "No. Los escenarios usan valores de ejemplo rotulados como tales, con enlaces a las fuentes oficiales para consultar los vigentes.",
+      "q4": "¿Quién es Fuerte?",
+      "a4": "El compañero de la billetera: avisa antes de un error evitable, explica después de uno y celebra los avances. Se puede silenciar.",
+      "q5": "¿Es un producto real?",
+      "a5": "Es un prototipo de portfolio con datos ficticios y sin backend: todo lo que cargas queda en tu navegador."
+    },
+    "final": {
+      "title": "Elige una persona y recorre la billetera"
+    },
+    "footer": {
+      "tagline": "Plataforma corporativa de aprendizaje en finanzas personales. Prototipo con datos ficticios.",
+      "explore": "Explorar",
+      "project": "El proyecto",
+      "demo": "La demo",
+      "caseStudy": "Case study",
+      "docs": "Documentación",
+      "portfolio": "Portfolio",
+      "credit": "Diseño y desarrollo: Lourdes Pedaci, Experience Designer (Learning y UX/UI)."
+    }
   },
   "notFound": {
     "title": "No encontramos esta página",
@@ -45,5 +227,170 @@
     "amountRange": "Ese monto está fuera del rango permitido. Revisa el rango en la ayuda del campo",
     "percent": "Ingresa un porcentaje solo con números, por ejemplo: 3 o 2,5",
     "percentRange": "Ese porcentaje está fuera del rango permitido. Revisa el rango en la ayuda del campo"
+  },
+  "sim3": {
+    "title": "Inflación y poder de compra",
+    "intro": "Mira cuánto pierde tu dinero si lo guardas sin moverlo, con un escenario de inflación de ejemplo.",
+    "fuerte": "Prueba con tu sueldo de práctica. Después compáralo con otro escenario.",
+    "dataLabel": "Datos del escenario",
+    "amount": {
+      "label": "Monto",
+      "help": "Monto en pesos, por ejemplo: 100.000"
+    },
+    "scenario": {
+      "label": "Inflación mensual (valores de ejemplo)",
+      "help": "Escenario elegido: {{scenario}}. Elige otro o carga tu propio valor.",
+      "low": "inflación baja",
+      "medium": "inflación media",
+      "high": "inflación alta",
+      "custom": "valor propio",
+      "lowShort": "1,5 %",
+      "mediumShort": "3 %",
+      "highShort": "6 %",
+      "customShort": "Otro"
+    },
+    "custom": {
+      "label": "Inflación mensual propia",
+      "help": "Porcentaje mensual entre 0 y 50, por ejemplo: 2,5"
+    },
+    "months": {
+      "label": "Meses",
+      "sliderLabel": "Meses, deslizador",
+      "valueText": "{{count}} meses",
+      "help": "Entre 1 y 60 meses. Puedes usar el deslizador o escribir el número."
+    },
+    "tryChanging": "Prueba cambiar: pasa de inflación media a alta y mira cuánto cambia lo que compra el mismo dinero.",
+    "resultLabel": "Lo que compra tu dinero dentro de {{months}} meses",
+    "sentence": "Con {{inflation}} de inflación mensual, en {{months}} meses tus {{amount}} compran lo que hoy cuesta {{power}}: un {{loss}} menos.",
+    "invalid": "Ingresa un monto y una inflación válidos para ver el resultado.",
+    "notSet": "sin dato",
+    "lossPill": "Pierdes poder de compra: {{loss}}",
+    "futurePrice": "Algo que hoy cuesta lo mismo costaría {{price}}",
+    "stickyLabel": "En {{months}} meses compra",
+    "chart": {
+      "title": "Poder de compra mes a mes",
+      "conclusion": "En {{months}} meses, el mismo dinero compra un {{loss}} menos.",
+      "showTable": "Ver como tabla",
+      "hideTable": "Ver como gráfico",
+      "tableLabel": "Poder de compra mes a mes, en tabla",
+      "month": "Mes",
+      "power": "Poder de compra",
+      "today": "Hoy",
+      "todayShort": "Hoy",
+      "monthN_one": "Mes {{count}}",
+      "monthN_other": "Mes {{count}}"
+    },
+    "meaning": {
+      "title": "Qué significa esto",
+      "body": "La inflación hace que el mismo billete alcance para menos cosas. Si guardas dinero sin que rinda, pierdes poder de compra aunque el saldo no cambie. Por eso conviene comparar lo que rinde tu ahorro con la inflación (lo vas a ver en Rendir)."
+    },
+    "assumptions": {
+      "summary": "Escenario: {{scenario}}, {{inflation}} mensual · Valores de ejemplo",
+      "constant": "La inflación es la misma todos los meses.",
+      "noInterest": "El dinero no rinde nada: está guardado sin moverse.",
+      "examples": "Valores de ejemplo para aprender. Consulta los valores vigentes en las fuentes oficiales.",
+      "whereReal": "Dónde ver los valores reales:",
+      "indec": "índice de precios al consumidor del INDEC"
+    },
+    "newTab": "(se abre en una pestaña nueva)",
+    "compare": {
+      "save": "Guardar escenario",
+      "help": "Guarda hasta dos escenarios para compararlos lado a lado. Quedan solo en esta pantalla.",
+      "listLabel": "Escenarios guardados",
+      "name": "Escenario {{n}}",
+      "remove": "Quitar escenario {{n}}",
+      "detail": "{{amount}} · {{inflation}} mensual · {{months}} meses"
+    },
+    "legal": "Contenido educativo. No es asesoramiento financiero ni una recomendación de inversión."
+  },
+  "wallet": {
+    "practiceBanner": "Billetera de práctica · dinero ficticio",
+    "viewAs": "Ver como: Mariana",
+    "help": "Ayuda",
+    "notifications": "Notificaciones, {{count}} sin leer",
+    "profileMenu": "Menú de {{name}}: perfil, seguridad y comprobantes",
+    "missionPanel": "Misión activa y Fuerte",
+    "breadcrumbs": "Estás en",
+    "levelIndicator": "Nivel {{level}} de 7 completado",
+    "nextUnlock": "Próximo desbloqueo: Invertir",
+    "nextUnlockDetail": "Fondo de emergencia: 2 de 3 meses",
+    "nav": {
+      "label": "Navegación principal",
+      "home": "Inicio",
+      "pay": "Pagar",
+      "save": "Ahorrar",
+      "invest": "Invertir",
+      "learn": "Aprender",
+      "locked": "bloqueado"
+    },
+    "sub": {
+      "transfer": "Transferir",
+      "qr": "Pagar con QR",
+      "bills": "Servicios",
+      "credit": "Tarjeta y préstamos",
+      "budget": "Presupuesto",
+      "pockets": "Apartados y metas",
+      "yield": "Rendir",
+      "map": "Mapa de niveles",
+      "tools": "Herramientas"
+    },
+    "home": {
+      "date": "19/04/2027",
+      "day": "día {{day}} de la billetera",
+      "hello": "Hola,",
+      "fuerteLine": "Tu fondo de emergencia ya cubre 2 meses. Falta uno para desbloquear Invertir.",
+      "context": "Tu progreso",
+      "chipLevel": "Nivel {{level}} · Rendir",
+      "chipNext": "Próximo desbloqueo: Invertir",
+      "advance": {
+        "day": "Avanzar un día",
+        "month": "Avanzar un mes"
+      },
+      "balance": {
+        "title": "Saldo disponible",
+        "power": "Poder de compra hoy",
+        "alias": "Alias",
+        "cvu": "CVU de ejemplo"
+      },
+      "actions": {
+        "title": "Acciones rápidas",
+        "transfer": "Transferir",
+        "qr": "Pagar con QR",
+        "bills": "Servicios",
+        "pockets": "Apartar"
+      },
+      "pockets": {
+        "total": "En apartados"
+      },
+      "unlock": {
+        "kicker": "Próximo desbloqueo · Nivel 7",
+        "title": "Invertir",
+        "body": "Primero lo que te protege, después lo que te hace crecer. Esto es lo que falta:",
+        "go": "Ir a Apartados y metas",
+        "emergency": "Fondo de emergencia",
+        "monthsOf": "{{months}} de {{goal}} meses",
+        "challengeDone": "Desafío del nivel 6 aprobado",
+        "noDebt": "Sin deudas de tasa alta",
+        "profile": "Test de perfil de inversor"
+      },
+      "movements": {
+        "title": "Últimos movimientos",
+        "all": "Ver todos"
+      },
+      "mission": {
+        "kicker": "Misión activa",
+        "minutes_one": "{{count}} minuto",
+        "minutes_other": "{{count}} minutos",
+        "objective": "Elegir dónde dejar tu saldo después de leer la ficha de cada opción, y explicar la diferencia.",
+        "progress": "Avance de la misión",
+        "stepOf": "Paso {{step}} de {{steps}}",
+        "continue": "Seguir la misión",
+        "fuerte": "Ojo con esto: \"cuenta remunerada\" y \"fondo\" no son lo mismo. Mira qué protección tiene cada una."
+      },
+      "why": {
+        "title": "¿Por qué importa?",
+        "body": "En una billetera, la mayor parte del dinero \"que rinde\" suele estar en un fondo money market, no en la cuenta: no tiene la garantía de los depósitos."
+      }
+    }
   }
 }

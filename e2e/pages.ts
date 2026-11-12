@@ -12,7 +12,9 @@ export interface CheckedPage {
 }
 
 export const PAGES: CheckedPage[] = [
-  { id: 'g0-placeholder', path: '/#/' },
+  { id: 'g0-landing', path: '/#/' },
+  { id: 'p1-home', path: '/#/app' },
+  { id: 'sim3-tool', path: '/#/app/tools/SIM-3' },
   { id: 'g7-not-found', path: '/#/no-existe' },
   { id: 'styleguide', path: '/#/styleguide' },
 ];

@@ -59,6 +59,7 @@
   /* Fuerte (D-52, D-108): the only warm color, only inside the character illustration. */
   --ref-fuerte-orange: #f08c3e;
   --ref-fuerte-light: #ffc387;
+  --ref-fuerte-shade: #b85a1c;
 
   /* ===================== 2. System ===================== */
   /* Color roles (light, default) */
@@ -124,6 +125,7 @@
   /* Fuerte (D-52): only for the character and its lights. Never on buttons, backgrounds, charts or states. */
   --fuerte-body: var(--ref-fuerte-orange);
   --fuerte-light: var(--ref-fuerte-light);
+  --fuerte-shade: var(--ref-fuerte-shade);
 
   /* Chart series, in this order (2.1.1). Area fills are flat, at low opacity. */
   --chart-1: var(--ref-indigo-40);

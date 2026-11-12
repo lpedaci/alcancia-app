@@ -36,22 +36,24 @@ export function MoneyText({ value, currency = 'ARS', decimals = 2, trend = false
   const direction = d.isZero() ? 'flat' : d.isNegative() ? 'down' : 'up';
   const trendWord = trend ? t(`money.trend.${direction}`) : '';
   const accessible = trend ? `${full}, ${trendWord}` : full;
+  // Only abbreviate when the compact form is really shorter (one million or more).
+  const canCompact = compactBelow && d.abs().gte(1e6);
 
   return (
-    <span className={cn('relative inline-flex items-center gap-1 whitespace-nowrap tabular-nums', className)} title={compactBelow ? full : undefined}>
+    <span className={cn('relative inline-flex items-center gap-1 whitespace-nowrap tabular-nums', className)} title={canCompact ? full : undefined}>
       {trend && (
         <Icon
           name={direction === 'up' ? 'trending_up' : direction === 'down' ? 'trending_down' : 'trending_flat'}
           size={18}
         />
       )}
-      {compactBelow ? (
+      {canCompact ? (
         <>
           <span className="sr-only">{accessible}</span>
-          <span aria-hidden className={COMPACT_SWAP[compactBelow].full}>
+          <span aria-hidden className={COMPACT_SWAP[compactBelow!].full}>
             {full}
           </span>
-          <span aria-hidden className={COMPACT_SWAP[compactBelow].compact}>
+          <span aria-hidden className={COMPACT_SWAP[compactBelow!].compact}>
             {formatCompactMoney(d, { currency })}
           </span>
         </>
