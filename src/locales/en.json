@@ -4,7 +4,6 @@
     "skipToContent": "Skip to content"
   },
   "landing": {
-    "eyebrow": "Corporate learning platform for personal finance · B2B UX/UI design case",
     "disclaimer": "Educational content. It is not financial advice or an investment recommendation.",
     "newTab": "(opens in a new tab)",
     "homeLabel": "Alcancía, home",
@@ -22,8 +21,7 @@
       "titleKey": "learns finance",
       "titleEnd": "by using it",
       "body": "A corporate learning platform shaped like a digital wallet: each person gets a practice salary, pays, budgets, saves and invests with fictitious money, and learns at the right moment. The company sees learning progress, never the amounts.",
-      "caseStudy": "Read the case study",
-      "fuerte": "Hi, I'm Fuerte. Money in this wallet is for practice, so making mistakes is free."
+      "caseStudy": "Read the case study"
     },
     "pieces": {
       "simLabel": "$ 100.000 in 12 months at 3 % monthly inflation",
@@ -61,31 +59,47 @@
     },
     "solution": {
       "eyebrow": "The solution",
-      "title": "Not a course: a wallet that teaches",
-      "intro": "Each section unlocks with achievements and goals. The unlock order is the content: first what protects you, then what makes you grow.",
-      "diagnostic": {
-        "title": "Diagnostic and a path by levels",
-        "body": "\"Conocerte\" finds what you already know and proposes the path; \"Ya sé esto\" skips what you master."
-      },
-      "guides": {
-        "title": "5-minute guides with practice",
-        "body": "A situation with numbers, a worked example and a question with an explained answer."
-      },
-      "challenges": {
-        "title": "Nine kinds of challenges",
-        "body": "Calculations, branching cases, ordering and sorting, all accessible without dragging."
-      },
-      "tools": {
-        "title": "Tools to try scenarios",
-        "body": "Twelve simulators with visible assumptions and example values, never \"current rates\"."
-      },
-      "goals": {
-        "title": "Pockets and goals",
-        "body": "Emergency fund and goals adjusted for inflation, in the same wallet."
-      },
-      "panel": {
-        "title": "Tracking for tutors and L&D",
-        "body": "Aggregated learning progress, with at least 5 people per group. No amount leaves the browser."
+      "title": "It is not a course: it is a wallet that teaches",
+      "intro": "Each section unlocks through achievements and goals. The unlock order is the content: first what protects you, then what helps you grow.",
+      "rows": {
+        "route": {
+          "titleStart": "A path that",
+          "titleKey": "unlocks",
+          "body": "\"Get to know you\" detects what you already know and proposes the path through seven levels, from the account to Invest.",
+          "chip": "Next unlock: Invest",
+          "items": [
+            "Diagnostic across five dimensions",
+            "\"I know this\" to skip what you master",
+            "5-minute guides with practice",
+            "Locked sections show what is missing"
+          ]
+        },
+        "practice": {
+          "titleStart": "Practice with",
+          "titleKey": "scenarios",
+          "body": "Tools and missions with fictitious money: every mistake ends in an explanation, never in blame.",
+          "chip": "Example values, not current rates",
+          "items": [
+            "Nine kinds of challenges, no dragging needed",
+            "Twelve tools with visible assumptions",
+            "Pockets and goals adjusted for inflation",
+            "Thirteen missions of 2 to 6 minutes"
+          ]
+        },
+        "tracking": {
+          "titleStart": "Tracking",
+          "titleKey": "without seeing amounts",
+          "body": "Tutors and L&D follow learning progress. Practice money and habits stay in each person's browser.",
+          "chip": "Privacy threshold: 5 people",
+          "privacyLabel": "Sales cohort · 4 people",
+          "privacyBody": "Not enough data to show this group without identifying anyone.",
+          "items": [
+            "Progress by cohort and level",
+            "Metrics only with 5 people or more",
+            "No amount leaves the browser",
+            "Impact with Kirkpatrick levels 1 to 3"
+          ]
+        }
       },
       "levels": {
         "l1": "Level 1 · Account",
@@ -104,7 +118,12 @@
       "guideTitle": "Interest-free installments or a cash discount?",
       "guideBody": "You are offered 12 interest-free installments or 15 % off. Which is better with 3 % monthly inflation?",
       "optionA": "Installments",
-      "optionB": "Cash"
+      "optionB": "Cash",
+      "phoneLabel": "The same guide on Diego's phone",
+      "laptopLabel": "The same guide on Mariana's computer",
+      "answer": "Answer",
+      "exampleTitle": "Worked example",
+      "example": "With 3 % monthly inflation, 12 installments of {{installment}} are worth {{pv}} today: less than paying cash with 15 % off, {{cash}}."
     },
     "roles": {
       "eyebrow": "A journey for each role",
@@ -147,7 +166,8 @@
       "levels": "wallet levels",
       "missions": "practice missions",
       "tools": "tools",
-      "people": "people in the demo company"
+      "people": "people in the demo company",
+      "intro": "Computed from the fictitious data of Andina Servicios S.A."
     },
     "steps": {
       "eyebrow": "Explore the demo in three steps",
@@ -194,12 +214,87 @@
       "resetTitle": "Reset the demo",
       "resetBody": "The example data of every person comes back and the session closes. What you did in this demo is erased from this browser.",
       "resetDone": "Demo reset"
+    },
+    "visual": {
+      "account": "Practice account",
+      "balance": "Available balance",
+      "alias": "Example alias",
+      "salary": "Practice salary",
+      "pockets": "In pockets",
+      "emergency": "Emergency fund",
+      "emergencyValue": "2 of 3 months",
+      "level": "Wallet level",
+      "levelValue": "6 of 7",
+      "activity": "Recent activity"
+    },
+    "eyebrowTag": "B2B UX/UI case study",
+    "eyebrowText": "Corporate learning in personal finance",
+    "phone": {
+      "label": "Screen of the practice wallet on a phone: {{screen}}",
+      "switcher": "See a screen of the app",
+      "screens": {
+        "home": "Your account",
+        "levels": "Levels",
+        "tool": "Tools"
+      },
+      "time": "9:41",
+      "banner": "Practice wallet · fictitious money",
+      "hello": "Hi, Mariana",
+      "balance": "Available balance",
+      "power": "Purchasing power today",
+      "actions": {
+        "transfer": "Transfer",
+        "qr": "QR",
+        "bills": "Bills",
+        "pockets": "Set aside"
+      },
+      "mission": "Active mission · step 2 of 4",
+      "missionTitle": "Account or fund?",
+      "movements": "Recent activity",
+      "nav": {
+        "home": "Home",
+        "pay": "Pay",
+        "save": "Save",
+        "invest": "Invest",
+        "learn": "Learn"
+      },
+      "levelsTitle": "Level map",
+      "levelsSubtitle": "6 of 7 levels completed",
+      "levels": [
+        "Account",
+        "Pay",
+        "Budget",
+        "Pockets and goals",
+        "Credit",
+        "Yield",
+        "Invest"
+      ],
+      "levelPrefix": "Level {{n}}",
+      "missing": "What is missing",
+      "missingFund": "Emergency fund: 2 of 3 months",
+      "toolTitle": "Inflation and purchasing power",
+      "toolResult": "What your money buys in 12 months",
+      "toolPhrase": "With 3 % a month, in 12 months your money buys {{loss}} less.",
+      "toolScenario": "Scenario",
+      "toolExample": "Example values"
+    },
+    "floating": {
+      "unlockLabel": "Next unlock",
+      "unlockTitle": "Invest",
+      "unlockProgress": "Emergency fund",
+      "unlockValue": "2 of 3 months"
     }
   },
   "notFound": {
     "title": "We could not find this page",
     "body": "The address may be misspelled, or the page may not exist yet.",
-    "home": "Go to home"
+    "home": "Go to home",
+    "code": "Error 404",
+    "back": "Go back to the previous page",
+    "suggestionsTitle": "You can also go to",
+    "landing": "Alcancía home",
+    "login": "Sign in",
+    "help": "Get help signing in"
   },
   "ui": {
     "required": "required",

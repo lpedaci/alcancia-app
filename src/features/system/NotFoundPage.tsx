@@ -1,34 +1,39 @@
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router';
-import { Logo } from '@/components/layout/Logo';
+import { Link, useNavigate } from 'react-router';
 import { Button } from '@/components/ui/Button';
-import { Icon } from '@/components/ui/Icon';
 import { homePath } from '@/lib/permissions';
 import { useCurrentUser } from '@/store/session-store';
+import { SystemMessage } from './SystemMessage';
 
-/** G7 · Page not found. With a session, "Ir al inicio" goes to the person's own home. */
+/** G7 · Page not found: back to the person's home, the previous page or a place that always works. */
 export function NotFoundPage() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const user = useCurrentUser();
+  const home = user ? homePath(user) : '/';
+  const suggestions = [
+    { to: '/', icon: 'home' as const, label: t('notFound.landing') },
+    ...(user ? [] : [{ to: '/login', icon: 'person' as const, label: t('notFound.login') }]),
+    { to: '/access-help', icon: 'support_agent' as const, label: t('notFound.help') },
+  ];
   return (
-    <div className="flex min-h-dvh flex-col bg-surface px-(--space-gutter) py-6">
-      <header className="mx-auto w-full max-w-2xl">
-        <Link to="/" className="inline-flex rounded-sm">
-          <Logo />
-        </Link>
-      </header>
-      <main id="main-content" tabIndex={-1} className="mx-auto flex w-full max-w-2xl flex-1 flex-col justify-center py-10 focus:outline-none">
-        <section className="flex flex-col items-start gap-4 rounded-xl border border-outline-variant bg-surface-container-lowest p-6 md:p-8">
-          <span className="flex size-12 items-center justify-center rounded-full bg-surface-container-high text-on-surface-variant">
-            <Icon name="search" size={24} />
-          </span>
-          <h1 className="text-headline-small text-on-surface">{t('notFound.title')}</h1>
-          <p className="text-body-large text-on-surface-variant">{t('notFound.body')}</p>
+    <SystemMessage
+      icon="search"
+      code={t('notFound.code')}
+      title={t('notFound.title')}
+      body={t('notFound.body')}
+      suggestionsTitle={t('notFound.suggestionsTitle')}
+      suggestions={suggestions}
+      actions={
+        <>
           <Button asChild leadingIcon="home">
-            <Link to={user ? homePath(user) : '/'}>{t('notFound.home')}</Link>
+            <Link to={home}>{t('notFound.home')}</Link>
           </Button>
-        </section>
-      </main>
-    </div>
+          <Button variant="outlined" leadingIcon="arrow_back" onClick={() => navigate(-1)}>
+            {t('notFound.back')}
+          </Button>
+        </>
+      }
+    />
   );
 }

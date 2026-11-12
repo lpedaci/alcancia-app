@@ -13,6 +13,16 @@ for (const page of PAGES) {
       await prepareSession(browserPage, page);
       await browserPage.goto(page.path);
       await browserPage.locator('h1').first().waitFor();
+      // Scroll reveals (2.6) start at opacity 0: scroll through the page and let the entrances end,
+      // so axe checks every text at its final contrast instead of skipping it or catching a fade.
+      await browserPage.evaluate(async () => {
+        for (let y = 0; y < document.body.scrollHeight; y += 400) {
+          window.scrollTo(0, y);
+          await new Promise((r) => setTimeout(r, 40));
+        }
+        window.scrollTo(0, 0);
+      });
+      await browserPage.waitForTimeout(900);
 
       const results = await new AxeBuilder({ page: browserPage })
         .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'])

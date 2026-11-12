@@ -134,6 +134,7 @@
   --radius-md: var(--md-sys-shape-medium);
   --radius-lg: var(--md-sys-shape-large);
   --radius-xl: var(--md-sys-shape-extra-large);
+  --radius-2xl: var(--md-sys-shape-extra-extra-large);
   --radius-full: var(--md-sys-shape-full);
 
   /* Elevation: two levels only */

@@ -144,6 +144,7 @@
   --md-sys-shape-medium: 0.75rem; /* 12px: menus, tooltips, small cards */
   --md-sys-shape-large: 1rem; /* 16px: dialogs, inner panels */
   --md-sys-shape-extra-large: 1.5rem; /* 24px: bento cards (more open than Rumbo) */
+  --md-sys-shape-extra-extra-large: 3rem; /* 48px (M3 Expressive): only the phone frame of the landing mockups */
   --md-sys-shape-full: 9999px; /* pills, avatars, progress */
 
   /* Spacing: 8 px vertical rhythm (2.4). Component spacing uses the 4 px Tailwind scale. */

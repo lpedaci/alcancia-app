@@ -4,7 +4,6 @@
     "skipToContent": "Saltar al contenido"
   },
   "landing": {
-    "eyebrow": "Plataforma de aprendizaje corporativo en finanzas personales · Caso de diseño UX/UI B2B",
     "disclaimer": "Contenido educativo. No es asesoramiento financiero ni una recomendación de inversión.",
     "newTab": "(se abre en una pestaña nueva)",
     "homeLabel": "Alcancía, inicio",
@@ -22,8 +21,7 @@
       "titleKey": "aprende finanzas",
       "titleEnd": "usándola",
       "body": "Una plataforma de aprendizaje corporativo con forma de billetera virtual: cada persona cobra un sueldo de práctica, paga, presupuesta, ahorra e invierte con dinero ficticio, y aprende en el momento justo. La empresa ve el avance de aprendizaje, nunca los montos.",
-      "caseStudy": "Ver el case study",
-      "fuerte": "Hola, soy Fuerte. En esta billetera el dinero es de práctica, así que equivocarte sale gratis."
+      "caseStudy": "Ver el case study"
     },
     "pieces": {
       "simLabel": "$ 100.000 en 12 meses con 3 % de inflación mensual",
@@ -63,29 +61,45 @@
       "eyebrow": "La solución",
       "title": "No es un curso: es una billetera que enseña",
       "intro": "Cada sección se desbloquea por logros y metas. El orden de desbloqueo es el contenido: primero lo que te protege, después lo que te hace crecer.",
-      "diagnostic": {
-        "title": "Diagnóstico y ruta por niveles",
-        "body": "\"Conocerte\" detecta lo que ya sabes y propone el camino; con \"Ya sé esto\" saltas lo que dominas."
-      },
-      "guides": {
-        "title": "Guías de 5 minutos con práctica",
-        "body": "Una situación con números, un ejemplo resuelto y una pregunta con respuesta explicada."
-      },
-      "challenges": {
-        "title": "Desafíos de nueve tipos",
-        "body": "Cálculos, casos con decisiones, ordenar y clasificar, todos accesibles sin arrastrar."
-      },
-      "tools": {
-        "title": "Herramientas para probar escenarios",
-        "body": "Doce simuladores con supuestos visibles y valores de ejemplo, nunca \"tasas actuales\"."
-      },
-      "goals": {
-        "title": "Apartados y metas",
-        "body": "Fondo de emergencia y metas ajustadas por inflación, en la misma billetera."
-      },
-      "panel": {
-        "title": "Seguimiento para tutoría y L&D",
-        "body": "Avance de aprendizaje agregado, con un mínimo de 5 personas por grupo. Ningún monto sale del navegador."
+      "rows": {
+        "route": {
+          "titleStart": "Una ruta que se",
+          "titleKey": "desbloquea",
+          "body": "\"Conocerte\" detecta lo que ya sabes y propone el camino por siete niveles, de la cuenta a Invertir.",
+          "chip": "Próximo desbloqueo: Invertir",
+          "items": [
+            "Diagnóstico por cinco dimensiones",
+            "\"Ya sé esto\" para saltar lo que dominas",
+            "Guías de 5 minutos con práctica",
+            "Lo bloqueado se ve, con lo que falta"
+          ]
+        },
+        "practice": {
+          "titleStart": "Practicar con",
+          "titleKey": "escenarios",
+          "body": "Herramientas y misiones con dinero ficticio: cada error termina en una explicación, nunca en un reproche.",
+          "chip": "Valores de ejemplo, no tasas actuales",
+          "items": [
+            "Desafíos de nueve tipos, sin arrastrar",
+            "Doce herramientas con supuestos visibles",
+            "Apartados y metas ajustados por inflación",
+            "Trece misiones de 2 a 6 minutos"
+          ]
+        },
+        "tracking": {
+          "titleStart": "Seguimiento",
+          "titleKey": "sin ver montos",
+          "body": "Tutoría y L&D acompañan el avance de aprendizaje. El dinero de práctica y los hábitos quedan en el navegador de cada persona.",
+          "chip": "Umbral de privacidad: 5 personas",
+          "privacyLabel": "Cohorte Comercial · 4 personas",
+          "privacyBody": "Datos insuficientes para mostrar este grupo sin identificar a nadie.",
+          "items": [
+            "Avance por cohorte y por nivel",
+            "Métricas solo con 5 personas o más",
+            "Ningún monto sale del navegador",
+            "Impacto con Kirkpatrick 1 a 3"
+          ]
+        }
       },
       "levels": {
         "l1": "Nivel 1 · Cuenta",
@@ -104,7 +118,12 @@
       "guideTitle": "¿Cuotas sin interés o contado con descuento?",
       "guideBody": "Te ofrecen 12 cuotas sin interés o 15 % de descuento. ¿Qué conviene si la inflación es del 3 % mensual?",
       "optionA": "Las cuotas",
-      "optionB": "El contado"
+      "optionB": "El contado",
+      "phoneLabel": "La misma guía en el celular de Diego",
+      "laptopLabel": "La misma guía en la computadora de Mariana",
+      "answer": "Responder",
+      "exampleTitle": "Ejemplo resuelto",
+      "example": "Con 3 % de inflación mensual, 12 cuotas de {{installment}} valen hoy {{pv}}: menos que el contado con 15 % de descuento, {{cash}}."
     },
     "roles": {
       "eyebrow": "Un recorrido para cada rol",
@@ -147,7 +166,8 @@
       "levels": "niveles de la billetera",
       "missions": "misiones prácticas",
       "tools": "herramientas",
-      "people": "personas en la empresa de demo"
+      "people": "personas en la empresa de demo",
+      "intro": "Calculadas desde los datos ficticios de Andina Servicios S.A."
     },
     "steps": {
       "eyebrow": "Recorre la demo en tres pasos",
@@ -194,12 +214,87 @@
       "resetTitle": "Restablecer la demo",
       "resetBody": "Vuelven los datos de ejemplo de todas las personas y se cierra la sesión. Lo que hiciste en esta demo se borra de este navegador.",
       "resetDone": "Demo restablecida"
+    },
+    "visual": {
+      "account": "Cuenta de práctica",
+      "balance": "Saldo disponible",
+      "alias": "Alias de ejemplo",
+      "salary": "Sueldo de práctica",
+      "pockets": "En apartados",
+      "emergency": "Fondo de emergencia",
+      "emergencyValue": "2 de 3 meses",
+      "level": "Nivel de la billetera",
+      "levelValue": "6 de 7",
+      "activity": "Últimos movimientos"
+    },
+    "eyebrowTag": "Caso de diseño UX/UI B2B",
+    "eyebrowText": "Aprendizaje corporativo en finanzas personales",
+    "phone": {
+      "label": "Pantalla de la billetera de práctica en un celular: {{screen}}",
+      "switcher": "Ver una pantalla de la app",
+      "screens": {
+        "home": "Tu cuenta",
+        "levels": "Niveles",
+        "tool": "Herramientas"
+      },
+      "time": "9:41",
+      "banner": "Billetera de práctica · dinero ficticio",
+      "hello": "Hola, Mariana",
+      "balance": "Saldo disponible",
+      "power": "Poder de compra hoy",
+      "actions": {
+        "transfer": "Transferir",
+        "qr": "QR",
+        "bills": "Servicios",
+        "pockets": "Apartar"
+      },
+      "mission": "Misión activa · paso 2 de 4",
+      "missionTitle": "¿Cuenta o fondo?",
+      "movements": "Últimos movimientos",
+      "nav": {
+        "home": "Inicio",
+        "pay": "Pagar",
+        "save": "Ahorrar",
+        "invest": "Invertir",
+        "learn": "Aprender"
+      },
+      "levelsTitle": "Mapa de niveles",
+      "levelsSubtitle": "6 de 7 niveles completados",
+      "levels": [
+        "Cuenta",
+        "Pagar",
+        "Presupuesto",
+        "Apartados y metas",
+        "Crédito",
+        "Rendir",
+        "Invertir"
+      ],
+      "levelPrefix": "Nivel {{n}}",
+      "missing": "Lo que falta",
+      "missingFund": "Fondo de emergencia: 2 de 3 meses",
+      "toolTitle": "Inflación y poder de compra",
+      "toolResult": "Lo que compra tu dinero dentro de 12 meses",
+      "toolPhrase": "Con 3 % mensual, en 12 meses tu dinero compra un {{loss}} menos.",
+      "toolScenario": "Escenario",
+      "toolExample": "Valores de ejemplo"
+    },
+    "floating": {
+      "unlockLabel": "Próximo desbloqueo",
+      "unlockTitle": "Invertir",
+      "unlockProgress": "Fondo de emergencia",
+      "unlockValue": "2 de 3 meses"
     }
   },
   "notFound": {
     "title": "No encontramos esta página",
     "body": "Puede que la dirección esté mal escrita o que la página todavía no exista.",
-    "home": "Ir al inicio"
+    "home": "Ir al inicio",
+    "code": "Error 404",
+    "back": "Volver a la página anterior",
+    "suggestionsTitle": "También puedes ir a",
+    "landing": "Inicio de Alcancía",
+    "login": "Iniciar sesión",
+    "help": "Pedir ayuda para iniciar sesión"
   },
   "ui": {
     "required": "obligatorio",
@@ -586,7 +681,12 @@
   "forbidden": {
     "title": "Acceso no permitido",
     "body": "Esta sección no está disponible para tu rol. Si crees que deberías verla, consulta con la mesa de ayuda de Andina.",
-    "backHome": "Ir a mi inicio"
+    "backHome": "Ir a mi inicio",
+    "code": "Error 403",
+    "back": "Volver a la página anterior",
+    "suggestionsTitle": "También puedes ir a",
+    "help": "Escribir a la mesa de ayuda",
+    "landing": "Inicio de Alcancía"
   },
   "errorPage": {
     "title": "Algo no funcionó",
@@ -595,7 +695,8 @@
     "home": "Ir al inicio",
     "resetHint": "Si el error se repite, restablece la demo para volver a los datos de ejemplo.",
     "reset": "Restablecer demo",
-    "details": "Detalle técnico"
+    "details": "Detalle técnico",
+    "code": "Error inesperado"
   },
   "demo": {
     "viewAs": "Ver como",
