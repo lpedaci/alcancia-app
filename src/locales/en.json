@@ -14,5 +14,36 @@
     "title": "We could not find this page",
     "body": "The address may be misspelled, or the page may not exist yet.",
     "home": "Go to home"
+  },
+  "ui": {
+    "required": "required",
+    "optional": "optional",
+    "loading": "Loading…",
+    "saving": "Saving…",
+    "close": "Close",
+    "cancel": "Cancel",
+    "dismiss": "Dismiss",
+    "notificationsRegion": "Notifications",
+    "maskRejected": "That character isn't allowed in this field. Current value: {{value}}",
+    "emptyValue": "empty",
+    "valueAnnounce": "Value: {{value}}"
+  },
+  "money": {
+    "trend": {
+      "up": "increase",
+      "down": "decrease",
+      "flat": "no change"
+    }
+  },
+  "validation": {
+    "required": "This field is required. Fill it in to continue.",
+    "email": "Enter an email in the format first.last@andina.demo",
+    "dateFormat": "Enter the full date as DD/MM/YYYY, for example: 16/11/2026",
+    "dateInvalid": "That date doesn't exist. Check the day and month",
+    "otp": "Enter the 6 digits of the code",
+    "amount": "Enter an amount in pesos, numbers only, for example: 150.000",
+    "amountRange": "That amount is out of the allowed range. Check the range in the field help",
+    "percent": "Enter a percentage, numbers only, for example: 3 or 2,5",
+    "percentRange": "That percentage is out of the allowed range. Check the range in the field help"
   }
 }

@@ -6,12 +6,12 @@ export function NotFoundPage() {
   const { t } = useTranslation();
   return (
     <main id="main-content" className="mx-auto flex min-h-dvh max-w-3xl flex-col justify-center gap-4 px-4 py-12">
-      <h1 className="text-2xl font-semibold">{t('notFound.title')}</h1>
-      <p className="text-on-surface-variant">{t('notFound.body')}</p>
+      <h1 className="text-headline-small">{t('notFound.title')}</h1>
+      <p className="text-body-large text-on-surface-variant">{t('notFound.body')}</p>
       <p>
         <Link
           to="/"
-          className="font-medium text-primary underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          className="text-label-large text-primary underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
         >
           {t('notFound.home')}
         </Link>

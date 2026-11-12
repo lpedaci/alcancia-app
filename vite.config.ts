@@ -48,6 +48,6 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: ['./src/test/setup.ts'],
     include: ['src/**/*.test.{ts,tsx}'],
-    css: false,
+    css: { include: [/tokens.css/] },
   },
 });

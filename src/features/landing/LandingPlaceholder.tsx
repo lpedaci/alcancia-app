@@ -11,29 +11,29 @@ export function LandingPlaceholder() {
     <>
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:rounded-lg focus:bg-surface-container-lowest focus:px-4 focus:py-2"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:rounded-sm focus:bg-surface-container-lowest focus:px-4 focus:py-2"
       >
         {t('app.skipToContent')}
       </a>
       <main id="main-content" className="mx-auto flex min-h-dvh max-w-3xl flex-col justify-center gap-6 px-4 py-12">
-        <p className="text-sm font-medium text-on-surface-variant">{t('landing.eyebrow')}</p>
-        <h1 className="text-3xl font-semibold text-balance sm:text-4xl">
+        <p className="text-label-large text-on-surface-variant">{t('landing.eyebrow')}</p>
+        <h1 className="text-headline-small text-balance md:text-display-small">
           <span className="text-primary">{t('app.name')}</span>
           <span className="sr-only">: </span>
           <span className="mt-2 block">{t('landing.title')}</span>
         </h1>
-        <p className="text-base text-on-surface-variant">{t('landing.status')}</p>
+        <p className="text-body-large text-on-surface-variant">{t('landing.status')}</p>
         <p>
           <a
             href={DOCS_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex min-h-12 items-center rounded-lg bg-primary px-5 font-medium text-on-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            className="inline-flex min-h-12 items-center rounded-sm bg-primary px-5 text-label-large text-on-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
           >
             {t('landing.docsLink')}
           </a>
         </p>
-        <p className="border-t border-outline-variant pt-4 text-sm text-on-surface-variant">{t('landing.disclaimer')}</p>
+        <p className="border-t border-outline-variant pt-4 text-body-small text-on-surface-variant">{t('landing.disclaimer')}</p>
       </main>
     </>
   );

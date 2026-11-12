@@ -14,5 +14,36 @@
     "title": "No encontramos esta página",
     "body": "Puede que la dirección esté mal escrita o que la página todavía no exista.",
     "home": "Ir al inicio"
+  },
+  "ui": {
+    "required": "obligatorio",
+    "optional": "opcional",
+    "loading": "Cargando…",
+    "saving": "Guardando…",
+    "close": "Cerrar",
+    "cancel": "Cancelar",
+    "dismiss": "Cerrar aviso",
+    "notificationsRegion": "Avisos",
+    "maskRejected": "Ese carácter no se acepta en este campo. Valor actual: {{value}}",
+    "emptyValue": "vacío",
+    "valueAnnounce": "Valor: {{value}}"
+  },
+  "money": {
+    "trend": {
+      "up": "aumento",
+      "down": "disminución",
+      "flat": "sin cambios"
+    }
+  },
+  "validation": {
+    "required": "Este dato es obligatorio. Complétalo para continuar.",
+    "email": "Ingresa un correo con el formato nombre.apellido@andina.demo",
+    "dateFormat": "Ingresa la fecha completa con el formato DD/MM/AAAA, por ejemplo: 16/11/2026",
+    "dateInvalid": "Esa fecha no existe. Revisa el día y el mes",
+    "otp": "Ingresa los 6 dígitos del código",
+    "amount": "Ingresa un monto en pesos, solo con números, por ejemplo: 150.000",
+    "amountRange": "Ese monto está fuera del rango permitido. Revisa el rango en la ayuda del campo",
+    "percent": "Ingresa un porcentaje solo con números, por ejemplo: 3 o 2,5",
+    "percentRange": "Ese porcentaje está fuera del rango permitido. Revisa el rango en la ayuda del campo"
   }
 }
