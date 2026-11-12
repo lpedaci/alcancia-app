@@ -5,6 +5,7 @@ import { MoneyText } from '@/components/money/MoneyText';
 import { Button } from '@/components/ui/Button';
 import { Icon, type IconName } from '@/components/ui/Icon';
 import { IconTile } from '@/components/ui/IconTile';
+import { MetaChips } from '@/components/ui/MetaChips';
 import { InlineAlert } from '@/components/ui/InlineAlert';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/Popover';
 import { toast } from '@/components/ui/toast-store';
@@ -123,25 +124,24 @@ export function WalletHomePage() {
 
         {/* Greeting (2.2.1, pattern 2) with the controls of time on a white surface, so they read clearly */}
         <section aria-labelledby="home-title" className="flex flex-col gap-4 rounded-xl bg-primary-container p-(--space-card-padding) text-on-primary-container lg:flex-row lg:items-end lg:justify-between">
-          <div className="flex min-w-0 flex-col gap-2">
-            <p className="text-body-small">
-              <time dateTime={walletDate(wallet.day)}>{formatDate(walletDate(wallet.day))}</time> · {t('wallet.home.day', { day: wallet.day })}
-            </p>
+          <div className="flex min-w-0 flex-col gap-3">
+            <MetaChips
+              label={t('wallet.home.dateLabel')}
+              items={[
+                { icon: 'calendar_month', label: formatDate(walletDate(wallet.day)), dateTime: walletDate(wallet.day) },
+                { icon: 'today', label: t('wallet.home.dayChip', { day: wallet.day }) },
+              ]}
+            />
             <h1 id="home-title" className="text-headline-small">
               {t('wallet.home.hello')} <span className="text-primary">{firstName}</span>
             </h1>
-            <ul className="mt-1 flex flex-wrap gap-2" aria-label={t('wallet.home.context')}>
-              {current && (
-                <li className="rounded-full bg-surface-container-lowest px-3 py-1 text-label-medium text-on-surface">
-                  {t('wallet.home.chipLevel', { level: current.level.order, section: currentSection })}
-                </li>
-              )}
-              {next && (
-                <li className="rounded-full bg-tertiary-container px-3 py-1 text-label-medium text-on-tertiary-container">
-                  {t('wallet.home.chipNext', { section: nextSection })}
-                </li>
-              )}
-            </ul>
+            <MetaChips
+              label={t('wallet.home.context')}
+              items={[
+                ...(current ? [{ icon: 'route' as const, label: t('wallet.home.chipLevel', { level: current.level.order, section: currentSection }), strong: true }] : []),
+                ...(next ? [{ icon: 'lock' as const, label: t('wallet.home.chipNext', { section: nextSection }) }] : []),
+              ]}
+            />
           </div>
           <div className="flex flex-col gap-1.5">
             <p id="time-label" className="text-label-medium">{t('wallet.home.time.label')}</p>

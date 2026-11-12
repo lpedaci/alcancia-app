@@ -6,9 +6,11 @@ import { Logo } from '@/components/layout/Logo';
 import { UserMenu } from '@/components/layout/UserMenu';
 import { ViewAsMenu } from '@/components/layout/ViewAsMenu';
 import { ROLE_ACCENT } from '@/components/ui/Avatar';
+import { MetaChips } from '@/components/ui/MetaChips';
 import { Icon } from '@/components/ui/Icon';
 import { IconButton } from '@/components/ui/IconButton';
 import { findPerson } from '@/features/auth/auth-service';
+import { formatDate } from '@/lib/dates';
 import { cn } from '@/lib/utils';
 import { useCurrentUser } from '@/store/session-store';
 
@@ -28,7 +30,7 @@ export function StaffHomePage() {
     <div className="min-h-dvh bg-surface">
       <SkipLink />
       <header className="sticky top-0 z-30 border-b border-outline-variant bg-surface-container-lowest">
-        <div className="mx-auto flex h-16 max-w-[90rem] items-center gap-2 px-(--space-gutter)">
+        <div className="mx-auto flex h-16 max-w-[120rem] items-center gap-2 px-(--space-gutter) medium:px-8">
           <Link to="/" className="inline-flex min-w-0 rounded-sm">
             <Logo />
           </Link>
@@ -38,9 +40,16 @@ export function StaffHomePage() {
           <UserMenu />
         </div>
       </header>
-      <main id="main-content" tabIndex={-1} className="mx-auto flex max-w-[75rem] flex-col gap-8 px-(--space-gutter) py-8 focus:outline-none">
+      <main id="main-content" tabIndex={-1} className="mx-auto flex w-full max-w-[120rem] flex-col gap-8 px-(--space-gutter) py-8 focus:outline-none medium:px-8">
         <header className="flex flex-col gap-2">
-          <p className="text-body-medium text-on-surface-variant">{DEMO_TODAY.split('-').reverse().join('/')} · {t('staff.program')}</p>
+          <MetaChips
+            label={t('staff.context')}
+            items={[
+              { icon: 'calendar_month', label: formatDate(DEMO_TODAY), dateTime: DEMO_TODAY },
+              { icon: 'school', label: t('staff.programName') },
+              { icon: 'apartment', label: t('staff.org') },
+            ]}
+          />
           <h1 className="text-headline-small text-on-surface">
             {t('staff.hello')}{' '}
             <span className="text-primary">{person.name.split(' ')[0]}</span>

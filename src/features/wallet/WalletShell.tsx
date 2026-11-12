@@ -1,4 +1,4 @@
-import { type ReactNode, useState } from 'react';
+import { type ReactNode, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router';
 import { SkipLink } from '@/components/layout/InPageLink';
@@ -94,6 +94,10 @@ export function WalletShell({ section, children, fuerte }: { section: string; ch
   const user = useCurrentUser();
   const { statuses, next, isOpen } = useLevels(user?.personId ?? '');
   const lights = completedLights(statuses);
+  // The section is named by the page and the tab title, not repeated in the top bar.
+  useEffect(() => {
+    document.title = `${section} · Alcancía`;
+  }, [section]);
   const isLarge = useMediaQuery('(min-width: 75rem)', true);
   const [expandedPref, setExpandedPref] = useState<boolean | null>(readNavPref);
   const expanded = expandedPref ?? isLarge;
@@ -232,7 +236,7 @@ export function WalletShell({ section, children, fuerte }: { section: string; ch
           aria-label={t('wallet.nav.label')}
           className={cn(
             'sticky top-3 hidden h-[calc(100dvh-1.5rem)] shrink-0 flex-col overflow-hidden rounded-xl border border-outline-variant bg-surface-container-lowest medium:flex',
-            expanded ? 'w-64' : 'w-24',
+            expanded ? 'w-64' : 'w-20',
           )}
         >
           <div className={cn('flex h-16 shrink-0 items-center gap-1 border-b border-outline-variant px-3', !expanded && 'justify-center')}>
@@ -303,14 +307,14 @@ export function WalletShell({ section, children, fuerte }: { section: string; ch
               <Link to="/app" className="inline-flex shrink-0 rounded-sm medium:hidden">
                 <Logo compact />
               </Link>
-              <p className="ml-2 min-w-0 flex-1 truncate text-title-medium text-on-surface medium:ml-0">{section}</p>
+              <span className="flex-1" />
               <ViewAsMenu />
               <IconButton icon="help" label={t('wallet.help')} className="hidden sm:inline-flex" />
               <IconButton icon="notifications" label={t('wallet.notifications', { count: 2 })} />
               <UserMenu />
             </div>
           </header>
-          <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-[75rem] px-(--space-gutter) pt-6 pb-40 focus:outline-none medium:px-0 medium:pt-4 medium:pb-28">
+          <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-[120rem] px-(--space-gutter) pt-6 pb-40 focus:outline-none medium:px-6 medium:pt-6 medium:pb-28">
             {children}
           </main>
         </div>

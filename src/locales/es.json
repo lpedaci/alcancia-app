@@ -510,7 +510,9 @@
         "done_other": "Avanzaste {{count}} días: {{movements}} movimientos nuevos.",
         "pending": "No alcanzó el saldo para pagar {{name}} ({{amount}}). Pasa dinero de un apartado para seguir.",
         "notYet": "El tiempo avanza después de tu primer cobro (misión 1)."
-      }
+      },
+      "dayChip": "Día {{day}} de la billetera",
+      "dateLabel": "Fecha de la billetera"
     },
     "sections": {
       "level-0": "Abrir tu cuenta",
@@ -896,6 +898,9 @@
       "ld_admin": "11",
       "sponsor": "11"
     },
-    "program": "Bienestar financiero 2026 · Andina Servicios S.A."
+    "program": "Bienestar financiero 2026 · Andina Servicios S.A.",
+    "context": "Contexto del programa",
+    "programName": "Bienestar financiero 2026",
+    "org": "Andina Servicios S.A."
   }
 }
