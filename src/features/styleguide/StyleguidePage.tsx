@@ -560,15 +560,16 @@ export function StyleguidePage() {
             <ul className="flex flex-col gap-2">
               {(
                 [
-                  ['Paula Gómez', 'ld_admin', 'Admin de L&D: role-org-admin'],
-                  ['Kevin Giovanni', 'tutor', 'Tutor: role-tutor'],
-                  ['Mariana López', 'participant', 'Participante: role-participant'],
-                  ['Diego Suárez', 'participant', 'Participante (celular): role-participant'],
-                  ['Ricardo Benítez', 'sponsor', 'Decisor: role-sponsor'],
+                  ['Paula Gómez', 'ld_admin', 'Admin de L&D: role-org-admin', 'p-paula'],
+                  ['Kevin Giovanni', 'tutor', 'Tutor: role-tutor', 'p-kevin'],
+                  ['Mariana López', 'participant', 'Participante: role-participant', 'p-mariana'],
+                  ['Diego Suárez', 'participant', 'Participante (celular): role-participant', 'p-diego'],
+                  ['Ricardo Benítez', 'sponsor', 'Decisor: role-sponsor', 'p-ricardo'],
+                  ['Lucía Herrera', 'participant', 'Resto de las personas: iniciales', ''],
                 ] as const
-              ).map(([name, role, note]) => (
+              ).map(([name, role, note, id]) => (
                 <li key={name} className="flex items-center gap-3">
-                  <Avatar name={name} role={role} />
+                  <Avatar name={name} role={role} personId={id || undefined} />
                   <span className="flex flex-col">
                     <span className="text-title-small text-on-surface">{name}</span>
                     <span className="text-body-small text-on-surface-variant">{note}</span>
@@ -577,7 +578,7 @@ export function StyleguidePage() {
               ))}
             </ul>
             <p className="text-body-small text-on-surface-variant">
-              Sin fotos de personas: iniciales sobre el contenedor del color del rol (2.2).
+              Las cinco personas de la demo tienen foto con un anillo del color de su rol (D-165, fotos de Magnific con atribución). El resto, iniciales sobre el contenedor del color del rol.
             </p>
           </Panel>
           <Panel className="flex flex-col gap-3">

@@ -5,7 +5,7 @@
 
 Siguen el enfoque de proto-personas de *Lean UX* (Gothelf & Seiden, 2021): hipótesis explícitas sobre quién usa el producto, pensadas para validarse y corregirse con investigación, no para reemplazarla.
 
-Hay una proto-persona por rol del MVP y dos para el rol participante (personal de oficina y personal operativo), porque la spec pide diseñar para los dos públicos de Andina Servicios S.A. (empresa ficticia de logística, unas 500 personas en Operaciones, Administración, Tecnología y Comercial). No incluyen fotos ni datos demográficos que no cambien una decisión de diseño. En la interfaz cada persona aparece con un avatar de iniciales sobre el color de su rol.
+Hay una proto-persona por rol del MVP y dos para el rol participante (personal de oficina y personal operativo), porque la spec pide diseñar para los dos públicos de Andina Servicios S.A. (empresa ficticia de logística, unas 500 personas en Operaciones, Administración, Tecnología y Comercial). No incluyen fotos ni datos demográficos que no cambien una decisión de diseño. En la interfaz, las cinco personas de la demo aparecen con una foto de perfil de stock y un anillo del color de su rol (D-165); el resto de las personas, con iniciales.
 
 **Qué no sabemos de nadie:** ninguna proto-persona describe la situación financiera real de la persona (sueldo, deudas, ahorros). Es coherente con la privacidad por diseño: el producto tampoco lo sabe ni lo pregunta. Lo único que se supone es su relación con el tema (confianza, hábitos generales, momentos de uso).
 

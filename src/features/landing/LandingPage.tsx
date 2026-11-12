@@ -315,7 +315,7 @@ export function LandingPage() {
                 {/* Role color identifies the person (2.1.1), as a flat bar on top */}
                 <span aria-hidden className={cn('-mx-(--space-card-padding) mb-2 h-1.5', ROLE_ACCENT[r.role].bar)} />
                 <div className="flex items-center gap-3">
-                  <Avatar name={r.name} role={r.role} size="lg" />
+                  <Avatar name={r.name} role={r.role} personId={`p-${r.id}`} size="lg" />
                   <div className="min-w-0">
                     <h3 className="text-title-medium text-on-surface">{r.name}</h3>
                     <span className={cn('mt-1 inline-flex rounded-full px-2 py-0.5 text-label-medium', ROLE_ACCENT[r.role].chip)}>
@@ -429,9 +429,19 @@ export function LandingPage() {
           {/* One row: the credit and the profile icons. */}
           <div className={cn(container, 'flex flex-col gap-3 py-6 text-body-small text-on-surface-variant')}>
             <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-              <p>
-                {t('landing.footer.credit')} © 2026
-              </p>
+              <div className="flex flex-col gap-1">
+                <p>
+                  {t('landing.footer.credit')} © 2026
+                </p>
+                {/* Attribution required by the free license of the profile photos (D-165) */}
+                <p>
+                  {t('landing.footer.photos')}{' '}
+                  <a href="https://www.magnific.com/" target="_blank" rel="noopener noreferrer" className="text-primary underline underline-offset-2">
+                    Magnific
+                    <span className="sr-only"> {t('landing.newTab')}</span>
+                  </a>
+                </p>
+              </div>
               <ul className="-ml-3 flex items-center gap-1 md:ml-0 md:-mr-3" aria-label={t('landing.footer.profiles')}>
                 {(
                   [

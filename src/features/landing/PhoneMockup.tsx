@@ -93,7 +93,7 @@ export function AppTopBar({ section }: { section: string }) {
         <span className="min-w-0 flex-1 truncate text-title-small text-on-surface">{section}</span>
         <Icon name="help" size={20} className="text-on-surface-variant" />
         <Icon name="notifications" size={20} className="text-on-surface-variant" />
-        <Avatar name={MARIANA_NAME} role="participant" size="sm" />
+        <Avatar name={MARIANA_NAME} role="participant" personId="p-mariana" size="sm" />
       </div>
     </>
   );

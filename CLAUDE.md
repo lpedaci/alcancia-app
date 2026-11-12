@@ -225,7 +225,7 @@ Igual que Rumbo: Filled (uno solo por región), Filled tonal, Outlined, Text, Fi
 | Educo (inicio del estudiante) | Banner de saludo de ancho completo con nombre y frase (→ saludo de P1 con Fuerte en lugar de la ilustración); lista de tarjetas con miniatura, título, metadatos y botón tonal (→ guías y misiones); KPIs pequeños en grilla 2 × 2 | Ilustraciones 3D, fotos de terceros, la tarjeta de clase en vivo |
 | Avenra (panel clínico) | Saludo grande con fecha y acciones a la derecha (filtro, fecha, asistente); tarjetas con botón de flecha en la esquina para ir al detalle; selector de días en pestañas con contador (→ "Avanzar un día / semana / mes" y calendario de vencimientos); tabla con chips de estado con punto e ícono | El objeto translúcido con degradé y el fondo lila con degradé; tarjetas apiladas con sombra; gráfico de líneas diagonales decorativo |
 
-Reglas comunes al usar estas referencias: fondos y tarjetas planos (2.2, 2.5); cada gráfico con frase de conclusión y "Ver como tabla" (2.10); dona solo si hay una parte de un total que importa (por ejemplo, el reparto 50/30/20 del presupuesto), con su tabla; sin fotos de personas (avatares con iniciales sobre el color del rol).
+Reglas comunes al usar estas referencias: fondos y tarjetas planos (2.2, 2.5); cada gráfico con frase de conclusión y "Ver como tabla" (2.10); dona solo si hay una parte de un total que importa (por ejemplo, el reparto 50/30/20 del presupuesto), con su tabla; fotos de personas solo en los avatares de las cinco personas de la demo (D-165 de Claude Code); el resto, iniciales sobre el color del rol.
 
 ### 2.2.1 Dirección visual: propia, no genérica
 
@@ -236,7 +236,7 @@ Aprendizaje de Rumbo: la sobriedad (sin degradés, pocas sombras, paleta fría) 
 3. **KPIs con vida:** ícono en contenedor de color, sparkline, etiqueta, número grande y píldora de variación debajo.
 4. **Gráficos protagonistas** con relleno plano y tooltip oscuro (`inverse-surface`).
 5. **Navegación lateral flotante** plegable a íconos, con el ítem activo en píldora `primary`; barra superior flotante con logo, "Ver como", Ayuda y Notificaciones.
-6. **Personas con color de rol:** anillo en la foto o iniciales sobre el contenedor del rol.
+6. **Personas con color de rol:** las cinco personas de la demo tienen foto de perfil con un anillo del color de su rol (fotos de stock de Magnific con licencia gratuita y atribución en el pie de la landing, D-165 de Claude Code); el resto, iniciales sobre el contenedor del rol.
 7. **Bienvenida guiada** de 3 o 4 pasos al primer ingreso de cada rol, con zona ilustrativa hecha con componentes reales en miniatura, puntos de progreso, "Anterior" y "Continuar" (como el video `original-d624f662` de las referencias).
 8. **Mapa de niveles como línea de tiempo (5.0):** un tramo por nivel, con estado (completado, en curso, bloqueado con qué falta) con ícono y texto, y el nivel actual destacado.
 9. **Anatomía del simulador** (patrón propio, el más importante del producto):
@@ -462,7 +462,7 @@ Priorizadas con la misma matriz de decisión que Rumbo (valor para el usuario 40
 3. **El problema:** tres tarjetas (no sé si me alcanza a fin de mes; la inflación se come mis ahorros; no entiendo cuánto me cuesta la tarjeta), cada una con una escena hecha con piezas del producto.
 4. **La solución:** bento con diagnóstico y ruta, lecciones con práctica, evaluaciones variadas, simuladores, metas y panel de seguimiento.
 5. **Aprende en cualquier lugar:** la misma lección en la computadora de Mariana y en el celular de Diego, para mostrar el diseño para personal de oficina y operativo.
-6. **Un recorrido para cada rol:** una sección por rol con avatar de iniciales sobre el color del rol (sin fotos de personas), chip del rol, qué hace, qué se puede recorrer y "Recorrer como…", con una miniatura de su pantalla.
+6. **Un recorrido para cada rol:** una sección por rol con la foto de la persona y un anillo del color del rol (D-165), chip del rol, qué hace, qué se puede recorrer y "Recorrer como…", con una miniatura de su pantalla.
 7. **Prueba un simulador sin iniciar sesión:** el simulador de inflación (SIM-3) embebido y funcionando en la landing.
 8. **Cifras** calculadas desde los datos de demo.
 9. **Recorre la demo en tres pasos** y **Preguntas frecuentes** (incluida "¿Es asesoramiento financiero?").

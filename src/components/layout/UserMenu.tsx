@@ -33,7 +33,7 @@ export function UserMenu() {
         {/* The name comes from hidden text, so it never mismatches the visible initials (WCAG 2.5.3). */}
         <DropdownMenuTrigger className="min-h-12 min-w-12 rounded-full outline-offset-2 focus-visible:outline-2 focus-visible:outline-primary md:min-h-0 md:min-w-0">
           <span className="sr-only">{t('demo.userMenu', { name: person.name })}</span>
-          <Avatar name={person.name} role={person.role} size="md" />
+          <Avatar name={person.name} role={person.role} personId={person.id} size="md" />
         </DropdownMenuTrigger>
         <DropdownMenuContent label={t('demo.userMenu', { name: person.name })} align="end">
           <DropdownMenuLabel>
