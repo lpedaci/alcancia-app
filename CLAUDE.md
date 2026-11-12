@@ -10,7 +10,7 @@
 
 ## 0. Decisiones de base
 
-> Numeración: las decisiones de esta tabla las define Lourdes. Claude Code numera las suyas en `docs/decisions.md` a partir de D-31; las decisiones nuevas de la spec usan **D-50 en adelante** para no chocar.
+> Numeración: las decisiones de esta tabla las define Lourdes. Claude Code numera las suyas en `docs/decisions.md` a partir de **D-100** (cambio del 12/11/2026, para no chocar con las referencias a D-31, D-32 y D-38 de antes del reinicio); las de la spec usan D-01 a D-99.
 >
 > **Reinicio del 12/11/2026:** el proyecto se vuelve a construir desde cero con esta versión de la spec. Las decisiones de Claude Code ya aprobadas en la versión anterior se incorporaron a esta tabla (D-52, D-54, D-55) y la verificación de billeteras y fintech, al Anexo D. Lo construido antes no se reutiliza salvo que Lourdes lo indique.
 
@@ -32,6 +32,12 @@
 | D-53 | **Apartado "Ahorro" básico desde el nivel 1:** la misión 1 crea un único apartado sin meta; el nivel 4 suma apartados con meta y el fondo de emergencia (5.0, 5.3) | Confirmada |
 | D-54 | **Recibo de sueldo de demo:** se usa el recibo del taller, con empleador Andina Servicios S.A. y **neto de $ 1.284.958,86**; ese neto es el sueldo que se cobra en la misión 1 (antes D-31 de Claude Code) | Confirmada |
 | D-55 | **Evento sorpresa de la misión 1:** una suscripción ficticia de **$ 4.990** que se debita sin aviso, para trabajar gastos hormiga y débitos programados (antes D-38 de Claude Code) | Confirmada |
+| D-56 | **Crédito vive dentro de Pagar** como subsección "Tarjeta y préstamos" (nivel 5); los destinos siguen siendo 5 (5.3) | Confirmada |
+| D-57 | **Desafío de nivel armado con los bancos de sus módulos:** toma preguntas del banco de cada módulo del nivel; la insignia de un módulo sale de su parte del desafío. Si se agotan los intentos, no se bloquea para siempre: el desbloqueo pasa al tutor y no se pierde nada (5.0, 5.1) | Confirmada |
+| D-58 | **El tutor ve solo el estado de cada nivel** (bloqueado, en curso, completado), nunca el motivo de un bloqueo que dependa de la billetera (`wallet_metric`) ni su progreso ("2 de 3 meses") (4.2, 5.3) | Confirmada |
+| D-59 | **Misiones de fase A: 13** (las 7 numeradas de 5.3 y las 6 de la tabla de 5.0). Las 6 adicionales son cortas, de 2 a 4 minutos | Confirmada |
+| D-60 | **Fecha de la demo:** `DEMO_TODAY` = 16/11/2026; programa "Bienestar financiero 2026", iniciado el 03/08/2026, coherente con la verificación de los Anexos B, C y D (11/11/2026) | Confirmada |
+| D-61 | **Alcance del contenido en fase A:** cada uno de los 16 módulos tiene objetivo, **una guía completa** y su parte del banco de preguntas; las guías 2 y 3 de cada módulo pasan a fase B. Claude Code escribe el borrador de cada tanda junto con su sección y Lourdes lo revisa por tanda, con las ampliaciones marcadas para Kevin | Provisoria, Lourdes puede ampliar |
 | D-29 | **Invertir (cuenta comitente de práctica, SIM-14)** pasa a la **fase A** como nivel 7 (5.0, 5.4); cripto queda en fase B | Confirmada |
 | D-24 | La presentación del taller **no se sube** al repositorio: la base de contenido es su resumen en el Anexo A | Confirmada |
 | D-25 | Los datos regulatorios salen de fuentes oficiales (BCRA, CNV, BYMA, Caja de Valores, argentina.gob.ar, INDEC) y se registran en el Anexo B con fecha de verificación | Confirmada |
@@ -307,7 +313,7 @@ Con **Motion**, de 150 a 300 ms y curvas de M3:
 | Tutor o tutora (persona); "Tutoría" en chips y menús | Docente, profesor, facilitador |
 | Persona colaboradora / participante | Colaborador/a, empleado (en la interfaz) |
 | Cohorte | Grupo, comisión |
-| Evaluación / desafío | Examen, prueba |
+| Desafío de nivel (evaluación para desbloquear) / desafío semanal (del tutor); nunca "desafío" solo | Examen, prueba |
 | Celular / computadora | Móvil, ordenador |
 
 **Formato de números**
@@ -358,7 +364,7 @@ Propio de Alcancía:
 | Fechas | date-fns con locale `es` |
 | Íconos | Material Symbols en SVG |
 | Animaciones | Motion |
-| Idiomas | react-i18next (español e inglés) |
+| Idiomas | react-i18next: todos los textos pasan por i18n; en fase A, español completo y la landing en inglés; el resto en inglés en fase B (F17) |
 | Tests | Vitest (unitarios y de fórmulas) y Playwright (desbordes, axe, flujos) |
 | Deploy | GitHub Pages vía GitHub Actions |
 
@@ -425,7 +431,7 @@ Esto obliga a diseñar para públicos distintos dentro de la misma empresa, como
 - **"Ver como"** en la barra superior para cambiar de rol; para participante se elige entre Mariana y Diego, para mostrar las dos experiencias.
 - **Qué ve cada rol** (mínimo privilegio):
     - El participante ve todo lo suyo. Sus **montos de simuladores y metas nunca salen de su navegador** ni los ve nadie más.
-    - El tutor ve **avance de aprendizaje** de sus cohortes: módulos, resultados de evaluaciones y desafíos, de forma individual para poder acompañar, pero nunca montos ni respuestas de las preguntas de hábitos del diagnóstico.
+    - El tutor ve **avance de aprendizaje** de sus cohortes: módulos, resultados de evaluaciones y desafíos, de forma individual para poder acompañar, y el estado de cada nivel (bloqueado, en curso, completado), pero nunca montos, respuestas de las preguntas de hábitos del diagnóstico ni el motivo de un bloqueo que dependa de la billetera (D-58).
     - El admin ve adopción y avance agregados, y gestiona personas y cohortes.
     - El decisor ve solo el reporte de impacto agregado.
 - Las cuentas son de trabajo: los problemas de acceso se derivan a la mesa de ayuda de la empresa, sin autogestión (como en Rumbo).
@@ -445,7 +451,7 @@ Priorizadas con la misma matriz de decisión que Rumbo (valor para el usuario 40
 3. **El problema:** tres tarjetas (no sé si me alcanza a fin de mes; la inflación se come mis ahorros; no entiendo cuánto me cuesta la tarjeta), cada una con una escena hecha con piezas del producto.
 4. **La solución:** bento con diagnóstico y ruta, lecciones con práctica, evaluaciones variadas, simuladores, metas y panel de seguimiento.
 5. **Aprende en cualquier lugar:** la misma lección en la computadora de Mariana y en el celular de Diego, para mostrar el diseño para personal de oficina y operativo.
-6. **Un recorrido para cada rol:** una sección por rol con foto, chip del rol, qué hace, qué se puede recorrer y "Recorrer como…", con una miniatura de su pantalla.
+6. **Un recorrido para cada rol:** una sección por rol con avatar de iniciales sobre el color del rol (sin fotos de personas), chip del rol, qué hace, qué se puede recorrer y "Recorrer como…", con una miniatura de su pantalla.
 7. **Prueba un simulador sin iniciar sesión:** el simulador de inflación (SIM-3) embebido y funcionando en la landing.
 8. **Cifras** calculadas desde los datos de demo.
 9. **Recorre la demo en tres pasos** y **Preguntas frecuentes** (incluida "¿Es asesoramiento financiero?").
@@ -457,17 +463,18 @@ Priorizadas con la misma matriz de decisión que Rumbo (valor para el usuario 40
 - Login limpio con "Continuar con Microsoft" y "Continuar con Google" (**logos oficiales sin modificar**, misma prominencia) e "Iniciar sesión con correo y contraseña". Texto: "Usa tu cuenta de trabajo de Andina".
 - Rol preseleccionado desde la landing (`/login?demo=mariana`).
 - Simulación de SSO **neutra y rotulada**, que nunca imita las páginas de Microsoft ni de Google.
-- Verificación en dos pasos con código precargado en la demo (`246810`), obligatoria para admin y decisor.
+- Verificación en dos pasos con código precargado en la demo (`246810`), obligatoria para admin y decisor. Se muestra solo en el acceso desde la landing; cambiar de rol con "Ver como" dentro de la demo no la repite.
 - Error de credenciales genérico; bloqueo tras 5 intentos sin autodesbloqueo; "¿Problemas para iniciar sesión?" deriva a la mesa de ayuda de la empresa con un formulario de solicitud (sin rol de sistemas en el MVP: la solicitud queda registrada y se muestra la confirmación).
 - Expiración de sesión por inactividad con aviso previo.
 - **RBAC** desde `src/lib/permissions.ts`; rutas protegidas; "Acceso no permitido" para rutas ajenas.
 - **Aviso de privacidad y consentimiento** al primer ingreso (G5), con lo que ve y no ve la empresa, en lenguaje simple: "Tu empresa ve tu avance en los módulos, nunca tus montos ni tus respuestas sobre hábitos".
 
 ### F1. Configuración del programa (admin)
-- Datos del programa: nombre ("Bienestar financiero 2027"), descripción, si es **voluntario** o **asignado** con fecha límite por cohorte.
+- Datos del programa: nombre ("Bienestar financiero 2026", D-60), descripción, si es **voluntario** o **asignado** con fecha límite por cohorte.
 - Módulos habilitados, orden sugerido y módulos obligatorios dentro del programa.
 - Umbral de privacidad (mínimo 5, no se puede bajar de 5).
-- Puntaje mínimo para aprobar un módulo y obtener su insignia (por defecto 70 %) y cantidad de intentos.
+- Puntaje mínimo para aprobar un desafío de nivel y obtener las insignias de sus módulos (por defecto 70 %) y cantidad de intentos; al agotarlos, el desbloqueo pasa al tutor (D-57).
+- El admin habilita módulos, marca los obligatorios y fija plazos, pero **no cambia el orden de los niveles** (5.0).
 - Canales de recordatorio simulados: correo, Microsoft Teams o Slack (ver F9; en fase A solo la configuración).
 - Logo y nombre de la empresa (ficticios) en la barra superior.
 
@@ -478,7 +485,7 @@ Priorizadas con la misma matriz de decisión que Rumbo (valor para el usuario 40
 - Preguntas de hábitos **sin respuestas correctas ni juicio**; preguntas de conocimiento con retroalimentación al final, no durante.
 - Resultado por **cinco dimensiones**: presupuesto, ahorro y emergencias, deudas y crédito, inflación y tasas, metas. Gráfico de barras horizontales (no radar: se lee mejor y es más accesible) con su tabla.
 - Nivel por dimensión (inicial, intermedio, avanzado) y **ruta propuesta**: orden de módulos según las dimensiones más débiles, explicada ("Empezamos por presupuesto porque es la base de todo lo demás").
-- La persona puede reordenar o saltar módulos; el diagnóstico se puede repetir al final para medir el avance (pre y post).
+- La persona puede reordenar las guías **dentro de un nivel ya desbloqueado**; saltar un nivel equivale a hacer su desafío de suficiencia ("Ya sé esto"); el diagnóstico se puede repetir al final para medir el avance (pre y post).
 
 ### F3. Módulos y lecciones (participante)
 > Con D-50, cada módulo se convierte en **guías** dentro de la sección que le corresponde (5.0), y su evaluación en el **desafío de nivel**. El diseño instruccional de abajo no cambia.
@@ -525,7 +532,7 @@ Diseño instruccional con **Backward Design** (primero los resultados esperados,
 
 **Tramo 5 · Billeteras, fintech y seguridad** (fase A el 17; fase B el 18)
 17. Billeteras virtuales y fintech: CVU y CBU, transferencias inmediatas y QR interoperable, cuenta remunerada o fondo money market, qué protección tiene tu dinero según el tipo de cuenta, el mapa de billeteras y fintech argentinas (Anexo D) y cómo verificar una entidad en los registros oficiales (A). Se practica en la billetera de práctica (SIM-13).
-18. Estafas y mensajes sospechosos: phishing, falsos soportes, "inversiones" con rendimientos garantizados y cómo protegerte (T, A) · fase B, y sala 5 del escape room.
+18. Estafas y mensajes sospechosos: phishing, falsos soportes, "inversiones" con rendimientos garantizados y cómo protegerte (T, A) · en fase A, una guía base en el nivel 2 con la misión 6; el módulo completo en fase B, y sala 5 del escape room.
 
 - Objetivos redactados con verbos observables de la taxonomía de Bloom revisada (calcular, comparar, decidir), no "conocer" o "entender".
 - Contenido en `src/data/modules/` y documentado en `docs/content.md` con objetivo, evidencia, actividades y fuentes de cada módulo.
@@ -550,7 +557,7 @@ Las evaluaciones combinan tipos según lo que se quiere comprobar (evidencia de 
 Reglas:
 - **Práctica formativa** dentro de las lecciones (sin nota, con reintentos ilimitados) y **evaluación del módulo** al cierre (con puntaje mínimo e intentos configurables en F1).
 - Banco de preguntas por módulo con **orden aleatorio** de preguntas y opciones (excepto en "ordenar").
-- Para aprobar y obtener la insignia cuenta el **mejor intento**; los reportes muestran también el primero, que indica cuánto sabía la persona.
+- **Desafío de nivel (D-57):** toma preguntas del banco de cada módulo del nivel; la insignia de cada módulo sale de su parte. Para aprobar cuenta el **mejor intento**; los reportes muestran también el primero, que indica cuánto sabía la persona.
 - **Sin límite de tiempo** por defecto (criterio 2.2.1 de WCAG); si se usa, ajustable y con aviso.
 - Retroalimentación que explica, nunca solo "Correcto" o "Incorrecto".
 
@@ -703,11 +710,11 @@ Fuerte, la caja fuerte naranja del escape room "Tu primer sueldo", pasa a ser el
 4. **¿Cuenta o fondo?:** elegir dónde dejar el saldo tras leer la ficha de cada opción; avanzar 30 días y explicar la diferencia de rendimiento y de protección. Evidencia: pregunta con justificación (verdadero o falso con por qué).
 5. **El préstamo tentador:** decidir ante una oferta preaprobada con cuota baja y CFT alto; calcular el costo total. Evidencia: caso con decisiones y respuesta numérica.
 6. **El mensaje falso:** recibir tres mensajes y reportar el fraudulento sin compartir el código. Evidencia: clasificación correcta de los tres.
-7. **Mes completo:** avanzar un mes con eventos (suba de un servicio, gasto imprevisto, rendimiento) y cerrar con el presupuesto en verde y el fondo de emergencia intacto. Evidencia: resumen del mes con criterios cumplidos.
+7. **Mes completo:** avanzar un mes con eventos (suba de un servicio, gasto imprevisto, rendimiento) y cerrar con el presupuesto en verde y el apartado "Ahorro" intacto (el fondo de emergencia todavía no existe en el nivel 3). Evidencia: resumen del mes con criterios cumplidos.
 
-Las misiones se habilitan desde el mapa de niveles (P9) y desde la sección de la billetera a la que pertenecen (5.0), como actividad práctica de sus guías. Cada misión registra eventos tipo xAPI (inició, completó, respondió, aprobó, pidió pista) para F21, y suma a las insignias de F5.
+Las misiones se habilitan desde el mapa de niveles (P9) y desde la sección de la billetera a la que pertenecen (5.0), como actividad práctica de sus guías. Además de las 7 de arriba, la fase A incluye las 6 misiones cortas de la tabla de 5.0 (D-59): Configura tu seguridad (nivel 0), Crea tu fondo de emergencia (4), Sal de tus deudas (5), Abre tu cuenta comitente, Tu primer CEDEAR de ETF y Aguanta la caída (7). Cada misión registra eventos tipo xAPI (inició, completó, respondió, aprobó, pidió pista) para F21, y suma a las insignias de F5.
 
-**Cómo se ve en los paneles:** el tutor y el admin ven **solo** misiones completadas, intentos y aciertos agregados por cohorte (umbral de 5 personas). Nunca ven saldos, movimientos, metas ni decisiones individuales dentro de la billetera.
+**Cómo se ve en los paneles:** el tutor y el admin ven **solo** misiones completadas, intentos y aciertos agregados por cohorte (umbral de 5 personas). Nunca ven saldos, movimientos, metas ni decisiones individuales dentro de la billetera, ni el motivo de un bloqueo que dependa de ellos (D-58).
 
 **Técnica**
 - Estado en un store propio (`walletStore`) persistido en el navegador, separado de los demás; botón "Empezar de cero" con confirmación.
@@ -715,10 +722,10 @@ Las misiones se habilitan desde el mapa de niveles (P9) y desde la sección de l
 - Motor de eventos declarativo (`src/data/wallet-missions.json`): cada misión define estado inicial, pasos, disparadores (acción, monto, día), tarjetas de aprendizaje, preguntas (tipos de 5.1) y criterios de éxito. Así L&D puede sumar misiones sin tocar código (se conecta con F14).
 - Accesibilidad: cambios de saldo anunciados con región en vivo, todo operable con teclado, alternativa al escaneo de QR, sin límite de tiempo y con "reducir animaciones".
 - **Navegación por tamaño de pantalla** (clases de ventana de Material 3, verificadas en los 6 anchos de 2.7). Hay una sola navegación, la de la billetera; los roles de tutor, admin y decisor conservan su propio layout:
-  - **Destinos principales (los mismos en todos los tamaños):** Inicio · Pagar · Ahorrar (presupuesto, apartados y rendir) · Invertir · Aprender (mapa de niveles, logros, guías, desafíos y herramientas). Perfil, seguridad y comprobantes van en el avatar de la barra superior. Los destinos bloqueados se muestran con candado y abren su tarjeta de "qué falta".
+  - **Destinos principales (los mismos en todos los tamaños):** Inicio · Pagar (transferir, QR, servicios y "Tarjeta y préstamos", D-56) · Ahorrar (presupuesto, apartados y rendir) · Invertir · Aprender (mapa de niveles, logros, guías, desafíos y herramientas). Perfil, seguridad y comprobantes van en el avatar de la barra superior. Los destinos bloqueados se muestran con candado y abren su tarjeta de "qué falta".
   - **Celular (menos de 600 px; 320 y 375):** la app a pantalla completa. Barra superior con el nombre de la sección, Fuerte y avatar. **Barra de navegación inferior** con los 5 destinos. La misión activa es una tarjeta fija arriba del contenido que se expande como hoja inferior.
   - **Tablet (600 a 1199 px; 768 y 1024):** **riel de navegación** a la izquierda con los 5 destinos y el logo arriba. Contenido en dos columnas desde 840 px: la sección a la izquierda y la misión activa con las tarjetas de aprendizaje a la derecha; por debajo de 840 px, la misión va como hoja inferior.
-  - **Escritorio (1200 px o más; 1280 y 1440):** **menú lateral** con los 5 destinos y sus subsecciones desplegables (por ejemplo, Ahorrar > Presupuesto, Apartados, Rendir), más el indicador de nivel. Layout bento en tres zonas: saldo y acciones rápidas, movimientos o sección activa, y panel fijo de la misión con Fuerte. Ancho máximo de lectura de 1200 px, centrado.
+  - **Escritorio (1200 px o más; 1280 y 1440):** **menú lateral** con los 5 destinos y sus subsecciones desplegables (por ejemplo, Pagar > Transferir, QR, Servicios, Tarjeta y préstamos; Ahorrar > Presupuesto, Apartados, Rendir), más el indicador de nivel. Layout bento en tres zonas: saldo y acciones rápidas, movimientos o sección activa, y panel fijo de la misión con Fuerte. Ancho máximo de lectura de 1200 px, centrado.
   - En todos los tamaños: el destino activo se marca con el indicador de Material 3 y `aria-current`; el foco vuelve al título de la sección al cambiar de destino; objetivos táctiles de 48 × 48 px; las hojas inferiores se cierran con Escape y devuelven el foco.
 
 ### 5.4 Invertir: cuenta comitente de práctica (SIM-14, nivel 7, fase A)
@@ -951,8 +958,9 @@ interface DiagnosticResult {
   scores: Record<Dimension, number>; levels: Record<Dimension, Level>;
 }
 interface Progress { personId: string; moduleId: string; lessonIdsDone: string[]; quizScore?: number; satisfaction?: 1 | 2 | 3 | 4 | 5 }
-interface Challenge { id: string; cohortId: string; title: string; dueDate: string }
-interface ChallengeReport { challengeId: string; personId: string; result: 'done' | 'partial' | 'not_done'; reflection?: string }
+interface WeeklyChallenge { id: string; cohortId: string; title: string; dueDate: string }   // desafío semanal del tutor
+interface LevelChallenge { id: string; levelId: string; mastery: boolean; questionsPerModule: Record<string, number>; passingScore: number; maxAttempts?: number }   // D-57
+interface WeeklyChallengeReport { challengeId: string; personId: string; result: 'done' | 'partial' | 'not_done'; reflection?: string }
 interface FollowUp30 { personId: string; answeredAt: string; applied: Record<string, boolean> }
 
 // Solo en el navegador del participante, nunca en métricas ni visible para otros roles:
@@ -968,7 +976,7 @@ interface OfficialSource { id: string; name: string; url: string; verifiedAt: st
 - Montos y tasas en `src/lib/finance/` con `Decimal`; los montos se guardan como texto decimal (`"150000.00"`), nunca como `number`.
 - Toda métrica agregada pasa por `aggregate()` en `metrics.ts`, que devuelve "datos insuficientes" si el grupo tiene menos de `privacyThreshold` personas.
 - `LocalScenario` y `LocalGoal` se guardan en un espacio de `localStorage` separado por persona y nunca se leen desde vistas de otros roles (test que lo verifica).
-- `DEMO_TODAY` fijo para que los datos se vean coherentes.
+- `DEMO_TODAY` fijo en 16/11/2026 para que los datos se vean coherentes (D-60).
 
 ### Datos semilla
 - Andina Servicios: 4 cohortes (una por área) y unas 80 personas participantes, con distinta adopción por área (el centro de distribución, sobre todo desde el celular); con diagnósticos iniciales y algunos finales, progreso variado, satisfacción, desafíos y seguimientos a 30 días, para que los paneles muestren diferencias reales.
@@ -1082,7 +1090,8 @@ En `docs/`, en Markdown, con diagramas Mermaid y citas en **APA 7**. Índice en 
 - **14.8 `learning-design.md`:** análisis del público (principios de andragogía; personal de oficina y operativo; aprendizaje en el celular y en ratos cortos), resultados de aprendizaje con Backward Design, mapa de módulos y dimensiones, secuencia de Gagné, estrategia de evaluación con Kirkpatrick y plan de mejora.
 - **14.9 `content.md`:** por módulo, objetivo, evidencia, actividades, fuentes y estado de revisión por especialista.
 - **14.10 `formulas.md`:** cada fórmula con su explicación, supuestos, simplificaciones y casos de prueba calculados a mano.
-- **14.11 `issues.md`, `decisions.md` y `progress.md`.**
+- **14.11 `issues.md`, `decisions.md`, `progress.md` y `questions.md`** (dudas de contenido y datos pendientes de verificar, incluidos los ⚠ de los Anexos B y C).
+- **14.13 `wallet-engine.md`:** reglas de la economía simulada (cobro del sueldo, débitos, inflación sobre precios, cálculo de "meses de gastos" y origen de las deudas de la simulación).
 - **14.12 `security.md`.**
 
 ---
