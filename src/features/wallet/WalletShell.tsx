@@ -7,6 +7,7 @@ import { UserMenu } from '@/components/layout/UserMenu';
 import { ViewAsMenu } from '@/components/layout/ViewAsMenu';
 import { Icon, type IconName } from '@/components/ui/Icon';
 import { IconButton } from '@/components/ui/IconButton';
+import { Tooltip } from '@/components/ui/Tooltip';
 import { FuerteFab } from '@/features/companion/FuerteFab';
 import type { FuerteState } from '@/features/companion/Fuerte';
 import { completedLights } from '@/features/levels/engine';
@@ -135,20 +136,24 @@ export function WalletShell({ section, children, fuerte }: { section: string; ch
       </>
     );
     if (!expanded) {
-      // Rail: icon in its indicator, label below.
+      // Rail: icons only (the top bar already names the section, D-160). The name stays for
+      // assistive tech and shows in a tooltip on hover and keyboard focus.
       return (
-        <li key={d.id}>
-          <Link
-            to={d.to}
-            aria-current={active ? 'page' : undefined}
-            className={cn('flex w-full flex-col items-center gap-1 rounded-lg py-1.5 text-label-medium', active ? 'text-on-surface' : 'text-on-surface-variant hover:text-on-surface')}
-          >
-            <span className={cn('relative flex h-8 w-14 items-center justify-center rounded-full', active && 'bg-secondary-container text-on-secondary-container')}>
+        <li key={d.id} className="flex justify-center">
+          <Tooltip content={t(`wallet.nav.${d.id}`) + (locked ? ` · ${t('wallet.nav.locked')}` : '')} side="right">
+            <Link
+              to={d.to}
+              aria-current={active ? 'page' : undefined}
+              className={cn(
+                'relative flex h-12 w-14 items-center justify-center rounded-full',
+                active ? 'bg-secondary-container text-on-secondary-container' : 'text-on-surface-variant hover:bg-surface-container hover:text-on-surface',
+              )}
+            >
               <Icon name={d.icon} size={24} filled={active} />
-              {locked && <Icon name="lock" size={16} className="absolute -right-1 -bottom-1 rounded-full bg-surface-container-lowest" />}
-            </span>
-            <span>{label}</span>
-          </Link>
+              {locked && <Icon name="lock" size={16} className="absolute right-1.5 bottom-1.5 rounded-full bg-surface-container-lowest" />}
+              <span className="sr-only">{label}</span>
+            </Link>
+          </Tooltip>
         </li>
       );
     }
