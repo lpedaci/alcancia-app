@@ -43,6 +43,8 @@
 | D-64 | **La quinta dimensión de "Conocerte" es "Metas e inversión"** (antes "Metas"), porque agrupa los módulos 12 a 15 (D-116 de Claude Code). En el código sigue siendo `goals` | Confirmada |
 | D-65 | **El módulo 17 tiene una sola guía en fase A, en el nivel 2.** La parte "cuenta o fondo" del nivel 6 la cubren la guía del módulo 11 y las tarjetas de la misión 4 (D-117 de Claude Code, opción a) | Confirmada |
 | D-66 | **`design-references/` no se publica:** queda solo en la computadora de Lourdes (`.gitignore`) y se quita del historial del repositorio, como en Rumbo (2.2) | Confirmada |
+| D-67 | **El test de perfil de inversor se hace antes de abrir Invertir:** se ofrece desde la tarjeta "qué falta" de Invertir y desde la guía del módulo 13, aunque la sección esté bloqueada. Es educativo y su resultado nunca se traduce en una cartera (1.2). Al abrir la cuenta comitente (5.4) se reutiliza el resultado | Confirmada |
+| D-68 | **Montos sin cortes de línea:** entre `$`, `USD` o `−` y el número va siempre un espacio de no separación, para que el signo nunca quede solo al final de una línea (2.9) | Confirmada |
 | D-29 | **Invertir (cuenta comitente de práctica, SIM-14)** pasa a la **fase A** como nivel 7 (5.0, 5.4); cripto queda en fase B | Confirmada |
 | D-24 | La presentación del taller **no se sube** al repositorio: la base de contenido es su resumen en el Anexo A | Confirmada |
 | D-25 | Los datos regulatorios salen de fuentes oficiales (BCRA, CNV, BYMA, Caja de Valores, argentina.gob.ar, INDEC) y se registran en el Anexo B con fecha de verificación | Confirmada |
@@ -322,7 +324,7 @@ Con **Motion**, de 150 a 300 ms y curvas de M3:
 | Celular / computadora | Móvil, ordenador |
 
 **Formato de números**
-- Pesos: `$ 1.234.567,89` (signo, espacio, punto de miles y coma decimal). En moneda extranjera, siempre con código: `USD 1.200`.
+- Pesos: `$ 1.234.567,89` (signo, espacio de no separación, punto de miles y coma decimal; D-68). En moneda extranjera, siempre con código: `USD 1.200`.
 - Porcentajes: `3 %` mensual, `42,5 %` anual, siempre aclarando el período.
 - Fechas `DD/MM/AAAA`; meses en palabras en los gráficos ("ene 2027").
 
@@ -664,7 +666,7 @@ Fuerte, la caja fuerte naranja del escape room "Tu primer sueldo", pasa a ser el
 - Error en una misión: "Pasó lo mismo que en la vida real: el préstamo salió casi el doble. Veamos por qué en 30 segundos."
 - Sección bloqueada: "Invertir se abre cuando tengas tu colchón armado. Primero lo que te protege, después lo que te hace crecer."
 
-**Estados y expresiones** (ilustraciones SVG propias, mismo trazo y paleta): neutral, saludo, pensativo (cuando hay una pregunta), atención (advertencia), celebración (logro o desbloqueo, con las luces encendidas) y dormido (si la persona lo silencia). Las **luces** muestran el avance: una por cada nivel completado.
+**Estados y expresiones** (ilustraciones SVG propias, mismo trazo y paleta): neutral, saludo, pensativo (cuando hay una pregunta), atención (advertencia), celebración (logro o desbloqueo, con las luces encendidas) y dormido (si la persona lo silencia). Las **luces** muestran el avance: **siete**, una por cada nivel completado del 1 al 7 (D-134 de Claude Code, confirmada por Lourdes: reemplaza las cinco luces del escape room original para vincular a Fuerte con este producto; el escape room de fase B adapta sus candados a este diseño).
 
 **Dónde aparece**
 - Celular: avatar pequeño en la barra superior; sus mensajes salen como burbuja sobre la navegación inferior o dentro de la hoja de la misión.
@@ -736,7 +738,7 @@ Las misiones se habilitan desde el mapa de niveles (P9) y desde la sección de l
 ### 5.4 Invertir: cuenta comitente de práctica (SIM-14, nivel 7, fase A)
 
 Un bróker **ficticio** ("Bróker de Ejemplo S.A., matrícula ficticia") conectado a la billetera de práctica:
-1. **Abrir la cuenta:** validación de identidad simulada (sin datos reales) y **test de perfil de inversor** educativo (conservador, moderado, agresivo) que explica para qué sirve (A-54).
+1. **Abrir la cuenta:** validación de identidad simulada (sin datos reales) y el resultado del **test de perfil de inversor** educativo (conservador, moderado, agresivo), que la persona ya hizo antes de desbloquear el nivel (D-67) y que explica para qué sirve (A-54).
 2. **Fondear desde la billetera** por transferencia de práctica.
 3. **Elegir un instrumento** entre ejemplos: CEDEAR de un ETF que replica el S&P 500, fondo money market, bono de ejemplo. Cada uno con su ficha estándar (riesgo, liquidez, moneda).
 4. **Comprar:** ver precio de ejemplo con fecha, ratio y tipo de cambio implícito (SIM-11), comisión y derechos de mercado ficticios, plazo de liquidación (contado inmediato o 24 horas, B-34).
