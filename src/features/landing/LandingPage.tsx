@@ -15,7 +15,7 @@ import { installmentsPresentValue } from '@/lib/finance';
 import { formatMoney } from '@/lib/money';
 import { cn } from '@/lib/utils';
 import type { Role } from '@/types/domain';
-import { AppPhone, BottomNav, type PhoneScreen, PhoneFrame, StatusBar } from './PhoneMockup';
+import { AppPhone, AppTopBar, BottomNav, type PhoneScreen, PhoneFrame, StatusBar } from './PhoneMockup';
 import { PieceGoal, PieceKpi, PieceLevelMap, PieceSimResult, SceneBudget, SceneCard, SceneInflation } from './ProductPieces';
 import { ResetDemoButton } from './ResetDemoButton';
 import { CountUp, Reveal } from './Reveal';
@@ -145,7 +145,7 @@ export function LandingPage() {
       <main id="main-content" tabIndex={-1} className="focus:outline-none">
         {/* 2 · Hero: text on the left, the app on a real-size phone with feature cards on the right */}
         <section aria-labelledby="hero-title" className="overflow-hidden pt-10 pb-16 md:pt-16 md:pb-24">
-          <div className={cn(container, 'grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-8')}>
+          <div className={cn(container, 'grid grid-cols-[minmax(0,1fr)] items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-8')}>
             <div className="flex min-w-0 flex-col items-start gap-6">
               {/* Announcement badge: the case type as a tag, the product category as text */}
               <Reveal>
@@ -263,41 +263,35 @@ export function LandingPage() {
 
           {/* 5 · Learn anywhere: the same guide on a computer and on a real-size phone */}
           <Reveal>
-            <section id="cualquier-lugar" aria-labelledby="cualquier-lugar-title" className="flex scroll-mt-20 flex-col gap-10 rounded-xl bg-surface-container p-5 md:p-10">
-              <div className="grid gap-4 lg:grid-cols-2 lg:gap-14">
-                <div className="flex min-w-0 flex-col items-start gap-4">
-                  <p className="rounded-full border border-primary px-3 py-1 text-label-medium text-primary">{t('landing.anywhere.eyebrow')}</p>
-                  <h2 id="cualquier-lugar-title" className="text-title-large text-balance text-on-surface md:text-headline-small">
-                    {t('landing.anywhere.title')}
-                  </h2>
-                </div>
-                <p className="text-body-large text-on-surface-variant lg:self-end">{t('landing.anywhere.intro')}</p>
+            <section id="cualquier-lugar" aria-labelledby="cualquier-lugar-title" className="grid scroll-mt-20 grid-cols-[minmax(0,1fr)] items-center gap-10 rounded-xl bg-surface-container p-5 md:p-10 lg:grid-cols-2 lg:gap-14">
+              <div className="flex min-w-0 flex-col items-start gap-4">
+                <p className="rounded-full border border-primary px-3 py-1 text-label-medium text-primary">{t('landing.anywhere.eyebrow')}</p>
+                <h2 id="cualquier-lugar-title" className="text-title-large text-balance text-on-surface md:text-headline-small">
+                  {t('landing.anywhere.title')}
+                </h2>
+                <p className="text-body-large text-on-surface-variant">{t('landing.anywhere.intro')}</p>
+                <ul className="flex flex-col gap-2.5 pt-2">
+                  {(t('landing.anywhere.points', { returnObjects: true }) as string[]).map((point) => (
+                    <li key={point} className="flex items-start gap-3 text-body-medium text-on-surface">
+                      <Icon name="check_circle" size={20} className="shrink-0 text-primary" />
+                      {point}
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <div className="flex flex-col items-center gap-10 md:flex-row md:items-end md:gap-8">
-                <figure className="flex w-full min-w-0 flex-1 flex-col gap-3">
-                  <div role="img" aria-label={t('landing.anywhere.laptopLabel')} className="rounded-xl border border-outline-variant bg-surface-container-lowest p-5 md:p-8">
-                    <div className="mb-5 flex items-center gap-2">
-                      <span className="size-2.5 rounded-full bg-outline-variant" />
-                      <span className="size-2.5 rounded-full bg-outline-variant" />
-                      <span className="size-2.5 rounded-full bg-outline-variant" />
-                    </div>
+              <figure className="mx-auto flex w-80 max-w-full flex-col items-center gap-3">
+                <PhoneFrame label={t('landing.anywhere.phoneLabel')}>
+                  <StatusBar />
+                  <AppTopBar section={t('wallet.nav.learn')} />
+                  <div className="flex min-h-0 flex-1 flex-col gap-3 overflow-hidden px-3.5 py-3">
                     <GuidePreview />
+                    <WorkedExample />
+                    <span className="mt-auto rounded-sm bg-primary py-2.5 text-center text-label-large text-on-primary">{t('landing.anywhere.answer')}</span>
                   </div>
-                  <figcaption className="text-body-small text-on-surface-variant">{t('landing.anywhere.desktop')}</figcaption>
-                </figure>
-                <figure className="flex w-72 max-w-full shrink-0 flex-col gap-3">
-                  <PhoneFrame label={t('landing.anywhere.phoneLabel')}>
-                    <StatusBar />
-                    <div className="flex min-h-0 flex-1 flex-col gap-4 px-4 py-3">
-                      <GuidePreview compact />
-                      <WorkedExample />
-                      <span className="mt-auto rounded-sm bg-primary py-2.5 text-center text-label-large text-on-primary">{t('landing.anywhere.answer')}</span>
-                    </div>
-                    <BottomNav active="learn" />
-                  </PhoneFrame>
-                  <figcaption className="text-body-small text-on-surface-variant">{t('landing.anywhere.mobile')}</figcaption>
-                </figure>
-              </div>
+                  <BottomNav active="learn" />
+                </PhoneFrame>
+                <figcaption className="text-center text-body-small text-on-surface-variant">{t('landing.anywhere.mobile')}</figcaption>
+              </figure>
             </section>
           </Reveal>
         </Section>
@@ -546,22 +540,24 @@ function WorkedExample() {
   );
 }
 
-/** The same guide on a computer and on a phone (F0, section 5). */
-function GuidePreview({ compact = false }: { compact?: boolean }) {
+/** The guide on Diego's phone (F0, section 5): progress, kicker, question and two options. */
+function GuidePreview() {
   const { t } = useTranslation();
   return (
-    <div className="flex flex-col gap-3">
-      <div className="h-1.5 w-full rounded-full bg-surface-container">
+    <div className="flex flex-col gap-2.5">
+      <div className="h-1.5 w-full rounded-full bg-surface-container-high">
         <div className="h-1.5 w-2/5 rounded-full bg-primary" />
       </div>
       <p className="text-label-medium text-primary">{t('landing.anywhere.guideKicker')}</p>
-      <p className={cn('text-on-surface', compact ? 'text-title-medium' : 'text-title-large')}>{t('landing.anywhere.guideTitle')}</p>
-      <p className={cn('text-on-surface-variant', compact ? 'text-body-small' : 'text-body-medium')}>{t('landing.anywhere.guideBody')}</p>
-      <div className={cn('grid gap-2', compact ? 'grid-cols-1' : 'grid-cols-2')}>
-        <span className="rounded-md border border-primary bg-primary-container px-3 py-2.5 text-label-large text-on-primary-container">
+      <p className="text-title-medium text-on-surface">{t('landing.anywhere.guideTitle')}</p>
+      <p className="text-body-small text-on-surface-variant">{t('landing.anywhere.guideBody')}</p>
+      <div className="grid grid-cols-2 gap-2">
+        <span className="rounded-md border border-primary bg-primary-container px-3 py-2 text-label-large text-on-primary-container">
           {t('landing.anywhere.optionA')}
         </span>
-        <span className="rounded-md border border-outline-variant px-3 py-2.5 text-label-large text-on-surface">{t('landing.anywhere.optionB')}</span>
+        <span className="rounded-md border border-outline-variant bg-surface-container-lowest px-3 py-2 text-label-large text-on-surface">
+          {t('landing.anywhere.optionB')}
+        </span>
       </div>
     </div>
   );

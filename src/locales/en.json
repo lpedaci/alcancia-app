@@ -110,9 +110,8 @@
     },
     "anywhere": {
       "eyebrow": "Learn anywhere",
-      "title": "The same guide on Mariana's computer and on Diego's phone",
-      "intro": "Office staff learn in 15-minute slots; operational staff, in 5-minute breaks on their phones. The interface adapts to each one.",
-      "desktop": "Mariana, Operations Analyst, on the computer",
+      "title": "Guides that fit in a 5-minute break",
+      "intro": "Diego, a warehouse operator, learns on his phone between tasks; Mariana, on her computer. It is the same guide: the interface adapts to each screen.",
       "mobile": "Diego, Warehouse Operator, on the phone",
       "guideKicker": "Guide · 5 minutes",
       "guideTitle": "Interest-free installments or a cash discount?",
@@ -120,10 +119,14 @@
       "optionA": "Installments",
       "optionB": "Cash",
       "phoneLabel": "The same guide on Diego's phone",
-      "laptopLabel": "The same guide on Mariana's computer",
       "answer": "Answer",
       "exampleTitle": "Worked example",
-      "example": "With 3 % monthly inflation, 12 installments of {{installment}} are worth {{pv}} today: less than paying cash with 15 % off, {{cash}}."
+      "example": "With 3 % monthly inflation, 12 installments of {{installment}} are worth {{pv}} today: less than paying cash with 15 % off, {{cash}}.",
+      "points": [
+        "One idea per screen and a question with an explained answer",
+        "Bottom bar with the 5 destinations and 48 px touch targets",
+        "What you start on the phone continues on the computer"
+      ]
     },
     "roles": {
       "eyebrow": "A journey for each role",

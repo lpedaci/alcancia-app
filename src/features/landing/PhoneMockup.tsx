@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { MoneyText } from '@/components/money/MoneyText';
 import { Avatar } from '@/components/ui/Avatar';
 import { Icon, type IconName } from '@/components/ui/Icon';
+import { Fuerte } from '@/features/companion/Fuerte';
 import { PILOT } from '@/features/wallet/pilot-fixture';
 import { D, priceIndex, purchasingPower } from '@/lib/finance';
 import { formatPercent } from '@/lib/money';
@@ -13,14 +14,14 @@ import { cn } from '@/lib/utils';
 export type PhoneScreen = 'home' | 'levels' | 'tool';
 
 /**
- * A smartphone at real size (about 18 rem wide, 9:19 screen) with screens drawn with the same
+ * A smartphone at real size (20 rem wide, 9:19 screen) with screens drawn with the same
  * components and data as the wallet (Mariana's pilot until the engine of step 6 generates it).
  * Never a screenshot and never a real wallet's look (1.1.1). The whole phone is one image for
  * assistive tech: its label says which screen it shows.
  */
 export function PhoneFrame({ children, label, className }: { children: ReactNode; label: string; className?: string }) {
   return (
-    <div role="img" aria-label={label} className={cn('relative mx-auto w-72 max-w-full shrink-0 rounded-2xl bg-on-surface p-2.5', className)}>
+    <div role="img" aria-label={label} className={cn('relative mx-auto w-80 max-w-full shrink-0 rounded-2xl bg-on-surface p-2.5', className)}>
       <div className="relative flex aspect-[9/19] flex-col overflow-hidden rounded-[calc(var(--radius-2xl)-0.625rem)] bg-surface">
         {/* Camera island */}
         <span aria-hidden className="absolute top-2 left-1/2 z-10 h-5 w-20 -translate-x-1/2 rounded-full bg-on-surface" />
@@ -58,18 +59,41 @@ export function BottomNav({ active }: { active: 'home' | 'learn' }) {
   return (
     <div className="grid shrink-0 grid-cols-5 border-t border-outline-variant bg-surface-container-lowest px-1 pt-1.5 pb-3">
       {NAV.map(({ key, icon }) => (
-        <span key={key} className={cn('flex flex-col items-center gap-0.5 text-label-small', key === active ? 'text-on-surface' : 'text-on-surface-variant')}>
+        <span key={key} className={cn('flex min-w-0 flex-col items-center gap-0.5 text-label-small', key === active ? 'text-on-surface' : 'text-on-surface-variant')}>
           <span className={cn('relative flex h-6 w-10 items-center justify-center rounded-full', key === active && 'bg-primary-container text-on-primary-container')}>
             <Icon name={icon} size={18} filled={key === active} />
             {key === 'invest' && <Icon name="lock" size={16} className="absolute -right-0.5 -bottom-0.5 rounded-full bg-surface-container-lowest" />}
           </span>
-          {t(`landing.phone.nav.${key}`)}
+          <span className="max-w-full truncate">{t(`wallet.nav.${key}`)}</span>
         </span>
       ))}
     </div>
   );
 }
 
+/** Practice banner and top bar of the wallet on phones (5.3): Fuerte, the section, help, notifications, avatar. */
+export function AppTopBar({ section }: { section: string }) {
+  const { t } = useTranslation();
+  return (
+    <>
+      <p className="flex shrink-0 items-center justify-center gap-1 bg-inverse-surface px-3 py-1 text-label-small text-inverse-on-surface">
+        <Icon name="info" size={16} />
+        {t('wallet.practiceBanner')}
+      </p>
+      <div className="flex h-12 shrink-0 items-center gap-2 border-b border-outline-variant bg-surface-container-lowest px-3">
+        <Fuerte state="neutral" lights={PILOT.completedLevels} size={1.75} />
+        <span className="min-w-0 flex-1 truncate text-title-small text-on-surface">{section}</span>
+        <Icon name="help" size={20} className="text-on-surface-variant" />
+        <Icon name="notifications" size={20} className="text-on-surface-variant" />
+        <Avatar name={PILOT.personName} role="participant" size="sm" />
+      </div>
+    </>
+  );
+}
+
+const card = 'flex flex-col gap-2 rounded-lg border border-outline-variant bg-surface-container-lowest p-3';
+
+/** P1 on a phone, as the wallet draws it at 320 px: mission card, greeting, balance and quick actions. */
 function HomeScreen() {
   const { t } = useTranslation();
   const power = D(PILOT.balance).div(priceIndex(PILOT.day, PILOT.monthlyInflation));
@@ -81,52 +105,82 @@ function HomeScreen() {
   ];
   return (
     <>
-      <p className="shrink-0 bg-inverse-surface px-3 py-1 text-center text-label-small text-inverse-on-surface">{t('landing.phone.banner')}</p>
-      <div className="flex min-h-0 flex-1 flex-col gap-3 overflow-hidden px-3.5 py-3">
-        <div className="flex items-center justify-between gap-2">
-          <p className="text-title-small text-on-surface">{t('landing.phone.hello')}</p>
-          <Avatar name={PILOT.personName} role="participant" size="sm" />
+      <AppTopBar section={t('wallet.nav.home')} />
+      <div className="flex min-h-0 flex-1 flex-col gap-2.5 overflow-hidden px-3 py-3">
+        {/* Active mission: fixed card above the content on phones */}
+        <div className="flex items-center gap-2 rounded-lg border border-primary bg-surface-container-lowest p-2.5">
+          <span className="flex size-8 shrink-0 items-center justify-center rounded-md bg-primary-container text-on-primary-container">
+            <Icon name="flag" size={16} />
+          </span>
+          <span className="min-w-0 flex-1">
+            <span className="block truncate text-label-small text-primary">
+              {t('wallet.home.mission.kicker')} · {t('wallet.home.mission.stepOf', { step: PILOT.mission.step, steps: PILOT.mission.steps })}
+            </span>
+            <span className="block truncate text-title-small text-on-surface">{PILOT.mission.title}</span>
+          </span>
+          <Icon name="keyboard_arrow_up" size={20} className="text-on-surface-variant" />
         </div>
-        <div className="flex flex-col gap-1.5 rounded-lg border border-outline-variant bg-surface-container-lowest p-3">
-          <p className="text-label-small text-on-surface-variant">{t('landing.phone.balance')}</p>
-          <p className="text-title-large text-on-surface">
+        {/* Greeting */}
+        <div className="flex flex-col gap-1.5 rounded-lg bg-primary-container p-3 text-on-primary-container">
+          <p className="text-label-small">
+            {t('wallet.home.date')} · {t('wallet.home.day', { day: PILOT.day })}
+          </p>
+          <p className="text-title-large">
+            {t('wallet.home.hello')} <span className="text-primary">{PILOT.firstName}</span>
+          </p>
+          <p className="text-body-small">{t('wallet.home.fuerteLine')}</p>
+          <div className="flex flex-wrap gap-1.5 pt-0.5">
+            <span className="rounded-full bg-surface-container-lowest px-2 py-0.5 text-label-small text-on-surface">
+              {t('wallet.home.chipLevel', { level: PILOT.currentLevel })}
+            </span>
+            <span className="rounded-full bg-tertiary-container px-2 py-0.5 text-label-small text-on-tertiary-container">{t('wallet.home.chipNext')}</span>
+          </div>
+          <div className="flex flex-wrap gap-1.5 pt-1">
+            <span className="inline-flex items-center gap-1 rounded-sm bg-secondary-container px-2 py-1 text-label-small text-on-secondary-container">
+              <Icon name="skip_next" size={16} />
+              {t('wallet.home.advance.day')}
+            </span>
+            <span className="inline-flex items-center gap-1 rounded-sm border border-outline px-2 py-1 text-label-small text-primary">
+              <Icon name="fast_forward" size={16} />
+              {t('wallet.home.advance.week')}
+            </span>
+          </div>
+        </div>
+        {/* Balance */}
+        <div className={card}>
+          <div className="flex items-center justify-between gap-2">
+            <p className="text-label-medium text-on-surface-variant">{t('wallet.home.balance.title')}</p>
+            <span className="flex size-7 items-center justify-center rounded-md bg-primary-container text-on-primary-container">
+              <Icon name="account_balance_wallet" size={16} />
+            </span>
+          </div>
+          <p className="text-headline-small text-on-surface">
             <MoneyText value={PILOT.balance} />
           </p>
-          <span className="inline-flex w-fit items-center gap-1 rounded-full bg-warning-container px-2 py-0.5 text-label-small text-on-warning-container">
-            <Icon name="trending_down" size={16} className="text-warning" />
-            {t('landing.phone.power')}: <MoneyText value={power.toFixed(2)} />
-          </span>
-        </div>
-        <div className="grid grid-cols-4 gap-1">
-          {actions.map(({ key, icon }) => (
-            <span key={key} className="flex flex-col items-center gap-1 text-label-small text-on-surface">
-              <span className="flex size-9 items-center justify-center rounded-full bg-primary-container text-on-primary-container">
-                <Icon name={icon} size={18} />
-              </span>
-              {t(`landing.phone.actions.${key}`)}
+          <p className="flex flex-wrap items-center gap-x-2 gap-y-1">
+            <span className="inline-flex items-center gap-1 rounded-full bg-warning-container px-2 py-0.5 text-label-small whitespace-nowrap text-on-warning-container">
+              <Icon name="trending_down" size={16} className="text-warning" />
+              {t('wallet.home.balance.power')}
             </span>
-          ))}
+            <span className="text-label-medium text-on-surface">
+              <MoneyText value={power.toFixed(2)} />
+            </span>
+          </p>
         </div>
-        <div className="flex flex-col gap-1.5 rounded-lg bg-primary-container p-3 text-on-primary-container">
-          <p className="text-label-small">{t('landing.phone.mission')}</p>
-          <p className="text-title-small">{t('landing.phone.missionTitle')}</p>
-          <span className="h-1.5 rounded-full bg-surface-container-lowest">
-            <span className="block h-1.5 w-1/2 rounded-full bg-primary" />
-          </span>
-        </div>
-        <div className="flex flex-col gap-2">
-          <p className="text-label-medium text-on-surface">{t('landing.phone.movements')}</p>
-          {PILOT.movements.slice(0, 3).map((m) => (
-            <div key={m.id} className="flex items-center gap-2">
-              <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-surface-container-high text-on-surface-variant">
-                <Icon name={m.icon} size={16} />
+        {/* Quick actions */}
+        <div className={card}>
+          <p className="text-label-medium text-on-surface-variant">{t('wallet.home.actions.title')}</p>
+          {/* Two per row, as the wallet's container query lays them out at 320 px */}
+          <div className="grid grid-cols-2 gap-2">
+            {actions.map(({ key, icon }) => (
+              <span key={key} className="flex min-w-0 flex-col items-center gap-1 text-center text-label-small text-on-surface">
+                <span className="flex size-9 items-center justify-center rounded-full bg-secondary-container text-on-secondary-container">
+                  <Icon name={icon} size={18} />
+                </span>
+                {t(`wallet.home.actions.${key}`)}
               </span>
-              <span className="min-w-0 flex-1 truncate text-label-small text-on-surface">{m.counterparty}</span>
-              <span className="text-label-small text-on-surface">
-                <MoneyText value={m.amount} />
-              </span>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
       <BottomNav active="home" />
@@ -139,6 +193,7 @@ function LevelsScreen() {
   const names = t('landing.phone.levels', { returnObjects: true }) as string[];
   return (
     <>
+      <AppTopBar section={t('wallet.nav.learn')} />
       <div className="flex min-h-0 flex-1 flex-col gap-3 overflow-hidden px-3.5 py-3">
         <div>
           <p className="text-title-medium text-on-surface">{t('landing.phone.levelsTitle')}</p>
@@ -193,6 +248,7 @@ function ToolScreen() {
   const line = points.map((v, m) => `${x(m).toFixed(1)},${y(v).toFixed(1)}`).join(' ');
   return (
     <>
+      <AppTopBar section={t('wallet.nav.learn')} />
       <div className="flex min-h-0 flex-1 flex-col gap-3 overflow-hidden px-3.5 py-3">
         <p className="text-title-medium text-on-surface">{t('landing.phone.toolTitle')}</p>
         <div className="flex gap-1">

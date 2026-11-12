@@ -110,9 +110,8 @@
     },
     "anywhere": {
       "eyebrow": "Aprende en cualquier lugar",
-      "title": "La misma guía en la computadora de Mariana y en el celular de Diego",
-      "intro": "El personal de oficina aprende en ratos de 15 minutos; el operativo, en pausas de 5 desde el celular. La interfaz se adapta a cada uno.",
-      "desktop": "Mariana, Analista de Operaciones, en la computadora",
+      "title": "Guías que entran en una pausa de 5 minutos",
+      "intro": "Diego, operario de depósito, aprende desde el celular entre tareas; Mariana, desde la computadora. Es la misma guía: la interfaz se adapta a cada pantalla.",
       "mobile": "Diego, Operario de depósito, en el celular",
       "guideKicker": "Guía · 5 minutos",
       "guideTitle": "¿Cuotas sin interés o contado con descuento?",
@@ -120,10 +119,14 @@
       "optionA": "Las cuotas",
       "optionB": "El contado",
       "phoneLabel": "La misma guía en el celular de Diego",
-      "laptopLabel": "La misma guía en la computadora de Mariana",
       "answer": "Responder",
       "exampleTitle": "Ejemplo resuelto",
-      "example": "Con 3 % de inflación mensual, 12 cuotas de {{installment}} valen hoy {{pv}}: menos que el contado con 15 % de descuento, {{cash}}."
+      "example": "Con 3 % de inflación mensual, 12 cuotas de {{installment}} valen hoy {{pv}}: menos que el contado con 15 % de descuento, {{cash}}.",
+      "points": [
+        "Una idea por pantalla y una pregunta con respuesta explicada",
+        "Barra inferior con los 5 destinos y áreas táctiles de 48 px",
+        "Lo que empiezas en el celular sigue en la computadora"
+      ]
     },
     "roles": {
       "eyebrow": "Un recorrido para cada rol",

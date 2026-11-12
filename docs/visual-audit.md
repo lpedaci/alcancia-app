@@ -88,7 +88,7 @@ Autores verificados en Dribbble el 12/11/2026, comparando la publicación con la
 
 | Se toma | Dónde | No se toma |
 | --- | --- | --- |
-| La app en un celular de tamaño real (unos 18 rem de ancho, pantalla 9:19), con pantallas reales | Hero de G0 y "Aprende en cualquier lugar" | Una captura: las pantallas se dibujan con los mismos componentes, fórmulas y datos de la billetera |
+| La app en un celular de tamaño real (unos 18 rem de ancho, pantalla 9:19), con pantallas reales | Hero de G0 y "Aprende en cualquier lugar" (solo el celular de Diego, D-153) | Una captura: las pantallas reproducen la P1 real a 320 px con los mismos componentes, textos, fórmulas y datos de la billetera |
 | Tarjetas de funciones superpuestas a los bordes del celular desde 1280 px | Hero de G0: resultado de SIM-3 y "Próximo desbloqueo: Invertir" | Que tapen la pantalla: se corrieron hacia afuera |
 | | | La mancha con degradé: en Alcancía, una forma plana en `primary-container` |
 
@@ -98,7 +98,7 @@ Agregado propio: un botón segmentado debajo del celular para ver tres pantallas
 
 | Pantalla | Referencias | Decisiones visuales propias |
 | --- | --- | --- |
-| **G0 Landing** | Estructura de página de producto B2B de Rumbo (F0). **Rediseñada el 12/11/2026 con Payora y Finotive (D-150, D-151)** | Hero a la izquierda con la billetera de práctica de Mariana en un celular de tamaño real y tarjetas de funciones; cifras en una franja de color debajo; solución en filas alternadas con lista numerada; problema en tarjetas tenues; SIM-3 embebido y funcionando; entradas al desplazarse. Sin Fuerte (pedido de Lourdes), sin degradés ni sombras en tarjetas |
+| **G0 Landing** | Estructura de página de producto B2B de Rumbo (F0). **Rediseñada el 12/11/2026 con Payora y Finotive (D-150, D-151)** | Hero a la izquierda con la billetera de práctica de Mariana en un celular de tamaño real y tarjetas de funciones; cifras en una franja de color debajo; solución en filas alternadas con lista numerada; problema en tarjetas tenues; SIM-3 embebido y funcionando; entradas al desplazarse. Fuerte solo dentro del celular, como en la app real (D-153); sin degradés ni sombras en tarjetas |
 | **P1 Inicio de la cuenta** | Coursify (menú lateral, columna derecha fija, actividad), Educo (saludo), Avenra (saludo con acciones, flecha en tarjetas), Cognify (KPIs con contexto) | Saldo grande con poder de compra al lado y cartel "Billetera de práctica · dinero ficticio"; tarjeta de misión activa; próximo desbloqueo con progreso; últimos movimientos con `MoneyText` y signo. En celular, barra inferior de 5 destinos y misión como tarjeta fija (5.3) |
 | **SIM-3** | Ninguna directa: anatomía del simulador de 2.2.1 | Datos a la izquierda y resultado en `display-medium` a la derecha en escritorio; en celular, resultado en una franja fija. Gráfico de área con relleno plano, "Ver como tabla", supuestos plegables, comparar escenarios, "Prueba cambiar…" y aviso legal |
 | **Fuerte** | Diseño original del escape room "Tu primer sueldo" (Lourdes) | Mismo cuerpo, visor, ojos, cejas, perilla y bisagras, **con relleno plano** (el original usa degradés de metal): naranja `#f08c3e` y luces `#ffc387` (D-108). Siete luces, una por nivel de la billetera (el original tiene cinco, una por candado; D-134, confirmada). Seis estados (5.0.1) |
