@@ -34,7 +34,9 @@
 | D-55 | **Evento sorpresa de la misión 1:** una suscripción ficticia de **$ 4.990** que se debita sin aviso, para trabajar gastos hormiga y débitos programados (antes D-38 de Claude Code) | Confirmada |
 | D-56 | **Crédito vive dentro de Pagar** como subsección "Tarjeta y préstamos" (nivel 5); los destinos siguen siendo 5 (5.3) | Confirmada |
 | D-57 | **Desafío de nivel armado con los bancos de sus módulos:** toma preguntas del banco de cada módulo del nivel; la insignia de un módulo sale de su parte del desafío. Si se agotan los intentos, no se bloquea para siempre: el desbloqueo pasa al tutor y no se pierde nada (5.0, 5.1) | Confirmada |
-| D-58 | **El tutor ve solo el estado de cada nivel** (bloqueado, en curso, completado), nunca el motivo de un bloqueo que dependa de la billetera (`wallet_metric`) ni su progreso ("2 de 3 meses") (4.2, 5.3) | Confirmada |
+| D-58 | **El tutor ve solo el avance de aprendizaje de cada nivel:** guías leídas, estado del desafío de nivel (pendiente, aprobado, intentos agotados), si se habilitó por suficiencia o por un tutor, y si el nivel está completado. **No ve si un nivel está bloqueado o desbloqueado**, porque de ahí se deduciría una condición de la billetera (por ejemplo, desafío aprobado pero Invertir bloqueado = falta fondo o hay deudas). Puede habilitar cualquier nivel con motivo (4.2, 5.3; ajustado el 12/11/2026) | Confirmada |
+| D-62 | **Las respuestas de hábitos de "Conocerte" nunca salen del navegador, ni siquiera agregadas** (coherente con el aviso de G5). Kirkpatrick 2 compara pre y post por dimensión **solo con las preguntas de conocimiento**; los cambios de hábitos se miden en Kirkpatrick 3 con el autoinforme a 30 días (F7) | Confirmada |
+| D-63 | **Cada nivel se abre con el desafío del nivel anterior**, también el 2: Pagar pide la misión 1 y el desafío del nivel 1 (5.0) | Confirmada |
 | D-59 | **Misiones de fase A: 13** (las 7 numeradas de 5.3 y las 6 de la tabla de 5.0). Las 6 adicionales son cortas, de 2 a 4 minutos | Confirmada |
 | D-60 | **Fecha de la demo:** `DEMO_TODAY` = 16/11/2026; programa "Bienestar financiero 2026", iniciado el 03/08/2026, coherente con la verificación de los Anexos B, C y D (11/11/2026) | Confirmada |
 | D-61 | **Alcance del contenido en fase A:** cada uno de los 16 módulos tiene objetivo, **una guía completa** y su parte del banco de preguntas; las guías 2 y 3 de cada módulo pasan a fase B. Claude Code escribe el borrador de cada tanda junto con su sección y Lourdes lo revisa por tanda, con las ampliaciones marcadas para Kevin | Provisoria, Lourdes puede ampliar |
@@ -246,7 +248,7 @@ Aprendizaje de Rumbo: la sobriedad (sin degradés, pocas sombras, paleta fría) 
 **Material Symbols** Rounded, peso 300, en SVG importado por ícono, mediante un componente único `<Icon name="..." />`. Contorno por defecto y relleno solo para lo activo o seleccionado. Decorativos con `aria-hidden`; botones de solo ícono con `aria-label` y tooltip.
 
 ### 2.4 Layout bento
-Paneles y resúmenes (P1, T1, O1, D1) en grilla bento: 12 columnas desde 1280 px, 6 en tablet y 1 en mobile, con `<BentoCard size="sm | md | lg | wide | tall">`, el mismo espacio, radio y padding, y sin huecos (una tarjeta sola en media fila ocupa la fila completa). Ritmo vertical de 8 px: 32 px entre secciones y de 8 a 16 px dentro de cada una.
+Paneles y resúmenes (P1, T1, O1, D1) en grilla bento: 12 columnas desde 1200 px (coincide con el menú lateral, D-104 de Claude Code), 6 en tablet y 1 en mobile, con `<BentoCard size="sm | md | lg | wide | tall">`, el mismo espacio, radio y padding, y sin huecos (una tarjeta sola en media fila ocupa la fila completa). Ritmo vertical de 8 px: 32 px entre secciones y de 8 a 16 px dentro de cada una.
 
 ### 2.5 Sombras
 Tarjetas separadas por superficie y borde, sin sombras. Solo dos niveles de sombra (`--elevation-1` para menús, popovers y tooltips; `--elevation-2` para modales y toasts). Prohibido: sombras en tarjetas en reposo, de colores, apiladas o decorativas.
@@ -431,7 +433,7 @@ Esto obliga a diseñar para públicos distintos dentro de la misma empresa, como
 - **"Ver como"** en la barra superior para cambiar de rol; para participante se elige entre Mariana y Diego, para mostrar las dos experiencias.
 - **Qué ve cada rol** (mínimo privilegio):
     - El participante ve todo lo suyo. Sus **montos de simuladores y metas nunca salen de su navegador** ni los ve nadie más.
-    - El tutor ve **avance de aprendizaje** de sus cohortes: módulos, resultados de evaluaciones y desafíos, de forma individual para poder acompañar, y el estado de cada nivel (bloqueado, en curso, completado), pero nunca montos, respuestas de las preguntas de hábitos del diagnóstico ni el motivo de un bloqueo que dependa de la billetera (D-58).
+    - El tutor ve **avance de aprendizaje** de sus cohortes: módulos, resultados de evaluaciones y desafíos, de forma individual para poder acompañar, y el avance de aprendizaje de cada nivel (guías, desafío de nivel, completado), pero nunca montos, respuestas de las preguntas de hábitos del diagnóstico ni si un nivel está bloqueado o desbloqueado (D-58).
     - El admin ve adopción y avance agregados, y gestiona personas y cohortes.
     - El decisor ve solo el reporte de impacto agregado.
 - Las cuentas son de trabajo: los problemas de acceso se derivan a la mesa de ayuda de la empresa, sin autogestión (como en Rumbo).
@@ -625,7 +627,7 @@ Cada simulador sigue la anatomía de 2.2.1 (datos, resultado, frase, gráfico, "
 |---|---|---|---|---|---|
 | 0 | **Abrir tu cuenta** | Primer ingreso | Bienvenida; "Conocerte" (diagnóstico); seguridad básica (2FA, nunca compartir códigos) | Configura tu seguridad | Ninguna |
 | 1 | **Cuenta** (Inicio, movimientos, recibo de sueldo explicado, un apartado "Ahorro" básico sin meta, D-53) | Terminar el nivel 0 | 1 Recibo de sueldo; 2 Tu cerebro y el dinero | 1 Tu primer cobro | Ninguna |
-| 2 | **Pagar** (transferir, QR, servicios) | Misión 1 completa | 17 Billeteras y fintech (parte pagos); 18 Estafas (base) | 2 Transfiere sin errores; 3 Paga con QR; 6 El mensaje falso | Ninguna |
+| 2 | **Pagar** (transferir, QR, servicios) | Misión 1 completa y desafío del nivel 1 (D-63) | 17 Billeteras y fintech (parte pagos); 18 Estafas (base) | 2 Transfiere sin errores; 3 Paga con QR; 6 El mensaje falso | Ninguna |
 | 3 | **Presupuesto** | 10 movimientos categorizados y desafío del nivel 2 | 3 Presupuesto y gastos hormiga | 7 Mes completo (se puede hacer desde acá) | SIM-1 |
 | 4 | **Apartados y metas** (varios apartados con meta, incluido el fondo de emergencia; el apartado "Ahorro" del nivel 1 se puede convertir en uno con meta) | Un mes cerrado con presupuesto en verde y desafío del nivel 3 | 4 Fondo de emergencia | Crea tu fondo de emergencia | SIM-2, SIM-8 |
 | 5 | **Crédito** (tarjeta, préstamos, cuotas) | Desafío del nivel 4 | 5 El orden importa; 6 Tarjeta y CFT; 7 Salir de deudas; 8 Cuotas o contado | 5 El préstamo tentador; Sal de tus deudas | SIM-6, SIM-7, SIM-9 |
@@ -762,7 +764,7 @@ Medición con el modelo de **Kirkpatrick**:
 | Nivel | Qué se mide en la demo |
 | --- | --- |
 | 1. Reacción | Satisfacción con cada módulo (escala de 1 a 5 y comentario opcional) |
-| 2. Aprendizaje | Diferencia entre el diagnóstico inicial y el final por dimensión, y resultados de evaluaciones |
+| 2. Aprendizaje | Diferencia entre el diagnóstico inicial y el final por dimensión, **solo con las preguntas de conocimiento** (D-62), y resultados de los desafíos de nivel |
 | 3. Conducta | Autoinforme a 30 días: "¿Aplicaste lo aprendido?" (presupuesto armado, fondo iniciado, pago total de la tarjeta) y desafíos cumplidos |
 | 4. Resultados | Solo como línea futura y en `docs/learning-design.md` (por ejemplo, bienestar financiero reportado); no se inventan datos de negocio |
 
@@ -835,7 +837,7 @@ Documentar en `docs/learning-design.md` qué prácticas actuales incorpora y cu�
 | P4 | Ahorrar: presupuesto | `/app/save/budget` |
 | P5 | Ahorrar: apartados y metas | `/app/save/pockets` |
 | P6 | Ahorrar: rendir (cuenta remunerada, fondo, plazo fijo y UVA de práctica) | `/app/save/yield` |
-| P7 | Crédito (tarjeta, préstamos, cuotas) | `/app/credit` |
+| P7 | Pagar: tarjeta y préstamos (crédito, cuotas; D-56) | `/app/pay/credit` |
 | P8 | Invertir (cuenta comitente, instrumentos, tenencia) | `/app/invest`, `/app/invest/:instrumentId` |
 | P9 | Aprender: mapa de niveles y logros | `/app/learn` |
 | P10 | Guía (lección) | `/app/learn/guides/:guideId` |
@@ -981,7 +983,7 @@ interface OfficialSource { id: string; name: string; url: string; verifiedAt: st
 ### Datos semilla
 - Andina Servicios: 4 cohortes (una por área) y unas 80 personas participantes, con distinta adopción por área (el centro de distribución, sobre todo desde el celular); con diagnósticos iniciales y algunos finales, progreso variado, satisfacción, desafíos y seguimientos a 30 días, para que los paneles muestren diferencias reales.
 - Al menos una cohorte con menos de 5 personas, para mostrar el umbral de privacidad.
-- Estados de demo en niveles (coinciden con el modo demo de 5.0): **Diego en el nivel 2** (Pagar), con "Conocerte" hecho, las guías del nivel 1 leídas desde el celular y un desafío semanal cumplido. **Mariana en el nivel 6** (Rendir), con "Conocerte" hecho, un apartado de fondo de emergencia de 2 de 3 meses, una meta de ahorro y un desafío semanal pendiente (así se ve el bloqueo de Invertir con su progreso).
+- Estados de demo en niveles (coinciden con el modo demo de 5.0): **Diego en el nivel 2** (Pagar), con "Conocerte" hecho, las guías y el desafío del nivel 1 hechos desde el celular y un desafío semanal cumplido. **Mariana en el nivel 6** (Rendir), con "Conocerte" hecho, un apartado de fondo de emergencia de 2 de 3 meses, una meta de ahorro y un desafío semanal pendiente (así se ve el bloqueo de Invertir con su progreso).
 - Los 16 módulos de fase A con sus lecciones y evaluaciones.
 - Botón "Restablecer demo" en la landing y en el menú de usuario.
 
