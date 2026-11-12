@@ -1,0 +1,132 @@
+[
+  {
+    "id": "level-0",
+    "order": 0,
+    "section": "open_account",
+    "phase": "A",
+    "guideModuleIds": [],
+    "missionIds": ["mission-security"],
+    "toolSimIds": [],
+    "unlock": { "all": [{ "type": "first_sign_in" }] }
+  },
+  {
+    "id": "level-1",
+    "order": 1,
+    "section": "account",
+    "phase": "A",
+    "guideModuleIds": ["module-01", "module-02"],
+    "missionIds": ["mission-1"],
+    "toolSimIds": [],
+    "unlock": { "all": [{ "type": "level_completed", "levelId": "level-0" }] },
+    "challengeId": "challenge-level-1"
+  },
+  {
+    "id": "level-2",
+    "order": 2,
+    "section": "pay",
+    "phase": "A",
+    "guideModuleIds": ["module-17", "module-18"],
+    "missionIds": ["mission-2", "mission-3", "mission-6"],
+    "toolSimIds": [],
+    "unlock": {
+      "all": [
+        { "type": "mission_completed", "missionId": "mission-1" },
+        { "type": "challenge_passed", "challengeId": "challenge-level-1", "minScore": 0.7 }
+      ]
+    },
+    "challengeId": "challenge-level-2",
+    "masteryChallengeId": "mastery-level-2"
+  },
+  {
+    "id": "level-3",
+    "order": 3,
+    "section": "budget",
+    "phase": "A",
+    "guideModuleIds": ["module-03"],
+    "missionIds": ["mission-7"],
+    "toolSimIds": ["SIM-1"],
+    "unlock": {
+      "all": [
+        { "type": "wallet_metric", "metric": "categorized_movements", "op": ">=", "value": "10" },
+        { "type": "challenge_passed", "challengeId": "challenge-level-2", "minScore": 0.7 }
+      ]
+    },
+    "challengeId": "challenge-level-3",
+    "masteryChallengeId": "mastery-level-3"
+  },
+  {
+    "id": "level-4",
+    "order": 4,
+    "section": "pockets",
+    "phase": "A",
+    "guideModuleIds": ["module-04"],
+    "missionIds": ["mission-emergency-fund"],
+    "toolSimIds": ["SIM-2", "SIM-8"],
+    "unlock": {
+      "all": [
+        { "type": "wallet_metric", "metric": "months_closed_green", "op": ">=", "value": "1" },
+        { "type": "challenge_passed", "challengeId": "challenge-level-3", "minScore": 0.7 }
+      ]
+    },
+    "challengeId": "challenge-level-4",
+    "masteryChallengeId": "mastery-level-4"
+  },
+  {
+    "id": "level-5",
+    "order": 5,
+    "section": "credit",
+    "phase": "A",
+    "guideModuleIds": ["module-05", "module-06", "module-07", "module-08"],
+    "missionIds": ["mission-5", "mission-debts"],
+    "toolSimIds": ["SIM-6", "SIM-7", "SIM-9"],
+    "unlock": { "all": [{ "type": "challenge_passed", "challengeId": "challenge-level-4", "minScore": 0.7 }] },
+    "challengeId": "challenge-level-5",
+    "masteryChallengeId": "mastery-level-5"
+  },
+  {
+    "id": "level-6",
+    "order": 6,
+    "section": "yield",
+    "phase": "A",
+    "guideModuleIds": ["module-09", "module-10", "module-11"],
+    "missionIds": ["mission-4"],
+    "toolSimIds": ["SIM-3", "SIM-4", "SIM-5", "SIM-12"],
+    "unlock": {
+      "all": [
+        { "type": "wallet_metric", "metric": "emergency_pocket", "op": "==", "value": "1" },
+        { "type": "challenge_passed", "challengeId": "challenge-level-5", "minScore": 0.7 }
+      ]
+    },
+    "challengeId": "challenge-level-6",
+    "masteryChallengeId": "mastery-level-6"
+  },
+  {
+    "id": "level-7",
+    "order": 7,
+    "section": "invest",
+    "phase": "A",
+    "guideModuleIds": ["module-12", "module-13", "module-14", "module-15"],
+    "missionIds": ["mission-broker-account", "mission-first-cedear", "mission-hold-the-drop"],
+    "toolSimIds": ["SIM-10", "SIM-11"],
+    "unlock": {
+      "all": [
+        { "type": "wallet_metric", "metric": "emergency_months", "op": ">=", "value": "3" },
+        { "type": "wallet_metric", "metric": "high_rate_debt", "op": "==", "value": "0" },
+        { "type": "challenge_passed", "challengeId": "challenge-level-6", "minScore": 0.7 },
+        { "type": "investor_profile_done" }
+      ]
+    },
+    "challengeId": "challenge-level-7",
+    "masteryChallengeId": "mastery-level-7"
+  },
+  {
+    "id": "level-8",
+    "order": 8,
+    "section": "crypto",
+    "phase": "B",
+    "guideModuleIds": ["module-16"],
+    "missionIds": [],
+    "toolSimIds": [],
+    "unlock": { "all": [{ "type": "level_completed", "levelId": "level-7" }] }
+  }
+]

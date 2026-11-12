@@ -1,0 +1,50 @@
+[
+  {
+    "nombreComercial": "Allaria",
+    "razonSocial": "Allaria S.A.",
+    "categoria": "ALyC Integral",
+    "matricula": "24",
+    "fuente": "Nómina de ALyC de BYMA: https://www.byma.com.ar/mercado/para-agentes-miembros/listado-de-alycs",
+    "verificadoEl": "2026-11-12"
+  },
+  {
+    "nombreComercial": "Balanz",
+    "razonSocial": "Balanz Capital Valores S.A.U.",
+    "categoria": "ALyC Integral",
+    "matricula": "210",
+    "fuente": "Nómina de ALyC de BYMA: https://www.byma.com.ar/mercado/para-agentes-miembros/listado-de-alycs",
+    "verificadoEl": "2026-11-12"
+  },
+  {
+    "nombreComercial": "Bull Market Brokers",
+    "razonSocial": "Bull Market Brokers S.A.",
+    "categoria": "ALyC Propio",
+    "matricula": "247",
+    "fuente": "Nómina de ALyC de BYMA: https://www.byma.com.ar/mercado/para-agentes-miembros/listado-de-alycs",
+    "verificadoEl": "2026-11-12"
+  },
+  {
+    "nombreComercial": "Cocos Capital",
+    "razonSocial": "Cocos Capital S.A.",
+    "categoria": "ALyC Propio",
+    "matricula": "688",
+    "fuente": "Nómina de ALyC de BYMA: https://www.byma.com.ar/mercado/para-agentes-miembros/listado-de-alycs",
+    "verificadoEl": "2026-11-12"
+  },
+  {
+    "nombreComercial": "IOL invertironline",
+    "razonSocial": "InvertirOnline S.A.U.",
+    "categoria": "ALyC Integral",
+    "matricula": "273",
+    "fuente": "Registro Público de Agentes de la CNV: https://www.cnv.gov.ar/sitioWeb/RegistrosPublicos/Agentes",
+    "verificadoEl": "2026-11-12"
+  },
+  {
+    "nombreComercial": "PPI",
+    "razonSocial": "PP Inversiones S.A.",
+    "categoria": "ALyC Integral",
+    "matricula": "686",
+    "fuente": "Nómina de ALyC de BYMA: https://www.byma.com.ar/mercado/para-agentes-miembros/listado-de-alycs",
+    "verificadoEl": "2026-11-12"
+  }
+]

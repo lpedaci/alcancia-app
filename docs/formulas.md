@@ -206,11 +206,11 @@ Muestra las dos fuentes de variación y que se multiplican (`1,1 × 1,1 = 1,21`)
 
 | Opción (valores de ejemplo) | TNA | A los 30 días | Liquidez | En poder de compra |
 | --- | --- | --- | --- | --- |
-| Cuenta remunerada | 30 % | **$ 3.074.860,99** | Inmediata | $ 2.985.301,93 |
-| Fondo money market | 31 % | **$ 3.077.387,20** | En el día (B-26) | $ 2.987.754,56 |
-| Plazo fijo tradicional | 34 % | **$ 3.083.835,62** | Al vencimiento | $ 2.994.015,17 |
+| Cuenta remunerada | 30 % | **$ 3.074.860,99** | Inmediata | $ 2.985.301,94 |
+| Fondo money market | 31 % | **$ 3.077.387,20** | En el día (B-26) | $ 2.987.754,57 |
+| Plazo fijo tradicional | 34 % | **$ 3.083.835,62** | Al vencimiento | $ 2.994.015,16 |
 
-Ninguna le gana a la inflación del escenario medio en 30 días. Se presenta como comparación de características, no como recomendación; el panel dice qué opción tiene garantía de los depósitos (B-01, B-12, B-14).
+Ninguna le gana a la inflación del escenario medio en 30 días. El poder de compra se calcula con el monto sin redondear (por eso puede diferir en un centavo de dividir el monto ya redondeado). Se presenta como comparación de características, no como recomendación; el panel dice qué opción tiene garantía de los depósitos (B-01, B-12, B-14).
 
 **Caso F-28** · $ 3.000.000, 30 días, escenario bajo (1,5 % mensual), con las tasas de D-110
 
@@ -250,7 +250,7 @@ En este escenario, el fondo y el plazo fijo le ganan a la inflación por poco y 
 - 50 %: **$ 642.479,43** · 30 %: **$ 385.487,66** · 20 %: **$ 256.991,77**
 - Aguinaldo prorrateado aproximado: **$ 107.079,91**
 
-**Caso F-25** · evidencia de la misión 1: 20 % del neto = $ 256.991,772. Se aceptan respuestas entre **$ 256.990,77 y $ 256.992,77** (tolerancia de $ 1, spec 5.3).
+**Caso F-25** · evidencia de la misión 1: 20 % del neto = $ 256.991,772. Se aceptan respuestas entre **$ 256.990,78 y $ 256.992,77** (tolerancia de $ 1, spec 5.3).
 
 ## 15. Billetera: rendimiento diario y poder de compra
 

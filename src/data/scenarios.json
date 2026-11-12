@@ -1,0 +1,44 @@
+[
+  {
+    "id": "low",
+    "label": "Inflación baja",
+    "monthlyInflation": "0.015",
+    "exampleRates": {
+      "remunerated": "0.15",
+      "moneyMarket": "0.20",
+      "fixedTerm": "0.22",
+      "uvaExtra": "0.01",
+      "card": "0.45",
+      "personalLoan": "0.40"
+    },
+    "note": "example"
+  },
+  {
+    "id": "medium",
+    "label": "Inflación media",
+    "monthlyInflation": "0.03",
+    "exampleRates": {
+      "remunerated": "0.30",
+      "moneyMarket": "0.31",
+      "fixedTerm": "0.34",
+      "uvaExtra": "0.01",
+      "card": "0.60",
+      "personalLoan": "0.55"
+    },
+    "note": "example"
+  },
+  {
+    "id": "high",
+    "label": "Inflación alta",
+    "monthlyInflation": "0.06",
+    "exampleRates": {
+      "remunerated": "0.60",
+      "moneyMarket": "0.62",
+      "fixedTerm": "0.68",
+      "uvaExtra": "0.01",
+      "card": "1.20",
+      "personalLoan": "1.10"
+    },
+    "note": "example"
+  }
+]

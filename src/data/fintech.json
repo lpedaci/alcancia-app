@@ -1,0 +1,92 @@
+[
+  {
+    "nombreComercial": "Mercado Pago",
+    "razonSocial": "MercadoLibre S.R.L.",
+    "tipo": "psp_cuenta_pago",
+    "registro": "Registro de proveedores de servicios de pago del BCRA, proveedores de cuentas de pago",
+    "fuente": "https://www.bcra.gob.ar/registro-de-proveedores-de-servicios-de-pago-resultados-por-tipo/?tipoPSP=1",
+    "verificadoEl": "2026-11-12"
+  },
+  {
+    "nombreComercial": "Ualá",
+    "razonSocial": "Alau Tecnologia S.A.U.",
+    "tipo": "psp_cuenta_pago",
+    "registro": "Registro de proveedores de servicios de pago del BCRA, proveedores de cuentas de pago",
+    "fuente": "https://www.bcra.gob.ar/registro-de-proveedores-de-servicios-de-pago-resultados-por-tipo/?tipoPSP=1",
+    "verificadoEl": "2026-11-12",
+    "nota": "El grupo tiene además un banco, Uala Bank S.A.U., que figura en el listado de entidades financieras del BCRA. Mira en la app qué producto usas."
+  },
+  {
+    "nombreComercial": "Personal Pay",
+    "razonSocial": "Micro Sistemas S.A.",
+    "tipo": "psp_cuenta_pago",
+    "registro": "Registro de proveedores de servicios de pago del BCRA, proveedores de cuentas de pago",
+    "fuente": "https://www.bcra.gob.ar/registro-de-proveedores-de-servicios-de-pago-resultados-por-tipo/?tipoPSP=1",
+    "verificadoEl": "2026-11-12"
+  },
+  {
+    "nombreComercial": "Prex",
+    "razonSocial": "Prex Card S.A.S.",
+    "tipo": "psp_cuenta_pago",
+    "registro": "Registro de proveedores de servicios de pago del BCRA, proveedores de cuentas de pago",
+    "fuente": "https://www.bcra.gob.ar/registro-de-proveedores-de-servicios-de-pago-resultados-por-tipo/?tipoPSP=1",
+    "verificadoEl": "2026-11-12"
+  },
+  {
+    "nombreComercial": "Cuenta DNI",
+    "razonSocial": "Banco de la Provincia de Buenos Aires",
+    "tipo": "entidad_financiera",
+    "registro": "Listado de entidades financieras del BCRA (actualizado a agosto de 2026)",
+    "fuente": "https://www.bcra.gob.ar/entidades-financieras/",
+    "verificadoEl": "2026-11-12"
+  },
+  {
+    "nombreComercial": "BNA+",
+    "razonSocial": "Banco de la Nación Argentina",
+    "tipo": "entidad_financiera",
+    "registro": "Listado de entidades financieras del BCRA (actualizado a agosto de 2026)",
+    "fuente": "https://www.bcra.gob.ar/entidades-financieras/",
+    "verificadoEl": "2026-11-12"
+  },
+  {
+    "nombreComercial": "Naranja X",
+    "razonSocial": "Naranja Digital Compañía Financiera S.A.U.",
+    "tipo": "entidad_financiera",
+    "registro": "Listado de entidades financieras del BCRA (actualizado a agosto de 2026)",
+    "fuente": "https://www.bcra.gob.ar/entidades-financieras/",
+    "verificadoEl": "2026-11-12"
+  },
+  {
+    "nombreComercial": "Brubank",
+    "razonSocial": "Brubank S.A.U.",
+    "tipo": "entidad_financiera",
+    "registro": "Listado de entidades financieras del BCRA (actualizado a agosto de 2026)",
+    "fuente": "https://www.bcra.gob.ar/entidades-financieras/",
+    "verificadoEl": "2026-11-12"
+  },
+  {
+    "nombreComercial": "MODO",
+    "razonSocial": "Play Digital S.A.",
+    "tipo": "iniciador",
+    "registro": "Registro de proveedores de servicios de pago del BCRA, iniciadores",
+    "fuente": "https://www.bcra.gob.ar/registro-de-proveedores-de-servicios-de-pago-resultados-por-tipo/?tipoPSP=2",
+    "verificadoEl": "2026-11-12"
+  },
+  {
+    "nombreComercial": "Belo",
+    "razonSocial": "Belo Argentina S.A.",
+    "tipo": "psav",
+    "registro": "Registro PSAV de la CNV, N° 52",
+    "fuente": "https://www.cnv.gov.ar/SitioWeb/RegistrosPublicos/Psav",
+    "verificadoEl": "2026-11-12"
+  },
+  {
+    "nombreComercial": "Lemon",
+    "razonSocial": "Bay Treasure Caramel S.A.",
+    "tipo": "psav",
+    "registro": "Registro PSAV de la CNV, N° 162",
+    "fuente": "https://www.cnv.gov.ar/SitioWeb/RegistrosPublicos/Psav",
+    "verificadoEl": "2026-11-12",
+    "nota": "La razón social del servicio cripto sale de la leyenda legal de la app y se confirmó en el registro. La misma app ofrece una cuenta de pago de otra empresa: un ejemplo de por qué conviene leer la leyenda de cada producto."
+  }
+]
