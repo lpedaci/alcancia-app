@@ -41,19 +41,27 @@ function compute(amount: string, monthlyInflation: string, months: number) {
 
 export function InflationSimulator({
   headingLevel: Heading = 'h2',
-  title,
+  labelledBy,
   idPrefix,
+  initialAmount = '100000',
+  amountHelp,
 }: {
-  headingLevel?: 'h1' | 'h2' | 'h3';
-  /** Optional visible title; the page version passes it as its h1. */
-  title?: string;
+  headingLevel?: 'h2' | 'h3';
+  /** Id of a heading already on the page (the tool page's h1). Without it, a hidden heading names the section. */
+  labelledBy?: string;
   idPrefix?: string;
+  /** Decimal string. Inside the wallet it is the practice salary; on the landing, 100.000. */
+  initialAmount?: string;
+  /** Helper text of the amount, for example "Precargado con tu sueldo de práctica". */
+  amountHelp?: string;
 }) {
   const { t } = useTranslation();
   const autoId = useId();
   const uid = idPrefix ?? autoId;
 
-  const [amountText, setAmountText] = useState('100.000');
+  const [amountText, setAmountText] = useState(() =>
+    formatNumber(initialAmount, D(initialAmount).isInteger() ? 0 : 2),
+  );
   const [scenario, setScenario] = useState<ScenarioChoice>('medium');
   const [customText, setCustomText] = useState('3');
   const [months, setMonths] = useState(12);
@@ -111,12 +119,8 @@ export function InflationSimulator({
   };
 
   return (
-    <section aria-labelledby={`${uid}-title`} className="@container flex min-w-0 flex-col gap-4">
-      {title ? (
-        <Heading id={`${uid}-title`} className="text-headline-small text-on-surface">
-          {title}
-        </Heading>
-      ) : (
+    <section aria-labelledby={labelledBy ?? `${uid}-title`} className="@container flex min-w-0 flex-col gap-4">
+      {!labelledBy && (
         <Heading id={`${uid}-title`} className="sr-only">
           {t('sim3.title')}
         </Heading>
@@ -131,7 +135,7 @@ export function InflationSimulator({
         >
           <MoneyInput
             label={t('sim3.amount.label')}
-            helperText={t('sim3.amount.help')}
+            helperText={amountHelp ?? t('sim3.amount.help')}
             value={amountText}
             onChange={(e) => setAmountText(e.target.value)}
             id={`${uid}-amount`}
@@ -282,7 +286,9 @@ export function InflationSimulator({
                         axisLine={false}
                         width={72}
                         tick={{ fill: 'var(--md-sys-color-on-surface-variant)', fontSize: 12 }}
-                        tickFormatter={(v: number) => `$${NBSP}${formatNumber(String(Math.round(v / 1000)), 0)}${NBSP}mil`}
+                        tickFormatter={(v: number) =>
+                          v === 0 ? `$${NBSP}0` : `$${NBSP}${formatNumber(String(Math.round(v / 1000)), 0)}${NBSP}mil`
+                        }
                       />
                       <Tooltip
                         cursor={{ stroke: 'var(--md-sys-color-outline)' }}

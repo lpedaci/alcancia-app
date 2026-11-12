@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, NavLink } from 'react-router';
+import { Link, useLocation } from 'react-router';
 import { Logo } from '@/components/layout/Logo';
 import { Avatar } from '@/components/ui/Avatar';
 import { Icon, type IconName } from '@/components/ui/Icon';
@@ -49,6 +49,20 @@ export const DESTINATIONS: Destination[] = [
   { id: 'learn', to: '/app/learn', icon: 'school', subsections: [{ key: 'map', to: '/app/learn' }, { key: 'tools', to: '/app/tools' }] },
 ];
 
+/** Path prefixes of each destination: Aprender also covers the tools (P13, 5.3). */
+const ACTIVE_PREFIXES: Record<Destination['id'], string[]> = {
+  home: [],
+  pay: ['/app/pay'],
+  save: ['/app/save'],
+  invest: ['/app/invest'],
+  learn: ['/app/learn', '/app/tools', '/app/missions'],
+};
+
+export function isDestinationActive(d: Destination, pathname: string): boolean {
+  if (d.id === 'home') return pathname === '/app' || pathname === '/app/';
+  return ACTIVE_PREFIXES[d.id].some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`));
+}
+
 function DestinationLabel({ d }: { d: Destination }) {
   const { t } = useTranslation();
   return (
@@ -75,6 +89,7 @@ export function WalletShell({
   personName: string;
 }) {
   const { t } = useTranslation();
+  const { pathname } = useLocation();
 
   const itemClass = ({ isActive }: { isActive: boolean }) =>
     cn(
@@ -128,8 +143,12 @@ export function WalletShell({
             <ul className="flex flex-col gap-1">
               {DESTINATIONS.map((d) => (
                 <li key={d.id}>
-                  <NavLink to={d.to} end={d.id === 'home'} className={itemClass}>
-                    {({ isActive }) => (
+                  <Link
+                    to={d.to}
+                    className={itemClass({ isActive: isDestinationActive(d, pathname) })}
+                    aria-current={isDestinationActive(d, pathname) ? 'page' : undefined}
+                  >
+                    {(() => { const isActive = isDestinationActive(d, pathname); return (
                       <>
                         {/* Rail item: indicator pill around the icon, label below */}
                         <span className="flex w-20 flex-col items-center gap-1 py-1 large:hidden">
@@ -150,8 +169,8 @@ export function WalletShell({
                           {d.locked && <Icon name="lock" size={18} />}
                         </span>
                       </>
-                    )}
-                  </NavLink>
+                    );  })()}
+                  </Link>
                   {d.subsections && (
                     <ul className="mt-1 mb-2 ml-11 hidden flex-col gap-0.5 large:flex">
                       {d.subsections.map((s) => (
@@ -198,8 +217,12 @@ export function WalletShell({
         <ul className="grid grid-cols-5">
           {DESTINATIONS.map((d) => (
             <li key={d.id}>
-              <NavLink to={d.to} end={d.id === 'home'} className="flex min-h-16 flex-col items-center justify-center gap-1 px-1 py-2 text-label-medium text-on-surface-variant aria-[current=page]:text-on-surface">
-                {({ isActive }) => (
+              <Link
+                to={d.to}
+                aria-current={isDestinationActive(d, pathname) ? 'page' : undefined}
+                className="flex min-h-16 flex-col items-center justify-center gap-1 px-1 py-2 text-label-medium text-on-surface-variant aria-[current=page]:text-on-surface"
+              >
+                {(() => { const isActive = isDestinationActive(d, pathname); return (
                   <>
                     <span className={cn('relative flex h-8 w-14 items-center justify-center rounded-full', isActive && 'bg-primary-container text-on-primary-container')}>
                       <Icon name={d.icon} size={24} filled={isActive} />
@@ -209,8 +232,8 @@ export function WalletShell({
                       <DestinationLabel d={d} />
                     </span>
                   </>
-                )}
-              </NavLink>
+                );  })()}
+              </Link>
             </li>
           ))}
         </ul>

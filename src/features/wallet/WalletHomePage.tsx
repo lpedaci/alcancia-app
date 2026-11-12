@@ -103,7 +103,8 @@ export function WalletHomePage() {
           </div>
           <div className="flex flex-wrap gap-2 md:flex-col md:items-stretch">
             <Button variant="tonal" size="s" leadingIcon="skip_next">{t('wallet.home.advance.day')}</Button>
-            <Button variant="outlined" size="s" leadingIcon="fast_forward">{t('wallet.home.advance.month')}</Button>
+            <Button variant="outlined" size="s" leadingIcon="fast_forward">{t('wallet.home.advance.week')}</Button>
+            <Button variant="outlined" size="s" leadingIcon="calendar_month">{t('wallet.home.advance.month')}</Button>
           </div>
         </section>
 

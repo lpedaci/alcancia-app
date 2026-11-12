@@ -45,13 +45,18 @@ const ROLES: { id: string; demo: string; name: string; role: Role }[] = [
   { id: 'ricardo', demo: 'ricardo', name: 'Ricardo Benítez', role: 'sponsor' },
 ];
 
-const SOLUTION: { key: string; icon: IconName; wide?: boolean }[] = [
-  { key: 'diagnostic', icon: 'route', wide: true },
-  { key: 'guides', icon: 'menu_book' },
-  { key: 'challenges', icon: 'quiz' },
-  { key: 'tools', icon: 'calculate' },
-  { key: 'goals', icon: 'savings' },
-  { key: 'panel', icon: 'query_stats', wide: true },
+/**
+ * Solution bento without holes or empty bottoms (2.4): the two cards with a product piece share
+ * the first row (8 + 4 columns on desktop, full width on tablets); the four text cards fill the
+ * second row (3 columns each on desktop, two per row on tablets).
+ */
+const SOLUTION: { key: string; icon: IconName; span: string }[] = [
+  { key: 'diagnostic', icon: 'route', span: 'md:col-span-6 large:col-span-7' },
+  { key: 'panel', icon: 'query_stats', span: 'md:col-span-6 large:col-span-5' },
+  { key: 'guides', icon: 'menu_book', span: 'md:col-span-3 large:col-span-3' },
+  { key: 'challenges', icon: 'quiz', span: 'md:col-span-3 large:col-span-3' },
+  { key: 'tools', icon: 'calculate', span: 'md:col-span-3 large:col-span-3' },
+  { key: 'goals', icon: 'savings', span: 'md:col-span-3 large:col-span-3' },
 ];
 
 function Section({
@@ -212,13 +217,10 @@ export function LandingPage() {
             intro={t('landing.solution.intro')}
           />
           <ul className="grid grid-cols-1 gap-(--space-bento-gap) md:grid-cols-6 large:grid-cols-12">
-            {SOLUTION.map(({ key, icon, wide }) => (
+            {SOLUTION.map(({ key, icon, span }) => (
               <li
                 key={key}
-                className={cn(
-                  'flex min-w-0 flex-col gap-3 rounded-xl border border-outline-variant bg-surface p-(--space-card-padding)',
-                  wide ? 'md:col-span-6 large:col-span-6' : 'md:col-span-3 large:col-span-3',
-                )}
+                className={cn('flex min-w-0 flex-col gap-3 rounded-xl border border-outline-variant bg-surface p-(--space-card-padding)', span)}
               >
                 <IconTile icon={icon} tone={key === 'goals' ? 'tertiary' : 'primary'} />
                 <h3 className="text-title-medium text-on-surface">{t(`landing.solution.${key}.title`)}</h3>
@@ -262,9 +264,18 @@ export function LandingPage() {
         {/* 6 · One journey per role */}
         <Section id="recorridos" tone="white">
           <SectionTitle id="recorridos" eyebrow={t('landing.roles.eyebrow')} title={t('landing.roles.title')} intro={t('landing.roles.intro')} />
-          <ul className="grid grid-cols-1 gap-(--space-bento-gap) md:grid-cols-2 large:grid-cols-3">
-            {ROLES.map((r) => (
-              <li key={r.id} className="flex min-w-0 flex-col gap-3 rounded-xl border border-outline-variant bg-surface p-(--space-card-padding)">
+          {/* No holes (2.4): the two participants share the first row, the other three roles the second
+              on desktop; on tablets the last card takes the full row. */}
+          <ul className="grid grid-cols-1 gap-(--space-bento-gap) md:grid-cols-2 large:grid-cols-6">
+            {ROLES.map((r, index) => (
+              <li
+                key={r.id}
+                className={cn(
+                  'flex min-w-0 flex-col gap-3 rounded-xl border border-outline-variant bg-surface p-(--space-card-padding)',
+                  index < 2 ? 'large:col-span-3' : 'large:col-span-2',
+                  index === ROLES.length - 1 && 'md:col-span-2 large:col-span-2',
+                )}
+              >
                 <div className="flex items-center gap-3">
                   <Avatar name={r.name} role={r.role} size="lg" />
                   <div className="min-w-0">

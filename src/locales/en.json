@@ -235,7 +235,8 @@
     "dataLabel": "Scenario data",
     "amount": {
       "label": "Amount",
-      "help": "Amount in pesos, for example: 100.000"
+      "help": "Amount in pesos, for example: 100.000",
+      "helpSalary": "Prefilled with your practice salary. Amount in pesos, for example: 100.000"
     },
     "scenario": {
       "label": "Monthly inflation (example values)",

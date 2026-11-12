@@ -1,0 +1,11 @@
+#!/bin/sh
+# Blocks the push when lint, type check or unit tests fail (INC-07). Enabled with:
+#   git config core.hooksPath .githooks
+set -e
+echo "pre-push: lint"
+npm run lint --silent
+echo "pre-push: type check"
+npx tsc -b
+echo "pre-push: unit tests"
+npm test --silent
+echo "pre-push: ok"

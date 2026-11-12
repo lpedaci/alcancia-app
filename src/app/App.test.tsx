@@ -69,11 +69,33 @@ describe('P1 and SIM-3 in the wallet (visual pilot)', () => {
     expect(within(nav).getByRole('link', { name: /Invertir, bloqueado/ })).toBeInTheDocument();
   });
 
-  it('SIM-3 page uses the simulator title as its only h1', async () => {
+  it('SIM-3 page: the h1 comes before the description and Fuerte, and the amount starts with the practice salary', async () => {
     renderAt('/app/tools/SIM-3');
     const h1 = await screen.findAllByRole('heading', { level: 1 });
     expect(h1).toHaveLength(1);
     expect(h1[0]).toHaveTextContent(es.sim3.title);
+    const intro = screen.getByText(es.sim3.intro);
+    expect(h1[0]!.compareDocumentPosition(intro) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(screen.getByLabelText(es.sim3.amount.label)).toHaveValue('1.404.109,24');
+    expect(screen.getByRole('region', { name: es.sim3.title })).toBeInTheDocument();
+    // The tools live under Aprender (5.3): that destination is the current one.
+    const nav = screen.getAllByRole('navigation', { name: es.wallet.nav.label })[0]!;
+    expect(within(nav).getByRole('link', { name: new RegExp(es.wallet.nav.learn) })).toHaveAttribute('aria-current', 'page');
+    expect(within(nav).getByRole('link', { name: new RegExp(es.wallet.nav.home) })).not.toHaveAttribute('aria-current');
+  });
+
+  it('SIM-3 on the landing, without a session, starts at 100.000', () => {
+    renderAt('/');
+    const sim = screen.getByRole('region', { name: es.landing.simulator.title });
+    expect(within(sim).getByLabelText(es.sim3.amount.label)).toHaveValue('100.000');
+  });
+
+  it('P1 offers to advance a day, a week and a month', async () => {
+    renderAt('/app');
+    await screen.findByRole('heading', { level: 1 });
+    for (const key of ['day', 'week', 'month'] as const) {
+      expect(screen.getByRole('button', { name: es.wallet.home.advance[key] })).toBeInTheDocument();
+    }
   });
 });
 

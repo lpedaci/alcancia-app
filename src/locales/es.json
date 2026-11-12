@@ -235,7 +235,8 @@
     "dataLabel": "Datos del escenario",
     "amount": {
       "label": "Monto",
-      "help": "Monto en pesos, por ejemplo: 100.000"
+      "help": "Monto en pesos, por ejemplo: 100.000",
+      "helpSalary": "Precargado con tu sueldo de práctica. Monto en pesos, por ejemplo: 100.000"
     },
     "scenario": {
       "label": "Inflación mensual (valores de ejemplo)",
@@ -344,7 +345,8 @@
       "chipNext": "Próximo desbloqueo: Invertir",
       "advance": {
         "day": "Avanzar un día",
-        "month": "Avanzar un mes"
+        "month": "Avanzar un mes",
+        "week": "Avanzar una semana"
       },
       "balance": {
         "title": "Saldo disponible",
