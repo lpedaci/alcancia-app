@@ -280,7 +280,9 @@
       "toolResult": "What your money buys in 12 months",
       "toolPhrase": "With 3 % a month, in 12 months your money buys {{loss}} less.",
       "toolScenario": "Scenario",
-      "toolExample": "Example values"
+      "toolExample": "Example values",
+      "pause": "Pause animation",
+      "resume": "Resume animation"
     },
     "floating": {
       "unlockLabel": "Next unlock",
@@ -406,5 +408,8 @@
       "detail": "{{amount}} · {{inflation}} monthly · {{months}} months"
     },
     "legal": "Educational content. It is not financial advice or an investment recommendation."
+  },
+  "wallet": {
+    "practiceBanner": "Personal finance simulator · play money"
   }
 }

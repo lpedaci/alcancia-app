@@ -124,6 +124,13 @@ describe('P1 and SIM-3 in the wallet (visual pilot)', () => {
     expect(within(sim).getByLabelText(es.sim3.amount.label)).toHaveValue('100.000');
   });
 
+  it('the fixed banner always says the money is play money (1.1.1, D-69)', async () => {
+    renderAt('/app');
+    await screen.findByRole('heading', { level: 1 });
+    expect(es.wallet.practiceBanner).toContain('dinero ficticio');
+    expect(screen.getByText(es.wallet.practiceBanner)).toHaveTextContent('dinero ficticio');
+  });
+
   it('P1 offers to advance a day, a week and a month', async () => {
     renderAt('/app');
     await screen.findByRole('heading', { level: 1 });

@@ -38,7 +38,7 @@
 | RF-32 | Invertir: cuenta comitente de práctica con el bróker ficticio (5.4) | M | Los 7 pasos de 5.4; serie de precios sintética rotulada | Pendiente |
 | RF-33 | Fuerte con 6 estados, mensajes de `fuerte-lines.json` y 3 niveles de presencia | M | Nunca interrumpe dos veces la misma acción; mensaje anunciado como texto | Pendiente |
 | RF-34 | "¿Por qué importa?" y tarjetas de aprendizaje en el momento justo | M | Una por acción como máximo; no se repite si ya se respondió bien | Pendiente |
-| RF-35 | Cartel fijo "Simulador de finanzas personales" y ningún dato real pedido | M | Revisión de formularios: no hay campos de DNI, CBU, tarjeta ni contraseña reales | Pendiente |
+| RF-35 | Cartel fijo "Simulador de finanzas personales · dinero ficticio" y ningún dato real pedido | M | Revisión de formularios: no hay campos de DNI, CBU, tarjeta ni contraseña reales | Pendiente |
 | RF-36 | Comprobantes y resumen del mes | S | Comprobante ficticio descargable; resumen en cada cierre | Pendiente |
 | RF-37 | Empezar de cero la billetera con confirmación | M | No borra el avance de aprendizaje | Pendiente |
 

@@ -280,7 +280,9 @@
       "toolResult": "Lo que compra tu dinero dentro de 12 meses",
       "toolPhrase": "Con 3 % mensual, en 12 meses tu dinero compra un {{loss}} menos.",
       "toolScenario": "Escenario",
-      "toolExample": "Valores de ejemplo"
+      "toolExample": "Valores de ejemplo",
+      "pause": "Pausar animación",
+      "resume": "Reanudar animación"
     },
     "floating": {
       "unlockLabel": "Próximo desbloqueo",
@@ -408,7 +410,7 @@
     "legal": "Contenido educativo. No es asesoramiento financiero ni una recomendación de inversión."
   },
   "wallet": {
-    "practiceBanner": "Simulador de finanzas personales",
+    "practiceBanner": "Simulador de finanzas personales · dinero ficticio",
     "help": "Ayuda",
     "notifications": "Notificaciones, {{count}} sin leer",
     "profileMenu": "Menú de {{name}}: perfil, seguridad y comprobantes",

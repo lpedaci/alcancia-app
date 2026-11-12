@@ -16,6 +16,7 @@ import { InflationSimulator } from '@/features/simulators/InflationSimulator';
 import { installmentsPresentValue } from '@/lib/finance';
 import { formatMoney } from '@/lib/money';
 import { useShouldReduceMotion } from '@/lib/motion';
+import { useMediaQuery } from '@/lib/use-media-query';
 import { cn } from '@/lib/utils';
 import type { Role } from '@/types/domain';
 import { AppPhone, AppTopBar, BottomNav, type PhoneScreen, PhoneFrame, StatusBar } from './PhoneMockup';
@@ -475,8 +476,10 @@ function HeroPhone() {
   const { t } = useTranslation();
   const reduce = useShouldReduceMotion();
   const [screen, setScreen] = useState<PhoneScreen>('home');
-  // Auto-rotation (D-157, WCAG 2.2.2): it stops while the pointer or the keyboard focus is on the
-  // phone, a tap on it pauses and resumes it, and it never starts with reduced motion.
+  // Auto-rotation (D-157, WCAG 2.2.2). Fine pointer: it stops while the mouse or the keyboard focus
+  // is on the phone, with no visible button. Touch screens: a small floating pause button with a
+  // 48 × 48 px target. With reduced motion it never rotates and the button is not shown.
+  const coarse = useMediaQuery('(pointer: coarse)', false);
   const [paused, setPaused] = useState(false);
   const [hovered, setHovered] = useState(false);
   const running = !paused && !hovered && !reduce;
@@ -492,9 +495,12 @@ function HeroPhone() {
   return (
     <div
       className="flex min-w-0 flex-col items-center gap-6"
-      onPointerEnter={() => setHovered(true)}
-      onPointerLeave={() => setHovered(false)}
-      onFocus={() => setHovered(true)}
+      onPointerEnter={(event) => event.pointerType === 'mouse' && setHovered(true)}
+      onPointerLeave={(event) => event.pointerType === 'mouse' && setHovered(false)}
+      onFocus={(event) => {
+        // Only keyboard focus pauses: a tap that focuses the phone must not leave it paused by surprise.
+        if ((event.target as HTMLElement).matches(':focus-visible')) setHovered(true);
+      }}
       onBlur={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setHovered(false);
       }}
@@ -503,14 +509,24 @@ function HeroPhone() {
         {/* Flat tinted shape behind the phone (instead of the reference's gradient glow) */}
         <span aria-hidden className="absolute inset-x-[-15%] top-[12%] bottom-[8%] rounded-2xl bg-primary-container" />
         <Reveal delay={0.1} className="relative">
-          {/* Focusable and tappable so keyboard and touch can stop the rotation too (WCAG 2.2.2). */}
-          <div
-            tabIndex={0}
-            onClick={() => setPaused((value) => !value)}
-            className="rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
-          >
+          {/* Focusable, so keyboard focus stops the rotation (WCAG 2.2.2). */}
+          <div tabIndex={0} className="rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary">
             <AppPhone screen={screen} />
           </div>
+          {coarse && !reduce && (
+            // Floating on the bottom-right corner of the frame, above the screen: 32 px circle, 48 px target.
+            <button
+              type="button"
+              aria-pressed={paused}
+              aria-label={paused ? t('landing.phone.resume') : t('landing.phone.pause')}
+              onClick={() => setPaused((value) => !value)}
+              className="group absolute -right-3 -bottom-3 z-10 flex size-12 items-center justify-center rounded-full outline-offset-2 focus-visible:outline-2 focus-visible:outline-primary"
+            >
+              <span className="flex size-8 items-center justify-center rounded-full border border-outline-variant bg-surface-container-lowest text-on-surface group-active:bg-surface-container">
+                <Icon name={paused ? 'play_arrow' : 'pause'} size={20} />
+              </span>
+            </button>
+          )}
         </Reveal>
         <Reveal delay={0.3} className="absolute top-28 -left-36 hidden w-44 xl:block">
           <div aria-hidden>
