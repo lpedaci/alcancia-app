@@ -45,6 +45,7 @@
 | D-66 | **`design-references/` no se publica:** queda solo en la computadora de Lourdes (`.gitignore`) y se quita del historial del repositorio, como en Rumbo (2.2) | Confirmada |
 | D-67 | **El test de perfil de inversor se hace antes de abrir Invertir:** se ofrece desde la tarjeta "qué falta" de Invertir y desde la guía del módulo 13, aunque la sección esté bloqueada. Es educativo y su resultado nunca se traduce en una cartera (1.2). Al abrir la cuenta comitente (5.4) se reutiliza el resultado | Confirmada |
 | D-68 | **Montos sin cortes de línea:** entre `$`, `USD` o `−` y el número va siempre un espacio de no separación, para que el signo nunca quede solo al final de una línea (2.9) | Confirmada |
+| D-69 | **Cómo se presenta el producto:** "Simulador de finanzas personales" (para equipos de trabajo) en lugar de "plataforma de aprendizaje corporativo" en la landing y la pestaña; el carácter B2B se mantiene en el cuerpo del hero, los recorridos y el pie. El cartel fijo de la billetera dice **"Simulador de finanzas personales · dinero ficticio"**: lo de dinero ficticio no se quita nunca (D-154 y D-156 de Claude Code) | Confirmada |
 | D-29 | **Invertir (cuenta comitente de práctica, SIM-14)** pasa a la **fase A** como nivel 7 (5.0, 5.4); cripto queda en fase B | Confirmada |
 | D-24 | La presentación del taller **no se sube** al repositorio: la base de contenido es su resumen en el Anexo A | Confirmada |
 | D-25 | Los datos regulatorios salen de fuentes oficiales (BCRA, CNV, BYMA, Caja de Valores, argentina.gob.ar, INDEC) y se registran en el Anexo B con fecha de verificación | Confirmada |
@@ -211,6 +212,8 @@ Igual que Rumbo: Filled (uno solo por región), Filled tonal, Outlined, Text, Fi
 - **Para la billetera (D-50):** las imágenes de `/design-references/` muestran cómo deben verse el inicio de la cuenta, el dashboard y las demás secciones. Son la referencia principal de layout, jerarquía, densidad y componentes del entorno del participante. Antes de construir cada sección de 5.0, compárala con su referencia; si una pantalla no tiene referencia, deriva el estilo de las que sí tienen. Registra la correspondencia en `docs/visual-audit.md`.
 - Se aplican los mismos criterios de Rumbo: tomar funcionalidad y modalidad visual; **nunca fondos con degradé**; gráficos de área con relleno plano de baja opacidad; no copiar ilustraciones, íconos ni textos de terceros.
 - Si Lourdes suma referencias específicas de apps financieras o de aprendizaje, agregarlas a la tabla de abajo con qué tomar de cada una.
+
+**Referencias de la landing:** Payora y Finotive (D-150 y D-151 de Claude Code), descritas en `docs/visual-audit.md`, que es la fuente de qué se toma de cada una.
 
 **Referencias del dashboard (agregadas el 12/11/2026).** Son paneles de plataformas de aprendizaje y de salud, no billeteras: se toma **estructura y jerarquía**, nunca su contenido, marca ni estilo de ilustración.
 
@@ -689,7 +692,7 @@ Fuerte, la caja fuerte naranja del escape room "Tu primer sueldo", pasa a ser el
 - **Aprendizaje en el momento justo:** cada pantalla tiene un botón "¿Por qué importa?" y ciertas acciones disparan una **tarjeta de aprendizaje** de 20 a 40 segundos (concepto + dato oficial con su código B-xx + una pregunta de un toque). No se interrumpe más de una vez por acción ni se repite si ya se respondió bien.
 - **Dos modos:** **Misiones** (guiado, con objetivos y pasos) y **Libre** (explorar con el saldo que haya). El modo libre igual registra lo aprendido.
 - **Fuerte como compañero (5.0.1):** acompaña toda la experiencia con personalidad propia; se puede silenciar.
-- **Marca propia y evidente:** se llama Alcancía (D-28), con la paleta y los componentes del sistema de diseño, cartel fijo "Simulador de finanzas personales" (D-154). Nada imita los colores, íconos, tipografía ni flujos de una billetera real (1.1.1).
+- **Marca propia y evidente:** se llama Alcancía (D-28), con la paleta y los componentes del sistema de diseño, cartel fijo "Simulador de finanzas personales · dinero ficticio" (D-69: "dinero ficticio" no se quita nunca). Nada imita los colores, íconos, tipografía ni flujos de una billetera real (1.1.1).
 - **Sin datos reales:** nunca pide DNI, CUIT, CBU, tarjetas, contraseñas ni datos de contacto reales. El CVU se muestra como `0000000 0000000 EJEMPLO 00` (formato visual, no un número válido) y el alias es `alcancia.practica.mariana` según la persona de demo.
 - **Control del tiempo:** "Avanzar un día / una semana / un mes" para ver rendimientos, inflación del escenario, vencimientos y eventos. El escenario de inflación sale de `scenarios.json`.
 
@@ -1072,7 +1075,7 @@ Después de cada paso: build, tests y deploy en verde.
 ---
 
 ## 12. Cómo trabajar y registrar dudas
-- **Responde siempre en español** (informes, preguntas, decisiones y `docs/`); código y commits en inglés.
+- **Responde siempre en español** (informes, **avances intermedios**, preguntas, decisiones y `docs/`); código y commits en inglés.
 - **No resolver dudas en silencio:** elige lo más razonable, sigue y anótalo en `docs/decisions.md` (fecha, duda, decisión, por qué y si Lourdes debe confirmarla). Si cambia alcance, modelo de datos o el flujo de un rol, pregunta antes.
 - Con contenido financiero o legal dudoso, **no lo inventes**: márcalo como pendiente de verificación en `docs/content.md` y pregunta.
 - `docs/progress.md` al terminar cada paso; incidencias en `docs/issues.md`.
