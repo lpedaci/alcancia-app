@@ -1,0 +1,18 @@
+{
+  "app": {
+    "name": "Alcancía",
+    "skipToContent": "Skip to content"
+  },
+  "landing": {
+    "eyebrow": "Corporate learning platform for personal finance · B2B UX/UI design case",
+    "title": "The wallet where your team learns finance by using it",
+    "status": "We are building the demo. Meanwhile, you can read the project documentation.",
+    "docsLink": "Read the documentation",
+    "disclaimer": "Educational content. It is not financial advice or an investment recommendation."
+  },
+  "notFound": {
+    "title": "We could not find this page",
+    "body": "The address may be misspelled, or the page may not exist yet.",
+    "home": "Go to home"
+  }
+}

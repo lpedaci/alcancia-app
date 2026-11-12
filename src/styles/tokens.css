@@ -1,0 +1,23 @@
+/*
+ * Alcancía design tokens (CLAUDE.md 2.1). Step 1 (setup) only defines the few system roles the
+ * placeholder needs. Step 2 replaces this file with the four-level architecture (reference,
+ * system, Tailwind theme and components) and tokens.test.ts checks AA contrast.
+ */
+:root {
+  /* Reference */
+  --ref-indigo-40: #3d4fa8;
+  --ref-neutral-10: #111827;
+  --ref-neutral-30: #4b5563;
+  --ref-neutral-95: #f1f3f5;
+  --ref-neutral-100: #ffffff;
+  --ref-neutral-outline-variant: #d5dbe0;
+
+  /* System (M3 roles) */
+  --md-sys-color-primary: var(--ref-indigo-40);
+  --md-sys-color-on-primary: var(--ref-neutral-100);
+  --md-sys-color-surface: var(--ref-neutral-95);
+  --md-sys-color-surface-container-lowest: var(--ref-neutral-100);
+  --md-sys-color-on-surface: var(--ref-neutral-10);
+  --md-sys-color-on-surface-variant: var(--ref-neutral-30);
+  --md-sys-color-outline-variant: var(--ref-neutral-outline-variant);
+}

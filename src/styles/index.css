@@ -1,0 +1,34 @@
+@import '@fontsource-variable/inter';
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import './tokens.css';
+
+/*
+ * Tailwind theme = Alcancía tokens only (CLAUDE.md 2.1). Default palettes are reset so
+ * components can only use M3 roles. `inline` keeps the CSS variables live for a future
+ * dark theme. Step 2 completes the theme (type scale, radii, spacing, elevation, motion).
+ */
+@theme inline {
+  --color-*: initial;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+  --color-primary: var(--md-sys-color-primary);
+  --color-on-primary: var(--md-sys-color-on-primary);
+  --color-surface: var(--md-sys-color-surface);
+  --color-surface-container-lowest: var(--md-sys-color-surface-container-lowest);
+  --color-on-surface: var(--md-sys-color-on-surface);
+  --color-on-surface-variant: var(--md-sys-color-on-surface-variant);
+  --color-outline-variant: var(--md-sys-color-outline-variant);
+
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+  }
+  body {
+    background-color: var(--md-sys-color-surface);
+    color: var(--md-sys-color-on-surface);
+  }
+}
