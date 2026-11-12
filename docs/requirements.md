@@ -10,14 +10,14 @@
 | --- | --- | --- | --- | --- |
 | RF-01 | Landing con las 10 secciones de F0 y piezas reales del producto | M | Todas las secciones presentes; sin logos de terceros ni testimonios inventados | Pendiente |
 | RF-02 | SIM-3 funcionando en la landing sin iniciar sesión | M | Cambiar un dato actualiza el resultado, la frase, el gráfico y su tabla | Pendiente |
-| RF-03 | Entrar como cualquier persona de demo en un clic desde la landing | M | `/login?demo=persona` precarga la persona; el recorrido llega al inicio del rol | Pendiente |
-| RF-04 | SSO simulado neutro y rotulado (Microsoft y Google con logos oficiales) | M | La pantalla G2 no imita las páginas de Microsoft ni de Google | Pendiente |
-| RF-05 | Verificación en dos pasos obligatoria para admin y decisor, con código `246810` precargado | M | Solo en el acceso desde la landing; "Ver como" no la repite | Pendiente |
-| RF-06 | Error genérico, bloqueo a los 5 intentos y derivación a la mesa de ayuda | M | El sexto intento muestra el bloqueo; G4 registra la solicitud y muestra la confirmación | Pendiente |
-| RF-07 | Expiración por inactividad con aviso previo | S | Aviso 2 minutos antes; cambios sin guardar protegidos con `useBlocker` | Pendiente |
-| RF-08 | Aviso de privacidad y consentimiento al primer ingreso (G5) | M | Dice qué ve y qué no ve la empresa con la frase de F0 | Pendiente |
-| RF-09 | RBAC desde `permissions.ts` y "Acceso no permitido" en rutas ajenas | M | Tests de `roles.md` en verde | Pendiente |
-| RF-10 | "Ver como", "Ver todo desbloqueado", estados de ejemplo y "Restablecer demo" | M | Diego carga en nivel 2 y Mariana en nivel 6, coherentes con el motor | Pendiente |
+| RF-03 | Entrar como cualquier persona de demo en un clic desde la landing | M | `/login?demo=persona` precarga la persona; el recorrido llega al inicio del rol | Hecho (paso 5) |
+| RF-04 | SSO simulado neutro y rotulado (Microsoft y Google con logos oficiales) | M | La pantalla G2 no imita las páginas de Microsoft ni de Google | Hecho (paso 5) |
+| RF-05 | Verificación en dos pasos obligatoria para admin y decisor, con código `246810` precargado | M | Solo en el acceso desde la landing; "Ver como" no la repite | Hecho (paso 5) |
+| RF-06 | Error genérico, bloqueo a los 5 intentos y derivación a la mesa de ayuda | M | El sexto intento muestra el bloqueo; G4 registra la solicitud y muestra la confirmación | Hecho (paso 5) |
+| RF-07 | Expiración por inactividad con aviso previo | S | Aviso 2 minutos antes; cambios sin guardar protegidos con `useBlocker` | Parcial: expiración con aviso hecha en el paso 5; `useBlocker` llega con los primeros formularios que guardan cambios |
+| RF-08 | Aviso de privacidad y consentimiento al primer ingreso (G5) | M | Dice qué ve y qué no ve la empresa con la frase de F0 | Hecho (paso 5, D-143) |
+| RF-09 | RBAC desde `permissions.ts` y "Acceso no permitido" en rutas ajenas | M | Tests de `roles.md` en verde | Hecho (paso 5) |
+| RF-10 | "Ver como", "Ver todo desbloqueado", estados de ejemplo y "Restablecer demo" | M | Diego carga en nivel 2 y Mariana en nivel 6, coherentes con el motor | Parcial: menú y "Restablecer demo" en el paso 5 (D-144); los estados con el motor en el paso 6 |
 
 ### 1.2 Billetera y niveles (D-50, 5.0, 5.3)
 

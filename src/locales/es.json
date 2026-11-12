@@ -189,7 +189,11 @@
       "caseStudy": "Case study",
       "docs": "Documentación",
       "portfolio": "Portfolio",
-      "credit": "Diseño y desarrollo: Lourdes Pedaci, Experience Designer (Learning y UX/UI)."
+      "credit": "Diseño y desarrollo: Lourdes Pedaci, Experience Designer (Learning y UX/UI).",
+      "reset": "Restablecer demo",
+      "resetTitle": "Restablecer la demo",
+      "resetBody": "Vuelven los datos de ejemplo de todas las personas y se cierra la sesión. Lo que hiciste en esta demo se borra de este navegador.",
+      "resetDone": "Demo restablecida"
     }
   },
   "notFound": {
@@ -306,7 +310,6 @@
   },
   "wallet": {
     "practiceBanner": "Billetera de práctica · dinero ficticio",
-    "viewAs": "Ver como: Mariana",
     "help": "Ayuda",
     "notifications": "Notificaciones, {{count}} sin leer",
     "profileMenu": "Menú de {{name}}: perfil, seguridad y comprobantes",
@@ -394,5 +397,243 @@
         "body": "En una billetera, la mayor parte del dinero \"que rinde\" suele estar en un fondo money market, no en la cuenta: no tiene la garantía de los depósitos."
       }
     }
+  },
+  "roles": {
+    "participant": "Participante",
+    "tutor": "Tutoría",
+    "ld_admin": "Admin de L&D y Beneficios",
+    "sponsor": "Decisor"
+  },
+  "auth": {
+    "login": {
+      "title": "Iniciar sesión",
+      "subtitle": "Usa tu cuenta de trabajo de Andina.",
+      "ssoMicrosoft": "Continuar con Microsoft",
+      "ssoGoogle": "Continuar con Google",
+      "or": "o",
+      "emailToggle": "Iniciar sesión con correo y contraseña",
+      "emailLabel": "Correo de trabajo",
+      "emailHelp": "Tu correo de Andina, por ejemplo: nombre.apellido@andina.demo",
+      "passwordLabel": "Contraseña",
+      "passwordHelp": "La contraseña de tu cuenta de trabajo.",
+      "showPassword": "Mostrar contraseña",
+      "hidePassword": "Ocultar contraseña",
+      "submit": "Iniciar sesión",
+      "submitting": "Verificando…",
+      "invalid": "El correo o la contraseña no son correctos. Revisa los datos y vuelve a intentarlo.",
+      "attemptsWarning": "Después de {{max}} intentos fallidos, la cuenta se bloquea por seguridad.",
+      "lockedTitle": "Cuenta bloqueada por seguridad",
+      "lockedBody": "Hubo demasiados intentos fallidos. Para desbloquearla, pide ayuda a la mesa de ayuda de Andina.",
+      "troubleLink": "¿Problemas para iniciar sesión?",
+      "logout": {
+        "manual": "Cerraste sesión.",
+        "expired": "Tu sesión se cerró por inactividad. Vuelve a iniciar sesión para continuar.",
+        "reset": "Restableciste la demo: volvieron los datos de ejemplo."
+      },
+      "demoNotice": "Demo con datos ficticios. Los correos de las personas de demo terminan en @andina.demo y su contraseña es {{password}}"
+    },
+    "showcase": {
+      "eyebrow": "Bienestar financiero 2026",
+      "title": "La billetera donde tu equipo aprende finanzas usándola",
+      "body": "Dinero ficticio, decisiones reales y aprendizaje en el momento justo. Tu empresa ve tu avance, nunca tus montos."
+    },
+    "methods": {
+      "sso_microsoft": "Microsoft",
+      "sso_google": "Google",
+      "password": "correo y contraseña"
+    },
+    "sso": {
+      "title": "Iniciar sesión con {{provider}}",
+      "simulation": "Simulación del inicio de sesión con {{provider}}. En una empresa real, acá verías la página de tu proveedor de identidad.",
+      "branding": "Esta pantalla es neutra a propósito: nunca imita las páginas de Microsoft ni de Google.",
+      "accountLegend": "Cuenta de trabajo de demo",
+      "accountHelp": "Elige con qué persona recorrer la demo.",
+      "continue": "Continuar",
+      "back": "Volver a Iniciar sesión",
+      "stepsLabel": "Pasos del inicio de sesión con {{provider}}",
+      "steps": {
+        "redirect": "Te redirigimos a {{provider}}",
+        "account": "Cuenta de trabajo: {{email}}",
+        "verified": "{{provider}} confirmó tu identidad"
+      },
+      "stepDone": "listo",
+      "stepPending": "pendiente",
+      "allDone": "{{provider}} confirmó tu identidad."
+    },
+    "mfa": {
+      "title": "Verificación en dos pasos",
+      "subtitle": "Ingresa el código de 6 dígitos de tu app de autenticación.",
+      "required": "Tu rol pide este paso en cada inicio de sesión.",
+      "signingAs": "Inicias sesión como {{name}}.",
+      "demoCode": "Demo: el código {{code}} ya está cargado.",
+      "demoCodeManual": "Demo: usa el código {{code}}.",
+      "codeLabel": "Código de verificación",
+      "codeHelp": "6 dígitos, sin espacios. Por ejemplo: 123456",
+      "invalid": "El código no es correcto. Revisa tu app y vuelve a intentarlo.",
+      "submit": "Verificar",
+      "cancel": "Cancelar e iniciar sesión con otra cuenta"
+    }
+  },
+  "accessHelp": {
+    "title": "¿Problemas para iniciar sesión?",
+    "intro": "Las cuentas de Andina son de trabajo: el acceso lo resuelve la mesa de ayuda de la empresa. Cuéntanos qué pasa y te contactan.",
+    "channelsTitle": "Otros canales de la mesa de ayuda",
+    "email": "Correo: mesadeayuda@andina.demo",
+    "phone": "Teléfono interno: 4357 (ficticio)",
+    "hours": "De lunes a viernes, de 8 a 18 h",
+    "ssoTitle": "Si inicias sesión con Microsoft o Google",
+    "ssoBody": "La contraseña es la de tu cuenta de trabajo y la mesa de ayuda te ayuda a restablecerla. Nadie de Andina ni de Alcancía te va a pedir contraseñas ni códigos por correo o por chat.",
+    "formTitle": "Pedir ayuda",
+    "formIntro": "Todos los campos son obligatorios, salvo el comentario.",
+    "reasonLegend": "¿Qué pasa?",
+    "reasonHelp": "Elige la opción más parecida a tu situación.",
+    "reasons": {
+      "locked": "Mi cuenta está bloqueada",
+      "forgot_password": "No recuerdo la contraseña",
+      "mfa_issue": "No tengo el código de verificación",
+      "other": "Otro problema"
+    },
+    "reasonRequired": "Elige qué pasa.",
+    "commentLabel": "Comentario",
+    "commentHelp": "Hasta 500 caracteres. No escribas contraseñas ni códigos.",
+    "demoTip": "Demo: escribe #error en el comentario para ver cómo se muestra un error del servidor.",
+    "submit": "Enviar solicitud",
+    "sending": "Enviando…",
+    "serverErrorTitle": "No pudimos enviar la solicitud",
+    "serverErrorBody": "El servicio no respondió. Tus datos siguen cargados: vuelve a intentarlo.",
+    "retry": "Reintentar",
+    "confirmTitle": "Solicitud enviada",
+    "confirmNumber": "Número de solicitud: {{id}}",
+    "confirmBody": "Si el correo corresponde a una cuenta de Andina, la mesa de ayuda te contacta por los canales de la empresa.",
+    "confirmKeep": "Guarda el número para hacer el seguimiento.",
+    "backToLogin": "Volver a Iniciar sesión"
+  },
+  "consent": {
+    "eyebrow": "Antes de empezar",
+    "title": "Tu privacidad en Alcancía",
+    "summary": {
+      "participant": "Tu empresa ve tu avance en los módulos, nunca tus montos ni tus respuestas sobre hábitos.",
+      "staff": "Ves avance de aprendizaje, nunca el dinero de práctica ni los hábitos de nadie."
+    },
+    "step": "Paso {{n}} de {{total}}",
+    "version": "Aviso versión {{version}}",
+    "steps": {
+      "participant": [
+        {
+          "title": "Lo que ve tu empresa",
+          "icon": "visibility",
+          "items": [
+            "Tu avance en los módulos: guías leídas, desafíos de nivel y misiones completadas.",
+            "Tus respuestas a las preguntas de conocimiento de \"Conocerte\", para medir cuánto aprendiste.",
+            "Si cumpliste un desafío semanal. Tu reflexión, no."
+          ]
+        },
+        {
+          "title": "Lo que nunca ve",
+          "icon": "visibility_off",
+          "items": [
+            "Tus montos: saldo, movimientos, apartados, metas y lo que cargues en las herramientas.",
+            "Tus respuestas sobre hábitos de \"Conocerte\".",
+            "Qué secciones de tu billetera están bloqueadas o desbloqueadas."
+          ]
+        },
+        {
+          "title": "Dónde quedan tus datos",
+          "icon": "lock",
+          "items": [
+            "Tu dinero de práctica y tus respuestas sobre hábitos quedan solo en este navegador.",
+            "Los reportes muestran grupos de 5 personas o más, para no identificar a nadie.",
+            "Puedes empezar de cero cuando quieras desde tu perfil."
+          ]
+        }
+      ],
+      "staff": [
+        {
+          "title": "Lo que ves",
+          "icon": "visibility",
+          "items": [
+            "Avance de aprendizaje: por persona solo si acompañas una cohorte como tutor o tutora; en los demás casos, agregado.",
+            "Métricas de grupos de 5 personas o más, para no identificar a nadie."
+          ]
+        },
+        {
+          "title": "Lo que nunca ves",
+          "icon": "visibility_off",
+          "items": [
+            "Saldos, movimientos, metas ni decisiones dentro de la billetera de nadie.",
+            "Respuestas sobre hábitos de \"Conocerte\" ni reflexiones personales.",
+            "Si una sección de la billetera está bloqueada o desbloqueada para una persona."
+          ]
+        }
+      ]
+    },
+    "check": "Leí el aviso y acepto usar Alcancía con estas condiciones.",
+    "checkRequired": "Marca la casilla para continuar.",
+    "previous": "Anterior",
+    "next": "Continuar",
+    "accept": "Aceptar y continuar",
+    "accepted": "Aviso aceptado",
+    "signOutHelp": "Si no quieres aceptarlo ahora, puedes cerrar sesión.",
+    "signOut": "Cerrar sesión"
+  },
+  "session": {
+    "warningTitle": "Tu sesión está por cerrarse",
+    "warningBody": "Por seguridad, la sesión se cierra después de {{minutes}} minutos sin actividad.",
+    "countdown": "Tiempo restante: {{time}}",
+    "stay": "Seguir conectado",
+    "signOut": "Cerrar sesión"
+  },
+  "forbidden": {
+    "title": "Acceso no permitido",
+    "body": "Esta sección no está disponible para tu rol. Si crees que deberías verla, consulta con la mesa de ayuda de Andina.",
+    "backHome": "Ir a mi inicio"
+  },
+  "errorPage": {
+    "title": "Algo no funcionó",
+    "body": "La pantalla tuvo un error inesperado. Tus datos de demo siguen guardados en este navegador.",
+    "reload": "Volver a cargar",
+    "home": "Ir al inicio",
+    "resetHint": "Si el error se repite, restablece la demo para volver a los datos de ejemplo.",
+    "reset": "Restablecer demo",
+    "details": "Detalle técnico"
+  },
+  "demo": {
+    "viewAs": "Ver como",
+    "viewAsCurrent": "Ver como: {{name}}",
+    "viewAsMenu": "Recorrer la demo como",
+    "people": {
+      "p-mariana": "Participante · oficina · nivel 6",
+      "p-diego": "Participante · celular · nivel 2",
+      "p-andres": "Tutor de bienestar financiero",
+      "p-paula": "Admin de L&D y Beneficios",
+      "p-ricardo": "Decisor"
+    },
+    "unlockAll": "Ver todo desbloqueado",
+    "unlockAllHelp": "En la billetera, para recorrer todas las secciones",
+    "switched": "Ahora ves la demo como {{name}}.",
+    "userMenu": "Menú de {{name}}",
+    "profile": "Perfil, seguridad y comprobantes",
+    "reset": "Restablecer demo",
+    "resetTitle": "Restablecer la demo",
+    "resetBody": "Vuelven los datos de ejemplo de todas las personas y se cierra la sesión. Lo que hiciste en esta demo se borra de este navegador.",
+    "signOut": "Cerrar sesión",
+    "help": "Ayuda",
+    "notifications": "Notificaciones"
+  },
+  "staff": {
+    "hello": "Hola,",
+    "titles": {
+      "tutor": "Inicio de tutoría",
+      "ld_admin": "Panel de seguimiento del programa",
+      "sponsor": "Reporte de impacto"
+    },
+    "pendingTitle": "Este panel está en construcción",
+    "pending": "Se construye en el paso {{step}} del plan de trabajo. Mientras tanto, puedes recorrer la billetera como Mariana o Diego desde \"Ver como\".",
+    "steps": {
+      "tutor": "10",
+      "ld_admin": "11",
+      "sponsor": "11"
+    },
+    "program": "Bienestar financiero 2026 · Andina Servicios S.A."
   }
 }

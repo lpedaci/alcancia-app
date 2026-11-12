@@ -9,6 +9,8 @@ import { Fuerte } from '@/features/companion/Fuerte';
 import { FuerteMessage } from '@/features/companion/FuerteMessage';
 import { D, priceIndex } from '@/lib/finance';
 import { cn } from '@/lib/utils';
+import { findPerson } from '@/features/auth/auth-service';
+import { useCurrentUser } from '@/store/session-store';
 import { PILOT } from './pilot-fixture';
 import { WalletShell } from './WalletShell';
 
@@ -29,6 +31,9 @@ const card = 'flex min-w-0 flex-col gap-3 rounded-xl border border-outline-varia
 
 export function WalletHomePage() {
   const { t } = useTranslation();
+  const user = useCurrentUser();
+  // Until step 6 the data is Mariana's pilot for both participants (INC-09); the name is the session's.
+  const firstName = (user && findPerson(user.personId)?.name.split(' ')[0]) || PILOT.firstName;
   const power = D(PILOT.balance).div(priceIndex(PILOT.day, PILOT.monthlyInflation));
   const totalPockets = PILOT.pockets.reduce((sum, p) => sum.plus(p.amount), D(0));
 
@@ -64,7 +69,7 @@ export function WalletHomePage() {
   );
 
   return (
-    <WalletShell section={t('wallet.nav.home')} aside={missionPanel} completedLevels={PILOT.completedLevels} personName={PILOT.personName}>
+    <WalletShell section={t('wallet.nav.home')} aside={missionPanel} completedLevels={PILOT.completedLevels}>
       <div className="flex flex-col gap-(--space-bento-gap)">
         {/* Phones and tablets: the active mission is a fixed card above the content (5.3); it opens as a bottom sheet in step 6 */}
         <Link
@@ -89,7 +94,7 @@ export function WalletHomePage() {
               <time dateTime={PILOT.dateIso}>{t('wallet.home.date')}</time> · {t('wallet.home.day', { day: PILOT.day })}
             </p>
             <h1 id="home-title" className="text-headline-small">
-              {t('wallet.home.hello')} <span className="text-primary">{PILOT.firstName}</span>
+              {t('wallet.home.hello')} <span className="text-primary">{firstName}</span>
             </h1>
             <p className="text-body-medium">{t('wallet.home.fuerteLine')}</p>
             <ul className="mt-1 flex flex-wrap gap-2" aria-label={t('wallet.home.context')}>

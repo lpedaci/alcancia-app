@@ -15,7 +15,7 @@ export function InflationToolPage() {
   const { t } = useTranslation();
   const salary = PILOT.movements.find((m) => m.kind === 'income')?.amount ?? '1284958.86';
   return (
-    <WalletShell section={t('wallet.nav.learn')} completedLevels={PILOT.completedLevels} personName={PILOT.personName}>
+    <WalletShell section={t('wallet.nav.learn')} completedLevels={PILOT.completedLevels}>
       <div className="flex flex-col gap-4">
         <nav aria-label={t('wallet.breadcrumbs')} className="text-body-small text-on-surface-variant">
           <ol className="flex flex-wrap items-center gap-1">

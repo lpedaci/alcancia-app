@@ -43,6 +43,21 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        // Stable, cacheable chunks (INC-03): the seed data, React and the UI libraries apart from the app code.
+        manualChunks(id: string) {
+          if (id.includes('src/data/seed.json')) return 'seed';
+          if (/node_modules\/(react|react-dom|scheduler|react-router)\//.test(id)) return 'react';
+          if (/node_modules\/(radix-ui|@radix-ui)\//.test(id)) return 'radix';
+          if (/node_modules\/(i18next|react-i18next)\//.test(id)) return 'i18n';
+          if (/node_modules\/(recharts|d3-[a-z-]+|victory-vendor|es-toolkit|@reduxjs|immer|reselect|redux)\//.test(id)) return 'charts';
+          return undefined;
+        },
+      },
+    },
+  },
   test: {
     globals: true,
     environment: 'jsdom',

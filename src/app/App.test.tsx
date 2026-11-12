@@ -1,9 +1,13 @@
 import { fireEvent, screen, waitFor, within } from '@testing-library/react';
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import en from '@/locales/en.json';
 import es from '@/locales/es.json';
 import { renderAt } from '@/test/render-app';
+import { resetAll, signInAs } from '@/test/session';
+import { useSessionStore } from '@/store/session-store';
 import i18n from './i18n';
+
+beforeEach(() => resetAll());
 
 afterEach(async () => {
   await i18n.changeLanguage('es');
@@ -58,6 +62,8 @@ describe('G0 landing (F0)', () => {
 });
 
 describe('P1 and SIM-3 in the wallet (visual pilot)', () => {
+  beforeEach(() => signInAs('p-mariana'));
+
   it('P1 has one h1, the practice banner and the five destinations', async () => {
     renderAt('/app');
     expect(await screen.findByRole('heading', { level: 1 })).toHaveTextContent('Mariana');
@@ -103,6 +109,95 @@ describe('not found', () => {
   it('shows the not found page for unknown routes', () => {
     renderAt('/does-not-exist');
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(es.notFound.title);
+  });
+});
+
+describe('route guards (F0, roles.md 3.4)', () => {
+  it('sends a visitor without a session to sign in and remembers the route', async () => {
+    renderAt('/app/tools/SIM-3');
+    expect(await screen.findByRole('heading', { level: 1, name: es.auth.login.title })).toBeInTheDocument();
+    expect(useSessionStore.getState().returnTo).toBe('/app/tools/SIM-3');
+  });
+
+  it('asks for the privacy notice before entering (G5)', async () => {
+    signInAs('p-diego', { consent: false });
+    renderAt('/app');
+    expect(await screen.findByRole('heading', { level: 1, name: es.consent.title })).toBeInTheDocument();
+    expect(screen.getByText(es.consent.summary.participant)).toBeInTheDocument();
+  });
+
+  it('shows "Acceso no permitido" on another role\'s routes', async () => {
+    signInAs('p-mariana');
+    renderAt('/admin');
+    expect(await screen.findByRole('heading', { level: 1, name: es.forbidden.title })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: es.forbidden.backHome })).toHaveAttribute('href', '/app');
+  });
+
+  it('gives G7 before "not found" inside another role\'s area', async () => {
+    signInAs('p-andres');
+    renderAt('/app/save/budget');
+    expect(await screen.findByRole('heading', { level: 1, name: es.forbidden.title })).toBeInTheDocument();
+  });
+
+  for (const [personId, path, name] of [
+    ['p-andres', '/tutor', 'Andrés'],
+    ['p-paula', '/admin', 'Paula'],
+    ['p-ricardo', '/sponsor', 'Ricardo'],
+  ] as const) {
+    it(`opens the provisional home of ${name} with "Ver como" and the user menu`, async () => {
+      signInAs(personId);
+      renderAt(path);
+      expect(await screen.findByRole('heading', { level: 1 })).toHaveTextContent(name);
+      expect(screen.getAllByRole('button', { name: /Ver como/ }).length).toBeGreaterThan(0);
+      expect(screen.getByRole('button', { name: new RegExp(`^Menú de ${name}`) })).toBeInTheDocument();
+    });
+  }
+});
+
+describe('access flow (G1 to G5)', () => {
+  it('one click from the landing: SSO, verification with the code prefilled, notice and home', async () => {
+    renderAt('/login?demo=paula');
+    fireEvent.click(await screen.findByRole('button', { name: es.auth.login.ssoMicrosoft }));
+    expect(await screen.findByRole('heading', { level: 1, name: /Iniciar sesión con Microsoft/ })).toBeInTheDocument();
+    expect(screen.getByText('paula.gomez@andina.demo')).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: es.auth.sso.continue }));
+    expect(await screen.findByRole('heading', { level: 1, name: es.auth.mfa.title })).toBeInTheDocument();
+    expect(screen.getByLabelText(es.auth.mfa.codeLabel)).toHaveValue('246810');
+    fireEvent.click(screen.getByRole('button', { name: es.auth.mfa.submit }));
+    expect(await screen.findByRole('heading', { level: 1, name: es.consent.title })).toBeInTheDocument();
+    expect(screen.getByText(es.consent.summary.staff)).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: es.consent.next }));
+    fireEvent.click(await screen.findByRole('button', { name: es.consent.accept }));
+    expect(await screen.findByText(es.consent.checkRequired)).toBeInTheDocument();
+    fireEvent.click(screen.getByLabelText(es.consent.check));
+    fireEvent.click(screen.getByRole('button', { name: es.consent.accept }));
+    expect(await screen.findByRole('heading', { level: 1 })).toHaveTextContent('Paula');
+  });
+
+  it('participants skip the second step', async () => {
+    renderAt('/login?demo=diego');
+    fireEvent.click(await screen.findByRole('button', { name: es.auth.login.ssoGoogle }));
+    fireEvent.click(await screen.findByRole('button', { name: es.auth.sso.continue }));
+    expect(await screen.findByRole('heading', { level: 1, name: es.consent.title })).toBeInTheDocument();
+  });
+
+  it('shows a generic error and keeps the email (G1)', async () => {
+    renderAt('/login');
+    fireEvent.click(await screen.findByRole('button', { name: es.auth.login.emailToggle }));
+    fireEvent.change(screen.getByLabelText(es.auth.login.emailLabel), { target: { value: 'mariana.lopez@andina.demo' } });
+    fireEvent.change(screen.getByLabelText(es.auth.login.passwordLabel), { target: { value: 'equivocada' } });
+    fireEvent.click(screen.getByRole('button', { name: es.auth.login.submit }));
+    expect(await screen.findByText(es.auth.login.invalid)).toBeInTheDocument();
+    expect(screen.getByLabelText(es.auth.login.emailLabel)).toHaveValue('mariana.lopez@andina.demo');
+    expect(screen.getByLabelText(es.auth.login.passwordLabel)).toHaveValue('');
+  });
+
+  it('records a help desk request and shows its number (G4)', async () => {
+    renderAt('/access-help');
+    fireEvent.change(await screen.findByLabelText(new RegExp(es.auth.login.emailLabel)), { target: { value: 'diego.suarez@andina.demo' } });
+    fireEvent.click(screen.getByLabelText(es.accessHelp.reasons.locked));
+    fireEvent.click(screen.getByRole('button', { name: es.accessHelp.submit }));
+    expect(await screen.findByText('Número de solicitud: MDA-2026-0001')).toBeInTheDocument();
   });
 });
 

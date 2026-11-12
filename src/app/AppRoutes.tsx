@@ -2,27 +2,50 @@ import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router';
 import { LandingPage } from '@/features/landing/LandingPage';
 import { NotFoundPage } from '@/features/system/NotFoundPage';
+import { RequireSession } from './RequireSession';
 
-// Route-level code splitting (RNF-03): the wallet loads on demand.
-const WalletHomePage = lazy(() => import('@/features/wallet/WalletHomePage').then((m) => ({ default: m.WalletHomePage })));
-const InflationToolPage = lazy(() => import('@/features/simulators/ToolPage').then((m) => ({ default: m.InflationToolPage })));
+// Route-level code splitting (RNF-03, INC-03): access screens, the wallet and the staff panels load on demand.
+const lazyPage = <T extends Record<string, React.ComponentType>>(load: () => Promise<T>, name: keyof T) =>
+  lazy(() => load().then((m) => ({ default: m[name] as React.ComponentType })));
+
+const LoginPage = lazyPage(() => import('@/features/auth/LoginPage'), 'LoginPage');
+const SsoPage = lazyPage(() => import('@/features/auth/SsoPage'), 'SsoPage');
+const VerifyPage = lazyPage(() => import('@/features/auth/VerifyPage'), 'VerifyPage');
+const AccessHelpPage = lazyPage(() => import('@/features/auth/AccessHelpPage'), 'AccessHelpPage');
+const ConsentPage = lazyPage(() => import('@/features/auth/ConsentPage'), 'ConsentPage');
+const WalletHomePage = lazyPage(() => import('@/features/wallet/WalletHomePage'), 'WalletHomePage');
+const InflationToolPage = lazyPage(() => import('@/features/simulators/ToolPage'), 'InflationToolPage');
+const StaffHomePage = lazyPage(() => import('@/features/staff/StaffHomePage'), 'StaffHomePage');
 
 // The internal style guide (CLAUDE.md 2.8) exists only in development: it is never bundled in production.
-const StyleguidePage = import.meta.env.DEV
-  ? lazy(() => import('@/features/styleguide/StyleguidePage').then((m) => ({ default: m.StyleguidePage })))
-  : null;
+const StyleguidePage = import.meta.env.DEV ? lazyPage(() => import('@/features/styleguide/StyleguidePage'), 'StyleguidePage') : null;
 
 /**
- * Screens of docs/information-architecture.md, section 7, added step by step. Visual pilot
- * (step 4): G0, P1 and SIM-3. Access and route guards arrive in step 5.
+ * Screens of docs/information-architecture.md, section 7, added step by step. Public: G0 to G5 and
+ * G7. Protected (RequireSession: session, consent and permission of the route): the wallet and the
+ * homes of the other roles, whose panels arrive in steps 10 and 11.
  */
 export function AppRoutes() {
   return (
     <Suspense fallback={null}>
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/app" element={<WalletHomePage />} />
-        <Route path="/app/tools/SIM-3" element={<InflationToolPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/login/sso" element={<SsoPage />} />
+        <Route path="/login/verify" element={<VerifyPage />} />
+        <Route path="/access-help" element={<AccessHelpPage />} />
+        <Route path="/consent" element={<ConsentPage />} />
+        <Route element={<RequireSession />}>
+          <Route path="/app" element={<WalletHomePage />} />
+          <Route path="/app/tools/SIM-3" element={<InflationToolPage />} />
+          <Route path="/tutor" element={<StaffHomePage />} />
+          <Route path="/admin" element={<StaffHomePage />} />
+          <Route path="/sponsor" element={<StaffHomePage />} />
+          {/* Other routes of a role's area: not found inside the guard, so another role gets G7 first. */}
+          <Route path="/app/*" element={<NotFoundPage />} />
+          <Route path="/tutor/*" element={<NotFoundPage />} />
+          <Route path="/admin/*" element={<NotFoundPage />} />
+        </Route>
         {StyleguidePage && <Route path="/styleguide" element={<StyleguidePage />} />}
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

@@ -12,6 +12,7 @@ import seed from '@/data/seed.json';
 import { FuerteMessage } from '@/features/companion/FuerteMessage';
 import { InflationSimulator } from '@/features/simulators/InflationSimulator';
 import { cn } from '@/lib/utils';
+import { ResetDemoButton } from './ResetDemoButton';
 import type { Role } from '@/types/domain';
 import {
   PieceFuerte,
@@ -390,6 +391,7 @@ export function LandingPage() {
             <Link to="/login?demo=diego" className="w-fit text-body-medium text-on-surface-variant underline-offset-4 hover:underline">
               {t('landing.roles.cta', { name: 'Diego' })}
             </Link>
+            <ResetDemoButton />
           </nav>
         </div>
         <div className="border-t border-outline-variant">

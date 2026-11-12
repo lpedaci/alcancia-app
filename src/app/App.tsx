@@ -1,4 +1,5 @@
 import { createHashRouter, RouterProvider } from 'react-router';
+import { RouteErrorPage } from '@/features/system/RouteErrorPage';
 import { AppProviders } from './AppProviders';
 import { AppRoutes } from './AppRoutes';
 
@@ -6,6 +7,8 @@ import { AppRoutes } from './AppRoutes';
 export const appRoutes = [
   {
     path: '*',
+    // G7 · unexpected error: never the raw stack.
+    errorElement: <RouteErrorPage />,
     element: (
       <AppProviders>
         <AppRoutes />

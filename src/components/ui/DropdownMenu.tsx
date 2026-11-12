@@ -122,3 +122,36 @@ export function DropdownMenuRadioItem({
     </Menu.RadioItem>
   );
 }
+
+/** Checkbox item (menuitemcheckbox): a check and a state icon, not only color. Keeps the menu open. */
+export function DropdownMenuCheckboxItem({
+  checked,
+  onCheckedChange,
+  icon,
+  children,
+  description,
+}: {
+  checked: boolean;
+  onCheckedChange: (checked: boolean) => void;
+  icon?: IconName;
+  children: ReactNode;
+  description?: string;
+}) {
+  return (
+    <Menu.CheckboxItem
+      checked={checked}
+      onCheckedChange={onCheckedChange}
+      onSelect={(event) => event.preventDefault()}
+      className={cn(itemClass, 'data-[state=checked]:text-primary')}
+    >
+      {icon && <Icon name={icon} size={20} className="text-on-surface-variant" />}
+      <span className="flex min-w-0 flex-1 flex-col py-1">
+        <span className="truncate">{children}</span>
+        {description && <span className="text-body-small text-on-surface-variant">{description}</span>}
+      </span>
+      <Menu.ItemIndicator>
+        <Icon name="check" size={20} />
+      </Menu.ItemIndicator>
+    </Menu.CheckboxItem>
+  );
+}

@@ -189,7 +189,11 @@
       "caseStudy": "Case study",
       "docs": "Documentation",
       "portfolio": "Portfolio",
-      "credit": "Design and development: Lourdes Pedaci, Experience Designer (Learning and UX/UI)."
+      "credit": "Design and development: Lourdes Pedaci, Experience Designer (Learning and UX/UI).",
+      "reset": "Reset demo",
+      "resetTitle": "Reset the demo",
+      "resetBody": "The example data of every person comes back and the session closes. What you did in this demo is erased from this browser.",
+      "resetDone": "Demo reset"
     }
   },
   "notFound": {

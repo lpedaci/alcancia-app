@@ -335,3 +335,36 @@ export interface FintechEntry {
   verificadoEl: IsoDate;
   nota?: string;
 }
+
+// ---------- Access and session (F0, step 5). Simulated: no tokens, no real passwords. ----------
+
+export type AuthMethod = 'sso_microsoft' | 'sso_google' | 'password';
+
+export interface Session {
+  personId: string;
+  role: Role;
+  method: AuthMethod;
+  /** 'login' from the access screens, 'switch' from "Ver como" (no second step, F0). */
+  via: 'login' | 'switch';
+  startedAt: IsoDate;
+  lastActivityAt: IsoDate;
+}
+
+export type AccessRequestReason = 'locked' | 'forgot_password' | 'mfa_issue' | 'other';
+
+/** G4: a request to the company's help desk. No self-service and no IT role in the MVP. */
+export interface AccessRequest {
+  id: string;
+  email: string;
+  createdAt: IsoDate;
+  reason: AccessRequestReason;
+  comment?: string;
+  status: 'new';
+}
+
+/** G5: acceptance of the privacy notice, with its version. */
+export interface ConsentRecord {
+  personId: string;
+  version: string;
+  acceptedAt: IsoDate;
+}

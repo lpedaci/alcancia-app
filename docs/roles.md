@@ -1,6 +1,6 @@
 # Roles y permisos
 
-> Fecha: 12/11/2026 · Fuente de verdad en código: `src/lib/permissions.ts` (se crea en el paso 3). Esta matriz es la especificación de ese archivo; si cambia uno, se actualiza el otro en el mismo commit.
+> Fecha: 12/11/2026 · Fuente de verdad en código: `src/lib/permissions.ts` (creado en el paso 5, con `permissions.test.ts`, que recorre las tablas 3.1 a 3.3). Esta matriz es la especificación de ese archivo; si cambia uno, se actualiza el otro en el mismo commit.
 
 Alcancía sigue el principio de **mínimo privilegio** y de **privacidad por diseño** (spec 1, 4.2 y 8): cada rol ve lo que necesita para su tarea y nada más. La separación más importante es entre **aprendizaje** (lo que la empresa puede ver, a veces de forma individual) y **dinero** (lo que nunca sale del navegador de la persona).
 
@@ -126,7 +126,7 @@ Leyenda: ✔ permitido · ◐ solo agregado con umbral de privacidad (mínimo 5)
 | `/sponsor` | ✖ | ✖ | ✖ | ✔ |
 | `/`, `/login/*`, `/access-help`, `/consent`, `/design-system` | ✔ | ✔ | ✔ | ✔ |
 
-Una ruta ajena muestra "Acceso no permitido" (G7), con un enlace al inicio del rol actual. El selector "Ver como" no es un permiso: es una herramienta de la demo que cambia la sesión simulada (sin repetir la verificación en dos pasos, F0).
+Una ruta ajena muestra "Acceso no permitido" (G7), con un enlace al inicio del rol actual. La guarda `RequireSession` pide, en este orden, sesión (si falta, recuerda la ruta y lleva a G1), aviso de privacidad aceptado (G5) y el permiso de la ruta. El selector "Ver como" no es un permiso: es una herramienta de la demo que cambia la sesión simulada (sin repetir la verificación en dos pasos, F0).
 
 ## 4. Autenticación por rol (simulada)
 

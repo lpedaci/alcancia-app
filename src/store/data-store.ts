@@ -2,7 +2,9 @@ import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import seed from '@/data/seed.json';
 import type {
+  AccessRequest,
   ChallengeAttempt,
+  ConsentRecord,
   Cohort,
   DiagnosticKnowledgeResult,
   FollowUp30,
@@ -38,6 +40,10 @@ export interface OrgData {
   weeklyReports: WeeklyChallengeReport[];
   followUps: FollowUp30[];
   tutorQuestions: TutorQuestion[];
+  /** G4: requests to the help desk (no self-service, F0). */
+  accessRequests: AccessRequest[];
+  /** G5: accepted privacy notices, with their version. */
+  consents: ConsentRecord[];
 }
 
 export function seedData(): OrgData {
@@ -45,12 +51,14 @@ export function seedData(): OrgData {
   const copy = structuredClone(seed) as unknown as OrgData & { generatedFor?: string; note?: string };
   delete copy.generatedFor;
   delete copy.note;
-  return copy;
+  return { ...copy, accessRequests: [], consents: [] };
 }
 
 interface DataState extends OrgData {
   /** "Restablecer demo" (CLAUDE.md 7): back to the seed. */
   resetData: () => void;
+  addAccessRequest: (request: AccessRequest) => void;
+  acceptConsent: (record: ConsentRecord) => void;
 }
 
 export const DATA_STORAGE_KEY = 'alcancia-data';
@@ -60,6 +68,11 @@ export const useDataStore = create<DataState>()(
     (set) => ({
       ...seedData(),
       resetData: () => set(seedData()),
+      addAccessRequest: (request) => set((state) => ({ accessRequests: [...state.accessRequests, request] })),
+      acceptConsent: (record) =>
+        set((state) => ({
+          consents: [...state.consents.filter((c) => c.personId !== record.personId), record],
+        })),
     }),
     {
       name: DATA_STORAGE_KEY,

@@ -2,11 +2,13 @@ import type { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router';
 import { Logo } from '@/components/layout/Logo';
-import { Avatar } from '@/components/ui/Avatar';
+import { UserMenu } from '@/components/layout/UserMenu';
+import { ViewAsMenu } from '@/components/layout/ViewAsMenu';
 import { Icon, type IconName } from '@/components/ui/Icon';
 import { IconButton } from '@/components/ui/IconButton';
 import { Fuerte } from '@/features/companion/Fuerte';
 import { cn } from '@/lib/utils';
+import { useSessionStore } from '@/store/session-store';
 
 /**
  * The participant's only navigation (CLAUDE.md 5.3): the same 5 destinations at every size.
@@ -78,7 +80,6 @@ export function WalletShell({
   children,
   aside,
   completedLevels,
-  personName,
 }: {
   /** Visible name of the section on phones. */
   section: string;
@@ -86,10 +87,12 @@ export function WalletShell({
   /** Mission panel with Fuerte: right column on desktop, below the content on smaller screens. */
   aside?: ReactNode;
   completedLevels: number;
-  personName: string;
 }) {
   const { t } = useTranslation();
   const { pathname } = useLocation();
+  // Demo mode "Ver todo desbloqueado" (5.0): no destination shows a lock. Step 6 moves this to the level engine.
+  const unlockAll = useSessionStore((s) => s.demoUnlockAll);
+  const destinations = unlockAll ? DESTINATIONS.map((d) => ({ ...d, locked: false })) : DESTINATIONS;
 
   const itemClass = ({ isActive }: { isActive: boolean }) =>
     cn(
@@ -123,16 +126,10 @@ export function WalletShell({
             <Logo />
           </Link>
           <span className="hidden flex-1 medium:block" />
-          <span className="hidden rounded-full border border-outline-variant px-3 py-1 text-label-medium text-on-surface-variant expanded:inline-flex">
-            {t('wallet.viewAs')}
-          </span>
+          <ViewAsMenu />
           <IconButton icon="help" label={t('wallet.help')} />
           <IconButton icon="notifications" label={t('wallet.notifications', { count: 2 })} />
-          {/* The name comes from hidden text, so it never mismatches the visible initials (WCAG 2.5.3). */}
-          <button type="button" className="rounded-full">
-            <span className="sr-only">{t('wallet.profileMenu', { name: personName })}</span>
-            <Avatar name={personName} role="participant" size="md" />
-          </button>
+          <UserMenu />
         </div>
       </header>
 
@@ -141,7 +138,7 @@ export function WalletShell({
         <nav aria-label={t('wallet.nav.label')} className="hidden shrink-0 border-r border-outline-variant bg-surface-container-lowest medium:block">
           <div className="sticky top-16 flex h-[calc(100dvh-4rem)] flex-col gap-1 overflow-y-auto px-2 py-4 large:w-64 large:px-3">
             <ul className="flex flex-col gap-1">
-              {DESTINATIONS.map((d) => (
+              {destinations.map((d) => (
                 <li key={d.id}>
                   <Link
                     to={d.to}
@@ -215,7 +212,7 @@ export function WalletShell({
       {/* Bottom navigation bar (phones) */}
       <nav aria-label={t('wallet.nav.label')} className="fixed inset-x-0 bottom-0 z-30 border-t border-outline-variant bg-surface-container-lowest medium:hidden">
         <ul className="grid grid-cols-5">
-          {DESTINATIONS.map((d) => (
+          {destinations.map((d) => (
             <li key={d.id}>
               <Link
                 to={d.to}
