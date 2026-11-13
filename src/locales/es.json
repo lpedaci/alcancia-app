@@ -1254,8 +1254,14 @@
     "sources": {
       "title": "Fuentes",
       "newTab": "(se abre en una pestaña nueva)",
-      "verified": "verificada el {{date}}",
-      "legal": "Contenido educativo. No es asesoramiento financiero ni una recomendación de inversión."
+      "verified": "Verificada el {{date}}",
+      "legal": "Contenido educativo. No es asesoramiento financiero ni una recomendación de inversión.",
+      "kind": {
+        "workshop": "Taller",
+        "presentation": "Presentación",
+        "official": "Fuente oficial",
+        "formula": "Cálculo verificado"
+      }
     }
   },
   "pay": {
@@ -1340,7 +1346,11 @@
       "reactivate": "Reactivar",
       "reactivated": "Suscripción reactivada",
       "pending": "Hay un débito pendiente por falta de saldo",
-      "note": "Los montos suben con la inflación del escenario, salvo la suscripción, que tiene precio fijo."
+      "note": "Los montos suben con la inflación del escenario, salvo la suscripción, que tiene precio fijo.",
+      "status": "Estado del débito",
+      "soon_one": "Se debita mañana",
+      "soon_other": "Se debita en {{count}} días",
+      "ant": "Gasto hormiga"
     },
     "receipt": {
       "title": "Comprobante",
@@ -1950,7 +1960,7 @@
       "assumptions": [
         "Interés mensual = tasa anual × 30 ÷ 365 sobre cada saldo.",
         "Al saldar una deuda, su mínimo se suma al pago de la siguiente.",
-        "Los datos de ejemplo son los de la presentación del taller (A-29); los mínimos y el extra son supuestos para practicar."
+        "Los datos de ejemplo son los de la presentación del taller; los mínimos y el extra son supuestos para practicar."
       ]
     },
     "SIM-10": {
@@ -2117,7 +2127,7 @@
     "debtCount_one": "{{count}} deuda activa",
     "debtCount_other": "{{count}} deudas activas",
     "example": "Oferta de ejemplo",
-    "why": "Una cuota baja no dice cuánto cuesta un crédito: el CFT suma la tasa, las comisiones y los cargos, y la entidad debe informarlo destacado (B-04).",
+    "why": "Una cuota baja no dice cuánto cuesta un crédito: el CFT suma la tasa, las comisiones y los cargos, y la entidad debe informarlo destacado.",
     "legal": "Contenido educativo. No es asesoramiento financiero ni una recomendación. La tarjeta, la financiera y el comercio son ficticios, y las tasas son valores de ejemplo del escenario: consulta los valores vigentes en las fuentes oficiales.",
     "fuerte": {
       "locked": "Tarjeta y préstamos se abre con el desafío del nivel 4. Primero tu fondo, después el crédito.",
@@ -2131,11 +2141,10 @@
       "clear": "Sin saldo",
       "nothing_one": "No tienes nada para pagar. Pagaste el total de {{count}} resumen: no generaste intereses.",
       "nothing_other": "No tienes nada para pagar. Pagaste el total de {{count}} resúmenes: no generaste intereses.",
-      "belowMinimum": "El resumen anterior se pagó por debajo del mínimo. En una tarjeta real eso suma intereses punitorios y queda registrado en la Central de Deudores del BCRA (B-06).",
+      "belowMinimum": "El resumen anterior se pagó por debajo del mínimo. En una tarjeta real eso suma intereses punitorios y queda registrado en la Central de Deudores del BCRA.",
       "total": "Total del resumen",
       "minimum": "Pago mínimo",
       "dueDate": "Vencimiento",
-      "rates": "Tasa de financiación: TNA {{tna}}, TEA {{tea}}.",
       "firstBody": "Son consumos del mes pasado. Si pagas el total antes del vencimiento, no pagas intereses; lo que no pagues se financia y aparece en el próximo resumen con intereses.",
       "financedBody": "Este resumen incluye intereses por lo que no se pagó el mes anterior. Es una deuda de tasa alta hasta que la pagues completa.",
       "paidSoFar": "Pagaste",
@@ -2151,7 +2160,12 @@
       "amountMissing": "Escribe el monto que quieres pagar.",
       "pay": "Pagar resumen",
       "paid": "Pago de {{amount}} registrado",
-      "simulate": "Simular el pago mínimo"
+      "simulate": "Simular el pago mínimo",
+      "ratesLabel": "Tasas de la tarjeta",
+      "tna": "TNA {{value}}",
+      "tea": "TEA {{value}}",
+      "exampleRates": "Tasas de ejemplo",
+      "payOtherHelp": "Lo que no pagues antes del vencimiento se financia con intereses. Si pagas menos que el mínimo, en una tarjeta real hay intereses punitorios."
     },
     "loan": {
       "title": "Préstamo preaprobado",
@@ -2167,7 +2181,11 @@
       "accept": "Aceptar préstamo",
       "confirmTitle": "¿Aceptar el préstamo?",
       "confirmBody": "Te acreditan {{received}} y se debita una cuota de {{installment}} cada mes durante {{count}} meses. Es una deuda de tasa alta: mientras exista, Invertir no se abre. Puedes cancelarla antes desde \"Tus deudas\".",
-      "accepted": "Préstamo acreditado"
+      "accepted": "Préstamo acreditado",
+      "terms": "Condiciones de la oferta",
+      "chipMonths": "{{count}} cuotas mensuales",
+      "chipInstallment": "Cuota de {{amount}}",
+      "chipCommission": "Comisión de otorgamiento del {{rate}}"
     },
     "purchase": {
       "title": "Cuotas sin interés o contado",
@@ -2183,7 +2201,10 @@
       "confirmCashTitle": "¿Comprar de contado?",
       "confirmCashBody": "Se debitan {{amount}} de tu saldo ahora.",
       "boughtInstallments": "Compra en cuotas registrada",
-      "boughtCash": "Compra de contado registrada"
+      "boughtCash": "Compra de contado registrada",
+      "terms": "Condiciones de la oferta",
+      "chipPrice": "Precio de lista: {{amount}}",
+      "chipNoInterest": "Cuotas sin interés"
     },
     "debts": {
       "title": "Tus deudas",
@@ -2196,21 +2217,23 @@
       "snowballHelp": "Primero la de menor saldo: ves deudas saldadas antes y eso ayuda a sostener el plan.",
       "noInterest": "Sin interés",
       "rate": "TEA {{tea}}",
-      "monthly": "por mes:",
       "highRate": "Tasa alta",
       "notHighRate": "No es de tasa alta",
       "payOff": "Cancelar ahora",
       "payOffTitle": "¿Cancelar la deuda ahora?",
       "payOffBody": "Pagas {{amount}} de tu saldo y {{name}} queda cancelada. Al cancelar antes, pagas solo el capital que falta, sin los intereses de las cuotas futuras.",
       "paidOff": "Deuda cancelada",
-      "simulate": "Comparar los métodos"
+      "simulate": "Comparar los métodos",
+      "total": "Debes en total",
+      "terms": "Datos de la deuda",
+      "monthlyChip": "{{amount}} por mes"
     }
   },
   "yield": {
     "intro": "Elige dónde rinde tu saldo, compáralo con la inflación del escenario y practica con plazos fijos. Las tasas son valores de ejemplo, no las vigentes.",
     "context": "Datos de Rendir",
     "inflationChip": "Inflación del escenario: {{value}} mensual",
-    "why": "Una cuenta remunerada y un fondo money market no son lo mismo: la cuenta es una cuenta de pago y el fondo, una inversión. Ninguno de los dos tiene la garantía de los depósitos (B-12, B-14).",
+    "why": "Una cuenta remunerada y un fondo money market no son lo mismo: la cuenta es una cuenta de pago y el fondo, una inversión. Ninguno de los dos tiene la garantía de los depósitos.",
     "legal": "Contenido educativo. No es asesoramiento financiero ni una recomendación. Las tasas son valores de ejemplo del escenario y las opciones son de práctica: consulta los valores vigentes en las fuentes oficiales.",
     "fuerte": {
       "locked": "Rendir se abre cuando tengas tu fondo de emergencia creado y el desafío del nivel 5.",
@@ -2223,27 +2246,27 @@
       "current": "Elegida",
       "choose": "Elegir",
       "changed": "Tu saldo ahora está en: {{name}}",
-      "note": "En una billetera real, la leyenda legal y los términos de cada producto dicen si es una cuenta de pago o un fondo, y quién lo administra (B-14, B-17).",
+      "note": "En una billetera real, la leyenda legal y los términos de cada producto dicen si es una cuenta de pago o un fondo, y quién lo administra.",
       "none": {
         "name": "Sin rendimiento",
         "risk": "Ninguno",
         "liquidity": "Inmediata",
         "currency": "Pesos",
-        "protection": "Es tu cuenta de pago: sin garantía de los depósitos (B-12)"
+        "protection": "Es tu cuenta de pago: sin garantía de los depósitos"
       },
       "remunerated": {
         "name": "Cuenta remunerada",
         "risk": "Bajo",
         "liquidity": "Inmediata",
         "currency": "Pesos",
-        "protection": "Cuenta de pago: sin garantía de los depósitos (B-12, B-13)"
+        "protection": "Cuenta de pago: sin garantía de los depósitos"
       },
       "money_market": {
         "name": "Fondo money market",
         "risk": "Bajo, y el rendimiento varía a diario",
         "liquidity": "En el día",
         "currency": "Pesos",
-        "protection": "Inversión en un fondo regulado por la CNV: sin garantía de los depósitos (B-14, B-26)"
+        "protection": "Inversión en un fondo regulado por la CNV: sin garantía de los depósitos"
       }
     },
     "sheet": {
@@ -2283,8 +2306,8 @@
       "final_one": "Cobras a {{count}} día",
       "final_other": "Cobras a {{count}} días",
       "power": "En poder de compra de hoy",
-      "assumptions": "Supuestos de la práctica: plazo mínimo de 30 días, sin precancelación y sin impuestos. Las condiciones reales dependen de cada banco (B-02).",
-      "assumptionsUva": "Supuestos de la práctica: la UVA se aproxima con la inflación del escenario (la real sigue al CER con rezago), plazo mínimo de 90 días y sin precancelación. Las condiciones reales dependen de cada banco (B-03).",
+      "assumptions": "Supuestos de la práctica: plazo mínimo de 30 días, sin precancelación y sin impuestos. Las condiciones reales dependen de cada banco.",
+      "assumptionsUva": "Supuestos de la práctica: la UVA se aproxima con la inflación del escenario (la real sigue al CER con rezago), plazo mínimo de 90 días y sin precancelación. Las condiciones reales dependen de cada banco.",
       "make": "Constituir plazo fijo",
       "compare": "Comparar tradicional y UVA",
       "made": "Plazo fijo constituido",

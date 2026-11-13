@@ -88,6 +88,8 @@ describe('content of levels 1 to 6 (D-61)', () => {
     [es, BANK, GUIDES, missions, fuerteLines].forEach((source) => walk(source));
     expect(texts.filter((text) => /SIM-\d/.test(text))).toEqual([]);
     expect(texts.filter((text) => /el material/i.test(text))).toEqual([]);
+    // Source codes go in sourceIds and are shown by name in "Fuentes", never inside a text.
+    expect(texts.filter((text) => /(^|[^A-Za-z])[ABF]-[0-9]{2}/.test(text))).toEqual([]);
   });
 
   it('"Antes de empezar" about personal experience is a reflection: no right answer, and never in a bank or a challenge', () => {

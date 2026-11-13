@@ -13,6 +13,7 @@ import { TextField } from '@/components/ui/TextField';
 import { toast } from '@/components/ui/toast-store';
 import paymentsJson from '@/data/payments.json';
 import { guideOfModule } from '@/features/learning/questions';
+import { SourceList } from '@/features/learning/SourceList';
 import { UnlockCard } from '@/features/levels/UnlockCard';
 import { LEVELS, MISSIONS, useLevels } from '@/features/levels/use-levels';
 import { CreditPage } from '@/features/credit/CreditPage';
@@ -116,14 +117,13 @@ function Receipt({ movement, rows, headingRef }: { movement: WalletMovement; row
 
 /** "¿Por qué importa?" (5.3): a short learning card with its official source. */
 function WhyCard({ title, body, source }: { title: string; body: string; source: string }) {
-  const { t } = useTranslation();
   return (
     <aside className="flex items-start gap-3 rounded-lg bg-info-container p-4 text-on-info-container">
       <Icon name="lightbulb" className="mt-0.5 shrink-0 text-info" />
       <div className="flex flex-col gap-1">
         <p className="text-title-small">{title}</p>
         <p className="text-body-medium">{body}</p>
-        <p className="text-body-small">{t('pay.source', { source })}</p>
+        <SourceList codes={source.split(', ')} legal={false} className="pt-1 text-on-info-container" />
       </div>
     </aside>
   );
@@ -532,17 +532,16 @@ function BillsPage() {
   const today = wallet.day > 0 ? dayOfMonth(wallet.day) : 0;
   const bills = EXPENSE_DEFS.filter((d) => d.type === 'bill');
 
-  /** Next debit date: the first scheduled day of the month after today, or next month. */
-  const nextDate = (days: number[]) => {
+  /** Next debit: days from today to the first scheduled day of the month after today, or next month. */
+  const nextIn = (days: number[]) => {
     const upcoming = days.find((d) => d > today);
-    const offset = upcoming !== undefined ? upcoming - today : 30 - today + days[0]!;
-    return formatDate(walletDate(wallet.day + offset));
+    return upcoming !== undefined ? upcoming - today : 30 - today + days[0]!;
   };
 
   return (
     <WalletShell section={t('wallet.nav.pay')} fuerte={{ state: 'neutral', message: t('pay.fuerte.bills') }}>
       <div className="grid grid-cols-[minmax(0,1fr)] gap-6 large:grid-cols-[minmax(0,1fr)_22rem] large:items-start">
-        <section aria-labelledby="bills-title" className={card}>
+        <section aria-labelledby="bills-title" className={cn(card, '@container')}>
           <p className="flex items-center gap-2 text-label-large text-primary">
             <Icon name="receipt_long" size={18} />
             {t('wallet.sub.bills')}
@@ -555,21 +554,42 @@ function BillsPage() {
             {bills.map((b) => {
               const isSub = b.key === 'subscription';
               const active = !isSub || wallet.subscriptionActive;
+              const days = nextIn(b.days);
+              // A debit within 3 days asks for attention: there has to be balance for it (2.1.1, warning).
+              const soon = active && days <= 3;
               return (
                 <li key={b.key} className="flex items-start gap-3 py-4">
                   <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-surface-container text-on-surface-variant">
                     <Icon name="receipt_long" size={20} />
                   </span>
-                  {/* Name and date on top; amount and action below, so the text never gets squeezed (2.7) */}
-                  <span className="flex min-w-0 flex-1 flex-col gap-2">
-                    <span>
-                      <span className="block text-body-medium text-on-surface">{b.counterparty}</span>
-                      <span className="block text-body-small text-on-surface-variant">
-                        {active ? t('pay.bills.next', { date: nextDate(b.days) }) : t('pay.bills.cancelled')} · {t(`pay.bills.category.${b.category}`)}
-                      </span>
-                    </span>
-                    <span className="flex flex-wrap items-center justify-between gap-2">
-                      <MoneyText value={wallet.expenses[b.key]} className={cn('text-label-large', active ? 'text-on-surface' : 'text-on-surface-variant line-through')} />
+                  {/* Name and status chips on the left; amount and action on the right from 28 rem, below on narrow cards (2.7) */}
+                  <div className="flex min-w-0 flex-1 flex-col gap-3 @md:flex-row @md:items-center @md:justify-between">
+                    <div className="flex min-w-0 flex-col gap-2">
+                      <p className="text-body-large text-on-surface">{b.counterparty}</p>
+                      <ul className="flex flex-wrap gap-2" aria-label={t('pay.bills.status')}>
+                        <li>
+                          {active ? (
+                            <StatusPill
+                              tone={soon ? 'warning' : 'neutral'}
+                              icon={soon ? 'schedule' : 'calendar_month'}
+                              label={soon ? t('pay.bills.soon', { count: days }) : t('pay.bills.next', { date: formatDate(walletDate(wallet.day + days)) })}
+                            />
+                          ) : (
+                            <StatusPill tone="neutral" icon="block" label={t('pay.bills.cancelled')} />
+                          )}
+                        </li>
+                        <li>
+                          <StatusPill tone="neutral" icon={b.category === 'needs' ? 'home' : 'shopping_bag'} label={t(`pay.bills.category.${b.category}`)} />
+                        </li>
+                        {isSub && active && (
+                          <li>
+                            <StatusPill tone="warning" icon="warning" label={t('pay.bills.ant')} />
+                          </li>
+                        )}
+                      </ul>
+                    </div>
+                    <div className="flex shrink-0 flex-wrap items-center justify-between gap-2 @md:flex-col @md:items-end">
+                      <MoneyText value={wallet.expenses[b.key]} className={cn('text-title-medium', active ? 'text-on-surface' : 'text-on-surface-variant line-through')} />
                       {isSub &&
                         (active ? (
                           <Button variant="outlined" size="xs" onClick={() => setConfirmCancel(true)}>
@@ -587,16 +607,16 @@ function BillsPage() {
                             {t('pay.bills.reactivate')}
                           </Button>
                         ))}
-                    </span>
-                  </span>
+                    </div>
+                  </div>
                 </li>
               );
             })}
           </ul>
-          {wallet.pendingDebit && <StatusPill tone="warning" icon="schedule" label={t('pay.bills.pending')} />}
+          {wallet.pendingDebit && <InlineAlert tone="warning">{t('pay.bills.pending')}</InlineAlert>}
           <p className="text-body-small text-on-surface-variant">{t('pay.bills.note')}</p>
         </section>
-        <WhyCard title={t('pay.why.billsTitle')} body={t('pay.why.bills')} source="A-15, A-34" />
+        <WhyCard title={t('pay.why.billsTitle')} body={t('pay.why.bills')} source="T, A-15, A-34" />
       </div>
       <ConfirmDialog
         open={confirmCancel}

@@ -5,7 +5,7 @@ import { MoneyInput } from '@/components/money/MoneyInput';
 import { MoneyText } from '@/components/money/MoneyText';
 import { Button } from '@/components/ui/Button';
 import { ConfirmDialog } from '@/components/ui/Dialog';
-import { Icon } from '@/components/ui/Icon';
+import { Icon, type IconName } from '@/components/ui/Icon';
 import { IconTile } from '@/components/ui/IconTile';
 import { InlineAlert } from '@/components/ui/InlineAlert';
 import { MetaChips } from '@/components/ui/MetaChips';
@@ -14,6 +14,7 @@ import { SegmentedButton } from '@/components/ui/SegmentedButton';
 import { StatusPill } from '@/components/ui/StatusPill';
 import { toast } from '@/components/ui/toast-store';
 import { guideOfModule } from '@/features/learning/questions';
+import { SourceList } from '@/features/learning/SourceList';
 import { UnlockCard } from '@/features/levels/UnlockCard';
 import { LEVELS, MISSIONS, useLevels } from '@/features/levels/use-levels';
 import { WalletShell } from '@/features/wallet/WalletShell';
@@ -156,21 +157,30 @@ function Credit() {
                 <StatusPill tone="neutral" icon="info" label={t('credit.example')} />
               </div>
               <p className="text-body-large text-on-surface">{t('credit.loan.body', { principal: formatMoney(offer.principal), count: offer.months, installment: formatMoney(offer.installment) })}</p>
+              <MetaChips
+                label={t('credit.loan.terms')}
+                items={[
+                  { icon: 'calendar_month', label: t('credit.loan.chipMonths', { count: offer.months }) },
+                  { icon: 'payments', label: t('credit.loan.chipInstallment', { amount: formatMoney(offer.installment) }) },
+                  { icon: 'percent', label: t('credit.loan.chipCommission', { rate: formatPercent('0.05', { decimals: 0 }) }) },
+                ]}
+              />
+              {/* The CFT first and in attention color: it is the number to compare credits (B-04) */}
               <dl className="grid grid-cols-[minmax(0,1fr)] gap-3 @md:grid-cols-2">
-                <Fact label={t('credit.loan.cft')} highlight>
+                <Fact label={t('credit.loan.cft')} tone="warning" icon="warning">
                   {formatPercent(offer.cft, { decimals: 1 })}
                 </Fact>
                 <Fact label={t('credit.loan.tna')}>{formatPercent(offer.tna, { decimals: 1 })}</Fact>
                 <Fact label={t('credit.loan.received')}>
                   <MoneyText value={offer.received} />
                 </Fact>
-                <Fact label={t('credit.loan.total')}>
+                <Fact label={t('credit.loan.total')} tone="warning" icon="trending_up">
                   <MoneyText value={offer.total} />
                 </Fact>
               </dl>
-              <p className="text-body-medium text-on-surface-variant">
+              <InlineAlert tone="info" live="none">
                 {t('credit.loan.explain', { commission: formatMoney(offer.commission), extra: formatMoney(offer.total.minus(offer.received)) })}
-              </p>
+              </InlineAlert>
               {loanActive && <InlineAlert tone="info">{t('credit.loan.active')}</InlineAlert>}
               <div className="flex flex-wrap gap-3">
                 <Button asChild variant="tonal" leadingIcon="flag">
@@ -197,15 +207,24 @@ function Credit() {
                 <StatusPill tone="neutral" icon="info" label={t('credit.example')} />
               </div>
               <p className="text-body-large text-on-surface">{t('credit.purchase.body', { item: PURCHASE_OFFER.item.toLowerCase() })}</p>
+              <MetaChips
+                label={t('credit.purchase.terms')}
+                items={[
+                  { icon: 'shopping_bag', label: t('credit.purchase.chipPrice', { amount: formatMoney(PURCHASE_OFFER.price) }) },
+                  { icon: 'percent', label: t('credit.purchase.chipNoInterest') },
+                ]}
+              />
               <dl className="grid grid-cols-[minmax(0,1fr)] gap-3 @md:grid-cols-2">
-                <Fact label={t('credit.purchase.installmentsLabel', { count: PURCHASE_OFFER.months })}>
+                <Fact label={t('credit.purchase.installmentsLabel', { count: PURCHASE_OFFER.months })} icon="calendar_month">
                   <MoneyText value={D(PURCHASE_OFFER.price).div(PURCHASE_OFFER.months)} />
                 </Fact>
-                <Fact label={t('credit.purchase.cashLabel')}>
+                <Fact label={t('credit.purchase.cashLabel')} icon="payments">
                   <MoneyText value={cashPrice} />
                 </Fact>
               </dl>
-              <p className="text-body-medium text-on-surface-variant">{t('credit.purchase.explain')}</p>
+              <InlineAlert tone="info" live="none">
+                {t('credit.purchase.explain')}
+              </InlineAlert>
               <div className="flex flex-wrap gap-3">
                 <Button asChild variant="tonal" leadingIcon="calculate">
                   <Link to="/app/tools/SIM-6">{t('credit.purchase.compare')}</Link>
@@ -225,6 +244,7 @@ function Credit() {
             <LearnSection />
           </div>
         </div>
+        <SourceList codes={['T', 'A-23', 'A-28', 'A-29', 'B-04', 'B-05', 'B-06', 'F-10', 'F-14', 'F-29', 'F-30', 'F-31']} legal={false} />
         <p className="text-body-small text-on-surface-variant">{t('credit.legal')}</p>
       </div>
 
@@ -243,10 +263,26 @@ function Credit() {
   );
 }
 
-function Fact({ label, children, highlight }: { label: string; children: React.ReactNode; highlight?: boolean }) {
+type FactTone = 'neutral' | 'primary' | 'warning' | 'success';
+const FACT_TONE: Record<FactTone, { box: string; label: string; icon: string }> = {
+  neutral: { box: 'bg-surface-container text-on-surface', label: 'text-on-surface-variant', icon: 'text-on-surface-variant' },
+  primary: { box: 'bg-primary-container text-on-primary-container', label: 'text-on-primary-container', icon: 'text-primary' },
+  warning: { box: 'bg-warning-container text-on-warning-container', label: 'text-on-warning-container', icon: 'text-warning' },
+  success: { box: 'bg-success-container text-on-success-container', label: 'text-on-success-container', icon: 'text-success' },
+};
+
+/**
+ * A key figure in a tinted box (2.2.1): the tone says what kind of data it is, and attention or
+ * success figures also carry an icon, so color is never the only signal (2.1.1).
+ */
+function Fact({ label, children, tone = 'neutral', icon }: { label: string; children: React.ReactNode; tone?: FactTone; icon?: IconName }) {
+  const style = FACT_TONE[tone];
   return (
-    <div className={cn('flex flex-col gap-1 rounded-lg p-3', highlight ? 'bg-primary-container text-on-primary-container' : 'bg-surface-container')}>
-      <dt className={cn('text-label-medium', highlight ? 'text-on-primary-container' : 'text-on-surface-variant')}>{label}</dt>
+    <div className={cn('flex flex-col gap-1 rounded-lg p-3', style.box)}>
+      <dt className={cn('flex items-center gap-1 text-label-medium', style.label)}>
+        {icon && <Icon name={icon} size={16} className={cn('shrink-0', style.icon)} />}
+        {label}
+      </dt>
       <dd className="text-title-medium tabular-nums">{children}</dd>
     </div>
   );
@@ -318,18 +354,27 @@ function CardStatementSection() {
         <>
           {statement.belowMinimum && <InlineAlert tone="warning">{t('credit.card.belowMinimum')}</InlineAlert>}
           <dl className="grid grid-cols-[minmax(0,1fr)] gap-3 @md:grid-cols-3">
-            <Fact label={t('credit.card.total')} highlight>
+            <Fact label={t('credit.card.total')} tone={statement.financed ? 'warning' : 'primary'} icon={statement.financed ? 'warning' : undefined}>
               <MoneyText value={statement.total} />
             </Fact>
             <Fact label={t('credit.card.minimum')}>
               <MoneyText value={statement.minimum} />
             </Fact>
-            <Fact label={t('credit.card.dueDate')}>{formatDate(walletDate(statement.dueDay))}</Fact>
+            <Fact label={t('credit.card.dueDate')} icon="calendar_month">
+              {formatDate(walletDate(statement.dueDay))}
+            </Fact>
           </dl>
-          <p className="text-body-medium text-on-surface-variant">
-            {t('credit.card.rates', { tna: formatPercent(practice.tna, { decimals: 1 }), tea: formatPercent(tea, { decimals: 1 }) })}{' '}
+          <MetaChips
+            label={t('credit.card.ratesLabel')}
+            items={[
+              { icon: 'percent', label: t('credit.card.tna', { value: formatPercent(practice.tna, { decimals: 1 }) }) },
+              { icon: 'trending_up', label: t('credit.card.tea', { value: formatPercent(tea, { decimals: 1 }) }) },
+              { icon: 'info', label: t('credit.card.exampleRates') },
+            ]}
+          />
+          <InlineAlert tone={statement.financed ? 'warning' : 'info'} live="none">
             {statement.financed ? t('credit.card.financedBody') : t('credit.card.firstBody')}
-          </p>
+          </InlineAlert>
           {D(statement.paid).gt(0) && (
             <p className="text-body-medium text-on-surface">
               {t('credit.card.paidSoFar')} <MoneyText value={statement.paid} /> · {t('credit.card.left')} <MoneyText value={left} />
@@ -343,13 +388,19 @@ function CardStatementSection() {
                 value={choice}
                 onChange={(event) => setChoice(event.target.value as PayChoice)}
                 options={[
-                  { value: 'total', label: t('credit.card.payTotal', { amount: formatMoney(left) }), description: t('credit.card.payTotalHelp') },
-                  ...(minimumLeft.gt(0)
-                    ? [{ value: 'minimum', label: t('credit.card.payMinimum', { amount: formatMoney(minimumLeft) }), description: t('credit.card.payMinimumHelp', { amount: formatMoney(left.minus(minimumLeft)) }) }]
-                    : []),
+                  { value: 'total', label: t('credit.card.payTotal', { amount: formatMoney(left) }) },
+                  ...(minimumLeft.gt(0) ? [{ value: 'minimum', label: t('credit.card.payMinimum', { amount: formatMoney(minimumLeft) }) }] : []),
                   { value: 'other', label: t('credit.card.payOther') },
                 ]}
               />
+              {/* The consequence of the chosen payment, in its color (2.1.1): no interest, financed, or it depends */}
+              <InlineAlert tone={choice === 'total' ? 'success' : choice === 'minimum' ? 'warning' : 'info'} live="status">
+                {choice === 'total'
+                  ? t('credit.card.payTotalHelp')
+                  : choice === 'minimum'
+                    ? t('credit.card.payMinimumHelp', { amount: formatMoney(left.minus(minimumLeft)) })
+                    : t('credit.card.payOtherHelp')}
+              </InlineAlert>
               {choice === 'other' && (
                 <MoneyInput label={t('credit.card.otherLabel')} helperText={t('credit.card.otherHelp', { max: formatMoney(left) })} value={other} onChange={(e) => setOther(e.target.value)} />
               )}
@@ -389,6 +440,11 @@ function DebtsSection({ debts, onPayOff }: { debts: ActiveDebt[]; onPayOff: (deb
         <p className="text-body-medium text-on-surface-variant">{t('credit.debts.empty')}</p>
       ) : (
         <>
+          <dl className="grid grid-cols-[minmax(0,1fr)]">
+            <Fact label={t('credit.debts.total')} tone={debts.some((d) => d.highRate) ? 'warning' : 'neutral'} icon={debts.some((d) => d.highRate) ? 'warning' : undefined}>
+              <MoneyText value={debts.reduce((sum, d) => sum.plus(d.balance), D(0))} />
+            </Fact>
+          </dl>
           <p className="text-body-medium text-on-surface-variant">{t('credit.debts.intro', { inflation: formatPercent(inflation, { decimals: 1 }) })}</p>
           <SegmentedButton
             label={t('credit.debts.orderBy')}
@@ -404,13 +460,18 @@ function DebtsSection({ debts, onPayOff }: { debts: ActiveDebt[]; onPayOff: (deb
             {ordered.map((debt, index) => (
               <li key={debt.id} className="flex flex-col gap-2 py-3">
                 <span className="flex items-start gap-3">
-                  <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-surface-container text-label-large text-on-surface-variant">{index + 1}</span>
-                  <span className="min-w-0 flex-1">
-                    <span className="block text-body-medium text-on-surface">{debt.name}</span>
-                    <span className="block text-body-small text-on-surface-variant">
-                      {debt.tna.isZero() ? t('credit.debts.noInterest') : t('credit.debts.rate', { tea: formatPercent(debt.tea, { decimals: 1 }) })} · {t('credit.debts.monthly')}{' '}
-                      {formatMoney(debt.monthlyPayment)}
-                    </span>
+                  <span className={cn('flex size-8 shrink-0 items-center justify-center rounded-full text-label-large', index === 0 ? 'bg-primary text-on-primary' : 'bg-surface-container text-on-surface-variant')}>
+                    {index + 1}
+                  </span>
+                  <span className="flex min-w-0 flex-1 flex-col gap-2">
+                    <span className="text-body-large text-on-surface">{debt.name}</span>
+                    <MetaChips
+                      label={t('credit.debts.terms')}
+                      items={[
+                        { icon: 'percent', label: debt.tna.isZero() ? t('credit.debts.noInterest') : t('credit.debts.rate', { tea: formatPercent(debt.tea, { decimals: 1 }) }) },
+                        { icon: 'payments', label: t('credit.debts.monthlyChip', { amount: formatMoney(debt.monthlyPayment) }) },
+                      ]}
+                    />
                   </span>
                 </span>
                 <span className="flex flex-wrap items-center justify-between gap-2 pl-11">

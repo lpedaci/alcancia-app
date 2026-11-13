@@ -14,6 +14,7 @@ import { SegmentedButton } from '@/components/ui/SegmentedButton';
 import { StatusPill } from '@/components/ui/StatusPill';
 import { toast } from '@/components/ui/toast-store';
 import { guideOfModule } from '@/features/learning/questions';
+import { SourceList } from '@/features/learning/SourceList';
 import { UnlockCard } from '@/features/levels/UnlockCard';
 import { LEVELS, MISSIONS, useLevels } from '@/features/levels/use-levels';
 import { WalletShell } from '@/features/wallet/WalletShell';
@@ -193,6 +194,7 @@ function Yield() {
             <LearnSection />
           </div>
         </div>
+        <SourceList codes={['B-01', 'B-02', 'B-03', 'B-12', 'B-13', 'B-14', 'B-17', 'B-26', 'F-03', 'F-08', 'F-09']} legal={false} />
         <p className="text-body-small text-on-surface-variant">{t('yield.legal')}</p>
       </div>
     </WalletShell>
