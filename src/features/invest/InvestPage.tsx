@@ -361,8 +361,8 @@ function AccountSection() {
       )}
 
       {/* Two zones when the card is wide (D-192): what you hold and did on the left; moving money on the right */}
-      <div className="grid grid-cols-[minmax(0,1fr)] gap-6 @5xl:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
-        <div className="flex min-w-0 flex-col gap-4">
+      <div className="grid grid-cols-[minmax(0,1fr)] gap-6 @5xl:grid-cols-[minmax(0,5fr)_minmax(0,4fr)] @5xl:items-stretch">
+        <div className="flex min-w-0 flex-col gap-4 rounded-lg border border-outline-variant p-5">
           <h3 className="text-title-medium text-on-surface">{t('invest.holdings.title')}</h3>
           {list.length === 0 ? (
             <div className="flex flex-col gap-3">
@@ -428,7 +428,7 @@ function AccountSection() {
             </ul>
           )}
         </div>
-        <div className="flex min-w-0 flex-col gap-4 rounded-lg bg-surface-container p-5 @5xl:self-start">
+        <div className="flex min-w-0 flex-col gap-4 rounded-lg bg-surface-container p-5">
           <h3 className="text-title-medium text-on-surface">{t('invest.transfer.title')}</h3>
           <p className="text-body-medium text-on-surface-variant">
             {t('invest.transfer.walletBalance')} <MoneyText value={wallet.balance} />
