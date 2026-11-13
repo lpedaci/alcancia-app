@@ -137,6 +137,8 @@ function Invest() {
         <div className="grid grid-cols-[minmax(0,1fr)] gap-(--space-bento-gap) large:grid-cols-[minmax(0,3fr)_minmax(20rem,2fr)] large:items-start">
           <div className="flex min-w-0 flex-col gap-(--space-bento-gap)">
             {account ? <AccountSection /> : <OpenSection />}
+          </div>
+          <div className="flex min-w-0 flex-col gap-(--space-bento-gap)">
             <section aria-labelledby="instruments-title" className={card}>
               <h2 id="instruments-title" className="text-title-large text-on-surface">
                 {t('invest.instruments.title')}
@@ -149,11 +151,11 @@ function Invest() {
                       <IconTile icon={ICON[i.kind] ?? 'trending_up'} tone="secondary" size="sm" />
                       <span className="flex min-w-0 flex-1 flex-col gap-2">
                         <span className="text-body-large text-on-surface">{t(`invest.instrument.${i.id}.name`)}</span>
+                        <span className="flex flex-wrap items-baseline gap-x-2">
+                          <MoneyText value={quote(wallet, i.id).price} className="text-title-medium text-on-surface" />
+                          <span className="text-body-small text-on-surface-variant">{t('invest.instruments.perUnit')}</span>
+                        </span>
                         <InstrumentSheet instrumentId={i.id} />
-                      </span>
-                      <span className="flex shrink-0 flex-col items-end gap-1">
-                        <MoneyText value={quote(wallet, i.id).price} className="text-title-medium text-on-surface" />
-                        <span className="text-body-small text-on-surface-variant">{t('invest.instruments.perUnit')}</span>
                       </span>
                       <Icon name="chevron_right" size={20} className="mt-2 shrink-0 text-on-surface-variant" />
                     </Link>
@@ -161,10 +163,11 @@ function Invest() {
                 ))}
               </ul>
             </section>
-          </div>
-          <div className="flex min-w-0 flex-col gap-(--space-bento-gap)">
-            <BrokersSection />
             <LearnSection />
+          </div>
+          {/* The longest card goes below, full width, with its list in columns (D-188) */}
+          <div className="large:col-span-2">
+            <BrokersSection />
           </div>
         </div>
         <SourceList variant="footer" codes={['T', 'A-53', 'A-54', 'B-20', 'B-21', 'B-22', 'B-26', 'B-30', 'B-31', 'B-34', 'B-36', 'F-32', 'F-33', 'F-34']} legalText={t('invest.legal')} />
@@ -343,16 +346,19 @@ function AccountSection() {
 function BrokersSection() {
   const { t } = useTranslation();
   return (
-    <section aria-labelledby="brokers-title" className={card}>
-      <h2 id="brokers-title" className="text-title-large text-on-surface">
-        {t('invest.brokers.title')}
-      </h2>
+    <section aria-labelledby="brokers-title" className={cn(card, '@container')}>
+      <div className="flex items-center gap-3">
+        <IconTile icon="badge" tone="secondary" />
+        <h2 id="brokers-title" className="text-title-large text-on-surface">
+          {t('invest.brokers.title')}
+        </h2>
+      </div>
       <InlineAlert tone="info" live="none">
         {t('invest.brokers.intro')}
       </InlineAlert>
-      <ul className="flex flex-col divide-y divide-outline-variant">
+      <ul className="grid grid-cols-[minmax(0,1fr)] gap-3 @2xl:grid-cols-2 @5xl:grid-cols-3">
         {[...brokersJson].sort((a, b) => a.nombreComercial.localeCompare(b.nombreComercial, 'es')).map((b) => (
-          <li key={b.matricula} className="flex flex-col gap-1.5 py-3">
+          <li key={b.matricula} className="flex flex-col gap-1.5 rounded-lg border border-outline-variant p-3">
             <span className="text-body-large text-on-surface">{b.nombreComercial}</span>
             <span className="text-body-small text-on-surface-variant">{b.razonSocial}</span>
             <StatusPill tone="neutral" icon="badge" label={t('invest.brokers.registration', { category: b.categoria, number: b.matricula })} className="self-start" />

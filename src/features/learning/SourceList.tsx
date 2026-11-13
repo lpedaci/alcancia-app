@@ -31,7 +31,9 @@ export function SourceList({
   legalText?: string;
 }) {
   const { t } = useTranslation();
-  const sources = describeSources(codes ?? []);
+  // One chip per short label: two documents of the same organism ("argentina.gob.ar") show once; the
+  // Fuentes page lists each of them.
+  const sources = describeSources(codes ?? []).filter((s, i, all) => all.findIndex((o) => o.short === s.short) === i);
   if (sources.length === 0) return null;
   const footer = variant === 'footer';
 
