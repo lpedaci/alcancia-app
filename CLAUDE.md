@@ -672,7 +672,7 @@ Fuerte, la caja fuerte naranja del escape room "Tu primer sueldo", pasa a ser el
 - Antes de confirmar una transferencia: "Ojo con esto: el titular no coincide con el nombre que buscabas. ¿Lo revisamos?"
 - Logro: "Guardado. Tu fondo de emergencia ya cubre un mes. Faltan dos para desbloquear Invertir."
 - Error en una misión: "Pasó lo mismo que en la vida real: el préstamo salió casi el doble. Veamos por qué en 30 segundos."
-- Sección bloqueada: "Invertir se abre cuando tengas tu colchón armado. Primero lo que te protege, después lo que te hace crecer."
+- Sección bloqueada: "Invertir se abre cuando tengas tu fondo de emergencia armado. Primero lo que te protege, después lo que te hace crecer."
 
 **Estados y expresiones** (ilustraciones SVG propias, mismo trazo y paleta): neutral, saludo, pensativo (cuando hay una pregunta), atención (advertencia), celebración (logro o desbloqueo, con las luces encendidas) y dormido (si la persona lo silencia). Las **luces** muestran el avance: **siete**, una por cada nivel completado del 1 al 7 (D-134 de Claude Code, confirmada por Lourdes: reemplaza las cinco luces del escape room original para vincular a Fuerte con este producto; el escape room de fase B adapta sus candados a este diseño).
 
