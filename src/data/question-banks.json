@@ -2219,6 +2219,735 @@
       "sourceIds": [
         "B-01"
       ]
+    },
+    {
+      "id": "m12-diff",
+      "moduleId": "module-12",
+      "type": "single",
+      "prompt": "¿Cuál es la diferencia entre ahorrar e invertir?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ahorrar es guardar dinero; invertir es ponerlo en activos que pueden generar más dinero"
+        },
+        {
+          "id": "b",
+          "text": "Son lo mismo con distinto nombre"
+        },
+        {
+          "id": "c",
+          "text": "Invertir es ahorrar en dólares"
+        }
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "feedback": {
+        "a": "Correcto. Ahorrar retiene valor; invertir busca que el dinero crezca, con riesgo.",
+        "b": "No son lo mismo: ahorrar es guardar; invertir es poner el dinero en activos que pueden generar más dinero.",
+        "c": "La moneda no define la diferencia: ahorrar es guardar e invertir es poner el dinero a trabajar, con riesgo."
+      },
+      "sourceIds": [
+        "T",
+        "A-38"
+      ]
+    },
+    {
+      "id": "m12-opportunity",
+      "moduleId": "module-12",
+      "type": "single",
+      "prompt": "¿Qué es el costo de oportunidad de un gasto?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Lo que ese dinero podría haber generado si lo invertías"
+        },
+        {
+          "id": "b",
+          "text": "El precio con impuestos"
+        },
+        {
+          "id": "c",
+          "text": "El interés de la tarjeta"
+        }
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "feedback": {
+        "a": "Correcto. Cada peso gastado en algo efímero deja de crecer con el interés compuesto.",
+        "b": "El costo de oportunidad no es un impuesto: es lo que dejas de ganar al usar el dinero en otra cosa.",
+        "c": "No es un interés: es lo que ese dinero podría haber generado si lo invertías."
+      },
+      "sourceIds": [
+        "T",
+        "A-19"
+      ]
+    },
+    {
+      "id": "m12-compound",
+      "moduleId": "module-12",
+      "type": "numeric",
+      "prompt": "Con USD 1.000 a una tasa de ejemplo del 10 % anual durante 10 años, sin aportes, ¿con cuánto terminas? (C = P × (1 + r)^n)",
+      "numeric": {
+        "answer": "2593.74",
+        "tolerance": "1.00",
+        "unit": "USD"
+      },
+      "help": "Monto en dólares, con dos decimales, por ejemplo: 2.000,00",
+      "feedback": {
+        "correct": "Correcto. 1.000 × 1,1^10 = USD 2.593,74: el interés también genera interés.",
+        "incorrect": "Aplica la fórmula: 1.000 × 1,1^10 = USD 2.593,74."
+      },
+      "sourceIds": [
+        "T",
+        "A-39",
+        "F-18"
+      ]
+    },
+    {
+      "id": "m12-time",
+      "moduleId": "module-12",
+      "type": "true_false_why",
+      "prompt": "En el interés compuesto, empezar antes pesa menos que aportar más.",
+      "options": [
+        {
+          "id": "true",
+          "text": "Verdadero"
+        },
+        {
+          "id": "false",
+          "text": "Falso"
+        }
+      ],
+      "correctOptionIds": [
+        "false"
+      ],
+      "why": {
+        "prompt": "¿Por qué?",
+        "options": [
+          {
+            "id": "w1",
+            "text": "Porque el tiempo es el factor más potente: los intereses se acumulan sobre los intereses"
+          },
+          {
+            "id": "w2",
+            "text": "Porque los aportes no generan intereses"
+          }
+        ],
+        "correct": "w1"
+      },
+      "feedback": {
+        "correct": "Correcto. El tiempo es el factor más potente: cuanto antes empiezas, más tiempo trabaja el interés compuesto.",
+        "incorrect": "Es falso: el tiempo es el factor más potente del interés compuesto."
+      },
+      "sourceIds": [
+        "T",
+        "A-39"
+      ]
+    },
+    {
+      "id": "m12-200",
+      "moduleId": "module-12",
+      "type": "single",
+      "prompt": "Con aportes de USD 200 por mes a una tasa de ejemplo del 12 % anual durante 33 años, ¿qué parte del resultado final son tus aportes?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Unos USD 79.200 de un total cercano a USD 1.008.712"
+        },
+        {
+          "id": "b",
+          "text": "Casi todo el total"
+        },
+        {
+          "id": "c",
+          "text": "La mitad"
+        }
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "feedback": {
+        "a": "Correcto. Aportas USD 79.200; el resto, unos USD 929.512, es interés compuesto en ese escenario.",
+        "b": "Los aportes son USD 200 × 396 meses = USD 79.200; el resto es interés compuesto.",
+        "c": "Es mucho menos: USD 79.200 de unos USD 1.008.712. El resto es interés compuesto."
+      },
+      "sourceIds": [
+        "T",
+        "A-55",
+        "F-19"
+      ]
+    },
+    {
+      "id": "m13-broker",
+      "moduleId": "module-13",
+      "type": "single",
+      "prompt": "¿Qué es un bróker?",
+      "options": [
+        {
+          "id": "a",
+          "text": "El intermediario regulado con el que compras acciones, bonos, ETFs y FCI"
+        },
+        {
+          "id": "b",
+          "text": "Un banco que garantiza tus inversiones"
+        },
+        {
+          "id": "c",
+          "text": "Una aplicación de pagos"
+        }
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "feedback": {
+        "a": "Correcto. Es el intermediario regulado: siempre hay que verificar que esté registrado en la CNV.",
+        "b": "Un bróker no garantiza tus inversiones: es un intermediario regulado por la CNV.",
+        "c": "Es un intermediario para invertir, regulado por la CNV; no una aplicación de pagos."
+      },
+      "sourceIds": [
+        "T",
+        "A-53"
+      ]
+    },
+    {
+      "id": "m13-steps",
+      "moduleId": "module-13",
+      "type": "ordering",
+      "prompt": "Ordena los pasos para abrir una cuenta en un bróker.",
+      "ordering": {
+        "items": [
+          {
+            "id": "a",
+            "text": "Elegir un bróker registrado en la CNV"
+          },
+          {
+            "id": "b",
+            "text": "Validar tu identidad"
+          },
+          {
+            "id": "c",
+            "text": "Hacer el test de perfil de inversor"
+          },
+          {
+            "id": "d",
+            "text": "Fondear la cuenta desde tu cuenta bancaria o billetera"
+          }
+        ],
+        "correctOrder": [
+          "a",
+          "b",
+          "c",
+          "d"
+        ]
+      },
+      "feedback": {
+        "correct": "Correcto. Primero el bróker registrado, después la identidad, el perfil y por último el dinero.",
+        "incorrect": "El orden es: elegir un bróker registrado, validar la identidad, hacer el test de perfil y fondear la cuenta."
+      },
+      "sourceIds": [
+        "T",
+        "A-54",
+        "B-34"
+      ]
+    },
+    {
+      "id": "m13-verify",
+      "moduleId": "module-13",
+      "type": "single",
+      "prompt": "¿Dónde verificas que un agente esté autorizado para operar?",
+      "options": [
+        {
+          "id": "a",
+          "text": "En el Registro Público de Agentes de la CNV"
+        },
+        {
+          "id": "b",
+          "text": "En sus redes sociales"
+        },
+        {
+          "id": "c",
+          "text": "En una nota de prensa"
+        }
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "feedback": {
+        "a": "Correcto. Se busca por nombre, razón social, CUIT o matrícula. Si no figura, extrema las precauciones.",
+        "b": "Las redes sociales no prueban nada: se verifica en el Registro Público de Agentes de la CNV.",
+        "c": "La prensa no reemplaza al registro: se verifica en el Registro Público de Agentes de la CNV."
+      },
+      "sourceIds": [
+        "B-21"
+      ]
+    },
+    {
+      "id": "m13-custody",
+      "moduleId": "module-13",
+      "type": "single",
+      "prompt": "Si compras títulos a través de un agente registrado, ¿a nombre de quién quedan?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A tu nombre, en una subcuenta comitente en Caja de Valores"
+        },
+        {
+          "id": "b",
+          "text": "A nombre del bróker"
+        },
+        {
+          "id": "c",
+          "text": "A nombre del banco"
+        }
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "feedback": {
+        "a": "Correcto. Quedan en una subcuenta comitente a tu nombre en Caja de Valores, y puedes consultarla.",
+        "b": "Quedan a tu nombre, en una subcuenta comitente en Caja de Valores asociada al agente.",
+        "c": "No intervienen bancos: quedan a tu nombre en una subcuenta comitente en Caja de Valores."
+      },
+      "sourceIds": [
+        "B-22"
+      ]
+    },
+    {
+      "id": "m13-profile",
+      "moduleId": "module-13",
+      "type": "true_false_why",
+      "prompt": "El resultado del test de perfil de inversor te dice qué tienes que comprar.",
+      "options": [
+        {
+          "id": "true",
+          "text": "Verdadero"
+        },
+        {
+          "id": "false",
+          "text": "Falso"
+        }
+      ],
+      "correctOptionIds": [
+        "false"
+      ],
+      "why": {
+        "prompt": "¿Por qué?",
+        "options": [
+          {
+            "id": "w1",
+            "text": "Porque el perfil describe cuánto riesgo toleras; no es una recomendación de qué comprar"
+          },
+          {
+            "id": "w2",
+            "text": "Porque el test no sirve para nada"
+          }
+        ],
+        "correct": "w1"
+      },
+      "feedback": {
+        "correct": "Correcto. El perfil (conservador, moderado o agresivo) ayuda a entender tu tolerancia al riesgo; no es una recomendación.",
+        "incorrect": "Es falso: el perfil describe tu tolerancia al riesgo. No dice qué comprar."
+      },
+      "sourceIds": [
+        "T",
+        "A-54"
+      ]
+    },
+    {
+      "id": "m14-indexes",
+      "moduleId": "module-14",
+      "type": "matching",
+      "prompt": "Une cada índice con lo que replica.",
+      "matching": {
+        "left": [
+          {
+            "id": "sp",
+            "text": "S&P 500"
+          },
+          {
+            "id": "ndx",
+            "text": "Nasdaq 100"
+          },
+          {
+            "id": "dj",
+            "text": "Dow Jones"
+          },
+          {
+            "id": "acwi",
+            "text": "MSCI ACWI"
+          }
+        ],
+        "right": [
+          {
+            "id": "d1",
+            "text": "Las 500 empresas más grandes de EE. UU."
+          },
+          {
+            "id": "d2",
+            "text": "Las 100 mayores empresas no financieras de ese mercado"
+          },
+          {
+            "id": "d3",
+            "text": "30 grandes empresas de EE. UU. de distintos sectores"
+          },
+          {
+            "id": "d4",
+            "text": "Empresas grandes y medianas de mercados desarrollados y emergentes"
+          }
+        ],
+        "pairs": [
+          [
+            "sp",
+            "d1"
+          ],
+          [
+            "ndx",
+            "d2"
+          ],
+          [
+            "dj",
+            "d3"
+          ],
+          [
+            "acwi",
+            "d4"
+          ]
+        ]
+      },
+      "feedback": {
+        "correct": "Correcto. Un ETF que replica un índice te da muchas empresas en una sola inversión.",
+        "incorrect": "S&P 500: 500 grandes de EE. UU. Nasdaq 100: 100 mayores no financieras. Dow Jones: 30 grandes. ACWI: el mercado global."
+      },
+      "sourceIds": [
+        "T",
+        "A-40",
+        "A-43",
+        "A-44",
+        "A-45"
+      ]
+    },
+    {
+      "id": "m14-type",
+      "moduleId": "module-14",
+      "type": "categorize",
+      "prompt": "Clasifica cada instrumento según qué es.",
+      "categorize": {
+        "categories": [
+          {
+            "id": "share",
+            "label": "Parte de una empresa"
+          },
+          {
+            "id": "debt",
+            "label": "Un préstamo que haces"
+          },
+          {
+            "id": "fund",
+            "label": "Un fondo con muchos activos"
+          }
+        ],
+        "items": [
+          {
+            "id": "i1",
+            "text": "Acción",
+            "categoryId": "share"
+          },
+          {
+            "id": "i2",
+            "text": "Bono",
+            "categoryId": "debt"
+          },
+          {
+            "id": "i3",
+            "text": "Obligación negociable",
+            "categoryId": "debt"
+          },
+          {
+            "id": "i4",
+            "text": "Fondo común de inversión",
+            "categoryId": "fund"
+          },
+          {
+            "id": "i5",
+            "text": "ETF",
+            "categoryId": "fund"
+          }
+        ]
+      },
+      "feedback": {
+        "correct": "Correcto. Con una acción eres parte de una empresa; con un bono o una ON le prestas dinero a un Estado o a una empresa; un FCI o un ETF reúne muchos activos.",
+        "incorrect": "Acción: parte de una empresa. Bono y obligación negociable: un préstamo. FCI y ETF: fondos con muchos activos."
+      },
+      "sourceIds": [
+        "B-25"
+      ]
+    },
+    {
+      "id": "m14-diversify",
+      "moduleId": "module-14",
+      "type": "single",
+      "prompt": "¿Para qué sirve diversificar?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Para que una caída de un activo pese menos en el total"
+        },
+        {
+          "id": "b",
+          "text": "Para ganar siempre"
+        },
+        {
+          "id": "c",
+          "text": "Para no pagar comisiones"
+        }
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "feedback": {
+        "a": "Correcto. Repartir entre muchos activos reduce el efecto de que a uno le vaya mal; no elimina el riesgo.",
+        "b": "Nada garantiza ganar: diversificar reduce el peso de una caída puntual.",
+        "c": "No cambia las comisiones: reparte el riesgo entre muchos activos."
+      },
+      "sourceIds": [
+        "T",
+        "A-45"
+      ]
+    },
+    {
+      "id": "m14-horizon",
+      "moduleId": "module-14",
+      "type": "single",
+      "prompt": "Vas a necesitar ese dinero en dos meses. ¿Qué característica importa más?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Liquidez y bajo riesgo"
+        },
+        {
+          "id": "b",
+          "text": "El mayor rendimiento posible"
+        },
+        {
+          "id": "c",
+          "text": "Que sea en un índice global"
+        }
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "feedback": {
+        "a": "Correcto. Con un horizonte corto, una caída no tiene tiempo de recuperarse: importan la liquidez y el bajo riesgo.",
+        "b": "A más rendimiento esperado, más riesgo; con un horizonte corto conviene priorizar liquidez y bajo riesgo.",
+        "c": "Un índice de acciones puede caer justo cuando lo necesitas: con horizonte corto importan la liquidez y el bajo riesgo."
+      },
+      "sourceIds": [
+        "T",
+        "A-36"
+      ]
+    },
+    {
+      "id": "m14-fci",
+      "moduleId": "module-14",
+      "type": "true_false_why",
+      "prompt": "Un fondo común de inversión es una empresa que te garantiza un rendimiento.",
+      "options": [
+        {
+          "id": "true",
+          "text": "Verdadero"
+        },
+        {
+          "id": "false",
+          "text": "Falso"
+        }
+      ],
+      "correctOptionIds": [
+        "false"
+      ],
+      "why": {
+        "prompt": "¿Por qué?",
+        "options": [
+          {
+            "id": "w1",
+            "text": "Porque es un patrimonio formado por los aportes de los cuotapartistas, regulado por la CNV, sin rendimiento garantizado"
+          },
+          {
+            "id": "w2",
+            "text": "Porque los fondos están prohibidos"
+          }
+        ],
+        "correct": "w1"
+      },
+      "feedback": {
+        "correct": "Correcto. Un FCI es un patrimonio de los cuotapartistas, regulado por la CNV; su rendimiento no está garantizado.",
+        "incorrect": "Es falso: un FCI es un patrimonio formado por los aportes de los cuotapartistas, regulado por la CNV, sin rendimiento garantizado."
+      },
+      "sourceIds": [
+        "B-25"
+      ]
+    },
+    {
+      "id": "m15-price",
+      "moduleId": "module-15",
+      "type": "numeric",
+      "prompt": "Una acción vale USD 600, el ratio de ejemplo es 20:1 y el tipo de cambio implícito de ejemplo es $ 1.500. ¿Cuál es el precio teórico del CEDEAR en pesos?",
+      "numeric": {
+        "answer": "45000",
+        "tolerance": "1.00",
+        "unit": "ARS"
+      },
+      "help": "Monto en pesos, por ejemplo: 40.000",
+      "feedback": {
+        "correct": "Correcto. 600 ÷ 20 × 1.500 = $ 45.000.",
+        "incorrect": "Divide el precio por el ratio y multiplica por el tipo de cambio: 600 ÷ 20 × 1.500 = $ 45.000."
+      },
+      "sourceIds": [
+        "B-36",
+        "F-20"
+      ]
+    },
+    {
+      "id": "m15-sources",
+      "moduleId": "module-15",
+      "type": "multiple",
+      "prompt": "¿Qué puede hacer cambiar el precio en pesos de un CEDEAR? Elige todas las que correspondan.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Que cambie el precio de la acción o del ETF en el exterior"
+        },
+        {
+          "id": "b",
+          "text": "Que cambie el tipo de cambio implícito"
+        },
+        {
+          "id": "c",
+          "text": "Que cambie el ratio por un ajuste del programa"
+        },
+        {
+          "id": "d",
+          "text": "El día de la semana"
+        }
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "feedback": {
+        "correct": "Correcto. El precio del activo y el tipo de cambio son las dos fuentes de variación; el ratio también puede cambiar por un split o un ajuste.",
+        "incorrect": "Cambian el precio del activo, el tipo de cambio implícito y, a veces, el ratio (por splits o ajustes)."
+      },
+      "sourceIds": [
+        "B-31",
+        "B-36",
+        "F-20"
+      ]
+    },
+    {
+      "id": "m15-ratio",
+      "moduleId": "module-15",
+      "type": "single",
+      "prompt": "Un ratio de 20:1 significa…",
+      "options": [
+        {
+          "id": "a",
+          "text": "Que 20 CEDEARs equivalen a una acción en su mercado de origen"
+        },
+        {
+          "id": "b",
+          "text": "Que la acción vale 20 veces más"
+        },
+        {
+          "id": "c",
+          "text": "Que hay un 20 % de comisión"
+        }
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "feedback": {
+        "a": "Correcto. Por eso un CEDEAR permite invertir con poco dinero.",
+        "b": "El ratio no es un precio: dice cuántos CEDEARs equivalen a una acción.",
+        "c": "El ratio no es una comisión: dice cuántos CEDEARs equivalen a una acción."
+      },
+      "sourceIds": [
+        "B-31"
+      ]
+    },
+    {
+      "id": "m15-dividends",
+      "moduleId": "module-15",
+      "type": "single",
+      "prompt": "Si el activo del CEDEAR paga dividendos, ¿en qué moneda se cobran?",
+      "options": [
+        {
+          "id": "a",
+          "text": "En dólares, aunque hayas invertido en pesos"
+        },
+        {
+          "id": "b",
+          "text": "Siempre en pesos"
+        },
+        {
+          "id": "c",
+          "text": "No se cobran"
+        }
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "feedback": {
+        "a": "Correcto. Los dividendos de un CEDEAR se cobran en dólares.",
+        "b": "Se cobran en dólares, aunque la inversión haya sido en pesos.",
+        "c": "Sí se cobran, y en dólares."
+      },
+      "sourceIds": [
+        "B-32"
+      ]
+    },
+    {
+      "id": "m15-cheap",
+      "moduleId": "module-15",
+      "type": "true_false_why",
+      "prompt": "Un CEDEAR de $ 9.780 es más barato que uno de $ 56.625, así que conviene más.",
+      "options": [
+        {
+          "id": "true",
+          "text": "Verdadero"
+        },
+        {
+          "id": "false",
+          "text": "Falso"
+        }
+      ],
+      "correctOptionIds": [
+        "false"
+      ],
+      "why": {
+        "prompt": "¿Por qué?",
+        "options": [
+          {
+            "id": "w1",
+            "text": "Porque el precio en pesos depende del ratio: no dice si el activo está caro o barato"
+          },
+          {
+            "id": "w2",
+            "text": "Porque el más caro siempre rinde más"
+          }
+        ],
+        "correct": "w1"
+      },
+      "feedback": {
+        "correct": "Correcto. El precio en pesos depende del ratio; compararlo no dice qué conviene. Lo que importa es qué replica, su riesgo y tu horizonte.",
+        "incorrect": "Es falso: el precio en pesos depende del ratio, así que compararlo no dice qué conviene."
+      },
+      "sourceIds": [
+        "A-46",
+        "B-31"
+      ]
     }
   ]
 }

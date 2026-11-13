@@ -27,7 +27,7 @@ export type LearningQuestion =
   | (Base & { type: 'reflection'; options: Option[] })
   | (Base & { type: 'multiple'; options: Option[]; correctOptionIds: string[] })
   | (Base & { type: 'true_false_why'; options: Option[]; correctOptionIds: string[]; why: { prompt: string; options: Option[]; correct: string } })
-  | (Base & { type: 'numeric'; numeric: { answer: string; tolerance: string; unit: 'ARS' | 'percent' | 'months' }; help: string })
+  | (Base & { type: 'numeric'; numeric: { answer: string; tolerance: string; unit: 'ARS' | 'USD' | 'percent' | 'months' }; help: string })
   | (Base & { type: 'ordering'; ordering: { items: Option[]; correctOrder: string[] } })
   | (Base & { type: 'matching'; matching: { left: Option[]; right: Option[]; pairs: [string, string][] } })
   | (Base & { type: 'categorize'; categorize: { categories: { id: string; label: string }[]; items: (Option & { categoryId: string })[] } });

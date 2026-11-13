@@ -25,3 +25,4 @@
 | 13/11/2026 | 8.4 · Rendir | P6 con las fichas de cuenta remunerada y fondo money market, la tasa real del mes y los plazos fijos tradicional y UVA de práctica; serie diaria del fondo en el motor; misión 4 "¿Cuenta o fondo?" (D-180, D-181). Paso 8 completo: queda la revisión de Lourdes | Hecho |
 | 13/11/2026 | Revisión de contenido 1 a 6 | Las 12 correcciones de Lourdes en guías y bancos, fuentes con nombre completo, preguntas de reflexión y tests de fuentes y códigos internos; CLAUDE.md actualizado (D-182) | Hecho |
 | 13/11/2026 | Formato y color de la información | Servicios, Tarjeta y préstamos y Fuentes con chips, datos clave con tono y avisos de color; sin códigos de fuente en los textos (D-183). 449 tests unitarios y 488 de Playwright en verde | Hecho |
+| 13/11/2026 | 9.1 · Contenido del nivel 7 | 4 guías (módulos 12 a 15), 20 preguntas y los desafíos de nivel y de suficiencia del nivel 7 (D-184) | Hecho |

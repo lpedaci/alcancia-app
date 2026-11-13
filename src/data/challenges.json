@@ -112,6 +112,30 @@
         "module-11": 3
       },
       "passingScore": 0.7
+    },
+    {
+      "id": "challenge-level-7",
+      "levelId": "level-7",
+      "mastery": false,
+      "questionsPerModule": {
+        "module-12": 2,
+        "module-13": 2,
+        "module-14": 2,
+        "module-15": 2
+      },
+      "passingScore": 0.7
+    },
+    {
+      "id": "mastery-level-7",
+      "levelId": "level-7",
+      "mastery": true,
+      "questionsPerModule": {
+        "module-12": 2,
+        "module-13": 2,
+        "module-14": 2,
+        "module-15": 2
+      },
+      "passingScore": 0.7
     }
   ]
 }

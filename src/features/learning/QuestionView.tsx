@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { MoneyInput } from '@/components/money/MoneyInput';
+import { PercentInput } from '@/components/money/PercentInput';
 import { Button } from '@/components/ui/Button';
 import { Checkbox } from '@/components/ui/Checkbox';
 import { IconButton } from '@/components/ui/IconButton';
@@ -91,16 +92,12 @@ export function QuestionView({
         </div>
       );
     }
-    case 'numeric':
-      return (
-        <MoneyInput
-          label={question.prompt}
-          helperText={question.help}
-          disabled={disabled}
-          value={(value as string) ?? ''}
-          onChange={(e) => onChange(e.target.value)}
-        />
-      );
+    case 'numeric': {
+      // The field shows the unit of the answer: pesos, dollars or a percentage (2.10).
+      const field = { label: question.prompt, helperText: question.help, disabled, value: (value as string) ?? '', onChange: (e: React.ChangeEvent<HTMLInputElement>) => onChange(e.target.value) };
+      if (question.numeric.unit === 'percent') return <PercentInput {...field} />;
+      return <MoneyInput {...field} currency={question.numeric.unit === 'USD' ? 'USD' : 'ARS'} />;
+    }
     case 'ordering': {
       const order = (value as string[]) ?? question.ordering.items.map((i) => i.id);
       const move = (index: number, delta: number) => {

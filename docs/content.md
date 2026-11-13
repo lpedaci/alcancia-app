@@ -104,6 +104,19 @@ Las 13 guías y sus bancos quedan revisados por Lourdes con estas correcciones:
 
 También se cambió la frase de Fuerte para Invertir bloqueado: "Invertir se abre cuando tengas tu fondo de emergencia armado", como en la spec actualizada.
 
+## Tanda del paso 9: guías y bancos del nivel 7 (D-184)
+
+Escrita con las reglas de la revisión de Lourdes (D-182): fuentes solo en `sourceIds`, "Antes de empezar" como reflexión, tasas rotuladas "de ejemplo", herramientas por su nombre y con botón. **Estado:** borrador para revisión de Lourdes; las ampliaciones (módulos 13 a 15), además, para revisión del Lic. Kevin Giampieri.
+
+| Módulo | Guía | Banco (tipos) | Fuentes |
+| --- | --- | --- | --- |
+| 12 · Ahorrar e invertir | "El tiempo como aliado" (6 min) | opción única (ahorrar o invertir, costo de oportunidad, aportes frente a intereses), numérica en dólares (USD 1.000 al 10 % de ejemplo por 10 años), verdadero o falso (el tiempo) | T, A-19, A-38, A-39, A-55, F-18, F-19 |
+| 13 · Perfil y bróker | "Antes de abrir una cuenta" (7 min) | opción única (bróker, registro, subcuenta comitente), ordenar (pasos para abrir una cuenta), verdadero o falso (el perfil no es una recomendación) | T, A-53, A-54, B-20 a B-23, B-34 |
+| 14 · Mercado de capitales | "Qué hay en el mercado" (7 min) | unir pares (índices), clasificar (acción, bono, ON, FCI, ETF), opción única (diversificar, horizonte), verdadero o falso (FCI) | T, A-36, A-40, A-43 a A-45, B-25 |
+| 15 · CEDEARs | "De la acción a tu pantalla" (7 min) | numérica (precio teórico, F-20), opción múltiple (fuentes de variación), opción única (ratio, dividendos), verdadero o falso (precio en pesos y ratio) | A-46, B-30 a B-34, B-36, F-20 |
+
+Sin A-42 (Q-06) ni el 10 % anual de A-40 (Q-05) hasta tener su fuente; A-20 (el ejemplo del teléfono) queda fuera de la guía por el mismo motivo. Los precios de A-46 se muestran con su fecha (14/09/2026) y solo para explicar el ratio. Las preguntas numéricas muestran ahora su unidad (pesos, dólares o porcentaje).
+
 ## Tanda del paso 8: guías y bancos de los niveles 5 y 6 (D-177)
 
 Texto completo en `src/data/guides.json` y `src/data/question-banks.json` (5 preguntas por módulo). **Estado:** revisada por Lourdes el 13/11/2026, con las correcciones de la sección "Revisión de Lourdes de los niveles 1 a 6". Las ampliaciones (módulos 6, 8, 10 y 11) siguen pendientes de revisión del Lic. Kevin Giampieri.

@@ -1394,6 +1394,460 @@
         "B-26",
         "F-08"
       ]
+    },
+    {
+      "id": "module-12-guide-1",
+      "moduleId": "module-12",
+      "title": "El tiempo como aliado",
+      "minutes": 6,
+      "blocks": [
+        {
+          "type": "hook",
+          "body": "Un café de todos los días parece poco. Pero ese dinero, invertido durante años, podría ser mucho más."
+        },
+        {
+          "type": "objective",
+          "body": "Al terminar vas a poder diferenciar ahorrar de invertir y estimar el efecto del interés compuesto con una herramienta."
+        },
+        {
+          "type": "recall",
+          "question": {
+            "id": "g12-recall",
+            "moduleId": "module-12",
+            "type": "reflection",
+            "prompt": "¿Hoy tu dinero ahorrado está guardado o invertido?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Guardado"
+              },
+              {
+                "id": "b",
+                "text": "Invertido"
+              },
+              {
+                "id": "c",
+                "text": "No lo sé"
+              }
+            ],
+            "feedback": {
+              "a": "Es el primer paso. Veamos qué cambia al invertir.",
+              "b": "Bien. Veamos por qué el tiempo pesa tanto.",
+              "c": "Es muy común. Lo vemos ahora."
+            },
+            "sourceIds": []
+          }
+        },
+        {
+          "type": "text",
+          "title": "Ahorrar e invertir",
+          "body": "**Ahorrar** es guardar dinero: retener su valor. **Invertir** es ponerlo en activos que pueden generar más dinero, con riesgo. Y siempre hay un **costo de oportunidad**: cada peso que gastas en algo efímero deja de crecer."
+        },
+        {
+          "type": "text",
+          "title": "El interés compuesto",
+          "body": "Con el **interés compuesto**, los intereses también generan intereses: C = P × (1 + r)^n. El **tiempo** es el factor más potente: empezar antes pesa más que aportar más."
+        },
+        {
+          "type": "example",
+          "title": "Ejemplo resuelto, con una tasa de ejemplo",
+          "steps": [
+            "Aportas USD 200 por mes durante 33 años.",
+            "Con una tasa de ejemplo del 12 % anual, el total llega a unos USD 1.008.712.",
+            "Tus aportes suman USD 79.200; el resto es interés compuesto.",
+            "Es un escenario, no una promesa: los rendimientos pasados no garantizan rendimientos futuros."
+          ]
+        },
+        {
+          "type": "practice",
+          "question": {
+            "id": "m12-compound",
+            "moduleId": "module-12",
+            "type": "numeric",
+            "prompt": "Con USD 1.000 a una tasa de ejemplo del 10 % anual durante 10 años, sin aportes, ¿con cuánto terminas? (C = P × (1 + r)^n)",
+            "numeric": {
+              "answer": "2593.74",
+              "tolerance": "1.00",
+              "unit": "USD"
+            },
+            "help": "Monto en dólares, con dos decimales, por ejemplo: 2.000,00",
+            "feedback": {
+              "correct": "Correcto. 1.000 × 1,1^10 = USD 2.593,74: el interés también genera interés.",
+              "incorrect": "Aplica la fórmula: 1.000 × 1,1^10 = USD 2.593,74."
+            },
+            "sourceIds": [
+              "T",
+              "A-39",
+              "F-18"
+            ]
+          }
+        },
+        {
+          "type": "takeaway",
+          "body": "Para tu vida: elige un gasto chico que repites seguido y mira cuánto sería invertido en la herramienta \"Interés compuesto y aportes periódicos\".",
+          "toolId": "SIM-10"
+        }
+      ],
+      "sourceIds": [
+        "T",
+        "A-19",
+        "A-38",
+        "A-39",
+        "A-55",
+        "F-18",
+        "F-19"
+      ]
+    },
+    {
+      "id": "module-13-guide-1",
+      "moduleId": "module-13",
+      "title": "Antes de abrir una cuenta",
+      "minutes": 7,
+      "blocks": [
+        {
+          "type": "hook",
+          "body": "Ves una publicidad: \"Invierte desde el celular en minutos\". ¿Cómo sabes si esa empresa está autorizada?"
+        },
+        {
+          "type": "objective",
+          "body": "Al terminar vas a poder explicar para qué sirve el perfil de inversor y verificar a un agente en el registro de la CNV."
+        },
+        {
+          "type": "recall",
+          "question": {
+            "id": "g13-recall",
+            "moduleId": "module-13",
+            "type": "reflection",
+            "prompt": "¿Alguna vez verificaste si una empresa financiera estaba registrada?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Sí"
+              },
+              {
+                "id": "b",
+                "text": "No"
+              }
+            ],
+            "feedback": {
+              "a": "Bien. Veamos dónde se hace con los brókers.",
+              "b": "Es común. Te mostramos dónde, en un minuto."
+            },
+            "sourceIds": []
+          }
+        },
+        {
+          "type": "text",
+          "title": "El bróker y el registro",
+          "body": "El **bróker** es el intermediario regulado con el que compras acciones, bonos, ETFs y fondos. En el **Registro Público de Agentes de la CNV** puedes buscarlo por nombre, CUIT o matrícula; su publicidad debe mostrar su categoría (por ejemplo, ALyC) y su número. Si no figura, extrema las precauciones."
+        },
+        {
+          "type": "text",
+          "title": "Tus títulos a tu nombre",
+          "body": "Lo que compras queda en una **subcuenta comitente a tu nombre** en Caja de Valores. Si tienes un problema, primero reclamas al Responsable de Relaciones con el Público del agente y, si no se resuelve, a la CNV."
+        },
+        {
+          "type": "example",
+          "title": "Ejemplo resuelto: abrir una cuenta",
+          "steps": [
+            "Eliges un bróker y verificas su matrícula en el registro de la CNV.",
+            "Validas tu identidad.",
+            "Haces el test de perfil de inversor: conservador, moderado o agresivo.",
+            "Fondeas la cuenta desde tu cuenta bancaria o billetera."
+          ]
+        },
+        {
+          "type": "practice",
+          "question": {
+            "id": "m13-steps",
+            "moduleId": "module-13",
+            "type": "ordering",
+            "prompt": "Ordena los pasos para abrir una cuenta en un bróker.",
+            "ordering": {
+              "items": [
+                {
+                  "id": "a",
+                  "text": "Elegir un bróker registrado en la CNV"
+                },
+                {
+                  "id": "b",
+                  "text": "Validar tu identidad"
+                },
+                {
+                  "id": "c",
+                  "text": "Hacer el test de perfil de inversor"
+                },
+                {
+                  "id": "d",
+                  "text": "Fondear la cuenta desde tu cuenta bancaria o billetera"
+                }
+              ],
+              "correctOrder": [
+                "a",
+                "b",
+                "c",
+                "d"
+              ]
+            },
+            "feedback": {
+              "correct": "Correcto. Primero el bróker registrado, después la identidad, el perfil y por último el dinero.",
+              "incorrect": "El orden es: elegir un bróker registrado, validar la identidad, hacer el test de perfil y fondear la cuenta."
+            },
+            "sourceIds": [
+              "T",
+              "A-54",
+              "B-34"
+            ]
+          }
+        },
+        {
+          "type": "takeaway",
+          "body": "Para tu vida: busca en el registro de la CNV a un agente que conozcas de nombre y mira su categoría y su matrícula."
+        }
+      ],
+      "sourceIds": [
+        "T",
+        "A-53",
+        "A-54",
+        "B-20",
+        "B-21",
+        "B-22",
+        "B-23"
+      ]
+    },
+    {
+      "id": "module-14-guide-1",
+      "moduleId": "module-14",
+      "title": "Qué hay en el mercado",
+      "minutes": 7,
+      "blocks": [
+        {
+          "type": "hook",
+          "body": "Acciones, bonos, fondos, ETFs: parecen muchas cosas distintas. Se ordenan con cuatro preguntas."
+        },
+        {
+          "type": "objective",
+          "body": "Al terminar vas a poder clasificar instrumentos por riesgo, liquidez, moneda y horizonte, y explicar qué es diversificar con un índice."
+        },
+        {
+          "type": "recall",
+          "question": {
+            "id": "g14-recall",
+            "moduleId": "module-14",
+            "type": "reflection",
+            "prompt": "¿Sabes qué es un ETF?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Sí"
+              },
+              {
+                "id": "b",
+                "text": "Más o menos"
+              },
+              {
+                "id": "c",
+                "text": "No"
+              }
+            ],
+            "feedback": {
+              "a": "Bien. Lo vamos a ubicar junto a los demás instrumentos.",
+              "b": "Lo vemos paso a paso.",
+              "c": "Es muy común. Lo vemos ahora."
+            },
+            "sourceIds": []
+          }
+        },
+        {
+          "type": "text",
+          "title": "Cuatro preguntas",
+          "body": "Para cada instrumento: **qué riesgo tiene** (cuánto puede variar), **qué liquidez** (cuándo puedes usar el dinero), **en qué moneda está** y **para qué horizonte sirve**. Con una **acción** eres parte de una empresa; con un **bono** o una **obligación negociable** prestas dinero; un **FCI** o un **ETF** reúne muchos activos."
+        },
+        {
+          "type": "text",
+          "title": "Índices y diversificación",
+          "body": "Un **índice** mide un grupo de empresas: el **S&P 500** sigue a las 500 más grandes de EE. UU.; el **Nasdaq 100**, a las 100 mayores no financieras; el **Dow Jones**, a 30 grandes; el **MSCI ACWI**, a empresas de mercados desarrollados y emergentes. Un ETF que replica un índice **diversifica**: una caída puntual pesa menos, pero el riesgo no desaparece."
+        },
+        {
+          "type": "example",
+          "title": "Ejemplo resuelto: el horizonte manda",
+          "steps": [
+            "Necesitas el dinero en dos meses: importan la liquidez y el bajo riesgo.",
+            "Lo vas a necesitar en diez años: puedes tolerar más variación en el camino.",
+            "En los dos casos, primero el fondo de emergencia y sin deudas caras.",
+            "Ningún instrumento es \"el mejor\": depende de tu horizonte y tu perfil."
+          ]
+        },
+        {
+          "type": "practice",
+          "question": {
+            "id": "m14-type",
+            "moduleId": "module-14",
+            "type": "categorize",
+            "prompt": "Clasifica cada instrumento según qué es.",
+            "categorize": {
+              "categories": [
+                {
+                  "id": "share",
+                  "label": "Parte de una empresa"
+                },
+                {
+                  "id": "debt",
+                  "label": "Un préstamo que haces"
+                },
+                {
+                  "id": "fund",
+                  "label": "Un fondo con muchos activos"
+                }
+              ],
+              "items": [
+                {
+                  "id": "i1",
+                  "text": "Acción",
+                  "categoryId": "share"
+                },
+                {
+                  "id": "i2",
+                  "text": "Bono",
+                  "categoryId": "debt"
+                },
+                {
+                  "id": "i3",
+                  "text": "Obligación negociable",
+                  "categoryId": "debt"
+                },
+                {
+                  "id": "i4",
+                  "text": "Fondo común de inversión",
+                  "categoryId": "fund"
+                },
+                {
+                  "id": "i5",
+                  "text": "ETF",
+                  "categoryId": "fund"
+                }
+              ]
+            },
+            "feedback": {
+              "correct": "Correcto. Con una acción eres parte de una empresa; con un bono o una ON le prestas dinero a un Estado o a una empresa; un FCI o un ETF reúne muchos activos.",
+              "incorrect": "Acción: parte de una empresa. Bono y obligación negociable: un préstamo. FCI y ETF: fondos con muchos activos."
+            },
+            "sourceIds": [
+              "B-25"
+            ]
+          }
+        },
+        {
+          "type": "takeaway",
+          "body": "Para tu vida: elige un instrumento que conozcas y responde las cuatro preguntas: riesgo, liquidez, moneda y horizonte."
+        }
+      ],
+      "sourceIds": [
+        "T",
+        "A-36",
+        "A-43",
+        "A-44",
+        "A-45",
+        "B-25"
+      ]
+    },
+    {
+      "id": "module-15-guide-1",
+      "moduleId": "module-15",
+      "title": "De la acción a tu pantalla",
+      "minutes": 7,
+      "blocks": [
+        {
+          "type": "hook",
+          "body": "En la pantalla de un bróker, un CEDEAR cuesta unos miles de pesos, aunque la acción en el exterior valga cientos de dólares. ¿Cómo puede ser?"
+        },
+        {
+          "type": "objective",
+          "body": "Al terminar vas a poder calcular el precio teórico en pesos de un CEDEAR e identificar sus dos fuentes de variación."
+        },
+        {
+          "type": "recall",
+          "question": {
+            "id": "g15-recall",
+            "moduleId": "module-15",
+            "type": "reflection",
+            "prompt": "¿Escuchaste hablar de los CEDEARs?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Sí"
+              },
+              {
+                "id": "b",
+                "text": "No"
+              }
+            ],
+            "feedback": {
+              "a": "Bien. Veamos cómo se forma su precio.",
+              "b": "Lo vemos desde el principio."
+            },
+            "sourceIds": []
+          }
+        },
+        {
+          "type": "text",
+          "title": "Qué es un CEDEAR",
+          "body": "Un **CEDEAR** es un certificado emitido en Argentina que da acceso a una acción o un ETF del exterior; está respaldado por ese activo y se custodia en Caja de Valores. El **ratio** dice cuántos CEDEARs equivalen a una acción: con 20:1, 20 CEDEARs son una acción. Los dividendos se cobran **en dólares**."
+        },
+        {
+          "type": "text",
+          "title": "Dos fuentes de variación",
+          "body": "Precio teórico ≈ **precio del activo en dólares ÷ ratio × tipo de cambio implícito**. Si sube la acción, sube el CEDEAR; si sube el tipo de cambio, también. El precio real puede tener una prima o un descuento. Como ejemplo fechado, al 14/09/2026 un CEDEAR de SPY costaba $ 20.400 y uno de QQQ, $ 56.625: el precio en pesos depende del ratio, no dice cuál conviene."
+        },
+        {
+          "type": "example",
+          "title": "Ejemplo resuelto, con valores de ejemplo",
+          "steps": [
+            "Precio de la acción: USD 600; ratio: 20:1; tipo de cambio implícito: $ 1.500.",
+            "Precio teórico: 600 ÷ 20 × 1.500 = $ 45.000.",
+            "Si la acción sube 10 %: 660 ÷ 20 × 1.500 = $ 49.500.",
+            "Si el tipo de cambio sube 10 %: 600 ÷ 20 × 1.650 = $ 49.500."
+          ]
+        },
+        {
+          "type": "practice",
+          "question": {
+            "id": "m15-price",
+            "moduleId": "module-15",
+            "type": "numeric",
+            "prompt": "Una acción vale USD 600, el ratio de ejemplo es 20:1 y el tipo de cambio implícito de ejemplo es $ 1.500. ¿Cuál es el precio teórico del CEDEAR en pesos?",
+            "numeric": {
+              "answer": "45000",
+              "tolerance": "1.00",
+              "unit": "ARS"
+            },
+            "help": "Monto en pesos, por ejemplo: 40.000",
+            "feedback": {
+              "correct": "Correcto. 600 ÷ 20 × 1.500 = $ 45.000.",
+              "incorrect": "Divide el precio por el ratio y multiplica por el tipo de cambio: 600 ÷ 20 × 1.500 = $ 45.000."
+            },
+            "sourceIds": [
+              "B-36",
+              "F-20"
+            ]
+          }
+        },
+        {
+          "type": "takeaway",
+          "body": "Para tu vida: prueba en la herramienta \"CEDEAR: de la acción al precio en pesos\" qué pasa si sube la acción y qué pasa si sube el tipo de cambio.",
+          "toolId": "SIM-11"
+        }
+      ],
+      "sourceIds": [
+        "A-46",
+        "B-30",
+        "B-31",
+        "B-32",
+        "B-33",
+        "B-34",
+        "B-36",
+        "F-20"
+      ]
     }
   ]
 }
