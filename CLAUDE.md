@@ -236,7 +236,7 @@ Aprendizaje de Rumbo: la sobriedad (sin degradés, pocas sombras, paleta fría) 
 3. **KPIs con vida:** ícono en contenedor de color, sparkline, etiqueta, número grande y píldora de variación debajo.
 4. **Gráficos protagonistas** con relleno plano y tooltip oscuro (`inverse-surface`).
 5. **Navegación lateral flotante** plegable a íconos, con el ítem activo en píldora `primary`; barra superior flotante con logo, "Ver como", Ayuda y Notificaciones.
-6. **Personas con color de rol:** las cinco personas de la demo tienen foto de perfil con un anillo del color de su rol (fotos de stock de Magnific con licencia gratuita y atribución en el pie de la landing, D-165 de Claude Code); el resto, iniciales sobre el contenedor del rol.
+6. **Personas con color de rol:** las cinco personas de la demo tienen foto de perfil con un anillo del color de su rol (fotos de stock de Magnific con licencia gratuita, atribuidas en el case study, la documentación y el sistema de diseño, D-165 de Claude Code); el resto, iniciales sobre el contenedor del rol.
 7. **Bienvenida guiada** de 3 o 4 pasos al primer ingreso de cada rol, con zona ilustrativa hecha con componentes reales en miniatura, puntos de progreso, "Anterior" y "Continuar" (como el video `original-d624f662` de las referencias).
 8. **Mapa de niveles como línea de tiempo (5.0):** un tramo por nivel, con estado (completado, en curso, bloqueado con qué falta) con ícono y texto, y el nivel actual destacado.
 9. **Anatomía del simulador** (patrón propio, el más importante del producto):

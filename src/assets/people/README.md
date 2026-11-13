@@ -10,4 +10,4 @@ Fotos de stock descargadas de [Magnific](https://www.magnific.com/) con su licen
 | Paula Gómez | `2148213468.jpg` |
 | Ricardo Benítez | `3600.jpg` |
 
-Crédito visible: "Fotos de personas: Magnific" en el pie de la landing.
+Crédito: en el case study, en la documentación y en el sitio del sistema de diseño (no en la interfaz del producto).
