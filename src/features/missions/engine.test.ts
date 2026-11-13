@@ -27,9 +27,9 @@ function play(def: MissionDef, run: MissionRun, input?: string) {
 }
 
 describe('mission catalog (D-59, D-166)', () => {
-  it('has the 13 phase A missions, each with a level, and the first two are playable', () => {
+  it('has the 13 phase A missions; levels 0 to 2 are playable', () => {
     expect(MISSION_DEFS).toHaveLength(13);
-    expect(MISSION_DEFS.filter((m) => isPlayable(m)).map((m) => m.id)).toEqual(['mission-security', 'mission-1']);
+    expect(MISSION_DEFS.filter((m) => isPlayable(m)).map((m) => m.id)).toEqual(['mission-security', 'mission-1', 'mission-2', 'mission-3', 'mission-6']);
   });
 
   it('every playable mission ends with a summary and its criteria point to real steps', () => {
@@ -144,5 +144,44 @@ describe('mission "Configura tu seguridad" (level 0)', () => {
     run = answerStep(security, run, 'email').run;
     expect(run.statements.filter((s) => s.verb === 'answered')).toHaveLength(2);
     expect(run.statements[0]).toEqual({ verb: 'started', object: 'mission-security' });
+  });
+});
+
+describe('missions of level 2 (step 7)', () => {
+  const start = (id: string) => startMission(missionById(id)!, buildMariana());
+
+  it('mission 2: confirming with the wrong holder sends the money to another person, and the fix pays Sofía', () => {
+    const def = missionById('mission-2')!;
+    let run = start('mission-2');
+    expect(run.wallet.balance).toBe('1284958.86'); // starts after the first salary
+    run = play(def, run).run; // situation card
+    const wrong = answerStep(def, run, 'confirm');
+    expect(wrong.feedback?.tone).toBe('info');
+    expect(wrong.run.wallet.balance).toBe('1272958.86'); // $ 1.284.958,86 − $ 12.000 sent to Sofía Ramírez
+    run = play(def, wrong.run, 'cancel').run;
+    run = play(def, run, 'right').run;
+    expect(run.wallet.balance).toBe('1260958.86'); // and $ 12.000 more to Sofía Ramos
+    expect(criteriaStatus(def, run).every((c) => c.met)).toBe(true);
+  });
+
+  it('mission 3: pays $ 3.500 with QR and checks the receipt', () => {
+    const def = missionById('mission-3')!;
+    let run = play(def, start('mission-3')).run;
+    run = play(def, run).run; // pay
+    expect(run.wallet.movements.at(-1)).toMatchObject({ type: 'qr_payment', amount: '-3500.00' });
+    expect(answerStep(def, run, 'again').feedback?.tone).toBe('info');
+    run = play(def, run, 'receipt').run;
+    expect(criteriaStatus(def, run).every((c) => c.met)).toBe(true);
+  });
+
+  it('mission 6: the three messages must be classified right before reporting the false one', () => {
+    const def = missionById('mission-6')!;
+    let run = play(def, start('mission-6')).run;
+    const wrong = answerStep(def, run, JSON.stringify({ m1: 'safe', m2: 'safe', m3: 'safe' }));
+    expect(wrong.feedback?.tone).toBe('info');
+    expect(answerStep(def, run, JSON.stringify({ m1: 'safe' })).feedback).toBeUndefined(); // incomplete: not checked
+    run = play(def, wrong.run, JSON.stringify({ m1: 'safe', m2: 'suspicious', m3: 'safe' })).run;
+    run = play(def, run, 'report').run;
+    expect(finishMission(def, run).finished).toBe(true);
   });
 });

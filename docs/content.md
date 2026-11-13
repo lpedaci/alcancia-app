@@ -92,6 +92,14 @@ Cálculos verificados a mano: $ 1.559.263,32 − $ 274.304,46 = $ 1.284.958,86; 
 - **Configura tu seguridad** (nivel 0): tarjeta "Tus códigos son solo tuyos" (B-24), activar el segundo factor, elegir un límite diario y reconocer un pedido falso de código (opción única con devolución por opción). Criterios: segundo factor activado, límite elegido y respuesta correcta.
 - **Tu primer cobro** (nivel 1): cobrar el sueldo neto de demo ($ 1.284.958,86, D-54), elegir el neto entre bruto, neto y costo laboral del recibo del taller (T), separar el 20 % en "Ahorro" ($ 256.991,77, tolerancia $ 1, A-32), el débito sorpresa de $ 4.990 (D-55, A-34) y decidir si se cancela. Se juega en una cuenta de práctica nueva.
 
+### Misiones del nivel 2 (paso 7.2, D-173)
+
+- **Transfiere sin errores** (módulo 17): le debes $ 12.000 a Sofía Ramos; el alias escrito lleva a Sofía Ramírez. Confirmar manda el dinero a otra persona (no se deshace desde la app, B-15); cancelar y corregir con el alias correcto completa la misión. Personas y entidades ficticias.
+- **Paga con QR** (módulo 17): QR interoperable (B-15), pago de $ 3.500 en un comedor ficticio y lectura del comprobante ante un reclamo.
+- **El mensaje falso** (módulo 18): tres mensajes, uno con pedido urgente de código (falso) y dos avisos que mandan a la app; reportar sin responder (T, B-24).
+
+**Estado:** borrador para revisión de Lourdes; la parte de billeteras (B-15, B-16), además, para revisión del Lic. Kevin Giampieri.
+
 ### Módulo 1 · Tu recibo de sueldo
 - **Objetivo:** calcular el sueldo neto a partir del bruto y los descuentos de un recibo, y clasificar cada concepto como aporte, contribución o suma no remunerativa.
 - **Evidencia:** respuesta numérica (neto del recibo de demo, tolerancia de $ 1); clasificar 6 conceptos del recibo; misión 1 (separar el 20 % del neto).

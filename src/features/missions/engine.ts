@@ -8,9 +8,11 @@ import {
   createPocket,
   createWallet,
   moveToPocket,
+  payQr,
   setDailyLimit,
   setSubscription,
   setTwoFactor,
+  transferOut,
 } from '@/features/wallet/engine/engine';
 import { POCKET_SAVINGS } from '@/features/wallet/engine/demo';
 import type { WalletState } from '@/features/wallet/engine/types';
@@ -27,8 +29,16 @@ import type { WalletState } from '@/features/wallet/engine/types';
  * completed) for F21.
  */
 
-export type ActionId = 'receive_salary' | 'enable_two_factor' | 'set_daily_limit' | 'charge_subscription' | 'cancel_subscription' | 'save_to_savings';
-export type CheckId = 'two_factor_on' | 'daily_limit_set' | 'step_correct' | 'step_done' | 'salary_received' | 'savings_percent';
+export type ActionId =
+  | 'receive_salary'
+  | 'enable_two_factor'
+  | 'set_daily_limit'
+  | 'charge_subscription'
+  | 'cancel_subscription'
+  | 'save_to_savings'
+  | 'transfer'
+  | 'pay_qr';
+export type CheckId = 'two_factor_on' | 'daily_limit_set' | 'step_correct' | 'step_done' | 'salary_received' | 'savings_percent' | 'paid_to';
 
 interface StepBase {
   id: string;
@@ -42,11 +52,13 @@ export interface Option {
   feedback: string;
   action?: ActionId;
   value?: string;
+  /** Counterparty of a transfer or merchant of a QR payment (always fictitious). */
+  target?: string;
 }
 export type MissionStep =
   | (StepBase & { kind: 'card'; title: string; body: string })
   | (StepBase & { kind: 'event'; title: string; body: string; action: ActionId })
-  | (StepBase & { kind: 'action'; instruction: string; button: string; action: ActionId; done: string })
+  | (StepBase & { kind: 'action'; instruction: string; button: string; action: ActionId; done: string; value?: string; target?: string })
   | (StepBase & { kind: 'decision'; prompt: string; options: Option[] })
   | (StepBase & { kind: 'single'; prompt: string; options: Option[]; correct: string; title?: string; body?: string })
   | (StepBase & {
@@ -59,6 +71,14 @@ export type MissionStep =
       onCorrect?: ActionId;
       hint: string;
       feedback: string;
+    })
+  | (StepBase & {
+      kind: 'classify';
+      prompt: string;
+      categories: { id: string; label: string }[];
+      items: { id: string; text: string; categoryId: string }[];
+      feedbackCorrect: string;
+      feedbackIncorrect: string;
     })
   | (StepBase & { kind: 'summary' });
 
@@ -75,8 +95,11 @@ export interface MissionDef {
   title: string;
   minutes: number;
   objective: string;
-  /** `fresh`: a practice account at day 0. `current`: a copy of the person's wallet, kept on completion. */
-  initial?: 'fresh' | 'current';
+  /**
+   * `fresh`: a practice account at day 0. `salary`: the same account after the first salary (day 1).
+   * `current`: a copy of the person's wallet, kept on completion.
+   */
+  initial?: 'fresh' | 'salary' | 'current';
   steps?: MissionStep[];
   criteria?: Criterion[];
 }
@@ -131,7 +154,7 @@ export function expectedAmount(step: Extract<MissionStep, { kind: 'numeric' }>, 
   return toMoneyString(percentOfSalary(run.wallet, step.param));
 }
 
-function applyAction(wallet: WalletState, action: ActionId, value?: string): WalletState {
+function applyAction(wallet: WalletState, action: ActionId, value?: string, target?: string): WalletState {
   switch (action) {
     case 'receive_salary':
       // Day 0 → day 1: the engine credits the net salary first thing (D-158).
@@ -144,6 +167,10 @@ function applyAction(wallet: WalletState, action: ActionId, value?: string): Wal
       return chargeSurpriseSubscription(wallet);
     case 'cancel_subscription':
       return setSubscription(wallet, false);
+    case 'transfer':
+      return transferOut(wallet, { amount: value ?? '0', counterparty: target ?? '' });
+    case 'pay_qr':
+      return payQr(wallet, { amount: value ?? '0', merchant: target ?? '' });
     case 'save_to_savings': {
       const withPocket = createPocket(wallet, { id: POCKET_SAVINGS, name: 'Ahorro' });
       return moveToPocket(withPocket, POCKET_SAVINGS, value ?? '0');
@@ -152,7 +179,8 @@ function applyAction(wallet: WalletState, action: ActionId, value?: string): Wal
 }
 
 export function startMission(def: MissionDef, current: WalletState): MissionRun {
-  const wallet = def.initial === 'fresh' ? createWallet(current.personId, current.scenarioId) : structuredClone(current);
+  const fresh = createWallet(current.personId, current.scenarioId);
+  const wallet = def.initial === 'fresh' ? fresh : def.initial === 'salary' ? advanceDays(fresh, 1) : structuredClone(current);
   return { missionId: def.id, step: 0, wallet, results: {}, statements: [{ verb: 'started', object: def.id }], snapshots: {}, finished: false };
 }
 
@@ -181,7 +209,7 @@ export function answerStep(def: MissionDef, run: MissionRun, input?: string): { 
     case 'event':
     case 'action': {
       if (previous.done) return { run };
-      const wallet = applyAction(run.wallet, step.action);
+      const wallet = step.kind === 'action' ? applyAction(run.wallet, step.action, step.value, step.target) : applyAction(run.wallet, step.action);
       const feedback = step.kind === 'action' ? { tone: 'success' as const, text: fillText(step.done, { ...run, wallet }) } : undefined;
       return { run: record({ ...previous, done: true }, { verb: 'acted', object: `${def.id}/${step.id}` }, wallet), feedback };
     }
@@ -191,7 +219,7 @@ export function answerStep(def: MissionDef, run: MissionRun, input?: string): { 
       // A decision has no wrong answer: it has a consequence. Changing it replays from the wallet
       // as it was before the first choice.
       const base = run.snapshots[step.id] ?? run.wallet;
-      const wallet = option.action ? applyAction(base, option.action, option.value) : base;
+      const wallet = option.action ? applyAction(base, option.action, option.value, option.target) : base;
       return {
         run: record(
           { answer: option.id, attempts: previous.attempts + 1, done: true },
@@ -207,10 +235,13 @@ export function answerStep(def: MissionDef, run: MissionRun, input?: string): { 
       const option = step.options.find((o) => o.id === input);
       if (!option) return { run };
       const correct = option.id === step.correct;
+      // An option can have a consequence in the simulation (5.3: errors are allowed and have one).
+      const wallet = option.action ? applyAction(run.wallet, option.action, option.value, option.target) : run.wallet;
       return {
         run: record(
           { answer: option.id, correct, attempts: previous.attempts + 1, done: correct },
           { verb: 'answered', object: `${def.id}/${step.id}`, result: { success: correct, response: option.id } },
+          wallet,
         ),
         feedback: { tone: correct ? 'success' : 'info', text: option.feedback },
       };
@@ -233,6 +264,19 @@ export function answerStep(def: MissionDef, run: MissionRun, input?: string): { 
         feedback: correct
           ? { tone: 'success', text: fillText(step.feedback, run, { amount }) }
           : { tone: 'info', text: fillText(step.hint, run, { expected }) },
+      };
+    }
+    case 'classify': {
+      if (previous.correct || input === undefined) return { run };
+      const chosen = JSON.parse(input) as Record<string, string>;
+      if (!step.items.every((i) => chosen[i.id])) return { run };
+      const correct = step.items.every((i) => chosen[i.id] === i.categoryId);
+      return {
+        run: record(
+          { answer: input, correct, attempts: previous.attempts + 1, done: correct },
+          { verb: 'answered', object: `${def.id}/${step.id}`, result: { success: correct, response: input } },
+        ),
+        feedback: { tone: correct ? 'success' : 'info', text: correct ? step.feedbackCorrect : step.feedbackIncorrect },
       };
     }
     case 'summary':
@@ -268,6 +312,8 @@ export function checkCriterion(criterion: Criterion, run: MissionRun): boolean {
       return run.results[criterion.param ?? '']?.done === true;
     case 'salary_received':
       return wallet.movements.some((m) => m.type === 'income');
+    case 'paid_to':
+      return wallet.movements.some((m) => (m.type === 'transfer_out' || m.type === 'qr_payment') && !m.expenseKey && m.counterparty === criterion.param);
     case 'savings_percent': {
       const pocket = wallet.pockets.find((p) => p.id === POCKET_SAVINGS);
       if (!pocket) return false;

@@ -29,7 +29,7 @@
 | RF-23 | "Ya sé esto": desafío de suficiencia que desbloquea | M | Aprobar con 70 % desbloquea con `unlockedBy: mastery` | Parcial (paso 7): desafíos de suficiencia de los niveles 2 a 4 |
 | RF-24 | Habilitación de niveles por el tutor con motivo y modo libre del admin | M | Queda registro con fecha, autor y motivo | Pendiente |
 | RF-25 | Motor económico de `wallet-engine.md` (tiempo, sueldo, gastos, inflación, rendimientos, deudas, cierre de mes) | M | Casos de `formulas.md` y tests del motor en verde; determinista | Pendiente |
-| RF-26 | Pagar: transferir (alias, CBU o CVU con titular y entidad ficticios), QR con alternativa sin cámara, servicios y débitos | M | Misiones 2 y 3 completables por teclado y en celular | Pendiente |
+| RF-26 | Pagar: transferir (alias, CBU o CVU con titular y entidad ficticios), QR con alternativa sin cámara, servicios y débitos | M | Misiones 2 y 3 completables por teclado y en celular | Hecho (paso 7.2, D-173) |
 | RF-27 | Categorizar movimientos desde Inicio desde el nivel 1 (D-114) | M | Cuenta para la condición del nivel 3 | Pendiente |
 | RF-28 | Presupuesto con reparto frente a 50/30/20 o 70/20/10 | M | Dona solo con su tabla (2.2) | Pendiente |
 | RF-29 | Apartados: "Ahorro" básico desde el nivel 1; apartados con meta y fondo de emergencia desde el nivel 4 | M | `emergency_months` según `wallet-engine.md` | Pendiente |
@@ -51,7 +51,7 @@
 | RF-42 | 16 guías de fase A con la secuencia de Gagné (D-61) | M | Cada una con objetivo observable y "Para tu vida" | Parcial (paso 7): guías de los módulos 1, 2, 17, 18, 3 y 4 (D-171) |
 | RF-43 | Los 9 tipos de pregunta de 5.1 con alternativa accesible al arrastre | M | Ordenar con "Subir" y "Bajar"; unir con selects; clasificar con menú | Parcial (paso 7): 7 de los 9 tipos con alternativa al arrastre; caso con decisiones y ejercicio con simulador pendientes |
 | RF-44 | Desafíos de nivel con los bancos de sus módulos, mejor intento e intentos configurables (D-57) | M | Insignia por módulo según su parte | Hecho para los niveles 1 a 4 (paso 7, D-171) |
-| RF-45 | 13 misiones con el motor declarativo (D-59) | M | Cada una con objetivo, pasos, evento, devolución y criterios de éxito | Parcial (paso 6): motor declarativo con tests (D-166) y misiones "Configura tu seguridad" y "Tu primer cobro"; las demás llegan con su nivel |
+| RF-45 | 13 misiones con el motor declarativo (D-59) | M | Cada una con objetivo, pasos, evento, devolución y criterios de éxito | Parcial (paso 7.2): seguridad, 1, 2, 3 y 6 jugables; las demás llegan con su nivel |
 | RF-46 | Mapa de niveles como línea de tiempo y logros | M | Estado con ícono y texto | Hecho (paso 7, P9) |
 | RF-47 | Glosario integrado con chip en el primer uso | M | Términos de 1.1.1 | Pendiente |
 | RF-48 | Fichas "Brókers registrados" y "Billeteras y fintech" verificadas | M | Solo filas verificadas en el registro oficial, con fecha | Pendiente |

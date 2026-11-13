@@ -224,21 +224,268 @@
       "levelId": "level-2",
       "title": "Transfiere sin errores",
       "minutes": 4,
-      "objective": "Pagarle a un compañero por alias, revisando el titular antes de confirmar."
+      "objective": "Pagarle a un compañero por alias, revisando el titular antes de confirmar.",
+      "initial": "salary",
+      "steps": [
+        {
+          "id": "situation",
+          "kind": "card",
+          "title": "Antes de confirmar",
+          "body": "Le debes $ 12.000 a tu compañera Sofía Ramos por un regalo de cumpleaños. Te pasó su alias por chat y lo escribiste rápido.",
+          "sourceIds": [
+            "B-15"
+          ],
+          "fuerte": "Ojo con esto: una transferencia inmediata no se deshace desde la app."
+        },
+        {
+          "id": "confirm",
+          "kind": "single",
+          "title": "La pantalla de confirmación",
+          "body": "Escribiste sofia.ramirez.practica. La app muestra: titular Sofía Ramírez, entidad Banco Ficticio del Sur, cuenta con CBU, monto $ 12.000.",
+          "prompt": "¿Qué haces?",
+          "options": [
+            {
+              "id": "confirm",
+              "text": "Confirmo: el nombre se parece",
+              "action": "transfer",
+              "value": "12000.00",
+              "target": "Sofía Ramírez · alias sofia.ramirez.practica",
+              "feedback": "Pasó lo mismo que en la vida real: el dinero se acreditó en segundos a otra persona y no se puede deshacer desde la app. Habría que pedirle a Sofía Ramírez que lo devuelva. ¿Qué tendrías que haber hecho?"
+            },
+            {
+              "id": "cancel",
+              "text": "Cancelo y reviso el alias con Sofía",
+              "feedback": "Correcto. El titular no coincide con la persona a la que le pagas: cancelar antes de confirmar es la mejor protección."
+            }
+          ],
+          "correct": "cancel",
+          "sourceIds": [
+            "B-15"
+          ]
+        },
+        {
+          "id": "fix",
+          "kind": "single",
+          "title": "Corrige el alias",
+          "body": "Sofía te confirma su alias por otro canal. Elige la confirmación que coincide con ella.",
+          "prompt": "¿Cuál confirmas?",
+          "options": [
+            {
+              "id": "right",
+              "text": "sofia.ramos.practica · titular Sofía Ramos · Billetera de Ejemplo (CVU) · $ 12.000",
+              "action": "transfer",
+              "value": "12000.00",
+              "target": "Sofía Ramos · alias sofia.ramos.practica",
+              "feedback": "Guardado. Alias, titular y monto coinciden: ahora sí, la transferencia se acredita en segundos."
+            },
+            {
+              "id": "same",
+              "text": "sofia.ramirez.practica · titular Sofía Ramírez · Banco Ficticio del Sur (CBU) · $ 12.000",
+              "feedback": "Es la misma cuenta de antes: el titular sigue sin coincidir. Prueba de nuevo."
+            }
+          ],
+          "correct": "right",
+          "sourceIds": [
+            "B-15",
+            "B-16"
+          ]
+        },
+        {
+          "id": "summary",
+          "kind": "summary"
+        }
+      ],
+      "criteria": [
+        {
+          "id": "cancel",
+          "description": "Cancelaste cuando el titular no coincidía",
+          "check": "step_correct",
+          "param": "confirm"
+        },
+        {
+          "id": "paid",
+          "description": "Le pagaste a Sofía Ramos",
+          "check": "paid_to",
+          "param": "Sofía Ramos · alias sofia.ramos.practica"
+        }
+      ]
     },
     {
       "id": "mission-3",
       "levelId": "level-2",
       "title": "Paga con QR",
       "minutes": 3,
-      "objective": "Comprar en un comercio ficticio y verificar el comprobante."
+      "objective": "Comprar en un comercio ficticio y verificar el comprobante.",
+      "initial": "salary",
+      "steps": [
+        {
+          "id": "interop",
+          "kind": "card",
+          "title": "Un QR, cualquier billetera",
+          "body": "Con el QR interoperable, cualquier billetera o app bancaria puede leer cualquier QR. No necesitas una app distinta para cada comercio.",
+          "sourceIds": [
+            "B-15"
+          ]
+        },
+        {
+          "id": "pay",
+          "kind": "action",
+          "instruction": "Estás en el comedor de la empresa. El QR de la caja muestra $ 3.500 para Comedor de Andina (ficticio).",
+          "button": "Pagar con QR",
+          "action": "pay_qr",
+          "value": "3500.00",
+          "target": "Comedor de Andina (ficticio)",
+          "done": "Pagaste $ 3.500 a Comedor de Andina (ficticio)."
+        },
+        {
+          "id": "receipt",
+          "kind": "single",
+          "title": "Revisa el comprobante",
+          "body": "Comprobante de pago con QR: Comedor de Andina (ficticio) · $ 3.500,00 · operación N.º 0001 (ejemplo).",
+          "prompt": "En la caja te dicen que el pago no llegó. ¿Qué miras primero?",
+          "options": [
+            {
+              "id": "receipt",
+              "text": "El comprobante: comercio, monto y número de operación",
+              "feedback": "Correcto. El comprobante dice a quién le pagaste, cuánto y con qué número de operación: es lo que se muestra ante un reclamo."
+            },
+            {
+              "id": "again",
+              "text": "Pago de nuevo para no tener problemas",
+              "feedback": "Si pagas de nuevo, puedes terminar pagando dos veces. Primero revisa el comprobante. Prueba de nuevo."
+            },
+            {
+              "id": "delete",
+              "text": "Borro el movimiento",
+              "feedback": "Los movimientos no se borran: son tu registro. Revisa el comprobante. Prueba de nuevo."
+            }
+          ],
+          "correct": "receipt",
+          "sourceIds": [
+            "B-15"
+          ]
+        },
+        {
+          "id": "summary",
+          "kind": "summary"
+        }
+      ],
+      "criteria": [
+        {
+          "id": "paid",
+          "description": "Pagaste con QR en el comedor",
+          "check": "paid_to",
+          "param": "Comedor de Andina (ficticio)"
+        },
+        {
+          "id": "receipt",
+          "description": "Revisaste el comprobante",
+          "check": "step_correct",
+          "param": "receipt"
+        }
+      ]
     },
     {
       "id": "mission-6",
       "levelId": "level-2",
       "title": "El mensaje falso",
       "minutes": 4,
-      "objective": "Reconocer y reportar el mensaje fraudulento sin compartir el código."
+      "objective": "Reconocer y reportar el mensaje fraudulento sin compartir el código.",
+      "initial": "fresh",
+      "steps": [
+        {
+          "id": "inbox",
+          "kind": "card",
+          "title": "Tres mensajes nuevos",
+          "body": "Llegaron tres mensajes a tu billetera. Uno es falso: se parece a los reales, pero te pide algo que nadie legítimo pide.",
+          "sourceIds": [
+            "T",
+            "B-24"
+          ],
+          "fuerte": "Ojo con esto: los mensajes falsos copian el tono y el logo de los reales."
+        },
+        {
+          "id": "classify",
+          "kind": "classify",
+          "prompt": "Clasifica cada mensaje.",
+          "categories": [
+            {
+              "id": "safe",
+              "label": "Esperable"
+            },
+            {
+              "id": "suspicious",
+              "label": "Sospechoso"
+            }
+          ],
+          "items": [
+            {
+              "id": "m1",
+              "text": "\"Alcancía: tu resumen de octubre ya está disponible en la app.\"",
+              "categoryId": "safe"
+            },
+            {
+              "id": "m2",
+              "text": "\"Soporte Alcancía: detectamos un problema. Para no perder tu cuenta, respóndenos hoy con el código que te acaba de llegar.\"",
+              "categoryId": "suspicious"
+            },
+            {
+              "id": "m3",
+              "text": "\"Alcancía: activaste el segundo factor. Si no fuiste tú, entra a la app y revisa tu seguridad.\"",
+              "categoryId": "safe"
+            }
+          ],
+          "feedbackCorrect": "Correcto. El que pide un código con urgencia es falso; los otros dos avisan sin pedir nada y te mandan a revisar desde la app.",
+          "feedbackIncorrect": "Revisa qué pide cada mensaje: un aviso real no te pide códigos ni datos y te manda a la app. Prueba de nuevo.",
+          "sourceIds": [
+            "B-24"
+          ]
+        },
+        {
+          "id": "report",
+          "kind": "single",
+          "prompt": "¿Qué haces con el mensaje falso?",
+          "options": [
+            {
+              "id": "report",
+              "text": "Lo reporto y no respondo",
+              "feedback": "Guardado. Reportarlo ayuda a cuidar a otras personas, y no compartir el código protege tu cuenta."
+            },
+            {
+              "id": "ask",
+              "text": "Le respondo para preguntar si es real",
+              "feedback": "Responder le confirma que tu número está activo. Mejor no responder y reportarlo. Prueba de nuevo."
+            },
+            {
+              "id": "give",
+              "text": "Le paso el código y después cambio la contraseña",
+              "feedback": "Con el código pueden entrar antes de que cambies nada. El código no se comparte nunca. Prueba de nuevo."
+            }
+          ],
+          "correct": "report",
+          "sourceIds": [
+            "B-24"
+          ]
+        },
+        {
+          "id": "summary",
+          "kind": "summary"
+        }
+      ],
+      "criteria": [
+        {
+          "id": "classify",
+          "description": "Clasificaste bien los tres mensajes",
+          "check": "step_correct",
+          "param": "classify"
+        },
+        {
+          "id": "report",
+          "description": "Reportaste el mensaje falso sin compartir el código",
+          "check": "step_correct",
+          "param": "report"
+        }
+      ]
     },
     {
       "id": "mission-7",

@@ -23,6 +23,7 @@ const ProfilePage = lazyPage(() => import('@/features/profile/ProfilePage'), 'Pr
 const LearnPage = lazyPage(() => import('@/features/learning/LearnPage'), 'LearnPage');
 const GuidePage = lazyPage(() => import('@/features/learning/GuidePage'), 'GuidePage');
 const ChallengePage = lazyPage(() => import('@/features/learning/ChallengePage'), 'ChallengePage');
+const PayPage = lazyPage(() => import('@/features/pay/PayPage'), 'PayPage');
 const WalletSectionPage = lazy(() => import('@/features/wallet/WalletSectionPage').then((m) => ({ default: m.WalletSectionPage })));
 
 // The internal style guide (CLAUDE.md 2.8) exists only in development: it is never bundled in production.
@@ -48,8 +49,8 @@ export function AppRoutes() {
           <Route path="/app/tools/SIM-3" element={<InflationToolPage />} />
           <Route path="/app/learn/investor-profile" element={<InvestorProfilePage />} />
           {/* Wallet sections built in later steps: locked ones show what is missing (5.0) */}
-          <Route path="/app/pay" element={<WalletSectionPage area="pay" />} />
-          <Route path="/app/pay/:flow" element={<WalletSectionPage area="pay-flow" />} />
+          <Route path="/app/pay" element={<PayPage />} />
+          <Route path="/app/pay/:flow" element={<PayPage />} />
           <Route path="/app/save/budget" element={<WalletSectionPage area="budget" />} />
           <Route path="/app/save/pockets" element={<WalletSectionPage area="pockets" />} />
           <Route path="/app/save/yield" element={<WalletSectionPage area="yield" />} />

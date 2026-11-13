@@ -274,6 +274,41 @@ export function setTwoFactor(state: WalletState, on: boolean): WalletState {
   return next;
 }
 
+/** Manual payments of the day (transfers and QR), for the daily limit; scheduled debits do not count. */
+export function paidToday(state: WalletState): Decimal {
+  return state.movements
+    .filter((m) => m.day === state.day && !m.expenseKey && (m.type === 'transfer_out' || m.type === 'qr_payment'))
+    .reduce((sum, m) => sum.plus(D(m.amount).abs()), ZERO);
+}
+
+function checkPayment(state: WalletState, value: Decimal) {
+  if (value.lte(0)) throw new WalletError('amount_not_positive');
+  if (D(state.balance).lt(value)) throw new WalletError('insufficient_balance');
+  const limit = state.securitySettings.dailyLimit;
+  if (limit && paidToday(state).plus(value).gt(limit)) throw new WalletError('daily_limit');
+}
+
+/**
+ * An immediate transfer to an alias, CBU or CVU (P3, B-15): it is credited in seconds and cannot be
+ * undone from the app. Counterparties are always fictitious (1.1.1). The person categorizes it.
+ */
+export function transferOut(state: WalletState, { amount, counterparty, category }: { amount: string; counterparty: string; category?: BudgetCategory }): WalletState {
+  const value = roundCents(amount);
+  checkPayment(state, value);
+  const next = clone(state);
+  addMovement(next, { type: 'transfer_out', amount: value.neg(), counterparty, suggestedCategory: category });
+  return next;
+}
+
+/** A payment with an interoperable QR to a fictitious merchant (P3, B-15). */
+export function payQr(state: WalletState, { amount, merchant, category }: { amount: string; merchant: string; category?: BudgetCategory }): WalletState {
+  const value = roundCents(amount);
+  checkPayment(state, value);
+  const next = clone(state);
+  addMovement(next, { type: 'qr_payment', amount: value.neg(), counterparty: merchant, suggestedCategory: category });
+  return next;
+}
+
 /** Daily transfer limit of practice (mission "Configura tu seguridad", 5.3 Seguridad). */
 export function setDailyLimit(state: WalletState, amount: string | undefined): WalletState {
   const next = clone(state);

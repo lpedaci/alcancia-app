@@ -701,7 +701,10 @@
       "notMet": "pendiente",
       "complete": "Completar la misión",
       "missing": "Todavía falta un criterio: vuelve al paso que corresponde con \"Anterior\".",
-      "doneBody": "Quedó registrada en tu avance. Tu tutor solo ve que la completaste, nunca tus montos ni tus respuestas."
+      "doneBody": "Quedó registrada en tu avance. Tu tutor solo ve que la completaste, nunca tus montos ni tus respuestas.",
+      "salaryNote": "Se juega en una cuenta de práctica con tu primer sueldo ya cobrado: no cambia el saldo de tu billetera.",
+      "classifyTitle": "Clasifica",
+      "classifyHelp": "Elige una categoría para este mensaje."
     },
     "practiceBannerShort": "Dinero ficticio"
   },
@@ -1246,6 +1249,114 @@
       "conocerte": "Conocerte y tu ruta",
       "profile": "Test de perfil de inversor",
       "tools": "Simulador de inflación"
+    }
+  },
+  "pay": {
+    "intro": "Transfiere, paga con QR y revisa tus débitos. Todo con dinero ficticio y personas, entidades y comercios inventados.",
+    "balance": "Saldo disponible:",
+    "back": "Volver a Pagar",
+    "cancel": "Cancelar",
+    "source": "Fuente: {{source}}",
+    "fuerte": {
+      "locked": "Pagar se abre con tu primer cobro y el desafío del nivel 1.",
+      "home": "Acá practicas lo que harías en cualquier billetera, sin riesgo.",
+      "transfer": "Antes de confirmar, mira el titular. Es lo que más importa.",
+      "confirm": "Ojo con esto: si el titular no es quien esperabas, cancela.",
+      "qr": "Cualquier billetera lee cualquier QR. Revisa el monto antes de pagar.",
+      "bills": "Los débitos se repiten todos los meses. Revisarlos es un buen hábito."
+    },
+    "actions": {
+      "transfer": "A un alias, CBU o CVU, revisando el titular antes de confirmar.",
+      "qr": "En un comercio ficticio, con QR interoperable.",
+      "bills": "Luz, gas, celular y suscripciones que se debitan solas.",
+      "credit": "Tarjeta, préstamos y cuotas. Se abre en el nivel 5."
+    },
+    "learn": {
+      "title": "Aprende y practica",
+      "guideMeta": "Guía · {{minutes}} min",
+      "missionMeta": "Misión · {{minutes}} min"
+    },
+    "recent": {
+      "title": "Últimos pagos",
+      "empty": "Cuando transfieras, pagues con QR o se debite un servicio, lo vas a ver acá."
+    },
+    "transfer": {
+      "title": "Transferir",
+      "alias": "Alias, CBU o CVU",
+      "aliasHelp": "En la práctica usamos alias. Por ejemplo: tomas.diaz.practica.",
+      "aliasMissing": "Escribe el alias de la persona a la que le transfieres.",
+      "aliasUnknown": "No encontramos ese alias en la billetera de práctica. Revisa cómo está escrito o elige uno de la lista.",
+      "contacts": "Contactos de práctica",
+      "amount": "Monto",
+      "amountHelp": "Monto en pesos, por ejemplo: 12.000",
+      "amountMissing": "Escribe un monto mayor que cero, por ejemplo: 12.000.",
+      "continue": "Continuar",
+      "confirmTitle": "Revisa antes de confirmar",
+      "holder": "Titular",
+      "aliasLabel": "Alias",
+      "entity": "Entidad",
+      "account": "Tipo de cuenta",
+      "type": {
+        "CVU": "Cuenta de pago con CVU",
+        "CBU": "Cuenta bancaria con CBU"
+      },
+      "confirm": "Confirmar transferencia",
+      "edit": "Corregir datos",
+      "sent": "Transferencia enviada",
+      "another": "Hacer otra transferencia"
+    },
+    "qr": {
+      "title": "Pagar con QR",
+      "body": "Elige el comercio: en la demo no usamos la cámara, y elegir de una lista es la alternativa accesible a escanear.",
+      "confirmTitle": "Revisa el pago",
+      "merchant": "Comercio",
+      "pay": "Pagar",
+      "paid": "Pago realizado",
+      "method": "Medio",
+      "methodValue": "QR interoperable",
+      "another": "Pagar otro QR"
+    },
+    "bills": {
+      "title": "Servicios y débitos",
+      "body": "Estos gastos se debitan solos el día indicado. Si un día no alcanza el saldo, el avance del tiempo se detiene hasta que lo resuelvas.",
+      "next": "Próximo débito: {{date}}",
+      "cancelled": "Cancelado",
+      "category": {
+        "needs": "Necesidad",
+        "wants": "Deseo",
+        "savings": "Ahorro"
+      },
+      "cancel": "Cancelar suscripción",
+      "cancelTitle": "¿Cancelar la suscripción?",
+      "cancelBody": "Desde el próximo mes deja de debitarse. Puedes reactivarla cuando quieras.",
+      "cancelledToast": "Suscripción cancelada",
+      "reactivate": "Reactivar",
+      "reactivated": "Suscripción reactivada",
+      "pending": "Hay un débito pendiente por falta de saldo",
+      "note": "Los montos suben con la inflación del escenario, salvo la suscripción, que tiene precio fijo."
+    },
+    "receipt": {
+      "title": "Comprobante",
+      "subtitle": "Se acreditó en segundos. Guárdalo por si necesitas hacer un reclamo.",
+      "operation": "Operación",
+      "example": "ejemplo",
+      "date": "Fecha",
+      "amount": "Monto",
+      "note": "Comprobante ficticio de la billetera de práctica: no sirve como constancia real."
+    },
+    "why": {
+      "transferTitle": "¿Por qué importa revisar el titular?",
+      "transfer": "Una transferencia inmediata se acredita en segundos entre CBU y CVU y no se puede deshacer desde la app. El alias no alcanza: confirma que el titular sea quien esperas.",
+      "qrTitle": "¿Por qué importa el QR interoperable?",
+      "qr": "Cualquier billetera o app bancaria puede leer cualquier QR, sin tarjeta de débito. Lo que cambia es de dónde sale el dinero: revisa el monto y guarda el comprobante.",
+      "billsTitle": "¿Por qué importan los débitos?",
+      "bills": "Los gastos fijos se repiten todos los meses. Las suscripciones que no usas son gastos hormiga: de a poco, pesan. Revisarlas una vez por mes ayuda a cortarlas a tiempo."
+    },
+    "errors": {
+      "amount_not_positive": "El monto tiene que ser mayor que cero.",
+      "insufficient_balance": "No alcanza el saldo disponible. Revisa el monto o pasa dinero desde un apartado.",
+      "daily_limit": "Supera tu límite diario de transferencias. Puedes cambiarlo en tu perfil, en Seguridad.",
+      "unknown": "No se pudo hacer el pago. Vuelve a intentarlo."
     }
   }
 }

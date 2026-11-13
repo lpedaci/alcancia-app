@@ -12,6 +12,10 @@ import {
   essentialMonthlyExpenses,
   monthOf,
   moveToPocket,
+  paidToday,
+  payQr,
+  setDailyLimit,
+  transferOut,
   walletMetrics,
   WalletError,
   withdrawFromPocket,
@@ -144,5 +148,31 @@ describe('demo states (CLAUDE.md 7, INC-08)', () => {
 
   it('every closed month of Mariana is in green', () => {
     expect(buildMariana().monthSummaries.every((m) => m.green)).toBe(true);
+  });
+});
+
+describe('payments of P3 (step 7)', () => {
+  const paid = () => advanceDays(createWallet('p-test'), 1);
+
+  it('a transfer leaves the balance at once, with a fictitious counterparty and no category yet', () => {
+    const next = transferOut(paid(), { amount: '12000', counterparty: 'Sofía Ramos · alias sofia.ramos.practica' });
+    expect(next.balance).toBe('1272958.86');
+    expect(next.movements.at(-1)).toMatchObject({ type: 'transfer_out', amount: '-12000.00' });
+    expect(next.movements.at(-1)?.category).toBeUndefined();
+  });
+
+  it('a QR payment is a categorizable movement', () => {
+    const next = payQr(paid(), { amount: '3500', merchant: 'Comedor de Andina (ficticio)', category: 'needs' });
+    expect(next.movements.at(-1)).toMatchObject({ type: 'qr_payment', amount: '-3500.00', suggestedCategory: 'needs' });
+  });
+
+  it('respects the balance and the daily limit (scheduled debits do not count)', () => {
+    expect(() => transferOut(createWallet('p-test'), { amount: '1', counterparty: 'x' })).toThrow(WalletError);
+    const limited = setDailyLimit(paid(), '100000');
+    const once = transferOut(limited, { amount: '60000', counterparty: 'x' });
+    expect(() => payQr(once, { amount: '50000', merchant: 'y' })).toThrow('daily_limit');
+    expect(paidToday(once).toFixed(2)).toBe('60000.00');
+    // A new day starts the limit again.
+    expect(payQr(advanceDays(once, 1), { amount: '50000', merchant: 'y' }).balance).toBeDefined();
   });
 });

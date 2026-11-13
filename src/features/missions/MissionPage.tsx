@@ -9,6 +9,7 @@ import { Icon } from '@/components/ui/Icon';
 import { IconTile } from '@/components/ui/IconTile';
 import { InlineAlert } from '@/components/ui/InlineAlert';
 import { RadioGroup } from '@/components/ui/RadioGroup';
+import { Select } from '@/components/ui/Select';
 import { ProgressBar } from '@/components/ui/ProgressBar';
 import { UnlockCard } from '@/features/levels/UnlockCard';
 import { useLevels } from '@/features/levels/use-levels';
@@ -123,7 +124,7 @@ function MissionRunner({ def }: { def: MissionDef & { steps: MissionStep[] } }) 
               ))}
             </ul>
             <p className="text-body-medium text-on-surface-variant">
-              {def.initial === 'fresh' ? t('wallet.mission.freshNote') : t('wallet.mission.currentNote')}
+              {def.initial === 'current' ? t('wallet.mission.currentNote') : def.initial === 'salary' ? t('wallet.mission.salaryNote') : t('wallet.mission.freshNote')}
             </p>
             {done && <InlineAlert tone="success">{t('wallet.mission.alreadyDone')}</InlineAlert>}
             <Button className="self-start" leadingIcon={done ? 'replay' : 'play_arrow'} onClick={begin}>
@@ -173,7 +174,8 @@ function MissionRunner({ def }: { def: MissionDef & { steps: MissionStep[] } }) 
           valueText={t('wallet.mission.stepOf', { step: Math.min(run.step + 1, total), total })}
         />
 
-        <PracticeWallet run={run} fresh={def.initial === 'fresh'} />
+        {/* Only when the mission moves money: a mission about messages has nothing to show here */}
+        {(def.initial === 'current' || run.wallet.movements.length > 0) && <PracticeWallet run={run} fresh={def.initial !== 'current'} />}
 
         <section aria-labelledby="step-title" className="flex flex-col gap-4 rounded-xl border border-outline-variant bg-surface-container-lowest p-(--space-card-padding)">
           <StepBody
@@ -285,6 +287,7 @@ function StepBody({
   const [choice, setChoice] = useState<string>(result?.answer ?? '');
   const [amount, setAmount] = useState('');
   const [tried, setTried] = useState(false);
+  const [classified, setClassified] = useState<Record<string, string>>({});
   const title = (text: string) => (
     <h1 id="step-title" ref={headingRef} tabIndex={-1} className="text-headline-medium text-on-surface focus:outline-none">
       {text}
@@ -372,6 +375,49 @@ function StepBody({
           {!result?.correct && (
             <Button type="submit" className="self-start" leadingIcon="calculate">
               {t('wallet.mission.check')}
+            </Button>
+          )}
+        </form>
+      );
+    }
+    case 'classify': {
+      // One select per item: the accessible alternative to dragging into columns (5.1, 2.10)
+      const answer = (() => {
+        try {
+          return result?.answer ? (JSON.parse(result.answer) as Record<string, string>) : {};
+        } catch {
+          return {};
+        }
+      })();
+      const [current, setCurrent] = [classified, setClassified];
+      const values = { ...answer, ...current };
+      const complete = step.items.every((i) => values[i.id]);
+      const submit = (event: FormEvent) => {
+        event.preventDefault();
+        setTried(true);
+        if (complete) onAnswer(JSON.stringify(values));
+      };
+      return (
+        <form noValidate onSubmit={submit} className="flex flex-col gap-4">
+          {title(t('wallet.mission.classifyTitle'))}
+          <fieldset className="flex flex-col gap-3" disabled={result?.correct}>
+            <legend className="mb-1 text-title-small text-on-surface">{step.prompt}</legend>
+            {step.items.map((item) => (
+              <Select
+                key={item.id}
+                label={item.text}
+                helperText={t('wallet.mission.classifyHelp')}
+                value={values[item.id] ?? ''}
+                error={tried && !values[item.id] ? t('wallet.mission.choose') : undefined}
+                onChange={(e) => setCurrent((prev) => ({ ...prev, [item.id]: e.target.value }))}
+                options={[{ value: '', label: t('learn.q.choose') }, ...step.categories.map((c) => ({ value: c.id, label: c.label }))]}
+              />
+            ))}
+          </fieldset>
+          <Sources ids={step.sourceIds} />
+          {!result?.correct && (
+            <Button type="submit" className="self-start" leadingIcon="check">
+              {t('wallet.mission.answer')}
             </Button>
           )}
         </form>
