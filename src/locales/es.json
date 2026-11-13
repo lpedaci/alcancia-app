@@ -1502,5 +1502,602 @@
       "insufficient_pocket": "El apartado no tiene ese monto.",
       "unknown_pocket": "No encontramos ese apartado."
     }
+  },
+  "sims": {
+    "common": {
+      "intro": "Las doce herramientas juntas. Cada una calcula un escenario con valores de ejemplo o con los datos de tu billetera de práctica: nada sale de tu navegador.",
+      "fuerte": "Las herramientas no adivinan el futuro: muestran escenarios. Cambia los datos y mira qué pasa.",
+      "sectionLocked": "su sección se abre en el nivel {{level}}",
+      "data": "Datos del escenario",
+      "slider": "{{label}}, deslizador",
+      "invalid": "Revisa los datos: hay un campo vacío o fuera de rango.",
+      "assumptionsSummary": "Supuestos del escenario · Valores de ejemplo",
+      "examples": "Valores de ejemplo para aprender. Consulta los valores vigentes en las fuentes oficiales.",
+      "whereReal": "Dónde ver los valores reales",
+      "preset": "Algunos datos vienen de tu billetera de práctica.",
+      "table": "Tabla del resultado",
+      "category": "Categoría",
+      "month": "Mes",
+      "year": "Año",
+      "today": "Hoy",
+      "concept": "Concepto",
+      "value": "Valor",
+      "option": "Opción",
+      "method": "Método",
+      "scenario": "Escenario"
+    },
+    "SIM-3": {
+      "short": "Cuánto compra tu dinero con inflación, mes a mes."
+    },
+    "SIM-1": {
+      "title": "Presupuesto mensual",
+      "short": "Tu ingreso, tus gastos y cuánto queda, frente a 50/30/20 o 70/20/10.",
+      "intro": "Arma tu mes y compáralo con una regla de referencia. La regla es un punto de partida, no una obligación.",
+      "fuerte": "Ojo con esto: la regla orienta, pero tu presupuesto lo decides tú.",
+      "fields": {
+        "income": {
+          "label": "Ingreso neto del mes",
+          "help": "Monto en pesos, por ejemplo: 1.284.958,86",
+          "short": "Ingreso"
+        },
+        "aguinaldo": {
+          "label": "Sumar el aguinaldo prorrateado",
+          "help": "El aguinaldo (sueldo anual complementario) repartido en 12 meses, aproximado como el neto dividido 12.",
+          "choices": {
+            "no": "No",
+            "yes": "Sí"
+          }
+        },
+        "needs": {
+          "label": "Gastos en necesidades",
+          "help": "Alquiler, comida, servicios y transporte. Por ejemplo: 650.000",
+          "short": "Necesidades"
+        },
+        "wants": {
+          "label": "Gastos en deseos",
+          "help": "Salidas, ropa, suscripciones. Por ejemplo: 186.500",
+          "short": "Deseos"
+        },
+        "rule": {
+          "label": "Regla de referencia",
+          "help": "50/30/20 en general; 70/20/10 si tus gastos fijos son altos.",
+          "choices": {
+            "50/30/20": "50/30/20",
+            "70/20/10": "70/20/10"
+          }
+        }
+      },
+      "main": "Te queda para ahorrar",
+      "sentence": "Con estos datos, las necesidades son el {{needs}} de tu ingreso, los deseos el {{wants}} y te queda el {{saved}} para ahorrar. Compáralo con la referencia {{rule}}.",
+      "sentenceNegative": "Con estos datos, los gastos superan al ingreso en {{missing}}. Revisa qué gasto se puede ajustar.",
+      "pillNegative": "Los gastos superan al ingreso",
+      "pillSaved": "Ahorro: {{saved}} del ingreso",
+      "chartTitle": "Tu reparto frente a la referencia",
+      "chartConclusion": "Cada barra compara tu monto con lo que propone la regla {{rule}}.",
+      "yours": "Tu presupuesto",
+      "reference": "Referencia",
+      "meaning": "Las reglas 50/30/20 y 70/20/10 son puntos de partida. Si tus necesidades pasan la referencia, no es un error: es un dato para decidir dónde ajustar o cómo ahorrar aunque sea un poco cada mes.",
+      "try": "Prueba cambiar la regla a 70/20/10 y mira cómo cambia la referencia de ahorro.",
+      "assumptions": [
+        "Un mes de ingresos y gastos, sin cambios de precios.",
+        "El aguinaldo prorrateado es una aproximación: neto mensual dividido 12.",
+        "Lo que queda después de necesidades y deseos se toma como ahorro."
+      ]
+    },
+    "SIM-2": {
+      "title": "Fondo de emergencia",
+      "short": "Cuánto necesitas, cuánto te falta y en cuántos meses llegas.",
+      "intro": "Calcula tu fondo de emergencia con tus gastos esenciales y cuántos meses te lleva armarlo.",
+      "fuerte": "Primero lo que te protege, después lo que te hace crecer.",
+      "fields": {
+        "essentials": {
+          "label": "Gastos esenciales por mes",
+          "help": "Alquiler, comida, servicios y transporte. Por ejemplo: 650.000",
+          "short": "Esenciales"
+        },
+        "months": {
+          "label": "Meses de cobertura",
+          "help": "De 3 a 6 meses es una referencia habitual.",
+          "short": "Meses"
+        },
+        "current": {
+          "label": "Lo que ya tienes ahorrado",
+          "help": "Monto en pesos, por ejemplo: 0",
+          "short": "Ahorrado"
+        },
+        "monthly": {
+          "label": "Cuánto separas por mes",
+          "help": "Monto en pesos, por ejemplo: 128.495,89"
+        }
+      },
+      "main": "Tu meta de {{months}} meses",
+      "sentence_one": "Te faltan {{missing}}. Separando {{monthly}} por mes, llegas en {{count}} mes.",
+      "sentence_other": "Te faltan {{missing}}. Separando {{monthly}} por mes, llegas en {{count}} meses.",
+      "sentenceNoSaving": "Te faltan {{missing}}. Sin un monto por mes, no hay una fecha estimada.",
+      "sentenceDone": "Ya llegaste a tu meta: mantenerla disponible y sin riesgo es lo que importa ahora.",
+      "pillMissing": "Falta: {{missing}}",
+      "pillMonths_one": "{{count}} mes para llegar",
+      "pillMonths_other": "{{count}} meses para llegar",
+      "chartTitle": "Tu ahorro hacia la meta",
+      "chartConclusion_one": "Con este ritmo, la línea del ahorro alcanza la meta en {{count}} mes.",
+      "chartConclusion_other": "Con este ritmo, la línea del ahorro alcanza la meta en {{count}} meses.",
+      "saved": "Ahorrado",
+      "goal": "Meta",
+      "meaning": "El fondo de emergencia es para imprevistos reales, como un problema de salud o quedarte sin trabajo. Conviene tenerlo disponible en 24 horas y sin riesgo.",
+      "try": "Prueba cambiar los meses de cobertura de 3 a 6 y mira cuánto más tiempo te lleva.",
+      "assumptions": [
+        "Gastos esenciales constantes.",
+        "Aportes iguales todos los meses, sin rendimiento.",
+        "Los meses se redondean hacia arriba: un mes parcial igual requiere ahorrar."
+      ]
+    },
+    "SIM-4": {
+      "title": "Tasa real",
+      "short": "Si una tasa le gana o no a la inflación del escenario.",
+      "intro": "Pasa de la tasa nominal anual (TNA) a la tasa del período y compárala con la inflación del mismo período.",
+      "fuerte": "La tasa que importa es la que queda después de la inflación.",
+      "fields": {
+        "tna": {
+          "label": "Tasa nominal anual (TNA)",
+          "help": "En porcentaje anual, por ejemplo: 34",
+          "short": "TNA"
+        },
+        "days": {
+          "label": "Plazo en días",
+          "help": "De 1 a 365 días, por ejemplo: 30",
+          "short": "Días"
+        },
+        "inflation": {
+          "label": "Inflación mensual del escenario",
+          "help": "En porcentaje mensual, por ejemplo: 3",
+          "short": "Inflación"
+        }
+      },
+      "main": "Tasa real en {{days}} días",
+      "sentenceWins": "En {{days}} días, la tasa del período ({{rate}}) supera a la inflación del período ({{inflation}}): tu dinero gana poder de compra en este escenario.",
+      "sentenceLoses": "En {{days}} días, la tasa del período ({{rate}}) no alcanza a la inflación del período ({{inflation}}): tu dinero pierde poder de compra en este escenario.",
+      "pillWins": "Le gana a la inflación del escenario",
+      "pillLoses": "Pierdes poder de compra",
+      "chartTitle": "Tasa e inflación en {{days}} días",
+      "percentOfPeriod": "% del período",
+      "periodRate": "Tasa del período",
+      "periodInflation": "Inflación del período",
+      "tnaRow": "TNA",
+      "teaRow": "Tasa efectiva anual (TEA)",
+      "realRow": "Tasa real",
+      "meaning": "La TNA es una tasa de referencia; lo que cobras en un plazo es TNA × días ÷ 365. La tasa real descuenta la inflación: si es negativa, el dinero compra menos al final aunque haya más pesos.",
+      "try": "Prueba cambiar la inflación al escenario alto (6 %) y mira qué pasa con la tasa real.",
+      "assumptions": [
+        "Inflación mensual constante en el período.",
+        "Interés simple por el plazo: TNA × días ÷ 365.",
+        "Sin impuestos ni comisiones."
+      ]
+    },
+    "SIM-5": {
+      "title": "Plazo fijo tradicional o UVA",
+      "short": "Cuánto queda en pesos y en poder de compra con cada uno.",
+      "intro": "Compara un plazo fijo tradicional con uno UVA (ajustado por inflación) en el mismo escenario.",
+      "fuerte": "Ojo con esto: no todos los bancos ofrecen plazo fijo UVA, y sus condiciones cambian.",
+      "fields": {
+        "amount": {
+          "label": "Monto",
+          "help": "Monto en pesos, por ejemplo: 1.000.000",
+          "short": "Monto"
+        },
+        "days": {
+          "label": "Plazo en días",
+          "help": "De 30 a 365 días, por ejemplo: 180",
+          "short": "Días"
+        },
+        "tna": {
+          "label": "TNA del plazo fijo tradicional",
+          "help": "En porcentaje anual, por ejemplo: 34",
+          "short": "TNA"
+        },
+        "uvaExtra": {
+          "label": "Tasa adicional del UVA",
+          "help": "En porcentaje anual, por ejemplo: 1"
+        },
+        "inflation": {
+          "label": "Inflación mensual del escenario",
+          "help": "En porcentaje mensual, por ejemplo: 3"
+        }
+      },
+      "main": "A los {{days}} días",
+      "uvaHigher": "El UVA termina con más",
+      "tradHigher": "El tradicional termina con más",
+      "sentence": "A los {{days}} días, el tradicional llega a {{trad}} y el UVA a {{uva}}, en este escenario.",
+      "pillMinimum": "Muchos bancos piden 90 o 180 días para el UVA",
+      "pillPower": "En poder de compra: {{trad}} y {{uva}}",
+      "chartTitle": "Monto final en pesos y en poder de compra",
+      "chartConclusion": "La segunda barra de cada opción descuenta la inflación del escenario.",
+      "inPesos": "En pesos",
+      "inPower": "En poder de compra",
+      "trad": "Tradicional",
+      "uva": "UVA",
+      "meaning": "El tradicional paga una tasa fija; el UVA ajusta el capital por inflación y suma una tasa pequeña. Si la inflación sube, el UVA protege mejor; si baja, puede rendir menos. Las condiciones dependen de cada banco.",
+      "try": "Prueba cambiar la inflación al escenario bajo (1,5 %) y mira cuál termina con más.",
+      "assumptions": [
+        "La UVA se aproxima con la inflación del escenario; la UVA real se ajusta por CER con rezago.",
+        "El plazo mínimo del UVA y la precancelación dependen del banco: consulta sus condiciones.",
+        "Sin impuestos."
+      ]
+    },
+    "SIM-6": {
+      "title": "Cuotas sin interés o contado",
+      "short": "Qué conviene en un escenario: descuento hoy o cuotas que la inflación achica.",
+      "intro": "Compara el precio de contado con descuento contra el valor de hoy de las cuotas, con la inflación del escenario.",
+      "fuerte": "Cuotas sin interés no siempre es lo mismo que más barato. Hagamos la cuenta.",
+      "fields": {
+        "price": {
+          "label": "Precio en cuotas",
+          "help": "Monto total en pesos, por ejemplo: 120.000",
+          "short": "Precio"
+        },
+        "count": {
+          "label": "Cantidad de cuotas",
+          "help": "De 1 a 36, por ejemplo: 12",
+          "short": "Cuotas"
+        },
+        "discount": {
+          "label": "Descuento por pagar de contado",
+          "help": "En porcentaje, por ejemplo: 15",
+          "short": "Descuento"
+        },
+        "inflation": {
+          "label": "Inflación mensual del escenario",
+          "help": "En porcentaje mensual, por ejemplo: 3"
+        },
+        "first": {
+          "label": "Primera cuota",
+          "help": "Si se paga dentro de un mes o en el momento de la compra.",
+          "choices": {
+            "next": "En un mes",
+            "today": "Hoy"
+          }
+        }
+      },
+      "main": "En este escenario conviene",
+      "cash": "Contado",
+      "installments": "Cuotas",
+      "sentenceCash": "El contado con descuento ({{cash}}) cuesta menos que lo que valen hoy las {{count}} cuotas de {{installment}} ({{pv}}).",
+      "sentenceInstallments": "Las {{count}} cuotas de {{installment}} valen hoy {{pv}}, menos que el contado con descuento ({{cash}}): la inflación achica cada cuota.",
+      "pillScenario": "Depende de la inflación del escenario",
+      "chartTitle": "Lo que pagas, en pesos de hoy",
+      "chartCash": "El contado es la barra más baja en este escenario.",
+      "chartInstallments": "El valor de hoy de las cuotas es la barra más baja en este escenario.",
+      "inToday": "En pesos de hoy",
+      "cashBar": "Contado con descuento",
+      "pvBar": "Cuotas, valor de hoy",
+      "nominalBar": "Cuotas, suma total",
+      "installmentRow": "Cuota (de {{count}})",
+      "meaning": "Una cuota futura vale menos que el mismo monto hoy, porque la inflación sube los precios. Por eso las cuotas sin interés pueden convenir, salvo que el descuento de contado sea mayor.",
+      "try": "Prueba cambiar el descuento a 5 % y mira si cambia lo que conviene.",
+      "assumptions": [
+        "Inflación mensual constante.",
+        "Cuotas iguales y sin interés.",
+        "No incluye el rendimiento que podrías obtener con el dinero."
+      ]
+    },
+    "SIM-7": {
+      "title": "Tarjeta de crédito",
+      "short": "Cuánto cuesta pagar el mínimo frente a pagar el total.",
+      "intro": "Mira cuánto tardas y cuánto pagas de intereses si solo pagas el mínimo, sin consumos nuevos.",
+      "fuerte": "Muchas personas pagan el mínimo. Veamos cuánto cuesta.",
+      "fields": {
+        "balance": {
+          "label": "Saldo del resumen",
+          "help": "Monto en pesos, por ejemplo: 240.000",
+          "short": "Saldo"
+        },
+        "tna": {
+          "label": "Tasa de financiación (TNA)",
+          "help": "En porcentaje anual, por ejemplo: 60",
+          "short": "TNA"
+        },
+        "cft": {
+          "label": "Costo financiero total (CFT)",
+          "help": "El que figura en tu resumen, en porcentaje anual. Por ejemplo: 95"
+        },
+        "minimum": {
+          "label": "Pago mínimo",
+          "help": "En porcentaje del saldo, por ejemplo: 10"
+        }
+      },
+      "main": "Intereses si pagas el mínimo",
+      "sentence_one": "Pagando el mínimo, tardas {{count}} mes, pagas {{interest}} de intereses y {{total}} en total. Pagando el total hoy, pagas {{balance}}.",
+      "sentence_other": "Pagando el mínimo, tardas {{count}} meses, pagas {{interest}} de intereses y {{total}} en total. Pagando el total hoy, pagas {{balance}}.",
+      "sentenceNever": "Con estos datos, el pago mínimo no alcanza a cubrir los intereses: la deuda no termina de pagarse.",
+      "pillMonths_one": "{{count}} mes pagando el mínimo",
+      "pillMonths_other": "{{count}} meses pagando el mínimo",
+      "pillCft": "CFT {{cft}} frente a TNA {{tna}}",
+      "chartTitle": "Saldo de la tarjeta pagando el mínimo",
+      "chartConclusion_one": "El saldo llega a cero en {{count}} mes.",
+      "chartConclusion_other": "El saldo llega a cero en {{count}} meses.",
+      "balance": "Saldo",
+      "payMinimum": "Pagando el mínimo",
+      "payTotal": "Pagando el total",
+      "paid": "Total pagado",
+      "interest": "Intereses",
+      "time": "Tiempo",
+      "months_one": "{{count}} mes",
+      "months_other": "{{count}} meses",
+      "now": "Hoy",
+      "meaning": "Lo que no pagas del resumen se financia a la tasa de la tarjeta. El CFT suma a esa tasa las comisiones y cargos: es el número para comparar. Pagar el total evita los intereses.",
+      "try": "Prueba cambiar el pago mínimo de 10 % a 5 % y mira cuántos meses más tardas.",
+      "assumptions": [
+        "Sin consumos nuevos ni impuestos: es una simplificación.",
+        "Interés mensual = TNA × 30 ÷ 365 sobre el saldo; mínimo con un piso de $ 1.000.",
+        "El CFT se muestra para comparar; el cálculo usa la TNA."
+      ]
+    },
+    "SIM-8": {
+      "title": "Meta de ahorro con inflación",
+      "short": "Cuánto costará tu meta y cuánto separar por mes.",
+      "intro": "Ajusta el precio de tu meta por la inflación del escenario y calcula cuánto separar cada mes.",
+      "fuerte": "Una meta con fecha y monto es más fácil de cumplir.",
+      "fields": {
+        "price": {
+          "label": "Cuánto cuesta hoy",
+          "help": "Monto en pesos, por ejemplo: 1.500.000",
+          "short": "Precio"
+        },
+        "months": {
+          "label": "Plazo en meses",
+          "help": "De 1 a 60, por ejemplo: 12",
+          "short": "Meses"
+        },
+        "inflation": {
+          "label": "Inflación mensual del escenario",
+          "help": "En porcentaje mensual, por ejemplo: 3"
+        },
+        "return": {
+          "label": "Rendimiento mensual del ahorro",
+          "help": "En porcentaje mensual; 0 si lo guardas sin rendimiento. Por ejemplo: 2,5"
+        }
+      },
+      "main": "Separa por mes",
+      "sentence_one": "Lo que hoy cuesta {{price}} costaría {{future}} en {{count}} mes. Para llegar, separa {{monthly}} por mes.",
+      "sentence_other": "Lo que hoy cuesta {{price}} costaría {{future}} en {{count}} meses. Para llegar, separa {{monthly}} por mes.",
+      "pillFuture": "Precio estimado al final: {{future}}",
+      "chartTitle": "El precio de tu meta y tu ahorro",
+      "chartConclusion_one": "Las dos líneas se encuentran en el mes {{count}}.",
+      "chartConclusion_other": "Las dos líneas se encuentran en el mes {{count}}.",
+      "priceSeries": "Precio de la meta",
+      "savedSeries": "Lo ahorrado",
+      "meaning": "Con inflación, una meta se aleja si no se ajusta. Calcular el precio al final y el ahorro mensual evita llegar con menos de lo necesario.",
+      "try": "Prueba sumar un rendimiento del 2,5 % mensual y mira cuánto baja el ahorro por mes.",
+      "assumptions": [
+        "Inflación y rendimiento mensuales constantes.",
+        "Aportes iguales al final de cada mes."
+      ]
+    },
+    "SIM-9": {
+      "title": "Salir de deudas: bola de nieve o avalancha",
+      "short": "Dos formas de ordenar tus deudas, comparadas lado a lado.",
+      "intro": "Compara pagar primero la deuda más chica (bola de nieve) o la de tasa más alta (avalancha), con el mismo monto por mes.",
+      "fuerte": "Los dos métodos sirven: uno motiva antes y el otro paga menos intereses.",
+      "fields": {
+        "b1": {
+          "label": "Deuda 1 · saldo",
+          "help": "Monto en pesos, por ejemplo: 40.000"
+        },
+        "r1": {
+          "label": "Deuda 1 · tasa anual",
+          "help": "En porcentaje anual, por ejemplo: 150"
+        },
+        "m1": {
+          "label": "Deuda 1 · pago mínimo",
+          "help": "Monto en pesos por mes, por ejemplo: 4.000"
+        },
+        "b2": {
+          "label": "Deuda 2 · saldo",
+          "help": "Monto en pesos, por ejemplo: 15.000"
+        },
+        "r2": {
+          "label": "Deuda 2 · tasa anual",
+          "help": "En porcentaje anual, por ejemplo: 110"
+        },
+        "m2": {
+          "label": "Deuda 2 · pago mínimo",
+          "help": "Monto en pesos por mes, por ejemplo: 1.500"
+        },
+        "b3": {
+          "label": "Deuda 3 · saldo",
+          "help": "Monto en pesos, por ejemplo: 200.000"
+        },
+        "r3": {
+          "label": "Deuda 3 · tasa anual",
+          "help": "En porcentaje anual, por ejemplo: 80"
+        },
+        "m3": {
+          "label": "Deuda 3 · pago mínimo",
+          "help": "Monto en pesos por mes, por ejemplo: 10.000"
+        },
+        "extra": {
+          "label": "Monto extra por mes",
+          "help": "Lo que puedes sumar a los mínimos, por ejemplo: 20.000"
+        }
+      },
+      "debt1": "Tarjeta",
+      "debt2": "Financiera",
+      "debt3": "Crédito bancario",
+      "main": "Diferencia de intereses",
+      "sentence_one": "La avalancha te ahorra {{saving}} en intereses; la bola de nieve te da la primera deuda saldada {{count}} mes antes.",
+      "sentence_other": "La avalancha te ahorra {{saving}} en intereses; la bola de nieve te da la primera deuda saldada {{count}} meses antes.",
+      "pillSnow": "Bola de nieve: {{count}} meses",
+      "pillAval": "Avalancha: {{count}} meses",
+      "chartTitle": "Intereses totales de cada método",
+      "chartConclusion": "La barra más baja es la que menos intereses paga.",
+      "interest": "Intereses",
+      "snowball": "Bola de nieve",
+      "avalanche": "Avalancha",
+      "order": "Orden en que se saldan",
+      "monthsCol": "Meses",
+      "meaning": "La bola de nieve ataca primero la deuda más chica y da resultados rápidos; la avalancha ataca primero la de tasa más alta y paga menos intereses. Lo importante es pagar todos los mínimos y sostener el extra.",
+      "try": "Prueba subir el monto extra a 40.000 y mira cuántos meses menos tardas.",
+      "assumptions": [
+        "Interés mensual = tasa anual × 30 ÷ 365 sobre cada saldo.",
+        "Al saldar una deuda, su mínimo se suma al pago de la siguiente.",
+        "Los datos de ejemplo son los de la presentación del taller (A-29); los mínimos y el extra son supuestos para practicar."
+      ]
+    },
+    "SIM-10": {
+      "title": "Interés compuesto y aportes periódicos",
+      "short": "Cuánto crece un aporte mensual con el tiempo.",
+      "intro": "Mira cómo crece un capital con aportes mensuales y una tasa anual de ejemplo.",
+      "fuerte": "El tiempo es el factor más potente del interés compuesto.",
+      "fields": {
+        "currency": {
+          "label": "Moneda",
+          "help": "Pesos o dólares.",
+          "choices": {
+            "USD": "Dólares",
+            "ARS": "Pesos"
+          }
+        },
+        "initial": {
+          "label": "Capital inicial",
+          "help": "Por ejemplo: 0",
+          "short": "Inicial"
+        },
+        "monthly": {
+          "label": "Aporte mensual",
+          "help": "Por ejemplo: 200",
+          "short": "Aporte"
+        },
+        "rate": {
+          "label": "Tasa anual esperada",
+          "help": "En porcentaje anual, por ejemplo: 12",
+          "short": "Tasa"
+        },
+        "years": {
+          "label": "Años",
+          "help": "De 1 a 50, por ejemplo: 33"
+        }
+      },
+      "main_one": "Capital al final de {{count}} año",
+      "main_other": "Capital al final de {{count}} años",
+      "sentence_one": "Aportando {{monthly}} por mes al {{rate}} anual durante {{count}} año, llegarías a {{final}} en este escenario; {{interest}} serían intereses.",
+      "sentence_other": "Aportando {{monthly}} por mes al {{rate}} anual durante {{count}} años, llegarías a {{final}} en este escenario; {{interest}} serían intereses.",
+      "pillContributed": "Aportado: {{amount}}",
+      "pillInterest": "Intereses: {{amount}}",
+      "chartTitle": "Crecimiento del capital",
+      "chartConclusion": "La distancia entre las dos áreas son los intereses: crece más cuanto más tiempo pasa.",
+      "finalSeries": "Capital",
+      "contributedSeries": "Aportado",
+      "meaning": "El interés compuesto hace que los intereses también generen intereses. Por eso empezar antes pesa más que aportar mucho después. Los rendimientos pasados no garantizan rendimientos futuros.",
+      "try": "Prueba bajar los años de 33 a 20 y mira cuánto cambia el resultado.",
+      "assumptions": [
+        "Tasa anual constante, capitalización mensual (tasa ÷ 12).",
+        "Aportes al final de cada mes.",
+        "Sin impuestos, comisiones ni inflación. Los rendimientos pasados no garantizan rendimientos futuros."
+      ]
+    },
+    "SIM-11": {
+      "title": "CEDEAR: de la acción al precio en pesos",
+      "short": "Cómo se forma el precio de un CEDEAR y qué lo mueve.",
+      "intro": "Calcula el precio teórico de un CEDEAR a partir del precio en dólares, el ratio y el tipo de cambio implícito. Todos los valores son de ejemplo.",
+      "fuerte": "Un CEDEAR se mueve por dos cosas: la acción y el tipo de cambio.",
+      "fields": {
+        "usdPrice": {
+          "label": "Precio de la acción o del ETF en dólares",
+          "help": "Por ejemplo: 600"
+        },
+        "ratio": {
+          "label": "Ratio de conversión",
+          "help": "Cuántos CEDEARs equivalen a una acción. Por ejemplo: 20 (20:1)"
+        },
+        "fx": {
+          "label": "Tipo de cambio implícito",
+          "help": "Pesos por dólar, por ejemplo: 1.500"
+        }
+      },
+      "main": "Precio teórico del CEDEAR",
+      "sentence": "Con un precio de {{usd}}, un ratio de {{ratio}}:1 y un tipo de cambio de {{fx}}, el CEDEAR valdría unos {{price}}.",
+      "pillExample": "Valores de ejemplo, no precios actuales",
+      "chartTitle": "Qué pasa si sube la acción o el tipo de cambio un 10 %",
+      "chartConclusion": "Cualquiera de las dos subas mueve el precio en pesos en la misma proporción.",
+      "priceSeries": "Precio en pesos",
+      "base": "Hoy",
+      "stockUp": "Acción +10 %",
+      "fxUp": "Tipo de cambio +10 %",
+      "bothUp": "Ambas +10 %",
+      "meaning": "El precio de un CEDEAR depende del precio del activo en el exterior y del tipo de cambio. El precio real puede tener una prima o un descuento por oferta y demanda. Los ratios pueden cambiar: consulta el listado vigente.",
+      "try": "Prueba cambiar el ratio de 20 a 10 y mira cómo cambia el precio de cada CEDEAR.",
+      "assumptions": [
+        "Precio teórico: dólares ÷ ratio × tipo de cambio implícito.",
+        "Sin comisiones ni derechos de mercado.",
+        "El ratio es de ejemplo: los vigentes están en el listado de BYMA."
+      ]
+    },
+    "SIM-12": {
+      "title": "¿Dónde guardo mi fondo de emergencia?",
+      "short": "Compara liquidez, rendimiento y protección de tres opciones.",
+      "intro": "Compara una cuenta remunerada, un plazo fijo y un fondo money market con tasas de ejemplo. No es una recomendación: es una comparación de características.",
+      "fuerte": "Para el fondo de emergencia, estar disponible pesa más que rendir.",
+      "fields": {
+        "amount": {
+          "label": "Monto",
+          "help": "Monto en pesos, por ejemplo: 3.000.000",
+          "short": "Monto"
+        },
+        "days": {
+          "label": "Plazo en días",
+          "help": "De 1 a 365, por ejemplo: 30",
+          "short": "Días"
+        },
+        "inflation": {
+          "label": "Inflación mensual del escenario",
+          "help": "En porcentaje mensual, por ejemplo: 3"
+        },
+        "remunerated": {
+          "label": "TNA de la cuenta remunerada",
+          "help": "Valor de ejemplo, en porcentaje anual"
+        },
+        "fixedTerm": {
+          "label": "TNA del plazo fijo",
+          "help": "Valor de ejemplo, en porcentaje anual"
+        },
+        "moneyMarket": {
+          "label": "TNA del fondo money market",
+          "help": "Valor de ejemplo, en porcentaje anual"
+        }
+      },
+      "main": "En {{days}} días, en este escenario",
+      "beating_one": "{{count}} opción le gana a la inflación",
+      "beating_other": "{{count}} opciones le ganan a la inflación",
+      "sentence": "La inflación del escenario en {{days}} días es de {{inflation}}. Mira, además del rendimiento, cuándo puedes usar el dinero y qué protección tiene.",
+      "pillNotAdvice": "Comparación, no recomendación",
+      "chartTitle": "Monto final en {{days}} días",
+      "chartConclusion": "La segunda barra descuenta la inflación del escenario.",
+      "finalSeries": "Monto final",
+      "powerSeries": "En poder de compra",
+      "realCol": "Tasa real",
+      "liquidity": "Liquidez",
+      "guarantee": "Garantía de los depósitos",
+      "options": {
+        "remunerated": "Cuenta remunerada",
+        "fixedTerm": "Plazo fijo",
+        "moneyMarket": "Fondo money market"
+      },
+      "liquidityOf": {
+        "remunerated": "Inmediata",
+        "fixedTerm": "Al vencimiento",
+        "moneyMarket": "En el día"
+      },
+      "guaranteeOf": {
+        "remunerated": "Depende: en un banco sí; en una billetera, no",
+        "fixedTerm": "Sí, hasta el tope vigente",
+        "moneyMarket": "No: es un fondo"
+      },
+      "meaning": "Para un fondo de emergencia importan la liquidez y el riesgo bajo. Una cuenta en una billetera no tiene la garantía de los depósitos; un fondo money market tampoco, y su rendimiento varía a diario.",
+      "try": "Prueba cambiar el plazo a 90 días y mira cómo cambia la comparación.",
+      "assumptions": [
+        "Cuenta y fondo con rendimiento diario; plazo fijo con interés simple al vencimiento.",
+        "Tasas e inflación constantes y de ejemplo.",
+        "Sin impuestos ni comisiones."
+      ]
+    }
   }
 }

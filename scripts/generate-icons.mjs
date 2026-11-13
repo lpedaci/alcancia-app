@@ -9,7 +9,7 @@ import { fileURLToPath } from 'node:url';
 
 const ICONS = [
   // Navigation and layout (wallet destinations, CLAUDE.md 5.3)
-  'replay', 'touch_app', 'quiz', 'tune', 'table_rows', 'event_available', 'military_tech', 'timeline', 'remove',
+  'replay', 'touch_app', 'quiz', 'tune', 'table_rows', 'event_available', 'military_tech', 'timeline', 'remove', 'shopping_bag', 'stacked_line_chart', 'table_view',
   'menu', 'menu_open', 'home', 'payments', 'savings', 'trending_up', 'school', 'account_circle',
   'notifications', 'help', 'search', 'settings', 'logout', 'swap_horiz', 'dashboard', 'group', 'groups',
   'person', 'badge', 'apartment', 'route', 'map', 'description', 'assignment', 'fact_check',

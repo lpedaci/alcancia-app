@@ -63,10 +63,10 @@
 
 | ID | Requerimiento | Prioridad | Criterio de aceptación | Estado |
 | --- | --- | --- | --- | --- |
-| RF-60 | SIM-1 a SIM-12 con la anatomía de 2.2.1 | M | Datos, resultado, frase, gráfico con tabla, "Qué significa esto", supuestos, comparar, "Prueba cambiar…" y aviso legal | Pendiente |
-| RF-61 | Escenarios de ejemplo de `scenarios.json` y "Dónde ver los valores reales" | M | Rotulados "Valores de ejemplo" | Pendiente |
-| RF-62 | Guardar y comparar dos escenarios, en el navegador | M | `LocalScenario` por persona | Pendiente |
-| RF-63 | Precargar herramientas con datos de la billetera | S | SIM-2 con los gastos esenciales del último mes | Pendiente |
+| RF-60 | SIM-1 a SIM-12 con la anatomía de 2.2.1 | M | Datos, resultado, frase, gráfico con tabla, "Qué significa esto", supuestos, comparar, "Prueba cambiar…" y aviso legal | Hecho (paso 8.1, D-176): SIM-3 propio y los otros 11 con el simulador genérico; tests con los casos de formulas.md |
+| RF-61 | Escenarios de ejemplo de `scenarios.json` y "Dónde ver los valores reales" | M | Rotulados "Valores de ejemplo" | Hecho (paso 8.1): tasas e inflación por defecto del escenario medio, rotuladas como ejemplo, con las fuentes oficiales de cada herramienta |
+| RF-62 | Guardar y comparar dos escenarios, en el navegador | M | `LocalScenario` por persona | Parcial (paso 8.1): se comparan dos escenarios en la sesión; falta guardarlos en `LocalScenario` |
+| RF-63 | Precargar herramientas con datos de la billetera | S | SIM-2 con los gastos esenciales del último mes | Hecho (paso 8.1): SIM-1, SIM-2 y SIM-12 se precargan con la billetera |
 | RF-64 | Exportar el resultado como resumen imprimible con supuestos | S | Vista de impresión | Pendiente |
 
 ### 1.5 Tutor, admin y decisor (F1, F6 a F8)
