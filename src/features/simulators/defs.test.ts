@@ -10,7 +10,7 @@ function run(id: string, values: SimValues = {}) {
   const defaults = Object.fromEntries(def.fields.map((f) => [f.id, f.kind === 'percent' ? String(Number(f.default) / 100) : f.default]));
   return def.compute({ ...defaults, ...values }, t);
 }
-const plain = (text: string) => text.replace(/ /g, ' ');
+const plain = (text: string) => text.replaceAll(String.fromCharCode(160), ' ');
 
 describe('tools SIM-1 to SIM-12 (F4, D-176)', () => {
   it('there are 12 tools and every declarative one has its texts', () => {
