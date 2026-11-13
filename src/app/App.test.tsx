@@ -309,8 +309,14 @@ describe('locales', () => {
   });
 
   it('Spanish texts follow the voice rules (CLAUDE.md 2.9)', () => {
-    const texts = valuesOf(es).join(' | ');
-    expect(texts).not.toMatch(/—/);
+    // The design system's voice guide and money rules quote what to avoid ("dashboard", "Vas a ganar")
+    // on purpose, as counterexamples; every other text must follow the rules.
+    const product = structuredClone(es) as typeof es;
+    product.designSystem.voice.vocab = [];
+    product.designSystem.voice.principles = [];
+    product.designSystem.money.rules = [];
+    const texts = valuesOf(product).join(' | ');
+    expect(valuesOf(es).join(' | ')).not.toMatch(/—/);
     expect(texts).not.toMatch(/\b(vos|usted)\b/i);
     expect(texts).not.toMatch(/\b(loguea|dashboard|mail|móvil|ordenador|target|cuotas gratis)\b/i);
     expect(texts).not.toMatch(/\bvas a ganar\b/i);

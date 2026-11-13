@@ -9,3 +9,7 @@ export const CASE_STUDY_URL = 'https://lpedaci.github.io/portfolio/';
 export const PORTFOLIO_URL = 'https://lpedaci.github.io/portfolio/';
 export const GITHUB_PROFILE_URL = 'https://github.com/lpedaci';
 export const LINKEDIN_URL = 'https://www.linkedin.com/in/lourdes-pedaci/';
+
+/** Markdown versions of the design system and the security notes, in the repository (G8, D-70). */
+export const DESIGN_SYSTEM_MD_URL = `${REPO_URL}/blob/main/docs/design-system.md`;
+export const SECURITY_MD_URL = `${REPO_URL}/blob/main/docs/security.md`;

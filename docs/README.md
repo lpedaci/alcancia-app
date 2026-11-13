@@ -10,7 +10,7 @@
 | [Casos de uso](use-cases.md) | 14.4 | Tanda 2, en revisión |
 | [Flujos](flows.md) | 14.5 | Revisado (tanda 1) |
 | [Arquitectura de la información](information-architecture.md) | 14.6 | Revisado (tanda 1) |
-| [Sistema de diseño](design-system.md) | 14.7 | Índice (paso 6); contenido en el paso 12 |
+| [Sistema de diseño](design-system.md) | 14.7 | Versión en Markdown del sitio `/#/design-system` (paso 12) |
 | [Diseño de aprendizaje](learning-design.md) | 14.8 | Tanda 2, en revisión |
 | [Contenido](content.md) | 14.9 | Tanda 2, en revisión (las guías se agregan en el paso de cada sección) |
 | [Fórmulas](formulas.md) | 14.10 | Tanda 2, en revisión |

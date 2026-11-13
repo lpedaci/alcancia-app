@@ -220,7 +220,8 @@
       "profiles": "Perfiles de Lourdes Pedaci",
       "linkedin": "LinkedIn de Lourdes Pedaci",
       "github": "GitHub de Lourdes Pedaci",
-      "photos": "Fotos de personas:"
+      "photos": "Fotos de personas:",
+      "designSystem": "Sistema de diseño"
     },
     "visual": {
       "account": "Cuenta de práctica",
@@ -3025,5 +3026,805 @@
       "challenge": "Desafío del nivel {{n}}: aprobaron"
     },
     "privacy": "Solo cifras agregadas, calculadas desde los datos. Ningún grupo de menos de {{threshold}} personas se muestra."
+  },
+  "designSystem": {
+    "docTitle": "Sistema de diseño",
+    "title": "Sistema de diseño",
+    "skip": "Saltar al contenido",
+    "nav": {
+      "label": "Grupos del sistema de diseño",
+      "onThisPage": "En esta página",
+      "menu": "Secciones",
+      "current": "Sección actual:",
+      "close": "Cerrar el índice",
+      "sheetDescription": "Elige una sección para ir a ella.",
+      "demo": "Ver la demo",
+      "foundations": "Fundamentos",
+      "components": "Componentes",
+      "patterns": "Patrones",
+      "guidelines": "Pautas"
+    },
+    "hero": {
+      "eyebrow": "Sistema de diseño de Alcancía · Material Design 3 personalizado",
+      "title": "Un sistema sobrio para hablar de dinero sin miedo",
+      "highlight": "hablar de dinero",
+      "intro": "Los tokens, componentes y patrones con los que se construye el simulador de finanzas personales. Todo lo que ves acá es el código real del producto: los colores y los contrastes se leen en vivo de los tokens.",
+      "stats": {
+        "tokens": "tokens de sistema",
+        "roles": "roles de color",
+        "type": "roles tipográficos",
+        "patterns": "patrones documentados"
+      },
+      "md": "Leer la versión en Markdown"
+    },
+    "sections": {
+      "principles": {
+        "eyebrow": "Principios",
+        "title": "Seis ideas que deciden cada pantalla",
+        "intro": "Cuando dos opciones de diseño son válidas, gana la que cumple mejor estos principios."
+      },
+      "tokens": {
+        "eyebrow": "Arquitectura de tokens",
+        "title": "Cuatro niveles, ningún valor suelto",
+        "intro": "Siguiendo Material Design 3 y el grupo de tokens de diseño del W3C: los valores crudos solo viven en el primer nivel y cada componente usa roles con nombre."
+      },
+      "color": {
+        "eyebrow": "Color",
+        "title": "Confiable, clara y tranquila",
+        "intro": "Índigo y verde azulado sobre neutros grises fríos. Sin estética de casino ni de trading: el color informa, no empuja a decidir."
+      },
+      "type": {
+        "eyebrow": "Tipografía",
+        "title": "Inter con la escala de Material 3",
+        "intro": "Títulos con la variante enfatizada de M3 Expressive. Montos, porcentajes y fechas siempre con cifras tabulares, para que se puedan comparar en columna."
+      },
+      "space": {
+        "eyebrow": "Espacio y forma",
+        "title": "Ritmo de 8 px y profundidad tonal",
+        "intro": "Más aireado en las vistas de aprendizaje y más denso en los paneles. La profundidad sale de la superficie, no de la sombra."
+      },
+      "icons": {
+        "eyebrow": "Íconos",
+        "title": "Material Symbols Rounded, peso 300",
+        "intro": "Un solo componente, cada ícono importado como SVG. Contorno por defecto y relleno solo para lo activo."
+      },
+      "motion": {
+        "eyebrow": "Movimiento",
+        "title": "Corto, con sentido y opcional",
+        "intro": "De 150 a 300 ms con las curvas de M3. Cada animación explica un cambio; ninguna es decoración en bucle."
+      },
+      "components": {
+        "eyebrow": "Componentes",
+        "title": "Componentes reales del producto",
+        "intro": "Ninguna de estas muestras es una imagen: son los mismos componentes que usan la billetera y los paneles, con sus textos."
+      },
+      "fuerte": {
+        "eyebrow": "Fuerte",
+        "title": "El compañero de la billetera",
+        "intro": "La caja fuerte naranja del escape room del taller acompaña a cada persona: la recibe, le avisa y celebra con ella. Es la única excepción a la paleta fría (D-52)."
+      },
+      "patterns": {
+        "eyebrow": "Patrones",
+        "title": "Soluciones que se repiten",
+        "intro": "Cada patrón lleva el número de la decisión que lo originó, registrada en docs/decisions.md."
+      },
+      "money": {
+        "eyebrow": "Cómo mostramos el dinero",
+        "title": "Montos que se leen, se comparan y no asustan",
+        "intro": "El formato, el color y los avisos de cada cifra. Enseñamos con escenarios, nunca con promesas."
+      },
+      "security": {
+        "eyebrow": "Seguridad y privacidad",
+        "title": "Privacidad por diseño, en tres capas",
+        "intro": "Lo que se simula en la interfaz, lo que el front protege de verdad hoy y lo que sumaría una versión en producción (D-70)."
+      },
+      "a11y": {
+        "eyebrow": "Accesibilidad",
+        "title": "WCAG 2.2 AA desde el diseño",
+        "intro": "Norma ISO/IEC 40500:2025. Se verifica con axe en cada pantalla y en 6 anchos, con recorridos de teclado y con lector de pantalla."
+      },
+      "voice": {
+        "eyebrow": "Voz y tono",
+        "title": "Como alguien que explica sin juzgar",
+        "intro": "Español latinoamericano neutro, con tú. Clara, paciente y sin juicio; nunca alarmista ni vendedora."
+      },
+      "credits": {
+        "eyebrow": "Créditos",
+        "title": "Lo que no hicimos nosotros",
+        "intro": "Recursos de terceros, contenido validado y licencias."
+      }
+    },
+    "principles": [
+      {
+        "title": "Aprender usando",
+        "body": "Quien participa no entra a un campus: entra a una billetera con dinero ficticio. Cada acción enseña algo en el momento y las secciones se abren con logros (D-50)."
+      },
+      {
+        "title": "Educación, no asesoramiento",
+        "body": "Escenarios con sus supuestos a la vista, nunca predicciones. Ninguna pantalla recomienda un producto, una entidad o una inversión."
+      },
+      {
+        "title": "Sobrio no es plano",
+        "body": "Sin degradés y casi sin sombras, la riqueza sale de la jerarquía, los datos, el acento y la composición en capas."
+      },
+      {
+        "title": "Privacidad por diseño",
+        "body": "Los montos viven solo en el navegador de cada persona. La empresa ve aprendizaje agregado, con un mínimo de 5 personas por grupo."
+      },
+      {
+        "title": "Para la oficina y el depósito",
+        "body": "La misma guía en la computadora de Mariana y en el celular de Diego: ratos cortos, textos simples y nada que dependa de un gesto."
+      },
+      {
+        "title": "Gamificación con medida",
+        "body": "Niveles y logros que celebran conductas sanas. Sin rachas que castigan, sin rankings, sin cuentas regresivas ni urgencia."
+      }
+    ],
+    "tiers": {
+      "ref": {
+        "title": "1 · Referencia",
+        "items": [
+          [
+            "--ref-indigo-40",
+            "Valores crudos: el único lugar con hexadecimales"
+          ],
+          [
+            "--ref-neutral-96",
+            "Neutros grises fríos"
+          ],
+          [
+            "--ref-fuerte-orange",
+            "El naranja de Fuerte, aislado"
+          ]
+        ]
+      },
+      "sys": {
+        "title": "2 · Sistema",
+        "items": [
+          [
+            "--md-sys-color-primary",
+            "Roles de color de M3"
+          ],
+          [
+            "--role-tutor",
+            "Color de cada rol de persona"
+          ],
+          [
+            "--chart-1 a --chart-5",
+            "Series de gráficos, en orden"
+          ],
+          [
+            "--space-*, --elevation-*",
+            "Espacio, forma y movimiento"
+          ]
+        ]
+      },
+      "theme": {
+        "title": "3 · Tema de Tailwind",
+        "items": [
+          [
+            "@theme inline",
+            "Sin la paleta ni los radios por defecto"
+          ],
+          [
+            "bg-primary, rounded-xl",
+            "Clases que apuntan a los roles"
+          ],
+          [
+            "text-title-large",
+            "La escala tipográfica de M3"
+          ]
+        ]
+      },
+      "comp": {
+        "title": "4 · Componentes",
+        "items": [
+          [
+            "Button (cva)",
+            "Variantes filled, tonal, outlined, text y danger"
+          ],
+          [
+            "MoneyText",
+            "Formato de dinero con espacio de no separación"
+          ],
+          [
+            "KpiCard, StatusPill",
+            "Estados con ícono y texto"
+          ]
+        ]
+      },
+      "qa": {
+        "title": "Controles automáticos",
+        "items": [
+          [
+            "tokens.test.ts",
+            "Contraste AA de cada combinación"
+          ],
+          [
+            "no-raw-values.test.ts",
+            "Ningún color, sombra ni degradé suelto"
+          ],
+          [
+            "Playwright",
+            "Sin desbordes en 6 anchos y axe sin errores"
+          ]
+        ]
+      },
+      "caption": "Cada nivel solo puede usar el anterior. Si un componente necesita un color nuevo, primero se crea el rol."
+    },
+    "color": {
+      "brand": "Marca",
+      "status": "Estados",
+      "surfaces": "Superficies y neutros",
+      "container": "Contenedor",
+      "aa": "AA",
+      "aaa": "AAA",
+      "fail": "no alcanza AA",
+      "roles": {
+        "primary": "Primario · índigo",
+        "secondary": "Secundario · índigo apagado",
+        "tertiary": "Terciario · verde azulado",
+        "error": "Error",
+        "success": "Correcto",
+        "warning": "Atención",
+        "info": "Información"
+      },
+      "uses": {
+        "primary": "Acción principal, navegación activa, enlaces y foco.",
+        "secondary": "Botones tonales, chips de filtro y menor énfasis.",
+        "tertiary": "Logros, metas alcanzadas y segunda serie de gráficos.",
+        "error": "Errores y acciones destructivas.",
+        "success": "Completado, correcto, dinero que entra.",
+        "warning": "Riesgo, pendiente y pérdida de poder de compra.",
+        "info": "Avisos, ayuda, supuestos y respuestas para revisar."
+      },
+      "rule": "Los colores de estado son solo para estados, nunca para series de gráficos. Y nunca son la única señal: siempre van con ícono y texto.",
+      "surfaceNames": {
+        "surface": "Fondo de página",
+        "surface-container-lowest": "Tarjetas",
+        "surface-container": "Paneles internos",
+        "surface-container-high": "Pie de fuentes",
+        "on-surface": "Texto",
+        "on-surface-variant": "Texto secundario",
+        "outline": "Bordes de campos",
+        "outline-variant": "Divisores",
+        "inverse-surface": "Tooltips y avisos"
+      },
+      "people": "Personas",
+      "peopleNote": "Cada rol tiene su color, que identifica personas y nunca estados. Las cinco personas de la demo llevan foto con un anillo de ese color; el resto, iniciales.",
+      "peopleNames": {
+        "ld_admin": "Admin de L&D · Paula",
+        "tutor": "Tutor · Kevin",
+        "participant": "Participante · Mariana",
+        "sponsor": "Decisor · Ricardo"
+      },
+      "charts": "Series de gráficos",
+      "chartsNote": "Siempre en este orden y con al menos 3:1 sobre blanco. Las áreas usan relleno plano de baja opacidad.",
+      "fuerte": "La excepción: el naranja de Fuerte",
+      "fuerteNote": "Solo en el personaje y sus luces, con relleno plano. Nunca en botones, fondos, gráficos ni estados (D-52).",
+      "fuerteNames": {
+        "body": "Cuerpo",
+        "light": "Luces",
+        "shade": "Sombra"
+      }
+    },
+    "type": {
+      "samples": {
+        "display-medium": "$ 1.284.958,86",
+        "display-small": "Hola, Mariana",
+        "headline-medium": "Presupuesto del mes",
+        "headline-small": "Tu fondo para imprevistos",
+        "title-large": "Últimos movimientos",
+        "title-medium": "Cuenta remunerada",
+        "title-small": "Cohorte",
+        "body-large": "El dinero quieto pierde poder de compra cuando hay inflación.",
+        "body-medium": "Separaste el 20 % de tu sueldo en el apartado Ahorro.",
+        "body-small": "Valores de ejemplo para aprender.",
+        "label-large": "Calcular escenario",
+        "label-medium": "Nivel 3 · Presupuesto",
+        "label-small": "12"
+      },
+      "uses": {
+        "display-medium": "Resultado de un simulador",
+        "display-small": "KPIs y resultado en celular",
+        "headline-medium": "Título de página (único h1)",
+        "headline-small": "Título destacado",
+        "title-large": "Título de sección (h2)",
+        "title-medium": "Tarjeta, modal y grupo (h3)",
+        "title-small": "Subtítulos y encabezados de tabla",
+        "body-large": "Texto de las guías",
+        "body-medium": "Texto de paneles",
+        "body-small": "Ayuda, supuestos y metadatos",
+        "label-large": "Botones y navegación",
+        "label-medium": "Chips y píldoras",
+        "label-small": "Solo contadores"
+      },
+      "note": "Tamaño, interlineado y peso leídos del navegador. Las guías se leen con 60 a 72 caracteres por línea y el CSS final usa rem, nunca px fijos."
+    },
+    "space": {
+      "spacing": "Espacio",
+      "rhythm": "Ritmo vertical de 8 px: 32 px entre secciones y de 8 a 16 px dentro de cada una. Los valores crecen en tablet y escritorio.",
+      "tokens": {
+        "space-gutter": "Margen lateral de la página",
+        "space-bento-gap": "Separación entre tarjetas",
+        "space-card-padding": "Relleno de las tarjetas",
+        "space-section": "Entre secciones"
+      },
+      "shape": "Forma",
+      "shapeNote": "Una sola forma, cuadrada con esquinas suaves, sin animación de cambio de forma. Las tarjetas bento usan la más abierta.",
+      "shapes": {
+        "xs": "4 px · casillas",
+        "sm": "8 px · botones y campos",
+        "md": "12 px · menús",
+        "lg": "16 px · diálogos y paneles",
+        "xl": "24 px · tarjetas",
+        "full": "Píldoras y avatares"
+      },
+      "elevation": "Elevación",
+      "levels": {
+        "tonal": "En reposo: superficie y borde, sin sombra",
+        "e1": "Elevación 1: menús, popovers y tooltips",
+        "e2": "Elevación 2: diálogos y avisos"
+      }
+    },
+    "icons": {
+      "outline": "Contorno · por defecto",
+      "filled": "Relleno · activo o elegido",
+      "rules": [
+        "Un componente único: <Icon name=\"…\" />.",
+        "Los decorativos llevan aria-hidden.",
+        "Un botón de solo ícono tiene nombre accesible y tooltip.",
+        "Tamaños de 16, 18, 20 y 24 px.",
+        "Sin logos de empresas, salvo Microsoft y Google en el acceso y los perfiles de la autora en el pie."
+      ]
+    },
+    "motion": {
+      "curves": {
+        "standard": "Estándar",
+        "decelerate": "Enfatizada, al entrar",
+        "accelerate": "Enfatizada, al salir"
+      },
+      "durations": "Duraciones",
+      "short": "corta",
+      "medium": "media",
+      "long": "larga",
+      "uses": [
+        "El resultado de un simulador cambia con una transición corta, sin contar desde cero.",
+        "Las barras de progreso se llenan al entrar y se actualizan al cambiar.",
+        "Las listas y el bento entran escalonados, 50 ms entre elementos.",
+        "Un desbloqueo aparece con una escala corta, una sola vez y con Fuerte."
+      ],
+      "replay": "Repetir la entrada",
+      "reduced": "Con \"reducir animaciones\" del sistema o del perfil, solo queda la opacidad. Nada de rebotes, confeti ni bucles."
+    },
+    "components": {
+      "buttons": "Botones",
+      "buttonsNote": "Uno solo Filled por región. El Filled de error solo confirma acciones destructivas y repite la consecuencia.",
+      "filled": "Guardar meta",
+      "tonal": "Ver como tabla",
+      "outlined": "Cancelar",
+      "text": "Ver todo",
+      "danger": "Eliminar meta",
+      "disabled": "Confirmar transferencia",
+      "xs": "XS",
+      "s": "S",
+      "m": "M",
+      "fields": "Campos",
+      "fieldsNote": "Etiqueta arriba y ayuda debajo con qué poner, formato y ejemplo. El error aparece al salir del campo, dice qué corregir y nunca borra lo cargado.",
+      "alias": "Alias o CVU",
+      "aliasHelp": "Por ejemplo: sofia.ramos.practica",
+      "aliasValue": "sofia.ramso.practica",
+      "aliasError": "No encontramos ese alias. Revisa si está bien escrito.",
+      "amount": "Monto",
+      "amountHelp": "Monto en pesos, por ejemplo: 150.000",
+      "rate": "Inflación mensual",
+      "rateHelp": "Porcentaje, por ejemplo: 3",
+      "chips": "Estados y chips",
+      "chipsNote": "Cada estado lleva ícono y texto. Los metadatos van en chips neutros; los filtros, en botones segmentados.",
+      "statuses": {
+        "done": "Completada",
+        "progress": "En curso",
+        "soon": "Vence pronto",
+        "error": "Datos que revisar",
+        "neutral": "Bloqueado"
+      },
+      "meta1": "Nivel 3 · Presupuesto",
+      "meta2": "6 min",
+      "meta3": "16/11/2026",
+      "segmentLabel": "Escenario de inflación",
+      "seg": {
+        "low": "Baja",
+        "medium": "Media",
+        "high": "Alta"
+      },
+      "kpi": "KPIs",
+      "kpiNote": "Ícono en contenedor de color, número grande, sparkline y texto de contexto. Cuentan hasta su valor una vez por sesión.",
+      "kpiBalance": "Saldo disponible",
+      "kpiBalanceCaption": "Dinero ficticio de práctica",
+      "kpiFund": "Fondo de emergencia",
+      "kpiFundCaption": "Faltan 1 mes para Invertir",
+      "alerts": "Avisos",
+      "alertsNote": "Información en info, logros en success, riesgo en warning y errores solo para fallas reales. Un error de la persona en una práctica es info, nunca culpa.",
+      "alertInfo": "Valores de ejemplo para aprender. Consulta los valores vigentes en las fuentes oficiales.",
+      "alertSuccess": "Guardado. Tu fondo de emergencia ya cubre un mes.",
+      "alertWarning": "Ojo con esto: el titular no coincide con el nombre que buscabas.",
+      "alertError": "No pudimos guardar la configuración. Reintenta en unos segundos.",
+      "progress": "Progreso",
+      "progressNote": "Barras con su valor en texto y pasos segmentados en los flujos guiados.",
+      "progressLabel": "Fondo de emergencia",
+      "progressValue": "2 de 3 meses",
+      "sources": "Fuentes",
+      "sourcesNote": "Al pie de cada sección con datos: chips cortos que abren Aprender > Fuentes, sobre surface-container-high (D-182, D-187).",
+      "stepsValue": "Paso 3 de 5"
+    },
+    "fuerte": {
+      "states": {
+        "neutral": "Neutral",
+        "greeting": "Saludo",
+        "thinking": "Pensativo",
+        "attention": "Atención",
+        "celebration": "Celebración",
+        "sleeping": "Dormido"
+      },
+      "lights": "Las siete luces muestran los niveles completados, una por nivel.",
+      "rules": [
+        "Habla en los momentos clave y nunca interrumpe dos veces seguidas la misma acción.",
+        "Nunca juzga, no recomienda productos ni promete rendimientos. Como mucho, dos oraciones.",
+        "La ilustración es decorativa: su mensaje se anuncia como texto.",
+        "Se puede silenciar: Conversador, Solo lo importante o Silencio.",
+        "En la billetera flota y se puede mover, con una alternativa al arrastre."
+      ],
+      "quote": "Guardado. Tu fondo de emergencia ya cubre un mes. Faltan dos para desbloquear Invertir."
+    },
+    "patterns": [
+      [
+        "D-50",
+        "La app es una billetera",
+        "Las guías, desafíos y herramientas viven dentro de las secciones de la billetera, que se abren por logros."
+      ],
+      [
+        "5.0",
+        "Lo bloqueado se ve",
+        "Cada sección bloqueada muestra un candado, para qué sirve y qué falta, con progreso y un acceso a la acción que la acerca."
+      ],
+      [
+        "D-164, D-72",
+        "Navegación por tamaño",
+        "Barra inferior en celular y tablet, con el nombre solo en el destino activo; menú lateral con subsecciones desde 1200 px."
+      ],
+      [
+        "2.2.1",
+        "Anatomía del simulador",
+        "Datos a la izquierda, resultado y frase a la derecha, gráfico con tabla, supuestos plegables, comparar escenarios y aviso legal."
+      ],
+      [
+        "D-166",
+        "Misiones declarativas",
+        "Cada misión define pasos, disparadores, tarjetas de aprendizaje y criterios en JSON: L&D puede sumar misiones sin tocar código."
+      ],
+      [
+        "2.2.1",
+        "Retroalimentación formativa",
+        "Correcto en success con explicación; para revisar en info con una pista. Nunca un mensaje que culpe."
+      ],
+      [
+        "D-188",
+        "Bento por cantidad de contenido",
+        "Las tarjetas cortas, juntas arriba; la de más contenido, a todo el ancho y con su lista en columnas."
+      ],
+      [
+        "D-178",
+        "El CFT antes que la cuota",
+        "En una oferta de crédito, el costo financiero total va primero, junto a lo que se recibe y lo que se paga en total."
+      ],
+      [
+        "D-182, D-187",
+        "Fuentes al pie",
+        "Chips cortos que abren la página de fuentes, sin códigos dentro del texto."
+      ],
+      [
+        "D-195",
+        "Datos insuficientes",
+        "Ningún grupo de menos de 5 personas muestra cifras; si queda uno solo oculto, se oculta otro para que no se deduzca restando."
+      ],
+      [
+        "D-196",
+        "Carga en tres pasos",
+        "Elegir el archivo, revisar cada fila con el error junto al campo y confirmar. Nada se carga antes del último paso."
+      ],
+      [
+        "D-197",
+        "Cambios sin guardar",
+        "Un aviso marca lo que cambió y salir pide confirmación, sin perder lo cargado."
+      ]
+    ],
+    "money": {
+      "formats": "Formato",
+      "long": "Montos largos",
+      "longNote": "Si un monto no entra, pasa a notación abreviada ($ 12,3 M) y el valor completo queda en el nombre accesible. Nunca se corta.",
+      "rows": {
+        "ars": "Pesos",
+        "usd": "Moneda extranjera, siempre con código",
+        "percent": "Porcentaje, siempre con su período",
+        "in": "Dinero que entra",
+        "out": "Dinero que sale",
+        "loss": "Pérdida de poder de compra",
+        "lossLabel": "Pierdes poder de compra"
+      },
+      "monthly": "mensual",
+      "yearly": "anual",
+      "credit": "Crédito: el CFT primero",
+      "creditNote": "La cuota nunca aparece sola. Una deuda de tasa alta lleva la píldora \"Tasa alta\" en warning: es información, no una falla (D-178).",
+      "cft": "Costo financiero total (CFT)",
+      "tna": "Tasa nominal anual (TNA)",
+      "received": "Lo que te acreditan",
+      "total": "Lo que pagas en total",
+      "inputs": "Campos con máscara",
+      "inputsNote": "Solo aceptan dígitos y coma decimal, formatean los miles al salir y aceptan pegar \"$ 1.500,50\" o \"1500.50\".",
+      "rules": [
+        [
+          "Espacio de no separación",
+          "Entre $, USD o − y el número, para que el signo nunca quede solo al final de una línea (D-68)."
+        ],
+        [
+          "Cifras tabulares",
+          "Montos, porcentajes y fechas con cifras de igual ancho, para compararlos en columna."
+        ],
+        [
+          "Ganancias y pérdidas",
+          "Con signo, ícono de tendencia y texto, nunca solo verde y rojo."
+        ],
+        [
+          "Escenarios, no promesas",
+          "\"Si la inflación fuera del 3 % mensual…\", nunca \"Vas a ganar…\"."
+        ],
+        [
+          "Supuestos a la vista",
+          "Junto a cada resultado, con \"Valores de ejemplo\" y dónde ver los valores reales."
+        ],
+        [
+          "Aviso legal",
+          "Contenido educativo. No es asesoramiento financiero ni una recomendación de inversión."
+        ]
+      ],
+      "legal": "Contenido educativo. No es asesoramiento financiero ni una recomendación de inversión."
+    },
+    "security": {
+      "layers": [
+        {
+          "title": "1 · Simulado en la interfaz",
+          "body": "Patrones que muestran cómo sería la experiencia corporativa real.",
+          "items": [
+            "Acceso con SSO neutro y rotulado, que nunca imita a Microsoft ni a Google",
+            "Verificación en dos pasos obligatoria para admin y decisor",
+            "Bloqueo tras 5 intentos y derivación a la mesa de ayuda",
+            "Aviso de sesión por vencer y aviso de privacidad al primer ingreso",
+            "Roles con mínimo privilegio desde permissions.ts"
+          ]
+        },
+        {
+          "title": "2 · Aplicado de verdad hoy",
+          "body": "Lo que protege el front publicado en GitHub Pages.",
+          "items": [
+            "Política de seguridad de contenido (CSP) en la página, verificada en la CI",
+            "Sin HTML insertado sin escapar (dangerouslySetInnerHTML)",
+            "Dependencias con versión fija y auditadas en cada build",
+            "Validación de formularios con Zod",
+            "Enlaces externos con rel=\"noopener noreferrer\""
+          ]
+        },
+        {
+          "title": "3 · En producción",
+          "body": "Lo que GitHub Pages no permite y sumaría un dominio propio.",
+          "items": [
+            "Encabezados HTTP reales con Cloudflare: frame-ancestors, HSTS, X-Content-Type-Options, Referrer-Policy y Permissions-Policy",
+            "Protección ante bots y denegación de servicio",
+            "SSO con OIDC o SAML y sesiones en cookies HttpOnly",
+            "Permisos verificados en el servidor y datos separados por empresa"
+          ]
+        }
+      ],
+      "design": "La privacidad también se diseña",
+      "designItems": [
+        [
+          "Dinero ficticio, siempre a la vista",
+          "El cartel \"Simulador de finanzas personales · dinero ficticio\" está en toda la billetera y no se quita nunca (D-69)."
+        ],
+        [
+          "Marca propia",
+          "La billetera no imita colores, íconos ni flujos de ninguna app real."
+        ],
+        [
+          "Sin datos reales",
+          "Nunca pide DNI, CBU, tarjetas ni contraseñas. El CVU se muestra con un formato que no es válido."
+        ],
+        [
+          "Los montos no salen del navegador",
+          "Saldos, movimientos, metas y hábitos quedan en el dispositivo de cada persona."
+        ],
+        [
+          "Umbral de 5",
+          "Ninguna cifra se muestra para grupos de menos de 5 personas, y el admin no puede bajarlo."
+        ]
+      ],
+      "who": "Qué ve cada rol",
+      "whoCols": {
+        "role": "Rol",
+        "learning": "Avance de aprendizaje",
+        "money": "Montos y movimientos",
+        "habits": "Hábitos de Conocerte",
+        "locked": "Si un nivel está bloqueado"
+      },
+      "whoRows": [
+        [
+          "Participante",
+          "Todo lo suyo",
+          "Solo los suyos",
+          "Solo los suyos",
+          "Sí, lo suyo"
+        ],
+        [
+          "Tutor o tutora",
+          "Por persona, de sus cohortes",
+          "Nunca",
+          "Nunca",
+          "Nunca (D-58)"
+        ],
+        [
+          "Admin de L&D",
+          "Agregado, con umbral",
+          "Nunca",
+          "Nunca",
+          "Nunca"
+        ],
+        [
+          "Decisor",
+          "Reporte agregado",
+          "Nunca",
+          "Nunca",
+          "Nunca"
+        ]
+      ],
+      "doc": "Leer docs/security.md"
+    },
+    "a11y": [
+      [
+        "Formularios",
+        "Etiqueta visible, ayuda con formato y ejemplo, \"(obligatorio)\" en texto y errores junto al campo."
+      ],
+      [
+        "Teclado y foco",
+        "Todo se opera con teclado, el foco es visible y nunca queda tapado, y los diálogos lo atrapan."
+      ],
+      [
+        "Gráficos",
+        "Título, frase con la conclusión y la misma información como tabla."
+      ],
+      [
+        "Dinero y porcentajes",
+        "Campos con máscara y deslizadores siempre con un campo numérico al lado."
+      ],
+      [
+        "Cambios anunciados",
+        "Saldos y resultados se anuncian con una región en vivo, con una demora breve."
+      ],
+      [
+        "Sin arrastre obligatorio",
+        "Ordenar, unir y clasificar tienen botones o menús como alternativa."
+      ],
+      [
+        "Sin límite de tiempo",
+        "Los desafíos no tienen reloj; la sesión avisa antes de vencer."
+      ],
+      [
+        "Áreas táctiles",
+        "48 × 48 px en celular y 24 × 24 px en escritorio."
+      ],
+      [
+        "Reflujo y zoom",
+        "Sin desborde a 320 px ni al 200 % de zoom, verificado en 6 anchos."
+      ]
+    ],
+    "voice": {
+      "principles": [
+        [
+          "Claridad primero",
+          "Frases cortas, una idea por oración y ejemplos con números redondos."
+        ],
+        [
+          "Sin culpar ni avergonzar",
+          "\"Muchas personas pagan el mínimo de la tarjeta; veamos cuánto cuesta.\""
+        ],
+        [
+          "Términos explicados",
+          "La primera vez, con una definición breve y un chip al glosario."
+        ],
+        [
+          "Escenarios, no promesas",
+          "\"Si…, entonces…\", nunca \"Vas a ganar\"."
+        ],
+        [
+          "Tono según el momento",
+          "Cálido en los logros, neutro en los paneles y serio en deudas, estafas y privacidad."
+        ]
+      ],
+      "use": "Usar",
+      "avoid": "Evitar",
+      "vocab": [
+        [
+          "Iniciar sesión",
+          "Ingresar, loguearse"
+        ],
+        [
+          "Panel",
+          "Dashboard"
+        ],
+        [
+          "Costo financiero total (CFT)",
+          "\"Interés de la tarjeta\""
+        ],
+        [
+          "Inflación, poder de compra",
+          "\"Pérdida de plata\""
+        ],
+        [
+          "Cuotas sin interés",
+          "\"Cuotas gratis\""
+        ],
+        [
+          "Fondo de emergencia",
+          "Colchón"
+        ],
+        [
+          "Meta de ahorro",
+          "Objetivo, target"
+        ],
+        [
+          "Tutor o tutora",
+          "Docente, facilitador"
+        ],
+        [
+          "Desafío de nivel",
+          "Examen, prueba"
+        ],
+        [
+          "Celular, computadora",
+          "Móvil, ordenador"
+        ]
+      ]
+    },
+    "credits": [
+      [
+        "Contenido de finanzas",
+        "Basado en la presentación del Lic. Kevin Giampieri para el taller \"Del aula al primer trabajo\". Las ampliaciones quedan marcadas para su revisión."
+      ],
+      [
+        "Fuerte",
+        "Personaje propio de Lourdes Pedaci, creado para el escape room \"Tu primer sueldo\"."
+      ],
+      [
+        "Fotos de las personas de la demo",
+        "Fotos de stock con licencia gratuita."
+      ],
+      [
+        "Íconos",
+        "Material Symbols de Google, con licencia Apache 2.0."
+      ],
+      [
+        "Tipografía",
+        "Inter, de Rasmus Andersson, con licencia SIL Open Font."
+      ]
+    ],
+    "magnific": "Designed by Magnific",
+    "newTab": "(se abre en una pestaña nueva)",
+    "footer": {
+      "demo": "Ver la demo",
+      "md": "Sistema de diseño en Markdown",
+      "repo": "Repositorio en GitHub",
+      "docs": "Documentación"
+    }
+  },
+  "layout": {
+    "backToTop": "Volver arriba"
   }
 }

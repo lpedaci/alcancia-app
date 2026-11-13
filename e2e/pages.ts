@@ -85,6 +85,7 @@ export const PAGES: CheckedPage[] = [
   { id: 'd1-sponsor', path: '/#/sponsor', as: 'p-ricardo' },
   { id: 'g7-forbidden', path: '/#/admin', as: 'p-mariana' },
   { id: 'g7-not-found', path: '/#/no-existe' },
+  { id: 'g8-design-system', path: '/#/design-system' },
   { id: 'styleguide', path: '/#/styleguide' },
 ];
 

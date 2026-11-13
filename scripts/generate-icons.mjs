@@ -10,6 +10,7 @@ import { fileURLToPath } from 'node:url';
 const ICONS = [
   // Navigation and layout (wallet destinations, CLAUDE.md 5.3)
   'replay', 'touch_app', 'quiz', 'tune', 'table_rows', 'event_available', 'military_tech', 'timeline', 'remove', 'shopping_bag', 'stacked_line_chart', 'table_view', 'lock_clock', 'inventory_2', 'grid_view', 'mark_chat_unread', 'sentiment_satisfied', 'monitoring', 'print', 'upload_file', 'download', 'person_add', 'group_add', 'settings',
+  'toc', 'code', 'accessibility_new', 'record_voice_over', 'photo_camera', 'cloud', 'storage',
   'menu', 'menu_open', 'home', 'payments', 'savings', 'trending_up', 'school', 'account_circle',
   'notifications', 'help', 'search', 'settings', 'logout', 'swap_horiz', 'dashboard', 'group', 'groups',
   'person', 'badge', 'apartment', 'route', 'map', 'description', 'assignment', 'fact_check',

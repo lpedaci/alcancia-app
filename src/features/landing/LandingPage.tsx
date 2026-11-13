@@ -413,6 +413,9 @@ export function LandingPage() {
             <External href={DOCS_URL} className={footerLink}>
               {t('landing.footer.docs')}
             </External>
+            <Link to="/design-system" className={footerLink}>
+              {t('landing.footer.designSystem')}
+            </Link>
           </nav>
           <nav aria-labelledby="footer-demo" className="flex flex-col gap-2">
             <h2 id="footer-demo" className="text-title-small text-on-surface">{t('landing.footer.demo')}</h2>

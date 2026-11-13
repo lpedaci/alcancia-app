@@ -88,8 +88,8 @@
 
 | ID | Requerimiento | Prioridad | Criterio de aceptación | Estado |
 | --- | --- | --- | --- | --- |
-| RF-80 | `/styleguide` interno | M | Tokens y componentes base | Pendiente |
-| RF-81 | Sistema de diseño público con "Cómo mostramos el dinero" | M | Secciones de 2.8 | Pendiente |
+| RF-80 | `/styleguide` interno | M | Tokens y componentes base | Hecho (paso 2) |
+| RF-81 | Sistema de diseño público con "Cómo mostramos el dinero" | M | Secciones de 2.8 | Hecho (paso 12, D-199) |
 | RF-82 | Indexación, Open Graph, favicon y manifiesto (spec 15) | S | `og-image.png` de 1200 × 630 | Pendiente |
 
 ### 1.7 Fase B (Won't en fase A)

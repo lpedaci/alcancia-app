@@ -15,6 +15,7 @@ const AccessHelpPage = lazyPage(() => import('@/features/auth/AccessHelpPage'), 
 const ConsentPage = lazyPage(() => import('@/features/auth/ConsentPage'), 'ConsentPage');
 const WalletHomePage = lazyPage(() => import('@/features/wallet/WalletHomePage'), 'WalletHomePage');
 const InflationToolPage = lazyPage(() => import('@/features/simulators/ToolPage'), 'InflationToolPage');
+const DesignSystemPage = lazyPage(() => import('@/features/design-system/DesignSystemPage'), 'DesignSystemPage');
 const AdminHomePage = lazyPage(() => import('@/features/organization/AdminHomePage'), 'AdminHomePage');
 const PeoplePage = lazyPage(() => import('@/features/organization/PeoplePage'), 'PeoplePage');
 const ImportPage = lazyPage(() => import('@/features/organization/ImportPage'), 'ImportPage');
@@ -48,7 +49,7 @@ const StyleguidePage = import.meta.env.DEV ? lazyPage(() => import('@/features/s
 /**
  * Screens of docs/information-architecture.md, section 7, added step by step. Public: G0 to G5 and
  * G7. Protected (RequireSession: session, consent and permission of the route): the wallet and the
- * homes of the other roles, whose panels arrive in steps 10 and 11.
+ * panels of the other roles. Public: the landing, the access screens and the design system (G8).
  */
 export function AppRoutes() {
   return (
@@ -60,6 +61,7 @@ export function AppRoutes() {
         <Route path="/login/verify" element={<VerifyPage />} />
         <Route path="/access-help" element={<AccessHelpPage />} />
         <Route path="/consent" element={<ConsentPage />} />
+        <Route path="/design-system" element={<DesignSystemPage />} />
         <Route element={<RequireSession />}>
           <Route path="/app" element={<WalletHomePage />} />
           <Route path="/app/tools/SIM-3" element={<InflationToolPage />} />
