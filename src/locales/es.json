@@ -1158,7 +1158,8 @@
       "sources": "Fuentes: {{ids}}. Contenido educativo, no es asesoramiento financiero.",
       "outline": "En esta guía",
       "outlineMeta": "{{parts}} partes · {{minutes}} min",
-      "goTo": ", volver a esta parte"
+      "goTo": ", volver a esta parte",
+      "openTool": "Abrir la herramienta \"{{name}}\""
     },
     "challenge": {
       "fuerte": "Sin apuro: no hay límite de tiempo.",
@@ -1249,6 +1250,12 @@
       "conocerte": "Conocerte y tu ruta",
       "profile": "Test de perfil de inversor",
       "tools": "Simulador de inflación"
+    },
+    "sources": {
+      "title": "Fuentes",
+      "newTab": "(se abre en una pestaña nueva)",
+      "verified": "verificada el {{date}}",
+      "legal": "Contenido educativo. No es asesoramiento financiero ni una recomendación de inversión."
     }
   },
   "pay": {

@@ -204,7 +204,7 @@
       "id": "m02-hyperbolic",
       "moduleId": "module-02",
       "type": "single",
-      "prompt": "Te ofrecen USD 100 hoy o USD 110 mañana y casi todas las personas eligen los USD 100 de hoy. ¿Cómo se llama ese sesgo?",
+      "prompt": "Te ofrecen USD 100 hoy o USD 110 mañana y mucha gente elige los USD 100 de hoy. ¿Cómo se llama ese sesgo?",
       "options": [
         {
           "id": "a",
@@ -313,7 +313,7 @@
       "id": "m02-wealth",
       "moduleId": "module-02",
       "type": "single",
-      "prompt": "Según el material del taller, ¿cómo suele verse la riqueza real?",
+      "prompt": "¿Cómo suele verse la riqueza real?",
       "options": [
         {
           "id": "a",
@@ -337,6 +337,7 @@
         "c": "Las cuotas son deuda. La riqueza real suele estar en activos que no se ven."
       },
       "sourceIds": [
+        "T",
         "A-10",
         "A-12"
       ]
@@ -824,7 +825,7 @@
       "id": "m03-702010",
       "moduleId": "module-03",
       "type": "single",
-      "prompt": "Tus gastos fijos son altos y el 50 % no te alcanza para lo esencial. ¿Qué punto de partida propone el material?",
+      "prompt": "Tus gastos fijos son altos y el 50 % no te alcanza para lo esencial. ¿Qué punto de partida se suele proponer?",
       "options": [
         {
           "id": "a",
@@ -845,9 +846,10 @@
       "feedback": {
         "a": "Correcto. La variante 70/20/10 es un punto de partida para gastos fijos altos, y mantiene un 10 % para ahorro e inversión.",
         "b": "La idea es seguir separando algo, aunque sea menos: la variante 70/20/10 deja un 10 % para ahorro e inversión.",
-        "c": "Esa variante deja el ahorro en cero. La que propone el material es 70/20/10."
+        "c": "Esa variante deja el ahorro en cero. La que se suele proponer para ese caso es 70/20/10."
       },
       "sourceIds": [
+        "T",
         "A-33"
       ]
     },
@@ -884,10 +886,11 @@
         "correct": "w1"
       },
       "feedback": {
-        "correct": "Correcto. Café, golosinas o suscripciones sin uso, sumados, pueden llegar al 15 % del ingreso anual según el material del taller. Anotar todo durante un mes los hace visibles.",
+        "correct": "Correcto. Café, golosinas o suscripciones sin uso, sumados, pueden llegar al 15 % del ingreso anual. Anotar todo durante un mes los hace visibles.",
         "incorrect": "Es falso: sumados pueden llegar a una parte importante del ingreso. Anotar todo un mes los hace visibles."
       },
       "sourceIds": [
+        "T",
         "A-34"
       ]
     },
@@ -1059,7 +1062,7 @@
       "id": "m05-order",
       "moduleId": "module-05",
       "type": "single",
-      "prompt": "Según el material del taller, ¿en qué orden conviene ordenar tus finanzas?",
+      "prompt": "¿En qué orden conviene ordenar tus finanzas?",
       "options": [
         {
           "id": "a",
@@ -1083,6 +1086,7 @@
         "c": "Mientras la deuda cara sigue, sus intereses crecen. Primero se pagan las deudas caras."
       },
       "sourceIds": [
+        "T",
         "A-23"
       ]
     },
@@ -1094,7 +1098,7 @@
       "options": [
         {
           "id": "a",
-          "text": "Ganar un 120 % asegurado"
+          "text": "Dejar de pagar un 120 % anual: un ahorro asegurado"
         },
         {
           "id": "b",
@@ -1102,16 +1106,16 @@
         },
         {
           "id": "c",
-          "text": "Ganar lo mismo que un plazo fijo"
+          "text": "Lo mismo que poner ese dinero en un plazo fijo"
         }
       ],
       "correctOptionIds": [
         "a"
       ],
       "feedback": {
-        "a": "Correcto. Cada peso que no se financia al 120 % es un 120 % que dejas de pagar: un rendimiento asegurado.",
+        "a": "Correcto. Cada peso que no se financia al 120 % anual es un 120 % que dejas de pagar: un ahorro asegurado.",
         "b": "El dinero no se pierde: deja de generar intereses en tu contra.",
-        "c": "Es mucho más: dejas de pagar un 120 % anual, que ningún ahorro de bajo riesgo suele igualar."
+        "c": "Es mucho más: dejas de pagar un 120 % anual, algo que ningún ahorro de bajo riesgo suele igualar."
       },
       "sourceIds": [
         "A-23"
@@ -1227,7 +1231,7 @@
         "a"
       ],
       "feedback": {
-        "a": "Correcto. Bajar la deuda cara es lo que más \"rinde\" en tu situación.",
+        "a": "Correcto. Bajar la deuda cara es lo que más te ahorra en tu situación.",
         "b": "Primero conviene bajar la deuda cara: su costo seguro supera lo que suele rendir una inversión.",
         "c": "Pagando el mínimo, el resto sigue generando intereses. Conviene pagar más."
       },
@@ -1282,7 +1286,8 @@
         "incorrect": "El pago mínimo es el saldo por el porcentaje: $ 240.000 × 0,1 = $ 24.000."
       },
       "sourceIds": [
-        "T"
+        "T",
+        "B-04"
       ]
     },
     {
@@ -1329,7 +1334,7 @@
       "id": "m06-time",
       "moduleId": "module-06",
       "type": "single",
-      "prompt": "Un saldo de $ 100.000 con TNA del 60 %, pagando solo el mínimo del 10 % y sin consumos nuevos, ¿cuánto tarda en pagarse?",
+      "prompt": "Un saldo de $ 100.000 con TNA del 60 %, pagando solo el mínimo del 10 %, con un mínimo de $ 1.000 por mes, y sin consumos nuevos, ¿cuánto tarda en pagarse?",
       "options": [
         {
           "id": "a",
@@ -1353,7 +1358,8 @@
         "c": "Con el mínimo, se paga solo una parte por mes."
       },
       "sourceIds": [
-        "T"
+        "T",
+        "F-14"
       ]
     },
     {
@@ -1603,7 +1609,9 @@
         "b": "Compara en pesos de hoy: las cuotas valen $ 99.540,04, menos que los $ 102.000 del contado.",
         "c": "No: en pesos de hoy, las cuotas valen $ 99.540,04 y el contado $ 102.000."
       },
-      "sourceIds": []
+      "sourceIds": [
+        "F-10"
+      ]
     },
     {
       "id": "m08-cash",
@@ -1620,7 +1628,9 @@
         "correct": "Correcto. $ 120.000 × 0,85 = $ 102.000.",
         "incorrect": "Al precio le restas el 15 %: $ 120.000 × 0,85 = $ 102.000."
       },
-      "sourceIds": []
+      "sourceIds": [
+        "F-10"
+      ]
     },
     {
       "id": "m08-myth",
@@ -1658,7 +1668,10 @@
         "correct": "Correcto. Con 1,5 % mensual, el mismo caso cambia: las cuotas valen $ 109.075,05 y conviene el contado.",
         "incorrect": "Es falso: depende del escenario. Con inflación baja y un buen descuento, puede convenir el contado."
       },
-      "sourceIds": []
+      "sourceIds": [
+        "F-10",
+        "F-11"
+      ]
     },
     {
       "id": "m08-why",
@@ -1687,7 +1700,9 @@
         "b": "No hay descuento: el monto es el mismo, pero vale menos con el tiempo por la inflación.",
         "c": "No hay devolución: la diferencia viene de la inflación."
       },
-      "sourceIds": []
+      "sourceIds": [
+        "F-10"
+      ]
     },
     {
       "id": "m08-check",
@@ -1850,7 +1865,7 @@
       "id": "m09-defense",
       "moduleId": "module-09",
       "type": "single",
-      "prompt": "Según el material del taller, ¿qué es invertir frente a la inflación?",
+      "prompt": "Frente a la inflación, ¿qué papel cumple invertir?",
       "options": [
         {
           "id": "a",
@@ -1874,6 +1889,7 @@
         "c": "Cualquier persona puede invertir a través de un agente registrado; es una estrategia de defensa."
       },
       "sourceIds": [
+        "T",
         "A-21"
       ]
     },
@@ -1892,7 +1908,9 @@
         "correct": "Correcto. 36 % × 30 ÷ 365 = 2,96 % en 30 días.",
         "incorrect": "La tasa del período es TNA × días ÷ 365: 36 % × 30 ÷ 365 = 2,96 %."
       },
-      "sourceIds": []
+      "sourceIds": [
+        "F-01"
+      ]
     },
     {
       "id": "m10-real",
@@ -1921,7 +1939,9 @@
         "b": "Hay que descontar la inflación: la tasa real es 1,0296 ÷ 1,03 − 1 ≈ −0,04 %.",
         "c": "Cambia un poco: la tasa real es negativa, cerca de −0,04 %."
       },
-      "sourceIds": []
+      "sourceIds": [
+        "F-03"
+      ]
     },
     {
       "id": "m10-terms",
@@ -1976,7 +1996,10 @@
         "correct": "Correcto. La tasa que importa para tu poder de compra es la real.",
         "incorrect": "TNA: referencia anual. TEA: con capitalización. Tasa real: descuenta la inflación."
       },
-      "sourceIds": []
+      "sourceIds": [
+        "F-02",
+        "F-03"
+      ]
     },
     {
       "id": "m10-tea",
@@ -2014,7 +2037,9 @@
         "correct": "Correcto. Al reinvertir los intereses, la TEA queda por encima de la TNA.",
         "incorrect": "Es falso: la TEA suma la capitalización de los intereses, por eso suele ser mayor que la TNA."
       },
-      "sourceIds": []
+      "sourceIds": [
+        "F-02"
+      ]
     },
     {
       "id": "m10-compare",
@@ -2043,7 +2068,9 @@
         "b": "Son períodos distintos: la TNA es anual y la inflación, mensual.",
         "c": "El monto final siempre es mayor en pesos; hay que descontar la inflación."
       },
-      "sourceIds": []
+      "sourceIds": [
+        "F-03"
+      ]
     },
     {
       "id": "m11-fixed",
@@ -2060,7 +2087,9 @@
         "correct": "Correcto. $ 1.000.000 × (1 + 0,36 × 30 ÷ 365) = $ 1.029.589,04.",
         "incorrect": "Suma el interés del período: $ 1.000.000 × (1 + 0,36 × 30 ÷ 365) = $ 1.029.589,04."
       },
-      "sourceIds": []
+      "sourceIds": [
+        "F-08"
+      ]
     },
     {
       "id": "m11-uva",

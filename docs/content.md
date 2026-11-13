@@ -72,22 +72,41 @@ Las de **hábitos** no tienen respuesta correcta ni juicio, y **nunca salen del 
 
 ## Tanda del paso 7: guías y bancos de los niveles 1 a 4 (D-171)
 
-Texto completo en `src/data/guides.json` (una guía por módulo) y `src/data/question-banks.json` (5 preguntas por módulo). **Estado:** borrador para revisión de Lourdes; las ampliaciones (módulos 17 y 18), además, para revisión del Lic. Kevin Giampieri.
+Texto completo en `src/data/guides.json` (una guía por módulo) y `src/data/question-banks.json` (5 preguntas por módulo). **Estado:** revisada por Lourdes el 13/11/2026, con las correcciones de la sección "Revisión de Lourdes de los niveles 1 a 6". Las ampliaciones (módulos 17 y 18) siguen pendientes de revisión del Lic. Kevin Giampieri.
 
 | Módulo | Guía | Banco (tipos) | Fuentes |
 | --- | --- | --- | --- |
 | 1 · Tu recibo de sueldo | "Del bruto al neto" (6 min) | numérica (neto), opción única (bruto, costo laboral), clasificar (aportes y contribuciones), verdadero o falso con justificación | T |
-| 2 · Tu cerebro y el dinero | "Esperar 48 horas" (6 min) | opción única (regla de las 48 horas, descuento hiperbólico, riqueza real), verdadero o falso (minimalismo), opción múltiple (frenar el impulso) | A-06, A-08, A-10, A-12 a A-16 |
+| 2 · Tu cerebro y el dinero | "Esperar 48 horas" (6 min) | opción única (regla de las 48 horas, descuento hiperbólico, riqueza real), verdadero o falso (minimalismo), opción múltiple (frenar el impulso) | T, A-10, A-12 a A-16 (A-06 y A-08, "hablar de dinero", salieron de esta guía en la revisión: quedan para las guías 2 y 3 de fase B) |
 | 17 · Billeteras y fintech | "Qué tipo de cuenta tienes" (7 min) | unir pares (CVU, CBU, PSPCP, QR), opción única (garantía, transferencia inmediata, registro), numérica (tope prorrateado: $ 50.000.000 ÷ 2) | B-01, B-10, B-12, B-14 a B-16, B-19 |
 | 18 · Estafas (guía base) | "Nadie legítimo te pide un código" (5 min) | opción múltiple (señales de alerta), opción única (código, alertas de la CNV), clasificar (tres mensajes sospechosos y uno esperable), verdadero o falso (página parecida) | T, B-24 |
 | 3 · Presupuesto | "Adónde va tu sueldo" (7 min) | clasificar (8 gastos), numéricas (20 % y 50 % del neto), opción única (70/20/10), verdadero o falso (gastos hormiga) | A-32 a A-34, T |
-| 4 · Fondo de emergencia | "Tu colchón para imprevistos" (6 min) | numérica ($ 700.000 × 3), opción múltiple (qué es una emergencia), opción única (liquidez y riesgo), ordenar (4 pasos), verdadero o falso (no invertirlo todo) | A-35, A-36 |
+| 4 · Fondo de emergencia | "Tu fondo para imprevistos" (6 min) | numérica ($ 700.000 × 3), opción múltiple (qué es una emergencia), opción única (liquidez y riesgo), ordenar (4 pasos), verdadero o falso (no invertirlo todo) | A-35, A-36 |
 
 Cálculos verificados a mano: $ 1.559.263,32 − $ 274.304,46 = $ 1.284.958,86; 50 % = $ 642.479,43; 30 % = $ 385.487,66; 20 % = $ 256.991,77; $ 700.000 × 3 = $ 2.100.000; con $ 250.000 por mes se llega en 9 meses (8 × 250.000 = 2.000.000 no alcanza).
 
+## Revisión de Lourdes de los niveles 1 a 6 (13/11/2026, D-182)
+
+Las 13 guías y sus bancos quedan revisados por Lourdes con estas correcciones:
+
+1. **Fuentes visibles:** ningún texto dice "el material" ni "según el material del taller" (guía 3, m02-wealth, m03-702010, m05-order, m09-defense); la fuente queda en `sourceIds`: T (taller) y el A-xx de la presentación, más el B-xx oficial cuando hay uno. El bloque "Fuentes" de cada guía y paso de misión muestra el nombre completo: el taller "Del aula al primer trabajo" de Lourdes Pedaci (con enlace), la presentación del Lic. Kevin Giampieri con sus diapositivas, cada fuente oficial con su fecha de verificación y los casos de `formulas.md` (`src/app/content-sources.ts`).
+2. **Pago mínimo con piso:** guía 6 y m06-time dicen "pago mínimo del 10 %, con un mínimo de $ 1.000 por mes", como el caso F-14.
+3. **m05-equivalent:** la opción correcta es "Dejar de pagar un 120 % anual: un ahorro asegurado"; pagar una deuda no se describe como "ganar" (también en la guía 5 y en m05-first).
+4. **Fuentes de las preguntas con números:** módulo 8 (F-10, F-11), módulo 10 (F-01 a F-03), m11-fixed (F-08) y m06-minimum (T, B-04). Un test falla si una pregunta con monto, tasa o porcentaje no tiene fuente.
+5. **Sin códigos internos:** las conclusiones de las guías 7, 8, 10 y 11 nombran la herramienta ("Salir de deudas: bola de nieve o avalancha", "Cuotas sin interés o contado", "Tasa real", "¿Dónde guardo mi fondo de emergencia?") y suman un botón que la abre. Un test falla si un texto visible contiene "SIM-".
+6. Guía 3: "hubo muchos gastos chicos".
+7. Guía 4: título "Tu fondo para imprevistos".
+8. m02-hyperbolic: "mucha gente elige".
+9. Guía 2: "¿Alguna vez compraste algo y te arrepentiste a los pocos días?".
+10. **"Antes de empezar" como reflexión:** las preguntas sobre la experiencia propia (guías 2 a 11, 17 y 18) son de tipo `reflection`, sin respuesta correcta; no se guardan, no puntúan y nunca entran en un banco ni en un desafío (test). La de la guía 1 ("¿qué número usarías…?") sigue siendo de conocimiento previo, porque tiene una respuesta (el neto).
+11. **Tasas de ejemplo:** las guías 5, 6 y 7 aclaran que las tasas de tarjeta son de ejemplo.
+12. Guía 2: sale el bloque "Hablar de dinero", que no llevaba a la regla de las 48 horas.
+
+También se cambió la frase de Fuerte para Invertir bloqueado: "Invertir se abre cuando tengas tu fondo de emergencia armado", como en la spec actualizada.
+
 ## Tanda del paso 8: guías y bancos de los niveles 5 y 6 (D-177)
 
-Texto completo en `src/data/guides.json` y `src/data/question-banks.json` (5 preguntas por módulo). **Estado:** borrador para revisión de Lourdes; las ampliaciones (módulos 6, 8, 10 y 11), además, para revisión del Lic. Kevin Giampieri.
+Texto completo en `src/data/guides.json` y `src/data/question-banks.json` (5 preguntas por módulo). **Estado:** revisada por Lourdes el 13/11/2026, con las correcciones de la sección "Revisión de Lourdes de los niveles 1 a 6". Las ampliaciones (módulos 6, 8, 10 y 11) siguen pendientes de revisión del Lic. Kevin Giampieri.
 
 | Módulo | Guía | Banco (tipos) | Fuentes |
 | --- | --- | --- | --- |

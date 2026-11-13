@@ -1,5 +1,9 @@
 import { describe, expect, it } from 'vitest';
+import fuerteLines from '@/data/fuerte-lines.json';
 import levels from '@/data/levels.json';
+import missions from '@/data/wallet-missions.json';
+import es from '@/locales/es.json';
+import { describeSources, isKnownSourceCode } from '@/app/content-sources';
 import {
   type Answer,
   BANK,
@@ -20,6 +24,8 @@ const byId = (id: string) => BANK.find((q) => q.id === id)!;
 /** The right answer of any question, built from its own data. */
 function rightAnswer(q: LearningQuestion): Answer {
   switch (q.type) {
+    case 'reflection':
+      return q.options[0]!.id;
     case 'single':
       return q.correctOptionIds[0]!;
     case 'multiple':
@@ -59,6 +65,39 @@ describe('content of levels 1 to 6 (D-61)', () => {
       if (q.type !== 'single') expect(q.feedback.incorrect, q.id).toBeTruthy();
       else for (const o of q.options) expect(q.feedback[o.id], `${q.id}/${o.id}`).toBeTruthy();
     }
+  });
+
+  it('every question with an amount, a rate or a percentage has a source (review of 13/11/2026)', () => {
+    const all = [...BANK, ...GUIDES.flatMap((g) => g.blocks.flatMap((b) => (b.type === 'recall' || b.type === 'practice' ? [b.question] : [])))];
+    for (const q of all) {
+      const visible = JSON.stringify({ prompt: q.prompt, options: 'options' in q ? q.options : undefined, numeric: q.type === 'numeric' ? q.numeric : undefined });
+      if (q.type !== 'reflection' && /\$|%|USD|TNA|TEA|CFT/.test(visible)) expect(q.sourceIds.length, q.id).toBeGreaterThan(0);
+    }
+  });
+
+  it('no visible text names a tool by its internal code or mentions "el material"', () => {
+    // Every text a person can read: interface, guides, banks, missions and Fuerte (keys and ids are not visible).
+    const hidden = new Set(['id', 'toolId', 'simId', 'sourceIds', 'moduleId', 'levelId', 'toolSimIds', 'missionIds', 'guideModuleIds', 'challengeId', 'masteryChallengeId']);
+    const texts: string[] = [];
+    const walk = (value: unknown, key = ''): void => {
+      if (hidden.has(key)) return;
+      if (typeof value === 'string') texts.push(value);
+      else if (Array.isArray(value)) value.forEach((v) => walk(v));
+      else if (value && typeof value === 'object') for (const [k, v] of Object.entries(value)) walk(v, k);
+    };
+    [es, BANK, GUIDES, missions, fuerteLines].forEach((source) => walk(source));
+    expect(texts.filter((text) => /SIM-\d/.test(text))).toEqual([]);
+    expect(texts.filter((text) => /el material/i.test(text))).toEqual([]);
+  });
+
+  it('"Antes de empezar" about personal experience is a reflection: no right answer, and never in a bank or a challenge', () => {
+    const recalls = GUIDES.flatMap((g) => g.blocks.filter((b) => b.type === 'recall').map((b) => (b as { question: LearningQuestion }).question));
+    expect(recalls.filter((q) => q.type === 'reflection').length).toBeGreaterThanOrEqual(12);
+    for (const q of recalls.filter((r) => r.type === 'reflection')) {
+      expect('correctOptionIds' in q, q.id).toBe(false);
+      for (const o of 'options' in q ? q.options : []) expect(isCorrect(q, o.id)).toBe(true);
+    }
+    expect(BANK.some((q) => q.type === 'reflection')).toBe(false);
   });
 
   it('each challenge draws from banks with enough questions', () => {
@@ -129,5 +168,24 @@ describe('challenges (D-57)', () => {
     for (const level of levels.filter((l) => ['level-2', 'level-3', 'level-4', 'level-5', 'level-6'].includes(l.id))) {
       expect(CHALLENGES.map((c) => c.id)).toContain(level.masteryChallengeId);
     }
+  });
+});
+
+describe('sources shown with full names (review of 13/11/2026)', () => {
+  it('every source code in guides, banks and missions is known, and shows its full name', () => {
+    const codes = new Set<string>();
+    const walk = (value: unknown, key = ''): void => {
+      if (key === 'sourceIds' && Array.isArray(value)) value.forEach((c) => codes.add(String(c)));
+      else if (Array.isArray(value)) value.forEach((v) => walk(v));
+      else if (value && typeof value === 'object') for (const [k, v] of Object.entries(value)) walk(v, k);
+    };
+    [BANK, GUIDES, missions].forEach((source) => walk(source));
+    expect([...codes].filter((c) => !isKnownSourceCode(c))).toEqual([]);
+    const shown = describeSources(['T', 'A-23', 'A-14', 'B-04', 'B-02', 'F-14']);
+    expect(shown.map((s) => s.kind)).toEqual(['workshop', 'presentation', 'official', 'official', 'formula']);
+    expect(shown[0]).toMatchObject({ name: 'Taller "Del aula al primer trabajo", de Lourdes Pedaci', url: 'https://lpedaci.github.io/taller-primerempleo/' });
+    expect(shown[1]!.name).toContain('Lic. Kevin Giampieri (diapositivas 14, 23)');
+    expect(shown[2]).toMatchObject({ verifiedAt: '2026-11-12' });
+    expect(shown[3]).toMatchObject({ verifiedAt: '2026-11-11' });
   });
 });

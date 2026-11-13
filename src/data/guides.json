@@ -112,8 +112,8 @@
           "question": {
             "id": "g02-recall",
             "moduleId": "module-02",
-            "type": "single",
-            "prompt": "¿Te pasó comprar algo y arrepentirte a los pocos días?",
+            "type": "reflection",
+            "prompt": "¿Alguna vez compraste algo y te arrepentiste a los pocos días?",
             "options": [
               {
                 "id": "a",
@@ -124,20 +124,12 @@
                 "text": "Casi nunca"
               }
             ],
-            "correctOptionIds": [
-              "a"
-            ],
             "feedback": {
               "a": "Le pasa a casi todo el mundo, y tiene una explicación.",
               "b": "Bien. Igual vale conocer el mecanismo, porque el marketing lo usa todo el tiempo."
             },
             "sourceIds": []
           }
-        },
-        {
-          "type": "text",
-          "title": "Hablar de dinero",
-          "body": "En muchas casas, el dinero es un tema que no se habla. Las finanzas personales no son magia: son administración y disciplina, y se aprenden."
         },
         {
           "type": "text",
@@ -199,8 +191,7 @@
         }
       ],
       "sourceIds": [
-        "A-06",
-        "A-08",
+        "T",
         "A-10",
         "A-12",
         "A-13",
@@ -228,7 +219,7 @@
           "question": {
             "id": "g17-recall",
             "moduleId": "module-17",
-            "type": "single",
+            "type": "reflection",
             "prompt": "¿Sabes si tu billetera te da un CVU o un CBU?",
             "options": [
               {
@@ -239,9 +230,6 @@
                 "id": "b",
                 "text": "No estoy seguro"
               }
-            ],
-            "correctOptionIds": [
-              "b"
             ],
             "feedback": {
               "a": "Bien. Al final de esta guía vas a saber también qué significa para tu dinero.",
@@ -343,7 +331,7 @@
           "question": {
             "id": "g18-recall",
             "moduleId": "module-18",
-            "type": "single",
+            "type": "reflection",
             "prompt": "¿Alguna vez recibiste un mensaje que te pedía datos con urgencia?",
             "options": [
               {
@@ -354,9 +342,6 @@
                 "id": "b",
                 "text": "No que yo recuerde"
               }
-            ],
-            "correctOptionIds": [
-              "a"
             ],
             "feedback": {
               "a": "Es muy común. Vamos a ver cómo reconocerlo.",
@@ -438,7 +423,7 @@
       "blocks": [
         {
           "type": "hook",
-          "body": "Cobraste hace dos semanas y ya no queda casi nada. No hubo un gasto grande: hubo muchos chicos."
+          "body": "Cobraste hace dos semanas y ya no queda casi nada. No hubo un gasto grande: hubo muchos gastos chicos."
         },
         {
           "type": "objective",
@@ -449,7 +434,7 @@
           "question": {
             "id": "g03-recall",
             "moduleId": "module-03",
-            "type": "single",
+            "type": "reflection",
             "prompt": "¿Sabes cuánto gastaste el mes pasado en salidas y delivery?",
             "options": [
               {
@@ -460,9 +445,6 @@
                 "id": "b",
                 "text": "No tengo idea"
               }
-            ],
-            "correctOptionIds": [
-              "b"
             ],
             "feedback": {
               "a": "Bien. Con un presupuesto lo vas a saber con precisión.",
@@ -494,7 +476,7 @@
         {
           "type": "text",
           "title": "Gastos hormiga",
-          "body": "Café, golosinas, suscripciones que no usas: cada uno es chico, pero sumados **pueden llegar** al 15 % del ingreso anual, según el material del taller. El truco: anotar todo durante un mes."
+          "body": "Café, golosinas, suscripciones que no usas: cada uno es chico, pero sumados **pueden llegar** al 15 % del ingreso anual. El truco: anotar todo durante un mes."
         },
         {
           "type": "practice",
@@ -585,7 +567,7 @@
     {
       "id": "module-04-guide-1",
       "moduleId": "module-04",
-      "title": "Tu colchón para imprevistos",
+      "title": "Tu fondo para imprevistos",
       "minutes": 6,
       "blocks": [
         {
@@ -601,7 +583,7 @@
           "question": {
             "id": "g04-recall",
             "moduleId": "module-04",
-            "type": "single",
+            "type": "reflection",
             "prompt": "Si mañana tuvieras un gasto imprevisto, ¿con qué lo cubrirías?",
             "options": [
               {
@@ -612,9 +594,6 @@
                 "id": "b",
                 "text": "Con la tarjeta o un préstamo"
               }
-            ],
-            "correctOptionIds": [
-              "a"
             ],
             "feedback": {
               "a": "Bien. En esta guía vas a ver cuánto conviene tener y dónde.",
@@ -676,6 +655,7 @@
         }
       ],
       "sourceIds": [
+        "T",
         "A-35",
         "A-36"
       ]
@@ -699,7 +679,7 @@
           "question": {
             "id": "g05-recall",
             "moduleId": "module-05",
-            "type": "single",
+            "type": "reflection",
             "prompt": "¿Tienes hoy alguna deuda con interés, como la tarjeta financiada?",
             "options": [
               {
@@ -711,9 +691,6 @@
                 "text": "No"
               }
             ],
-            "correctOptionIds": [
-              "a"
-            ],
             "feedback": {
               "a": "Es muy común. Esta guía te ayuda a decidir por dónde empezar.",
               "b": "Bien. Igual vale conocer el orden para cuando aparezca una."
@@ -723,8 +700,8 @@
         },
         {
           "type": "text",
-          "title": "Pagar una deuda también rinde",
-          "body": "Si tu tarjeta cobra **120 % anual**, cada peso que dejas de financiar es un **120 % que no pagas**: un rendimiento asegurado que ninguna inversión de bajo riesgo suele igualar."
+          "title": "Pagar una deuda es un ahorro asegurado",
+          "body": "Si tu tarjeta cobra **120 % anual** (tasa de ejemplo), cada peso que dejas de financiar es un **120 % anual que no pagas**: un ahorro asegurado que ninguna inversión de bajo riesgo suele igualar."
         },
         {
           "type": "text",
@@ -735,7 +712,7 @@
           "type": "example",
           "title": "Ejemplo resuelto",
           "steps": [
-            "Deuda de tarjeta: $ 100.000 al 120 % anual.",
+            "Deuda de tarjeta: $ 100.000 al 120 % anual (tasa de ejemplo).",
             "Si la pagas, dejas de generar unos $ 10.000 de intereses por mes.",
             "Para que una inversión te convenga más, tendría que rendir más que eso, sin riesgo.",
             "Por eso, primero la tarjeta."
@@ -766,7 +743,7 @@
               "a"
             ],
             "feedback": {
-              "a": "Correcto. Bajar la deuda cara es lo que más \"rinde\" en tu situación.",
+              "a": "Correcto. Bajar la deuda cara es lo que más te ahorra en tu situación.",
               "b": "Primero conviene bajar la deuda cara: su costo seguro supera lo que suele rendir una inversión.",
               "c": "Pagando el mínimo, el resto sigue generando intereses. Conviene pagar más."
             },
@@ -781,6 +758,7 @@
         }
       ],
       "sourceIds": [
+        "T",
         "A-23"
       ]
     },
@@ -803,7 +781,7 @@
           "question": {
             "id": "g06-recall",
             "moduleId": "module-06",
-            "type": "single",
+            "type": "reflection",
             "prompt": "¿Alguna vez pagaste solo el mínimo de la tarjeta?",
             "options": [
               {
@@ -814,9 +792,6 @@
                 "id": "b",
                 "text": "No"
               }
-            ],
-            "correctOptionIds": [
-              "a"
             ],
             "feedback": {
               "a": "Muchas personas lo hacen. Veamos cuánto cuesta.",
@@ -839,8 +814,8 @@
           "type": "example",
           "title": "Ejemplo resuelto",
           "steps": [
-            "Saldo: $ 100.000, TNA del 60 %, pago mínimo del 10 %, sin consumos nuevos.",
-            "Cada mes se suman intereses y se paga el 10 % del saldo.",
+            "Saldo: $ 100.000, TNA de ejemplo del 60 %, pago mínimo del 10 %, con un mínimo de $ 1.000 por mes, sin consumos nuevos.",
+            "Cada mes se suman intereses y se paga el 10 % del saldo, o $ 1.000 si el 10 % da menos.",
             "Para terminar de pagarlo hacen falta 55 meses.",
             "En total, se pagan $ 83.880,36 de intereses."
           ]
@@ -863,7 +838,8 @@
               "incorrect": "El pago mínimo es el saldo por el porcentaje: $ 240.000 × 0,1 = $ 24.000."
             },
             "sourceIds": [
-              "T"
+              "T",
+              "B-04"
             ]
           }
         },
@@ -874,7 +850,8 @@
       ],
       "sourceIds": [
         "T",
-        "B-04"
+        "B-04",
+        "F-14"
       ]
     },
     {
@@ -896,7 +873,7 @@
           "question": {
             "id": "g07-recall",
             "moduleId": "module-07",
-            "type": "single",
+            "type": "reflection",
             "prompt": "Si tuvieras varias deudas, ¿por cuál empezarías?",
             "options": [
               {
@@ -907,9 +884,6 @@
                 "id": "b",
                 "text": "Por la más cara"
               }
-            ],
-            "correctOptionIds": [
-              "b"
             ],
             "feedback": {
               "a": "Es la idea de la bola de nieve. Veamos también la otra opción.",
@@ -930,7 +904,7 @@
         },
         {
           "type": "example",
-          "title": "Ejemplo resuelto: la avalancha",
+          "title": "Ejemplo resuelto: la avalancha, con tasas de ejemplo",
           "steps": [
             "Tarjeta: 150 % anual, $ 40.000.",
             "Financiera: 110 % anual, $ 15.000.",
@@ -975,10 +949,12 @@
         },
         {
           "type": "takeaway",
-          "body": "Para tu vida: ordena tus deudas con los dos métodos y prueba ambos en la herramienta SIM-9."
+          "body": "Para tu vida: ordena tus deudas con los dos métodos y prueba ambos en la herramienta \"Salir de deudas: bola de nieve o avalancha\".",
+          "toolId": "SIM-9"
         }
       ],
       "sourceIds": [
+        "T",
         "A-24",
         "A-25",
         "A-28",
@@ -1005,7 +981,7 @@
           "question": {
             "id": "g08-recall",
             "moduleId": "module-08",
-            "type": "single",
+            "type": "reflection",
             "prompt": "¿Qué eliges cuando te ofrecen cuotas sin interés?",
             "options": [
               {
@@ -1016,9 +992,6 @@
                 "id": "b",
                 "text": "Depende del descuento"
               }
-            ],
-            "correctOptionIds": [
-              "b"
             ],
             "feedback": {
               "a": "Muchas veces conviene, pero no siempre. Veamos cómo saberlo.",
@@ -1085,16 +1058,22 @@
               "correct": "Correcto. Con 1,5 % mensual, el mismo caso cambia: las cuotas valen $ 109.075,05 y conviene el contado.",
               "incorrect": "Es falso: depende del escenario. Con inflación baja y un buen descuento, puede convenir el contado."
             },
-            "sourceIds": []
+            "sourceIds": [
+              "F-10",
+              "F-11"
+            ]
           }
         },
         {
           "type": "takeaway",
-          "body": "Para tu vida: la próxima compra en cuotas, pregunta el precio de contado y hazlo en la herramienta SIM-6."
+          "body": "Para tu vida: la próxima compra en cuotas, pregunta el precio de contado y hazlo en la herramienta \"Cuotas sin interés o contado\".",
+          "toolId": "SIM-6"
         }
       ],
       "sourceIds": [
-        "B-04"
+        "B-04",
+        "F-10",
+        "F-11"
       ]
     },
     {
@@ -1116,7 +1095,7 @@
           "question": {
             "id": "g09-recall",
             "moduleId": "module-09",
-            "type": "single",
+            "type": "reflection",
             "prompt": "¿Notaste que lo mismo cuesta más que hace un año?",
             "options": [
               {
@@ -1127,9 +1106,6 @@
                 "id": "b",
                 "text": "No mucho"
               }
-            ],
-            "correctOptionIds": [
-              "a"
             ],
             "feedback": {
               "a": "Eso es la inflación. Veamos cómo medirla.",
@@ -1222,7 +1198,7 @@
           "question": {
             "id": "g10-recall",
             "moduleId": "module-10",
-            "type": "single",
+            "type": "reflection",
             "prompt": "¿Sabes qué significa la TNA?",
             "options": [
               {
@@ -1233,9 +1209,6 @@
                 "id": "b",
                 "text": "No del todo"
               }
-            ],
-            "correctOptionIds": [
-              "b"
             ],
             "feedback": {
               "a": "Bien. Vamos a ver cómo usarla para comparar.",
@@ -1281,16 +1254,22 @@
               "correct": "Correcto. 36 % × 30 ÷ 365 = 2,96 % en 30 días.",
               "incorrect": "La tasa del período es TNA × días ÷ 365: 36 % × 30 ÷ 365 = 2,96 %."
             },
-            "sourceIds": []
+            "sourceIds": [
+              "F-01"
+            ]
           }
         },
         {
           "type": "takeaway",
-          "body": "Para tu vida: toma una tasa que veas esta semana y calcula su tasa real en la herramienta SIM-4."
+          "body": "Para tu vida: toma una tasa que veas esta semana y calcula su tasa real en la herramienta \"Tasa real\".",
+          "toolId": "SIM-4"
         }
       ],
       "sourceIds": [
-        "B-40"
+        "B-40",
+        "F-01",
+        "F-02",
+        "F-03"
       ]
     },
     {
@@ -1312,7 +1291,7 @@
           "question": {
             "id": "g11-recall",
             "moduleId": "module-11",
-            "type": "single",
+            "type": "reflection",
             "prompt": "¿Tu dinero ahorrado hoy rinde algo?",
             "options": [
               {
@@ -1323,9 +1302,6 @@
                 "id": "b",
                 "text": "No"
               }
-            ],
-            "correctOptionIds": [
-              "b"
             ],
             "feedback": {
               "a": "Bien. Veamos qué protección tiene cada opción.",
@@ -1406,7 +1382,8 @@
         },
         {
           "type": "takeaway",
-          "body": "Para tu vida: fíjate si tu dinero \"que rinde\" está en una cuenta o en un fondo, y compara las opciones en la herramienta SIM-12."
+          "body": "Para tu vida: fíjate si tu dinero \"que rinde\" está en una cuenta o en un fondo, y compara las opciones en la herramienta \"¿Dónde guardo mi fondo de emergencia?\".",
+          "toolId": "SIM-12"
         }
       ],
       "sourceIds": [
@@ -1414,7 +1391,8 @@
         "B-02",
         "B-03",
         "B-14",
-        "B-26"
+        "B-26",
+        "F-08"
       ]
     }
   ]

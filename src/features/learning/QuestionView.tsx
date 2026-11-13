@@ -31,6 +31,7 @@ export function QuestionView({
 
   switch (question.type) {
     case 'single':
+    case 'reflection':
       return (
         <RadioGroup
           name={name}

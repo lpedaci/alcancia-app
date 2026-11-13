@@ -5,6 +5,7 @@ import { DEMO_TODAY } from '@/app/config';
 import { MoneyInput } from '@/components/money/MoneyInput';
 import { MoneyText } from '@/components/money/MoneyText';
 import { Button } from '@/components/ui/Button';
+import { SourceList } from '@/features/learning/SourceList';
 import { Icon } from '@/components/ui/Icon';
 import { IconTile } from '@/components/ui/IconTile';
 import { InlineAlert } from '@/components/ui/InlineAlert';
@@ -260,9 +261,8 @@ function PracticeWallet({ run, fresh }: { run: MissionRun; fresh: boolean }) {
 }
 
 function Sources({ ids }: { ids?: string[] }) {
-  const { t } = useTranslation();
   if (!ids?.length) return null;
-  return <p className="text-body-small text-on-surface-variant">{t('wallet.mission.sources', { ids: ids.join(', ') })}</p>;
+  return <SourceList codes={ids} legal={false} />;
 }
 
 function StepBody({

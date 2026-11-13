@@ -23,6 +23,8 @@ interface Base {
 }
 export type LearningQuestion =
   | (Base & { type: 'single'; options: Option[]; correctOptionIds: string[] })
+  /** "Antes de empezar" about the person's own experience: no right answer, never scored nor stored (review of 13/11/2026). */
+  | (Base & { type: 'reflection'; options: Option[] })
   | (Base & { type: 'multiple'; options: Option[]; correctOptionIds: string[] })
   | (Base & { type: 'true_false_why'; options: Option[]; correctOptionIds: string[]; why: { prompt: string; options: Option[]; correct: string } })
   | (Base & { type: 'numeric'; numeric: { answer: string; tolerance: string; unit: 'ARS' | 'percent' | 'months' }; help: string })
@@ -34,7 +36,9 @@ export type LearningQuestion =
 export type Answer = string | string[] | Record<string, string>;
 
 export type GuideBlock =
-  | { type: 'hook' | 'objective' | 'takeaway'; body: string }
+  | { type: 'hook' | 'objective'; body: string }
+  /** "Para tu vida", optionally with the tool to try it (its name is in the text, never its code). */
+  | { type: 'takeaway'; body: string; toolId?: string }
   | { type: 'text'; title: string; body: string }
   | { type: 'example'; title: string; steps: string[] }
   | { type: 'recall' | 'practice'; question: LearningQuestion };
@@ -80,6 +84,7 @@ export function isAnswered(question: LearningQuestion, answer: Answer | undefine
   if (answer === undefined) return false;
   switch (question.type) {
     case 'single':
+    case 'reflection':
       return typeof answer === 'string' && answer !== '';
     case 'multiple':
       return Array.isArray(answer) && answer.length > 0;
@@ -101,6 +106,8 @@ export function isAnswered(question: LearningQuestion, answer: Answer | undefine
 export function isCorrect(question: LearningQuestion, answer: Answer | undefined): boolean {
   if (!isAnswered(question, answer)) return false;
   switch (question.type) {
+    case 'reflection':
+      return true;
     case 'single':
       return question.correctOptionIds[0] === answer;
     case 'multiple': {
@@ -126,7 +133,7 @@ export function isCorrect(question: LearningQuestion, answer: Answer | undefined
 
 /** The explanation for this answer: per option for single choice, right or wrong for the rest. */
 export function feedbackFor(question: LearningQuestion, answer: Answer | undefined): string {
-  if (question.type === 'single' && typeof answer === 'string' && question.feedback[answer]) return question.feedback[answer];
+  if ((question.type === 'single' || question.type === 'reflection') && typeof answer === 'string' && question.feedback[answer]) return question.feedback[answer];
   return isCorrect(question, answer) ? (question.feedback.correct ?? '') : (question.feedback.incorrect ?? '');
 }
 

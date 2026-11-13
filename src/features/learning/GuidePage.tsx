@@ -19,6 +19,7 @@ import { useDataStore } from '@/store/data-store';
 import { useCurrentUser } from '@/store/session-store';
 import type { GuideProgress } from '@/types/domain';
 import { CheckButton, QuestionView } from './QuestionView';
+import { SourceList } from './SourceList';
 import { type Answer, feedbackFor, type Guide, type GuideBlock, guideById, isAnswered, isCorrect, moduleById } from './questions';
 
 /**
@@ -249,7 +250,10 @@ function GuideReader({ guide }: { guide: Guide }) {
               );
             })}
           </ol>
-          <p className="border-t border-outline-variant pt-4 text-body-small text-on-surface-variant">{t('learn.guide.sources', { ids: guide.sourceIds.join(', ') })}</p>
+          <SourceList
+            className="border-t border-outline-variant pt-4"
+            codes={[...guide.sourceIds, ...guide.blocks.flatMap((b) => (b.type === 'recall' || b.type === 'practice' ? b.question.sourceIds : []))]}
+          />
         </aside>
       </div>
     </WalletShell>
@@ -336,6 +340,11 @@ function Block({
             <Icon name="event_available" className="mt-0.5 shrink-0" />
             <p className="text-body-large">{capitalize(block.body.replace(/^Para tu vida:\s*/, ''))}</p>
           </div>
+          {block.toolId && (
+            <Button asChild variant="tonal" leadingIcon="calculate" className="self-start">
+              <Link to={`/app/tools/${block.toolId}`}>{t('learn.guide.openTool', { name: block.toolId === 'SIM-3' ? t('sim3.title') : t(`sims.${block.toolId}.title`) })}</Link>
+            </Button>
+          )}
         </>
       );
     case 'recall':
