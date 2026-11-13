@@ -2401,7 +2401,22 @@
     "instruments": {
       "title": "Instrumentos de ejemplo",
       "intro": "Cada uno con su ficha: riesgo, liquidez y moneda. Ninguno es una recomendación.",
-      "perUnit": "por unidad, hoy"
+      "perUnit": "por unidad, hoy",
+      "howTitle": "Cómo leer la ficha",
+      "how": {
+        "risk": {
+          "title": "Riesgo",
+          "body": "Cuánto puede subir o bajar el precio. A más riesgo, más puede variar en el camino."
+        },
+        "liquidity": {
+          "title": "Liquidez",
+          "body": "Cuándo puedes tener el dinero si vendes o rescatas: en el día, en contado inmediato o a 24 horas."
+        },
+        "currency": {
+          "title": "Moneda",
+          "body": "En qué moneda lo pagas y en cuál está el activo. Un CEDEAR se paga en pesos, pero sigue a un activo en dólares."
+        }
+      }
     },
     "open": {
       "title": "Abre tu cuenta comitente de práctica",
@@ -2438,7 +2453,16 @@
       "total": "Valor total",
       "cash": "Disponible para invertir",
       "result": "Resultado frente a lo pagado",
-      "paperLoss": "Tu inversión vale menos de lo que pagaste. Mientras no vendas, es una pérdida en el papel: si no necesitas ese dinero y tienes tu fondo de emergencia, puedes esperar."
+      "paperLoss": "Tu inversión vale menos de lo que pagaste. Mientras no vendas, es una pérdida en el papel: si no necesitas ese dinero y tienes tu fondo de emergencia, puedes esperar.",
+      "data": "Datos de la cuenta",
+      "opened": "Abierta el {{date}}",
+      "trades_one": "{{count}} operación",
+      "trades_other": "{{count}} operaciones",
+      "invested": "Invertido, a precio de hoy",
+      "split": "Cómo se reparte tu cuenta",
+      "splitInvested": "Invertido: {{value}}",
+      "splitCash": "Disponible: {{value}}",
+      "custodyNote": "En la vida real, lo que compras con un agente registrado queda en una subcuenta comitente a tu nombre en Caja de Valores, y puedes consultarla en sus canales. Acá es una subcuenta de práctica."
     },
     "holdings": {
       "title": "Tu tenencia",
@@ -2448,7 +2472,9 @@
       "units_other": "{{count}} unidades",
       "paid": "Pagaste {{amount}}",
       "pending_one": "{{count}} se acredita mañana",
-      "pending_other": "{{count}} se acreditan mañana"
+      "pending_other": "{{count}} se acreditan mañana",
+      "seeCedear": "Ver el CEDEAR de ejemplo",
+      "mission": "Comprar con la misión"
     },
     "transfer": {
       "title": "Mover dinero con tu billetera",
@@ -2522,6 +2548,14 @@
       "amount_not_positive": "Escribe un monto mayor que cero.",
       "no_brokerage": "Primero abre tu cuenta comitente de práctica.",
       "unknown_instrument": "No encontramos ese instrumento."
+    },
+    "trades": {
+      "title": "Últimas operaciones",
+      "empty": "Todavía no hay operaciones. Cuando compres o vendas, aparecen acá con su fecha, su plazo y su total.",
+      "buy_one": "Compra · {{count}} unidad",
+      "buy_other": "Compra · {{count}} unidades",
+      "sell_one": "Venta · {{count}} unidad",
+      "sell_other": "Venta · {{count}} unidades"
     }
   }
 }
