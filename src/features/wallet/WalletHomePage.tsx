@@ -56,6 +56,8 @@ const MOVEMENT_ICON: Record<WalletMovement['type'], IconName> = {
   pocket_in: 'savings',
   pocket_out: 'savings',
   loan: 'request_quote',
+  card_payment: 'credit_card',
+  installment: 'shopping_bag',
 };
 
 const card = 'flex min-w-0 flex-col gap-3 rounded-xl border border-outline-variant bg-surface-container-lowest p-(--space-card-padding)';
@@ -179,7 +181,7 @@ export function WalletHomePage() {
         {wallet.pendingDebit && (
           <InlineAlert tone="warning" live="alert">
             {t('wallet.home.time.pending', {
-              name: t(`wallet.expenses.${wallet.pendingDebit.expenseKey}`),
+              name: wallet.pendingDebit.expenseKey ? t(`wallet.expenses.${wallet.pendingDebit.expenseKey}`) : (wallet.pendingDebit.counterparty ?? ""),
               amount: formatMoney(wallet.pendingDebit.amount),
             })}
           </InlineAlert>

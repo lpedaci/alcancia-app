@@ -162,7 +162,7 @@ function MissionRunner({ def }: { def: MissionDef & { steps: MissionStep[] } }) 
     recordMission(personId, def.id, DEMO_TODAY);
   };
 
-  const fuerteMessage = run.finished ? t('wallet.mission.fuerteDone') : (step.fuerte ?? fuerteDefault);
+  const fuerteMessage = run.finished ? t('wallet.mission.fuerteDone') : (step.fuerte ? fillText(step.fuerte, run) : fuerteDefault);
 
   return (
     <WalletShell section={t('wallet.nav.learn')} fuerte={{ state: run.finished ? 'celebration' : step.kind === 'single' ? 'thinking' : 'neutral', message: fuerteMessage }}>
@@ -301,7 +301,7 @@ function StepBody({
         <>
           <IconTile icon={step.kind === 'event' ? 'notifications' : 'lightbulb'} tone={step.kind === 'event' ? 'warning' : 'tertiary'} />
           {title(step.title)}
-          <p className="max-w-prose text-body-large text-on-surface">{step.body}</p>
+          <p className="max-w-prose text-body-large text-on-surface">{fillText(step.body, run)}</p>
           <Sources ids={step.sourceIds} />
           {step.kind === 'card' && !result?.done && (
             <Button variant="tonal" className="self-start" leadingIcon="check" onClick={() => onAnswer()}>
@@ -333,14 +333,14 @@ function StepBody({
       return (
         <form noValidate onSubmit={submit} className="flex flex-col gap-4">
           {step.kind === 'single' && step.title ? title(step.title) : title(step.kind === 'single' ? t('wallet.mission.questionTitle') : t('wallet.mission.decisionTitle'))}
-          {step.kind === 'single' && step.body && <p className="max-w-prose text-body-large text-on-surface">{step.body}</p>}
+          {step.kind === 'single' && step.body && <p className="max-w-prose text-body-large text-on-surface">{fillText(step.body, run)}</p>}
           <RadioGroup
             name={`${def.id}-${step.id}`}
-            legend={step.prompt}
+            legend={fillText(step.prompt, run)}
             required
             disabled={locked}
             error={tried && !choice ? t('wallet.mission.choose') : undefined}
-            options={step.options.map((o) => ({ value: o.id, label: o.text }))}
+            options={step.options.map((o) => ({ value: o.id, label: fillText(o.text, run) }))}
             value={choice}
             onChange={(e) => setChoice(e.target.value)}
           />
@@ -363,7 +363,7 @@ function StepBody({
         <form noValidate onSubmit={submit} className="flex flex-col gap-4">
           {title(t('wallet.mission.calcTitle'))}
           <MoneyInput
-            label={step.prompt}
+            label={fillText(step.prompt, run)}
             helperText={step.help}
             required
             disabled={result?.correct}
@@ -401,7 +401,7 @@ function StepBody({
         <form noValidate onSubmit={submit} className="flex flex-col gap-4">
           {title(t('wallet.mission.classifyTitle'))}
           <fieldset className="flex flex-col gap-3" disabled={result?.correct}>
-            <legend className="mb-1 text-title-small text-on-surface">{step.prompt}</legend>
+            <legend className="mb-1 text-title-small text-on-surface">{fillText(step.prompt, run)}</legend>
             {step.items.map((item) => (
               <Select
                 key={item.id}

@@ -1,10 +1,27 @@
+import Decimal from 'decimal.js';
 import scenarios from '@/data/scenarios.json';
-import { D, type Decimal, dailyYield, emergencyMonths, ONE, roundCents, toMoneyString, ZERO } from '@/lib/finance';
+import {
+  annualCostRate,
+  annualInflation,
+  D,
+  dailyYield,
+  effectiveAnnualRate,
+  emergencyMonths,
+  financedStatement,
+  frenchInstallment,
+  isHighRateDebt,
+  ONE,
+  remainingPrincipal,
+  roundCents,
+  toMoneyString,
+  ZERO,
+} from '@/lib/finance';
 import { EMPLOYER, EXPENSE_DEFS, EXPENSES_START, SALARY_START } from './profile';
 import type {
   BudgetCategory,
   ExpenseAmounts,
   ExpenseKey,
+  InstallmentPlan,
   MonthSummary,
   MovementType,
   Pocket,
@@ -88,7 +105,7 @@ function partOf(total: string, parts: number, index: number): Decimal {
 }
 
 /** Money that leaves for spending: scheduled debits and the person's own payments (not pockets). */
-const SPENDING: MovementType[] = ['transfer_out', 'qr_payment', 'bill', 'loan'];
+const SPENDING: MovementType[] = ['transfer_out', 'qr_payment', 'bill', 'loan', 'card_payment', 'installment'];
 
 export interface MonthBreakdown {
   month: number;
@@ -195,25 +212,97 @@ function processDay(state: WalletState): boolean {
     addMovement(state, { type: 'income', amount: D(state.salary), counterparty: EMPLOYER, suggestedCategory: undefined });
   }
 
+  closeDueStatement(state);
+  if (!chargeDebits(state, debitsOf(state, dom))) return false;
+
+  if (dom === DAYS_IN_MONTH) closeMonth(state, month);
+  return true;
+}
+
+interface Debit {
+  /** `expense:<key>` or `plan:<id>`, to resume from it when it could not be charged. */
+  id: string;
+  type: MovementType;
+  amount: Decimal;
+  counterparty: string;
+  expenseKey?: ExpenseKey;
+  planId?: string;
+  category?: BudgetCategory;
+}
+
+/** Scheduled debits of a day of the month, in order: the profile's expenses, then installments. */
+function debitsOf(state: WalletState, dom: number): Debit[] {
+  const debits: Debit[] = [];
   for (const def of EXPENSE_DEFS) {
     const index = def.days.indexOf(dom);
     if (index === -1) continue;
     if (def.key === 'subscription' && !state.subscriptionActive) continue;
-    const amount = partOf(state.expenses[def.key], def.days.length, index);
-    if (D(state.balance).lt(amount)) {
-      state.pendingDebit = { expenseKey: def.key, amount: toMoneyString(amount), day };
+    debits.push({
+      id: `expense:${def.key}`,
+      type: def.type,
+      amount: partOf(state.expenses[def.key], def.days.length, index),
+      counterparty: def.counterparty,
+      expenseKey: def.key,
+      category: def.category,
+    });
+  }
+  for (const plan of state.plans ?? []) {
+    if (plan.closed || plan.paid >= plan.count || plan.dayOfMonth !== dom || state.day <= plan.startDay) continue;
+    debits.push({
+      id: `plan:${plan.id}`,
+      type: plan.kind === 'loan' ? 'loan' : 'installment',
+      amount: D(plan.installment),
+      counterparty: `${plan.counterparty} · cuota ${plan.paid + 1} de ${plan.count}`,
+      planId: plan.id,
+      category: plan.kind === 'loan' ? 'needs' : 'wants',
+    });
+  }
+  return debits;
+}
+
+/** Charges debits in order; stops at the first one the balance cannot cover (it never goes negative). */
+function chargeDebits(state: WalletState, debits: Debit[]): boolean {
+  for (const debit of debits) {
+    if (D(state.balance).lt(debit.amount)) {
+      state.pendingDebit = {
+        expenseKey: debit.expenseKey,
+        planId: debit.planId,
+        counterparty: debit.counterparty,
+        amount: toMoneyString(debit.amount),
+        day: state.day,
+      };
       return false;
     }
     addMovement(state, {
-      type: def.type,
-      amount: amount.neg(),
-      counterparty: def.counterparty,
-      expenseKey: def.key,
-      suggestedCategory: def.category,
+      type: debit.type,
+      amount: debit.amount.neg(),
+      counterparty: debit.counterparty,
+      expenseKey: debit.expenseKey,
+      suggestedCategory: debit.category,
     });
+    if (debit.planId) {
+      const plan = state.plans?.find((p) => p.id === debit.planId);
+      if (plan) plan.paid += 1;
+    }
   }
+  return true;
+}
 
-  if (dom === DAYS_IN_MONTH) closeMonth(state, month);
+/**
+ * A pending debit is charged as soon as the balance covers it (for example, after taking money out
+ * of a pocket), together with the rest of that day's debits and the month close if it was day 30.
+ */
+function resumePending(state: WalletState): boolean {
+  const pending = state.pendingDebit;
+  if (!pending) return true;
+  if (D(state.balance).lt(pending.amount)) return false;
+  const dom = dayOfMonth(pending.day);
+  const debits = debitsOf(state, dom);
+  const id = pending.planId ? `plan:${pending.planId}` : `expense:${pending.expenseKey}`;
+  const from = Math.max(0, debits.findIndex((d) => d.id === id));
+  state.pendingDebit = undefined;
+  if (!chargeDebits(state, debits.slice(from))) return false;
+  if (dom === DAYS_IN_MONTH) closeMonth(state, monthOf(pending.day));
   return true;
 }
 
@@ -222,8 +311,15 @@ const clone = (state: WalletState): WalletState => structuredClone(state);
 /** "Avanzar un día / una semana" and replays: processes n days, stopping at a pending debit. */
 export function advanceDays(state: WalletState, days: number): WalletState {
   const next = clone(state);
-  if (next.pendingDebit) return next;
+  if (!resumePending(next)) return next;
   for (let i = 0; i < days; i += 1) if (!processDay(next)) break;
+  return next;
+}
+
+/** Charges a pending debit now, if the balance covers it, without moving the day. */
+export function retryPendingDebit(state: WalletState): WalletState {
+  const next = clone(state);
+  resumePending(next);
   return next;
 }
 
@@ -396,6 +492,228 @@ export function setDailyLimit(state: WalletState, amount: string | undefined): W
   return next;
 }
 
+// ---------- Credit (level 5, section 9) ----------
+
+export const CARD_LIMIT = '1500000.00';
+export const CARD_FIRST_STATEMENT = '240000.00';
+export const CARD_MINIMUM_RATE = '0.1';
+export const CARD_NAME = 'Tarjeta Alcancía de práctica';
+
+const minimumOf = (total: Decimal) => roundCents(total.times(CARD_MINIMUM_RATE));
+/** First day after `day` that is day 10 of a simulated month (the card's due date). */
+const nextDueDay = (day: number) => {
+  let d = day + 1;
+  while (dayOfMonth(d) !== 10) d += 1;
+  return d;
+};
+
+/**
+ * The practice card arrives when level 5 opens (D-112): a statement already issued for $ 240.000 of
+ * last month's purchases, due on day 10, minimum 10 %, at the scenario's card TNA.
+ */
+export function openPracticeCard(state: WalletState): WalletState {
+  if (state.card) return state;
+  const next = clone(state);
+  const total = D(CARD_FIRST_STATEMENT);
+  next.card = {
+    limit: CARD_LIMIT,
+    tna: scenarioOf(next).exampleRates.card,
+    statement: { total: toMoneyString(total), minimum: toMoneyString(minimumOf(total)), paid: '0.00', dueDay: nextDueDay(Math.max(0, next.day)), financed: false },
+    paidInFull: 0,
+  };
+  return next;
+}
+
+/** What is left to pay of the current statement. */
+export function statementLeft(state: WalletState): Decimal {
+  const statement = state.card?.statement;
+  return statement ? Decimal.max(ZERO, D(statement.total).minus(statement.paid)) : ZERO;
+}
+
+/** Pays part or all of the statement from the balance (5.3 Ofertas, SIM-7). */
+export function payCard(state: WalletState, amount: string): WalletState {
+  const value = roundCents(amount);
+  if (value.lte(0)) throw new WalletError('amount_not_positive');
+  if (!state.card?.statement) throw new WalletError('nothing_to_pay');
+  if (value.gt(statementLeft(state))) throw new WalletError('more_than_due');
+  if (D(state.balance).lt(value)) throw new WalletError('insufficient_balance');
+  const next = clone(state);
+  addMovement(next, { type: 'card_payment', amount: value.neg(), counterparty: `${CARD_NAME} · pago del resumen`, suggestedCategory: 'needs' });
+  const statement = next.card!.statement!;
+  statement.paid = toMoneyString(D(statement.paid).plus(value));
+  return next;
+}
+
+/** When the due day passes: paid in full clears the card; otherwise the rest is financed (F-31). */
+function closeDueStatement(state: WalletState) {
+  const card = state.card;
+  const statement = card?.statement;
+  if (!card || !statement || state.day <= statement.dueDay) return;
+  const left = D(statement.total).minus(statement.paid);
+  if (left.lte(0)) {
+    card.statement = undefined;
+    card.paidInFull += 1;
+    return;
+  }
+  const total = financedStatement({ carried: left, tna: card.tna });
+  card.statement = {
+    total: toMoneyString(total),
+    minimum: toMoneyString(minimumOf(total)),
+    paid: '0.00',
+    dueDay: statement.dueDay + DAYS_IN_MONTH,
+    financed: true,
+    belowMinimum: D(statement.paid).lt(statement.minimum),
+  };
+}
+
+/** The loan offer of level 5 (mission 5 and P7): example amounts, the scenario's TNA, a commission. */
+export const LOAN_PRINCIPAL = '600000.00';
+export const LOAN_MONTHS = 24;
+export const LOAN_COMMISSION_RATE = '0.05';
+export const LOAN_LENDER = 'Financiera de Ejemplo S.A.';
+
+export function loanOffer(state: Pick<WalletState, 'scenarioId'>) {
+  const tna = scenarioOf(state).exampleRates.personalLoan;
+  const principal = D(LOAN_PRINCIPAL);
+  const commission = roundCents(principal.times(LOAN_COMMISSION_RATE));
+  const installment = frenchInstallment({ principal, tna, months: LOAN_MONTHS });
+  const received = principal.minus(commission);
+  return {
+    principal,
+    months: LOAN_MONTHS,
+    tna,
+    tea: ONE.plus(D(tna).div(12)).pow(12).minus(1),
+    commission,
+    received,
+    installment,
+    total: installment.times(LOAN_MONTHS),
+    cft: annualCostRate({ received, installment, months: LOAN_MONTHS }),
+  };
+}
+
+/** Accepts the loan: the principal is credited, the commission charged, the installments scheduled. */
+export function acceptLoan(state: WalletState): WalletState {
+  if ((state.plans ?? []).some((p) => p.kind === 'loan' && !p.closed && p.paid < p.count)) throw new WalletError('loan_active');
+  const offer = loanOffer(state);
+  const next = clone(state);
+  next.seq += 1;
+  const plan: InstallmentPlan = {
+    id: `loan-${next.seq}`,
+    kind: 'loan',
+    counterparty: LOAN_LENDER,
+    principal: toMoneyString(offer.principal),
+    tna: offer.tna,
+    cft: offer.cft.toFixed(4),
+    installment: toMoneyString(offer.installment),
+    count: offer.months,
+    paid: 0,
+    dayOfMonth: dayOfMonth(Math.max(1, next.day)),
+    startDay: next.day,
+  };
+  next.plans = [...(next.plans ?? []), plan];
+  addMovement(next, { type: 'loan', amount: offer.principal, counterparty: `${LOAN_LENDER} · préstamo acreditado` });
+  addMovement(next, { type: 'loan', amount: offer.commission.neg(), counterparty: `${LOAN_LENDER} · comisión de otorgamiento`, suggestedCategory: 'needs' });
+  return next;
+}
+
+/** The installment offer of level 5 (F-10): 12 installments without interest or 15 % off in cash. */
+export const PURCHASE_OFFER = { item: 'Auriculares inalámbricos', merchant: 'Electro Norte (comercio ficticio)', price: '120000.00', months: 12, cashDiscount: '0.15' };
+
+export function buyInInstallments(state: WalletState): WalletState {
+  const next = clone(state);
+  next.seq += 1;
+  next.plans = [
+    ...(next.plans ?? []),
+    {
+      id: `purchase-${next.seq}`,
+      kind: 'purchase',
+      counterparty: `${PURCHASE_OFFER.merchant}, ${PURCHASE_OFFER.item.toLowerCase()}`,
+      principal: PURCHASE_OFFER.price,
+      tna: '0',
+      installment: toMoneyString(frenchInstallment({ principal: PURCHASE_OFFER.price, tna: '0', months: PURCHASE_OFFER.months })),
+      count: PURCHASE_OFFER.months,
+      paid: 0,
+      dayOfMonth: dayOfMonth(Math.max(1, next.day)),
+      startDay: next.day,
+    },
+  ];
+  return next;
+}
+
+export function buyInCash(state: WalletState): WalletState {
+  const price = roundCents(D(PURCHASE_OFFER.price).times(ONE.minus(PURCHASE_OFFER.cashDiscount)));
+  if (D(state.balance).lt(price)) throw new WalletError('insufficient_balance');
+  const next = clone(state);
+  addMovement(next, { type: 'qr_payment', amount: price.neg(), counterparty: `${PURCHASE_OFFER.merchant}, ${PURCHASE_OFFER.item.toLowerCase()} de contado`, suggestedCategory: 'wants' });
+  return next;
+}
+
+/** What is still owed of a plan: the remaining principal of a loan, or the installments left. */
+export function planLeft(plan: InstallmentPlan): Decimal {
+  if (plan.closed) return ZERO;
+  return remainingPrincipal({ installment: plan.installment, tna: plan.tna, remaining: plan.count - plan.paid });
+}
+
+/** Pays a plan off early from the balance ("Sal de tus deudas"): only the remaining principal. */
+export function payOffPlan(state: WalletState, planId: string): WalletState {
+  const plan = state.plans?.find((p) => p.id === planId);
+  if (!plan || plan.closed || plan.paid >= plan.count) throw new WalletError('nothing_to_pay');
+  const amount = planLeft(plan);
+  if (D(state.balance).lt(amount)) throw new WalletError('insufficient_balance');
+  const next = clone(state);
+  next.plans!.find((p) => p.id === planId)!.closed = true;
+  addMovement(next, {
+    type: plan.kind === 'loan' ? 'loan' : 'installment',
+    amount: amount.neg(),
+    counterparty: `${plan.counterparty} · cancelación anticipada`,
+    suggestedCategory: plan.kind === 'loan' ? 'needs' : 'wants',
+  });
+  if (next.pendingDebit?.planId === planId) next.pendingDebit = undefined;
+  return next;
+}
+
+export interface ActiveDebt {
+  id: string;
+  kind: 'card' | 'loan' | 'purchase';
+  name: string;
+  /** What is owed today. */
+  balance: Decimal;
+  tna: Decimal;
+  /** Effective annual rate, compared with the scenario's annual inflation (D-113). */
+  tea: Decimal;
+  monthlyPayment: Decimal;
+  highRate: boolean;
+}
+
+/**
+ * Debts of the simulation (section 9): a financed card statement, active loans and purchases in
+ * installments. A statement not yet due is not a debt; installments without interest are not high rate.
+ */
+export function activeDebts(state: WalletState): ActiveDebt[] {
+  const inflation = annualInflation(scenarioOf(state).monthlyInflation);
+  const debts: ActiveDebt[] = [];
+  const statement = state.card?.statement;
+  if (state.card && statement?.financed && statementLeft(state).gt(0)) {
+    const tea = effectiveAnnualRate(state.card.tna, 30);
+    debts.push({ id: 'card', kind: 'card', name: CARD_NAME, balance: statementLeft(state), tna: D(state.card.tna), tea, monthlyPayment: D(statement.minimum), highRate: isHighRateDebt(tea, inflation) });
+  }
+  for (const plan of state.plans ?? []) {
+    if (plan.closed || plan.paid >= plan.count) continue;
+    const tea = ONE.plus(D(plan.tna).div(12)).pow(12).minus(1);
+    debts.push({
+      id: plan.id,
+      kind: plan.kind,
+      name: plan.counterparty,
+      balance: planLeft(plan),
+      tna: D(plan.tna),
+      tea,
+      monthlyPayment: D(plan.installment),
+      highRate: D(plan.tna).gt(0) && isHighRateDebt(tea, inflation),
+    });
+  }
+  return debts;
+}
+
 // ---------- Reading ----------
 
 export const CATEGORIZABLE: MovementType[] = ['transfer_out', 'qr_payment', 'bill'];
@@ -418,8 +736,7 @@ export function walletMetrics(state: WalletState): WalletMetrics {
     months_closed_green: state.monthSummaries.filter((s) => s.green).length,
     emergency_pocket: fund ? 1 : 0,
     emergency_months: fund ? emergencyMonths(fund.amount, essentialMonthlyExpenses(state)).toFixed(1) : '0.0',
-    // No debts exist before level 5 (credit arrives in step 8, wallet-engine.md section 9).
-    high_rate_debt: 0,
+    high_rate_debt: activeDebts(state).filter((d) => d.highRate).length,
   };
 }
 
@@ -430,3 +747,8 @@ export function purchasingPowerToday(state: WalletState): Decimal {
 }
 
 export type { ExpenseKey };
+
+/** Annual inflation of the wallet's scenario, the line between a high-rate debt and one that is not (D-113). */
+export function annualInflationOf(state: Pick<WalletState, 'scenarioId'>): Decimal {
+  return annualInflation(scenarioOf(state).monthlyInflation);
+}

@@ -713,14 +713,274 @@
       "levelId": "level-5",
       "title": "El préstamo tentador",
       "minutes": 5,
-      "objective": "Encontrar el CFT de una oferta preaprobada y calcular su costo total antes de decidir."
+      "objective": "Encontrar el CFT de una oferta preaprobada y calcular su costo total antes de decidir.",
+      "initial": "salary",
+      "steps": [
+        {
+          "id": "offer",
+          "kind": "card",
+          "title": "Una oferta preaprobada",
+          "body": "Te llega una oferta de la Financiera de Ejemplo S.A. (ficticia): un préstamo preaprobado de {{loanPrincipal}} para lo que quieras, en 24 cuotas de solo {{installment}}. La cuota parece baja. Antes de decidir, veamos cuánto cuesta.",
+          "fuerte": "Ojo con esto: una cuota baja no te dice cuánto pagas en total."
+        },
+        {
+          "id": "number",
+          "kind": "single",
+          "prompt": "¿Qué dato de la oferta te dice cuánto cuesta de verdad el préstamo?",
+          "options": [
+            {
+              "id": "installment",
+              "text": "El valor de la cuota",
+              "feedback": "La cuota dice cuánto pagas por mes, no cuánto cuesta el préstamo. Busca el dato que suma la tasa, las comisiones y los cargos."
+            },
+            {
+              "id": "tna",
+              "text": "La tasa nominal anual (TNA)",
+              "feedback": "La TNA es solo la tasa: no incluye comisiones ni cargos. Busca el dato que los suma."
+            },
+            {
+              "id": "cft",
+              "text": "El costo financiero total (CFT)",
+              "feedback": "Correcto. El CFT suma a la tasa las comisiones y los cargos, y la entidad debe informarlo destacado. En esta oferta, la TNA es {{tna}} y el CFT, {{cft}}."
+            }
+          ],
+          "correct": "cft",
+          "sourceIds": [
+            "B-04"
+          ]
+        },
+        {
+          "id": "fine-print",
+          "kind": "card",
+          "title": "La letra chica",
+          "body": "Te prestan {{loanPrincipal}}, pero cobran una comisión de otorgamiento de {{commission}}: te acreditan {{loanReceived}}. Por eso el CFT ({{cft}}) es más alto que la TNA ({{tna}}).",
+          "sourceIds": [
+            "B-04"
+          ]
+        },
+        {
+          "id": "total",
+          "kind": "numeric",
+          "prompt": "¿Cuánto pagas en total si pagas las 24 cuotas de {{installment}}?",
+          "help": "Monto en pesos, por ejemplo: 900.000",
+          "expected": "loan_total",
+          "param": "24",
+          "tolerance": "1.00",
+          "hint": "Multiplica la cuota por la cantidad de cuotas: {{installment}} × 24 = {{expected}}. Prueba con ese monto.",
+          "feedback": "Correcto. Pagas {{amount}} para recibir {{loanReceived}}: {{loanExtra}} más de lo que te acreditan."
+        },
+        {
+          "id": "decide",
+          "kind": "decision",
+          "prompt": "¿Qué haces con la oferta?",
+          "options": [
+            {
+              "id": "accept",
+              "text": "La acepto",
+              "feedback": "Pasó lo mismo que en la vida real: tienes {{loanReceived}} hoy y una cuota de {{installment}} durante 24 meses. Es una deuda de tasa alta: mientras exista, Invertir no se abre.",
+              "action": "accept_loan"
+            },
+            {
+              "id": "wait",
+              "text": "Lo pienso 48 horas",
+              "feedback": "Buena idea: la regla de las 48 horas sirve también para el crédito. Si no tenías un uso para ese dinero, la oferta no resuelve nada."
+            },
+            {
+              "id": "decline",
+              "text": "La rechazo: no lo necesito",
+              "feedback": "Guardado. Un crédito sirve para algo que necesitas y puedes pagar. Sin un para qué, cuesta {{loanExtra}} de más."
+            }
+          ],
+          "sourceIds": [
+            "A-13",
+            "A-14"
+          ]
+        },
+        {
+          "id": "summary",
+          "kind": "summary"
+        }
+      ],
+      "criteria": [
+        {
+          "id": "cft",
+          "description": "Encontraste el dato que dice cuánto cuesta el préstamo (CFT)",
+          "check": "step_correct",
+          "param": "number"
+        },
+        {
+          "id": "total",
+          "description": "Calculaste cuánto pagas en total",
+          "check": "step_correct",
+          "param": "total"
+        },
+        {
+          "id": "decided",
+          "description": "Decidiste con los números a la vista",
+          "check": "step_done",
+          "param": "decide"
+        }
+      ]
     },
     {
       "id": "mission-debts",
       "levelId": "level-5",
       "title": "Sal de tus deudas",
       "minutes": 4,
-      "objective": "Elegir bola de nieve o avalancha y aplicar el plan."
+      "objective": "Ordenar deudas con bola de nieve y con avalancha, elegir un método y aplicarlo al dinero extra.",
+      "initial": "salary",
+      "steps": [
+        {
+          "id": "case",
+          "kind": "card",
+          "title": "Las deudas de Tomás",
+          "body": "Tomás, un compañero ficticio, tiene tres deudas: una tarjeta de $ 40.000 al 150 % anual (mínimo $ 4.000), una financiera de $ 15.000 al 110 % (mínimo $ 1.500) y un crédito bancario de $ 200.000 al 80 % (mínimo $ 10.000). Además de los mínimos, puede poner $ 20.000 por mes.",
+          "fuerte": "Ordenar las deudas es la mitad del trabajo. Ayudemos a Tomás.",
+          "sourceIds": [
+            "A-29"
+          ]
+        },
+        {
+          "id": "avalanche",
+          "kind": "single",
+          "prompt": "Con la avalancha, ¿a qué deuda va primero el dinero extra?",
+          "options": [
+            {
+              "id": "card",
+              "text": "La tarjeta, al 150 % anual",
+              "feedback": "Correcto. La avalancha ataca primero la tasa más alta: es el método que menos intereses paga."
+            },
+            {
+              "id": "fin",
+              "text": "La financiera, de $ 15.000",
+              "feedback": "Esa es la de menor saldo, la que elige la bola de nieve. La avalancha mira la tasa. Prueba de nuevo."
+            },
+            {
+              "id": "bank",
+              "text": "El crédito bancario, de $ 200.000",
+              "feedback": "Es la deuda más grande, pero no la más cara. La avalancha mira la tasa. Prueba de nuevo."
+            }
+          ],
+          "correct": "card",
+          "sourceIds": [
+            "A-28",
+            "A-29"
+          ]
+        },
+        {
+          "id": "snowball",
+          "kind": "single",
+          "prompt": "¿Y con la bola de nieve?",
+          "options": [
+            {
+              "id": "card",
+              "text": "La tarjeta, al 150 % anual",
+              "feedback": "Esa es la de tasa más alta, la que elige la avalancha. La bola de nieve mira el saldo. Prueba de nuevo."
+            },
+            {
+              "id": "fin",
+              "text": "La financiera, de $ 15.000",
+              "feedback": "Correcto. La bola de nieve ataca primero el saldo más chico; al saldarla, su mínimo se suma a la siguiente."
+            },
+            {
+              "id": "bank",
+              "text": "El crédito bancario, de $ 200.000",
+              "feedback": "Es el saldo más grande: la bola de nieve empieza por el más chico. Prueba de nuevo."
+            }
+          ],
+          "correct": "fin",
+          "sourceIds": [
+            "A-24",
+            "A-25"
+          ]
+        },
+        {
+          "id": "results",
+          "kind": "card",
+          "title": "Los dos planes, lado a lado",
+          "body": "Con la herramienta Bola de nieve o avalancha: con la avalancha, Tomás termina en 11 meses y paga $ 109.817,08 de intereses. Con la bola de nieve también termina en 11 meses, paga $ 111.507,88 de intereses y salda su primera deuda en el mes 1, en lugar del mes 2.",
+          "sourceIds": [
+            "A-30"
+          ]
+        },
+        {
+          "id": "method",
+          "kind": "decision",
+          "prompt": "¿Qué método le propones a Tomás?",
+          "options": [
+            {
+              "id": "avalanche",
+              "text": "La avalancha",
+              "feedback": "Guardado. La avalancha le ahorra $ 1.690,80 en intereses: es el método que menos paga."
+            },
+            {
+              "id": "snowball",
+              "text": "La bola de nieve",
+              "feedback": "Guardado. La bola de nieve le da una deuda saldada en el primer mes, que motiva a seguir. Paga $ 1.690,80 más de intereses."
+            }
+          ],
+          "sourceIds": [
+            "A-30"
+          ]
+        },
+        {
+          "id": "rule",
+          "kind": "single",
+          "prompt": "Un mes, a Tomás le sobran $ 30.000 en lugar de $ 20.000. ¿Qué hace con los $ 10.000 de más?",
+          "options": [
+            {
+              "id": "priority",
+              "text": "Los suma a la deuda prioritaria de su método",
+              "feedback": "Correcto. El plan funciona concentrando todo el extra en una deuda por vez, y pagando el mínimo de las demás."
+            },
+            {
+              "id": "split",
+              "text": "Los reparte entre las tres deudas",
+              "feedback": "Repartir diluye el efecto: el plan funciona concentrando el extra en una deuda por vez. Prueba de nuevo."
+            },
+            {
+              "id": "spend",
+              "text": "Paga solo los mínimos y gasta el resto",
+              "feedback": "Con solo los mínimos, las deudas tardan mucho más y cuestan más intereses. Prueba de nuevo."
+            }
+          ],
+          "correct": "priority",
+          "sourceIds": [
+            "A-24",
+            "A-28"
+          ]
+        },
+        {
+          "id": "summary",
+          "kind": "summary"
+        }
+      ],
+      "criteria": [
+        {
+          "id": "avalanche",
+          "description": "Ordenaste las deudas con la avalancha",
+          "check": "step_correct",
+          "param": "avalanche"
+        },
+        {
+          "id": "snowball",
+          "description": "Ordenaste las deudas con la bola de nieve",
+          "check": "step_correct",
+          "param": "snowball"
+        },
+        {
+          "id": "method",
+          "description": "Elegiste un método para el plan",
+          "check": "step_done",
+          "param": "method"
+        },
+        {
+          "id": "rule",
+          "description": "Aplicaste el plan al dinero extra",
+          "check": "step_correct",
+          "param": "rule"
+        }
+      ]
     },
     {
       "id": "mission-4",

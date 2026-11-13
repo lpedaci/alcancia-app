@@ -263,6 +263,21 @@ Detalle del motor en `wallet-engine.md`. Fórmulas:
 - Poder de compra con 3 % mensual: `1.024.953,66 / 1,03` = **$ 995.100,64**
 - Índice al día 15: `1,03^0,5` = 1,0148891565
 
+## 17. Crédito de la billetera (nivel 5)
+
+**F-29 · Cuota del sistema francés:** `c = P × i / (1 − (1 + i)^−n)`, con `i = TNA / 12` (convención habitual de los préstamos personales; la tarjeta usa `TNA × 30 / 365`, como SIM-7). Con tasa cero, `c = P / n`.
+- Caso: $ 600.000, TNA 55 %, 24 cuotas → `i = 0,0458333`; **c = $ 41.737,16**; total $ 1.001.691,84; intereses $ 401.691,84.
+- Capital que falta después de pagar: valor actual de las cuotas restantes, `c × (1 − (1 + i)^−r) / i`. Con las 24 cuotas pendientes da $ 600.000; con ninguna, $ 0.
+
+**F-30 · Costo financiero total como tasa efectiva anual (B-04):** la tasa mensual `r` que iguala lo que de verdad se recibe con el valor actual de las cuotas, `recibido = c × (1 − (1 + r)^−n) / r`, resuelta por bisección; `CFT = (1 + r)^12 − 1`. Las comisiones cuentan porque reducen lo que se recibe.
+- Caso: comisión del 5 % → se reciben $ 570.000; `r ≈ 0,05106`; **CFT ≈ 81,8 %**. Sin comisión, el resultado es la TEA del préstamo, `(1 + 0,55 / 12)^12 − 1 ≈ 71,2 %`.
+- Simplificación: la simulación no incluye IVA, seguros ni otros cargos, que en un CFT real sí cuentan.
+
+**F-31 · Resumen siguiente de la tarjeta:** lo que no se pagó al vencimiento se financia por 30 días, `financiado × (1 + TNA × 30 / 365)`, redondeado a centavos.
+- Caso: resumen de $ 240.000, se paga el mínimo de $ 24.000 → quedan $ 216.000; con TNA 60 %, **$ 226.652,05**, mínimo $ 22.665,21. La TEA de esa tarjeta es `(1 + 0,6 × 30 / 365)^(365 / 30) − 1 ≈ 79,6 %`, mayor que la inflación anual del escenario medio (42,6 %): es una deuda de tasa alta (D-113).
+
+**Caso del A-29 en la misión "Sal de tus deudas"** (`debtPayoff`, F-16 y F-17): tarjeta $ 40.000 al 150 % (mínimo $ 4.000), financiera $ 15.000 al 110 % (mínimo $ 1.500), crédito bancario $ 200.000 al 80 % (mínimo $ 10.000), $ 20.000 extra por mes. Avalancha: 11 meses, $ 109.817,08 de intereses, primera deuda saldada en el mes 2. Bola de nieve: 11 meses, $ 111.507,88, primera deuda en el mes 1. Diferencia: $ 1.690,80.
+
 ## 16. Métrica con umbral de privacidad
 
 **Regla (`metrics.ts`):** `aggregate(grupo)` devuelve "datos insuficientes" si `personas < privacyThreshold` (mínimo 5); si no, el valor agregado. Además, en una misma vista no se muestra un total y sus partes si al restar se pudiera deducir un grupo de menos de 5.
@@ -291,6 +306,9 @@ Detalle del motor en `wallet-engine.md`. Fórmulas:
 | F-24, F-25 | `budgetSplit(...)` | ver caso |
 | F-26 | motor de la billetera | $ 1.024.953,66 |
 | F-27 | `aggregate(...)` | ver caso |
+| F-29 | `frenchInstallment(...)` | $ 41.737,16 |
+| F-30 | `annualCostRate(...)` | 0,8178 (81,8 %) |
+| F-31 | `financedStatement(...)` | $ 226.652,05 |
 
 ## Referencias
 

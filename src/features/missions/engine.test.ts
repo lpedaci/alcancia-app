@@ -1,8 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { createWallet } from '@/features/wallet/engine/engine';
+import { activeDebts, createWallet, walletMetrics } from '@/features/wallet/engine/engine';
+import { debtPayoff } from '@/lib/finance';
 import { buildMariana, POCKET_SAVINGS } from '@/features/wallet/engine/demo';
 import {
   answerStep,
+  fillText,
   canContinue,
   criteriaStatus,
   currentStep,
@@ -27,9 +29,9 @@ function play(def: MissionDef, run: MissionRun, input?: string) {
 }
 
 describe('mission catalog (D-59, D-166)', () => {
-  it('has the 13 phase A missions; levels 0 to 4 are playable', () => {
+  it('has the 13 phase A missions; levels 0 to 5 are playable', () => {
     expect(MISSION_DEFS).toHaveLength(13);
-    expect(MISSION_DEFS.filter((m) => isPlayable(m)).map((m) => m.id)).toEqual(['mission-security', 'mission-1', 'mission-2', 'mission-3', 'mission-6', 'mission-7', 'mission-emergency-fund']);
+    expect(MISSION_DEFS.filter((m) => isPlayable(m)).map((m) => m.id)).toEqual(['mission-security', 'mission-1', 'mission-2', 'mission-3', 'mission-6', 'mission-7', 'mission-emergency-fund', 'mission-5', 'mission-debts']);
   });
 
   it('every playable mission ends with a summary and its criteria point to real steps', () => {
@@ -219,5 +221,72 @@ describe('mission "Crea tu fondo de emergencia" (step 7.4)', () => {
     expect(run.wallet.pockets.find((p) => p.isEmergencyFund)?.amount).toBe('256991.77');
     run = play(def, answerStep(def, run, 'stocks').run, 'liquid').run;
     expect(finishMission(def, run).finished).toBe(true);
+  });
+});
+
+describe('mission "El préstamo tentador" (step 8.3)', () => {
+  const def = missionById('mission-5')!;
+  const plain = (text?: string) => (text ?? '').replaceAll(String.fromCharCode(160), ' ');
+
+  it('fills the offer of the scenario, asks for the CFT and the total, and accepting creates a high-rate debt', () => {
+    let run = play(def, startMission(def, createWallet('p'))).run;
+    expect(plain(answerStep(def, run, 'tna').feedback?.text)).not.toContain('{{');
+    const cft = answerStep(def, run, 'cft');
+    expect(plain(cft.feedback?.text)).toContain('81,8 %');
+    run = play(def, cft.run).run;
+    run = play(def, run).run;
+    const wrong = answerStep(def, run, '41.737,16');
+    expect(plain(wrong.feedback?.text)).toContain('$ 1.001.691,84');
+    const right = answerStep(def, wrong.run, '1.001.691,84');
+    expect(plain(right.feedback?.text)).toContain('$ 431.691,84');
+    run = nextStep(def, right.run);
+    const accepted = answerStep(def, run, 'accept');
+    expect(walletMetrics(accepted.run.wallet).high_rate_debt).toBe(1);
+    // Changing your mind replays from before the loan.
+    const declined = answerStep(def, accepted.run, 'decline');
+    expect(activeDebts(declined.run.wallet)).toEqual([]);
+    expect(finishMission(def, nextStep(def, declined.run)).finished).toBe(true);
+  });
+});
+
+describe('mission "Sal de tus deudas" (step 8.3)', () => {
+  const def = missionById('mission-debts')!;
+
+  it('its numbers are the ones SIM-9 gives for the A-29 case', () => {
+    const debts = [
+      { id: 'card', name: 'Tarjeta', balance: '40000', tna: '1.5', minimumPayment: '4000' },
+      { id: 'fin', name: 'Financiera', balance: '15000', tna: '1.1', minimumPayment: '1500' },
+      { id: 'bank', name: 'Crédito bancario', balance: '200000', tna: '0.8', minimumPayment: '10000' },
+    ];
+    const snow = debtPayoff({ debts, extra: '20000', method: 'snowball' });
+    const aval = debtPayoff({ debts, extra: '20000', method: 'avalanche' });
+    expect([snow.months, snow.totalInterest.toFixed(2), snow.paidOff[0]]).toEqual([11, '111507.88', { id: 'fin', name: 'Financiera', month: 1 }]);
+    expect([aval.months, aval.totalInterest.toFixed(2), aval.paidOff[0]?.month]).toEqual([11, '109817.08', 2]);
+    expect(snow.totalInterest.minus(aval.totalInterest).toFixed(2)).toBe('1690.80');
+  });
+
+  it('is completed by ordering with both methods, choosing one and applying it', () => {
+    let run = play(def, startMission(def, createWallet('p'))).run;
+    run = play(def, answerStep(def, run, 'fin').run, 'card').run;
+    run = play(def, run, 'fin').run;
+    run = play(def, run).run;
+    run = play(def, run, 'snowball').run;
+    run = play(def, answerStep(def, run, 'split').run, 'priority').run;
+    expect(criteriaStatus(def, run).every((c) => c.met)).toBe(true);
+  });
+});
+
+describe('mission texts', () => {
+  it('every text shown on screen is filled in: no {{placeholder}} is left', () => {
+    for (const def of MISSION_DEFS.filter((m) => isPlayable(m))) {
+      const run = startMission(def, createWallet('p'));
+      for (const step of def.steps!) {
+        const texts = Object.entries(step)
+          .filter(([key, value]) => typeof value === 'string' && ['title', 'body', 'prompt', 'instruction', 'fuerte'].includes(key))
+          .map(([, value]) => value as string);
+        if ('options' in step) texts.push(...step.options.flatMap((o) => [o.text, o.feedback]));
+        for (const text of texts) expect(fillText(text, run), `${def.id}/${step.id}`).not.toContain('{{');
+      }
+    }
   });
 });

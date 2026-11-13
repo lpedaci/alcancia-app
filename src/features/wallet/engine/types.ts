@@ -16,7 +16,12 @@ export type MovementType =
   | 'yield'
   | 'pocket_in'
   | 'pocket_out'
-  | 'loan';
+  /** Loan: the disbursement (positive), its commission and each installment (negative). */
+  | 'loan'
+  /** Payment of the practice card's statement (level 5). */
+  | 'card_payment'
+  /** Installment of a purchase in installments (level 5). */
+  | 'installment';
 
 export interface WalletMovement {
   id: string;
@@ -75,6 +80,51 @@ export interface MonthSummary {
   green: boolean;
 }
 
+/** Statement of the practice card (wallet-engine.md, section 9). */
+export interface CardStatement {
+  total: MoneyString;
+  minimum: MoneyString;
+  paid: MoneyString;
+  /** Absolute simulated day; whatever is unpaid when it passes is financed. */
+  dueDay: number;
+  /** It carries a balance that was not paid in full: that is debt with interest. */
+  financed: boolean;
+  /** The previous statement was paid below the minimum (late payment in a real card, B-06). */
+  belowMinimum?: boolean;
+}
+
+export interface PracticeCard {
+  limit: MoneyString;
+  /** Financing TNA of the scenario when the card was opened. */
+  tna: string;
+  /** No statement: the card has nothing to pay. */
+  statement?: CardStatement;
+  /** Statements paid in full, for the achievement "Pagaste el total". */
+  paidInFull: number;
+}
+
+/** A loan or a purchase in installments, debited each month on the same day (section 9). */
+export interface InstallmentPlan {
+  id: string;
+  kind: 'loan' | 'purchase';
+  /** Fictitious name of the lender or the merchant (1.1.1). */
+  counterparty: string;
+  principal: MoneyString;
+  /** Nominal annual rate; "0" for installments without interest. */
+  tna: string;
+  /** CFT shown in the offer, as an effective annual rate (B-04). */
+  cft?: string;
+  installment: MoneyString;
+  count: number;
+  paid: number;
+  /** Day of the simulated month when each installment is debited. */
+  dayOfMonth: number;
+  /** Simulated day of the purchase or the disbursement: the first installment is a month later. */
+  startDay: number;
+  /** Paid off before the end. */
+  closed?: boolean;
+}
+
 export type YieldMode = 'none' | 'remunerated' | 'money_market';
 
 export interface WalletState {
@@ -93,10 +143,14 @@ export interface WalletState {
   /** The surprise subscription of mission 1 (D-55) keeps being debited until it is cancelled. */
   subscriptionActive: boolean;
   /** A debit that could not be charged: the advance stops here (section 4, insufficient balance). */
-  pendingDebit?: { expenseKey: ExpenseKey; amount: MoneyString; day: number };
+  pendingDebit?: { expenseKey?: ExpenseKey; planId?: string; counterparty?: string; amount: MoneyString; day: number };
   monthSummaries: MonthSummary[];
   completedMissionIds: string[];
   securitySettings: { twoFactor: boolean; dailyLimit?: MoneyString };
+  /** Practice card, given when level 5 opens (section 9). Optional: older saved states have none. */
+  card?: PracticeCard;
+  /** Loans and purchases in installments (section 9). */
+  plans?: InstallmentPlan[];
   /** Sequence for movement ids, so the state is deterministic. */
   seq: number;
 }

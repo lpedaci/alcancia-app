@@ -411,6 +411,36 @@ export function StyleguidePage() {
               y en el título.
             </p>
           </Panel>
+          <Panel className="flex flex-col gap-3 lg:col-span-2">
+            <h3 className="text-title-medium text-on-surface">Crédito: el CFT antes que la cuota (B-04, D-178)</h3>
+            <dl className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              <div className="flex flex-col gap-1 rounded-lg bg-primary-container p-3 text-on-primary-container">
+                <dt className="text-label-medium">Costo financiero total (CFT)</dt>
+                <dd className="text-title-medium tabular-nums">{formatPercent('0.818', { decimals: 1 })}</dd>
+              </div>
+              <div className="flex flex-col gap-1 rounded-lg bg-surface-container p-3">
+                <dt className="text-label-medium text-on-surface-variant">Tasa nominal anual (TNA)</dt>
+                <dd className="text-title-medium tabular-nums text-on-surface">{formatPercent('0.55', { decimals: 1 })}</dd>
+              </div>
+              <div className="flex flex-col gap-1 rounded-lg bg-surface-container p-3">
+                <dt className="text-label-medium text-on-surface-variant">Lo que te acreditan</dt>
+                <dd className="text-title-medium text-on-surface">
+                  <MoneyText value="570000" />
+                </dd>
+              </div>
+              <div className="flex flex-col gap-1 rounded-lg bg-surface-container p-3">
+                <dt className="text-label-medium text-on-surface-variant">Lo que pagas en total</dt>
+                <dd className="text-title-medium text-on-surface">
+                  <MoneyText value="1001691.84" />
+                </dd>
+              </div>
+            </dl>
+            <p className="text-body-small text-on-surface-variant">
+              En una oferta de crédito, el CFT va destacado y primero; la cuota nunca aparece sola: siempre junto a lo que
+              se recibe y lo que se paga en total. Una deuda de tasa alta (TEA mayor que la inflación anual del escenario,
+              D-113) lleva la píldora &quot;Tasa alta&quot; en warning, no en error: es información, no una falla.
+            </p>
+          </Panel>
           <Panel className="flex flex-col gap-4 lg:col-span-2">
             <h3 className="text-title-medium text-on-surface">Campos de dinero y porcentaje (2.10)</h3>
             <div className="grid grid-cols-1 gap-5 md:grid-cols-3">

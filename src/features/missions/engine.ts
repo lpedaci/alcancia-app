@@ -1,7 +1,8 @@
 import missionsJson from '@/data/wallet-missions.json';
 import { D, roundCents, toMoneyString } from '@/lib/finance';
-import { formatMoney, parseDecimalInput } from '@/lib/money';
+import { formatMoney, formatPercent, parseDecimalInput } from '@/lib/money';
 import {
+  acceptLoan,
   advanceDays,
   advanceMonth,
   raiseExpense,
@@ -11,6 +12,7 @@ import {
   createWallet,
   emergencyFund,
   essentialMonthlyExpenses,
+  loanOffer,
   moveToPocket,
   payQr,
   setDailyLimit,
@@ -46,7 +48,8 @@ export type ActionId =
   | 'raise_phone'
   | 'close_month'
   | 'create_emergency'
-  | 'save_emergency';
+  | 'save_emergency'
+  | 'accept_loan';
 export type CheckId = 'two_factor_on' | 'daily_limit_set' | 'step_correct' | 'step_done' | 'salary_received' | 'savings_percent' | 'paid_to' | 'month_green' | 'savings_kept' | 'emergency_goal' | 'emergency_funded';
 
 interface StepBase {
@@ -74,7 +77,7 @@ export type MissionStep =
       kind: 'numeric';
       prompt: string;
       help: string;
-      expected: 'salary_percent' | 'essential_months';
+      expected: 'salary_percent' | 'essential_months' | 'loan_total';
       param: string;
       tolerance: string;
       onCorrect?: ActionId;
@@ -151,9 +154,26 @@ export interface Feedback {
 
 const percentOfSalary = (wallet: WalletState, fraction: string) => roundCents(D(wallet.salary).times(fraction));
 
-/** Fills `{{salary}}`, `{{expected}}` and `{{amount}}` with formatted amounts. */
+/**
+ * Fills `{{salary}}`, `{{essentials}}`, `{{expected}}`, `{{amount}}` and the loan offer of the
+ * run's scenario (`{{loanPrincipal}}`, `{{installment}}`, `{{commission}}`, `{{loanReceived}}`,
+ * `{{loanTotal}}`, `{{loanExtra}}`, `{{tna}}`, `{{cft}}`) with formatted amounts.
+ */
 export function fillText(text: string, run: MissionRun, extra: { expected?: string; amount?: string } = {}): string {
-  return text
+  let filled = text;
+  if (filled.includes('{{')) {
+    const offer = loanOffer(run.wallet);
+    filled = filled
+      .replaceAll('{{loanPrincipal}}', formatMoney(offer.principal))
+      .replaceAll('{{installment}}', formatMoney(offer.installment))
+      .replaceAll('{{commission}}', formatMoney(offer.commission))
+      .replaceAll('{{loanReceived}}', formatMoney(offer.received))
+      .replaceAll('{{loanTotal}}', formatMoney(offer.total))
+      .replaceAll('{{loanExtra}}', formatMoney(offer.total.minus(offer.received)))
+      .replaceAll('{{tna}}', formatPercent(offer.tna, { decimals: 1 }))
+      .replaceAll('{{cft}}', formatPercent(offer.cft, { decimals: 1 }));
+  }
+  return filled
     .replaceAll('{{salary}}', formatMoney(run.wallet.salary))
     .replaceAll('{{essentials}}', formatMoney(essentialMonthlyExpenses(run.wallet)))
     .replaceAll('{{expected}}', extra.expected ? formatMoney(extra.expected) : '')
@@ -162,6 +182,7 @@ export function fillText(text: string, run: MissionRun, extra: { expected?: stri
 
 export function expectedAmount(step: Extract<MissionStep, { kind: 'numeric' }>, run: MissionRun): string {
   if (step.expected === 'essential_months') return toMoneyString(essentialMonthlyExpenses(run.wallet).times(step.param));
+  if (step.expected === 'loan_total') return toMoneyString(loanOffer(run.wallet).total);
   return toMoneyString(percentOfSalary(run.wallet, step.param));
 }
 
@@ -197,6 +218,8 @@ function applyAction(wallet: WalletState, action: ActionId, value?: string, targ
       const withPocket = createPocket(wallet, { id: POCKET_SAVINGS, name: 'Ahorro' });
       return moveToPocket(withPocket, POCKET_SAVINGS, value ?? '0');
     }
+    case 'accept_loan':
+      return acceptLoan(wallet);
   }
 }
 
@@ -249,7 +272,7 @@ export function answerStep(def: MissionDef, run: MissionRun, input?: string): { 
           wallet,
           { ...run.snapshots, [step.id]: base },
         ),
-        feedback: { tone: 'success', text: option.feedback },
+        feedback: { tone: 'success', text: fillText(option.feedback, { ...run, wallet }) },
       };
     }
     case 'single': {
@@ -265,7 +288,7 @@ export function answerStep(def: MissionDef, run: MissionRun, input?: string): { 
           { verb: 'answered', object: `${def.id}/${step.id}`, result: { success: correct, response: option.id } },
           wallet,
         ),
-        feedback: { tone: correct ? 'success' : 'info', text: option.feedback },
+        feedback: { tone: correct ? 'success' : 'info', text: fillText(option.feedback, { ...run, wallet }) },
       };
     }
     case 'numeric': {

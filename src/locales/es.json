@@ -1353,10 +1353,13 @@
       "bills": "Los gastos fijos se repiten todos los meses. Las suscripciones que no usas son gastos hormiga: de a poco, pesan. Revisarlas una vez por mes ayuda a cortarlas a tiempo."
     },
     "errors": {
-      "amount_not_positive": "El monto tiene que ser mayor que cero.",
+      "amount_not_positive": "Escribe un monto mayor que cero.",
       "insufficient_balance": "No alcanza el saldo disponible. Revisa el monto o pasa dinero desde un apartado.",
       "daily_limit": "Supera tu límite diario de transferencias. Puedes cambiarlo en tu perfil, en Seguridad.",
-      "unknown": "No se pudo hacer el pago. Vuelve a intentarlo."
+      "unknown": "No se pudo hacer el pago. Vuelve a intentarlo.",
+      "nothing_to_pay": "No hay nada para pagar en este momento.",
+      "more_than_due": "El monto supera lo que queda por pagar del resumen. Revisa el monto.",
+      "loan_active": "Ya tienes un préstamo activo de práctica. Puedes cancelarlo en \"Tus deudas\"."
     }
   },
   "budget": {
@@ -2098,6 +2101,101 @@
         "Tasas e inflación constantes y de ejemplo.",
         "Sin impuestos ni comisiones."
       ]
+    }
+  },
+  "credit": {
+    "intro": "Tu tarjeta de práctica, las ofertas de crédito y tus deudas. Antes de decidir, mira el costo financiero total (CFT) y cuánto pagas en total.",
+    "context": "Datos de tu crédito",
+    "debtCount_one": "{{count}} deuda activa",
+    "debtCount_other": "{{count}} deudas activas",
+    "example": "Oferta de ejemplo",
+    "why": "Una cuota baja no dice cuánto cuesta un crédito: el CFT suma la tasa, las comisiones y los cargos, y la entidad debe informarlo destacado (B-04).",
+    "legal": "Contenido educativo. No es asesoramiento financiero ni una recomendación. La tarjeta, la financiera y el comercio son ficticios, y las tasas son valores de ejemplo del escenario: consulta los valores vigentes en las fuentes oficiales.",
+    "fuerte": {
+      "locked": "Tarjeta y préstamos se abre con el desafío del nivel 4. Primero tu fondo, después el crédito.",
+      "home": "Esta tarjeta trae un resumen del mes pasado. Veamos cuánto cuesta cada forma de pagarlo.",
+      "debt": "Ojo con esto: tienes una deuda de tasa alta. Mientras exista, Invertir sigue cerrado."
+    },
+    "card": {
+      "limit": "Límite de ejemplo:",
+      "financed": "Saldo financiado",
+      "due": "Vence el {{date}}",
+      "clear": "Sin saldo",
+      "nothing_one": "No tienes nada para pagar. Pagaste el total de {{count}} resumen: no generaste intereses.",
+      "nothing_other": "No tienes nada para pagar. Pagaste el total de {{count}} resúmenes: no generaste intereses.",
+      "belowMinimum": "El resumen anterior se pagó por debajo del mínimo. En una tarjeta real eso suma intereses punitorios y queda registrado en la Central de Deudores del BCRA (B-06).",
+      "total": "Total del resumen",
+      "minimum": "Pago mínimo",
+      "dueDate": "Vencimiento",
+      "rates": "Tasa de financiación: TNA {{tna}}, TEA {{tea}}.",
+      "firstBody": "Son consumos del mes pasado. Si pagas el total antes del vencimiento, no pagas intereses; lo que no pagues se financia y aparece en el próximo resumen con intereses.",
+      "financedBody": "Este resumen incluye intereses por lo que no se pagó el mes anterior. Es una deuda de tasa alta hasta que la pagues completa.",
+      "paidSoFar": "Pagaste",
+      "left": "queda",
+      "howMuch": "¿Cuánto pagas?",
+      "payTotal": "El total: {{amount}}",
+      "payTotalHelp": "No pagas intereses y la tarjeta queda sin saldo.",
+      "payMinimum": "El mínimo: {{amount}}",
+      "payMinimumHelp": "Evitas la mora, pero {{amount}} se financian con intereses.",
+      "payOther": "Otro monto",
+      "otherLabel": "Monto a pagar",
+      "otherHelp": "Monto en pesos, hasta {{max}}. Por ejemplo: 100.000",
+      "amountMissing": "Escribe el monto que quieres pagar.",
+      "pay": "Pagar resumen",
+      "paid": "Pago de {{amount}} registrado",
+      "simulate": "Simular el pago mínimo"
+    },
+    "loan": {
+      "title": "Préstamo preaprobado",
+      "lender": "Financiera de Ejemplo S.A. (ficticia)",
+      "body": "Te ofrecen {{principal}} en {{count}} cuotas de {{installment}}.",
+      "cft": "Costo financiero total (CFT)",
+      "tna": "Tasa nominal anual (TNA)",
+      "received": "Lo que te acreditan",
+      "total": "Lo que pagas en total",
+      "explain": "La comisión de otorgamiento ({{commission}}) se descuenta al acreditar, por eso el CFT es más alto que la TNA. En total pagas {{extra}} más de lo que recibes.",
+      "active": "Ya tienes un préstamo de práctica activo. Lo ves en \"Tus deudas\".",
+      "mission": "Analizar la oferta en la misión",
+      "accept": "Aceptar préstamo",
+      "confirmTitle": "¿Aceptar el préstamo?",
+      "confirmBody": "Te acreditan {{received}} y se debita una cuota de {{installment}} cada mes durante {{count}} meses. Es una deuda de tasa alta: mientras exista, Invertir no se abre. Puedes cancelarla antes desde \"Tus deudas\".",
+      "accepted": "Préstamo acreditado"
+    },
+    "purchase": {
+      "title": "Cuotas sin interés o contado",
+      "body": "Te ofrecen {{item}} en cuotas sin interés o con descuento si pagas de contado.",
+      "installmentsLabel": "{{count}} cuotas sin interés de",
+      "cashLabel": "De contado, con 15 % de descuento",
+      "explain": "Qué conviene depende de la inflación del escenario: compara el valor de hoy de las cuotas con el precio de contado. Y si no lo necesitas, la opción más barata es no comprarlo.",
+      "compare": "Comparar en la herramienta",
+      "installments": "Comprar en cuotas",
+      "cash": "Comprar de contado",
+      "confirmInstallmentsTitle": "¿Comprar en 12 cuotas?",
+      "confirmInstallmentsBody": "Se debita una cuota de $ 10.000 cada mes durante 12 meses. Al ser sin interés, no es una deuda de tasa alta, pero ocupa parte de tu presupuesto cada mes.",
+      "confirmCashTitle": "¿Comprar de contado?",
+      "confirmCashBody": "Se debitan {{amount}} de tu saldo ahora.",
+      "boughtInstallments": "Compra en cuotas registrada",
+      "boughtCash": "Compra de contado registrada"
+    },
+    "debts": {
+      "title": "Tus deudas",
+      "empty": "No tienes deudas. Para abrir Invertir hace falta no tener deudas de tasa alta, además del fondo de emergencia.",
+      "intro": "Una deuda es de tasa alta cuando su tasa efectiva anual supera la inflación anual del escenario ({{inflation}}): te cuesta más de lo que suben los precios.",
+      "orderBy": "Ordenar deudas por",
+      "avalanche": "Avalancha",
+      "snowball": "Bola de nieve",
+      "avalancheHelp": "Primero la de tasa más alta: es el orden que menos intereses paga.",
+      "snowballHelp": "Primero la de menor saldo: ves deudas saldadas antes y eso ayuda a sostener el plan.",
+      "noInterest": "Sin interés",
+      "rate": "TEA {{tea}}",
+      "monthly": "por mes:",
+      "highRate": "Tasa alta",
+      "notHighRate": "No es de tasa alta",
+      "payOff": "Cancelar ahora",
+      "payOffTitle": "¿Cancelar la deuda ahora?",
+      "payOffBody": "Pagas {{amount}} de tu saldo y {{name}} queda cancelada. Al cancelar antes, pagas solo el capital que falta, sin los intereses de las cuotas futuras.",
+      "paidOff": "Deuda cancelada",
+      "simulate": "Comparar los métodos"
     }
   }
 }

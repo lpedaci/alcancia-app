@@ -3,3 +3,4 @@ export * from './decimal';
 export * from './rates';
 export * from './simulators';
 export * from './wallet';
+export * from './credit';

@@ -15,7 +15,7 @@ import paymentsJson from '@/data/payments.json';
 import { guideOfModule } from '@/features/learning/questions';
 import { UnlockCard } from '@/features/levels/UnlockCard';
 import { LEVELS, MISSIONS, useLevels } from '@/features/levels/use-levels';
-import { WalletSectionPage } from '@/features/wallet/WalletSectionPage';
+import { CreditPage } from '@/features/credit/CreditPage';
 import { WalletShell } from '@/features/wallet/WalletShell';
 import { dayOfMonth, payQr, setSubscription, transferOut, WalletError } from '@/features/wallet/engine/engine';
 import { EXPENSE_DEFS } from '@/features/wallet/engine/profile';
@@ -55,7 +55,7 @@ export function PayPage() {
   const { t } = useTranslation();
   const user = useCurrentUser();
   const { statuses, isOpen } = useLevels(user?.personId ?? '');
-  if (flow === 'credit') return <WalletSectionPage area="pay-flow" />;
+  if (flow === 'credit') return <CreditPage />;
   const status = statuses.find((s) => s.level.id === 'level-2');
   if (status && !isOpen('level-2')) {
     return (

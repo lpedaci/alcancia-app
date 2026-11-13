@@ -101,6 +101,14 @@ Texto completo en `src/data/guides.json` y `src/data/question-banks.json` (5 pre
 
 Cálculos (casos de `formulas.md`): mínimo $ 240.000 × 0,1 = $ 24.000; tarjeta de $ 100.000 al 60 % pagando el 10 %: 55 meses y $ 83.880,36 de intereses (F-14); 12 cuotas de $ 10.000 al 3 % valen $ 99.540,04 frente a $ 102.000 de contado, y al 1,5 % valen $ 109.075,05 (F-10, F-11); $ 100.000 ÷ 1,03^12 = $ 70.137,99 y 1,03^12 − 1 ≈ 42,6 %; 36 % × 30 ÷ 365 = 2,96 % y 1,0296 ÷ 1,03 − 1 ≈ −0,04 % (F-03); $ 1.000.000 × (1 + 0,36 × 30 ÷ 365) = $ 1.029.589,04, que en poder de compra son $ 999.601,01 (F-08). Desafíos: nivel 5 con 2 preguntas por módulo (8 en total) y nivel 6 con 3 por módulo (9), más los de suficiencia.
 
+## Misiones del nivel 5 (paso 8.3, D-179)
+
+- **El préstamo tentador** (módulos 5, 6 y 8): oferta preaprobada de $ 600.000 en 24 cuotas de una financiera ficticia; encontrar el CFT (B-04) frente a la cuota y la TNA; la comisión de otorgamiento del 5 % que explica por qué el CFT supera a la TNA; calcular el total (24 × $ 41.737,16 = $ 1.001.691,84 en el escenario medio) y decidir, con la regla de las 48 horas (A-14) entre las opciones. Valores de ejemplo calculados con F-29 y F-30.
+- **Sal de tus deudas** (módulo 7): el caso de A-29 con mínimos de ejemplo ($ 4.000, $ 1.500 y $ 10.000) y $ 20.000 extra; ordenar con la avalancha y con la bola de nieve (A-24, A-28), comparar los resultados de SIM-9 y aplicar el extra a la deuda prioritaria (A-30).
+- **P7, Tarjeta y préstamos:** resumen de la tarjeta de práctica (T, B-04, B-06), oferta de préstamo con el CFT destacado y oferta de cuotas sin interés o contado (F-10).
+
+**Estado:** borrador para revisión de Lourdes; los montos de las ofertas y la comisión, además, para revisión del Lic. Kevin Giampieri.
+
 ## Nivel 1 · Cuenta
 
 ### Misiones del paso 6 (D-166)
