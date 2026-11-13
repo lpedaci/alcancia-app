@@ -1,3 +1,4 @@
+import { AnimatePresence, motion } from 'motion/react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
@@ -9,6 +10,7 @@ import { completedLights, type LevelStatus } from '@/features/levels/engine';
 import { MISSIONS, useLevels } from '@/features/levels/use-levels';
 import { WalletShell } from '@/features/wallet/WalletShell';
 import { NBSP } from '@/lib/money';
+import { duration, easing, useShouldReduceMotion } from '@/lib/motion';
 import { cn } from '@/lib/utils';
 import { useDataStore } from '@/store/data-store';
 import { useCurrentUser } from '@/store/session-store';
@@ -37,6 +39,7 @@ export function LearnPage() {
   const attempts = allAttempts.filter((a) => a.personId === personId);
   const missionCompletions = allMissions.filter((m) => m.personId === personId);
   const passing = useDataStore((s) => s.program.passingScore);
+  const reduce = useShouldReduceMotion();
   const [open, setOpen] = useState<Set<string>>(() => new Set(current ? [current.level.id] : []));
 
   const guideDone = (guideId: string) => guideProgress.some((g) => g.guideIdsDone.includes(guideId));
@@ -59,13 +62,13 @@ export function LearnPage() {
 
   return (
     <WalletShell section={t('wallet.nav.learn')} fuerte={{ state: 'neutral', message: t('learn.map.fuerte') }}>
-      <div className="flex max-w-6xl flex-col gap-6">
+      <div className="flex flex-col gap-6">
         <header className="flex flex-col gap-2">
           <h1 className="text-headline-medium text-on-surface">{t('learn.map.title')}</h1>
-          <p className="max-w-prose text-body-large text-on-surface-variant">{t('learn.map.intro')}</p>
+          <p className="text-body-large text-on-surface-variant">{t('learn.map.intro')}</p>
         </header>
 
-        <div className="grid grid-cols-[minmax(0,1fr)] gap-6 large:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] large:items-start">
+        <div className="grid grid-cols-[minmax(0,1fr)] gap-6 large:grid-cols-[minmax(0,2fr)_minmax(20rem,1fr)] large:items-start">
           {/* Timeline of levels */}
           <section aria-labelledby="map-title" className="flex flex-col gap-4 rounded-xl border border-outline-variant bg-surface-container-lowest p-3 sm:p-(--space-card-padding)">
             <h2 id="map-title" className="text-title-large text-on-surface">
@@ -79,7 +82,14 @@ export function LearnPage() {
                 const last = i === statuses.length - 1;
                 const name = t(`wallet.sections.${s.level.id}`, { defaultValue: t('learn.map.crypto') });
                 return (
-                  <li key={s.level.id} className="relative flex gap-2 pb-5 sm:gap-4">
+                  <motion.li
+                    key={s.level.id}
+                    className="relative flex gap-2 pb-6 sm:gap-4"
+                    // Lists enter staggered, 50 ms apart (2.6); with reduced motion, opacity only
+                    initial={reduce ? { opacity: 0 } : { opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: duration.long, ease: easing.emphasizedDecelerate, delay: i * 0.05 }}
+                  >
                     {/* The line of the timeline, decorative */}
                     {!last && <span aria-hidden className="absolute top-8 bottom-0 left-4 w-0.5 -translate-x-1/2 bg-outline-variant sm:top-10 sm:left-5" />}
                     <span
@@ -93,7 +103,7 @@ export function LearnPage() {
                     >
                       <Icon name={STATE_ICON[s.status]} size={20} filled={s.status === 'completed'} />
                     </span>
-                    <div className={cn('flex min-w-0 flex-1 flex-col gap-3 rounded-lg p-2 sm:p-3', isCurrent ? 'border border-primary bg-primary-container/40' : 'border border-transparent')}>
+                    <div className={cn('flex min-w-0 flex-1 flex-col gap-4 rounded-lg p-3 sm:p-4', isCurrent ? 'border border-primary bg-primary-container/40' : 'border border-transparent')}>
                       <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
                         <h3 className="text-title-medium text-on-surface">{t('learn.map.levelName', { n: s.level.order, name })}</h3>
                         {phaseB ? (
@@ -107,16 +117,29 @@ export function LearnPage() {
                           </Button>
                         )}
                       </div>
-                      {expanded && !phaseB && <LevelDetail status={s} guideDone={guideDone} bestOf={bestOf} missionDone={missionDone} passing={passing} />}
+                      <AnimatePresence initial={false}>
+                        {expanded && !phaseB && (
+                          <motion.div
+                            key="detail"
+                            initial={{ opacity: 0, height: reduce ? 'auto' : 0 }}
+                            animate={{ opacity: 1, height: 'auto' }}
+                            exit={{ opacity: 0, height: reduce ? 'auto' : 0 }}
+                            transition={{ duration: duration.medium, ease: easing.standard }}
+                            className="overflow-hidden"
+                          >
+                            <LevelDetail status={s} guideDone={guideDone} bestOf={bestOf} missionDone={missionDone} passing={passing} />
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
                     </div>
-                  </li>
+                  </motion.li>
                 );
               })}
             </ol>
           </section>
 
           {/* Achievements */}
-          <section aria-labelledby="badges-title" className="flex flex-col gap-4 rounded-xl border border-outline-variant bg-surface-container-lowest p-(--space-card-padding)">
+          <section aria-labelledby="badges-title" className="flex flex-col gap-6 rounded-xl border border-outline-variant bg-surface-container-lowest p-(--space-card-padding)">
             <h2 id="badges-title" className="text-title-large text-on-surface">
               {t('learn.map.achievements')}
             </h2>
@@ -147,8 +170,8 @@ export function LearnPage() {
                 );
               })}
             </ul>
-            <p className="text-body-small text-on-surface-variant">{t('learn.map.badgesNote')}</p>
-            <div className="flex flex-col gap-2 border-t border-outline-variant pt-4">
+            <p className="-mt-3 text-body-small text-on-surface-variant">{t('learn.map.badgesNote')}</p>
+            <div className="flex flex-col gap-3 border-t border-outline-variant pt-5">
               <Link to="/app/welcome" className="inline-flex items-center gap-2 text-label-large text-primary hover:underline">
                 <Icon name="person" size={18} />
                 {t('learn.map.conocerte')}
@@ -191,10 +214,10 @@ function LevelDetail({
   const row = 'flex items-center gap-2 rounded-lg px-1 py-2 hover:bg-surface-container sm:gap-3 sm:px-3';
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col divide-y divide-outline-variant border-t border-outline-variant [&>*]:py-4 [&>*:last-child]:pb-0">
       {locked && (
         <div className="flex flex-col gap-2">
-          <p className="text-label-large text-on-surface">{t('wallet.unlock.missing')}</p>
+          <p className="pb-1 text-title-small text-on-surface">{t('wallet.unlock.missing')}</p>
           <ul className="flex flex-wrap gap-2">
             {status.conditions
               .filter((c) => c.condition.type !== 'first_sign_in')
@@ -221,8 +244,8 @@ function LevelDetail({
       )}
 
       {level.guideModuleIds.length > 0 && (
-        <div className="flex flex-col gap-1">
-          <p className="text-label-large text-on-surface">{t('learn.map.guides')}</p>
+        <div className="flex flex-col gap-1.5">
+          <p className="pb-1 text-title-small text-on-surface">{t('learn.map.guides')}</p>
           {level.guideModuleIds.map((moduleId) => {
             const guide = guideOfModule(moduleId);
             const module = moduleById(moduleId);
@@ -261,8 +284,8 @@ function LevelDetail({
       )}
 
       {level.challengeId && (
-        <div className="flex flex-col gap-1">
-          <p className="text-label-large text-on-surface">{t('learn.map.challenge')}</p>
+        <div className="flex flex-col gap-1.5">
+          <p className="pb-1 text-title-small text-on-surface">{t('learn.map.challenge')}</p>
           {challenge && !locked ? (
             <Link to={`/app/learn/challenges/${level.challengeId}`} className={row}>
               <Icon name="quiz" size={20} className={best !== undefined && best >= passing ? 'text-success' : 'text-primary'} />
@@ -281,8 +304,8 @@ function LevelDetail({
       )}
 
       {missions.length > 0 && (
-        <div className="flex flex-col gap-1">
-          <p className="text-label-large text-on-surface">{t('learn.map.missions')}</p>
+        <div className="flex flex-col gap-1.5">
+          <p className="pb-1 text-title-small text-on-surface">{t('learn.map.missions')}</p>
           {missions.map((m) => {
             const done = missionDone(m.id);
             const content = (

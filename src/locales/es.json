@@ -1152,7 +1152,10 @@
       "doneBody": "Terminaste \"{{title}}\". Cuando leas las guías del nivel, haz su desafío.",
       "toChallenge": "Ir al desafío del nivel {{level}}",
       "backToLearn": "Volver a Aprender",
-      "sources": "Fuentes: {{ids}}. Contenido educativo, no es asesoramiento financiero."
+      "sources": "Fuentes: {{ids}}. Contenido educativo, no es asesoramiento financiero.",
+      "outline": "En esta guía",
+      "outlineMeta": "{{parts}} partes · {{minutes}} min",
+      "goTo": ", volver a esta parte"
     },
     "challenge": {
       "fuerte": "Sin apuro: no hay límite de tiempo.",
