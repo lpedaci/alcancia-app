@@ -282,6 +282,21 @@ Detalle del motor en `wallet-engine.md`. Fórmulas:
 
 **Caso del A-29 en la misión "Sal de tus deudas"** (`debtPayoff`, F-16 y F-17): tarjeta $ 40.000 al 150 % (mínimo $ 4.000), financiera $ 15.000 al 110 % (mínimo $ 1.500), crédito bancario $ 200.000 al 80 % (mínimo $ 10.000), $ 20.000 extra por mes. Avalancha: 11 meses, $ 109.817,08 de intereses, primera deuda saldada en el mes 2. Bola de nieve: 11 meses, $ 111.507,88, primera deuda en el mes 1. Diferencia: $ 1.690,80.
 
+## 18. Cuenta comitente de práctica (SIM-14, nivel 7)
+
+Datos, costos y serie en `src/data/invest.json`; todo es de ejemplo y ficticio (spec 5.4).
+
+- **CEDEAR de ejemplo:** `precio = USD × factor ÷ ratio × tipo de cambio implícito`, con USD 600, ratio 20 y $ 1.500 de partida (F-20). El factor sale de una serie mensual sintética desde el día en que abres la cuenta (con una caída hasta 0,70 en el mes 5 y su recuperación), interpolada entre meses; el tipo de cambio implícito sube con la inflación del escenario, `1.500 × (1 + π_m)^(día / 30)`.
+- **Fondo money market de práctica:** cuotaparte de $ 1.000 que crece cada día con su TNA de ejemplo, `1.000 × (1 + TNA / 365)^días`.
+- **Bono en pesos de ejemplo:** lámina de $ 1.000 que devenga la TNA de ejemplo del plazo fijo, `1.000 × (1 + TNA × días / 365)`, por un factor mensual cercano a 1 (precio de mercado).
+- **Costos de ejemplo:** comisión 0,5 % y derechos de mercado 0,08 % sobre el monto bruto, en la compra y en la venta (sin IVA: simplificación).
+
+**Caso F-32** · CEDEAR de ejemplo: día 0 → **$ 45.000**; a los 150 días (factor 0,70, inflación del 3 % mensual) → USD 420, tipo de cambio $ 1.738,91, **$ 36.517,13**.
+
+**Caso F-33** · compra de 4 CEDEARs a $ 45.000: bruto $ 180.000, comisión $ 900, derechos $ 144, **total $ 181.044**. Venta de 4 a $ 36.517,13: bruto $ 146.068,52, costos $ 730,34 + $ 116,85.
+
+**Caso F-34** · fondo de práctica a 30 días con TNA 31 % → **$ 1.025,80**; bono de ejemplo a 30 días con TNA 34 % y factor 1,01 → **$ 1.038,22**.
+
 ## 16. Métrica con umbral de privacidad
 
 **Regla (`metrics.ts`):** `aggregate(grupo)` devuelve "datos insuficientes" si `personas < privacyThreshold` (mínimo 5); si no, el valor agregado. Además, en una misma vista no se muestra un total y sus partes si al restar se pudiera deducir un grupo de menos de 5.
@@ -313,6 +328,7 @@ Detalle del motor en `wallet-engine.md`. Fórmulas:
 | F-29 | `frenchInstallment(...)` | $ 41.737,16 |
 | F-30 | `annualCostRate(...)` | 0,8178 (81,8 %) |
 | F-31 | `financedStatement(...)` | $ 226.652,05 |
+| F-32 a F-34 | `quote(...)`, `buyPreview(...)` (invest/engine.ts) | $ 36.517,13 · $ 181.044 · $ 1.025,80 |
 
 ## Referencias
 

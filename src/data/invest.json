@@ -1,0 +1,41 @@
+{
+  "note": "Cuenta comitente de práctica (SIM-14, spec 5.4). Bróker, instrumentos, precios, comisiones y derechos de mercado son de ejemplo y ficticios. La serie de precios es sintética: tiene meses buenos y malos para practicar no vender en pánico, no son datos reales. Los rendimientos pasados no garantizan rendimientos futuros.",
+  "broker": { "name": "Bróker de Ejemplo S.A.", "registration": "matrícula ficticia" },
+  "costs": { "commission": "0.005", "marketFee": "0.0008" },
+  "instruments": [
+    {
+      "id": "cedear-sp500",
+      "kind": "cedear",
+      "name": "CEDEAR de un ETF que replica el S&P 500",
+      "usdPrice": "600",
+      "ratio": "20",
+      "impliedFx": "1500",
+      "risk": "high",
+      "liquidity": "ci_24h",
+      "currency": "ARS_USD"
+    },
+    {
+      "id": "mm-fund",
+      "kind": "fund",
+      "name": "Fondo money market de práctica",
+      "unitPrice": "1000",
+      "risk": "low",
+      "liquidity": "same_day",
+      "currency": "ARS"
+    },
+    {
+      "id": "bond-example",
+      "kind": "bond",
+      "name": "Bono en pesos de ejemplo",
+      "unitPrice": "1000",
+      "risk": "medium",
+      "liquidity": "ci_24h",
+      "currency": "ARS"
+    }
+  ],
+  "series": {
+    "note": "Factor del precio en dólares del ETF de ejemplo al cierre de cada mes desde que abres la cuenta; entre meses se interpola. Después del último mes, el precio queda en el último valor.",
+    "cedearMonthly": ["1.00", "1.02", "0.95", "0.84", "0.72", "0.70", "0.76", "0.83", "0.90", "0.96", "1.01", "1.05", "1.08", "1.05", "1.11", "1.14", "1.12", "1.17", "1.20", "1.16", "1.22", "1.25", "1.23", "1.28", "1.30"],
+    "bondMonthly": ["1.00", "1.01", "0.99", "0.98", "1.00", "1.01", "1.00", "0.99", "1.01", "1.02", "1.00", "1.01"]
+  }
+}

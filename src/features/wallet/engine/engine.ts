@@ -77,7 +77,7 @@ export function createWallet(personId: string, scenarioId: WalletState['scenario
   };
 }
 
-function addMovement(
+export function addMovement(
   state: WalletState,
   movement: Omit<WalletMovement, 'id' | 'day' | 'amount'> & { amount: Decimal },
 ): WalletMovement {
@@ -142,7 +142,7 @@ export function monthBreakdown(state: WalletState, month: number): MonthBreakdow
   const wants = byCategory('wants');
   const unclassified = byCategory(undefined);
   // Pockets and practice fixed-term deposits are money set aside, not spending (section 8).
-  const saved = sum(inMonth.filter((m) => m.type === 'pocket_in' || m.type === 'pocket_out' || m.type === 'term_deposit').map((m) => D(m.amount).neg()));
+  const saved = sum(inMonth.filter((m) => m.type === 'pocket_in' || m.type === 'pocket_out' || m.type === 'term_deposit' || m.type === 'brokerage').map((m) => D(m.amount).neg()));
   const yieldTotal = sum(inMonth.filter((m) => m.type === 'yield').map((m) => D(m.amount)));
   const savingsWithdrawn = inMonth.some((m) => m.type === 'pocket_out');
   // Section 8 (D-115): spending within income, at least 10 % set aside, and no savings taken out.
@@ -317,7 +317,7 @@ function resumePending(state: WalletState): boolean {
   return true;
 }
 
-const clone = (state: WalletState): WalletState => structuredClone(state);
+export const clone = (state: WalletState): WalletState => structuredClone(state);
 
 /** "Avanzar un día / una semana" and replays: processes n days, stopping at a pending debit. */
 export function advanceDays(state: WalletState, days: number): WalletState {

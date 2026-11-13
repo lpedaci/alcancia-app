@@ -23,7 +23,9 @@ export type MovementType =
   /** Installment of a purchase in installments (level 5). */
   | 'installment'
   /** A practice fixed-term deposit: the amount leaves when it is made and comes back at maturity (level 6). */
-  | 'term_deposit';
+  | 'term_deposit'
+  /** Money sent to or brought back from the practice brokerage account (level 7, SIM-14). */
+  | 'brokerage';
 
 export interface WalletMovement {
   id: string;
@@ -141,6 +143,43 @@ export interface TermDeposit {
   paidOut?: boolean;
 }
 
+export type InvestorProfileId = 'conservative' | 'moderate' | 'aggressive';
+
+/** A position in the practice brokerage account; quantities are whole units. */
+export interface Holding {
+  instrumentId: string;
+  quantity: number;
+  /** Total paid, costs included, so the result shows what was really spent. */
+  cost: MoneyString;
+  /** Simulated day when it is credited: the same day (contado inmediato) or the next one (24 horas, B-34). */
+  settlesDay: number;
+}
+
+export interface Trade {
+  id: string;
+  day: number;
+  side: 'buy' | 'sell';
+  instrumentId: string;
+  quantity: number;
+  price: MoneyString;
+  commission: MoneyString;
+  marketFee: MoneyString;
+  /** Net money that left (buy) or entered (sell) the brokerage cash. */
+  total: MoneyString;
+  settlement: 'ci' | '24h';
+}
+
+export interface BrokerageAccount {
+  openedDay: number;
+  /** The educational profile the person declared (D-67): it never becomes a portfolio. */
+  profile: InvestorProfileId;
+  /** Pesos available in the brokerage account. */
+  cash: MoneyString;
+  holdings: Holding[];
+  trades: Trade[];
+  seq: number;
+}
+
 export type YieldMode = 'none' | 'remunerated' | 'money_market';
 
 export interface WalletState {
@@ -169,6 +208,8 @@ export interface WalletState {
   plans?: InstallmentPlan[];
   /** Practice fixed-term deposits (level 6). */
   deposits?: TermDeposit[];
+  /** Practice brokerage account at the fictitious broker (level 7, SIM-14, spec 5.4). */
+  brokerage?: BrokerageAccount;
   /** Sequence for movement ids, so the state is deterministic. */
   seq: number;
 }
