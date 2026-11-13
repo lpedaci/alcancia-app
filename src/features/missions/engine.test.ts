@@ -29,9 +29,9 @@ function play(def: MissionDef, run: MissionRun, input?: string) {
 }
 
 describe('mission catalog (D-59, D-166)', () => {
-  it('has the 13 phase A missions; levels 0 to 5 are playable', () => {
+  it('has the 13 phase A missions; levels 0 to 6 are playable', () => {
     expect(MISSION_DEFS).toHaveLength(13);
-    expect(MISSION_DEFS.filter((m) => isPlayable(m)).map((m) => m.id)).toEqual(['mission-security', 'mission-1', 'mission-2', 'mission-3', 'mission-6', 'mission-7', 'mission-emergency-fund', 'mission-5', 'mission-debts']);
+    expect(MISSION_DEFS.filter((m) => isPlayable(m)).map((m) => m.id)).toEqual(['mission-security', 'mission-1', 'mission-2', 'mission-3', 'mission-6', 'mission-7', 'mission-emergency-fund', 'mission-5', 'mission-debts', 'mission-4']);
   });
 
   it('every playable mission ends with a summary and its criteria point to real steps', () => {
@@ -288,5 +288,25 @@ describe('mission texts', () => {
         for (const text of texts) expect(fillText(text, run), `${def.id}/${step.id}`).not.toContain('{{');
       }
     }
+  });
+});
+
+describe('mission "¿Cuenta o fondo?" (step 8.4)', () => {
+  const def = missionById('mission-4')!;
+  const plain = (text?: string) => (text ?? '').replaceAll(String.fromCharCode(160), ' ');
+
+  it('chooses where the balance yields, shows a month of yield and asks what protects a fund', () => {
+    let run = play(def, startMission(def, createWallet('p'))).run;
+    run = play(def, run, 'money_market').run;
+    expect(run.wallet.yieldMode).toBe('money_market');
+    const advanced = answerStep(def, run);
+    expect(advanced.run.wallet.day).toBe(31);
+    // 31 % TNA for 30 days against 3 % inflation: (1 + 0,31 × 30 / 365) / 1,03 − 1 ≈ −0,44 %.
+    expect(plain(advanced.feedback?.text)).toContain('−0,44 %');
+    expect(advanced.run.wallet.movements.filter((m) => m.type === 'yield')).toHaveLength(30);
+    run = nextStep(def, advanced.run);
+    run = play(def, answerStep(def, run, 'true-cnv').run, 'false-fund').run;
+    run = play(def, run, 'legal').run;
+    expect(finishMission(def, run).finished).toBe(true);
   });
 });

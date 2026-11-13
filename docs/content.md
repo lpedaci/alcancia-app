@@ -101,6 +101,13 @@ Texto completo en `src/data/guides.json` y `src/data/question-banks.json` (5 pre
 
 Cálculos (casos de `formulas.md`): mínimo $ 240.000 × 0,1 = $ 24.000; tarjeta de $ 100.000 al 60 % pagando el 10 %: 55 meses y $ 83.880,36 de intereses (F-14); 12 cuotas de $ 10.000 al 3 % valen $ 99.540,04 frente a $ 102.000 de contado, y al 1,5 % valen $ 109.075,05 (F-10, F-11); $ 100.000 ÷ 1,03^12 = $ 70.137,99 y 1,03^12 − 1 ≈ 42,6 %; 36 % × 30 ÷ 365 = 2,96 % y 1,0296 ÷ 1,03 − 1 ≈ −0,04 % (F-03); $ 1.000.000 × (1 + 0,36 × 30 ÷ 365) = $ 1.029.589,04, que en poder de compra son $ 999.601,01 (F-08). Desafíos: nivel 5 con 2 preguntas por módulo (8 en total) y nivel 6 con 3 por módulo (9), más los de suficiencia.
 
+## Misión del nivel 6 y Rendir (paso 8.4, D-180, D-181)
+
+- **¿Cuenta o fondo?** (módulos 10, 11 y 17): las fichas de la cuenta remunerada (cuenta de pago, B-12, B-13) y del fondo money market (FCI regulado por la CNV, rescate en el día, rendimiento variable, B-14, B-26), ninguna con garantía de los depósitos; un mes de rendimiento con la tasa real (F-03); verdadero o falso con justificación sobre la garantía de un fondo (B-01); dónde se verifica en una billetera real (términos y leyenda legal, B-14, B-17).
+- **P6, Rendir:** fichas con riesgo, liquidez, moneda y protección (1.1.1); tasa real del mes; plazo fijo tradicional (B-02) y UVA (B-03, condiciones según cada banco), con los supuestos de la práctica visibles.
+
+**Estado:** borrador para revisión de Lourdes; las fichas de protección y los supuestos de plazos, además, para revisión del Lic. Kevin Giampieri.
+
 ## Misiones del nivel 5 (paso 8.3, D-179)
 
 - **El préstamo tentador** (módulos 5, 6 y 8): oferta preaprobada de $ 600.000 en 24 cuotas de una financiera ficticia; encontrar el CFT (B-04) frente a la cuota y la TNA; la comisión de otorgamiento del 5 % que explica por qué el CFT supera a la TNA; calcular el total (24 × $ 41.737,16 = $ 1.001.691,84 en el escenario medio) y decidir, con la regla de las 48 horas (A-14) entre las opciones. Valores de ejemplo calculados con F-29 y F-30.

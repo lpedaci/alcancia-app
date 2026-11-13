@@ -21,7 +21,9 @@ export type MovementType =
   /** Payment of the practice card's statement (level 5). */
   | 'card_payment'
   /** Installment of a purchase in installments (level 5). */
-  | 'installment';
+  | 'installment'
+  /** A practice fixed-term deposit: the amount leaves when it is made and comes back at maturity (level 6). */
+  | 'term_deposit';
 
 export interface WalletMovement {
   id: string;
@@ -125,6 +127,20 @@ export interface InstallmentPlan {
   closed?: boolean;
 }
 
+/** A practice fixed-term deposit, traditional or UVA (wallet-engine.md, section 6, F-08, F-09). */
+export interface TermDeposit {
+  id: string;
+  kind: 'traditional' | 'uva';
+  amount: MoneyString;
+  /** TNA of the traditional deposit, or the extra rate of the UVA one, from the scenario. */
+  rate: string;
+  days: number;
+  startDay: number;
+  /** Amount credited at maturity, fixed for the traditional one and estimated for the UVA one. */
+  final?: MoneyString;
+  paidOut?: boolean;
+}
+
 export type YieldMode = 'none' | 'remunerated' | 'money_market';
 
 export interface WalletState {
@@ -151,6 +167,8 @@ export interface WalletState {
   card?: PracticeCard;
   /** Loans and purchases in installments (section 9). */
   plans?: InstallmentPlan[];
+  /** Practice fixed-term deposits (level 6). */
+  deposits?: TermDeposit[];
   /** Sequence for movement ids, so the state is deterministic. */
   seq: number;
 }

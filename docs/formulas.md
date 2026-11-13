@@ -258,6 +258,10 @@ Detalle del motor en `wallet-engine.md`. Fórmulas:
 - Rendimiento del día: `saldo × TNA / 365`, redondeado a centavos y acreditado como movimiento (spec 5.3).
 - Índice de precios del día `d`: `(1 + π_m)^(d / 30)`; poder de compra = saldo ÷ índice.
 
+**Plazo fijo de práctica (P6):** usa F-08 y F-09 con las tasas de ejemplo del escenario. Casos de `yield.test.ts`: $ 1.000.000 a 30 días con TNA 34 % → **$ 1.027.945,21**; $ 100.000 a 30 días → $ 102.794,52 ($ 2.794,52 de intereses); UVA de $ 1.000.000 a 90 días con 3 % mensual y 1 % adicional → **$ 1.095.421,40** (F-09). En poder de compra de hoy se divide por `(1 + π_m)^(días / 30)`.
+
+**Fondo money market de práctica:** rendimiento del día `saldo × TNA × factor / 365`, con el factor del día de una serie de 30 valores entre 0,95 y 1,05 cuyo promedio es 1 (`money-market-series.json`).
+
 **Caso F-26** · $ 1.000.000 en cuenta remunerada con TNA 30 %, 30 días, redondeando cada acreditación
 - Saldo al día 30: **$ 1.024.953,66** (rendimiento acumulado $ 24.953,66)
 - Poder de compra con 3 % mensual: `1.024.953,66 / 1,03` = **$ 995.100,64**

@@ -1,5 +1,5 @@
 import missionsJson from '@/data/wallet-missions.json';
-import { D, roundCents, toMoneyString } from '@/lib/finance';
+import { D, periodRate, realRate, roundCents, toMoneyString } from '@/lib/finance';
 import { formatMoney, formatPercent, parseDecimalInput } from '@/lib/money';
 import {
   acceptLoan,
@@ -7,6 +7,9 @@ import {
   advanceMonth,
   raiseExpense,
   chargeSurpriseSubscription,
+  scenarioOf,
+  setYieldMode,
+  tnaOf,
   completeMission,
   createPocket,
   createWallet,
@@ -49,7 +52,10 @@ export type ActionId =
   | 'close_month'
   | 'create_emergency'
   | 'save_emergency'
-  | 'accept_loan';
+  | 'accept_loan'
+  | 'yield_remunerated'
+  | 'yield_money_market'
+  | 'advance_30';
 export type CheckId = 'two_factor_on' | 'daily_limit_set' | 'step_correct' | 'step_done' | 'salary_received' | 'savings_percent' | 'paid_to' | 'month_green' | 'savings_kept' | 'emergency_goal' | 'emergency_funded';
 
 interface StepBase {
@@ -172,6 +178,17 @@ export function fillText(text: string, run: MissionRun, extra: { expected?: stri
       .replaceAll('{{loanExtra}}', formatMoney(offer.total.minus(offer.received)))
       .replaceAll('{{tna}}', formatPercent(offer.tna, { decimals: 1 }))
       .replaceAll('{{cft}}', formatPercent(offer.cft, { decimals: 1 }));
+    const scenario = scenarioOf(run.wallet);
+    const earned = run.wallet.movements.filter((m) => m.type === 'yield').reduce((sum, m) => sum.plus(m.amount), D(0));
+    const modeTna = tnaOf(run.wallet, run.wallet.yieldMode) ?? '0';
+    // Real rate of 30 days with the chosen option's example TNA (F-03); the fund's varies day by day.
+    const real = realRate(periodRate(modeTna, 30), scenario.monthlyInflation);
+    filled = filled
+      .replaceAll('{{remunerated}}', formatPercent(scenario.exampleRates.remunerated, { decimals: 1 }))
+      .replaceAll('{{moneyMarket}}', formatPercent(scenario.exampleRates.moneyMarket, { decimals: 1 }))
+      .replaceAll('{{inflation}}', formatPercent(scenario.monthlyInflation, { decimals: 1 }))
+      .replaceAll('{{yieldEarned}}', formatMoney(earned))
+      .replaceAll('{{realRate}}', formatPercent(real, { decimals: 2, sign: 'always' }));
   }
   return filled
     .replaceAll('{{salary}}', formatMoney(run.wallet.salary))
@@ -220,6 +237,12 @@ function applyAction(wallet: WalletState, action: ActionId, value?: string, targ
     }
     case 'accept_loan':
       return acceptLoan(wallet);
+    case 'yield_remunerated':
+      return setYieldMode(wallet, 'remunerated');
+    case 'yield_money_market':
+      return setYieldMode(wallet, 'money_market');
+    case 'advance_30':
+      return advanceDays(wallet, 30);
   }
 }
 

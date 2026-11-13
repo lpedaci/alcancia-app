@@ -987,7 +987,138 @@
       "levelId": "level-6",
       "title": "¿Cuenta o fondo?",
       "minutes": 5,
-      "objective": "Elegir dónde dejar el saldo después de leer la ficha de cada opción, y explicar la diferencia."
+      "objective": "Elegir dónde dejar el saldo después de leer la ficha de cada opción, y explicar la diferencia de rendimiento y de protección.",
+      "initial": "salary",
+      "steps": [
+        {
+          "id": "cards",
+          "kind": "card",
+          "title": "Dos fichas para leer",
+          "body": "Cuenta remunerada de práctica: TNA de ejemplo {{remunerated}}, el rendimiento se acredita cada día y el dinero está disponible siempre. Es una cuenta de pago: no tiene la garantía de los depósitos. Fondo money market de práctica: TNA de ejemplo {{moneyMarket}}, que varía a diario porque es un fondo común de inversión regulado por la CNV; se rescata en el día y tampoco tiene la garantía de los depósitos.",
+          "fuerte": "Las dos rinden y las dos se pueden usar rápido. La diferencia está en la letra chica.",
+          "sourceIds": [
+            "B-12",
+            "B-13",
+            "B-14",
+            "B-26"
+          ]
+        },
+        {
+          "id": "choose",
+          "kind": "decision",
+          "prompt": "¿Dónde dejas tu saldo de práctica?",
+          "options": [
+            {
+              "id": "remunerated",
+              "text": "En la cuenta remunerada",
+              "feedback": "Guardado. El rendimiento se acredita cada día con la misma tasa de ejemplo. Avancemos un mes para verlo.",
+              "action": "yield_remunerated"
+            },
+            {
+              "id": "money_market",
+              "text": "En el fondo money market",
+              "feedback": "Guardado. El rendimiento va a cambiar un poco cada día: así funciona un fondo. Avancemos un mes para verlo.",
+              "action": "yield_money_market"
+            }
+          ],
+          "sourceIds": [
+            "B-14"
+          ]
+        },
+        {
+          "id": "advance",
+          "kind": "action",
+          "instruction": "Avanza 30 días y mira los movimientos de rendimiento que se acreditan.",
+          "button": "Avanzar 30 días",
+          "action": "advance_30",
+          "done": "Pasaron 30 días. Tu saldo rindió {{yieldEarned}}. Con una inflación de {{inflation}} mensual, la tasa real de un mes es {{realRate}}: así cambia tu poder de compra."
+        },
+        {
+          "id": "protection",
+          "kind": "single",
+          "prompt": "Verdadero o falso: el fondo money market tiene la garantía de los depósitos. ¿Qué respondes y por qué?",
+          "options": [
+            {
+              "id": "true-cnv",
+              "text": "Verdadero, porque lo regula la CNV",
+              "feedback": "Que lo regule la CNV no lo convierte en un depósito: es una inversión en un fondo. No tiene la garantía de los depósitos. Prueba de nuevo."
+            },
+            {
+              "id": "false-fund",
+              "text": "Falso, porque es una inversión en un fondo, no un depósito",
+              "feedback": "Correcto. El fondo es una inversión regulada por la CNV, de bajo riesgo, pero no un depósito: no tiene la garantía y su rendimiento varía."
+            },
+            {
+              "id": "false-account",
+              "text": "Falso, porque la garantía la tiene solo la cuenta remunerada",
+              "feedback": "La cuenta remunerada de una billetera es una cuenta de pago y tampoco tiene la garantía de los depósitos. La tienen los depósitos en bancos. Prueba de nuevo."
+            }
+          ],
+          "correct": "false-fund",
+          "sourceIds": [
+            "B-01",
+            "B-12",
+            "B-14"
+          ]
+        },
+        {
+          "id": "where",
+          "kind": "single",
+          "prompt": "En una billetera real, ¿dónde ves si tu dinero \"que rinde\" está en una cuenta o en un fondo?",
+          "options": [
+            {
+              "id": "legal",
+              "text": "En los términos del producto y la leyenda legal de la app",
+              "feedback": "Correcto. Ahí dice si es una cuenta de pago o si suscribes cuotapartes de un fondo, y quién lo administra."
+            },
+            {
+              "id": "ads",
+              "text": "En la publicidad, por la tasa que ofrece",
+              "feedback": "La publicidad muestra la tasa, no qué tipo de producto es. Busca los términos y la leyenda legal. Prueba de nuevo."
+            },
+            {
+              "id": "nowhere",
+              "text": "No se puede saber",
+              "feedback": "Sí se puede: está en los términos del producto y en la leyenda legal. Prueba de nuevo."
+            }
+          ],
+          "correct": "legal",
+          "sourceIds": [
+            "B-14",
+            "B-17"
+          ]
+        },
+        {
+          "id": "summary",
+          "kind": "summary"
+        }
+      ],
+      "criteria": [
+        {
+          "id": "choose",
+          "description": "Elegiste dónde dejar el saldo después de leer las fichas",
+          "check": "step_done",
+          "param": "choose"
+        },
+        {
+          "id": "advance",
+          "description": "Viste un mes de rendimiento",
+          "check": "step_done",
+          "param": "advance"
+        },
+        {
+          "id": "protection",
+          "description": "Explicaste qué protección tiene un fondo money market",
+          "check": "step_correct",
+          "param": "protection"
+        },
+        {
+          "id": "where",
+          "description": "Sabes dónde verificarlo en una billetera real",
+          "check": "step_correct",
+          "param": "where"
+        }
+      ]
     },
     {
       "id": "mission-broker-account",

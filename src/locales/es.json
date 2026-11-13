@@ -1359,7 +1359,8 @@
       "unknown": "No se pudo hacer el pago. Vuelve a intentarlo.",
       "nothing_to_pay": "No hay nada para pagar en este momento.",
       "more_than_due": "El monto supera lo que queda por pagar del resumen. Revisa el monto.",
-      "loan_active": "Ya tienes un préstamo activo de práctica. Puedes cancelarlo en \"Tus deudas\"."
+      "loan_active": "Ya tienes un préstamo activo de práctica. Puedes cancelarlo en \"Tus deudas\".",
+      "invalid_term": "Elige uno de los plazos de la práctica."
     }
   },
   "budget": {
@@ -2196,6 +2197,101 @@
       "payOffBody": "Pagas {{amount}} de tu saldo y {{name}} queda cancelada. Al cancelar antes, pagas solo el capital que falta, sin los intereses de las cuotas futuras.",
       "paidOff": "Deuda cancelada",
       "simulate": "Comparar los métodos"
+    }
+  },
+  "yield": {
+    "intro": "Elige dónde rinde tu saldo, compáralo con la inflación del escenario y practica con plazos fijos. Las tasas son valores de ejemplo, no las vigentes.",
+    "context": "Datos de Rendir",
+    "inflationChip": "Inflación del escenario: {{value}} mensual",
+    "why": "Una cuenta remunerada y un fondo money market no son lo mismo: la cuenta es una cuenta de pago y el fondo, una inversión. Ninguno de los dos tiene la garantía de los depósitos (B-12, B-14).",
+    "legal": "Contenido educativo. No es asesoramiento financiero ni una recomendación. Las tasas son valores de ejemplo del escenario y las opciones son de práctica: consulta los valores vigentes en las fuentes oficiales.",
+    "fuerte": {
+      "locked": "Rendir se abre cuando tengas tu fondo de emergencia creado y el desafío del nivel 5.",
+      "home": "Tu saldo rinde. Ahora la pregunta es si le gana a la inflación.",
+      "none": "Tu saldo está quieto. Lee las fichas y elige dónde rinde."
+    },
+    "mode": {
+      "title": "Dónde rinde tu saldo",
+      "intro": "El rendimiento se calcula cada día sobre tu saldo disponible y tus apartados. Lee la ficha de cada opción antes de elegir.",
+      "current": "Elegida",
+      "choose": "Elegir",
+      "changed": "Tu saldo ahora está en: {{name}}",
+      "note": "En una billetera real, la leyenda legal y los términos de cada producto dicen si es una cuenta de pago o un fondo, y quién lo administra (B-14, B-17).",
+      "none": {
+        "name": "Sin rendimiento",
+        "risk": "Ninguno",
+        "liquidity": "Inmediata",
+        "currency": "Pesos",
+        "protection": "Es tu cuenta de pago: sin garantía de los depósitos (B-12)"
+      },
+      "remunerated": {
+        "name": "Cuenta remunerada",
+        "risk": "Bajo",
+        "liquidity": "Inmediata",
+        "currency": "Pesos",
+        "protection": "Cuenta de pago: sin garantía de los depósitos (B-12, B-13)"
+      },
+      "money_market": {
+        "name": "Fondo money market",
+        "risk": "Bajo, y el rendimiento varía a diario",
+        "liquidity": "En el día",
+        "currency": "Pesos",
+        "protection": "Inversión en un fondo regulado por la CNV: sin garantía de los depósitos (B-14, B-26)"
+      }
+    },
+    "sheet": {
+      "rate": "Tasa de ejemplo",
+      "rateValue": "TNA {{value}}",
+      "rateVaries": "TNA {{value}} en promedio, varía cada día",
+      "noRate": "No rinde",
+      "risk": "Riesgo",
+      "liquidity": "Liquidez",
+      "currency": "Moneda",
+      "protection": "Protección"
+    },
+    "real": {
+      "title": "¿Le ganas a la inflación?",
+      "earned": "Rendimiento de este mes",
+      "label": "Tasa real de un mes",
+      "beats": "Le ganas a la inflación",
+      "loses": "Pierdes poder de compra",
+      "explain": "Con la opción elegida, un mes rinde {{rate}} y la inflación del escenario es {{inflation}}. La tasa real compara las dos en el mismo período.",
+      "explainNone": "Sin rendimiento, tu saldo pierde lo que suben los precios: {{inflation}} por mes en este escenario.",
+      "simulate": "Calcular la tasa real"
+    },
+    "deposit": {
+      "title": "Plazo fijo de práctica",
+      "intro": "El dinero sale de tu saldo y vuelve al vencimiento con sus intereses. Mientras tanto no lo puedes usar.",
+      "kind": "Tipo de plazo fijo",
+      "traditional": "Plazo fijo tradicional",
+      "traditionalHelp": "Tasa fija: TNA de ejemplo {{rate}}. Sabes desde el principio cuánto vas a cobrar.",
+      "uva": "Plazo fijo UVA",
+      "uvaHelp": "El capital se ajusta por inflación (CER) y suma una tasa de ejemplo de {{rate}}. No todos los bancos lo ofrecen.",
+      "term": "Plazo",
+      "days_one": "{{count}} día",
+      "days_other": "{{count}} días",
+      "amount": "Monto",
+      "amountHelp": "Monto en pesos que sale de tu saldo, por ejemplo: 200.000",
+      "amountMissing": "Escribe el monto del plazo fijo.",
+      "final_one": "Cobras a {{count}} día",
+      "final_other": "Cobras a {{count}} días",
+      "power": "En poder de compra de hoy",
+      "assumptions": "Supuestos de la práctica: plazo mínimo de 30 días, sin precancelación y sin impuestos. Las condiciones reales dependen de cada banco (B-02).",
+      "assumptionsUva": "Supuestos de la práctica: la UVA se aproxima con la inflación del escenario (la real sigue al CER con rezago), plazo mínimo de 90 días y sin precancelación. Las condiciones reales dependen de cada banco (B-03).",
+      "make": "Constituir plazo fijo",
+      "compare": "Comparar tradicional y UVA",
+      "made": "Plazo fijo constituido",
+      "active": "Tus plazos fijos",
+      "none": "Todavía no tienes plazos fijos de práctica.",
+      "maturity": "vence el {{date}}",
+      "atMaturity": "Al vencimiento:",
+      "confirmTitle_traditional": "¿Constituir el plazo fijo tradicional?",
+      "confirmTitle_uva": "¿Constituir el plazo fijo UVA?",
+      "confirmBody_one": "Salen {{amount}} de tu saldo y no los puedes usar hasta el vencimiento, en {{count}} día. Al vencimiento cobras {{final}}.",
+      "confirmBody_other": "Salen {{amount}} de tu saldo y no los puedes usar hasta el vencimiento, en {{count}} días. Al vencimiento cobras {{final}}."
+    },
+    "learn": {
+      "tool": "Herramienta"
     }
   }
 }

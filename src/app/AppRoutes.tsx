@@ -26,6 +26,7 @@ const ChallengePage = lazyPage(() => import('@/features/learning/ChallengePage')
 const PayPage = lazyPage(() => import('@/features/pay/PayPage'), 'PayPage');
 const BudgetPage = lazyPage(() => import('@/features/budget/BudgetPage'), 'BudgetPage');
 const PocketsPage = lazyPage(() => import('@/features/pockets/PocketsPage'), 'PocketsPage');
+const YieldPage = lazyPage(() => import('@/features/yield/YieldPage'), 'YieldPage');
 const ToolsPage = lazyPage(() => import('@/features/simulators/ToolsPages'), 'ToolsPage');
 const SimToolPage = lazyPage(() => import('@/features/simulators/ToolsPages'), 'SimToolPage');
 const WalletSectionPage = lazy(() => import('@/features/wallet/WalletSectionPage').then((m) => ({ default: m.WalletSectionPage })));
@@ -57,7 +58,7 @@ export function AppRoutes() {
           <Route path="/app/pay/:flow" element={<PayPage />} />
           <Route path="/app/save/budget" element={<BudgetPage />} />
           <Route path="/app/save/pockets" element={<PocketsPage />} />
-          <Route path="/app/save/yield" element={<WalletSectionPage area="yield" />} />
+          <Route path="/app/save/yield" element={<YieldPage />} />
           <Route path="/app/invest" element={<WalletSectionPage area="invest" />} />
           <Route path="/app/learn" element={<LearnPage />} />
           <Route path="/app/learn/guides/:guideId" element={<GuidePage />} />

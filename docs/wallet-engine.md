@@ -66,11 +66,11 @@ Perfil de gastos ficticio, igual para Mariana y Diego (las diferencias entre ell
 | --- | --- | --- |
 | `none` | Siempre | Sin rendimiento |
 | `remunerated` (cuenta remunerada de práctica) | Nivel 6 | Cada día: `saldo × TNA / 365`, redondeado a centavos y acreditado como movimiento `yield`. TNA de ejemplo del escenario (30 % en el medio) |
-| `money_market` (fondo de práctica) | Nivel 6 | Igual que la cuenta, con la TNA de ejemplo del escenario (31 % en el medio) multiplicada por un factor diario de una serie fija entre 0,95 y 1,05 (`scenarios.json`), para mostrar que el rendimiento varía a diario y no está garantizado (B-14, B-26). El rescate se acredita el mismo día |
+| `money_market` (fondo de práctica) | Nivel 6 | Igual que la cuenta, con la TNA de ejemplo del escenario (31 % en el medio) multiplicada por un factor diario de una serie fija de 30 valores entre 0,95 y 1,05, con promedio 1 (`money-market-series.json`), para mostrar que el rendimiento varía a diario y no está garantizado (B-14, B-26). El rescate se acredita el mismo día |
 
 - El rendimiento se calcula sobre el **saldo disponible y los apartados** (los apartados son parte de la misma cuenta). Se dice en "¿Por qué importa?".
 - La ficha de cada opción dice qué protección tiene: la cuenta de pago no tiene la garantía de los depósitos (B-12); el fondo es una inversión en un FCI, tampoco la tiene (B-14). En la práctica no hay cuenta bancaria con CBU: se explica con la ficha del Anexo D.
-- **Plazo fijo y plazo fijo UVA de práctica (nivel 6):** se constituyen desde Rendir con un monto que sale del saldo; se acreditan al vencimiento con las fórmulas de F-08 y F-09. No admiten precancelación en fase A (supuesto visible).
+- **Plazo fijo y plazo fijo UVA de práctica (nivel 6):** se constituyen desde Rendir con un monto que sale del saldo; se acreditan al vencimiento con las fórmulas de F-08 y F-09. No admiten precancelación en fase A (supuesto visible). Plazos de la práctica: 30, 60 o 90 días el tradicional y 90 o 180 días el UVA (supuestos: los reales dependen de cada banco, B-02, B-03). Al constituirlo sale como movimiento `term_deposit` y cuenta como dinero separado en el presupuesto (como un apartado); al vencimiento vuelve el capital (`term_deposit`) y los intereses o el ajuste UVA se acreditan como rendimiento (`yield`). No cuenta para los meses del fondo de emergencia, que es un apartado.
 
 ## 7. Apartados y "meses de gastos"
 
@@ -158,4 +158,4 @@ Solo estas métricas, calculadas en el navegador de la persona y consumidas por 
   - **Compra en cuotas:** auriculares de $ 120.000 en 12 cuotas sin interés de $ 10.000 o $ 102.000 de contado (F-10). Las cuotas se debitan el mismo día del mes de la compra, desde el mes siguiente, como deseo.
   - **Cancelar antes:** un préstamo o una compra en cuotas se puede cancelar con el capital que falta (valor actual de las cuotas restantes a la tasa del plan), sin los intereses futuros.
   - **Deudas activas y `high_rate_debt`:** cuentan el resumen financiado de la tarjeta y los planes con cuotas por pagar. Es de tasa alta si su TEA supera la inflación anual del escenario (D-113); un resumen todavía no vencido no es deuda, y las cuotas sin interés no son de tasa alta.
-- **Pendiente para el paso 8.4:** la serie diaria del fondo money market (por ahora usa la TNA de ejemplo sin el factor diario) y los plazos fijos de práctica.
+- **Rendir (paso 8.4, D-180):** `tnaOf` con el factor diario del fondo, `depositQuote`, `makeDeposit`, `activeDeposits` y `yieldOfMonth`, con tests en `yield.test.ts`. El estado de demo de Mariana no cambia: usa la cuenta remunerada desde el día 125.

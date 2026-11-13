@@ -58,6 +58,7 @@ const MOVEMENT_ICON: Record<WalletMovement['type'], IconName> = {
   loan: 'request_quote',
   card_payment: 'credit_card',
   installment: 'shopping_bag',
+  term_deposit: 'account_balance',
 };
 
 const card = 'flex min-w-0 flex-col gap-3 rounded-xl border border-outline-variant bg-surface-container-lowest p-(--space-card-padding)';

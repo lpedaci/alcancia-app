@@ -1,4 +1,5 @@
 import Decimal from 'decimal.js';
+import moneyMarketSeries from '@/data/money-market-series.json';
 import scenarios from '@/data/scenarios.json';
 import {
   annualCostRate,
@@ -8,12 +9,14 @@ import {
   effectiveAnnualRate,
   emergencyMonths,
   financedStatement,
+  fixedTermDeposit,
   frenchInstallment,
   isHighRateDebt,
   ONE,
   remainingPrincipal,
   roundCents,
   toMoneyString,
+  uvaDeposit,
   ZERO,
 } from '@/lib/finance';
 import { EMPLOYER, EXPENSE_DEFS, EXPENSES_START, SALARY_START } from './profile';
@@ -23,6 +26,7 @@ import type {
   ExpenseKey,
   InstallmentPlan,
   MonthSummary,
+  TermDeposit,
   MovementType,
   Pocket,
   WalletMetrics,
@@ -137,7 +141,8 @@ export function monthBreakdown(state: WalletState, month: number): MonthBreakdow
   const needs = byCategory('needs');
   const wants = byCategory('wants');
   const unclassified = byCategory(undefined);
-  const saved = sum(inMonth.filter((m) => m.type === 'pocket_in' || m.type === 'pocket_out').map((m) => D(m.amount).neg()));
+  // Pockets and practice fixed-term deposits are money set aside, not spending (section 8).
+  const saved = sum(inMonth.filter((m) => m.type === 'pocket_in' || m.type === 'pocket_out' || m.type === 'term_deposit').map((m) => D(m.amount).neg()));
   const yieldTotal = sum(inMonth.filter((m) => m.type === 'yield').map((m) => D(m.amount)));
   const savingsWithdrawn = inMonth.some((m) => m.type === 'pocket_out');
   // Section 8 (D-115): spending within income, at least 10 % set aside, and no savings taken out.
@@ -176,10 +181,15 @@ function closeMonth(state: WalletState, month: number) {
   state.monthSummaries = [...state.monthSummaries.filter((s) => s.month !== month), summary];
 }
 
-function tnaOf(state: WalletState, mode: YieldMode): string | null {
+const MM_FACTORS = moneyMarketSeries.dailyFactors;
+/** Daily factor of the practice money market fund on a day (section 6): it varies, it is not guaranteed. */
+export const moneyMarketFactor = (day: number) => D(MM_FACTORS[((day % MM_FACTORS.length) + MM_FACTORS.length) % MM_FACTORS.length]!);
+
+/** Example TNA of a yield mode in the scenario; the fund's one of a given day includes its daily factor. */
+export function tnaOf(state: Pick<WalletState, 'scenarioId'>, mode: YieldMode, day?: number): string | null {
   const rates = scenarioOf(state).exampleRates;
   if (mode === 'remunerated') return rates.remunerated;
-  if (mode === 'money_market') return rates.moneyMarket;
+  if (mode === 'money_market') return day === undefined ? rates.moneyMarket : D(rates.moneyMarket).times(moneyMarketFactor(day)).toString();
   return null;
 }
 
@@ -194,7 +204,7 @@ function processDay(state: WalletState): boolean {
   const month = monthOf(day);
   const dom = dayOfMonth(day);
 
-  const tna = tnaOf(state, state.yieldMode);
+  const tna = tnaOf(state, state.yieldMode, day);
   if (tna) {
     const base = D(state.balance).plus(pocketsTotal(state));
     const credit = dailyYield(base, tna);
@@ -213,6 +223,7 @@ function processDay(state: WalletState): boolean {
   }
 
   closeDueStatement(state);
+  payOutDeposits(state);
   if (!chargeDebits(state, debitsOf(state, dom))) return false;
 
   if (dom === DAYS_IN_MONTH) closeMonth(state, month);
@@ -712,6 +723,72 @@ export function activeDebts(state: WalletState): ActiveDebt[] {
     });
   }
   return debts;
+}
+
+// ---------- Practice fixed-term deposits (level 6, section 6) ----------
+
+/** Terms offered in the practice (supuestos visibles: the real ones depend on each bank, B-02, B-03). */
+export const DEPOSIT_TERMS = { traditional: [30, 60, 90], uva: [90, 180] } as const;
+
+/** What a deposit would pay at maturity in the wallet's scenario (F-08; F-09 with the scenario's inflation). */
+export function depositQuote(state: Pick<WalletState, 'scenarioId'>, kind: TermDeposit['kind'], amount: string, days: number) {
+  const scenario = scenarioOf(state);
+  const rate = kind === 'traditional' ? scenario.exampleRates.fixedTerm : scenario.exampleRates.uvaExtra;
+  const final =
+    kind === 'traditional'
+      ? fixedTermDeposit({ amount, tna: rate, days }).final
+      : uvaDeposit({ amount, monthlyInflation: scenario.monthlyInflation, extraTna: rate, days }).final;
+  const purchasingPower = final.div(ONE.plus(scenario.monthlyInflation).pow(D(days).div(DAYS_IN_MONTH)));
+  return { rate, final: roundCents(final), purchasingPower: roundCents(purchasingPower) };
+}
+
+/** Makes a deposit from the balance; it cannot be cancelled early in phase A (visible assumption). */
+export function makeDeposit(state: WalletState, kind: TermDeposit['kind'], amount: string, days: number): WalletState {
+  const value = roundCents(amount);
+  if (value.lte(0)) throw new WalletError('amount_not_positive');
+  if (!(DEPOSIT_TERMS[kind] as readonly number[]).includes(days)) throw new WalletError('invalid_term');
+  if (D(state.balance).lt(value)) throw new WalletError('insufficient_balance');
+  const next = clone(state);
+  const quote = depositQuote(next, kind, value.toFixed(2), days);
+  next.seq += 1;
+  const deposit: TermDeposit = {
+    id: `deposit-${next.seq}`,
+    kind,
+    amount: toMoneyString(value),
+    rate: quote.rate,
+    days,
+    startDay: next.day,
+    final: toMoneyString(quote.final),
+  };
+  next.deposits = [...(next.deposits ?? []), deposit];
+  const label = kind === 'traditional' ? 'Plazo fijo de práctica' : 'Plazo fijo UVA de práctica';
+  addMovement(next, { type: 'term_deposit', amount: value.neg(), counterparty: `${label} · ${days} días`, suggestedCategory: 'savings' });
+  return next;
+}
+
+/** At maturity, the capital comes back to the balance and the interest is credited as yield. */
+function payOutDeposits(state: WalletState) {
+  for (const deposit of state.deposits ?? []) {
+    if (deposit.paidOut || state.day < deposit.startDay + deposit.days) continue;
+    const final = D(deposit.final ?? deposit.amount);
+    const label = deposit.kind === 'traditional' ? 'Plazo fijo de práctica' : 'Plazo fijo UVA de práctica';
+    deposit.paidOut = true;
+    addMovement(state, { type: 'term_deposit', amount: D(deposit.amount), counterparty: `${label} · capital al vencimiento` });
+    const interest = final.minus(deposit.amount);
+    if (interest.gt(0)) addMovement(state, { type: 'yield', amount: interest, counterparty: `${label} · ${deposit.kind === 'uva' ? 'ajuste UVA e intereses' : 'intereses'}` });
+  }
+}
+
+/** Deposits not paid out yet, with their maturity day. */
+export function activeDeposits(state: WalletState) {
+  return (state.deposits ?? []).filter((d) => !d.paidOut).map((d) => ({ ...d, maturityDay: d.startDay + d.days }));
+}
+
+/** Yield credited in a simulated month (account, fund and deposits). */
+export function yieldOfMonth(state: WalletState, month: number): Decimal {
+  const from = month * DAYS_IN_MONTH + 1;
+  const to = (month + 1) * DAYS_IN_MONTH;
+  return sum(state.movements.filter((m) => m.type === 'yield' && m.day >= from && m.day <= to).map((m) => D(m.amount)));
 }
 
 // ---------- Reading ----------
