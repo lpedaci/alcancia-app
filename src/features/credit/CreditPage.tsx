@@ -244,8 +244,7 @@ function Credit() {
             <LearnSection />
           </div>
         </div>
-        <SourceList codes={['T', 'A-23', 'A-28', 'A-29', 'B-04', 'B-05', 'B-06', 'F-10', 'F-14', 'F-29', 'F-30', 'F-31']} legal={false} />
-        <p className="text-body-small text-on-surface-variant">{t('credit.legal')}</p>
+        <SourceList variant="footer" codes={['T', 'A-23', 'A-28', 'A-29', 'B-04', 'B-05', 'B-06', 'F-10', 'F-14', 'F-29', 'F-30', 'F-31']} legalText={t('credit.legal')} />
       </div>
 
       {confirmCopy && (

@@ -27,3 +27,4 @@
 | 13/11/2026 | Formato y color de la información | Servicios, Tarjeta y préstamos y Fuentes con chips, datos clave con tono y avisos de color; sin códigos de fuente en los textos (D-183). 449 tests unitarios y 488 de Playwright en verde | Hecho |
 | 13/11/2026 | 9.1 · Contenido del nivel 7 | 4 guías (módulos 12 a 15), 20 preguntas y los desafíos de nivel y de suficiencia del nivel 7 (D-184) | Hecho |
 | 13/11/2026 | 9.2 · Cuenta comitente en el motor | Abrir, fondear, comprar, vender, liquidación y posiciones con la serie sintética (D-185, F-32 a F-34) | Hecho |
+| 13/11/2026 | 9.3 · Invertir y fuentes | P8 con apertura, cuenta, tenencia, instrumentos y detalle con compra y venta; ficha de brókers del Anexo C; misiones "Abre tu cuenta comitente", "Tu primer CEDEAR de ETF" y "Aguanta la caída"; fuentes compactas con la página Aprender > Fuentes y el pie de sección como patrón del sistema de diseño (D-186, D-187) | Hecho |

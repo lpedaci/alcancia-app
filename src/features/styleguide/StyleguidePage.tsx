@@ -7,6 +7,7 @@ import { type ReactNode, useState } from 'react';
 import { PageShell } from '@/components/layout/PageShell';
 import { MoneyInput } from '@/components/money/MoneyInput';
 import { MoneyText } from '@/components/money/MoneyText';
+import { SourceList } from '@/features/learning/SourceList';
 import { PercentInput } from '@/components/money/PercentInput';
 import { formatPercent, NBSP } from '@/lib/money';
 import { Fuerte, FUERTE_STATES } from '@/features/companion/Fuerte';
@@ -543,6 +544,14 @@ export function StyleguidePage() {
               <Icon name="info" size={16} />
               Simulador de finanzas personales · dinero ficticio
             </p>
+          </div>
+          <div className="flex flex-col gap-3">
+            <p className="text-label-medium text-on-surface">
+              Fuentes (D-187): chips cortos con el ícono de su tipo que abren Aprender &gt; Fuentes. En guías y misiones, como
+              panel; al pie de una sección, como franja discreta con el ícono fact_check y el aviso legal debajo
+            </p>
+            <SourceList codes={['T', 'A-23', 'B-04', 'F-14']} legal={false} />
+            <SourceList variant="footer" codes={['B-30', 'B-31', 'F-20']} legalText="Contenido educativo. No es asesoramiento financiero ni una recomendación de inversión." />
           </div>
         </Panel>
       </Section>

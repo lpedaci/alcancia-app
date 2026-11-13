@@ -27,9 +27,11 @@ const PayPage = lazyPage(() => import('@/features/pay/PayPage'), 'PayPage');
 const BudgetPage = lazyPage(() => import('@/features/budget/BudgetPage'), 'BudgetPage');
 const PocketsPage = lazyPage(() => import('@/features/pockets/PocketsPage'), 'PocketsPage');
 const YieldPage = lazyPage(() => import('@/features/yield/YieldPage'), 'YieldPage');
+const SourcesPage = lazyPage(() => import('@/features/learning/SourcesPage'), 'SourcesPage');
+const InvestPage = lazyPage(() => import('@/features/invest/InvestPage'), 'InvestPage');
+const InstrumentPage = lazyPage(() => import('@/features/invest/InvestPage'), 'InstrumentPage');
 const ToolsPage = lazyPage(() => import('@/features/simulators/ToolsPages'), 'ToolsPage');
 const SimToolPage = lazyPage(() => import('@/features/simulators/ToolsPages'), 'SimToolPage');
-const WalletSectionPage = lazy(() => import('@/features/wallet/WalletSectionPage').then((m) => ({ default: m.WalletSectionPage })));
 
 // The internal style guide (CLAUDE.md 2.8) exists only in development: it is never bundled in production.
 const StyleguidePage = import.meta.env.DEV ? lazyPage(() => import('@/features/styleguide/StyleguidePage'), 'StyleguidePage') : null;
@@ -53,13 +55,15 @@ export function AppRoutes() {
           <Route path="/app" element={<WalletHomePage />} />
           <Route path="/app/tools/SIM-3" element={<InflationToolPage />} />
           <Route path="/app/learn/investor-profile" element={<InvestorProfilePage />} />
+          <Route path="/app/learn/sources" element={<SourcesPage />} />
           {/* Wallet sections built in later steps: locked ones show what is missing (5.0) */}
           <Route path="/app/pay" element={<PayPage />} />
           <Route path="/app/pay/:flow" element={<PayPage />} />
           <Route path="/app/save/budget" element={<BudgetPage />} />
           <Route path="/app/save/pockets" element={<PocketsPage />} />
           <Route path="/app/save/yield" element={<YieldPage />} />
-          <Route path="/app/invest" element={<WalletSectionPage area="invest" />} />
+          <Route path="/app/invest" element={<InvestPage />} />
+          <Route path="/app/invest/:instrumentId" element={<InstrumentPage />} />
           <Route path="/app/learn" element={<LearnPage />} />
           <Route path="/app/learn/guides/:guideId" element={<GuidePage />} />
           <Route path="/app/learn/challenges/:challengeId" element={<ChallengePage />} />

@@ -441,7 +441,8 @@
       "yield": "Rendir",
       "map": "Mapa de niveles",
       "tools": "Herramientas",
-      "profile": "Perfil"
+      "profile": "Perfil",
+      "sources": "Fuentes"
     },
     "home": {
       "date": "{{date}}",
@@ -1261,7 +1262,29 @@
         "presentation": "Presentación",
         "official": "Fuente oficial",
         "formula": "Cálculo verificado"
-      }
+      },
+      "chipLabel": ": {{name}}. Ver el detalle",
+      "all": "Ver todas las fuentes",
+      "page": {
+        "title": "Fuentes",
+        "intro": "De dónde sale cada contenido de Alcancía: el contenido validado del taller, las fuentes oficiales con su fecha de verificación y los cálculos verificados a mano.",
+        "fuerte": "Todo lo que te explico tiene de dónde salir. Acá lo puedes revisar.",
+        "baseTitle": "Contenido base",
+        "workshop": "Taller \"Del aula al primer trabajo\", de Lourdes Pedaci",
+        "workshopBody": "Sitio del taller con las secciones \"El recibo de sueldo\" y \"Finanzas personales\", sus calculadoras y el escape room \"Tu primer sueldo\".",
+        "presentation": "Presentación \"Educación financiera: transformá tu relación con el dinero\", del Lic. Kevin Giampieri",
+        "presentationBody": "Material validado del taller: psicología del dinero, deudas, administración, inversión y ejecución. En cada guía se indican las diapositivas usadas.",
+        "extensions": "Lo que Alcancía agrega para profundizar (mercado de capitales, CEDEARs, billeteras y fintech) se construye sobre fuentes oficiales y está pendiente de revisión del Lic. Kevin Giampieri.",
+        "formulasTitle": "Cálculos verificados",
+        "formulas": "Fórmulas del proyecto, con casos calculados a mano",
+        "formulasBody": "Cada número de las guías, las preguntas y las herramientas sale de una fórmula documentada, con sus supuestos, simplificaciones y un caso de prueba calculado a mano.",
+        "sheetsTitle": "Fichas informativas",
+        "sheetsBody": "Los brókers registrados en la CNV y las billeteras y fintech se muestran en fichas informativas, en orden alfabético y sin ser una recomendación, con el enlace al registro oficial para verificar.",
+        "brokers": "Ver los brókers registrados en Invertir",
+        "officialTitle": "Fuentes oficiales",
+        "officialBody": "Normas y datos del BCRA, la CNV, BYMA, Caja de Valores, argentina.gob.ar e INDEC. Cada una con la fecha en que se verificó."
+      },
+      "allShort": "Ver todas"
     }
   },
   "pay": {
@@ -2322,6 +2345,183 @@
     },
     "learn": {
       "tool": "Herramienta"
+    }
+  },
+  "invest": {
+    "intro": "Tu cuenta comitente de práctica en un bróker ficticio. Compras y vendes con dinero ficticio, precios de ejemplo y costos de ejemplo, para aprender cómo funciona antes de hacerlo de verdad.",
+    "context": "Datos de tu cuenta comitente",
+    "brokerChip": "{{name}} (ficticio)",
+    "profileChip": "Perfil: {{profile}}",
+    "profile": {
+      "conservative": "conservador",
+      "moderate": "moderado",
+      "aggressive": "agresivo"
+    },
+    "why": "Lo que compras con un agente registrado queda en una subcuenta comitente a tu nombre en Caja de Valores. Y antes de invertir, primero el fondo de emergencia y sin deudas caras.",
+    "legal": "Contenido educativo. No es asesoramiento financiero ni una recomendación de inversión. El bróker, los precios, la serie y los costos son de ejemplo y ficticios. Los rendimientos pasados no garantizan rendimientos futuros.",
+    "back": "Volver a Invertir",
+    "fuerte": {
+      "locked": "Invertir se abre cuando tengas tu fondo de emergencia armado. Primero lo que te protege, después lo que te hace crecer.",
+      "open": "Abramos tu cuenta de práctica. Acá equivocarte sale gratis.",
+      "home": "Tu cuenta comitente de práctica. Mira el riesgo de cada instrumento antes de comprar.",
+      "high": "Ojo con esto: riesgo alto quiere decir que el precio puede bajar mucho. Solo con dinero que no necesitas pronto.",
+      "medium": "Un bono también cambia de precio. Mira la ficha antes de decidir.",
+      "low": "Bajo riesgo, rendimiento que varía a diario y sin garantía de los depósitos."
+    },
+    "sheet": {
+      "label": "Ficha del instrumento",
+      "risk": {
+        "low": "Riesgo bajo",
+        "medium": "Riesgo medio",
+        "high": "Riesgo alto"
+      },
+      "liquidity": {
+        "same_day": "Rescate en el día",
+        "ci_24h": "Contado inmediato o 24 horas"
+      },
+      "currency": {
+        "ARS": "En pesos",
+        "ARS_USD": "En pesos, activo en dólares"
+      }
+    },
+    "instrument": {
+      "cedear-sp500": {
+        "name": "CEDEAR de un ETF que replica el S&P 500 (ejemplo)",
+        "body": "Te da acceso a un ETF del exterior que sigue a las 500 empresas más grandes de EE. UU. Lo pagas en pesos, pero su precio cambia con el ETF en dólares y con el tipo de cambio."
+      },
+      "mm-fund": {
+        "name": "Fondo money market de práctica",
+        "body": "Un fondo común de inversión de bajo riesgo y muy corto plazo. Su cuotaparte crece un poco cada día y se rescata en el día. No tiene la garantía de los depósitos."
+      },
+      "bond-example": {
+        "name": "Bono en pesos de ejemplo",
+        "body": "Le prestas dinero a un emisor a cambio de una tasa. Su precio en el mercado también sube y baja, aunque menos que el de una acción."
+      }
+    },
+    "instruments": {
+      "title": "Instrumentos de ejemplo",
+      "intro": "Cada uno con su ficha: riesgo, liquidez y moneda. Ninguno es una recomendación.",
+      "perUnit": "por unidad, hoy"
+    },
+    "open": {
+      "title": "Abre tu cuenta comitente de práctica",
+      "broker": "{{name}}, matrícula ficticia",
+      "intro": "Los mismos pasos que en un bróker real, sin ningún dato real.",
+      "steps": {
+        "verify": {
+          "title": "Verificar al agente",
+          "body": "En la vida real, en el Registro Público de Agentes de la CNV. Este bróker es ficticio."
+        },
+        "identity": {
+          "title": "Validar tu identidad",
+          "body": "Simulada: acá no se pide ningún dato real."
+        },
+        "profile": {
+          "title": "Test de perfil de inversor",
+          "body": "Es educativo: describe cuánto riesgo toleras y nunca se convierte en una cartera recomendada."
+        },
+        "fund": {
+          "title": "Fondear la cuenta",
+          "body": "Con una transferencia de práctica desde tu billetera."
+        }
+      },
+      "noProfile": "Todavía no hiciste el test de perfil de inversor. Puedes abrir la cuenta con un perfil moderado de ejemplo.",
+      "takeTest": "Hacer el test",
+      "button": "Abrir cuenta de práctica",
+      "done": "Cuenta comitente abierta",
+      "mission": "Hacerlo con la misión"
+    },
+    "account": {
+      "title": "Tu cuenta comitente",
+      "custody": "Tus títulos, en tu subcuenta comitente (de práctica)",
+      "practice": "Cuenta de práctica",
+      "total": "Valor total",
+      "cash": "Disponible para invertir",
+      "result": "Resultado frente a lo pagado",
+      "paperLoss": "Tu inversión vale menos de lo que pagaste. Mientras no vendas, es una pérdida en el papel: si no necesitas ese dinero y tienes tu fondo de emergencia, puedes esperar."
+    },
+    "holdings": {
+      "title": "Tu tenencia",
+      "empty": "Todavía no compraste nada. Elige un instrumento de la lista para ver su ficha y su precio.",
+      "data": "Datos de la tenencia",
+      "units_one": "{{count}} unidad",
+      "units_other": "{{count}} unidades",
+      "paid": "Pagaste {{amount}}",
+      "pending_one": "{{count}} se acredita mañana",
+      "pending_other": "{{count}} se acreditan mañana"
+    },
+    "transfer": {
+      "title": "Mover dinero con tu billetera",
+      "walletBalance": "Saldo de tu billetera:",
+      "amount": "Monto",
+      "help": "Monto en pesos, por ejemplo: 100.000",
+      "missing": "Escribe el monto que quieres mover.",
+      "fund": "Transferir a la cuenta",
+      "withdraw": "Retirar a la billetera",
+      "funded": "Transferiste {{amount}} a tu cuenta comitente",
+      "withdrawn": "Retiraste {{amount}} a tu billetera"
+    },
+    "brokers": {
+      "title": "Brókers registrados en la CNV",
+      "intro": "Algunos agentes de liquidación y compensación (ALyC) registrados en la CNV. La lista es informativa y no es una recomendación; hay muchos más. Verifica siempre la matrícula en el Registro Público de Agentes de la CNV antes de abrir una cuenta.",
+      "registration": "{{category}} · matrícula {{number}}",
+      "verified": "Matrículas verificadas el {{date}}.",
+      "cnv": "Buscar en el registro de la CNV"
+    },
+    "price": {
+      "title": "Precio de ejemplo",
+      "example": "Serie de ejemplo",
+      "today": "Hoy, {{date}}",
+      "cedear": "El precio en pesos cambia por dos motivos: si sube o baja el ETF en dólares, y si sube o baja el tipo de cambio implícito.",
+      "chartTitle": "Precio por mes",
+      "up": "En este período de ejemplo pasó de {{from}} a {{to}}.",
+      "down": "En este período de ejemplo bajó de {{from}} a {{to}}.",
+      "unit": "Precio por unidad",
+      "month": "Mes",
+      "showTable": "Ver como tabla",
+      "hideTable": "Ocultar la tabla",
+      "past": "Serie sintética de ejemplo, no son datos reales. Los rendimientos pasados no garantizan rendimientos futuros.",
+      "noHistory": "El gráfico se arma a medida que pasa el tiempo desde que abriste la cuenta. Usa \"Avanzar un mes\" en Inicio para ver cómo cambia el precio de ejemplo.",
+      "formulaShort": "Dólares ÷ ratio × tipo de cambio"
+    },
+    "order": {
+      "title": "Comprar o vender",
+      "noAccount": "Para operar, primero abre tu cuenta comitente de práctica.",
+      "openLink": "Abrir la cuenta",
+      "cash": "Disponible para invertir:",
+      "quantity": "Cantidad de unidades",
+      "quantityHelp": "Un número entero, por ejemplo: 4",
+      "quantityError": "Escribe una cantidad entera mayor que cero.",
+      "settlement": "Plazo de liquidación",
+      "ci": "Contado inmediato",
+      "24h": "A 24 horas",
+      "ciHelp": "Se acredita hoy, en tu subcuenta comitente.",
+      "24hHelp": "Se acredita el día siguiente, al precio de hoy.",
+      "gross": "Precio × cantidad",
+      "commission": "Comisión del bróker (ejemplo, 0,5 %)",
+      "marketFee": "Derechos de mercado (ejemplo, 0,08 %)",
+      "total": "Total de la compra",
+      "costsNote": "Los agentes deben informar sus costos antes de operar. Estos son de ejemplo y no incluyen impuestos.",
+      "buy": "Comprar",
+      "sell": "Vender",
+      "confirmBuyTitle_one": "¿Comprar {{count}} unidad?",
+      "confirmBuyTitle_other": "¿Comprar {{count}} unidades?",
+      "confirmBuyBody": "Pagas {{total}} desde tu cuenta comitente, con liquidación {{settlement}}. El precio puede bajar después de la compra.",
+      "confirmSellTitle_one": "¿Vender {{count}} unidad?",
+      "confirmSellTitle_other": "¿Vender {{count}} unidades?",
+      "confirmSellBody": "Recibes unos {{total}} en tu cuenta comitente, ya descontados los costos. Si el precio está por debajo de lo que pagaste, la pérdida se vuelve real.",
+      "bought": "Compra registrada",
+      "sold": "Venta registrada",
+      "youHave": "Tienes {{count}} para vender{{pending}}."
+    },
+    "errors": {
+      "insufficient_balance": "No alcanza el saldo de tu billetera.",
+      "insufficient_broker_cash": "No alcanza el disponible de tu cuenta comitente. Transfiere más desde tu billetera.",
+      "not_enough_units": "No tienes esa cantidad acreditada para vender.",
+      "quantity_not_positive": "Escribe una cantidad entera mayor que cero.",
+      "amount_not_positive": "Escribe un monto mayor que cero.",
+      "no_brokerage": "Primero abre tu cuenta comitente de práctica.",
+      "unknown_instrument": "No encontramos ese instrumento."
     }
   }
 }

@@ -64,7 +64,7 @@ function tickFormatter(currency: SimChart['currency']) {
   };
 }
 
-function Chart({ chart }: { chart: SimChart }) {
+export function Chart({ chart }: { chart: SimChart }) {
   const format = tickFormatter(chart.currency);
   const colors = ['var(--chart-1)', 'var(--chart-2)'];
   const common = { data: chart.data, margin: { top: 8, right: 8, bottom: 0, left: 0 } };

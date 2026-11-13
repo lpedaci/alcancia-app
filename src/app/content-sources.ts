@@ -52,6 +52,8 @@ export interface ContentSource {
   key: string;
   kind: 'workshop' | 'presentation' | 'official' | 'formula';
   name: string;
+  /** Short label for the compact chips: "Taller", "BCRA", "Cálculo F-14". */
+  short: string;
   url?: string;
   /** ISO date when the official data was checked. */
   verifiedAt?: string;
@@ -65,7 +67,7 @@ export function describeSources(codes: string[]): ContentSource[] {
   const unique = [...new Set(codes)];
   const out: ContentSource[] = [];
   if (unique.includes('T')) {
-    out.push({ key: 'T', kind: 'workshop', name: 'Taller "Del aula al primer trabajo", de Lourdes Pedaci', url: WORKSHOP_URL });
+    out.push({ key: 'T', kind: 'workshop', name: 'Taller "Del aula al primer trabajo", de Lourdes Pedaci', short: 'Taller', url: WORKSHOP_URL });
   }
   const slides = unique.filter((c) => c.startsWith('A-')).map((c) => Number(c.slice(2)));
   if (slides.length > 0) {
@@ -74,6 +76,7 @@ export function describeSources(codes: string[]): ContentSource[] {
       key: 'A',
       kind: 'presentation',
       name: `Presentación "Educación financiera: transformá tu relación con el dinero", del Lic. Kevin Giampieri (${slides.length === 1 ? 'diapositiva' : 'diapositivas'} ${list})`,
+      short: 'Presentación del taller',
     });
   }
   const seen = new Set<string>();
@@ -84,17 +87,35 @@ export function describeSources(codes: string[]): ContentSource[] {
       const source = sourceById(entry);
       if (!source || seen.has(entry)) continue;
       seen.add(entry);
-      out.push({ key: entry, kind: 'official', name: source.name, url: source.url, verifiedAt: source.verifiedAt });
+      out.push({ key: entry, kind: 'official', name: source.name, short: shortName(source.name), url: source.url, verifiedAt: source.verifiedAt });
     } else if (!seen.has(entry.name)) {
       seen.add(entry.name);
-      out.push({ key: code, kind: 'official', name: entry.name, verifiedAt: ANNEX_B_VERIFIED });
+      out.push({ key: code, kind: 'official', name: entry.name, short: shortName(entry.name), verifiedAt: ANNEX_B_VERIFIED });
     }
   }
   const cases = unique.filter((c) => c.startsWith('F-'));
   if (cases.length > 0) {
-    out.push({ key: 'F', kind: 'formula', name: `Cálculo verificado a mano: ${cases.length === 1 ? 'caso' : 'casos'} ${cases.join(', ')} de las fórmulas del proyecto`, url: FORMULAS_URL });
+    out.push({
+      key: 'F',
+      kind: 'formula',
+      name: `Cálculo verificado a mano: ${cases.length === 1 ? 'caso' : 'casos'} ${cases.join(', ')} de las fórmulas del proyecto`,
+      short: `Cálculo ${cases.join(', ')}`,
+      url: FORMULAS_URL,
+    });
   }
   return out;
+}
+
+/** The organism of an official source, for its chip: "BCRA", "CNV", "argentina.gob.ar", "Ley 25.065". */
+function shortName(name: string): string {
+  const law = /^Ley [\d.]+/.exec(name);
+  if (law) return law[0];
+  return name.split(/[,:]/)[0]!.trim();
+}
+
+/** Every official source with its full name, link and date, for the Fuentes page. */
+export function allOfficialSources(): ContentSource[] {
+  return describeSources(Object.keys(OFFICIAL));
 }
 
 /** Every code used in content must be known here (checked by a test). */

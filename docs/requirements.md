@@ -35,7 +35,7 @@
 | RF-29 | Apartados: "Ahorro" básico desde el nivel 1; apartados con meta y fondo de emergencia desde el nivel 4 | M | `emergency_months` según `wallet-engine.md` | Hecho (paso 7.4, D-175) |
 | RF-30 | Rendir: cuenta remunerada y fondo money market de práctica; plazo fijo y UVA de práctica | M | Rendimiento diario acreditado; fichas con protección de cada opción | Hecho (paso 8.4, D-180) |
 | RF-31 | Tarjeta y préstamos: tarjeta de práctica con resumen, préstamo preaprobado y compra en cuotas | M | El CFT siempre visible antes de decidir | Hecho (paso 8.3, D-178) |
-| RF-32 | Invertir: cuenta comitente de práctica con el bróker ficticio (5.4) | M | Los 7 pasos de 5.4; serie de precios sintética rotulada | Pendiente |
+| RF-32 | Invertir: cuenta comitente de práctica con el bróker ficticio (5.4) | M | Los 7 pasos de 5.4; serie de precios sintética rotulada | Hecho (paso 9, D-185, D-186) |
 | RF-33 | Fuerte con 6 estados, mensajes de `fuerte-lines.json` y 3 niveles de presencia | M | Nunca interrumpe dos veces la misma acción; mensaje anunciado como texto | Parcial (paso 6): 3 niveles de presencia en P14, Fuerte flotante y movible; faltan los mensajes de `fuerte-lines.json` |
 | RF-34 | "¿Por qué importa?" y tarjetas de aprendizaje en el momento justo | M | Una por acción como máximo; no se repite si ya se respondió bien | Pendiente |
 | RF-35 | Cartel fijo "Simulador de finanzas personales · dinero ficticio" y ningún dato real pedido | M | Revisión de formularios: no hay campos de DNI, CBU, tarjeta ni contraseña reales | Pendiente |

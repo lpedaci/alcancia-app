@@ -23,6 +23,7 @@ import {
   setTwoFactor,
   transferOut,
 } from '@/features/wallet/engine/engine';
+import { buy, fundBrokerage, openBrokerage, portfolioValue, positions, quote, sell } from '@/features/invest/engine';
 import { POCKET_EMERGENCY, POCKET_SAVINGS } from '@/features/wallet/engine/demo';
 import type { WalletState } from '@/features/wallet/engine/types';
 
@@ -55,8 +56,15 @@ export type ActionId =
   | 'accept_loan'
   | 'yield_remunerated'
   | 'yield_money_market'
-  | 'advance_30';
-export type CheckId = 'two_factor_on' | 'daily_limit_set' | 'step_correct' | 'step_done' | 'salary_received' | 'savings_percent' | 'paid_to' | 'month_green' | 'savings_kept' | 'emergency_goal' | 'emergency_funded';
+  | 'advance_30'
+  | 'open_brokerage'
+  | 'fund_brokerage'
+  | 'setup_brokerage'
+  | 'setup_buy'
+  | 'buy_cedear'
+  | 'sell_cedear'
+  | 'advance_days';
+export type CheckId = 'two_factor_on' | 'daily_limit_set' | 'step_correct' | 'step_done' | 'salary_received' | 'savings_percent' | 'paid_to' | 'month_green' | 'savings_kept' | 'emergency_goal' | 'emergency_funded' | 'brokerage_open' | 'brokerage_funded' | 'holds';
 
 interface StepBase {
   id: string;
@@ -83,7 +91,7 @@ export type MissionStep =
       kind: 'numeric';
       prompt: string;
       help: string;
-      expected: 'salary_percent' | 'essential_months' | 'loan_total';
+      expected: 'salary_percent' | 'essential_months' | 'loan_total' | 'cedear_price';
       param: string;
       tolerance: string;
       onCorrect?: ActionId;
@@ -158,6 +166,9 @@ export interface Feedback {
   text: string;
 }
 
+/** The example CEDEAR of the practice brokerage account (SIM-14). */
+const CEDEAR = 'cedear-sp500';
+
 const percentOfSalary = (wallet: WalletState, fraction: string) => roundCents(D(wallet.salary).times(fraction));
 
 /**
@@ -189,6 +200,18 @@ export function fillText(text: string, run: MissionRun, extra: { expected?: stri
       .replaceAll('{{inflation}}', formatPercent(scenario.monthlyInflation, { decimals: 1 }))
       .replaceAll('{{yieldEarned}}', formatMoney(earned))
       .replaceAll('{{realRate}}', formatPercent(real, { decimals: 2, sign: 'always' }));
+    // Practice brokerage account (SIM-14): the example CEDEAR's quote and the account's value.
+    const cedear = quote(run.wallet, CEDEAR);
+    const value = portfolioValue(run.wallet);
+    filled = filled
+      .replaceAll('{{usdPrice}}', formatMoney(cedear.usdPrice!, { currency: 'USD' }))
+      .replaceAll('{{impliedFx}}', formatMoney(cedear.impliedFx!))
+      .replaceAll('{{cedearPrice}}', formatMoney(cedear.price))
+      .replaceAll('{{portfolioCost}}', formatMoney(value.cost))
+      .replaceAll('{{portfolioValue}}', formatMoney(value.invested))
+      .replaceAll('{{portfolioResult}}', formatMoney(value.result, { sign: 'always' }))
+      .replaceAll('{{portfolioRate}}', formatPercent(value.cost.gt(0) ? value.result.div(value.cost) : 0, { decimals: 1, sign: 'always' }))
+      .replaceAll('{{portfolioTotal}}', formatMoney(value.total));
   }
   return filled
     .replaceAll('{{salary}}', formatMoney(run.wallet.salary))
@@ -200,6 +223,7 @@ export function fillText(text: string, run: MissionRun, extra: { expected?: stri
 export function expectedAmount(step: Extract<MissionStep, { kind: 'numeric' }>, run: MissionRun): string {
   if (step.expected === 'essential_months') return toMoneyString(essentialMonthlyExpenses(run.wallet).times(step.param));
   if (step.expected === 'loan_total') return toMoneyString(loanOffer(run.wallet).total);
+  if (step.expected === 'cedear_price') return toMoneyString(quote(run.wallet, CEDEAR).price);
   return toMoneyString(percentOfSalary(run.wallet, step.param));
 }
 
@@ -243,6 +267,24 @@ function applyAction(wallet: WalletState, action: ActionId, value?: string, targ
       return setYieldMode(wallet, 'money_market');
     case 'advance_30':
       return advanceDays(wallet, 30);
+    case 'advance_days':
+      return advanceDays(wallet, Number(value ?? '1'));
+    // The practice account uses an example moderate profile: the person's own test result stays in
+    // her browser's local data, outside the mission (D-67).
+    case 'open_brokerage':
+      return openBrokerage(wallet, 'moderate');
+    case 'fund_brokerage':
+      return fundBrokerage(wallet, value ?? '0');
+    case 'setup_brokerage':
+      return fundBrokerage(openBrokerage(wallet, 'moderate'), value ?? '0');
+    case 'setup_buy':
+      return buy(fundBrokerage(openBrokerage(wallet, 'moderate'), value ?? '0'), CEDEAR, Number(target ?? '1'));
+    case 'buy_cedear':
+      return buy(wallet, CEDEAR, Number(value ?? '1'), target === '24h' ? '24h' : 'ci');
+    case 'sell_cedear': {
+      const held = positions(wallet).find((p) => p.instrumentId === CEDEAR)?.settled ?? 0;
+      return held > 0 ? sell(wallet, CEDEAR, held) : wallet;
+    }
   }
 }
 
@@ -388,6 +430,12 @@ export function checkCriterion(criterion: Criterion, run: MissionRun): boolean {
     }
     case 'emergency_funded':
       return D(emergencyFund(wallet)?.amount ?? '0').gt(0);
+    case 'brokerage_open':
+      return Boolean(wallet.brokerage);
+    case 'brokerage_funded':
+      return Boolean(wallet.brokerage) && wallet.movements.some((m) => m.type === 'brokerage' && D(m.amount).lt(0));
+    case 'holds':
+      return Boolean(wallet.brokerage?.trades.some((t) => t.side === 'buy' && t.instrumentId === criterion.param));
     case 'savings_kept':
       return !wallet.movements.some((m) => m.type === 'pocket_out');
     case 'paid_to':

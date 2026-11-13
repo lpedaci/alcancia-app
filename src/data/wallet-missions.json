@@ -1125,21 +1125,388 @@
       "levelId": "level-7",
       "title": "Abre tu cuenta comitente",
       "minutes": 3,
-      "objective": "Abrir una cuenta de práctica en un bróker ficticio y fondearla desde la billetera."
+      "objective": "Abrir una cuenta de práctica en un bróker ficticio, fondearla desde la billetera y explicar dónde quedan tus títulos y cómo se verifica un agente.",
+      "initial": "salary",
+      "steps": [
+        {
+          "id": "broker",
+          "kind": "card",
+          "title": "Un bróker de práctica",
+          "body": "Vas a abrir una cuenta en Bróker de Ejemplo S.A., con matrícula ficticia. En la vida real, antes de abrir una cuenta verificas al agente en el Registro Público de Agentes de la CNV y miras su categoría y su matrícula. Acá no te pedimos ningún dato real.",
+          "fuerte": "Primero verificar, después abrir. Así se empieza a invertir.",
+          "sourceIds": [
+            "T",
+            "A-53",
+            "A-54",
+            "B-21"
+          ]
+        },
+        {
+          "id": "open",
+          "kind": "action",
+          "instruction": "Abre tu cuenta comitente de práctica. En esta misión usamos un perfil moderado de ejemplo: el resultado de tu test queda solo en tu navegador.",
+          "button": "Abrir cuenta comitente",
+          "action": "open_brokerage",
+          "done": "Guardado. Tu cuenta comitente de práctica está abierta."
+        },
+        {
+          "id": "fund",
+          "kind": "decision",
+          "prompt": "¿Cuánto transfieres desde tu billetera para empezar?",
+          "options": [
+            {
+              "id": "f100",
+              "text": "$ 100.000",
+              "feedback": "Transferido. Sale de tu billetera y queda en el bróker, listo para invertir.",
+              "action": "fund_brokerage",
+              "value": "100000"
+            },
+            {
+              "id": "f200",
+              "text": "$ 200.000",
+              "feedback": "Transferido. Sale de tu billetera y queda en el bróker, listo para invertir.",
+              "action": "fund_brokerage",
+              "value": "200000"
+            },
+            {
+              "id": "f300",
+              "text": "$ 300.000",
+              "feedback": "Transferido. Recuerda: solo invierte dinero que no vas a necesitar pronto.",
+              "action": "fund_brokerage",
+              "value": "300000"
+            }
+          ],
+          "sourceIds": [
+            "B-34"
+          ]
+        },
+        {
+          "id": "custody",
+          "kind": "single",
+          "prompt": "Cuando compres con un agente registrado, ¿a nombre de quién quedan los títulos?",
+          "options": [
+            {
+              "id": "mine",
+              "text": "A tu nombre, en una subcuenta comitente en Caja de Valores",
+              "feedback": "Correcto. Quedan a tu nombre y puedes consultar tus tenencias en los canales del agente y de Caja de Valores."
+            },
+            {
+              "id": "broker",
+              "text": "A nombre del bróker",
+              "feedback": "Quedan a tu nombre, en una subcuenta comitente en Caja de Valores asociada al agente. Prueba de nuevo."
+            },
+            {
+              "id": "bank",
+              "text": "A nombre de un banco",
+              "feedback": "No intervienen bancos: quedan a tu nombre en una subcuenta comitente en Caja de Valores. Prueba de nuevo."
+            }
+          ],
+          "correct": "mine",
+          "sourceIds": [
+            "B-22"
+          ]
+        },
+        {
+          "id": "verify",
+          "kind": "single",
+          "prompt": "Ves una publicidad de un bróker que no conoces. ¿Qué haces antes de abrir una cuenta?",
+          "options": [
+            {
+              "id": "cnv",
+              "text": "Lo busco en el Registro Público de Agentes de la CNV",
+              "feedback": "Correcto. Su publicidad debe mostrar su categoría y su matrícula; si no figura en el registro, extrema las precauciones."
+            },
+            {
+              "id": "reviews",
+              "text": "Leo comentarios en redes sociales",
+              "feedback": "Los comentarios no prueban que esté autorizado. Se verifica en el Registro Público de Agentes de la CNV. Prueba de nuevo."
+            },
+            {
+              "id": "rate",
+              "text": "Elijo el que promete más rendimiento",
+              "feedback": "Un rendimiento prometido es una señal de alerta. Primero se verifica en el registro de la CNV. Prueba de nuevo."
+            }
+          ],
+          "correct": "cnv",
+          "sourceIds": [
+            "B-21",
+            "B-24"
+          ]
+        },
+        {
+          "id": "summary",
+          "kind": "summary"
+        }
+      ],
+      "criteria": [
+        {
+          "id": "open",
+          "description": "Abriste tu cuenta comitente de práctica",
+          "check": "brokerage_open"
+        },
+        {
+          "id": "funded",
+          "description": "La fondeaste desde tu billetera",
+          "check": "brokerage_funded"
+        },
+        {
+          "id": "custody",
+          "description": "Sabes dónde quedan tus títulos",
+          "check": "step_correct",
+          "param": "custody"
+        },
+        {
+          "id": "verify",
+          "description": "Sabes cómo verificar a un agente",
+          "check": "step_correct",
+          "param": "verify"
+        }
+      ]
     },
     {
       "id": "mission-first-cedear",
       "levelId": "level-7",
       "title": "Tu primer CEDEAR de ETF",
       "minutes": 4,
-      "objective": "Comprar un CEDEAR de ejemplo y leer el ratio, el tipo de cambio implícito y los costos."
+      "objective": "Calcular el precio teórico de un CEDEAR de ejemplo, comprarlo eligiendo el plazo de liquidación y reconocer sus costos.",
+      "initial": "salary",
+      "steps": [
+        {
+          "id": "setup",
+          "kind": "action",
+          "instruction": "Abre tu cuenta de práctica y transfiere $ 300.000 desde tu billetera.",
+          "button": "Abrir y fondear",
+          "action": "setup_brokerage",
+          "value": "300000",
+          "done": "Listo: tienes $ 300.000 en tu cuenta comitente de práctica."
+        },
+        {
+          "id": "sheet",
+          "kind": "card",
+          "title": "La ficha del instrumento",
+          "body": "CEDEAR de un ETF que replica el S&P 500, de ejemplo. Riesgo alto: su precio puede subir o bajar mucho. Liquidez: se compra y se vende en contado inmediato o a 24 horas. Moneda: lo pagas en pesos, pero el activo está en dólares, así que también cambia con el tipo de cambio.",
+          "fuerte": "Ojo con esto: riesgo alto quiere decir que puede bajar. Solo con dinero que no necesitas pronto.",
+          "sourceIds": [
+            "B-30",
+            "B-33",
+            "B-34"
+          ]
+        },
+        {
+          "id": "price",
+          "kind": "numeric",
+          "prompt": "El ETF de ejemplo vale {{usdPrice}}, el ratio es 20:1 y el tipo de cambio implícito, {{impliedFx}}. ¿Cuál es el precio teórico de un CEDEAR en pesos?",
+          "help": "Monto en pesos, con dos decimales, por ejemplo: 40.000,00",
+          "expected": "cedear_price",
+          "param": "1",
+          "tolerance": "1.00",
+          "hint": "Divide el precio por el ratio y multiplica por el tipo de cambio: el resultado es {{expected}}. Prueba con ese monto.",
+          "feedback": "Correcto: {{amount}} por CEDEAR. Si sube el ETF o sube el tipo de cambio, sube el precio en pesos.",
+          "sourceIds": [
+            "B-31",
+            "B-36",
+            "F-20"
+          ]
+        },
+        {
+          "id": "settle",
+          "kind": "decision",
+          "prompt": "Compras 4 CEDEARs. ¿Con qué plazo de liquidación?",
+          "options": [
+            {
+              "id": "ci",
+              "text": "Contado inmediato",
+              "feedback": "Comprado. Con contado inmediato, los CEDEARs se acreditan hoy en tu subcuenta comitente.",
+              "action": "buy_cedear",
+              "value": "4",
+              "target": "ci"
+            },
+            {
+              "id": "24h",
+              "text": "A 24 horas",
+              "feedback": "Comprado. A 24 horas, se acreditan el día hábil siguiente, al precio de hoy.",
+              "action": "buy_cedear",
+              "value": "4",
+              "target": "24h"
+            }
+          ],
+          "sourceIds": [
+            "B-34"
+          ]
+        },
+        {
+          "id": "costs",
+          "kind": "single",
+          "prompt": "Además del precio, ¿qué pagaste en esta compra de práctica?",
+          "options": [
+            {
+              "id": "fees",
+              "text": "La comisión del bróker y los derechos de mercado",
+              "feedback": "Correcto. Los agentes deben informar sus costos antes de operar: compáralos siempre. Acá son de ejemplo."
+            },
+            {
+              "id": "none",
+              "text": "Nada más que el precio",
+              "feedback": "También pagaste la comisión del bróker y los derechos de mercado (de ejemplo). Mira el detalle de la compra. Prueba de nuevo."
+            },
+            {
+              "id": "tax",
+              "text": "Un impuesto por comprar",
+              "feedback": "En esta práctica pagaste la comisión y los derechos de mercado, de ejemplo. Prueba de nuevo."
+            }
+          ],
+          "correct": "fees",
+          "sourceIds": [
+            "B-20"
+          ]
+        },
+        {
+          "id": "summary",
+          "kind": "summary"
+        }
+      ],
+      "criteria": [
+        {
+          "id": "price",
+          "description": "Calculaste el precio teórico del CEDEAR",
+          "check": "step_correct",
+          "param": "price"
+        },
+        {
+          "id": "bought",
+          "description": "Compraste tu primer CEDEAR de ejemplo",
+          "check": "holds",
+          "param": "cedear-sp500"
+        },
+        {
+          "id": "costs",
+          "description": "Reconociste los costos de la compra",
+          "check": "step_correct",
+          "param": "costs"
+        }
+      ]
     },
     {
       "id": "mission-hold-the-drop",
       "levelId": "level-7",
       "title": "Aguanta la caída",
-      "minutes": 3,
-      "objective": "Seguir la inversión en una caída de ejemplo sin vender en pánico."
+      "minutes": 4,
+      "objective": "Seguir una inversión de ejemplo durante una caída, decidir sin pánico y explicar qué permite esperar.",
+      "initial": "salary",
+      "steps": [
+        {
+          "id": "setup",
+          "kind": "action",
+          "instruction": "Abre tu cuenta de práctica, transfiere $ 300.000 y compra 4 CEDEARs de ejemplo.",
+          "button": "Abrir, fondear y comprar",
+          "action": "setup_buy",
+          "value": "300000",
+          "target": "4",
+          "done": "Listo: tienes 4 CEDEARs de ejemplo. Pagaste {{portfolioCost}}, con los costos incluidos."
+        },
+        {
+          "id": "drop",
+          "kind": "action",
+          "instruction": "Avanza cuatro meses y mira cómo está tu inversión.",
+          "button": "Avanzar cuatro meses",
+          "action": "advance_days",
+          "value": "120",
+          "done": "Pasaron cuatro meses y el mercado de ejemplo cayó. Tu inversión vale {{portfolioValue}}: {{portfolioResult}} ({{portfolioRate}}) frente a lo que pagaste.",
+          "fuerte": "Respira. Esto es una serie de ejemplo y nadie te apura."
+        },
+        {
+          "id": "choice",
+          "kind": "decision",
+          "prompt": "¿Qué haces con tus CEDEARs?",
+          "options": [
+            {
+              "id": "sell",
+              "text": "Los vendo para no perder más",
+              "feedback": "Vendiste en la caída: la pérdida, que estaba en el papel, ahora es real. Veamos qué habría pasado esperando.",
+              "action": "sell_cedear"
+            },
+            {
+              "id": "hold",
+              "text": "Los mantengo: no necesito ese dinero",
+              "feedback": "Guardado. Una caída no es una pérdida hasta que vendes, si no necesitas ese dinero y tienes tu fondo de emergencia."
+            },
+            {
+              "id": "more",
+              "text": "Compro uno más a un precio más bajo",
+              "feedback": "Compraste uno más a un precio más bajo: es la idea de los aportes periódicos. Sin presión: solo con dinero que no necesitas.",
+              "action": "buy_cedear",
+              "value": "1",
+              "target": "ci"
+            }
+          ],
+          "sourceIds": [
+            "T",
+            "A-39",
+            "A-55"
+          ]
+        },
+        {
+          "id": "later",
+          "kind": "action",
+          "instruction": "Avanza diez meses más.",
+          "button": "Avanzar diez meses",
+          "action": "advance_days",
+          "value": "300",
+          "done": "Pasaron diez meses más. Tu cuenta comitente vale {{portfolioTotal}} en total, entre efectivo e inversión. En este ejemplo el precio se recuperó; en la vida real puede tardar más o no pasar. Los rendimientos pasados no garantizan rendimientos futuros."
+        },
+        {
+          "id": "lesson",
+          "kind": "single",
+          "prompt": "¿Qué te permite esperar en una caída sin tener que vender?",
+          "options": [
+            {
+              "id": "base",
+              "text": "Tener el fondo de emergencia armado e invertir solo dinero que no necesitas pronto",
+              "feedback": "Correcto. Por eso Invertir se abre después del fondo de emergencia y sin deudas caras: primero lo que te protege."
+            },
+            {
+              "id": "watch",
+              "text": "Mirar el precio todos los días",
+              "feedback": "Mirarlo seguido no cambia el precio, y suele empujar a decidir con miedo. Prueba de nuevo."
+            },
+            {
+              "id": "always",
+              "text": "Saber que el precio siempre se recupera",
+              "feedback": "Nada garantiza que se recupere ni cuándo. Lo que permite esperar es no necesitar ese dinero. Prueba de nuevo."
+            }
+          ],
+          "correct": "base",
+          "sourceIds": [
+            "T",
+            "A-23",
+            "A-35"
+          ]
+        },
+        {
+          "id": "summary",
+          "kind": "summary"
+        }
+      ],
+      "criteria": [
+        {
+          "id": "choice",
+          "description": "Decidiste qué hacer en la caída",
+          "check": "step_done",
+          "param": "choice"
+        },
+        {
+          "id": "later",
+          "description": "Seguiste la inversión en el tiempo",
+          "check": "step_done",
+          "param": "later"
+        },
+        {
+          "id": "lesson",
+          "description": "Explicaste qué te permite esperar",
+          "check": "step_correct",
+          "param": "lesson"
+        }
+      ]
     }
   ]
 }

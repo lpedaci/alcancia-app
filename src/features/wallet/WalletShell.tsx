@@ -55,7 +55,7 @@ export const DESTINATIONS: Destination[] = [
     ],
   },
   { id: 'invest', to: '/app/invest', icon: 'trending_up' },
-  { id: 'learn', to: '/app/learn', icon: 'school', subsections: [{ key: 'map', to: '/app/learn' }, { key: 'tools', to: '/app/tools' }] },
+  { id: 'learn', to: '/app/learn', icon: 'school', subsections: [{ key: 'map', to: '/app/learn' }, { key: 'tools', to: '/app/tools' }, { key: 'sources', to: '/app/learn/sources' }] },
 ];
 
 /** Path prefixes of each destination: Aprender also covers the tools and the missions (P12, P13). */

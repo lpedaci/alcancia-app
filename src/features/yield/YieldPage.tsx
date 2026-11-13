@@ -194,8 +194,7 @@ function Yield() {
             <LearnSection />
           </div>
         </div>
-        <SourceList codes={['B-01', 'B-02', 'B-03', 'B-12', 'B-13', 'B-14', 'B-17', 'B-26', 'F-03', 'F-08', 'F-09']} legal={false} />
-        <p className="text-body-small text-on-surface-variant">{t('yield.legal')}</p>
+        <SourceList variant="footer" codes={['B-01', 'B-02', 'B-03', 'B-12', 'B-13', 'B-14', 'B-17', 'B-26', 'F-03', 'F-08', 'F-09']} legalText={t('yield.legal')} />
       </div>
     </WalletShell>
   );

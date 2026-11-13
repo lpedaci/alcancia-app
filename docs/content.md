@@ -104,6 +104,15 @@ Las 13 guías y sus bancos quedan revisados por Lourdes con estas correcciones:
 
 También se cambió la frase de Fuerte para Invertir bloqueado: "Invertir se abre cuando tengas tu fondo de emergencia armado", como en la spec actualizada.
 
+## Misiones del nivel 7 e Invertir (paso 9.3, D-186)
+
+- **Abre tu cuenta comitente** (módulo 13): el bróker ficticio y cómo se verifica uno real en el registro de la CNV (B-21, B-24); abrir con un perfil moderado de ejemplo (el test real queda en el navegador, D-67); fondear desde la billetera; dónde quedan los títulos (subcuenta comitente en Caja de Valores, B-22).
+- **Tu primer CEDEAR de ETF** (módulo 15): ficha del instrumento (riesgo alto, contado inmediato o 24 horas, en pesos con activo en dólares; B-30, B-33, B-34); precio teórico del día (B-36, F-20, tolerancia de $ 1); plazo de liquidación; costos de ejemplo (B-20).
+- **Aguanta la caída** (módulos 12 y 14): serie sintética de ejemplo con una caída en los primeros meses; vender, mantener o comprar uno más, cada uno con su consecuencia; "Los rendimientos pasados no garantizan rendimientos futuros"; qué permite esperar: el fondo de emergencia y dinero que no se necesita pronto (T, A-23, A-35).
+- **P8, Invertir:** apertura en cuatro pasos (A-54), cuenta con valor, disponible y resultado, tenencia con unidades pendientes de acreditar, transferencias con la billetera, instrumentos con su ficha, detalle con precio, gráfico de la serie de ejemplo y "Ver como tabla", y la ficha de brókers registrados del Anexo C (orden alfabético, sin logos ni comisiones, con enlace al registro de la CNV).
+
+**Estado:** borrador para revisión de Lourdes; los instrumentos, costos y la serie de ejemplo, además, para revisión del Lic. Kevin Giampieri.
+
 ## Tanda del paso 9: guías y bancos del nivel 7 (D-184)
 
 Escrita con las reglas de la revisión de Lourdes (D-182): fuentes solo en `sourceIds`, "Antes de empezar" como reflexión, tasas rotuladas "de ejemplo", herramientas por su nombre y con botón. **Estado:** borrador para revisión de Lourdes; las ampliaciones (módulos 13 a 15), además, para revisión del Lic. Kevin Giampieri.

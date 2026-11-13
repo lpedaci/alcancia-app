@@ -29,9 +29,9 @@ function play(def: MissionDef, run: MissionRun, input?: string) {
 }
 
 describe('mission catalog (D-59, D-166)', () => {
-  it('has the 13 phase A missions; levels 0 to 6 are playable', () => {
+  it('has the 13 phase A missions, all of them playable', () => {
     expect(MISSION_DEFS).toHaveLength(13);
-    expect(MISSION_DEFS.filter((m) => isPlayable(m)).map((m) => m.id)).toEqual(['mission-security', 'mission-1', 'mission-2', 'mission-3', 'mission-6', 'mission-7', 'mission-emergency-fund', 'mission-5', 'mission-debts', 'mission-4']);
+    expect(MISSION_DEFS.filter((m) => isPlayable(m)).map((m) => m.id)).toEqual(['mission-security', 'mission-1', 'mission-2', 'mission-3', 'mission-6', 'mission-7', 'mission-emergency-fund', 'mission-5', 'mission-debts', 'mission-4', 'mission-broker-account', 'mission-first-cedear', 'mission-hold-the-drop']);
   });
 
   it('every playable mission ends with a summary and its criteria point to real steps', () => {
@@ -307,6 +307,48 @@ describe('mission "¿Cuenta o fondo?" (step 8.4)', () => {
     run = nextStep(def, advanced.run);
     run = play(def, answerStep(def, run, 'true-cnv').run, 'false-fund').run;
     run = play(def, run, 'legal').run;
+    expect(finishMission(def, run).finished).toBe(true);
+  });
+});
+
+describe('level 7 missions (step 9.3)', () => {
+  const plain = (text?: string) => (text ?? '').replaceAll(String.fromCharCode(160), ' ');
+
+  it('"Abre tu cuenta comitente": opens, funds from the wallet and checks custody and verification', () => {
+    const def = missionById('mission-broker-account')!;
+    let run = play(def, startMission(def, createWallet('p'))).run;
+    run = play(def, run).run;
+    expect(run.wallet.brokerage).toBeDefined();
+    run = play(def, run, 'f200').run;
+    expect(run.wallet.brokerage!.cash).toBe('200000.00');
+    run = play(def, answerStep(def, run, 'broker').run, 'mine').run;
+    run = play(def, run, 'cnv').run;
+    expect(finishMission(def, run).finished).toBe(true);
+  });
+
+  it('"Tu primer CEDEAR de ETF": the theoretical price of the run day, the purchase and its costs', () => {
+    const def = missionById('mission-first-cedear')!;
+    let run = play(def, startMission(def, createWallet('p'))).run;
+    run = play(def, run).run;
+    // Day 1: USD 600 ÷ 20 × (1.500 × 1,03^(1/30)) = $ 45.044,36.
+    const right = answerStep(def, run, '45.044,36');
+    expect(right.run.results.price?.correct).toBe(true);
+    run = play(def, nextStep(def, right.run), '24h').run;
+    expect(run.wallet.brokerage!.trades[0]).toMatchObject({ settlement: '24h', quantity: 4 });
+    run = play(def, answerStep(def, run, 'none').run, 'fees').run;
+    expect(finishMission(def, run).finished).toBe(true);
+  });
+
+  it('"Aguanta la caída": four months later the example investment is down; ten more and it has recovered', () => {
+    const def = missionById('mission-hold-the-drop')!;
+    let run = startMission(def, createWallet('p'));
+    run = play(def, run).run;
+    const drop = answerStep(def, run);
+    expect(plain(drop.feedback?.text)).toMatch(/−\d/);
+    run = play(def, nextStep(def, drop.run), 'hold').run;
+    const later = answerStep(def, run);
+    expect(plain(later.feedback?.text)).toContain('no garantizan');
+    run = play(def, nextStep(def, later.run), 'base').run;
     expect(finishMission(def, run).finished).toBe(true);
   });
 });
