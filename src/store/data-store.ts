@@ -9,6 +9,7 @@ import type {
   DiagnosticKnowledgeResult,
   FollowUp30,
   GuideProgress,
+  ItemResponse,
   LevelLearningProgress,
   LevelUnlockRecord,
   MissionCompletion,
@@ -33,6 +34,8 @@ export interface OrgData {
   diagnostics: DiagnosticKnowledgeResult[];
   guideProgress: GuideProgress[];
   challengeAttempts: ChallengeAttempt[];
+  /** What was answered in each challenge question, for the tutor's item statistics (T4, aggregated). */
+  itemResponses: ItemResponse[];
   levelLearning: LevelLearningProgress[];
   unlockRecords: LevelUnlockRecord[];
   missionCompletions: MissionCompletion[];
@@ -66,7 +69,13 @@ interface DataState extends OrgData {
   /** A guide read (P10), with the optional satisfaction of Kirkpatrick 1 (RF-49). */
   markGuideDone: (personId: string, moduleId: string, guideId: string, at: string, satisfaction?: GuideProgress['satisfaction']) => void;
   /** A challenge attempt (P11, D-57): the best one counts, the first one shows what the person knew. */
-  addChallengeAttempt: (attempt: ChallengeAttempt) => void;
+  addChallengeAttempt: (attempt: ChallengeAttempt, items?: ItemResponse[]) => void;
+  /** T3: a weekly challenge for a cohort (F5). */
+  assignWeeklyChallenge: (challenge: WeeklyChallenge) => void;
+  /** T5: the tutor's answer to a question about a module (never economic data). */
+  answerQuestion: (questionId: string, text: string, at: string) => void;
+  /** T2: the tutor enables a level for a person or a cohort, with a reason that is recorded (5.0). */
+  addUnlockRecord: (record: LevelUnlockRecord) => void;
 }
 
 export const DATA_STORAGE_KEY = 'alcancia-data';
@@ -108,7 +117,14 @@ export const useDataStore = create<DataState>()(
             ],
           };
         }),
-      addChallengeAttempt: (attempt) => set((state) => ({ challengeAttempts: [...state.challengeAttempts, attempt] })),
+      addChallengeAttempt: (attempt, items = []) =>
+        set((state) => ({ challengeAttempts: [...state.challengeAttempts, attempt], itemResponses: [...state.itemResponses, ...items] })),
+      assignWeeklyChallenge: (challenge) => set((state) => ({ weeklyChallenges: [...state.weeklyChallenges, challenge] })),
+      answerQuestion: (questionId, text, at) =>
+        set((state) => ({
+          tutorQuestions: state.tutorQuestions.map((q) => (q.id === questionId ? { ...q, answer: { text, answeredAt: at } } : q)),
+        })),
+      addUnlockRecord: (record) => set((state) => ({ unlockRecords: [...state.unlockRecords, record] })),
     }),
     {
       name: DATA_STORAGE_KEY,

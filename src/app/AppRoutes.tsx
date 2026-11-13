@@ -28,6 +28,11 @@ const BudgetPage = lazyPage(() => import('@/features/budget/BudgetPage'), 'Budge
 const PocketsPage = lazyPage(() => import('@/features/pockets/PocketsPage'), 'PocketsPage');
 const YieldPage = lazyPage(() => import('@/features/yield/YieldPage'), 'YieldPage');
 const SourcesPage = lazyPage(() => import('@/features/learning/SourcesPage'), 'SourcesPage');
+const TutorHomePage = lazyPage(() => import('@/features/tutor/TutorHomePage'), 'TutorHomePage');
+const CohortPage = lazyPage(() => import('@/features/tutor/CohortPage'), 'CohortPage');
+const AssignChallengePage = lazyPage(() => import('@/features/tutor/AssignChallengePage'), 'AssignChallengePage');
+const AssessmentsPage = lazyPage(() => import('@/features/tutor/AssessmentsPage'), 'AssessmentsPage');
+const QuestionsPage = lazyPage(() => import('@/features/tutor/QuestionsPage'), 'QuestionsPage');
 const InvestPage = lazyPage(() => import('@/features/invest/InvestPage'), 'InvestPage');
 const InstrumentPage = lazyPage(() => import('@/features/invest/InvestPage'), 'InstrumentPage');
 const ToolsPage = lazyPage(() => import('@/features/simulators/ToolsPages'), 'ToolsPage');
@@ -72,7 +77,11 @@ export function AppRoutes() {
           <Route path="/app/missions/:missionId" element={<MissionPage />} />
           <Route path="/app/welcome" element={<WelcomePage />} />
           <Route path="/app/profile" element={<ProfilePage />} />
-          <Route path="/tutor" element={<StaffHomePage />} />
+          <Route path="/tutor" element={<TutorHomePage />} />
+          <Route path="/tutor/cohorts/:id" element={<CohortPage />} />
+          <Route path="/tutor/cohorts/:id/challenge" element={<AssignChallengePage />} />
+          <Route path="/tutor/assessments" element={<AssessmentsPage />} />
+          <Route path="/tutor/questions" element={<QuestionsPage />} />
           <Route path="/admin" element={<StaffHomePage />} />
           <Route path="/sponsor" element={<StaffHomePage />} />
           {/* Other routes of a role's area: not found inside the guard, so another role gets G7 first. */}

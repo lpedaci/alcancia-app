@@ -108,7 +108,13 @@ function ChallengeRunner({ challenge }: { challenge: ChallengeDef }) {
       moduleScores: score.moduleScores,
       startedAt: `${DEMO_TODAY}T09:00:00.000Z`,
       finishedAt: `${DEMO_TODAY}T09:10:00.000Z`,
-    });
+    }, questions.map((q) => ({
+      personId,
+      challengeId: challenge.id,
+      questionId: q.id,
+      correct: isCorrect(q, answers[q.id]),
+      ...(q.type === 'single' && typeof answers[q.id] === 'string' ? { optionIds: [answers[q.id] as string] } : {}),
+    })));
     setResult(score);
   };
 

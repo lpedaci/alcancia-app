@@ -27,7 +27,7 @@
 | RF-21 | Motor de niveles con las condiciones de 5.0, incluida la del nivel 2 (D-63) | M | Cada condición tiene test; un nivel nunca vuelve a bloquearse | Pendiente |
 | RF-22 | Secciones bloqueadas visibles con candado, para qué sirven y qué falta con progreso | M | Un toque lleva a la acción que acerca el desbloqueo | Pendiente |
 | RF-23 | "Ya sé esto": desafío de suficiencia que desbloquea | M | Aprobar con 70 % desbloquea con `unlockedBy: mastery` | Parcial (paso 7): desafíos de suficiencia de los niveles 2 a 4 |
-| RF-24 | Habilitación de niveles por el tutor con motivo y modo libre del admin | M | Queda registro con fecha, autor y motivo | Pendiente |
+| RF-24 | Habilitación de niveles por el tutor con motivo y modo libre del admin | M | Queda registro con fecha, autor y motivo | Hecho para el tutor (paso 10, D-193); el modo libre llega con el admin |
 | RF-25 | Motor económico de `wallet-engine.md` (tiempo, sueldo, gastos, inflación, rendimientos, deudas, cierre de mes) | M | Casos de `formulas.md` y tests del motor en verde; determinista | Pendiente |
 | RF-26 | Pagar: transferir (alias, CBU o CVU con titular y entidad ficticios), QR con alternativa sin cámara, servicios y débitos | M | Misiones 2 y 3 completables por teclado y en celular | Hecho (paso 7.2, D-173) |
 | RF-27 | Categorizar movimientos desde Inicio desde el nivel 1 (D-114) | M | Cuenta para la condición del nivel 3 | Pendiente |
@@ -73,11 +73,11 @@
 
 | ID | Requerimiento | Prioridad | Criterio de aceptación | Estado |
 | --- | --- | --- | --- | --- |
-| RF-70 | Inicio del tutor con KPIs y alertas | M | Calculados desde los datos | Pendiente |
-| RF-71 | Detalle de cohorte con mapa de calor de avance de aprendizaje (D-58) | M | Nunca muestra bloqueado o desbloqueado | Pendiente |
-| RF-72 | Asignar desafío semanal | M | Con fecha; toast "Desafío asignado" | Pendiente |
-| RF-73 | Resultados: preguntas con más errores y opciones más elegidas | M | Con umbral de 5 | Pendiente |
-| RF-74 | Bandeja de consultas | S | Sin datos económicos | Pendiente |
+| RF-70 | Inicio del tutor con KPIs y alertas | M | Calculados desde los datos | Hecho (paso 10, D-193) |
+| RF-71 | Detalle de cohorte con mapa de calor de avance de aprendizaje (D-58) | M | Nunca muestra bloqueado o desbloqueado | Hecho (paso 10, D-193) |
+| RF-72 | Asignar desafío semanal | M | Con fecha; toast "Desafío asignado" | Hecho (paso 10, D-193) |
+| RF-73 | Resultados: preguntas con más errores y opciones más elegidas | M | Con umbral de 5 | Hecho (paso 10, D-193) |
+| RF-74 | Bandeja de consultas | S | Sin datos económicos | Hecho (paso 10, D-193) |
 | RF-75 | Panel del admin: adopción, avance por cohorte, Kirkpatrick 1 a 3, alertas | M | Todo con umbral | Pendiente |
 | RF-76 | Personas y cohortes: listado con filtros, alta, cohortes con tutor y fecha | M | Estados invitada, activa, inactiva | Pendiente |
 | RF-77 | Carga por CSV con validación fila por fila y corrección | M | Correo inválido, duplicado y cohorte inexistente detectados | Pendiente |

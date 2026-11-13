@@ -2558,5 +2558,200 @@
       "sell_one": "Venta · {{count}} unidad",
       "sell_other": "Venta · {{count}} unidades"
     }
+  },
+  "tutor": {
+    "insufficient": "Datos insuficientes para mostrar este grupo sin identificar a nadie.",
+    "insufficientShort": "Datos insuficientes",
+    "privacy": "Ves el avance de aprendizaje de tus cohortes. Nunca ves montos, movimientos, metas, respuestas sobre hábitos ni si un nivel está bloqueado.",
+    "back": "Volver a Tutoría",
+    "status": {
+      "invited": "Invitada",
+      "inactive": "Inactiva",
+      "active": "Activa"
+    },
+    "nav": {
+      "label": "Tutoría",
+      "title": "Tutoría",
+      "home": "Inicio",
+      "assessments": "Resultados",
+      "questions": "Consultas",
+      "unanswered_one": "{{count}} consulta sin responder",
+      "unanswered_other": "{{count}} consultas sin responder"
+    },
+    "home": {
+      "subtitle_one": "Acompañas a {{count}} persona en el programa",
+      "subtitle_other": "Acompañas a {{count}} personas en el programa",
+      "cohortsChip_one": "{{count}} cohorte",
+      "cohortsChip_other": "{{count}} cohortes",
+      "cohortsTitle": "Tus cohortes",
+      "cohortData": "Datos de la cohorte",
+      "people_one": "{{count}} persona",
+      "people_other": "{{count}} personas",
+      "due": "Plazo: {{date}}",
+      "cohortLine": "Participación {{participation}} · promedio de desafíos {{challenges}}"
+    },
+    "kpi": {
+      "participation": "Participación",
+      "participationCaption": "personas activas",
+      "modules": "Módulos completados",
+      "modulesCaption": "de la ruta, en promedio",
+      "challenges": "Promedio de desafíos",
+      "challengesCaption": "mejor intento",
+      "weekly": "Desafíos semanales",
+      "weeklyCaption": "cumplidos"
+    },
+    "alerts": {
+      "title": "Para atender",
+      "empty": "No hay nada urgente. Puedes revisar los resultados de las evaluaciones para preparar el próximo encuentro.",
+      "not_started_one": "{{count}} persona no empezó el módulo {{module}}",
+      "not_started_other": "{{count}} personas no empezaron el módulo {{module}}",
+      "exhausted_one": "{{count}} persona agotó los intentos de un desafío de nivel: puedes habilitarle el nivel con un motivo",
+      "exhausted_other": "{{count}} personas agotaron los intentos de un desafío de nivel: puedes habilitarles el nivel con un motivo",
+      "unanswered_one": "{{count}} consulta espera tu respuesta",
+      "unanswered_other": "{{count}} consultas esperan tu respuesta",
+      "due_soon_one": "El plazo del programa vence en {{days}} días",
+      "due_soon_other": "El plazo del programa vence en {{days}} días para tus {{count}} cohortes"
+    },
+    "cohort": {
+      "modules_one": "{{count}} módulo en la ruta",
+      "modules_other": "{{count}} módulos en la ruta",
+      "heatTitle": "Avance por persona y módulo",
+      "heatIntro": "Cada celda es un módulo de la ruta: si leyó su guía y, cuando hizo el desafío del nivel, su mejor resultado en ese módulo.",
+      "heatNote": "Un resultado por debajo del 70 % se marca para reforzar. En celular, la tabla se desplaza dentro de su recuadro.",
+      "legend": "Referencias del mapa",
+      "person": "Persona",
+      "cell": {
+        "done": "Guía leída y desafío hecho",
+        "reading": "Guía leída",
+        "none": "Sin empezar"
+      }
+    },
+    "levels": {
+      "title": "Avance por nivel de una persona",
+      "privacy": "Ves las guías leídas, el desafío de nivel y si se habilitó por suficiencia o por un tutor. No ves si un nivel está bloqueado: de ahí se deduciría el estado de su billetera.",
+      "person": "Persona",
+      "personHelp": "Elige a quién quieres acompañar.",
+      "empty": "{{name}} todavía no empezó ningún nivel.",
+      "level": "Nivel {{n}} · {{name}}",
+      "data": "Avance del nivel",
+      "completed": "Completado",
+      "guides": "Guías: {{read}} de {{total}}",
+      "challenge": {
+        "not_started": "Desafío pendiente",
+        "in_progress": "Desafío en curso",
+        "passed": "Desafío aprobado · {{best}}",
+        "attempts_exhausted": "Intentos agotados"
+      },
+      "enabledBy": {
+        "mastery": "Habilitado por suficiencia",
+        "tutor": "Habilitado por un tutor"
+      },
+      "firstVsBest_one": "Primer intento {{first}}, mejor intento {{best}} ({{count}} intento).",
+      "firstVsBest_other": "Primer intento {{first}}, mejor intento {{best}} ({{count}} intentos).",
+      "reason": "Motivo: {{reason}}"
+    },
+    "unlock": {
+      "title": "Habilitar un nivel",
+      "intro": "Un ajuste razonable: por accesibilidad, por el rol de la persona o cuando agotó los intentos y repasaron juntos. El motivo queda registrado.",
+      "target": "¿Para quién?",
+      "person": "Solo para {{name}}",
+      "cohort": "Para toda la cohorte {{name}}",
+      "level": "Nivel",
+      "levelHelp": "El nivel que se habilita, sin pasar por su condición.",
+      "reason": "Motivo",
+      "reasonHelp": "Por qué lo habilitas, al menos 10 caracteres. Por ejemplo: repasamos el tema en el encuentro del viernes. Sin montos ni datos personales.",
+      "reasonError": "Escribe el motivo, con al menos 10 caracteres.",
+      "submit": "Habilitar nivel",
+      "done": "Nivel habilitado, con su motivo registrado"
+    },
+    "weekly": {
+      "title": "Desafíos semanales",
+      "assign": "Asignar desafío semanal",
+      "empty": "Todavía no hay desafíos semanales en esta cohorte.",
+      "results": "Resultados del desafío",
+      "closed": "Cerró el {{date}}",
+      "dueIn_one": "Vence en {{count}} día",
+      "dueIn_other": "Vence en {{count}} días",
+      "done_one": "{{count}} lo cumplió",
+      "done_other": "{{count}} lo cumplieron",
+      "partial_one": "{{count}} en parte",
+      "partial_other": "{{count}} en parte",
+      "notDone_one": "{{count}} no lo hizo",
+      "notDone_other": "{{count}} no lo hicieron",
+      "pending": "Sin respuesta: {{count}} de {{total}}"
+    },
+    "assign": {
+      "back": "Volver a {{name}}",
+      "title": "Asignar un desafío semanal",
+      "intro_one": "Para {{name}}: le llega a {{count}} persona activa, que responde si lo cumplió.",
+      "intro_other": "Para {{name}}: les llega a {{count}} personas activas, que responden si lo cumplieron.",
+      "formTitle": "El desafío",
+      "template": "Elige un desafío",
+      "templates": {
+        "track": "Registra tus gastos durante 7 días",
+        "cft": "Calcula el CFT de tu tarjeta",
+        "subscriptions": "Revisa tus suscripciones y date de baja de una que no uses",
+        "budget": "Arma tu presupuesto con la regla 50/30/20",
+        "emergency": "Calcula cuánto sería tu fondo de emergencia de 3 meses"
+      },
+      "custom": "Otro, con mis palabras",
+      "customLabel": "Tu desafío",
+      "customHelp": "Una acción concreta para esta semana, con un verbo. Por ejemplo: Compara dos ofertas de cuotas.",
+      "customError": "Escribe el desafío, con al menos 5 caracteres.",
+      "due": "Fecha límite",
+      "dueHelp": "Desde hoy en adelante. Una semana suele ser suficiente.",
+      "dueError": "Elige una fecha desde hoy en adelante.",
+      "privacy": "Cada persona responde si lo cumplió (sí, en parte o no). Su reflexión queda en su navegador: tú ves solo el resultado.",
+      "submit": "Asignar desafío",
+      "done": "Desafío asignado",
+      "preview": "Así lo ven las personas",
+      "previewChip": "Desafío semanal de tu tutor",
+      "previewEmpty": "Escribe el desafío para verlo acá",
+      "previewDue": "Hasta el {{date}}",
+      "previewReport": "¿Lo cumpliste? Sí · En parte · No, y una reflexión opcional que solo ves tú."
+    },
+    "assessments": {
+      "title": "Resultados de las evaluaciones",
+      "intro": "Qué preguntas costaron más y qué respuestas se eligieron, para reforzarlas en el próximo encuentro. Solo grupos de al menos 5 personas.",
+      "cohort": "Cohorte",
+      "cohortHelp": "Mira todas tus cohortes juntas o una por vez.",
+      "allCohorts": "Todas mis cohortes",
+      "levelsTitle": "Desafíos de nivel: primer y mejor intento",
+      "levelsIntro": "El primer intento muestra cuánto sabían al llegar; el mejor, cuánto aprendieron (para aprobar cuenta el mejor).",
+      "first": "Primer intento",
+      "best": "Mejor intento",
+      "itemsTitle": "Preguntas con más errores",
+      "itemsIntro": "Ordenadas de más a menos errores. En las de opción única, qué opción eligieron: la correcta va en verde y con su ícono.",
+      "module": "Módulo {{n}} · {{name}}",
+      "errorRate": "{{value}} de errores",
+      "options": "Respuestas elegidas",
+      "correct": "(respuesta correcta)",
+      "hidden_one": "{{count}} pregunta no se muestra porque la respondieron menos de 5 personas.",
+      "hidden_other": "{{count}} preguntas no se muestran porque las respondieron menos de 5 personas."
+    },
+    "questions": {
+      "title": "Consultas de las personas",
+      "intro_one": "Preguntas sobre los módulos. {{count}} espera tu respuesta.",
+      "intro_other": "Preguntas sobre los módulos. {{count}} esperan tu respuesta.",
+      "filter": "Mostrar consultas",
+      "pending": "Sin responder ({{count}})",
+      "answered": "Respondidas",
+      "all": "Todas",
+      "empty": {
+        "pending": "No hay consultas sin responder.",
+        "answered": "Todavía no respondiste ninguna consulta.",
+        "all": "Todavía no hay consultas."
+      },
+      "statusPending": "Sin responder",
+      "statusAnswered": "Respondida",
+      "data": "Datos de la consulta",
+      "yourAnswer": "Tu respuesta, del {{date}}",
+      "answerLabel": "Tu respuesta",
+      "answerHelp": "Explica con un ejemplo y, si sirve, sugiere la guía o la herramienta que lo practica. Al menos 10 caracteres.",
+      "answerError": "Escribe la respuesta, con al menos 10 caracteres.",
+      "privacy": "No pidas ni incluyas montos ni datos personales: la consulta es sobre el aprendizaje, no sobre la situación de nadie.",
+      "send": "Enviar respuesta",
+      "sent": "Respuesta enviada"
+    }
   }
 }

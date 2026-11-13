@@ -413,6 +413,46 @@ const tutorQuestions = QUESTIONS.map(([moduleId, text, answer], index) => {
   };
 });
 
+// ---------- Item responses for the tutor's item statistics (T4) ----------
+// A second PRNG, so adding this block does not change any value generated above. Each attempt draws
+// its questions from the banks of its level (D-57) and answers each one right with the probability
+// of its module score, shifted by a fixed difficulty per question; a wrong single-choice answer
+// picks one of the wrong options. Only learning data: what was answered, never money (D-58).
+const banks = read('src/data/question-banks.json').questions;
+const challengeDefs = read('src/data/challenges.json').challenges;
+let itemState = 20261117;
+function itemRand() {
+  itemState |= 0;
+  itemState = (itemState + 0x6d2b79f5) | 0;
+  let t = Math.imul(itemState ^ (itemState >>> 15), 1 | itemState);
+  t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+  return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+}
+const difficulty = (id) => {
+  let h = 0;
+  for (const ch of id) h = (h * 31 + ch.charCodeAt(0)) | 0;
+  return ((Math.abs(h) % 100) / 100) * 0.4 - 0.25; // from -0.25 (hard) to +0.15 (easy)
+};
+const itemResponses = [];
+for (const attempt of challengeAttempts) {
+  const def = challengeDefs.find((c) => c.id === attempt.challengeId);
+  if (!def) continue;
+  for (const [moduleId, count] of Object.entries(def.questionsPerModule)) {
+    const bank = banks.filter((q) => q.moduleId === moduleId);
+    const chosen = [...bank].sort(() => itemRand() - 0.5).slice(0, count);
+    for (const q of chosen) {
+      const p = Math.min(0.98, Math.max(0.05, (attempt.moduleScores[moduleId] ?? attempt.score) + difficulty(q.id)));
+      const correct = itemRand() < p;
+      const response = { personId: attempt.personId, challengeId: attempt.challengeId, questionId: q.id, correct };
+      if (q.type === 'single' || q.type === 'true_false_why') {
+        const wrong = q.options.filter((o) => !q.correctOptionIds.includes(o.id)).map((o) => o.id);
+        response.optionIds = correct ? q.correctOptionIds : [wrong[Math.floor(itemRand() * wrong.length)]];
+      }
+      itemResponses.push(response);
+    }
+  }
+}
+
 const seed = {
   generatedFor: iso(DEMO_TODAY),
   note: 'Learning data only. Wallet data, habit answers, reflections and level lock states never leave the participant browser (D-58, D-62).',
@@ -423,6 +463,7 @@ const seed = {
   diagnostics,
   guideProgress,
   challengeAttempts,
+  itemResponses,
   levelLearning,
   unlockRecords,
   missionCompletions,
