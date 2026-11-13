@@ -134,19 +134,18 @@ function Invest() {
           />
         </header>
 
-        {/* Bento (D-188, D-190): the account and the instruments side by side, the same height; the cards
-            with long lists below, full width, with their lists in columns */}
-        <div className="grid grid-cols-[minmax(0,1fr)] gap-(--space-bento-gap) large:grid-cols-[minmax(0,3fr)_minmax(20rem,2fr)] large:items-stretch">
+        {/* Full-width cards, one under the other (D-192): each one reorganizes its own content in columns */}
+        <div className="flex flex-col gap-(--space-bento-gap)">
           {account ? <AccountSection /> : <OpenSection />}
-          <section aria-labelledby="instruments-title" className={card}>
+          <section aria-labelledby="instruments-title" className={cn(card, '@container')}>
               <h2 id="instruments-title" className="text-title-large text-on-surface">
                 {t('invest.instruments.title')}
               </h2>
               <p className="text-body-medium text-on-surface-variant">{t('invest.instruments.intro')}</p>
-              <ul className="flex flex-col divide-y divide-outline-variant">
+              <ul className="grid grid-cols-[minmax(0,1fr)] gap-3 @3xl:grid-cols-3">
                 {INSTRUMENTS.map((i) => (
-                  <li key={i.id}>
-                    <Link to={`/app/invest/${i.id}`} className="group flex items-start gap-3 py-4 hover:bg-surface-container">
+                  <li key={i.id} className="flex">
+                    <Link to={`/app/invest/${i.id}`} className="group flex w-full items-start gap-3 rounded-lg border border-outline-variant p-4 hover:border-primary hover:bg-surface-container">
                       <IconTile icon={ICON[i.kind] ?? 'trending_up'} tone="secondary" size="sm" />
                       <span className="flex min-w-0 flex-1 flex-col gap-2">
                         <span className="text-body-large text-on-surface">{t(`invest.instrument.${i.id}.name`)}</span>
@@ -162,12 +161,13 @@ function Invest() {
                 ))}
               </ul>
               {/* How to read the sheet and where to practice, at the bottom so both cards of the row end together (D-191) */}
-              <div className="mt-auto flex flex-col gap-4 rounded-lg bg-surface-container p-5">
+              <div className="grid grid-cols-[minmax(0,1fr)] gap-x-8 gap-y-4 rounded-lg bg-surface-container p-5 @5xl:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
+                <div className="flex min-w-0 flex-col gap-4">
                 <p className="inline-flex items-center gap-2 text-title-small text-on-surface">
                   <Icon name="help" size={18} className="shrink-0 text-primary" />
                   {t('invest.instruments.howTitle')}
                 </p>
-                <dl className="flex flex-col gap-3">
+                <dl className="grid grid-cols-[minmax(0,1fr)] gap-3 @3xl:grid-cols-3">
                   {(
                     [
                       ['risk', 'shield'],
@@ -186,7 +186,8 @@ function Invest() {
                     </div>
                   ))}
                 </dl>
-                <div className="flex flex-col gap-1 border-t border-outline-variant pt-4">
+                </div>
+                <div className="flex flex-col gap-1 border-t border-outline-variant pt-4 @5xl:border-t-0 @5xl:border-l @5xl:pt-0 @5xl:pl-8">
                   <p className="text-label-large text-on-surface">{t('invest.instruments.practice')}</p>
                   <ul className="flex flex-col">
                     {(['SIM-11', 'SIM-10'] as const).map((id) => (
@@ -202,12 +203,8 @@ function Invest() {
                 </div>
               </div>
             </section>
-          <div className="large:col-span-2">
-            <LearnSection />
-          </div>
-          <div className="large:col-span-2">
-            <BrokersSection />
-          </div>
+          <LearnSection />
+          <BrokersSection />
         </div>
         <SourceList variant="footer" codes={['T', 'A-53', 'A-54', 'B-20', 'B-21', 'B-22', 'B-26', 'B-30', 'B-31', 'B-34', 'B-36', 'F-32', 'F-33', 'F-34']} legalText={t('invest.legal')} />
       </div>
@@ -363,89 +360,93 @@ function AccountSection() {
         </div>
       )}
 
-      <h3 className="text-title-medium text-on-surface">{t('invest.holdings.title')}</h3>
-      {list.length === 0 ? (
-        <div className="flex flex-col gap-3">
-          <p className="text-body-medium text-on-surface-variant">{t('invest.holdings.empty')}</p>
+      {/* Two zones when the card is wide (D-192): what you hold and did on the left; moving money on the right */}
+      <div className="grid grid-cols-[minmax(0,1fr)] gap-6 @5xl:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
+        <div className="flex min-w-0 flex-col gap-4">
+          <h3 className="text-title-medium text-on-surface">{t('invest.holdings.title')}</h3>
+          {list.length === 0 ? (
+            <div className="flex flex-col gap-3">
+              <p className="text-body-medium text-on-surface-variant">{t('invest.holdings.empty')}</p>
+              <div className="flex flex-wrap gap-3">
+                <Button asChild variant="tonal" leadingIcon="stacked_line_chart">
+                  <Link to="/app/invest/cedear-sp500">{t('invest.holdings.seeCedear')}</Link>
+                </Button>
+                <Button asChild variant="text" leadingIcon="flag">
+                  <Link to="/app/missions/mission-first-cedear">{t('invest.holdings.mission')}</Link>
+                </Button>
+              </div>
+            </div>
+          ) : (
+            <ul className="flex flex-col divide-y divide-outline-variant">
+              {list.map((p) => (
+                <li key={p.instrumentId} className="flex flex-col gap-2 py-3 @md:flex-row @md:items-center @md:justify-between">
+                  <div className="flex min-w-0 flex-col gap-1.5">
+                    <Link to={`/app/invest/${p.instrumentId}`} className="text-body-large text-primary underline-offset-4 hover:underline">
+                      {t(`invest.instrument.${p.instrumentId}.name`)}
+                    </Link>
+                    <MetaChips
+                      label={t('invest.holdings.data')}
+                      items={[
+                        { icon: 'inventory_2', label: t('invest.holdings.units', { count: p.quantity }) },
+                        { icon: 'payments', label: t('invest.holdings.paid', { amount: formatMoney(p.cost) }) },
+                      ]}
+                    />
+                    {p.pending > 0 && <StatusPill tone="info" icon="schedule" label={t('invest.holdings.pending', { count: p.pending })} className="self-start" />}
+                  </div>
+                  <div className="flex flex-wrap items-center justify-between gap-2 @md:flex-col @md:items-end">
+                    <MoneyText value={p.value} className="text-title-medium text-on-surface" />
+                    <StatusPill
+                      tone={p.result.gte(0) ? 'success' : 'warning'}
+                      icon={p.result.gte(0) ? 'trending_up' : 'trending_down'}
+                      label={`${formatMoney(p.result, { sign: 'always' })} (${formatPercent(p.resultRate, { decimals: 1, sign: 'always' })})`}
+                    />
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
+          <h3 className="border-t border-outline-variant pt-4 text-title-medium text-on-surface">{t('invest.trades.title')}</h3>
+          {account.trades.length === 0 ? (
+            <p className="text-body-medium text-on-surface-variant">{t('invest.trades.empty')}</p>
+          ) : (
+            <ul className="flex flex-col divide-y divide-outline-variant">
+              {[...account.trades]
+                .reverse()
+                .slice(0, 5)
+                .map((trade) => (
+                  <li key={trade.id} className="flex flex-wrap items-center justify-between gap-2 py-2.5">
+                    <span className="flex min-w-0 flex-col gap-1">
+                      <span className="text-body-medium text-on-surface">{t(`invest.instrument.${trade.instrumentId}.name`)}</span>
+                      <span className="flex flex-wrap items-center gap-2 text-body-small text-on-surface-variant">
+                        <StatusPill tone={trade.side === 'buy' ? 'primary' : 'neutral'} icon={trade.side === 'buy' ? 'add' : 'remove'} label={t(`invest.trades.${trade.side}`, { count: trade.quantity })} />
+                        {formatDate(walletDate(trade.day))} · {t(`invest.order.${trade.settlement}`)}
+                      </span>
+                    </span>
+                    <MoneyText value={trade.side === 'buy' ? D(trade.total).neg() : trade.total} trend flow className="text-label-large" />
+                  </li>
+                ))}
+            </ul>
+          )}
+        </div>
+        <div className="flex min-w-0 flex-col gap-4 rounded-lg bg-surface-container p-5 @5xl:self-start">
+          <h3 className="text-title-medium text-on-surface">{t('invest.transfer.title')}</h3>
+          <p className="text-body-medium text-on-surface-variant">
+            {t('invest.transfer.walletBalance')} <MoneyText value={wallet.balance} />
+          </p>
+          <MoneyInput label={t('invest.transfer.amount')} helperText={t('invest.transfer.help')} value={amount} onChange={(e) => setAmount(e.target.value)} />
+          {failure && <InlineAlert tone="info">{failure}</InlineAlert>}
           <div className="flex flex-wrap gap-3">
-            <Button asChild variant="tonal" leadingIcon="stacked_line_chart">
-              <Link to="/app/invest/cedear-sp500">{t('invest.holdings.seeCedear')}</Link>
+            <Button leadingIcon="arrow_forward" onClick={() => move('in')}>
+              {t('invest.transfer.fund')}
             </Button>
-            <Button asChild variant="text" leadingIcon="flag">
-              <Link to="/app/missions/mission-first-cedear">{t('invest.holdings.mission')}</Link>
+            <Button variant="outlined" leadingIcon="arrow_back" onClick={() => move('out')}>
+              {t('invest.transfer.withdraw')}
             </Button>
           </div>
+          <InlineAlert tone="info" live="none">
+            {t('invest.account.custodyNote')}
+          </InlineAlert>
         </div>
-      ) : (
-        <ul className="flex flex-col divide-y divide-outline-variant">
-          {list.map((p) => (
-            <li key={p.instrumentId} className="flex flex-col gap-2 py-3 @md:flex-row @md:items-center @md:justify-between">
-              <div className="flex min-w-0 flex-col gap-1.5">
-                <Link to={`/app/invest/${p.instrumentId}`} className="text-body-large text-primary underline-offset-4 hover:underline">
-                  {t(`invest.instrument.${p.instrumentId}.name`)}
-                </Link>
-                <MetaChips
-                  label={t('invest.holdings.data')}
-                  items={[
-                    { icon: 'inventory_2', label: t('invest.holdings.units', { count: p.quantity }) },
-                    { icon: 'payments', label: t('invest.holdings.paid', { amount: formatMoney(p.cost) }) },
-                  ]}
-                />
-                {p.pending > 0 && <StatusPill tone="info" icon="schedule" label={t('invest.holdings.pending', { count: p.pending })} className="self-start" />}
-              </div>
-              <div className="flex flex-wrap items-center justify-between gap-2 @md:flex-col @md:items-end">
-                <MoneyText value={p.value} className="text-title-medium text-on-surface" />
-                <StatusPill
-                  tone={p.result.gte(0) ? 'success' : 'warning'}
-                  icon={p.result.gte(0) ? 'trending_up' : 'trending_down'}
-                  label={`${formatMoney(p.result, { sign: 'always' })} (${formatPercent(p.resultRate, { decimals: 1, sign: 'always' })})`}
-                />
-              </div>
-            </li>
-          ))}
-        </ul>
-      )}
-
-      <InlineAlert tone="info" live="none">
-        {t('invest.account.custodyNote')}
-      </InlineAlert>
-
-      <h3 className="border-t border-outline-variant pt-4 text-title-medium text-on-surface">{t('invest.trades.title')}</h3>
-      {account.trades.length === 0 ? (
-        <p className="text-body-medium text-on-surface-variant">{t('invest.trades.empty')}</p>
-      ) : (
-        <ul className="flex flex-col divide-y divide-outline-variant">
-          {[...account.trades]
-            .reverse()
-            .slice(0, 5)
-            .map((trade) => (
-              <li key={trade.id} className="flex flex-wrap items-center justify-between gap-2 py-2.5">
-                <span className="flex min-w-0 flex-col gap-1">
-                  <span className="text-body-medium text-on-surface">{t(`invest.instrument.${trade.instrumentId}.name`)}</span>
-                  <span className="flex flex-wrap items-center gap-2 text-body-small text-on-surface-variant">
-                    <StatusPill tone={trade.side === 'buy' ? 'primary' : 'neutral'} icon={trade.side === 'buy' ? 'add' : 'remove'} label={t(`invest.trades.${trade.side}`, { count: trade.quantity })} />
-                    {formatDate(walletDate(trade.day))} · {t(`invest.order.${trade.settlement}`)}
-                  </span>
-                </span>
-                <MoneyText value={trade.side === 'buy' ? D(trade.total).neg() : trade.total} trend flow className="text-label-large" />
-              </li>
-            ))}
-        </ul>
-      )}
-
-      <h3 className="border-t border-outline-variant pt-4 text-title-medium text-on-surface">{t('invest.transfer.title')}</h3>
-      <p className="text-body-medium text-on-surface-variant">
-        {t('invest.transfer.walletBalance')} <MoneyText value={wallet.balance} />
-      </p>
-      <MoneyInput label={t('invest.transfer.amount')} helperText={t('invest.transfer.help')} value={amount} onChange={(e) => setAmount(e.target.value)} />
-      {failure && <InlineAlert tone="info">{failure}</InlineAlert>}
-      <div className="flex flex-wrap gap-3">
-        <Button leadingIcon="arrow_forward" onClick={() => move('in')}>
-          {t('invest.transfer.fund')}
-        </Button>
-        <Button variant="outlined" leadingIcon="arrow_back" onClick={() => move('out')}>
-          {t('invest.transfer.withdraw')}
-        </Button>
       </div>
     </section>
   );
