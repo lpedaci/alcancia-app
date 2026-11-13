@@ -20,6 +20,9 @@ const InvestorProfilePage = lazyPage(() => import('@/features/levels/InvestorPro
 const MissionPage = lazyPage(() => import('@/features/missions/MissionPage'), 'MissionPage');
 const WelcomePage = lazyPage(() => import('@/features/onboarding/WelcomePage'), 'WelcomePage');
 const ProfilePage = lazyPage(() => import('@/features/profile/ProfilePage'), 'ProfilePage');
+const LearnPage = lazyPage(() => import('@/features/learning/LearnPage'), 'LearnPage');
+const GuidePage = lazyPage(() => import('@/features/learning/GuidePage'), 'GuidePage');
+const ChallengePage = lazyPage(() => import('@/features/learning/ChallengePage'), 'ChallengePage');
 const WalletSectionPage = lazy(() => import('@/features/wallet/WalletSectionPage').then((m) => ({ default: m.WalletSectionPage })));
 
 // The internal style guide (CLAUDE.md 2.8) exists only in development: it is never bundled in production.
@@ -51,7 +54,9 @@ export function AppRoutes() {
           <Route path="/app/save/pockets" element={<WalletSectionPage area="pockets" />} />
           <Route path="/app/save/yield" element={<WalletSectionPage area="yield" />} />
           <Route path="/app/invest" element={<WalletSectionPage area="invest" />} />
-          <Route path="/app/learn" element={<WalletSectionPage area="learn" />} />
+          <Route path="/app/learn" element={<LearnPage />} />
+          <Route path="/app/learn/guides/:guideId" element={<GuidePage />} />
+          <Route path="/app/learn/challenges/:challengeId" element={<ChallengePage />} />
           <Route path="/app/tools" element={<WalletSectionPage area="tools" />} />
           <Route path="/app/missions/:missionId" element={<MissionPage />} />
           <Route path="/app/welcome" element={<WelcomePage />} />

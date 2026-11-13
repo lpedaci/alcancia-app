@@ -26,7 +26,7 @@
 | RF-20 | Navegación de 5 destinos: barra inferior con íconos en celular y tablet, menú lateral plegable en escritorio (D-164) | M | Verificado en los 6 anchos; `aria-current`; foco al título al cambiar de destino | Pendiente |
 | RF-21 | Motor de niveles con las condiciones de 5.0, incluida la del nivel 2 (D-63) | M | Cada condición tiene test; un nivel nunca vuelve a bloquearse | Pendiente |
 | RF-22 | Secciones bloqueadas visibles con candado, para qué sirven y qué falta con progreso | M | Un toque lleva a la acción que acerca el desbloqueo | Pendiente |
-| RF-23 | "Ya sé esto": desafío de suficiencia que desbloquea | M | Aprobar con 70 % desbloquea con `unlockedBy: mastery` | Pendiente |
+| RF-23 | "Ya sé esto": desafío de suficiencia que desbloquea | M | Aprobar con 70 % desbloquea con `unlockedBy: mastery` | Parcial (paso 7): desafíos de suficiencia de los niveles 2 a 4 |
 | RF-24 | Habilitación de niveles por el tutor con motivo y modo libre del admin | M | Queda registro con fecha, autor y motivo | Pendiente |
 | RF-25 | Motor económico de `wallet-engine.md` (tiempo, sueldo, gastos, inflación, rendimientos, deudas, cierre de mes) | M | Casos de `formulas.md` y tests del motor en verde; determinista | Pendiente |
 | RF-26 | Pagar: transferir (alias, CBU o CVU con titular y entidad ficticios), QR con alternativa sin cámara, servicios y débitos | M | Misiones 2 y 3 completables por teclado y en celular | Pendiente |
@@ -48,14 +48,14 @@
 | --- | --- | --- | --- | --- |
 | RF-40 | "Conocerte" con 10 a 12 preguntas, resultado por 5 dimensiones en barras horizontales con tabla | M | Hábitos sin juicio y solo en el navegador (D-62) | Hecho (paso 6, P2, D-167) |
 | RF-41 | Ruta explicada dentro de cada nivel y repetición final para pre y post | M | Frase que explica el orden | Hecho (paso 6): ruta explicada y "Repetir Conocerte" (final) |
-| RF-42 | 16 guías de fase A con la secuencia de Gagné (D-61) | M | Cada una con objetivo observable y "Para tu vida" | Pendiente |
-| RF-43 | Los 9 tipos de pregunta de 5.1 con alternativa accesible al arrastre | M | Ordenar con "Subir" y "Bajar"; unir con selects; clasificar con menú | Pendiente |
-| RF-44 | Desafíos de nivel con los bancos de sus módulos, mejor intento e intentos configurables (D-57) | M | Insignia por módulo según su parte | Pendiente |
+| RF-42 | 16 guías de fase A con la secuencia de Gagné (D-61) | M | Cada una con objetivo observable y "Para tu vida" | Parcial (paso 7): guías de los módulos 1, 2, 17, 18, 3 y 4 (D-171) |
+| RF-43 | Los 9 tipos de pregunta de 5.1 con alternativa accesible al arrastre | M | Ordenar con "Subir" y "Bajar"; unir con selects; clasificar con menú | Parcial (paso 7): 7 de los 9 tipos con alternativa al arrastre; caso con decisiones y ejercicio con simulador pendientes |
+| RF-44 | Desafíos de nivel con los bancos de sus módulos, mejor intento e intentos configurables (D-57) | M | Insignia por módulo según su parte | Hecho para los niveles 1 a 4 (paso 7, D-171) |
 | RF-45 | 13 misiones con el motor declarativo (D-59) | M | Cada una con objetivo, pasos, evento, devolución y criterios de éxito | Parcial (paso 6): motor declarativo con tests (D-166) y misiones "Configura tu seguridad" y "Tu primer cobro"; las demás llegan con su nivel |
-| RF-46 | Mapa de niveles como línea de tiempo y logros | M | Estado con ícono y texto | Pendiente |
+| RF-46 | Mapa de niveles como línea de tiempo y logros | M | Estado con ícono y texto | Hecho (paso 7, P9) |
 | RF-47 | Glosario integrado con chip en el primer uso | M | Términos de 1.1.1 | Pendiente |
 | RF-48 | Fichas "Brókers registrados" y "Billeteras y fintech" verificadas | M | Solo filas verificadas en el registro oficial, con fecha | Pendiente |
-| RF-49 | Satisfacción de 1 a 5 al terminar cada guía | S | Alimenta Kirkpatrick 1 | Pendiente |
+| RF-49 | Satisfacción de 1 a 5 al terminar cada guía | S | Alimenta Kirkpatrick 1 | Hecho (paso 7, P10) |
 | RF-50 | Desafíos semanales con autoinforme y reflexión opcional | M | La reflexión no sale del navegador de la persona | Pendiente |
 | RF-51 | Registro de eventos tipo xAPI en misiones | C | Visor en fase B (F21) | Parcial: las misiones registran los enunciados; el visor llega en F21 |
 

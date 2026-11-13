@@ -1,0 +1,71 @@
+{
+  "note": "Level and mastery challenges (D-57): questions drawn from each module's bank; the module badge comes from its part. Passing score and attempts come from the program (F1).",
+  "challenges": [
+    {
+      "id": "challenge-level-1",
+      "levelId": "level-1",
+      "mastery": false,
+      "questionsPerModule": {
+        "module-01": 3,
+        "module-02": 3
+      },
+      "passingScore": 0.7
+    },
+    {
+      "id": "challenge-level-2",
+      "levelId": "level-2",
+      "mastery": false,
+      "questionsPerModule": {
+        "module-17": 3,
+        "module-18": 3
+      },
+      "passingScore": 0.7
+    },
+    {
+      "id": "mastery-level-2",
+      "levelId": "level-2",
+      "mastery": true,
+      "questionsPerModule": {
+        "module-17": 3,
+        "module-18": 3
+      },
+      "passingScore": 0.7
+    },
+    {
+      "id": "challenge-level-3",
+      "levelId": "level-3",
+      "mastery": false,
+      "questionsPerModule": {
+        "module-03": 5
+      },
+      "passingScore": 0.7
+    },
+    {
+      "id": "mastery-level-3",
+      "levelId": "level-3",
+      "mastery": true,
+      "questionsPerModule": {
+        "module-03": 5
+      },
+      "passingScore": 0.7
+    },
+    {
+      "id": "challenge-level-4",
+      "levelId": "level-4",
+      "mastery": false,
+      "questionsPerModule": {
+        "module-04": 5
+      },
+      "passingScore": 0.7
+    },
+    {
+      "id": "mastery-level-4",
+      "levelId": "level-4",
+      "mastery": true,
+      "questionsPerModule": {
+        "module-04": 5
+      },
+      "passingScore": 0.7
+    }
+  ]
+}

@@ -63,6 +63,10 @@ interface DataState extends OrgData {
   saveDiagnostic: (result: DiagnosticKnowledgeResult) => void;
   /** A finished mission run: learning data the tutor sees aggregated (5.3), never the wallet. */
   recordMission: (personId: string, missionId: string, at: string) => void;
+  /** A guide read (P10), with the optional satisfaction of Kirkpatrick 1 (RF-49). */
+  markGuideDone: (personId: string, moduleId: string, guideId: string, at: string, satisfaction?: GuideProgress['satisfaction']) => void;
+  /** A challenge attempt (P11, D-57): the best one counts, the first one shows what the person knew. */
+  addChallengeAttempt: (attempt: ChallengeAttempt) => void;
 }
 
 export const DATA_STORAGE_KEY = 'alcancia-data';
@@ -92,6 +96,19 @@ export const useDataStore = create<DataState>()(
             ],
           };
         }),
+      markGuideDone: (personId, moduleId, guideId, at, satisfaction) =>
+        set((state) => {
+          const previous = state.guideProgress.find((g) => g.personId === personId && g.moduleId === moduleId);
+          const others = state.guideProgress.filter((g) => g !== previous);
+          const guideIdsDone = [...new Set([...(previous?.guideIdsDone ?? []), guideId])];
+          return {
+            guideProgress: [
+              ...others,
+              { personId, moduleId, guideIdsDone, completedAt: previous?.completedAt ?? at, satisfaction: satisfaction ?? previous?.satisfaction },
+            ],
+          };
+        }),
+      addChallengeAttempt: (attempt) => set((state) => ({ challengeAttempts: [...state.challengeAttempts, attempt] })),
     }),
     {
       name: DATA_STORAGE_KEY,

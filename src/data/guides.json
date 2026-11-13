@@ -1,0 +1,684 @@
+{
+  "note": "Phase A guides, one per module (D-61), with the Gagné sequence (F3): hook, objective, recall, content, worked example, practice and \"Para tu vida\". Levels 1 to 4 in step 7.",
+  "guides": [
+    {
+      "id": "module-01-guide-1",
+      "moduleId": "module-01",
+      "title": "Del bruto al neto",
+      "minutes": 6,
+      "blocks": [
+        {
+          "type": "hook",
+          "body": "Firmaste tu contrato por un sueldo y el primer cobro fue menor. No es un error: entre lo que dice el contrato y lo que entra en tu cuenta están los descuentos."
+        },
+        {
+          "type": "objective",
+          "body": "Al terminar vas a poder calcular el sueldo neto a partir del bruto y los descuentos, y distinguir aportes de contribuciones."
+        },
+        {
+          "type": "recall",
+          "question": {
+            "id": "g01-recall",
+            "moduleId": "module-01",
+            "type": "single",
+            "prompt": "Antes de empezar: ¿qué número usarías para saber cuánto puedes gastar en el mes?",
+            "options": [
+              {
+                "id": "a",
+                "text": "El que entra en mi cuenta"
+              },
+              {
+                "id": "b",
+                "text": "El que figura en el contrato"
+              }
+            ],
+            "correctOptionIds": [
+              "a"
+            ],
+            "feedback": {
+              "a": "Bien. Ese es el neto, y es el que vamos a calcular.",
+              "b": "El contrato suele decir el bruto. Lo que puedes gastar es lo que entra en tu cuenta: el neto."
+            },
+            "sourceIds": []
+          }
+        },
+        {
+          "type": "text",
+          "title": "Tres números en tu recibo",
+          "body": "El **bruto** es el total antes de los descuentos. Los **descuentos** son tus aportes: jubilación (11 %), obra social (3 %) y Ley 19.032 (3 %), entre otros. El **neto** es lo que queda y entra en tu cuenta."
+        },
+        {
+          "type": "text",
+          "title": "Lo que paga la empresa",
+          "body": "Además de tu bruto, la empresa paga **contribuciones** a la seguridad social. Bruto más contribuciones es el **costo laboral**: lo que le cuesta tu sueldo a la empresa. Algunas sumas son **no remunerativas**: en general no llevan aportes jubilatorios, y el detalle depende del convenio."
+        },
+        {
+          "type": "example",
+          "title": "Ejemplo resuelto: el recibo del taller",
+          "steps": [
+            "Bruto: $ 1.559.263,32 ($ 1.469.263,32 remunerativo y $ 90.000 no remunerativo).",
+            "Descuentos: $ 274.304,46.",
+            "Neto: $ 1.559.263,32 − $ 274.304,46 = $ 1.284.958,86.",
+            "Costo total para el empleador: $ 2.171.180,60."
+          ]
+        },
+        {
+          "type": "practice",
+          "question": {
+            "id": "m01-net",
+            "moduleId": "module-01",
+            "type": "numeric",
+            "prompt": "El recibo de ejemplo tiene un bruto de $ 1.559.263,32 y descuentos por $ 274.304,46. ¿Cuál es el sueldo neto?",
+            "numeric": {
+              "answer": "1284958.86",
+              "tolerance": "1.00",
+              "unit": "ARS"
+            },
+            "help": "Monto en pesos, por ejemplo: 1.000.000",
+            "feedback": {
+              "correct": "Correcto. Neto = bruto − descuentos: $ 1.559.263,32 − $ 274.304,46 = $ 1.284.958,86.",
+              "incorrect": "Para el neto, resta los descuentos al bruto: $ 1.559.263,32 − $ 274.304,46 = $ 1.284.958,86."
+            },
+            "sourceIds": [
+              "T"
+            ]
+          }
+        },
+        {
+          "type": "takeaway",
+          "body": "Para tu vida: busca tu último recibo y verifica que bruto menos descuentos dé tu neto. Si no te cierra, pregúntale a Recursos Humanos."
+        }
+      ],
+      "sourceIds": [
+        "T"
+      ]
+    },
+    {
+      "id": "module-02-guide-1",
+      "moduleId": "module-02",
+      "title": "Esperar 48 horas",
+      "minutes": 6,
+      "blocks": [
+        {
+          "type": "hook",
+          "body": "Son las once de la noche, aparece una oferta \"solo por hoy\" y el botón de comprar está a un toque. ¿Lo necesitas o lo quieres ahora?"
+        },
+        {
+          "type": "objective",
+          "body": "Al terminar vas a poder identificar la gratificación inmediata en una situación de compra y aplicar la regla de las 48 horas para decidir."
+        },
+        {
+          "type": "recall",
+          "question": {
+            "id": "g02-recall",
+            "moduleId": "module-02",
+            "type": "single",
+            "prompt": "¿Te pasó comprar algo y arrepentirte a los pocos días?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Sí, alguna vez"
+              },
+              {
+                "id": "b",
+                "text": "Casi nunca"
+              }
+            ],
+            "correctOptionIds": [
+              "a"
+            ],
+            "feedback": {
+              "a": "Le pasa a casi todo el mundo, y tiene una explicación.",
+              "b": "Bien. Igual vale conocer el mecanismo, porque el marketing lo usa todo el tiempo."
+            },
+            "sourceIds": []
+          }
+        },
+        {
+          "type": "text",
+          "title": "Hablar de dinero",
+          "body": "En muchas casas, el dinero es un tema que no se habla. Las finanzas personales no son magia: son administración y disciplina, y se aprenden."
+        },
+        {
+          "type": "text",
+          "title": "La trampa de lo inmediato",
+          "body": "El marketing aprovecha la **gratificación inmediata**: lo que se obtiene ya pesa más que lo que llega después. Por el **descuento hiperbólico**, mucha gente prefiere USD 100 hoy antes que USD 110 mañana, aunque esperar un día dé un 10 % más. La deuda de consumo compromete tu dinero futuro."
+        },
+        {
+          "type": "example",
+          "title": "Ejemplo resuelto: la regla de las 48 horas",
+          "steps": [
+            "Ves algo que no es esencial y quieres comprarlo.",
+            "Lo anotas y esperas 48 horas: esa espera suma fricción entre el impulso y la compra.",
+            "Si después de 48 horas todavía lo quieres y entra en tu presupuesto, lo compras con calma.",
+            "Muchas veces, las ganas se van solas."
+          ]
+        },
+        {
+          "type": "text",
+          "title": "Gastar con propósito",
+          "body": "El **minimalismo** como estrategia no es privarte de todo: es tener menos suscripciones y gastos fijos, tomar menos decisiones de consumo y evitar que tu estilo de vida crezca con cada aumento. La riqueza real suele ser invisible: son activos, no objetos para mostrar."
+        },
+        {
+          "type": "practice",
+          "question": {
+            "id": "m02-48h",
+            "moduleId": "module-02",
+            "type": "single",
+            "prompt": "Ves unas zapatillas en oferta y no las necesitas. Según la regla de las 48 horas, ¿qué haces?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Las compro ya, antes de que termine la oferta"
+              },
+              {
+                "id": "b",
+                "text": "Espero 48 horas y, si todavía las quiero, lo decido con calma"
+              },
+              {
+                "id": "c",
+                "text": "Las compro en cuotas para no pensarlo"
+              }
+            ],
+            "correctOptionIds": [
+              "b"
+            ],
+            "feedback": {
+              "a": "La urgencia de la oferta es justo lo que la regla busca frenar: esperar suma fricción entre el impulso y la compra.",
+              "b": "Correcto. Esperar 48 horas suma fricción entre el impulso y la compra; muchas veces las ganas se van.",
+              "c": "Las cuotas no cambian el impulso. La regla propone esperar 48 horas antes de decidir."
+            },
+            "sourceIds": [
+              "A-14"
+            ]
+          }
+        },
+        {
+          "type": "takeaway",
+          "body": "Para tu vida: la próxima compra no esencial, anótala y espera 48 horas. Revisa también tus suscripciones y date de baja de una que no uses."
+        }
+      ],
+      "sourceIds": [
+        "A-06",
+        "A-08",
+        "A-10",
+        "A-12",
+        "A-13",
+        "A-14",
+        "A-15",
+        "A-16"
+      ]
+    },
+    {
+      "id": "module-17-guide-1",
+      "moduleId": "module-17",
+      "title": "Qué tipo de cuenta tienes",
+      "minutes": 7,
+      "blocks": [
+        {
+          "type": "hook",
+          "body": "Dos amigos tienen su sueldo en apps distintas. Las dos se ven parecidas, pero el dinero no tiene la misma protección. La diferencia está en el tipo de cuenta."
+        },
+        {
+          "type": "objective",
+          "body": "Al terminar vas a poder distinguir una cuenta de pago con CVU de una cuenta bancaria con CBU, y explicar qué protección tiene tu dinero en cada una."
+        },
+        {
+          "type": "recall",
+          "question": {
+            "id": "g17-recall",
+            "moduleId": "module-17",
+            "type": "single",
+            "prompt": "¿Sabes si tu billetera te da un CVU o un CBU?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Sí, lo sé"
+              },
+              {
+                "id": "b",
+                "text": "No estoy seguro"
+              }
+            ],
+            "correctOptionIds": [
+              "b"
+            ],
+            "feedback": {
+              "a": "Bien. Al final de esta guía vas a saber también qué significa para tu dinero.",
+              "b": "Es muy común. En esta guía vas a aprender a reconocerlo."
+            },
+            "sourceIds": []
+          }
+        },
+        {
+          "type": "text",
+          "title": "CVU y CBU",
+          "body": "El **CBU** identifica una cuenta bancaria. El **CVU** identifica una cuenta de pago en una billetera. Los dos pueden tener alias. Las billeteras con CVU son **proveedores de servicios de pago (PSPCP)** y se inscriben en el registro del BCRA."
+        },
+        {
+          "type": "text",
+          "title": "Qué protección tiene tu dinero",
+          "body": "En un banco, los depósitos tienen la **garantía de los depósitos**, hoy hasta $ 50.000.000 por persona y por entidad. Los fondos en una **cuenta de pago no tienen esa garantía**, y la billetera debe aclararlo. Si la cuenta \"rinde\", muchas veces el dinero está en un **fondo money market**, que tampoco tiene esa garantía."
+        },
+        {
+          "type": "example",
+          "title": "Ejemplo resuelto: transferir sin errores",
+          "steps": [
+            "Escribes el alias de la persona a la que le pagas.",
+            "Antes de confirmar, revisas que el titular y la entidad sean los que esperas.",
+            "Confirmas: la transferencia inmediata se acredita en segundos.",
+            "Si te equivocaste, no se deshace desde la app: por eso el paso 2 es el más importante."
+          ]
+        },
+        {
+          "type": "text",
+          "title": "QR interoperable",
+          "body": "Con el **QR interoperable**, cualquier billetera o app bancaria puede leer cualquier QR. No necesitas una app distinta para cada comercio."
+        },
+        {
+          "type": "practice",
+          "question": {
+            "id": "m17-guarantee",
+            "moduleId": "module-17",
+            "type": "single",
+            "prompt": "El dinero que tienes en una cuenta de pago con CVU, ¿tiene la garantía de los depósitos?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Sí, igual que en un banco"
+              },
+              {
+                "id": "b",
+                "text": "No: las cuentas de pago no tienen esa garantía"
+              },
+              {
+                "id": "c",
+                "text": "Sí, pero solo los primeros 30 días"
+              }
+            ],
+            "correctOptionIds": [
+              "b"
+            ],
+            "feedback": {
+              "a": "No: la garantía de los depósitos cubre cuentas en bancos, no cuentas de pago de billeteras.",
+              "b": "Correcto. Los fondos en una cuenta de pago no tienen la garantía de los depósitos; la billetera debe aclararlo en su publicidad.",
+              "c": "No existe ese plazo: las cuentas de pago no tienen la garantía de los depósitos."
+            },
+            "sourceIds": [
+              "B-12"
+            ]
+          }
+        },
+        {
+          "type": "takeaway",
+          "body": "Para tu vida: abre tu billetera, busca en la leyenda legal o en los términos si tu cuenta es una cuenta de pago (CVU) o bancaria (CBU), y fíjate si el saldo \"que rinde\" está en un fondo."
+        }
+      ],
+      "sourceIds": [
+        "B-01",
+        "B-10",
+        "B-12",
+        "B-14",
+        "B-15",
+        "B-16",
+        "B-19"
+      ]
+    },
+    {
+      "id": "module-18-guide-1",
+      "moduleId": "module-18",
+      "title": "Nadie legítimo te pide un código",
+      "minutes": 5,
+      "blocks": [
+        {
+          "type": "hook",
+          "body": "Llega un mensaje: \"Tu cuenta se bloquea hoy. Confirma tus datos en este enlace\". Tiene el logo, los colores y hasta tu nombre."
+        },
+        {
+          "type": "objective",
+          "body": "Al terminar vas a poder reconocer las señales de un mensaje fraudulento y saber qué hacer sin compartir tus códigos."
+        },
+        {
+          "type": "recall",
+          "question": {
+            "id": "g18-recall",
+            "moduleId": "module-18",
+            "type": "single",
+            "prompt": "¿Alguna vez recibiste un mensaje que te pedía datos con urgencia?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Sí"
+              },
+              {
+                "id": "b",
+                "text": "No que yo recuerde"
+              }
+            ],
+            "correctOptionIds": [
+              "a"
+            ],
+            "feedback": {
+              "a": "Es muy común. Vamos a ver cómo reconocerlo.",
+              "b": "Bien. Igual vale estar atento: son cada vez más parecidos a los reales."
+            },
+            "sourceIds": []
+          }
+        },
+        {
+          "type": "text",
+          "title": "Tres formas habituales",
+          "body": "**Falso soporte:** alguien dice ser de tu billetera y te pide el código que te llegó. **Página parecida:** un enlace lleva a una copia de la página real para quedarse con tus datos. **Inversión garantizada:** te prometen duplicar tu dinero en poco tiempo."
+        },
+        {
+          "type": "text",
+          "title": "Señales de alerta",
+          "body": "Rendimientos garantizados, urgencia (\"es una oportunidad única\"), pedidos de códigos o contraseñas, y entidades que no figuran en ningún registro oficial. La CNV publica **alertas al inversor** sobre ofertas irregulares."
+        },
+        {
+          "type": "example",
+          "title": "Ejemplo resuelto: qué hacer",
+          "steps": [
+            "No respondas ni abras el enlace del mensaje.",
+            "Nunca compartas un código, ni completo ni en partes.",
+            "Entra a la app por tu cuenta y revisa si hay algún aviso real.",
+            "Si es una oferta de inversión, busca la entidad en los registros oficiales."
+          ]
+        },
+        {
+          "type": "practice",
+          "question": {
+            "id": "m18-code",
+            "moduleId": "module-18",
+            "type": "single",
+            "prompt": "Te llama alguien que dice ser de tu billetera y te pide el código que te llegó por mensaje. ¿Qué haces?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Se lo doy, porque llamó desde un número oficial"
+              },
+              {
+                "id": "b",
+                "text": "No lo comparto, corto y reviso entrando a la app por mi cuenta"
+              },
+              {
+                "id": "c",
+                "text": "Le doy solo la mitad del código"
+              }
+            ],
+            "correctOptionIds": [
+              "b"
+            ],
+            "feedback": {
+              "a": "Un número puede parecer oficial y no serlo. El código no se comparte nunca.",
+              "b": "Correcto. Nadie legítimo te pide un código. Se revisa entrando a la app por tu cuenta, no por el canal que te contactó.",
+              "c": "Ninguna parte del código se comparte: nadie legítimo te lo pide."
+            },
+            "sourceIds": [
+              "T",
+              "B-24"
+            ]
+          }
+        },
+        {
+          "type": "takeaway",
+          "body": "Para tu vida: activa el segundo factor en tus apps de dinero y cuéntale a alguien de tu familia que nadie legítimo pide un código."
+        }
+      ],
+      "sourceIds": [
+        "T",
+        "B-24"
+      ]
+    },
+    {
+      "id": "module-03-guide-1",
+      "moduleId": "module-03",
+      "title": "Adónde va tu sueldo",
+      "minutes": 7,
+      "blocks": [
+        {
+          "type": "hook",
+          "body": "Cobraste hace dos semanas y ya no queda casi nada. No hubo un gasto grande: hubo muchos chicos."
+        },
+        {
+          "type": "objective",
+          "body": "Al terminar vas a poder clasificar tus gastos en necesidades, deseos y ahorro, y armar un presupuesto mensual tomando 50/30/20 o 70/20/10 como punto de partida."
+        },
+        {
+          "type": "recall",
+          "question": {
+            "id": "g03-recall",
+            "moduleId": "module-03",
+            "type": "single",
+            "prompt": "¿Sabes cuánto gastaste el mes pasado en salidas y delivery?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Sí, más o menos"
+              },
+              {
+                "id": "b",
+                "text": "No tengo idea"
+              }
+            ],
+            "correctOptionIds": [
+              "b"
+            ],
+            "feedback": {
+              "a": "Bien. Con un presupuesto lo vas a saber con precisión.",
+              "b": "Es lo más común. Anotar es el primer paso, y la billetera te ayuda."
+            },
+            "sourceIds": []
+          }
+        },
+        {
+          "type": "text",
+          "title": "La regla 50/30/20",
+          "body": "Es un **punto de partida**, no una regla fija: **50 %** del neto para necesidades (alquiler, comida, luz), **30 %** para deseos (salidas, ropa, streaming) y **20 %** para ahorro e inversión."
+        },
+        {
+          "type": "text",
+          "title": "Si los gastos fijos son altos",
+          "body": "La variante **70/20/10** destina **70 %** a gastos fijos y variables, **20 %** a ocio y **10 %** a ahorro e inversión. Lo importante es separar algo todos los meses."
+        },
+        {
+          "type": "example",
+          "title": "Ejemplo resuelto: el neto de práctica",
+          "steps": [
+            "Neto: $ 1.284.958,86.",
+            "Necesidades, 50 %: $ 642.479,43.",
+            "Deseos, 30 %: $ 385.487,66.",
+            "Ahorro, 20 %: $ 256.991,77."
+          ]
+        },
+        {
+          "type": "text",
+          "title": "Gastos hormiga",
+          "body": "Café, golosinas, suscripciones que no usas: cada uno es chico, pero sumados **pueden llegar** al 15 % del ingreso anual, según el material del taller. El truco: anotar todo durante un mes."
+        },
+        {
+          "type": "practice",
+          "question": {
+            "id": "m03-classify",
+            "moduleId": "module-03",
+            "type": "categorize",
+            "prompt": "Clasifica cada gasto según la regla 50/30/20.",
+            "categorize": {
+              "categories": [
+                {
+                  "id": "needs",
+                  "label": "Necesidad"
+                },
+                {
+                  "id": "wants",
+                  "label": "Deseo"
+                },
+                {
+                  "id": "savings",
+                  "label": "Ahorro"
+                }
+              ],
+              "items": [
+                {
+                  "id": "i1",
+                  "text": "Alquiler",
+                  "categoryId": "needs"
+                },
+                {
+                  "id": "i2",
+                  "text": "Supermercado",
+                  "categoryId": "needs"
+                },
+                {
+                  "id": "i3",
+                  "text": "Luz",
+                  "categoryId": "needs"
+                },
+                {
+                  "id": "i4",
+                  "text": "Transporte al trabajo",
+                  "categoryId": "needs"
+                },
+                {
+                  "id": "i5",
+                  "text": "Salidas con amistades",
+                  "categoryId": "wants"
+                },
+                {
+                  "id": "i6",
+                  "text": "Plataforma de streaming",
+                  "categoryId": "wants"
+                },
+                {
+                  "id": "i7",
+                  "text": "Ropa nueva por gusto",
+                  "categoryId": "wants"
+                },
+                {
+                  "id": "i8",
+                  "text": "Apartado para el fondo de emergencia",
+                  "categoryId": "savings"
+                }
+              ]
+            },
+            "feedback": {
+              "correct": "Correcto. Las necesidades son lo esencial; los deseos, lo que suma pero puede esperar; y el ahorro es lo que separas para tu futuro.",
+              "incorrect": "Necesidades: alquiler, supermercado, luz y transporte. Deseos: salidas, streaming y ropa por gusto. Ahorro: el apartado para el fondo de emergencia."
+            },
+            "sourceIds": [
+              "A-32"
+            ]
+          }
+        },
+        {
+          "type": "takeaway",
+          "body": "Para tu vida: durante esta semana, categoriza cada movimiento de tu billetera de práctica como necesidad, deseo o ahorro."
+        }
+      ],
+      "sourceIds": [
+        "A-32",
+        "A-33",
+        "A-34",
+        "T"
+      ]
+    },
+    {
+      "id": "module-04-guide-1",
+      "moduleId": "module-04",
+      "title": "Tu colchón para imprevistos",
+      "minutes": 6,
+      "blocks": [
+        {
+          "type": "hook",
+          "body": "Se rompe la heladera un martes. Sin un fondo, la salida suele ser la tarjeta en cuotas o un préstamo caro."
+        },
+        {
+          "type": "objective",
+          "body": "Al terminar vas a poder calcular un fondo de emergencia de 3 a 6 meses de gastos esenciales y elegir dónde guardarlo según su liquidez y su riesgo."
+        },
+        {
+          "type": "recall",
+          "question": {
+            "id": "g04-recall",
+            "moduleId": "module-04",
+            "type": "single",
+            "prompt": "Si mañana tuvieras un gasto imprevisto, ¿con qué lo cubrirías?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Con ahorros"
+              },
+              {
+                "id": "b",
+                "text": "Con la tarjeta o un préstamo"
+              }
+            ],
+            "correctOptionIds": [
+              "a"
+            ],
+            "feedback": {
+              "a": "Bien. En esta guía vas a ver cuánto conviene tener y dónde.",
+              "b": "Es lo más común. Un fondo de emergencia evita endeudarte justo cuando más lo necesitas."
+            },
+            "sourceIds": []
+          }
+        },
+        {
+          "type": "text",
+          "title": "Cuánto",
+          "body": "Una referencia habitual es de **3 a 6 meses de gastos básicos**: alquiler, comida, servicios y transporte. Si tus ingresos son variables, conviene acercarse a 6."
+        },
+        {
+          "type": "text",
+          "title": "Para qué es, y para qué no",
+          "body": "Es para **emergencias reales**: un problema de salud o quedarte sin trabajo. No es para vacaciones ni ofertas: esas van en otras metas."
+        },
+        {
+          "type": "example",
+          "title": "Ejemplo resuelto",
+          "steps": [
+            "Gastos esenciales del mes: $ 700.000.",
+            "Fondo de 3 meses: $ 700.000 × 3 = $ 2.100.000.",
+            "Fondo de 6 meses: $ 700.000 × 6 = $ 4.200.000.",
+            "Si separas $ 250.000 por mes, llegas a 3 meses en 9 meses."
+          ]
+        },
+        {
+          "type": "text",
+          "title": "Dónde guardarlo",
+          "body": "Con **liquidez en 24 horas** y **bajo riesgo**: por ejemplo, una cuenta remunerada o un fondo money market. El fondo no busca rendir al máximo: busca estar ahí cuando lo necesites."
+        },
+        {
+          "type": "practice",
+          "question": {
+            "id": "m04-amount",
+            "moduleId": "module-04",
+            "type": "numeric",
+            "prompt": "Tus gastos esenciales son de $ 700.000 por mes. ¿Cuánto es un fondo de emergencia de 3 meses?",
+            "numeric": {
+              "answer": "2100000",
+              "tolerance": "1.00",
+              "unit": "ARS"
+            },
+            "help": "Monto en pesos, por ejemplo: 1.500.000",
+            "feedback": {
+              "correct": "Correcto. $ 700.000 × 3 = $ 2.100.000.",
+              "incorrect": "Multiplica los gastos esenciales por los meses: $ 700.000 × 3 = $ 2.100.000."
+            },
+            "sourceIds": [
+              "A-35"
+            ]
+          }
+        },
+        {
+          "type": "takeaway",
+          "body": "Para tu vida: suma tus gastos esenciales de un mes y multiplícalos por 3. Ese es tu primer objetivo."
+        }
+      ],
+      "sourceIds": [
+        "A-35",
+        "A-36"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1059 @@
+{
+  "note": "Question banks by module (5.1, D-57), levels 1 to 4. Draft for Lourdes's review; additions pending review by Lic. Kevin Giampieri (docs/content.md).",
+  "questions": [
+    {
+      "id": "m01-net",
+      "moduleId": "module-01",
+      "type": "numeric",
+      "prompt": "El recibo de ejemplo tiene un bruto de $ 1.559.263,32 y descuentos por $ 274.304,46. ¿Cuál es el sueldo neto?",
+      "numeric": {
+        "answer": "1284958.86",
+        "tolerance": "1.00",
+        "unit": "ARS"
+      },
+      "help": "Monto en pesos, por ejemplo: 1.000.000",
+      "feedback": {
+        "correct": "Correcto. Neto = bruto − descuentos: $ 1.559.263,32 − $ 274.304,46 = $ 1.284.958,86.",
+        "incorrect": "Para el neto, resta los descuentos al bruto: $ 1.559.263,32 − $ 274.304,46 = $ 1.284.958,86."
+      },
+      "sourceIds": [
+        "T"
+      ]
+    },
+    {
+      "id": "m01-gross",
+      "moduleId": "module-01",
+      "type": "single",
+      "prompt": "¿Qué es el sueldo bruto?",
+      "options": [
+        {
+          "id": "a",
+          "text": "El total antes de restar los descuentos"
+        },
+        {
+          "id": "b",
+          "text": "Lo que entra en tu cuenta"
+        },
+        {
+          "id": "c",
+          "text": "Lo que paga la empresa en total, con sus contribuciones"
+        }
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "feedback": {
+        "a": "Correcto. El bruto es el total antes de los descuentos; el neto es lo que te queda.",
+        "b": "Eso es el neto: lo que queda después de los descuentos.",
+        "c": "Eso es el costo laboral: el bruto más las contribuciones que paga la empresa."
+      },
+      "sourceIds": [
+        "T"
+      ]
+    },
+    {
+      "id": "m01-concepts",
+      "moduleId": "module-01",
+      "type": "categorize",
+      "prompt": "Clasifica cada concepto del recibo.",
+      "categorize": {
+        "categories": [
+          {
+            "id": "employee",
+            "label": "Aporte (lo descuentan de tu sueldo)"
+          },
+          {
+            "id": "employer",
+            "label": "Contribución (la paga la empresa)"
+          }
+        ],
+        "items": [
+          {
+            "id": "i1",
+            "text": "Jubilación (11 %)",
+            "categoryId": "employee"
+          },
+          {
+            "id": "i2",
+            "text": "Obra social (3 %)",
+            "categoryId": "employee"
+          },
+          {
+            "id": "i3",
+            "text": "Ley 19.032 (3 %)",
+            "categoryId": "employee"
+          },
+          {
+            "id": "i4",
+            "text": "Contribuciones patronales a la seguridad social",
+            "categoryId": "employer"
+          }
+        ]
+      },
+      "feedback": {
+        "correct": "Correcto. Los aportes se descuentan de tu bruto; las contribuciones las paga la empresa además de tu sueldo y forman parte del costo laboral.",
+        "incorrect": "Los aportes (jubilación, obra social y Ley 19.032) se descuentan de tu bruto. Las contribuciones las paga la empresa por encima de tu sueldo."
+      },
+      "sourceIds": [
+        "T"
+      ]
+    },
+    {
+      "id": "m01-cost",
+      "moduleId": "module-01",
+      "type": "single",
+      "prompt": "En el recibo de ejemplo, el costo total para el empleador es de $ 2.171.180,60. ¿Por qué es mayor que el bruto?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Porque incluye las contribuciones que paga la empresa"
+        },
+        {
+          "id": "b",
+          "text": "Porque suma el aguinaldo de todo el año"
+        },
+        {
+          "id": "c",
+          "text": "Porque incluye los descuentos dos veces"
+        }
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "feedback": {
+        "a": "Correcto. Al bruto se le suman las contribuciones patronales: eso es lo que le cuesta tu sueldo a la empresa.",
+        "b": "El aguinaldo es aparte. La diferencia son las contribuciones que paga la empresa.",
+        "c": "Los descuentos no se suman. La diferencia son las contribuciones que paga la empresa."
+      },
+      "sourceIds": [
+        "T"
+      ]
+    },
+    {
+      "id": "m01-plan",
+      "moduleId": "module-01",
+      "type": "true_false_why",
+      "prompt": "Para armar tu presupuesto mensual conviene partir del sueldo bruto.",
+      "options": [
+        {
+          "id": "true",
+          "text": "Verdadero"
+        },
+        {
+          "id": "false",
+          "text": "Falso"
+        }
+      ],
+      "correctOptionIds": [
+        "false"
+      ],
+      "why": {
+        "prompt": "¿Por qué?",
+        "options": [
+          {
+            "id": "w1",
+            "text": "Porque a tu cuenta entra el neto, que es el dinero que de verdad puedes usar"
+          },
+          {
+            "id": "w2",
+            "text": "Porque el bruto cambia todos los meses"
+          }
+        ],
+        "correct": "w1"
+      },
+      "feedback": {
+        "correct": "Correcto. El presupuesto se arma con el neto: es lo que entra en tu cuenta.",
+        "incorrect": "Es falso: el presupuesto se arma con el neto, porque es el dinero que entra en tu cuenta."
+      },
+      "sourceIds": [
+        "T"
+      ]
+    },
+    {
+      "id": "m02-48h",
+      "moduleId": "module-02",
+      "type": "single",
+      "prompt": "Ves unas zapatillas en oferta y no las necesitas. Según la regla de las 48 horas, ¿qué haces?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Las compro ya, antes de que termine la oferta"
+        },
+        {
+          "id": "b",
+          "text": "Espero 48 horas y, si todavía las quiero, lo decido con calma"
+        },
+        {
+          "id": "c",
+          "text": "Las compro en cuotas para no pensarlo"
+        }
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "feedback": {
+        "a": "La urgencia de la oferta es justo lo que la regla busca frenar: esperar suma fricción entre el impulso y la compra.",
+        "b": "Correcto. Esperar 48 horas suma fricción entre el impulso y la compra; muchas veces las ganas se van.",
+        "c": "Las cuotas no cambian el impulso. La regla propone esperar 48 horas antes de decidir."
+      },
+      "sourceIds": [
+        "A-14"
+      ]
+    },
+    {
+      "id": "m02-hyperbolic",
+      "moduleId": "module-02",
+      "type": "single",
+      "prompt": "Te ofrecen USD 100 hoy o USD 110 mañana y casi todas las personas eligen los USD 100 de hoy. ¿Cómo se llama ese sesgo?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Descuento hiperbólico"
+        },
+        {
+          "id": "b",
+          "text": "Costo de oportunidad"
+        },
+        {
+          "id": "c",
+          "text": "Interés compuesto"
+        }
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "feedback": {
+        "a": "Correcto. El descuento hiperbólico hace que valoremos de más lo inmediato, aunque esperar un día dé un 10 % más.",
+        "b": "El costo de oportunidad es otra idea. Valorar de más lo inmediato es el descuento hiperbólico.",
+        "c": "El interés compuesto es otra idea. Valorar de más lo inmediato es el descuento hiperbólico."
+      },
+      "sourceIds": [
+        "A-14"
+      ]
+    },
+    {
+      "id": "m02-minimal",
+      "moduleId": "module-02",
+      "type": "true_false_why",
+      "prompt": "El minimalismo, como estrategia financiera, significa no gastar nunca en nada que no sea esencial.",
+      "options": [
+        {
+          "id": "true",
+          "text": "Verdadero"
+        },
+        {
+          "id": "false",
+          "text": "Falso"
+        }
+      ],
+      "correctOptionIds": [
+        "false"
+      ],
+      "why": {
+        "prompt": "¿Por qué?",
+        "options": [
+          {
+            "id": "w1",
+            "text": "Porque se trata de gastar con propósito: menos gastos fijos y suscripciones, y dinero para lo que te importa"
+          },
+          {
+            "id": "w2",
+            "text": "Porque el minimalismo solo se aplica a la ropa"
+          }
+        ],
+        "correct": "w1"
+      },
+      "feedback": {
+        "correct": "Correcto. Se trata de dinero con propósito: menos suscripciones y gastos fijos, menos decisiones de consumo y evitar que el estilo de vida crezca con cada aumento.",
+        "incorrect": "Es falso: no es privarse de todo, sino gastar con propósito, con menos suscripciones y gastos fijos."
+      },
+      "sourceIds": [
+        "A-15",
+        "A-16"
+      ]
+    },
+    {
+      "id": "m02-dopamine",
+      "moduleId": "module-02",
+      "type": "multiple",
+      "prompt": "¿Qué estrategias ayudan a frenar la compra por impulso? Elige todas las que correspondan.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Esperar 48 horas antes de una compra no esencial"
+        },
+        {
+          "id": "b",
+          "text": "Guardar la tarjeta en todas las apps"
+        },
+        {
+          "id": "c",
+          "text": "Darte de baja de las suscripciones que no usas"
+        },
+        {
+          "id": "d",
+          "text": "Comprar cuando hay urgencia por una oferta"
+        }
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "feedback": {
+        "correct": "Correcto. Sumar fricción y reducir los gastos fijos que no usas son dos formas de frenar el impulso.",
+        "incorrect": "Las que ayudan son esperar 48 horas y darte de baja de lo que no usas. Guardar la tarjeta en todas las apps y comprar por urgencia hacen lo contrario: quitan fricción."
+      },
+      "sourceIds": [
+        "A-13",
+        "A-14",
+        "A-15"
+      ]
+    },
+    {
+      "id": "m02-wealth",
+      "moduleId": "module-02",
+      "type": "single",
+      "prompt": "Según el material del taller, ¿cómo suele verse la riqueza real?",
+      "options": [
+        {
+          "id": "a",
+          "text": "En objetos de consumo que se muestran"
+        },
+        {
+          "id": "b",
+          "text": "En activos que muchas veces no se ven"
+        },
+        {
+          "id": "c",
+          "text": "En la cantidad de cuotas que alguien paga"
+        }
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "feedback": {
+        "a": "Lo que se muestra suele ser consumo. La riqueza real suele ser invisible: son activos.",
+        "b": "Correcto. La riqueza real suele ser invisible: son activos, no objetos para mostrar.",
+        "c": "Las cuotas son deuda. La riqueza real suele estar en activos que no se ven."
+      },
+      "sourceIds": [
+        "A-10",
+        "A-12"
+      ]
+    },
+    {
+      "id": "m17-terms",
+      "moduleId": "module-17",
+      "type": "matching",
+      "prompt": "Une cada término con su definición.",
+      "matching": {
+        "left": [
+          {
+            "id": "cvu",
+            "text": "CVU"
+          },
+          {
+            "id": "cbu",
+            "text": "CBU"
+          },
+          {
+            "id": "psp",
+            "text": "PSPCP"
+          },
+          {
+            "id": "qr",
+            "text": "QR interoperable"
+          }
+        ],
+        "right": [
+          {
+            "id": "d1",
+            "text": "Identifica una cuenta de pago en una billetera"
+          },
+          {
+            "id": "d2",
+            "text": "Identifica una cuenta bancaria"
+          },
+          {
+            "id": "d3",
+            "text": "Proveedor de servicios de pago que ofrece cuentas de pago"
+          },
+          {
+            "id": "d4",
+            "text": "Cualquier billetera o app bancaria puede leer cualquier QR"
+          }
+        ],
+        "pairs": [
+          [
+            "cvu",
+            "d1"
+          ],
+          [
+            "cbu",
+            "d2"
+          ],
+          [
+            "psp",
+            "d3"
+          ],
+          [
+            "qr",
+            "d4"
+          ]
+        ]
+      },
+      "feedback": {
+        "correct": "Correcto. CVU y CBU identifican cuentas distintas; los PSPCP se inscriben en el registro del BCRA, y el QR interoperable funciona con cualquier billetera.",
+        "incorrect": "CVU: cuenta de pago en una billetera. CBU: cuenta bancaria. PSPCP: proveedor de servicios de pago con cuentas de pago. QR interoperable: cualquier billetera lee cualquier QR."
+      },
+      "sourceIds": [
+        "B-10",
+        "B-15",
+        "B-16"
+      ]
+    },
+    {
+      "id": "m17-guarantee",
+      "moduleId": "module-17",
+      "type": "single",
+      "prompt": "El dinero que tienes en una cuenta de pago con CVU, ¿tiene la garantía de los depósitos?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Sí, igual que en un banco"
+        },
+        {
+          "id": "b",
+          "text": "No: las cuentas de pago no tienen esa garantía"
+        },
+        {
+          "id": "c",
+          "text": "Sí, pero solo los primeros 30 días"
+        }
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "feedback": {
+        "a": "No: la garantía de los depósitos cubre cuentas en bancos, no cuentas de pago de billeteras.",
+        "b": "Correcto. Los fondos en una cuenta de pago no tienen la garantía de los depósitos; la billetera debe aclararlo en su publicidad.",
+        "c": "No existe ese plazo: las cuentas de pago no tienen la garantía de los depósitos."
+      },
+      "sourceIds": [
+        "B-12"
+      ]
+    },
+    {
+      "id": "m17-transfer",
+      "moduleId": "module-17",
+      "type": "single",
+      "prompt": "Hiciste una transferencia inmediata a un alias equivocado. ¿Qué pasa?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Se acredita en segundos y no se puede deshacer desde la app"
+        },
+        {
+          "id": "b",
+          "text": "Se cancela sola a las 24 horas"
+        },
+        {
+          "id": "c",
+          "text": "La billetera te devuelve el dinero automáticamente"
+        }
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "feedback": {
+        "a": "Correcto. Las transferencias inmediatas se acreditan en segundos y no se deshacen desde la app: por eso se revisa el titular antes de confirmar.",
+        "b": "No se cancela sola: se acredita en segundos. Por eso se revisa el titular antes de confirmar.",
+        "c": "No hay devolución automática: se acredita en segundos. Por eso se revisa el titular antes de confirmar."
+      },
+      "sourceIds": [
+        "B-15"
+      ]
+    },
+    {
+      "id": "m17-cap",
+      "moduleId": "module-17",
+      "type": "numeric",
+      "prompt": "La garantía de los depósitos cubre hasta $ 50.000.000 por persona y por entidad. Si tienes una cuenta con otra persona como cotitular, ¿hasta cuánto te cubre a ti?",
+      "numeric": {
+        "answer": "25000000",
+        "tolerance": "1.00",
+        "unit": "ARS"
+      },
+      "help": "Monto en pesos, por ejemplo: 10.000.000",
+      "feedback": {
+        "correct": "Correcto. Con dos titulares, el monto se prorratea: $ 50.000.000 ÷ 2 = $ 25.000.000 para cada persona.",
+        "incorrect": "Con varios titulares, el monto se prorratea: $ 50.000.000 ÷ 2 = $ 25.000.000 para cada persona."
+      },
+      "sourceIds": [
+        "B-01"
+      ]
+    },
+    {
+      "id": "m17-verify",
+      "moduleId": "module-17",
+      "type": "single",
+      "prompt": "¿Dónde verificas si una billetera que ofrece cuentas con CVU está registrada?",
+      "options": [
+        {
+          "id": "a",
+          "text": "En el registro de proveedores de servicios de pago del BCRA"
+        },
+        {
+          "id": "b",
+          "text": "En las reseñas de la tienda de apps"
+        },
+        {
+          "id": "c",
+          "text": "En el registro de agentes de la CNV"
+        }
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "feedback": {
+        "a": "Correcto. Las billeteras con cuentas de pago se inscriben en el registro de PSP del BCRA.",
+        "b": "Las reseñas no son un registro oficial. Las billeteras con cuentas de pago están en el registro de PSP del BCRA.",
+        "c": "Ahí están los brókers. Las billeteras con cuentas de pago están en el registro de PSP del BCRA."
+      },
+      "sourceIds": [
+        "B-19"
+      ]
+    },
+    {
+      "id": "m18-signals",
+      "moduleId": "module-18",
+      "type": "multiple",
+      "prompt": "¿Cuáles son señales de alerta en una oferta de inversión? Elige todas las que correspondan.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Te garantizan un rendimiento"
+        },
+        {
+          "id": "b",
+          "text": "Te apuran: \"es una oportunidad única\""
+        },
+        {
+          "id": "c",
+          "text": "El agente muestra su matrícula de la CNV"
+        },
+        {
+          "id": "d",
+          "text": "No figura en ningún registro oficial"
+        }
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "feedback": {
+        "correct": "Correcto. Rendimientos garantizados, urgencia y falta de registro son señales de alerta; la matrícula visible es lo que se espera de un agente registrado.",
+        "incorrect": "Las señales de alerta son el rendimiento garantizado, la urgencia y la falta de registro. Mostrar la matrícula de la CNV es lo esperable en un agente registrado."
+      },
+      "sourceIds": [
+        "B-24"
+      ]
+    },
+    {
+      "id": "m18-code",
+      "moduleId": "module-18",
+      "type": "single",
+      "prompt": "Te llama alguien que dice ser de tu billetera y te pide el código que te llegó por mensaje. ¿Qué haces?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Se lo doy, porque llamó desde un número oficial"
+        },
+        {
+          "id": "b",
+          "text": "No lo comparto, corto y reviso entrando a la app por mi cuenta"
+        },
+        {
+          "id": "c",
+          "text": "Le doy solo la mitad del código"
+        }
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "feedback": {
+        "a": "Un número puede parecer oficial y no serlo. El código no se comparte nunca.",
+        "b": "Correcto. Nadie legítimo te pide un código. Se revisa entrando a la app por tu cuenta, no por el canal que te contactó.",
+        "c": "Ninguna parte del código se comparte: nadie legítimo te lo pide."
+      },
+      "sourceIds": [
+        "T",
+        "B-24"
+      ]
+    },
+    {
+      "id": "m18-messages",
+      "moduleId": "module-18",
+      "type": "categorize",
+      "prompt": "Clasifica cada mensaje.",
+      "categorize": {
+        "categories": [
+          {
+            "id": "safe",
+            "label": "Esperable"
+          },
+          {
+            "id": "suspicious",
+            "label": "Sospechoso"
+          }
+        ],
+        "items": [
+          {
+            "id": "i1",
+            "text": "\"Tu resumen del mes ya está disponible en la app.\"",
+            "categoryId": "safe"
+          },
+          {
+            "id": "i2",
+            "text": "\"Tu cuenta se bloquea hoy. Entra a este enlace y confirma tus datos.\"",
+            "categoryId": "suspicious"
+          },
+          {
+            "id": "i3",
+            "text": "\"Duplica tu dinero en 30 días, rendimiento garantizado.\"",
+            "categoryId": "suspicious"
+          },
+          {
+            "id": "i4",
+            "text": "\"Soporte técnico: pásanos el código que te llegó para verificarte.\"",
+            "categoryId": "suspicious"
+          }
+        ]
+      },
+      "feedback": {
+        "correct": "Correcto. Urgencia con un enlace, rendimientos garantizados y pedidos de códigos son señales de estafa.",
+        "incorrect": "Solo el aviso del resumen es esperable. Urgencia con enlace, rendimientos garantizados y pedidos de códigos son señales de estafa."
+      },
+      "sourceIds": [
+        "T",
+        "B-24"
+      ]
+    },
+    {
+      "id": "m18-link",
+      "moduleId": "module-18",
+      "type": "true_false_why",
+      "prompt": "Si un mensaje trae un enlace a una página igual a la de tu billetera, es seguro iniciar sesión desde ahí.",
+      "options": [
+        {
+          "id": "true",
+          "text": "Verdadero"
+        },
+        {
+          "id": "false",
+          "text": "Falso"
+        }
+      ],
+      "correctOptionIds": [
+        "false"
+      ],
+      "why": {
+        "prompt": "¿Por qué?",
+        "options": [
+          {
+            "id": "w1",
+            "text": "Porque una página puede copiar el diseño y llevarse tus datos; se entra siempre desde la app o escribiendo la dirección"
+          },
+          {
+            "id": "w2",
+            "text": "Porque las billeteras no tienen página web"
+          }
+        ],
+        "correct": "w1"
+      },
+      "feedback": {
+        "correct": "Correcto. Copiar el diseño es fácil. Se entra siempre desde la app o escribiendo la dirección, nunca desde un enlace de un mensaje.",
+        "incorrect": "Es falso: una página puede copiar el diseño. Se entra siempre desde la app o escribiendo la dirección."
+      },
+      "sourceIds": [
+        "T"
+      ]
+    },
+    {
+      "id": "m18-report",
+      "moduleId": "module-18",
+      "type": "single",
+      "prompt": "Recibiste una oferta de inversión de una empresa que no figura en ningún registro. ¿Dónde puedes consultar alertas sobre entidades no autorizadas?",
+      "options": [
+        {
+          "id": "a",
+          "text": "En las alertas al inversor de la CNV"
+        },
+        {
+          "id": "b",
+          "text": "En el grupo de chat donde llegó la oferta"
+        },
+        {
+          "id": "c",
+          "text": "En la publicidad de la propia empresa"
+        }
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "feedback": {
+        "a": "Correcto. La CNV publica alertas sobre ofertas irregulares y entidades no autorizadas.",
+        "b": "El chat de la oferta no es una fuente independiente. La CNV publica alertas al inversor.",
+        "c": "La publicidad de la empresa no es una fuente independiente. La CNV publica alertas al inversor."
+      },
+      "sourceIds": [
+        "B-24"
+      ]
+    },
+    {
+      "id": "m03-classify",
+      "moduleId": "module-03",
+      "type": "categorize",
+      "prompt": "Clasifica cada gasto según la regla 50/30/20.",
+      "categorize": {
+        "categories": [
+          {
+            "id": "needs",
+            "label": "Necesidad"
+          },
+          {
+            "id": "wants",
+            "label": "Deseo"
+          },
+          {
+            "id": "savings",
+            "label": "Ahorro"
+          }
+        ],
+        "items": [
+          {
+            "id": "i1",
+            "text": "Alquiler",
+            "categoryId": "needs"
+          },
+          {
+            "id": "i2",
+            "text": "Supermercado",
+            "categoryId": "needs"
+          },
+          {
+            "id": "i3",
+            "text": "Luz",
+            "categoryId": "needs"
+          },
+          {
+            "id": "i4",
+            "text": "Transporte al trabajo",
+            "categoryId": "needs"
+          },
+          {
+            "id": "i5",
+            "text": "Salidas con amistades",
+            "categoryId": "wants"
+          },
+          {
+            "id": "i6",
+            "text": "Plataforma de streaming",
+            "categoryId": "wants"
+          },
+          {
+            "id": "i7",
+            "text": "Ropa nueva por gusto",
+            "categoryId": "wants"
+          },
+          {
+            "id": "i8",
+            "text": "Apartado para el fondo de emergencia",
+            "categoryId": "savings"
+          }
+        ]
+      },
+      "feedback": {
+        "correct": "Correcto. Las necesidades son lo esencial; los deseos, lo que suma pero puede esperar; y el ahorro es lo que separas para tu futuro.",
+        "incorrect": "Necesidades: alquiler, supermercado, luz y transporte. Deseos: salidas, streaming y ropa por gusto. Ahorro: el apartado para el fondo de emergencia."
+      },
+      "sourceIds": [
+        "A-32"
+      ]
+    },
+    {
+      "id": "m03-20",
+      "moduleId": "module-03",
+      "type": "numeric",
+      "prompt": "Con un neto de $ 1.284.958,86, ¿cuánto es el 20 % para ahorro según la regla 50/30/20?",
+      "numeric": {
+        "answer": "256991.77",
+        "tolerance": "1.00",
+        "unit": "ARS"
+      },
+      "help": "Monto en pesos, por ejemplo: 150.000",
+      "feedback": {
+        "correct": "Correcto. $ 1.284.958,86 × 0,2 = $ 256.991,77.",
+        "incorrect": "Multiplica el neto por 0,2: $ 1.284.958,86 × 0,2 = $ 256.991,77."
+      },
+      "sourceIds": [
+        "A-32"
+      ]
+    },
+    {
+      "id": "m03-50",
+      "moduleId": "module-03",
+      "type": "numeric",
+      "prompt": "Con el mismo neto de $ 1.284.958,86, ¿cuánto es el 50 % para necesidades?",
+      "numeric": {
+        "answer": "642479.43",
+        "tolerance": "1.00",
+        "unit": "ARS"
+      },
+      "help": "Monto en pesos, por ejemplo: 500.000",
+      "feedback": {
+        "correct": "Correcto. $ 1.284.958,86 × 0,5 = $ 642.479,43.",
+        "incorrect": "Multiplica el neto por 0,5: $ 1.284.958,86 × 0,5 = $ 642.479,43."
+      },
+      "sourceIds": [
+        "A-32"
+      ]
+    },
+    {
+      "id": "m03-702010",
+      "moduleId": "module-03",
+      "type": "single",
+      "prompt": "Tus gastos fijos son altos y el 50 % no te alcanza para lo esencial. ¿Qué punto de partida propone el material?",
+      "options": [
+        {
+          "id": "a",
+          "text": "70/20/10: 70 % gastos, 20 % ocio y 10 % ahorro e inversión"
+        },
+        {
+          "id": "b",
+          "text": "Dejar de ahorrar hasta que bajen los gastos"
+        },
+        {
+          "id": "c",
+          "text": "90/10: 90 % gastos y 10 % ocio"
+        }
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "feedback": {
+        "a": "Correcto. La variante 70/20/10 es un punto de partida para gastos fijos altos, y mantiene un 10 % para ahorro e inversión.",
+        "b": "La idea es seguir separando algo, aunque sea menos: la variante 70/20/10 deja un 10 % para ahorro e inversión.",
+        "c": "Esa variante deja el ahorro en cero. La que propone el material es 70/20/10."
+      },
+      "sourceIds": [
+        "A-33"
+      ]
+    },
+    {
+      "id": "m03-ant",
+      "moduleId": "module-03",
+      "type": "true_false_why",
+      "prompt": "Los gastos hormiga no importan porque cada uno es chico.",
+      "options": [
+        {
+          "id": "true",
+          "text": "Verdadero"
+        },
+        {
+          "id": "false",
+          "text": "Falso"
+        }
+      ],
+      "correctOptionIds": [
+        "false"
+      ],
+      "why": {
+        "prompt": "¿Por qué?",
+        "options": [
+          {
+            "id": "w1",
+            "text": "Porque sumados pueden llegar a una parte importante del ingreso, y por eso conviene anotar todo un mes"
+          },
+          {
+            "id": "w2",
+            "text": "Porque los gastos hormiga son siempre grandes"
+          }
+        ],
+        "correct": "w1"
+      },
+      "feedback": {
+        "correct": "Correcto. Café, golosinas o suscripciones sin uso, sumados, pueden llegar al 15 % del ingreso anual según el material del taller. Anotar todo durante un mes los hace visibles.",
+        "incorrect": "Es falso: sumados pueden llegar a una parte importante del ingreso. Anotar todo un mes los hace visibles."
+      },
+      "sourceIds": [
+        "A-34"
+      ]
+    },
+    {
+      "id": "m04-amount",
+      "moduleId": "module-04",
+      "type": "numeric",
+      "prompt": "Tus gastos esenciales son de $ 700.000 por mes. ¿Cuánto es un fondo de emergencia de 3 meses?",
+      "numeric": {
+        "answer": "2100000",
+        "tolerance": "1.00",
+        "unit": "ARS"
+      },
+      "help": "Monto en pesos, por ejemplo: 1.500.000",
+      "feedback": {
+        "correct": "Correcto. $ 700.000 × 3 = $ 2.100.000.",
+        "incorrect": "Multiplica los gastos esenciales por los meses: $ 700.000 × 3 = $ 2.100.000."
+      },
+      "sourceIds": [
+        "A-35"
+      ]
+    },
+    {
+      "id": "m04-what",
+      "moduleId": "module-04",
+      "type": "multiple",
+      "prompt": "¿Para qué usarías el fondo de emergencia? Elige todas las que correspondan.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Un problema de salud"
+        },
+        {
+          "id": "b",
+          "text": "Quedarte sin trabajo"
+        },
+        {
+          "id": "c",
+          "text": "Unas vacaciones"
+        },
+        {
+          "id": "d",
+          "text": "Una oferta de un celular nuevo"
+        }
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "feedback": {
+        "correct": "Correcto. El fondo es para emergencias reales, como la salud o la pérdida del empleo.",
+        "incorrect": "El fondo es para emergencias reales: salud y pérdida del empleo. Las vacaciones y las ofertas van en otras metas."
+      },
+      "sourceIds": [
+        "A-35"
+      ]
+    },
+    {
+      "id": "m04-where",
+      "moduleId": "module-04",
+      "type": "single",
+      "prompt": "¿Qué características busca el lugar donde guardas el fondo de emergencia?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Liquidez en 24 horas y bajo riesgo"
+        },
+        {
+          "id": "b",
+          "text": "El mayor rendimiento posible, aunque tenga riesgo"
+        },
+        {
+          "id": "c",
+          "text": "Que no se pueda retirar por un año"
+        }
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "feedback": {
+        "a": "Correcto. Tiene que estar disponible rápido y sin riesgo de perder valor, por ejemplo en una cuenta remunerada o un fondo money market.",
+        "b": "El fondo no busca rendir al máximo: busca estar disponible y no perder valor.",
+        "c": "Si no se puede retirar, no sirve para una emergencia: tiene que estar disponible en 24 horas."
+      },
+      "sourceIds": [
+        "A-36"
+      ]
+    },
+    {
+      "id": "m04-order",
+      "moduleId": "module-04",
+      "type": "ordering",
+      "prompt": "Ordena los pasos para armar tu fondo de emergencia.",
+      "ordering": {
+        "items": [
+          {
+            "id": "s1",
+            "text": "Calcular tus gastos esenciales del mes"
+          },
+          {
+            "id": "s2",
+            "text": "Multiplicarlos por 3 a 6 meses"
+          },
+          {
+            "id": "s3",
+            "text": "Crear un apartado separado para el fondo"
+          },
+          {
+            "id": "s4",
+            "text": "Separar una parte de cada sueldo hasta llegar a la meta"
+          }
+        ],
+        "correctOrder": [
+          "s1",
+          "s2",
+          "s3",
+          "s4"
+        ]
+      },
+      "feedback": {
+        "correct": "Correcto. Primero el número, después el lugar y, por último, el hábito de separar cada mes.",
+        "incorrect": "El orden es: calcular los gastos esenciales, multiplicarlos por 3 a 6 meses, crear el apartado y separar una parte de cada sueldo."
+      },
+      "sourceIds": [
+        "A-35"
+      ]
+    },
+    {
+      "id": "m04-invest",
+      "moduleId": "module-04",
+      "type": "true_false_why",
+      "prompt": "Si ya tienes el fondo de emergencia completo, conviene invertirlo todo en acciones para que rinda más.",
+      "options": [
+        {
+          "id": "true",
+          "text": "Verdadero"
+        },
+        {
+          "id": "false",
+          "text": "Falso"
+        }
+      ],
+      "correctOptionIds": [
+        "false"
+      ],
+      "why": {
+        "prompt": "¿Por qué?",
+        "options": [
+          {
+            "id": "w1",
+            "text": "Porque el fondo tiene que estar disponible y sin riesgo; lo que sobra puede ir a otras metas o inversiones"
+          },
+          {
+            "id": "w2",
+            "text": "Porque las acciones están prohibidas"
+          }
+        ],
+        "correct": "w1"
+      },
+      "feedback": {
+        "correct": "Correcto. El fondo se mantiene líquido y de bajo riesgo. Lo que ahorres por encima puede ir a otras metas o inversiones.",
+        "incorrect": "Es falso: el fondo tiene que estar disponible y sin riesgo. Lo que ahorres por encima puede ir a otras metas."
+      },
+      "sourceIds": [
+        "A-36"
+      ]
+    }
+  ]
+}

@@ -70,6 +70,21 @@ Las de **hábitos** no tienen respuesta correcta ni juicio, y **nunca salen del 
 
 ---
 
+## Tanda del paso 7: guías y bancos de los niveles 1 a 4 (D-171)
+
+Texto completo en `src/data/guides.json` (una guía por módulo) y `src/data/question-banks.json` (5 preguntas por módulo). **Estado:** borrador para revisión de Lourdes; las ampliaciones (módulos 17 y 18), además, para revisión del Lic. Kevin Giampieri.
+
+| Módulo | Guía | Banco (tipos) | Fuentes |
+| --- | --- | --- | --- |
+| 1 · Tu recibo de sueldo | "Del bruto al neto" (6 min) | numérica (neto), opción única (bruto, costo laboral), clasificar (aportes y contribuciones), verdadero o falso con justificación | T |
+| 2 · Tu cerebro y el dinero | "Esperar 48 horas" (6 min) | opción única (regla de las 48 horas, descuento hiperbólico, riqueza real), verdadero o falso (minimalismo), opción múltiple (frenar el impulso) | A-06, A-08, A-10, A-12 a A-16 |
+| 17 · Billeteras y fintech | "Qué tipo de cuenta tienes" (7 min) | unir pares (CVU, CBU, PSPCP, QR), opción única (garantía, transferencia inmediata, registro), numérica (tope prorrateado: $ 50.000.000 ÷ 2) | B-01, B-10, B-12, B-14 a B-16, B-19 |
+| 18 · Estafas (guía base) | "Nadie legítimo te pide un código" (5 min) | opción múltiple (señales de alerta), opción única (código, alertas de la CNV), clasificar (tres mensajes sospechosos y uno esperable), verdadero o falso (página parecida) | T, B-24 |
+| 3 · Presupuesto | "Adónde va tu sueldo" (7 min) | clasificar (8 gastos), numéricas (20 % y 50 % del neto), opción única (70/20/10), verdadero o falso (gastos hormiga) | A-32 a A-34, T |
+| 4 · Fondo de emergencia | "Tu colchón para imprevistos" (6 min) | numérica ($ 700.000 × 3), opción múltiple (qué es una emergencia), opción única (liquidez y riesgo), ordenar (4 pasos), verdadero o falso (no invertirlo todo) | A-35, A-36 |
+
+Cálculos verificados a mano: $ 1.559.263,32 − $ 274.304,46 = $ 1.284.958,86; 50 % = $ 642.479,43; 30 % = $ 385.487,66; 20 % = $ 256.991,77; $ 700.000 × 3 = $ 2.100.000; con $ 250.000 por mes se llega en 9 meses (8 × 250.000 = 2.000.000 no alcanza).
+
 ## Nivel 1 · Cuenta
 
 ### Misiones del paso 6 (D-166)
