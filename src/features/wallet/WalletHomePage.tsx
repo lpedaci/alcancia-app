@@ -152,7 +152,8 @@ export function WalletHomePage() {
           <div className="flex flex-col gap-1.5">
             <p id="time-label" className="text-label-medium">{t('wallet.home.time.label')}</p>
             {canAdvance ? (
-              <div role="group" aria-labelledby="time-label" className="inline-flex w-fit flex-wrap gap-1 rounded-lg bg-surface-container-lowest p-1">
+              // Phones: three equal buttons in one full-width row, text only, so they never wrap (D-169).
+              <div role="group" aria-labelledby="time-label" className="grid w-full grid-cols-3 gap-1 rounded-lg bg-surface-container-lowest p-1 sm:inline-flex sm:w-fit">
                 {(
                   [
                     ['day', 'skip_next'],
@@ -160,7 +161,8 @@ export function WalletHomePage() {
                     ['month', 'calendar_month'],
                   ] as const
                 ).map(([kind, icon]) => (
-                  <Button key={kind} variant="text" size="s" leadingIcon={icon} onClick={() => advance(kind)}>
+                  <Button key={kind} variant="text" size="s" className="min-w-0 px-2 sm:px-3" onClick={() => advance(kind)}>
+                    <Icon name={icon} size={20} className="hidden shrink-0 sm:block" />
                     {t(`wallet.home.time.${kind}`)}
                   </Button>
                 ))}

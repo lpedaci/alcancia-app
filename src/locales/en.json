@@ -411,6 +411,7 @@
     "legal": "Educational content. It is not financial advice or an investment recommendation."
   },
   "wallet": {
-    "practiceBanner": "Personal finance simulator · play money"
+    "practiceBanner": "Personal finance simulator · play money",
+    "practiceBannerShort": "Play money"
   }
 }

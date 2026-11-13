@@ -700,7 +700,8 @@
       "complete": "Completar la misión",
       "missing": "Todavía falta un criterio: vuelve al paso que corresponde con \"Anterior\".",
       "doneBody": "Quedó registrada en tu avance. Tu tutor solo ve que la completaste, nunca tus montos ni tus respuestas."
-    }
+    },
+    "practiceBannerShort": "Dinero ficticio"
   },
   "roles": {
     "participant": "Participante",

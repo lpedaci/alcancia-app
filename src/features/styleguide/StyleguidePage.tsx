@@ -498,8 +498,8 @@ export function StyleguidePage() {
           </div>
           <div className="flex flex-col gap-2">
             <p className="text-label-medium text-on-surface">
-              Aviso fijo de práctica (D-69): píldora oscura en la barra superior de escritorio; debajo de 1200 px, una línea
-              liviana de texto con su ícono (D-164)
+              Aviso fijo de práctica (D-69): píldora oscura en la barra superior de escritorio; debajo de 1200 px, un chip
+              junto al logo, con el texto completo desde 840 px y &quot;Dinero ficticio&quot; en celular (D-169)
             </p>
             <p className="inline-flex w-fit items-center gap-1.5 rounded-full bg-inverse-surface px-3 py-1 text-label-medium text-inverse-on-surface">
               <Icon name="info" size={16} />

@@ -303,16 +303,18 @@ export function WalletShell({ section, children, fuerte }: { section: string; ch
           {/* Top bar: on phones the logo and the section; from tablets, a floating bar with the section title */}
           {/* From tablets, the header covers the gap above the floating bar so content never shows behind it */}
           <header data-wallet-header className="sticky top-0 z-30 border-b border-outline-variant bg-surface-container-lowest large:-mt-3 large:border-0 large:bg-surface large:pt-3">
-            <div className="flex min-h-16 flex-wrap items-center gap-x-1 gap-y-2 px-(--space-gutter) py-2 medium:px-6 large:flex-nowrap large:gap-2 large:rounded-xl large:border large:border-outline-variant large:bg-surface-container-lowest large:px-4">
+            <div className="flex min-h-16 items-center gap-1 px-(--space-gutter) py-2 sm:gap-2 medium:px-6 large:gap-2 large:rounded-xl large:border large:border-outline-variant large:bg-surface-container-lowest large:px-4">
               <Link to="/app" className="inline-flex shrink-0 rounded-sm large:hidden">
                 <Logo compact />
               </Link>
-              {/* Fixed notice (5.3, D-69): always in sight inside the sticky top bar, so the side panel
-                  fits the screen. Below 1200 px it is a light line of its own under the bar (a dark pill
-                  there weighed too much, D-164), so it never wraps or pushes the actions out. "dinero ficticio" is never removed. */}
-              <p className="order-last -mt-1 flex w-full items-center justify-center gap-1 text-center text-label-medium text-on-surface-variant large:order-none large:mt-0 large:w-auto large:shrink-0 large:justify-start large:gap-1.5 large:rounded-full large:bg-inverse-surface large:px-3 large:py-1 large:whitespace-nowrap large:text-inverse-on-surface">
-                <Icon name="info" size={16} className="shrink-0" />
-                {t('wallet.practiceBanner')}
+              {/* Fixed notice (5.3, D-69, D-169): always in sight inside the sticky top bar, on the same row
+                  as the logo. Phones: a compact chip; from 840 px the full text; desktop, the dark pill.
+                  "dinero ficticio" is never removed. */}
+              <p className="inline-flex shrink-0 items-center gap-1 rounded-full border border-outline-variant bg-surface-container px-2.5 py-1 text-label-medium whitespace-nowrap text-on-surface-variant large:shrink-0 large:gap-1.5 large:border-0 large:bg-inverse-surface large:px-3 large:text-inverse-on-surface">
+                {/* At 320 px the icon gives way, so the text always fits whole */}
+                <Icon name="info" size={16} className="hidden shrink-0 min-[22.5rem]:block" />
+                <span className="expanded:hidden">{t('wallet.practiceBannerShort')}</span>
+                <span className="hidden expanded:inline">{t('wallet.practiceBanner')}</span>
               </p>
               <span className="flex-1" />
               <ViewAsMenu />
