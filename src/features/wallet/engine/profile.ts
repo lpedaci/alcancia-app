@@ -23,11 +23,11 @@ export const EXPENSE_DEFS: ExpenseDef[] = [
   { key: 'groceries', category: 'needs', days: [3, 10, 17, 24], type: 'qr_payment', counterparty: 'Almacén Don Ramiro', update: 'monthly' },
   { key: 'electricity', category: 'needs', days: [12], type: 'bill', counterparty: 'Luz · Energía del Sur (ficticia)', update: 'monthly' },
   { key: 'gas', category: 'needs', days: [12], type: 'bill', counterparty: 'Gas · Gas del Valle (ficticia)', update: 'monthly' },
-  { key: 'phone', category: 'needs', days: [15], type: 'bill', counterparty: 'Celular · Línea Ejemplo', update: 'monthly' },
+  { key: 'phone', category: 'needs', days: [15], type: 'bill', counterparty: 'Celular · Línea Norte (ficticia)', update: 'monthly' },
   { key: 'transport', category: 'needs', days: [2, 16], type: 'qr_payment', counterparty: 'Transporte · Tarjeta de viaje de ejemplo', update: 'monthly' },
   { key: 'outings', category: 'wants', days: [6, 13, 20, 27], type: 'qr_payment', counterparty: 'Salidas · Bar La Esquina (ficticio)', update: 'monthly' },
   { key: 'clothes', category: 'wants', days: [20], type: 'qr_payment', counterparty: 'Ropa · Tienda Andes (ficticia)', update: 'monthly' },
-  { key: 'streaming', category: 'wants', days: [8], type: 'bill', counterparty: 'Streaming · Pantalla Ejemplo', update: 'monthly' },
+  { key: 'streaming', category: 'wants', days: [8], type: 'bill', counterparty: 'Streaming · Cine en Casa (ficticio)', update: 'monthly' },
   { key: 'subscription', category: 'wants', days: [1], type: 'bill', counterparty: 'Suscripción · Club Premium (ficticio)', update: 'fixed' },
 ];
 
