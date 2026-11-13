@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Hash routes are one document for crawlers: the landing is the only indexable URL (CLAUDE.md 15). -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://lpedaci.github.io/alcancia-app/</loc>
+    <lastmod>2026-11-13</lastmod>
+  </url>
+</urlset>

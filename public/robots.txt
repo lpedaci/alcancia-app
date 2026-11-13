@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://lpedaci.github.io/alcancia-app/sitemap.xml

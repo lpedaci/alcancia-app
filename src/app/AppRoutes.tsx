@@ -44,6 +44,7 @@ const ToolsPage = lazyPage(() => import('@/features/simulators/ToolsPages'), 'To
 const SimToolPage = lazyPage(() => import('@/features/simulators/ToolsPages'), 'SimToolPage');
 
 // The internal style guide (CLAUDE.md 2.8) exists only in development: it is never bundled in production.
+const OgImagePage = import.meta.env.DEV ? lazyPage(() => import('@/features/og-image/OgImagePage'), 'OgImagePage') : null;
 const StyleguidePage = import.meta.env.DEV ? lazyPage(() => import('@/features/styleguide/StyleguidePage'), 'StyleguidePage') : null;
 
 /**
@@ -100,6 +101,7 @@ export function AppRoutes() {
           <Route path="/sponsor/*" element={<NotFoundPage />} />
         </Route>
         {StyleguidePage && <Route path="/styleguide" element={<StyleguidePage />} />}
+        {OgImagePage && <Route path="/og-image" element={<OgImagePage />} />}
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Suspense>

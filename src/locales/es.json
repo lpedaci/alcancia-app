@@ -3606,11 +3606,11 @@
           "title": "2 · Aplicado de verdad hoy",
           "body": "Lo que protege el front publicado en GitHub Pages.",
           "items": [
-            "Política de seguridad de contenido (CSP) en la página, verificada en la CI",
-            "Sin HTML insertado sin escapar (dangerouslySetInnerHTML)",
-            "Dependencias con versión fija y auditadas en cada build",
+            "Política de seguridad de contenido (CSP) en la página, y la CI recorre cada pantalla del build sin una sola violación",
+            "Sin HTML insertado sin escapar ni texto ejecutado como código, controlado por tests",
+            "Dependencias con versión fija, auditadas en cada build y actualizadas con Dependabot",
             "Validación de formularios con Zod",
-            "Enlaces externos con rel=\"noopener noreferrer\""
+            "Enlaces externos con rel=\"noopener noreferrer\", controlado por tests"
           ]
         },
         {

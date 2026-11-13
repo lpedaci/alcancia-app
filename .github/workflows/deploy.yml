@@ -33,6 +33,10 @@ jobs:
       - name: Security audit
         run: npm audit --audit-level=high
 
+      # D-200: what ships to visitors gets the strict bar, any known vulnerability fails.
+      - name: Security audit of production dependencies
+        run: npm audit --omit=dev --audit-level=low
+
       - name: Lint
         run: npm run lint
 
@@ -45,6 +49,13 @@ jobs:
       # CLAUDE.md 8.2: the published page must carry the Content Security Policy.
       - name: Check the Content Security Policy in the build
         run: grep -q 'http-equiv="Content-Security-Policy"' dist/index.html
+
+      # D-200: every screen of the build runs under the CSP with no violation and no console error.
+      - name: Install Chromium for the production checks
+        run: npx playwright install --with-deps chromium
+
+      - name: Check the production build under the CSP
+        run: npx playwright test --config playwright.prod.config.ts
 
       - name: Upload Pages artifact
         if: github.event_name != 'pull_request'

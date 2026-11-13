@@ -16,8 +16,10 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
+    "test:e2e:prod": "npm run build && playwright test --config playwright.prod.config.ts",
     "icons": "node scripts/generate-icons.mjs",
     "seed": "node scripts/generate-seed.mjs",
+    "og-image": "node scripts/generate-og-image.mjs",
     "prepare": "git config core.hooksPath .githooks || true"
   },
   "dependencies": {

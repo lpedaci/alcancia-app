@@ -119,7 +119,7 @@ Seis estados (neutral, saludo, pensativo, atención, celebración y dormido) con
 | Capa | Qué incluye |
 | --- | --- |
 | 1 · Simulado en la interfaz | SSO neutro y rotulado, verificación en dos pasos, bloqueo tras 5 intentos, aviso de sesión por vencer, aviso de privacidad y roles desde `permissions.ts` |
-| 2 · Aplicado de verdad hoy | CSP en la página verificada en la CI, sin `dangerouslySetInnerHTML`, dependencias con versión fija y auditadas, Zod y enlaces con `rel="noopener noreferrer"` |
+| 2 · Aplicado de verdad hoy | CSP en la página, con la CI recorriendo cada pantalla del build sin una sola violación; sin HTML crudo ni código desde texto; dependencias con versión fija, auditadas y actualizadas con Dependabot; Zod; enlaces con `rel="noopener noreferrer"` controlados por tests (D-200) |
 | 3 · En producción | Encabezados HTTP reales con Cloudflare (`frame-ancestors`, HSTS, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`), protección ante bots, SSO con OIDC o SAML y permisos en el servidor (D-70) |
 
 La privacidad también se diseña: el cartel "dinero ficticio" nunca se quita (D-69), la billetera tiene marca propia, no pide datos reales, los montos no salen del navegador y el umbral de 5 no se puede bajar.

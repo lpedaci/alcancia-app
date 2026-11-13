@@ -22,7 +22,7 @@ npm install
 npm run dev
 ```
 
-Otros comandos: `npm test` (tests unitarios), `npm run lint`, `npm run build` (incluye el chequeo de tipos).
+Otros comandos: `npm test` (tests unitarios), `npm run lint`, `npm run build` (incluye el chequeo de tipos), `npm run test:e2e` (desbordes y accesibilidad, con el servidor de desarrollo), `npm run test:e2e:prod` (el build de producción con la CSP activa) y `npm run og-image` (regenera la imagen para redes, con `npm run dev` corriendo).
 
 ## Autoría
 

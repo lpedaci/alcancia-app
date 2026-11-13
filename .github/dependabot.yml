@@ -1,0 +1,16 @@
+# D-200: weekly pull requests for npm dependencies and GitHub Actions, so security fixes
+# arrive without waiting for a manual check. Versions stay pinned (CLAUDE.md 8.2).
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    groups:
+      dev-tooling:
+        dependency-type: development
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly

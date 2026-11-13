@@ -90,7 +90,7 @@
 | --- | --- | --- | --- | --- |
 | RF-80 | `/styleguide` interno | M | Tokens y componentes base | Hecho (paso 2) |
 | RF-81 | Sistema de diseño público con "Cómo mostramos el dinero" | M | Secciones de 2.8 | Hecho (paso 12, D-199) |
-| RF-82 | Indexación, Open Graph, favicon y manifiesto (spec 15) | S | `og-image.png` de 1200 × 630 | Pendiente |
+| RF-82 | Indexación, Open Graph, favicon y manifiesto (spec 15) | S | `og-image.png` de 1200 × 630 | Hecho (paso 13, D-201) |
 
 ### 1.7 Fase B (Won't en fase A)
 
@@ -112,7 +112,7 @@ F9 a F22: recordatorios, glosario completo, módulos 16 y 18 completos, certific
 | RNF-10 | Fiabilidad | El estado sobrevive a recargas; ningún estado sin salida | M | Persistencia en `localStorage`; "Empezar de cero" y "Restablecer demo" |
 | RNF-11 | Seguridad · confidencialidad | Datos de la billetera, hábitos y estado de niveles nunca en vistas de otros roles (D-58, D-62) | M | Tests de `roles.md` |
 | RNF-12 | Seguridad · privacidad | Umbral de 5 en toda métrica agregada | M | `metrics.test.ts` |
-| RNF-13 | Seguridad · integridad | CSP estricta, sin `dangerouslySetInnerHTML`, Zod en formularios, `npm audit` en CI | M | La CI falla si falta la CSP |
+| RNF-13 | Seguridad · integridad | CSP estricta, sin `dangerouslySetInnerHTML`, Zod en formularios, `npm audit` en CI | M | La CI falla si falta la CSP, si una pantalla del build la viola, si hay HTML crudo o una pestaña sin `rel`, o si una dependencia de producción tiene una vulnerabilidad conocida (D-200) |
 | RNF-14 | Mantenibilidad | Tokens en cuatro niveles; ningún componente con valores sueltos; misiones y textos de Fuerte en JSON editable | M | Revisión de código y lint |
 | RNF-15 | Mantenibilidad · capacidad de prueba | Motor y fórmulas como funciones puras | M | Cobertura de `lib/finance` y del motor ≥ 90 % |
 | RNF-16 | Flexibilidad | Modelo academia > programa > módulo > lección; i18n en todos los textos | S | Landing en inglés en fase A |

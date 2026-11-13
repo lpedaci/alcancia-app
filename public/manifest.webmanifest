@@ -1,0 +1,12 @@
+{
+  "name": "Alcancía · Simulador de finanzas personales",
+  "short_name": "Alcancía",
+  "description": "Caso de diseño UX/UI B2B: un simulador de finanzas personales con forma de billetera, con dinero ficticio. Contenido educativo, no es asesoramiento financiero.",
+  "lang": "es",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F1F3F5",
+  "theme_color": "#3D4FA8",
+  "icons": [{ "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}

@@ -1,6 +1,6 @@
 # Seguridad y privacidad
 
-> Fecha: 12/11/2026 · Sección 14.12 de la spec, D-70. Alcancía es un prototipo de portfolio sin backend, publicado en GitHub Pages. Este documento separa tres capas, como en Rumbo: lo que se **simula** en la interfaz, lo que se **aplica de verdad** en el front-end y lo que haría falta **en producción**.
+> Fecha: 13/11/2026 (actualizado en el paso 13, D-200) · Sección 14.12 de la spec, D-70. Alcancía es un prototipo de portfolio sin backend, publicado en GitHub Pages. Este documento separa tres capas, como en Rumbo: lo que se **simula** en la interfaz, lo que se **aplica de verdad** en el front-end y lo que haría falta **en producción**.
 
 ## 1. Seguridad simulada en la interfaz (8.1)
 
@@ -22,11 +22,13 @@ Son patrones de diseño: se ven y se recorren como en un producto real, pero no 
 
 | Capa | Cómo | Verificación |
 | --- | --- | --- |
-| Política de seguridad de contenido (CSP) | Etiqueta `<meta http-equiv="Content-Security-Policy">` inyectada en el build desde `src/app/security.ts`: `default-src 'self'`, `script-src 'self'` estricto, `object-src 'none'`, `base-uri 'self'`, `form-action 'self'`, `upgrade-insecure-requests`. `style-src` permite estilos en línea porque Radix, Motion y Recharts los usan con valores en tiempo de ejecución | La CI falla si `dist/index.html` no tiene la etiqueta |
-| Sin HTML inyectado | Regla de ESLint que prohíbe `dangerouslySetInnerHTML` | `npm run lint` en la CI y en el hook `pre-push` (D-141) |
-| Dependencias auditadas | `npm audit --audit-level=high` y versiones fijas | Paso "Security audit" de la CI |
+| Política de seguridad de contenido (CSP) | Etiqueta `<meta http-equiv="Content-Security-Policy">` inyectada en el build desde `src/app/security.ts`: `default-src 'self'`, `script-src 'self'` estricto (sin `unsafe-inline` ni `unsafe-eval`), `object-src 'none'`, `base-uri 'self'`, `form-action 'self'`, `upgrade-insecure-requests`. `style-src` permite estilos en línea porque Radix, Motion y Recharts los usan con valores en tiempo de ejecución | `csp.test.ts`; la CI falla si `dist/index.html` no tiene la etiqueta y si **alguna de las 69 pantallas del build** produce una violación o un error de consola (`e2e/prod-security.spec.ts`) |
+| Política de referencia | `<meta name="referrer" content="strict-origin-when-cross-origin">`: los otros sitios reciben solo el dominio, nunca la ruta | `e2e/prod-security.spec.ts` |
+| Zod sin `new Function` | Zod 4 intenta compilar sus validaciones con `new Function`, algo que la CSP prohíbe; `src/app/zod-config.ts` lo configura en modo `jitless` antes de cargar la app. Lo encontró la suite sobre el build | `e2e/prod-security.spec.ts` en G1, G3 y G4 |
+| Sin HTML inyectado ni código desde texto | Regla de ESLint contra `dangerouslySetInnerHTML`, y test que además prohíbe `innerHTML`, `insertAdjacentHTML`, `document.write`, `eval`, `new Function`, `window.open` y URL `javascript:` en todo `src/` | `npm run lint` y `front-safety.test.ts`, en la CI y en el hook `pre-push` (D-141) |
+| Dependencias auditadas | Versiones fijas (`.npmrc` con `save-exact`); `npm audit --audit-level=high` para todo y `npm audit --omit=dev --audit-level=low` para lo que llega al visitante; Dependabot semanal para npm y GitHub Actions | Pasos "Security audit" de la CI; las dependencias de producción tienen 0 vulnerabilidades conocidas (13/11/2026) |
 | Validación de datos | Zod en los formularios; los montos se normalizan antes de usarse | Tests de `MoneyInput` y `parseDecimalInput` |
-| Enlaces externos | `target="_blank"` siempre con `rel="noopener noreferrer"` | Revisión de código |
+| Enlaces externos | `target="_blank"` siempre con `rel="noopener noreferrer"`, y solo enlaces `https://` | `front-safety.test.ts` |
 | Sin datos reales | Nunca se pide DNI, CUIT, CBU, tarjetas, contraseñas ni datos de contacto reales; el CVU es `0000000 0000000 EJEMPLO 00` | Revisión de formularios (RF-35) |
 | Montos solo en el navegador | Billetera, escenarios, metas, respuestas de hábitos y reflexiones viven en un espacio de `localStorage` por persona y ninguna vista de otro rol los lee (D-58, D-62) | `privacy-boundaries.test.ts` |
 | Umbral de 5 personas | Toda métrica agregada pasa por `aggregate()` en `src/lib/metrics.ts`, con supresión complementaria (D-133) | Tests de `metrics.ts` |
@@ -69,3 +71,13 @@ Si Alcancía pasara a producción:
 - **Datos financieros personales:** se calculan en el dispositivo y no se envían al servidor; si alguna vez se guardan, cifrados y fuera del alcance de la organización.
 - **Métricas agregadas** con el umbral mínimo de 5 personas, calculadas en el servidor.
 - **Ley 25.326** de protección de datos personales: acceso, rectificación y supresión (F16). Si se trabajara con menores, consentimiento de sus responsables y mínimos datos.
+
+## 6. Cómo verificarlo
+
+| Qué | Comando | Dónde corre |
+| --- | --- | --- |
+| Reglas del código (HTML crudo, código desde texto, enlaces sin `rel`, CSP en `security.ts`) | `npm test` | CI y hook `pre-push` |
+| Regla contra `dangerouslySetInnerHTML` | `npm run lint` | CI y hook `pre-push` |
+| Dependencias | `npm audit --audit-level=high` y `npm audit --omit=dev --audit-level=low` | CI |
+| Cada pantalla del build con la CSP activa, más los archivos de indexación | `npm run test:e2e:prod` | CI, antes de publicar |
+| Privacidad entre roles y umbral de 5 | `npm test` (`privacy-boundaries.test.ts`, `metrics.test.ts`) | CI y hook `pre-push` |
