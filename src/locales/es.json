@@ -2416,7 +2416,8 @@
           "title": "Moneda",
           "body": "En qué moneda lo pagas y en cuál está el activo. Un CEDEAR se paga en pesos, pero sigue a un activo en dólares."
         }
-      }
+      },
+      "practice": "Practica con las herramientas"
     },
     "open": {
       "title": "Abre tu cuenta comitente de práctica",

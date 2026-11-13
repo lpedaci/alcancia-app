@@ -161,24 +161,44 @@ function Invest() {
                   </li>
                 ))}
               </ul>
-              {/* How to read the sheet, at the bottom so both cards of the row end together */}
-              <div className="mt-auto flex flex-col gap-3 rounded-lg bg-surface-container p-4">
-                <p className="text-title-small text-on-surface">{t('invest.instruments.howTitle')}</p>
-                <dl className="flex flex-col gap-2 text-body-small">
-                  {(['risk', 'liquidity', 'currency'] as const).map((k) => (
-                    <div key={k} className="flex flex-col">
-                      <dt className="text-label-medium text-on-surface">{t(`invest.instruments.how.${k}.title`)}</dt>
-                      <dd className="text-on-surface-variant">{t(`invest.instruments.how.${k}.body`)}</dd>
+              {/* How to read the sheet and where to practice, at the bottom so both cards of the row end together (D-191) */}
+              <div className="mt-auto flex flex-col gap-4 rounded-lg bg-surface-container p-5">
+                <p className="inline-flex items-center gap-2 text-title-small text-on-surface">
+                  <Icon name="help" size={18} className="shrink-0 text-primary" />
+                  {t('invest.instruments.howTitle')}
+                </p>
+                <dl className="flex flex-col gap-3">
+                  {(
+                    [
+                      ['risk', 'shield'],
+                      ['liquidity', 'schedule'],
+                      ['currency', 'payments'],
+                    ] as const
+                  ).map(([k, icon]) => (
+                    <div key={k} className="flex items-start gap-3">
+                      <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-surface-container-lowest text-on-surface-variant" aria-hidden>
+                        <Icon name={icon} size={16} />
+                      </span>
+                      <div className="flex min-w-0 flex-col gap-0.5">
+                        <dt className="text-label-large text-on-surface">{t(`invest.instruments.how.${k}.title`)}</dt>
+                        <dd className="text-body-small text-on-surface-variant">{t(`invest.instruments.how.${k}.body`)}</dd>
+                      </div>
                     </div>
                   ))}
                 </dl>
-                <div className="flex flex-wrap gap-x-4 gap-y-2">
-                  <Link to="/app/tools/SIM-11" className="text-label-large text-primary underline-offset-4 hover:underline">
-                    {t('sims.SIM-11.title')}
-                  </Link>
-                  <Link to="/app/tools/SIM-10" className="text-label-large text-primary underline-offset-4 hover:underline">
-                    {t('sims.SIM-10.title')}
-                  </Link>
+                <div className="flex flex-col gap-1 border-t border-outline-variant pt-4">
+                  <p className="text-label-large text-on-surface">{t('invest.instruments.practice')}</p>
+                  <ul className="flex flex-col">
+                    {(['SIM-11', 'SIM-10'] as const).map((id) => (
+                      <li key={id}>
+                        <Link to={`/app/tools/${id}`} className="flex min-h-12 items-center gap-3 rounded-md px-1 hover:bg-surface-container-high">
+                          <Icon name="calculate" size={20} className="shrink-0 text-primary" />
+                          <span className="min-w-0 flex-1 text-body-medium text-on-surface">{t(`sims.${id}.title`)}</span>
+                          <Icon name="chevron_right" size={20} className="shrink-0 text-on-surface-variant" />
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             </section>
