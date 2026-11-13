@@ -1,0 +1,292 @@
+{
+  "note": "Conocerte (F2, P2, docs/content.md): 5 habit questions, which never leave the browser (D-62), and 7 knowledge questions, the only ones in Kirkpatrick 2. Draft content, reviewed by Lourdes; additions pending review by Lic. Kevin Giampieri.",
+  "questions": [
+    {
+      "id": "h-records",
+      "type": "habit",
+      "dimension": "budget",
+      "prompt": "¿Llevas registro de tus gastos?",
+      "options": [
+        {
+          "id": "always",
+          "text": "Siempre"
+        },
+        {
+          "id": "sometimes",
+          "text": "A veces"
+        },
+        {
+          "id": "rarely",
+          "text": "Casi nunca"
+        }
+      ]
+    },
+    {
+      "id": "h-unexpected",
+      "type": "habit",
+      "dimension": "savings",
+      "prompt": "Si mañana tuvieras un gasto imprevisto grande, ¿cómo lo cubrirías?",
+      "options": [
+        {
+          "id": "savings",
+          "text": "Con ahorros"
+        },
+        {
+          "id": "credit",
+          "text": "Con la tarjeta o un préstamo"
+        },
+        {
+          "id": "borrow",
+          "text": "Pidiendo prestado"
+        },
+        {
+          "id": "unsure",
+          "text": "No sé"
+        }
+      ]
+    },
+    {
+      "id": "h-card",
+      "type": "habit",
+      "dimension": "debt",
+      "prompt": "¿Cómo pagas habitualmente la tarjeta de crédito?",
+      "options": [
+        {
+          "id": "total",
+          "text": "El total"
+        },
+        {
+          "id": "more",
+          "text": "Más del mínimo"
+        },
+        {
+          "id": "minimum",
+          "text": "El mínimo"
+        },
+        {
+          "id": "none",
+          "text": "No tengo tarjeta"
+        }
+      ]
+    },
+    {
+      "id": "h-leftover",
+      "type": "habit",
+      "dimension": "inflation_rates",
+      "prompt": "Cuando te sobra dinero a fin de mes, ¿qué haces con él?",
+      "options": [
+        {
+          "id": "account",
+          "text": "Lo dejo en la cuenta"
+        },
+        {
+          "id": "yield",
+          "text": "Lo pongo a rendir"
+        },
+        {
+          "id": "spend",
+          "text": "Lo gasto"
+        },
+        {
+          "id": "none",
+          "text": "No me suele sobrar"
+        }
+      ]
+    },
+    {
+      "id": "h-goal",
+      "type": "habit",
+      "dimension": "goals",
+      "prompt": "¿Tienes una meta de ahorro con monto y fecha?",
+      "options": [
+        {
+          "id": "yes",
+          "text": "Sí"
+        },
+        {
+          "id": "idea",
+          "text": "Tengo una idea"
+        },
+        {
+          "id": "no",
+          "text": "No"
+        }
+      ]
+    },
+    {
+      "id": "k-net",
+      "type": "knowledge",
+      "dimension": "budget",
+      "prompt": "En un recibo de sueldo, ¿qué es el sueldo neto?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Lo que cobras antes de los descuentos"
+        },
+        {
+          "id": "b",
+          "text": "Lo que entra en tu cuenta, después de los descuentos"
+        },
+        {
+          "id": "c",
+          "text": "Lo que le cuesta tu sueldo a la empresa"
+        }
+      ],
+      "correct": "b",
+      "explanation": "El neto es el bruto menos los descuentos (jubilación, obra social y otros aportes). Con ese número se arma el presupuesto del mes.",
+      "sourceIds": [
+        "T"
+      ]
+    },
+    {
+      "id": "k-emergency",
+      "type": "knowledge",
+      "dimension": "savings",
+      "prompt": "¿Cuántos meses de gastos básicos se suele tomar como referencia para un fondo de emergencia?",
+      "options": [
+        {
+          "id": "a",
+          "text": "1 mes"
+        },
+        {
+          "id": "b",
+          "text": "De 3 a 6 meses"
+        },
+        {
+          "id": "c",
+          "text": "12 meses o más"
+        }
+      ],
+      "correct": "b",
+      "explanation": "Una referencia habitual es de 3 a 6 meses de gastos básicos, para imprevistos reales como un problema de salud o quedarte sin trabajo.",
+      "sourceIds": [
+        "A-35"
+      ]
+    },
+    {
+      "id": "k-cft",
+      "type": "knowledge",
+      "dimension": "debt",
+      "prompt": "¿Qué incluye el costo financiero total (CFT) que no incluye la tasa nominal anual (TNA)?",
+      "options": [
+        {
+          "id": "a",
+          "text": "La inflación del período"
+        },
+        {
+          "id": "b",
+          "text": "Las comisiones y los cargos del crédito, además de los intereses"
+        },
+        {
+          "id": "c",
+          "text": "Nada: son el mismo número"
+        }
+      ],
+      "correct": "b",
+      "explanation": "El CFT suma a la tasa las comisiones y los cargos. Por eso es el número para comparar créditos.",
+      "sourceIds": [
+        "B-04"
+      ]
+    },
+    {
+      "id": "k-minimum",
+      "type": "knowledge",
+      "dimension": "debt",
+      "prompt": "Si pagas solo el mínimo de la tarjeta, ¿qué pasa con el resto del saldo?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Se perdona si pagas a tiempo"
+        },
+        {
+          "id": "b",
+          "text": "Genera intereses y pasa al resumen siguiente"
+        },
+        {
+          "id": "c",
+          "text": "Se descuenta del próximo sueldo, sin costo"
+        }
+      ],
+      "correct": "b",
+      "explanation": "Lo que no pagas se financia: genera intereses y se suma al resumen siguiente.",
+      "sourceIds": [
+        "T"
+      ]
+    },
+    {
+      "id": "k-inflation",
+      "type": "knowledge",
+      "dimension": "inflation_rates",
+      "prompt": "Si la inflación fuera del 3 % mensual durante un año, ¿$ 100.000 guardados sin rendimiento comprarían más, lo mismo o menos?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Más"
+        },
+        {
+          "id": "b",
+          "text": "Lo mismo"
+        },
+        {
+          "id": "c",
+          "text": "Menos"
+        }
+      ],
+      "correct": "c",
+      "explanation": "Menos: con 3 % mensual, los precios suben cerca de 42,6 % en 12 meses, así que el mismo dinero alcanza para menos cosas.",
+      "sourceIds": [
+        "A-21"
+      ]
+    },
+    {
+      "id": "k-tna",
+      "type": "knowledge",
+      "dimension": "inflation_rates",
+      "prompt": "¿Qué indica la tasa nominal anual (TNA)?",
+      "options": [
+        {
+          "id": "a",
+          "text": "El rendimiento real, después de la inflación"
+        },
+        {
+          "id": "b",
+          "text": "La tasa anual de referencia de una operación, sin sumar la capitalización de intereses"
+        },
+        {
+          "id": "c",
+          "text": "Todo lo que cuesta un crédito, con comisiones"
+        }
+      ],
+      "correct": "b",
+      "explanation": "La TNA es la tasa anual de referencia, sin capitalización. La tasa efectiva anual (TEA) suma la capitalización y el CFT agrega comisiones y cargos.",
+      "sourceIds": [
+        "B-04"
+      ]
+    },
+    {
+      "id": "k-invest",
+      "type": "knowledge",
+      "dimension": "goals",
+      "prompt": "¿Cuál es la diferencia entre ahorrar e invertir?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ninguna: son lo mismo"
+        },
+        {
+          "id": "b",
+          "text": "Ahorrar es guardar dinero; invertir es ponerlo en activos que pueden generar más dinero, con riesgo"
+        },
+        {
+          "id": "c",
+          "text": "Invertir es ahorrar en dólares"
+        }
+      ],
+      "correct": "b",
+      "explanation": "Ahorrar es retener valor; invertir es poner el dinero en activos que pueden generar más dinero, y siempre tiene riesgo.",
+      "sourceIds": [
+        "A-38"
+      ]
+    }
+  ]
+}

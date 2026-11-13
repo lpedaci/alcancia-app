@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router';
+import { Link, Navigate } from 'react-router';
 import { MoneyText } from '@/components/money/MoneyText';
 import { Button } from '@/components/ui/Button';
 import { Icon, type IconName } from '@/components/ui/Icon';
@@ -16,6 +16,7 @@ import { formatDate, walletDate } from '@/lib/dates';
 import { D } from '@/lib/finance';
 import { formatMoney, formatNumber } from '@/lib/money';
 import { cn } from '@/lib/utils';
+import { useDataStore } from '@/store/data-store';
 import { useCurrentUser } from '@/store/session-store';
 import { useWallet } from '@/store/wallet-store';
 import { advanceDays, advanceMonth, CATEGORIZABLE, categorize, pocketsTotal, purchasingPowerToday, walletMetrics } from './engine/engine';
@@ -68,6 +69,8 @@ export function WalletHomePage() {
   const [wallet, update] = useWallet(personId);
   const { current, next, activeMission } = useLevels(personId);
   const [announcement, setAnnouncement] = useState('');
+  // A participant who has not opened her account yet starts there (flows.md 2.1, P2).
+  const accountOpened = useDataStore((s) => s.diagnostics.some((d) => d.personId === personId && d.kind === 'initial'));
 
   const metrics = walletMetrics(wallet);
   const power = purchasingPowerToday(wallet);
@@ -98,6 +101,8 @@ export function WalletHomePage() {
   ) : undefined;
 
   const recent = [...wallet.movements].reverse().slice(0, 6);
+
+  if (!accountOpened) return <Navigate to="/app/welcome" replace />;
 
   return (
     <WalletShell

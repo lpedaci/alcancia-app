@@ -36,28 +36,28 @@
 | RF-30 | Rendir: cuenta remunerada y fondo money market de práctica; plazo fijo y UVA de práctica | M | Rendimiento diario acreditado; fichas con protección de cada opción | Pendiente |
 | RF-31 | Tarjeta y préstamos: tarjeta de práctica con resumen, préstamo preaprobado y compra en cuotas | M | El CFT siempre visible antes de decidir | Pendiente |
 | RF-32 | Invertir: cuenta comitente de práctica con el bróker ficticio (5.4) | M | Los 7 pasos de 5.4; serie de precios sintética rotulada | Pendiente |
-| RF-33 | Fuerte con 6 estados, mensajes de `fuerte-lines.json` y 3 niveles de presencia | M | Nunca interrumpe dos veces la misma acción; mensaje anunciado como texto | Pendiente |
+| RF-33 | Fuerte con 6 estados, mensajes de `fuerte-lines.json` y 3 niveles de presencia | M | Nunca interrumpe dos veces la misma acción; mensaje anunciado como texto | Parcial (paso 6): 3 niveles de presencia en P14, Fuerte flotante y movible; faltan los mensajes de `fuerte-lines.json` |
 | RF-34 | "¿Por qué importa?" y tarjetas de aprendizaje en el momento justo | M | Una por acción como máximo; no se repite si ya se respondió bien | Pendiente |
 | RF-35 | Cartel fijo "Simulador de finanzas personales · dinero ficticio" y ningún dato real pedido | M | Revisión de formularios: no hay campos de DNI, CBU, tarjeta ni contraseña reales | Pendiente |
-| RF-36 | Comprobantes y resumen del mes | S | Comprobante ficticio descargable; resumen en cada cierre | Pendiente |
-| RF-37 | Empezar de cero la billetera con confirmación | M | No borra el avance de aprendizaje | Pendiente |
+| RF-36 | Comprobantes y resumen del mes | S | Comprobante ficticio descargable; resumen en cada cierre | Parcial (paso 6): resumen de cada mes cerrado en P14; falta el comprobante descargable |
+| RF-37 | Empezar de cero la billetera con confirmación | M | No borra el avance de aprendizaje | Hecho (paso 6, P14) |
 
 ### 1.3 Aprendizaje (F2, F3, 5.1)
 
 | ID | Requerimiento | Prioridad | Criterio de aceptación | Estado |
 | --- | --- | --- | --- | --- |
-| RF-40 | "Conocerte" con 10 a 12 preguntas, resultado por 5 dimensiones en barras horizontales con tabla | M | Hábitos sin juicio y solo en el navegador (D-62) | Pendiente |
-| RF-41 | Ruta explicada dentro de cada nivel y repetición final para pre y post | M | Frase que explica el orden | Pendiente |
+| RF-40 | "Conocerte" con 10 a 12 preguntas, resultado por 5 dimensiones en barras horizontales con tabla | M | Hábitos sin juicio y solo en el navegador (D-62) | Hecho (paso 6, P2, D-167) |
+| RF-41 | Ruta explicada dentro de cada nivel y repetición final para pre y post | M | Frase que explica el orden | Hecho (paso 6): ruta explicada y "Repetir Conocerte" (final) |
 | RF-42 | 16 guías de fase A con la secuencia de Gagné (D-61) | M | Cada una con objetivo observable y "Para tu vida" | Pendiente |
 | RF-43 | Los 9 tipos de pregunta de 5.1 con alternativa accesible al arrastre | M | Ordenar con "Subir" y "Bajar"; unir con selects; clasificar con menú | Pendiente |
 | RF-44 | Desafíos de nivel con los bancos de sus módulos, mejor intento e intentos configurables (D-57) | M | Insignia por módulo según su parte | Pendiente |
-| RF-45 | 13 misiones con el motor declarativo (D-59) | M | Cada una con objetivo, pasos, evento, devolución y criterios de éxito | Pendiente |
+| RF-45 | 13 misiones con el motor declarativo (D-59) | M | Cada una con objetivo, pasos, evento, devolución y criterios de éxito | Parcial (paso 6): motor declarativo con tests (D-166) y misiones "Configura tu seguridad" y "Tu primer cobro"; las demás llegan con su nivel |
 | RF-46 | Mapa de niveles como línea de tiempo y logros | M | Estado con ícono y texto | Pendiente |
 | RF-47 | Glosario integrado con chip en el primer uso | M | Términos de 1.1.1 | Pendiente |
 | RF-48 | Fichas "Brókers registrados" y "Billeteras y fintech" verificadas | M | Solo filas verificadas en el registro oficial, con fecha | Pendiente |
 | RF-49 | Satisfacción de 1 a 5 al terminar cada guía | S | Alimenta Kirkpatrick 1 | Pendiente |
 | RF-50 | Desafíos semanales con autoinforme y reflexión opcional | M | La reflexión no sale del navegador de la persona | Pendiente |
-| RF-51 | Registro de eventos tipo xAPI en misiones | C | Visor en fase B (F21) | Pendiente |
+| RF-51 | Registro de eventos tipo xAPI en misiones | C | Visor en fase B (F21) | Parcial: las misiones registran los enunciados; el visor llega en F21 |
 
 ### 1.4 Herramientas (F4)
 

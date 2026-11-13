@@ -15,6 +15,7 @@ import { LEVEL_ROUTE } from '@/features/levels/UnlockCard';
 import { AREA_LEVEL, useLevels } from '@/features/levels/use-levels';
 import { useMediaQuery } from '@/lib/use-media-query';
 import { cn } from '@/lib/utils';
+import { readLocal } from '@/store/local-store';
 import { useCurrentUser } from '@/store/session-store';
 
 /**
@@ -94,6 +95,7 @@ export function WalletShell({ section, children, fuerte }: { section: string; ch
   const user = useCurrentUser();
   const { statuses, next, isOpen } = useLevels(user?.personId ?? '');
   const lights = completedLights(statuses);
+  const presence = readLocal(user?.personId ?? '').fuertePresence ?? 'chatty';
   // The section is named by the page and the tab title, not repeated in the top bar.
   useEffect(() => {
     document.title = `${section} · Alcancía`;
@@ -357,8 +359,9 @@ export function WalletShell({ section, children, fuerte }: { section: string; ch
         </ul>
       </nav>
 
-      {fuerte && (
-        <FuerteFab state={fuerte.state} lights={lights} message={fuerte.message} why={fuerte.why}>
+      {/* Presence chosen in the profile (5.0.1): "Silencio" hides Fuerte; learning cards stay. */}
+      {fuerte && presence !== 'silent' && (
+        <FuerteFab state={fuerte.state} lights={lights} message={fuerte.message} why={fuerte.why} notify={presence === 'chatty'}>
           {fuerte.action}
         </FuerteFab>
       )}

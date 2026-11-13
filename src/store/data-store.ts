@@ -59,6 +59,10 @@ interface DataState extends OrgData {
   resetData: () => void;
   addAccessRequest: (request: AccessRequest) => void;
   acceptConsent: (record: ConsentRecord) => void;
+  /** Conocerte knowledge scores only (D-62): one initial and one final per person, the last one wins. */
+  saveDiagnostic: (result: DiagnosticKnowledgeResult) => void;
+  /** A finished mission run: learning data the tutor sees aggregated (5.3), never the wallet. */
+  recordMission: (personId: string, missionId: string, at: string) => void;
 }
 
 export const DATA_STORAGE_KEY = 'alcancia-data';
@@ -73,6 +77,21 @@ export const useDataStore = create<DataState>()(
         set((state) => ({
           consents: [...state.consents.filter((c) => c.personId !== record.personId), record],
         })),
+      saveDiagnostic: (result) =>
+        set((state) => ({
+          diagnostics: [...state.diagnostics.filter((d) => !(d.personId === result.personId && d.kind === result.kind)), result],
+        })),
+      recordMission: (personId, missionId, at) =>
+        set((state) => {
+          const previous = state.missionCompletions.find((m) => m.personId === personId && m.missionId === missionId);
+          const others = state.missionCompletions.filter((m) => m !== previous);
+          return {
+            missionCompletions: [
+              ...others,
+              { personId, missionId, attempts: (previous?.attempts ?? 0) + 1, completedAt: previous?.completedAt ?? at },
+            ],
+          };
+        }),
     }),
     {
       name: DATA_STORAGE_KEY,

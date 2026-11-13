@@ -70,12 +70,15 @@ export function FuerteFab({
   lights,
   message,
   why,
+  notify = true,
   children,
 }: {
   state?: FuerteState;
   lights: number;
   message: string;
   why?: string;
+  /** "Solo lo importante" (5.0.1): no dot for new messages. */
+  notify?: boolean;
   /** Optional action under the message (for example, the active mission). */
   children?: ReactNode;
 }) {
@@ -83,7 +86,7 @@ export function FuerteFab({
   const [open, setOpen] = useState(false);
   // A new message shows the dot again until it is read.
   const [readMessage, setReadMessage] = useState<string | null>(null);
-  const unread = readMessage !== message;
+  const unread = notify && readMessage !== message;
 
   const [place, setPlace] = useState<Place>(readPlace);
   const [bounds, setBounds] = useState({ minTop: 0, maxTop: 0, minLeft: 0 });

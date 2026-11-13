@@ -17,7 +17,7 @@ import { useCurrentUser } from '@/store/session-store';
 
 /**
  * Avatar menu of the top bar (CLAUDE.md 5.3 and 7): "Restablecer demo" with confirmation and
- * "Cerrar sesión". The participant's profile (P14) joins it in step 6.
+ * "Cerrar sesión", and for participants "Perfil, seguridad y comprobantes" (P14).
  */
 export function UserMenu() {
   const { t } = useTranslation();
@@ -41,7 +41,11 @@ export function UserMenu() {
             <span className="block text-body-small break-all text-on-surface-variant">{person.email}</span>
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
-          {/* "Perfil, seguridad y comprobantes" (P14) joins this menu in step 6. */}
+          {user.role === 'participant' && (
+            <DropdownMenuItem icon="person" onSelect={() => navigate('/app/profile')}>
+              {t('demo.profile')}
+            </DropdownMenuItem>
+          )}
           {can(user, 'demo.reset') && (
             <DropdownMenuItem icon="restart_alt" onSelect={() => setConfirmReset(true)}>
               {t('demo.reset')}

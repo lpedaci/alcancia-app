@@ -1,18 +1,300 @@
 {
-  "note": "Phase A missions (CLAUDE.md 5.3, D-59): 7 numbered and 6 short ones. Declarative catalog read by the mission engine; steps and learning cards are added with each level (steps 6 to 9). L&D can add missions here without touching code.",
+  "note": "Phase A missions (CLAUDE.md 5.3, D-59): 7 numbered and 6 short ones. Declarative catalog read by the mission engine (src/features/missions/engine.ts, D-166): each mission may define `initial` (`fresh`: a practice account at day 0, `current`: a copy of the person's wallet that is kept on completion), `steps` and `criteria`. Steps and learning cards are added with each level (steps 6 to 9). L&D can add missions here without touching code.",
   "missions": [
-    { "id": "mission-security", "levelId": "level-0", "title": "Configura tu seguridad", "minutes": 2, "objective": "Activar el segundo factor y fijar un límite diario de práctica." },
-    { "id": "mission-1", "levelId": "level-1", "title": "Tu primer cobro", "minutes": 5, "objective": "Cobrar el sueldo, identificar el neto y separar el 20 % en el apartado \"Ahorro\"." },
-    { "id": "mission-2", "levelId": "level-2", "title": "Transfiere sin errores", "minutes": 4, "objective": "Pagarle a un compañero por alias, revisando el titular antes de confirmar." },
-    { "id": "mission-3", "levelId": "level-2", "title": "Paga con QR", "minutes": 3, "objective": "Comprar en un comercio ficticio y verificar el comprobante." },
-    { "id": "mission-6", "levelId": "level-2", "title": "El mensaje falso", "minutes": 4, "objective": "Reconocer y reportar el mensaje fraudulento sin compartir el código." },
-    { "id": "mission-7", "levelId": "level-3", "title": "Mes completo", "minutes": 6, "objective": "Cerrar un mes con imprevistos con el presupuesto en verde." },
-    { "id": "mission-emergency-fund", "levelId": "level-4", "title": "Crea tu fondo de emergencia", "minutes": 3, "objective": "Crear el apartado de emergencia con una meta de 3 a 6 meses de gastos básicos." },
-    { "id": "mission-5", "levelId": "level-5", "title": "El préstamo tentador", "minutes": 5, "objective": "Encontrar el CFT de una oferta preaprobada y calcular su costo total antes de decidir." },
-    { "id": "mission-debts", "levelId": "level-5", "title": "Sal de tus deudas", "minutes": 4, "objective": "Elegir bola de nieve o avalancha y aplicar el plan." },
-    { "id": "mission-4", "levelId": "level-6", "title": "¿Cuenta o fondo?", "minutes": 5, "objective": "Elegir dónde dejar el saldo después de leer la ficha de cada opción, y explicar la diferencia." },
-    { "id": "mission-broker-account", "levelId": "level-7", "title": "Abre tu cuenta comitente", "minutes": 3, "objective": "Abrir una cuenta de práctica en un bróker ficticio y fondearla desde la billetera." },
-    { "id": "mission-first-cedear", "levelId": "level-7", "title": "Tu primer CEDEAR de ETF", "minutes": 4, "objective": "Comprar un CEDEAR de ejemplo y leer el ratio, el tipo de cambio implícito y los costos." },
-    { "id": "mission-hold-the-drop", "levelId": "level-7", "title": "Aguanta la caída", "minutes": 3, "objective": "Seguir la inversión en una caída de ejemplo sin vender en pánico." }
+    {
+      "id": "mission-security",
+      "levelId": "level-0",
+      "title": "Configura tu seguridad",
+      "minutes": 2,
+      "objective": "Activar el segundo factor y fijar un límite diario de práctica.",
+      "initial": "current",
+      "steps": [
+        {
+          "id": "codes",
+          "kind": "card",
+          "title": "Tus códigos son solo tuyos",
+          "body": "Para entrar o confirmar una operación, la app te manda un código. Ninguna empresa seria te lo pide por teléfono, mensaje ni correo: quien lo pide quiere entrar a tu cuenta.",
+          "sourceIds": [
+            "B-24"
+          ],
+          "fuerte": "Empecemos por lo que te protege. Son dos minutos."
+        },
+        {
+          "id": "two-factor",
+          "kind": "action",
+          "instruction": "Activa el segundo factor: además de la contraseña, cada inicio de sesión te va a pedir un código.",
+          "button": "Activar el segundo factor",
+          "action": "enable_two_factor",
+          "done": "Segundo factor activado."
+        },
+        {
+          "id": "limit",
+          "kind": "decision",
+          "prompt": "Elige un límite diario para tus transferencias. Si alguien entrara a tu cuenta, el límite frena cuánto se puede llevar.",
+          "options": [
+            {
+              "id": "100000",
+              "text": "$ 100.000 por día",
+              "action": "set_daily_limit",
+              "value": "100000.00",
+              "feedback": "Límite guardado: $ 100.000 por día. Lo puedes cambiar en tu perfil."
+            },
+            {
+              "id": "300000",
+              "text": "$ 300.000 por día",
+              "action": "set_daily_limit",
+              "value": "300000.00",
+              "feedback": "Límite guardado: $ 300.000 por día. Lo puedes cambiar en tu perfil."
+            },
+            {
+              "id": "500000",
+              "text": "$ 500.000 por día",
+              "action": "set_daily_limit",
+              "value": "500000.00",
+              "feedback": "Límite guardado: $ 500.000 por día. Lo puedes cambiar en tu perfil."
+            }
+          ]
+        },
+        {
+          "id": "phishing",
+          "kind": "single",
+          "prompt": "Te escribe \"Soporte Alcancía\" por chat y te pide el código que te acaba de llegar, para \"verificar tu cuenta\". ¿Qué haces?",
+          "options": [
+            {
+              "id": "give",
+              "text": "Se lo paso, así terminan la verificación.",
+              "feedback": "Ojo con esto: con ese código pueden entrar a tu cuenta. Ningún soporte real te lo pide. Prueba de nuevo."
+            },
+            {
+              "id": "check",
+              "text": "No lo comparto y reviso entrando a la app por mi cuenta.",
+              "feedback": "Correcto. El código no se comparte nunca, y los avisos se revisan entrando a la app por tu cuenta, no desde el mensaje."
+            },
+            {
+              "id": "email",
+              "text": "Le pido que me lo pida por correo, que es más seguro.",
+              "feedback": "El canal no cambia nada: el código no se comparte por ningún medio. Prueba de nuevo."
+            }
+          ],
+          "correct": "check",
+          "sourceIds": [
+            "B-24"
+          ]
+        },
+        {
+          "id": "summary",
+          "kind": "summary"
+        }
+      ],
+      "criteria": [
+        {
+          "id": "two-factor",
+          "description": "Segundo factor activado",
+          "check": "two_factor_on"
+        },
+        {
+          "id": "limit",
+          "description": "Límite diario elegido",
+          "check": "daily_limit_set"
+        },
+        {
+          "id": "code",
+          "description": "Reconociste que el código no se comparte",
+          "check": "step_correct",
+          "param": "phishing"
+        }
+      ]
+    },
+    {
+      "id": "mission-1",
+      "levelId": "level-1",
+      "title": "Tu primer cobro",
+      "minutes": 5,
+      "objective": "Cobrar el sueldo, identificar el neto y separar el 20 % en el apartado \"Ahorro\".",
+      "initial": "fresh",
+      "steps": [
+        {
+          "id": "salary",
+          "kind": "action",
+          "instruction": "Andina Servicios S.A. te deposita el sueldo del mes. Cóbralo para empezar.",
+          "button": "Cobrar el sueldo",
+          "action": "receive_salary",
+          "done": "Entró tu sueldo neto: {{salary}}.",
+          "fuerte": "Acá manejas dinero de práctica, así que equivocarte sale gratis."
+        },
+        {
+          "id": "net",
+          "kind": "single",
+          "title": "Bruto, descuentos y neto",
+          "body": "Tu recibo muestra el sueldo bruto, los descuentos (jubilación, obra social y otros aportes) y el neto. A tu cuenta entra el neto: con ese número se arma el presupuesto del mes.",
+          "prompt": "En el recibo de ejemplo, ¿qué monto entra en tu cuenta?",
+          "options": [
+            {
+              "id": "gross",
+              "text": "$ 1.559.263,32, el sueldo bruto",
+              "feedback": "Ese es el bruto: todavía no se restaron los descuentos. Prueba de nuevo."
+            },
+            {
+              "id": "net",
+              "text": "$ 1.284.958,86, el sueldo neto",
+              "feedback": "Correcto. El neto es el bruto menos los descuentos: $ 1.559.263,32 − $ 274.304,46 = $ 1.284.958,86."
+            },
+            {
+              "id": "cost",
+              "text": "$ 2.171.180,60, el costo total para el empleador",
+              "feedback": "Eso es lo que le cuesta tu sueldo a la empresa, con sus contribuciones. A tu cuenta llega bastante menos. Prueba de nuevo."
+            }
+          ],
+          "correct": "net",
+          "sourceIds": [
+            "T"
+          ]
+        },
+        {
+          "id": "save",
+          "kind": "numeric",
+          "prompt": "Separa el 20 % de tu sueldo neto en el apartado \"Ahorro\". ¿Cuánto vas a separar?",
+          "help": "Monto en pesos, por ejemplo: 150.000",
+          "expected": "salary_percent",
+          "param": "0.2",
+          "tolerance": "1.00",
+          "onCorrect": "save_to_savings",
+          "hint": "Para calcular el 20 %, multiplica el neto por 0,2: {{salary}} × 0,2 = {{expected}}. Prueba con ese monto.",
+          "feedback": "Guardado. Separaste {{amount}} en \"Ahorro\": el 20 % de la regla 50/30/20.",
+          "sourceIds": [
+            "A-32"
+          ]
+        },
+        {
+          "id": "surprise",
+          "kind": "event",
+          "title": "Un débito que no esperabas",
+          "body": "Se debitó una suscripción de $ 4.990 que no recordabas. Los débitos programados y las suscripciones que no usas son gastos hormiga: de a poco, pesan.",
+          "action": "charge_subscription",
+          "sourceIds": [
+            "A-34"
+          ],
+          "fuerte": "Ojo con esto: hay débitos que pasan sin que los notes."
+        },
+        {
+          "id": "decide",
+          "kind": "decision",
+          "prompt": "¿Qué haces con la suscripción?",
+          "options": [
+            {
+              "id": "cancel",
+              "text": "La cancelo: no la uso.",
+              "action": "cancel_subscription",
+              "feedback": "Cancelada. Desde el mes que viene ya no se debita. Revisar los débitos una vez por mes es un buen hábito."
+            },
+            {
+              "id": "keep",
+              "text": "La mantengo: la uso.",
+              "feedback": "Queda activa y se debita todos los meses. Si la usas, está bien; si no, es un gasto hormiga que puedes cortar cuando quieras."
+            }
+          ]
+        },
+        {
+          "id": "summary",
+          "kind": "summary"
+        }
+      ],
+      "criteria": [
+        {
+          "id": "salary",
+          "description": "Cobraste tu sueldo",
+          "check": "salary_received"
+        },
+        {
+          "id": "savings",
+          "description": "Separaste el 20 % en \"Ahorro\"",
+          "check": "savings_percent",
+          "param": "0.2"
+        },
+        {
+          "id": "surprise",
+          "description": "Revisaste el débito sorpresa",
+          "check": "step_done",
+          "param": "decide"
+        }
+      ]
+    },
+    {
+      "id": "mission-2",
+      "levelId": "level-2",
+      "title": "Transfiere sin errores",
+      "minutes": 4,
+      "objective": "Pagarle a un compañero por alias, revisando el titular antes de confirmar."
+    },
+    {
+      "id": "mission-3",
+      "levelId": "level-2",
+      "title": "Paga con QR",
+      "minutes": 3,
+      "objective": "Comprar en un comercio ficticio y verificar el comprobante."
+    },
+    {
+      "id": "mission-6",
+      "levelId": "level-2",
+      "title": "El mensaje falso",
+      "minutes": 4,
+      "objective": "Reconocer y reportar el mensaje fraudulento sin compartir el código."
+    },
+    {
+      "id": "mission-7",
+      "levelId": "level-3",
+      "title": "Mes completo",
+      "minutes": 6,
+      "objective": "Cerrar un mes con imprevistos con el presupuesto en verde."
+    },
+    {
+      "id": "mission-emergency-fund",
+      "levelId": "level-4",
+      "title": "Crea tu fondo de emergencia",
+      "minutes": 3,
+      "objective": "Crear el apartado de emergencia con una meta de 3 a 6 meses de gastos básicos."
+    },
+    {
+      "id": "mission-5",
+      "levelId": "level-5",
+      "title": "El préstamo tentador",
+      "minutes": 5,
+      "objective": "Encontrar el CFT de una oferta preaprobada y calcular su costo total antes de decidir."
+    },
+    {
+      "id": "mission-debts",
+      "levelId": "level-5",
+      "title": "Sal de tus deudas",
+      "minutes": 4,
+      "objective": "Elegir bola de nieve o avalancha y aplicar el plan."
+    },
+    {
+      "id": "mission-4",
+      "levelId": "level-6",
+      "title": "¿Cuenta o fondo?",
+      "minutes": 5,
+      "objective": "Elegir dónde dejar el saldo después de leer la ficha de cada opción, y explicar la diferencia."
+    },
+    {
+      "id": "mission-broker-account",
+      "levelId": "level-7",
+      "title": "Abre tu cuenta comitente",
+      "minutes": 3,
+      "objective": "Abrir una cuenta de práctica en un bróker ficticio y fondearla desde la billetera."
+    },
+    {
+      "id": "mission-first-cedear",
+      "levelId": "level-7",
+      "title": "Tu primer CEDEAR de ETF",
+      "minutes": 4,
+      "objective": "Comprar un CEDEAR de ejemplo y leer el ratio, el tipo de cambio implícito y los costos."
+    },
+    {
+      "id": "mission-hold-the-drop",
+      "levelId": "level-7",
+      "title": "Aguanta la caída",
+      "minutes": 3,
+      "objective": "Seguir la inversión en una caída de ejemplo sin vender en pánico."
+    }
   ]
 }

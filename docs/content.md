@@ -47,7 +47,9 @@ Dimensiones: D-116, aprobada; la quinta se llama "Metas e inversión" (D-64; en 
 - **Actividades:** bienvenida guiada con Fuerte; alta simulada sin datos reales; "Conocerte".
 - **Fuentes:** B-24 (señales de alerta). **Estado:** ampliación.
 
-### "Conocerte" (borrador de las 12 preguntas)
+### "Conocerte" (las 12 preguntas)
+
+Versión con opciones y explicaciones en `src/data/conocerte.json` (paso 6, D-167). Las explicaciones de las preguntas de conocimiento salen de T, A-21, A-35, A-38 y B-04; la frase "cerca de 42,6 % en 12 meses" es el cálculo de `(1,03)^12 − 1`. **Estado:** borrador para revisión de Lourdes; las ampliaciones, para revisión del Lic. Kevin Giampieri.
 
 Las de **hábitos** no tienen respuesta correcta ni juicio, y **nunca salen del navegador** (D-62). Las de **conocimiento** dan retroalimentación al final y son las únicas que entran en Kirkpatrick 2.
 
@@ -69,6 +71,11 @@ Las de **hábitos** no tienen respuesta correcta ni juicio, y **nunca salen del 
 ---
 
 ## Nivel 1 · Cuenta
+
+### Misiones del paso 6 (D-166)
+
+- **Configura tu seguridad** (nivel 0): tarjeta "Tus códigos son solo tuyos" (B-24), activar el segundo factor, elegir un límite diario y reconocer un pedido falso de código (opción única con devolución por opción). Criterios: segundo factor activado, límite elegido y respuesta correcta.
+- **Tu primer cobro** (nivel 1): cobrar el sueldo neto de demo ($ 1.284.958,86, D-54), elegir el neto entre bruto, neto y costo laboral del recibo del taller (T), separar el 20 % en "Ahorro" ($ 256.991,77, tolerancia $ 1, A-32), el débito sorpresa de $ 4.990 (D-55, A-34) y decidir si se cancela. Se juega en una cuenta de práctica nueva.
 
 ### Módulo 1 · Tu recibo de sueldo
 - **Objetivo:** calcular el sueldo neto a partir del bruto y los descuentos de un recibo, y clasificar cada concepto como aporte, contribución o suma no remunerativa.

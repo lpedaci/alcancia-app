@@ -1,3 +1,4 @@
+import type { MissionRun } from '@/features/missions/engine';
 import type { LevelProgress, LocalGoal, LocalScenario } from '@/types/domain';
 
 /**
@@ -17,7 +18,15 @@ export interface LocalData {
   levelProgress: LevelProgress[];
   /** D-67: result of the educational investor profile test. Never a portfolio recommendation (1.2). */
   investorProfile?: InvestorProfile;
+  /** Mission runs in progress or finished (5.3): "Salir y retomar" keeps the step. */
+  missionRuns?: Record<string, MissionRun>;
+  /** Conocerte answers in progress, so leaving halfway resumes at the same question (CU-01, 2a). */
+  conocerteDraft?: { answers: Record<string, string>; index: number; kind: 'initial' | 'final' };
+  /** Presence of Fuerte chosen in the profile (5.0.1): talkative by default. */
+  fuertePresence?: FuertePresence;
 }
+
+export type FuertePresence = 'chatty' | 'important' | 'silent';
 
 export type InvestorProfile = 'conservative' | 'moderate' | 'aggressive';
 

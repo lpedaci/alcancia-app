@@ -274,6 +274,13 @@ export function setTwoFactor(state: WalletState, on: boolean): WalletState {
   return next;
 }
 
+/** Daily transfer limit of practice (mission "Configura tu seguridad", 5.3 Seguridad). */
+export function setDailyLimit(state: WalletState, amount: string | undefined): WalletState {
+  const next = clone(state);
+  next.securitySettings = { ...next.securitySettings, dailyLimit: amount === undefined ? undefined : toMoneyString(roundCents(amount)) };
+  return next;
+}
+
 // ---------- Reading ----------
 
 export const CATEGORIZABLE: MovementType[] = ['transfer_out', 'qr_payment', 'bill'];
