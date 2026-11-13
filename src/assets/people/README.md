@@ -10,4 +10,4 @@ Fotos de stock descargadas de [Magnific](https://www.magnific.com/) con su licen
 | Paula Gómez | `2148213468.jpg` |
 | Ricardo Benítez | `3600.jpg` |
 
-Crédito: en el case study, en la documentación y en el sitio del sistema de diseño (no en la interfaz del producto).
+Crédito que pide la licencia (D-71): "Designed by Magnific" con enlace a magnific.com, en el pie de la landing ("Fotos de personas: Designed by Magnific"), en el case study, en la documentación y en el sitio del sistema de diseño.

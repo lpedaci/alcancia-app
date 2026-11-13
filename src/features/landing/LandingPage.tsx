@@ -429,9 +429,24 @@ export function LandingPage() {
           {/* One row: the credit and the profile icons. */}
           <div className={cn(container, 'flex flex-col gap-3 py-6 text-body-small text-on-surface-variant')}>
             <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-              <p>
-                {t('landing.footer.credit')} © 2026
-              </p>
+              <div className="flex flex-col gap-1">
+                <p>
+                  {t('landing.footer.credit')} © 2026
+                </p>
+                {/* Attribution required by the free license of the profile photos (D-71) */}
+                <p className="text-label-medium text-on-surface-variant">
+                  {t('landing.footer.photos')}{' '}
+                  <a
+                    href="https://www.magnific.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline underline-offset-2 hover:text-on-surface"
+                  >
+                    Designed by Magnific
+                    <span className="sr-only"> {t('landing.newTab')}</span>
+                  </a>
+                </p>
+              </div>
               <ul className="-ml-3 flex items-center gap-1 md:ml-0 md:-mr-3" aria-label={t('landing.footer.profiles')}>
                 {(
                   [

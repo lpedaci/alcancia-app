@@ -578,7 +578,7 @@ export function StyleguidePage() {
               ))}
             </ul>
             <p className="text-body-small text-on-surface-variant">
-              Las cinco personas de la demo tienen foto con un anillo del color de su rol (D-165, fotos de stock de Magnific). El resto, iniciales sobre el contenedor del color del rol.
+              Las cinco personas de la demo tienen foto con un anillo del color de su rol (D-165; fotos de stock, "Designed by Magnific", D-71). El resto, iniciales sobre el contenedor del color del rol.
             </p>
           </Panel>
           <Panel className="flex flex-col gap-3">

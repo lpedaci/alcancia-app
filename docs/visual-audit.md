@@ -117,5 +117,5 @@ Las referencias son paneles de escritorio. El layout de celular se deriva de **M
 
 - Fondos y tarjetas planos, sin degradés (2.2, 2.5); sin sombras en tarjetas en reposo.
 - Cada gráfico con frase de conclusión y "Ver como tabla" (2.10).
-- Fotos de personas solo en los avatares de las cinco personas de la demo: fotos de stock de [Magnific](https://www.magnific.com/) con licencia gratuita, recortadas en cuadrado con el mismo encuadre y atribuidas en el case study, la documentación y el sitio del sistema de diseño (D-165). Las fotos de las referencias de terceros no se usan.
+- Fotos de personas solo en los avatares de las cinco personas de la demo: fotos de stock de [Magnific](https://www.magnific.com/) con licencia gratuita, recortadas en cuadrado con el mismo encuadre con la atribución "Designed by Magnific" y enlace en el pie de la landing, el case study, la documentación y el sitio del sistema de diseño (D-165, D-71). Las fotos de las referencias de terceros no se usan.
 - El naranja solo en Fuerte (D-52).

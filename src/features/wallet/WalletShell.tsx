@@ -327,7 +327,9 @@ export function WalletShell({ section, children, fuerte }: { section: string; ch
         </div>
       </div>
 
-      {/* Bottom navigation bar (phones and tablets): icons only, D-164. Each name stays for assistive tech. */}
+      {/* Bottom navigation bar (phones and tablets), D-72: every destination shows its icon; only the
+          active one shows its name, under the pill indicator. The rest keep their accessible name and a
+          tooltip (the name also says when it is locked). */}
       <nav
         data-wallet-bottom-nav
         aria-label={t('wallet.nav.label')}
@@ -337,24 +339,33 @@ export function WalletShell({ section, children, fuerte }: { section: string; ch
           {DESTINATIONS.map((d) => {
             const active = isDestinationActive(d, pathname);
             const locked = destinationLocked(d);
-            return (
-              <li key={d.id}>
-                <Link
-                  to={d.to}
-                  aria-current={active ? 'page' : undefined}
-                  className="flex min-h-16 items-center justify-center px-1 py-2 text-on-surface-variant aria-[current=page]:text-on-surface"
-                >
-                  <span className={cn('relative flex h-10 w-16 items-center justify-center rounded-full', active && 'bg-secondary-container text-on-secondary-container')}>
-                    <Icon name={d.icon} size={24} filled={active} />
-                    {locked && <Icon name="lock" size={16} className="absolute right-2 bottom-0.5 rounded-full bg-surface-container-lowest" />}
+            const name = t(`wallet.nav.${d.id}`);
+            const lockedText = locked ? `, ${t('wallet.nav.locked')}` : '';
+            const link = (
+              <Link
+                to={d.to}
+                aria-current={active ? 'page' : undefined}
+                data-bottom-nav-item={d.id}
+                className="flex min-h-16 flex-col items-center justify-center gap-1 px-1 py-2 text-on-surface-variant aria-[current=page]:text-on-surface"
+              >
+                <span className={cn('relative flex h-8 w-16 items-center justify-center rounded-full', active && 'bg-secondary-container text-on-secondary-container')}>
+                  <Icon name={d.icon} size={24} filled={active} />
+                  {locked && <Icon name="lock" size={16} className="absolute right-2 bottom-0 rounded-full bg-surface-container-lowest" />}
+                </span>
+                {active ? (
+                  <span className="max-w-full truncate text-label-medium">
+                    {name}
+                    {locked && <span className="sr-only">{lockedText}</span>}
                   </span>
+                ) : (
                   <span className="sr-only">
-                    {t(`wallet.nav.${d.id}`)}
-                    {locked && `, ${t('wallet.nav.locked')}`}
+                    {name}
+                    {lockedText}
                   </span>
-                </Link>
-              </li>
+                )}
+              </Link>
             );
+            return <li key={d.id}>{active ? link : <Tooltip content={name + (locked ? ` · ${t('wallet.nav.locked')}` : '')}>{link}</Tooltip>}</li>;
           })}
         </ul>
       </nav>
