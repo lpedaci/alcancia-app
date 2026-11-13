@@ -87,29 +87,74 @@ function partOf(total: string, parts: number, index: number): Decimal {
   return index < parts - 1 ? each : D(total).minus(each.times(parts - 1));
 }
 
-function closeMonth(state: WalletState, month: number) {
+/** Money that leaves for spending: scheduled debits and the person's own payments (not pockets). */
+const SPENDING: MovementType[] = ['transfer_out', 'qr_payment', 'bill', 'loan'];
+
+export interface MonthBreakdown {
+  month: number;
+  income: Decimal;
+  needs: Decimal;
+  wants: Decimal;
+  /** Payments without a category yet (the person's own transfers before she categorizes them). */
+  unclassified: Decimal;
+  saved: Decimal;
+  yield: Decimal;
+  savingsWithdrawn: boolean;
+  /** The three conditions of a green month (section 8, D-115). */
+  checks: { withinIncome: boolean; savedTenPercent: boolean; savingsKept: boolean };
+  green: boolean;
+}
+
+/**
+ * Budget of one simulated month, closed or in progress (section 8, P4): income, spending by
+ * category (the person's category first, then the suggested one), money set aside and yield.
+ */
+export function monthBreakdown(state: WalletState, month: number): MonthBreakdown {
   const from = month * DAYS_IN_MONTH + 1;
   const to = (month + 1) * DAYS_IN_MONTH;
   const inMonth = state.movements.filter((m) => m.day >= from && m.day <= to);
   const income = sum(inMonth.filter((m) => m.type === 'income' || m.type === 'transfer_in').map((m) => D(m.amount)));
-  const byCategory = (category: BudgetCategory) =>
-    sum(inMonth.filter((m) => m.expenseKey && (m.category ?? m.suggestedCategory) === category).map((m) => D(m.amount).neg()));
+  const spending = inMonth.filter((m) => SPENDING.includes(m.type) && D(m.amount).lt(0));
+  const byCategory = (category: BudgetCategory | undefined) =>
+    sum(spending.filter((m) => (m.category ?? m.suggestedCategory) === category).map((m) => D(m.amount).neg()));
   const needs = byCategory('needs');
   const wants = byCategory('wants');
+  const unclassified = byCategory(undefined);
   const saved = sum(inMonth.filter((m) => m.type === 'pocket_in' || m.type === 'pocket_out').map((m) => D(m.amount).neg()));
   const yieldTotal = sum(inMonth.filter((m) => m.type === 'yield').map((m) => D(m.amount)));
   const savingsWithdrawn = inMonth.some((m) => m.type === 'pocket_out');
   // Section 8 (D-115): spending within income, at least 10 % set aside, and no savings taken out.
-  const green = needs.plus(wants).lte(income) && saved.gte(income.times('0.1')) && !savingsWithdrawn;
+  const checks = {
+    withinIncome: needs.plus(wants).plus(unclassified).lte(income),
+    savedTenPercent: income.gt(0) && saved.gte(income.times('0.1')),
+    savingsKept: !savingsWithdrawn,
+  };
+  return {
+    month,
+    income,
+    needs,
+    wants,
+    unclassified,
+    saved,
+    yield: yieldTotal,
+    savingsWithdrawn,
+    checks,
+    green: checks.withinIncome && checks.savedTenPercent && checks.savingsKept,
+  };
+}
+
+function closeMonth(state: WalletState, month: number) {
+  const b = monthBreakdown(state, month);
   const summary: MonthSummary = {
     month,
-    income: toMoneyString(income),
-    needs: toMoneyString(needs),
-    wants: toMoneyString(wants),
-    saved: toMoneyString(saved),
-    yield: toMoneyString(yieldTotal),
-    savingsWithdrawn,
-    green,
+    income: toMoneyString(b.income),
+    needs: toMoneyString(b.needs),
+    // Payments the person did not categorize count as wants until she does (conservative).
+    wants: toMoneyString(b.wants.plus(b.unclassified)),
+    saved: toMoneyString(b.saved),
+    yield: toMoneyString(b.yield),
+    savingsWithdrawn: b.savingsWithdrawn,
+    green: b.green,
   };
   state.monthSummaries = [...state.monthSummaries.filter((s) => s.month !== month), summary];
 }
@@ -306,6 +351,13 @@ export function payQr(state: WalletState, { amount, merchant, category }: { amou
   checkPayment(state, value);
   const next = clone(state);
   addMovement(next, { type: 'qr_payment', amount: value.neg(), counterparty: merchant, suggestedCategory: category });
+  return next;
+}
+
+/** A price change of a service from now on (mission 7: "subió el celular"). */
+export function raiseExpense(state: WalletState, key: ExpenseKey, amount: string): WalletState {
+  const next = clone(state);
+  next.expenses = { ...next.expenses, [key]: toMoneyString(roundCents(amount)) };
   return next;
 }
 

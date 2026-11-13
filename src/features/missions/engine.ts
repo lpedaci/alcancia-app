@@ -3,6 +3,8 @@ import { D, roundCents, toMoneyString } from '@/lib/finance';
 import { formatMoney, parseDecimalInput } from '@/lib/money';
 import {
   advanceDays,
+  advanceMonth,
+  raiseExpense,
   chargeSurpriseSubscription,
   completeMission,
   createPocket,
@@ -37,8 +39,11 @@ export type ActionId =
   | 'cancel_subscription'
   | 'save_to_savings'
   | 'transfer'
-  | 'pay_qr';
-export type CheckId = 'two_factor_on' | 'daily_limit_set' | 'step_correct' | 'step_done' | 'salary_received' | 'savings_percent' | 'paid_to';
+  | 'pay_qr'
+  | 'pay_repair'
+  | 'raise_phone'
+  | 'close_month';
+export type CheckId = 'two_factor_on' | 'daily_limit_set' | 'step_correct' | 'step_done' | 'salary_received' | 'savings_percent' | 'paid_to' | 'month_green' | 'savings_kept';
 
 interface StepBase {
   id: string;
@@ -57,7 +62,7 @@ export interface Option {
 }
 export type MissionStep =
   | (StepBase & { kind: 'card'; title: string; body: string })
-  | (StepBase & { kind: 'event'; title: string; body: string; action: ActionId })
+  | (StepBase & { kind: 'event'; title: string; body: string; action: ActionId; value?: string; target?: string })
   | (StepBase & { kind: 'action'; instruction: string; button: string; action: ActionId; done: string; value?: string; target?: string })
   | (StepBase & { kind: 'decision'; prompt: string; options: Option[] })
   | (StepBase & { kind: 'single'; prompt: string; options: Option[]; correct: string; title?: string; body?: string })
@@ -171,6 +176,13 @@ function applyAction(wallet: WalletState, action: ActionId, value?: string, targ
       return transferOut(wallet, { amount: value ?? '0', counterparty: target ?? '' });
     case 'pay_qr':
       return payQr(wallet, { amount: value ?? '0', merchant: target ?? '' });
+    case 'pay_repair':
+      // An unexpected expense paid from the balance, as a need (mission 7)
+      return transferOut(wallet, { amount: value ?? '0', counterparty: target ?? '', category: 'needs' });
+    case 'raise_phone':
+      return raiseExpense(wallet, 'phone', value ?? wallet.expenses.phone);
+    case 'close_month':
+      return advanceMonth(wallet);
     case 'save_to_savings': {
       const withPocket = createPocket(wallet, { id: POCKET_SAVINGS, name: 'Ahorro' });
       return moveToPocket(withPocket, POCKET_SAVINGS, value ?? '0');
@@ -209,7 +221,7 @@ export function answerStep(def: MissionDef, run: MissionRun, input?: string): { 
     case 'event':
     case 'action': {
       if (previous.done) return { run };
-      const wallet = step.kind === 'action' ? applyAction(run.wallet, step.action, step.value, step.target) : applyAction(run.wallet, step.action);
+      const wallet = applyAction(run.wallet, step.action, step.value, step.target);
       const feedback = step.kind === 'action' ? { tone: 'success' as const, text: fillText(step.done, { ...run, wallet }) } : undefined;
       return { run: record({ ...previous, done: true }, { verb: 'acted', object: `${def.id}/${step.id}` }, wallet), feedback };
     }
@@ -312,6 +324,10 @@ export function checkCriterion(criterion: Criterion, run: MissionRun): boolean {
       return run.results[criterion.param ?? '']?.done === true;
     case 'salary_received':
       return wallet.movements.some((m) => m.type === 'income');
+    case 'month_green':
+      return wallet.monthSummaries.find((m) => m.month === Number(criterion.param ?? '0'))?.green === true;
+    case 'savings_kept':
+      return !wallet.movements.some((m) => m.type === 'pocket_out');
     case 'paid_to':
       return wallet.movements.some((m) => (m.type === 'transfer_out' || m.type === 'qr_payment') && !m.expenseKey && m.counterparty === criterion.param);
     case 'savings_percent': {

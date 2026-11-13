@@ -11,8 +11,10 @@ import {
   dayOfMonth,
   essentialMonthlyExpenses,
   monthOf,
+  monthBreakdown,
   moveToPocket,
   paidToday,
+  raiseExpense,
   payQr,
   setDailyLimit,
   transferOut,
@@ -174,5 +176,33 @@ describe('payments of P3 (step 7)', () => {
     expect(paidToday(once).toFixed(2)).toBe('60000.00');
     // A new day starts the limit again.
     expect(payQr(advanceDays(once, 1), { amount: '50000', merchant: 'y' }).balance).toBeDefined();
+  });
+});
+
+describe('budget of the month (section 8, step 7.3)', () => {
+  it('counts the person\'s own payments and leaves them unclassified until she categorizes them', () => {
+    let w = advanceDays(createWallet('p-test'), 1);
+    w = transferOut(w, { amount: '85000', counterparty: 'Reparación · Taller Ejemplo (ficticio)' });
+    const b = monthBreakdown(w, 0);
+    expect(b.income.toFixed(2)).toBe('1284958.86');
+    expect(b.unclassified.toFixed(2)).toBe('85000.00');
+    expect(b.checks).toEqual({ withinIncome: true, savedTenPercent: false, savingsKept: true });
+    const categorized = categorize(w, w.movements.at(-1)!.id, 'needs');
+    expect(monthBreakdown(categorized, 0).needs.toFixed(2)).toBe('85000.00');
+  });
+
+  it('a month with 10 % set aside and no withdrawals closes green; a withdrawal turns it not green', () => {
+    let w = advanceDays(createWallet('p-test'), 1);
+    w = createPocket(w, { id: POCKET_SAVINGS, name: 'Ahorro' });
+    w = moveToPocket(w, POCKET_SAVINGS, '128495.89'); // 10 % of $ 1.284.958,86
+    expect(monthBreakdown(w, 0).checks.savedTenPercent).toBe(true);
+    expect(advanceMonth(w).monthSummaries[0]?.green).toBe(true);
+    expect(advanceMonth(withdrawFromPocket(w, POCKET_SAVINGS, '1000')).monthSummaries[0]?.green).toBe(false);
+  });
+
+  it('a raised service is charged at its new price', () => {
+    const w = raiseExpense(createWallet('p-test'), 'phone', '22000');
+    const after = advanceDays(w, 15);
+    expect(after.movements.find((m) => m.expenseKey === 'phone')?.amount).toBe('-22000.00');
   });
 });

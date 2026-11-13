@@ -27,9 +27,9 @@ function play(def: MissionDef, run: MissionRun, input?: string) {
 }
 
 describe('mission catalog (D-59, D-166)', () => {
-  it('has the 13 phase A missions; levels 0 to 2 are playable', () => {
+  it('has the 13 phase A missions; levels 0 to 3 are playable', () => {
     expect(MISSION_DEFS).toHaveLength(13);
-    expect(MISSION_DEFS.filter((m) => isPlayable(m)).map((m) => m.id)).toEqual(['mission-security', 'mission-1', 'mission-2', 'mission-3', 'mission-6']);
+    expect(MISSION_DEFS.filter((m) => isPlayable(m)).map((m) => m.id)).toEqual(['mission-security', 'mission-1', 'mission-2', 'mission-3', 'mission-6', 'mission-7']);
   });
 
   it('every playable mission ends with a summary and its criteria point to real steps', () => {
@@ -183,5 +183,25 @@ describe('missions of level 2 (step 7)', () => {
     run = play(def, wrong.run, JSON.stringify({ m1: 'safe', m2: 'suspicious', m3: 'safe' })).run;
     run = play(def, run, 'report').run;
     expect(finishMission(def, run).finished).toBe(true);
+  });
+});
+
+describe('mission 7 "Mes completo" (step 7.3)', () => {
+  const def = missionById('mission-7')!;
+
+  it('closes month 0 in green after saving 10 % and paying the repair from the balance (hand calculation)', () => {
+    let run = startMission(def, buildMariana());
+    run = play(def, run).run; // card
+    const low = answerStep(def, run, '64.247,94'); // 5 %: not enough
+    expect(low.feedback?.text).toContain('128.495,89'); // $ 1.284.958,86 × 0,1
+    run = play(def, low.run, '128.495,89').run;
+    run = play(def, run).run; // phone raised to $ 22.000
+    expect(run.wallet.expenses.phone).toBe('22000.00');
+    expect(answerStep(def, run, 'savings').feedback?.tone).toBe('info');
+    run = play(def, run, 'balance').run;
+    run = play(def, run).run; // close the month
+    expect(run.wallet.day).toBe(30);
+    expect(run.wallet.monthSummaries[0]).toMatchObject({ month: 0, green: true });
+    expect(criteriaStatus(def, run).every((c) => c.met)).toBe(true);
   });
 });

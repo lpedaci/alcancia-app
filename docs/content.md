@@ -100,6 +100,10 @@ Cálculos verificados a mano: $ 1.559.263,32 − $ 274.304,46 = $ 1.284.958,86; 
 
 **Estado:** borrador para revisión de Lourdes; la parte de billeteras (B-15, B-16), además, para revisión del Lic. Kevin Giampieri.
 
+### Misión del nivel 3 (paso 7.3, D-174)
+
+- **Mes completo** (módulo 3): las tres condiciones del mes en verde (wallet-engine.md, sección 8); separar el 10 % del neto ($ 1.284.958,86 × 0,1 = $ 128.495,89, el mínimo de la regla 70/20/10, A-33); la suba del celular de $ 18.000 a $ 22.000; un imprevisto de $ 85.000 (reparación de un calefón, ficticio) que se paga con el saldo del mes y no con el ahorro (A-35: el ahorro es para emergencias reales); avanzar hasta el día 30. Cálculo del mes: gastos de $ 836.500 a precios del mes 1, más $ 4.000 de suba y $ 85.000 de imprevisto, frente a un ingreso de $ 1.284.958,86. **Estado:** borrador para revisión de Lourdes.
+
 ### Módulo 1 · Tu recibo de sueldo
 - **Objetivo:** calcular el sueldo neto a partir del bruto y los descuentos de un recibo, y clasificar cada concepto como aporte, contribución o suma no remunerativa.
 - **Evidencia:** respuesta numérica (neto del recibo de demo, tolerancia de $ 1); clasificar 6 conceptos del recibo; misión 1 (separar el 20 % del neto).

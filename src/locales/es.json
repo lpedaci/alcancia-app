@@ -1358,5 +1358,68 @@
       "daily_limit": "Supera tu límite diario de transferencias. Puedes cambiarlo en tu perfil, en Seguridad.",
       "unknown": "No se pudo hacer el pago. Vuelve a intentarlo."
     }
+  },
+  "budget": {
+    "intro": "Cómo se reparte tu mes frente a una referencia. Las reglas son un punto de partida, no una obligación: cada vida tiene sus gastos.",
+    "context": "Mes de la billetera",
+    "monthRange": "Mes en curso: {{from}} al {{to}}",
+    "fuerte": {
+      "locked": "Presupuesto se abre con 10 movimientos categorizados y el desafío del nivel 2.",
+      "home": "Mirar adónde va el sueldo es el primer paso para decidir.",
+      "green": "Guardado. Este mes viene en verde."
+    },
+    "totals": {
+      "income": "Ingresos del mes",
+      "spent": "Gastado",
+      "saved": "Separado en apartados"
+    },
+    "split": {
+      "title": "Tu reparto del mes",
+      "rule": "Referencia",
+      "category": "Categoría",
+      "actual": "Este mes",
+      "share": "% del ingreso",
+      "reference": "Referencia",
+      "referenceLine": "Referencia: {{share}} del ingreso",
+      "above": "Por encima de la referencia",
+      "noIncome": "Todavía no hay ingresos este mes: el reparto aparece después del cobro.",
+      "over": "En {{category}} va el {{actual}} de tu ingreso, por encima del {{reference}} de la referencia. Es un dato para revisar, no un error.",
+      "within": "Tus gastos están dentro de la referencia y separaste el {{saved}} de tu ingreso.",
+      "note": "Los movimientos sin categoría cuentan como deseos hasta que los categorices."
+    },
+    "cat": {
+      "50/30/20": {
+        "needs": "Necesidades",
+        "wants": "Deseos",
+        "savings": "Ahorro"
+      },
+      "70/20/10": {
+        "needs": "Gastos fijos y variables",
+        "wants": "Ocio",
+        "savings": "Ahorro e inversión"
+      }
+    },
+    "green": {
+      "title": "¿Cierra en verde?",
+      "yes": "En verde",
+      "notYet": "Todavía no",
+      "withinIncome": "No gastas más de lo que entra en el mes",
+      "savedTenPercent": "Separas al menos el 10 % de tu ingreso",
+      "savingsKept": "No sacas dinero del ahorro para algo que no es una emergencia",
+      "note": "Se evalúa al cierre del mes, el día 30. Un mes cerrado en verde abre Apartados y metas."
+    },
+    "todo": {
+      "title": "Para categorizar",
+      "empty": "Este mes no hay movimientos sin categoría.",
+      "suggested": "sugerida: {{category}}",
+      "choose": "Categoría de {{name}}",
+      "done": "Movimiento categorizado"
+    },
+    "months": {
+      "title": "Meses cerrados",
+      "empty": "Cuando cierres tu primer mes, vas a ver acá cómo te fue.",
+      "label": "{{from}} al {{to}}",
+      "savedLine": "Separado:"
+    }
   }
 }

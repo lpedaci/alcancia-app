@@ -492,7 +492,109 @@
       "levelId": "level-3",
       "title": "Mes completo",
       "minutes": 6,
-      "objective": "Cerrar un mes con imprevistos con el presupuesto en verde."
+      "objective": "Cerrar un mes con imprevistos con el presupuesto en verde.",
+      "initial": "salary",
+      "steps": [
+        {
+          "id": "goal",
+          "kind": "card",
+          "title": "Un mes con imprevistos",
+          "body": "Vas a vivir un mes entero en pocos minutos. Para cerrarlo en verde: no gastar más de lo que entra, separar al menos el 10 % del ingreso y no sacar dinero del apartado \"Ahorro\" para algo que no es una emergencia.",
+          "sourceIds": [
+            "A-32",
+            "A-33"
+          ],
+          "fuerte": "Un mes real tiene sorpresas. Veamos cómo lo cierras."
+        },
+        {
+          "id": "save",
+          "kind": "numeric",
+          "prompt": "El mes en verde pide separar al menos el 10 % del ingreso. Con tu sueldo neto, ¿cuánto separas como mínimo en \"Ahorro\"?",
+          "help": "Monto en pesos, por ejemplo: 100.000",
+          "expected": "salary_percent",
+          "param": "0.1",
+          "tolerance": "1.00",
+          "onCorrect": "save_to_savings",
+          "hint": "El 10 % es el neto por 0,1: {{salary}} × 0,1 = {{expected}}. Prueba con ese monto.",
+          "feedback": "Guardado. Separaste {{amount}} en \"Ahorro\": el mínimo de la regla 70/20/10.",
+          "sourceIds": [
+            "A-33"
+          ]
+        },
+        {
+          "id": "phone",
+          "kind": "event",
+          "title": "Subió el celular",
+          "body": "Tu plan de celular sube de $ 18.000 a $ 22.000 por mes desde este mes. Los gastos fijos también cambian: revisarlos ayuda a que el presupuesto siga cerrando.",
+          "action": "raise_phone",
+          "sourceIds": [
+            "A-34"
+          ],
+          "value": "22000.00"
+        },
+        {
+          "id": "pay",
+          "kind": "single",
+          "title": "Un gasto imprevisto",
+          "body": "Se rompe el calefón y la reparación cuesta $ 85.000. No es una emergencia de salud ni de trabajo, pero hay que resolverla.",
+          "prompt": "¿Cómo lo pagas?",
+          "options": [
+            {
+              "id": "balance",
+              "text": "Con el saldo disponible del mes",
+              "action": "pay_repair",
+              "value": "85000.00",
+              "target": "Reparación del calefón · Taller Ejemplo (ficticio)",
+              "feedback": "Correcto. El saldo del mes alcanza: lo pagas sin tocar lo que separaste. El presupuesto sigue cerrando."
+            },
+            {
+              "id": "savings",
+              "text": "Con el dinero del apartado \"Ahorro\"",
+              "feedback": "Si sacas del apartado, el mes no cierra en verde: el ahorro es para tu futuro o para una emergencia real. Primero mira si alcanza el saldo del mes. Prueba de nuevo."
+            },
+            {
+              "id": "skip",
+              "text": "No lo pago y espero al mes que viene",
+              "feedback": "Postergar un arreglo necesario suele salir más caro. Revisa si el saldo del mes alcanza. Prueba de nuevo."
+            }
+          ],
+          "correct": "balance",
+          "sourceIds": [
+            "A-35"
+          ]
+        },
+        {
+          "id": "close",
+          "kind": "action",
+          "instruction": "Avanza hasta el último día del mes: se debitan los servicios, el supermercado y las salidas, y se cierra el resumen.",
+          "button": "Avanzar hasta el fin de mes",
+          "action": "close_month",
+          "done": "Llegaste al día 30: el resumen del mes está listo."
+        },
+        {
+          "id": "summary",
+          "kind": "summary"
+        }
+      ],
+      "criteria": [
+        {
+          "id": "green",
+          "description": "Cerraste el mes con el presupuesto en verde",
+          "check": "month_green",
+          "param": "0"
+        },
+        {
+          "id": "kept",
+          "description": "El apartado \"Ahorro\" quedó intacto",
+          "check": "savings_kept"
+        },
+        {
+          "id": "repair",
+          "description": "Resolviste el imprevisto con el saldo del mes",
+          "check": "step_correct",
+          "param": "pay"
+        }
+      ]
     },
     {
       "id": "mission-emergency-fund",
