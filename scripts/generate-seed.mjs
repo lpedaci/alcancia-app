@@ -453,6 +453,22 @@ for (const attempt of challengeAttempts) {
   }
 }
 
+// ---------- Final Conocerte for Kirkpatrick 2 (F7, D-62) ----------
+// Some people who completed at least 4 levels repeat Conocerte at the end (knowledge part only),
+// with the same separate PRNG, so the rest of the data does not change. Their improvement grows with
+// the levels they completed; nobody gets the same gain in every dimension.
+for (const p of participants.filter((x) => x.status === 'active' && x.id !== 'p-mariana' && x.id !== 'p-diego')) {
+  if (diagnostics.some((d) => d.personId === p.id && d.kind === 'final')) continue;
+  const completed = levelLearning.filter((l) => l.personId === p.id && l.completed).length;
+  if (completed < 4 || itemRand() > 0.55) continue;
+  const initial = diagnostics.find((d) => d.personId === p.id && d.kind === 'initial');
+  if (!initial) continue;
+  const scores = Object.fromEntries(
+    Object.entries(initial.scores).map(([d, v]) => [d, round2(Math.min(1, v + 0.04 * completed * (0.6 + itemRand() * 0.6)))]),
+  );
+  diagnostics.push({ personId: p.id, kind: 'final', takenAt: iso(DEMO_TODAY - (3 + Math.floor(itemRand() * 20)) * DAY), scores });
+}
+
 const seed = {
   generatedFor: iso(DEMO_TODAY),
   note: 'Learning data only. Wallet data, habit answers, reflections and level lock states never leave the participant browser (D-58, D-62).',

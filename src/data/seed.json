@@ -2326,6 +2326,90 @@
     "inflation_rates": 0.47,
     "goals": 0.49
    }
+  },
+  {
+   "personId": "p-hernan-escobar",
+   "kind": "final",
+   "takenAt": "2026-11-13",
+   "scores": {
+    "budget": 0.47,
+    "savings": 0.56,
+    "debt": 0.68,
+    "inflation_rates": 0.61,
+    "goals": 0.49
+   }
+  },
+  {
+   "personId": "p-rodrigo-morales",
+   "kind": "final",
+   "takenAt": "2026-10-26",
+   "scores": {
+    "budget": 0.73,
+    "savings": 0.75,
+    "debt": 0.64,
+    "inflation_rates": 0.76,
+    "goals": 0.82
+   }
+  },
+  {
+   "personId": "p-florencia-aguirre",
+   "kind": "final",
+   "takenAt": "2026-11-08",
+   "scores": {
+    "budget": 0.61,
+    "savings": 0.75,
+    "debt": 0.57,
+    "inflation_rates": 0.74,
+    "goals": 0.54
+   }
+  },
+  {
+   "personId": "p-graciela-ibanez",
+   "kind": "final",
+   "takenAt": "2026-11-13",
+   "scores": {
+    "budget": 0.61,
+    "savings": 0.55,
+    "debt": 0.53,
+    "inflation_rates": 0.54,
+    "goals": 0.52
+   }
+  },
+  {
+   "personId": "p-mauro-mendez",
+   "kind": "final",
+   "takenAt": "2026-11-11",
+   "scores": {
+    "budget": 0.65,
+    "savings": 0.67,
+    "debt": 0.65,
+    "inflation_rates": 0.83,
+    "goals": 0.92
+   }
+  },
+  {
+   "personId": "p-alejandro-morales",
+   "kind": "final",
+   "takenAt": "2026-10-28",
+   "scores": {
+    "budget": 0.65,
+    "savings": 0.55,
+    "debt": 0.77,
+    "inflation_rates": 0.83,
+    "goals": 0.56
+   }
+  },
+  {
+   "personId": "p-matias-sosa",
+   "kind": "final",
+   "takenAt": "2026-10-26",
+   "scores": {
+    "budget": 0.85,
+    "savings": 0.8,
+    "debt": 0.9,
+    "inflation_rates": 0.7,
+    "goals": 0.76
+   }
   }
  ],
  "guideProgress": [

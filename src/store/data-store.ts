@@ -76,6 +76,14 @@ interface DataState extends OrgData {
   answerQuestion: (questionId: string, text: string, at: string) => void;
   /** T2: the tutor enables a level for a person or a cohort, with a reason that is recorded (5.0). */
   addUnlockRecord: (record: LevelUnlockRecord) => void;
+  /** O4: program configuration (the threshold never goes below 5, F1). */
+  updateProgram: (program: Program, privacyThreshold: number) => void;
+  /** O2 and O3: people added one by one or by CSV, always invited first (F8). */
+  addPeople: (people: Person[]) => void;
+  /** O2: a new cohort with its tutor and deadline (F8). */
+  addCohort: (cohort: Cohort) => void;
+  /** O4: due dates per cohort when the program is assigned (F1). */
+  setCohortDueDates: (dueDates: Record<string, string | undefined>) => void;
 }
 
 export const DATA_STORAGE_KEY = 'alcancia-data';
@@ -125,6 +133,19 @@ export const useDataStore = create<DataState>()(
           tutorQuestions: state.tutorQuestions.map((q) => (q.id === questionId ? { ...q, answer: { text, answeredAt: at } } : q)),
         })),
       addUnlockRecord: (record) => set((state) => ({ unlockRecords: [...state.unlockRecords, record] })),
+      updateProgram: (program, privacyThreshold) =>
+        set((state) => ({ program, organization: { ...state.organization, privacyThreshold: Math.max(5, Math.floor(privacyThreshold)) } })),
+      addPeople: (people) => set((state) => ({ people: [...state.people, ...people] })),
+      addCohort: (cohort) => set((state) => ({ cohorts: [...state.cohorts, cohort] })),
+      setCohortDueDates: (dueDates) =>
+        set((state) => ({
+          cohorts: state.cohorts.map((c) => {
+            if (!(c.id in dueDates)) return c;
+            const next = { ...c, dueDate: dueDates[c.id] };
+            if (!next.dueDate) delete next.dueDate;
+            return next;
+          }),
+        })),
     }),
     {
       name: DATA_STORAGE_KEY,

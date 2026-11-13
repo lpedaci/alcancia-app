@@ -15,7 +15,11 @@ const AccessHelpPage = lazyPage(() => import('@/features/auth/AccessHelpPage'), 
 const ConsentPage = lazyPage(() => import('@/features/auth/ConsentPage'), 'ConsentPage');
 const WalletHomePage = lazyPage(() => import('@/features/wallet/WalletHomePage'), 'WalletHomePage');
 const InflationToolPage = lazyPage(() => import('@/features/simulators/ToolPage'), 'InflationToolPage');
-const StaffHomePage = lazyPage(() => import('@/features/staff/StaffHomePage'), 'StaffHomePage');
+const AdminHomePage = lazyPage(() => import('@/features/organization/AdminHomePage'), 'AdminHomePage');
+const PeoplePage = lazyPage(() => import('@/features/organization/PeoplePage'), 'PeoplePage');
+const ImportPage = lazyPage(() => import('@/features/organization/ImportPage'), 'ImportPage');
+const ProgramPage = lazyPage(() => import('@/features/organization/ProgramPage'), 'ProgramPage');
+const SponsorPage = lazyPage(() => import('@/features/sponsor/SponsorPage'), 'SponsorPage');
 const InvestorProfilePage = lazyPage(() => import('@/features/levels/InvestorProfilePage'), 'InvestorProfilePage');
 const MissionPage = lazyPage(() => import('@/features/missions/MissionPage'), 'MissionPage');
 const WelcomePage = lazyPage(() => import('@/features/onboarding/WelcomePage'), 'WelcomePage');
@@ -82,12 +86,16 @@ export function AppRoutes() {
           <Route path="/tutor/cohorts/:id/challenge" element={<AssignChallengePage />} />
           <Route path="/tutor/assessments" element={<AssessmentsPage />} />
           <Route path="/tutor/questions" element={<QuestionsPage />} />
-          <Route path="/admin" element={<StaffHomePage />} />
-          <Route path="/sponsor" element={<StaffHomePage />} />
+          <Route path="/admin" element={<AdminHomePage />} />
+          <Route path="/admin/people" element={<PeoplePage />} />
+          <Route path="/admin/people/import" element={<ImportPage />} />
+          <Route path="/admin/program" element={<ProgramPage />} />
+          <Route path="/sponsor" element={<SponsorPage />} />
           {/* Other routes of a role's area: not found inside the guard, so another role gets G7 first. */}
           <Route path="/app/*" element={<NotFoundPage />} />
           <Route path="/tutor/*" element={<NotFoundPage />} />
           <Route path="/admin/*" element={<NotFoundPage />} />
+          <Route path="/sponsor/*" element={<NotFoundPage />} />
         </Route>
         {StyleguidePage && <Route path="/styleguide" element={<StyleguidePage />} />}
         <Route path="*" element={<NotFoundPage />} />
