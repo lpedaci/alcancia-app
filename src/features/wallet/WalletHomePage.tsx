@@ -202,14 +202,15 @@ export function WalletHomePage() {
               </span>
               <MoneyText value={power.toFixed(2)} className="text-label-large text-on-surface" />
             </p>
-            <dl className="mt-auto grid grid-cols-1 gap-1 border-t border-outline-variant pt-3 text-body-small">
-              <div className="flex flex-wrap justify-between gap-x-3">
-                <dt className="text-on-surface-variant">{t('wallet.home.balance.alias')}</dt>
-                <dd className="truncate text-on-surface">{alias}</dd>
+            {/* Label over value on phones, side by side from 24 rem of card: more air between lines (D-170) */}
+            <dl className="mt-auto flex flex-col gap-3 border-t border-outline-variant pt-4">
+              <div className="flex flex-col gap-0.5 @xs:flex-row @xs:items-baseline @xs:justify-between @xs:gap-3">
+                <dt className="text-label-medium text-on-surface-variant">{t('wallet.home.balance.alias')}</dt>
+                <dd className="min-w-0 truncate text-body-medium text-on-surface">{alias}</dd>
               </div>
-              <div className="flex flex-wrap justify-between gap-x-3">
-                <dt className="text-on-surface-variant">{t('wallet.home.balance.cvu')}</dt>
-                <dd className="text-on-surface tabular-nums">0000000 0000000 EJEMPLO 00</dd>
+              <div className="flex flex-col gap-0.5 @xs:flex-row @xs:items-baseline @xs:justify-between @xs:gap-3">
+                <dt className="text-label-medium text-on-surface-variant">{t('wallet.home.balance.cvu')}</dt>
+                <dd className="text-body-medium text-on-surface tabular-nums">0000000 0000000 EJEMPLO 00</dd>
               </div>
             </dl>
           </section>
@@ -290,7 +291,7 @@ export function WalletHomePage() {
                         )}
                       </span>
                     </span>
-                    <MoneyText value={m.amount} trend className="text-label-large text-on-surface" />
+                    <MoneyText value={m.amount} trend flow className="text-label-large" />
                   </span>
                 </li>
               ))}

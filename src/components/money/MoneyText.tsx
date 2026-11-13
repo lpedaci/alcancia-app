@@ -14,6 +14,12 @@ export interface MoneyTextProps {
    */
   trend?: boolean;
   /**
+   * Cash flows (D-170): money that enters in `success` and money that leaves in `error`, always
+   * together with the sign and the trend icon, so color is never the only cue (2.1.1). Not for a
+   * loss of purchasing power, which is information and uses `warning`.
+   */
+  flow?: boolean;
+  /**
    * Long amounts never get cut (2.7). Below this container width the compact form ("$ 12,3 M")
    * is shown instead; the full value stays in the accessible name and in the title.
    * Needs an ancestor with `@container`.
@@ -29,7 +35,7 @@ const COMPACT_SWAP = {
 } as const;
 
 /** The one way to print money in the interface: tabular figures, Argentine format, no wrapping. */
-export function MoneyText({ value, currency = 'ARS', decimals = 2, trend = false, compactBelow, className }: MoneyTextProps) {
+export function MoneyText({ value, currency = 'ARS', decimals = 2, trend = false, flow = false, compactBelow, className }: MoneyTextProps) {
   const { t } = useTranslation();
   const d = new Decimal(value instanceof Decimal ? value : value.toString());
   const full = formatMoney(d, { currency, decimals, sign: trend ? 'always' : 'auto' });
@@ -40,7 +46,15 @@ export function MoneyText({ value, currency = 'ARS', decimals = 2, trend = false
   const canCompact = compactBelow && d.abs().gte(1e6);
 
   return (
-    <span className={cn('relative inline-flex items-center gap-1 whitespace-nowrap tabular-nums', className)} title={canCompact ? full : undefined}>
+    <span
+      className={cn(
+        'relative inline-flex items-center gap-1 whitespace-nowrap tabular-nums',
+        className,
+        flow && direction === 'up' && 'text-success',
+        flow && direction === 'down' && 'text-error',
+      )}
+      title={canCompact ? full : undefined}
+    >
       {trend && (
         <Icon
           name={direction === 'up' ? 'trending_up' : direction === 'down' ? 'trending_down' : 'trending_flat'}

@@ -108,29 +108,31 @@ export function UnlockCard({ status, headingLevel: Heading = 'h2', className }: 
   return (
     <section
       aria-labelledby={titleId}
-      className={cn('flex min-w-0 flex-col gap-4 rounded-xl border border-outline-variant bg-surface-container-lowest p-(--space-card-padding)', className)}
+      className={cn('flex min-w-0 flex-col gap-5 rounded-xl border border-outline-variant bg-surface-container-lowest p-(--space-card-padding)', className)}
     >
-      <div className="flex items-start gap-3">
-        <span aria-hidden className="flex size-10 shrink-0 items-center justify-center rounded-md bg-surface-container text-on-surface-variant">
-          <Icon name="lock" size={20} />
+      {/* Hierarchy (D-170): what is next, why it matters, how far you are and what is missing */}
+      <div className="flex items-center gap-3">
+        <span aria-hidden className="flex size-12 shrink-0 items-center justify-center rounded-lg bg-surface-container text-on-surface-variant">
+          <Icon name="lock" size={24} />
         </span>
-        <div className="min-w-0 flex-1">
+        <div className="flex min-w-0 flex-1 flex-col gap-1">
           <p className="text-label-medium text-on-surface-variant">{t('wallet.unlock.kicker', { level: status.level.order })}</p>
           <Heading id={titleId} className="text-title-large text-on-surface">
             {section}
           </Heading>
-          <p className="text-body-medium text-on-surface-variant">
-            {status.level.id === 'level-7' ? t('wallet.unlock.investBody') : t('wallet.unlock.body')}
-          </p>
         </div>
       </div>
-      <ProgressBar
-        value={(met / total) * 100}
-        label={t('wallet.unlock.progressLabel', { section })}
-        valueText={t('wallet.unlock.met', { met, total })}
-        tone="tertiary"
-      />
-      <ul className="flex flex-wrap gap-2">
+      <p className="max-w-prose text-body-medium text-on-surface-variant">
+        {status.level.id === 'level-7' ? t('wallet.unlock.investBody') : t('wallet.unlock.body')}
+      </p>
+      <div className="flex flex-col gap-2">
+        <p aria-hidden className="flex items-baseline justify-between gap-3">
+          <span className="text-title-small text-on-surface">{t('wallet.unlock.missing')}</span>
+          <span className="text-label-medium text-on-surface-variant tabular-nums">{t('wallet.unlock.met', { met, total })}</span>
+        </p>
+        <ProgressBar value={(met / total) * 100} label={`${t('wallet.unlock.progressLabel', { section })}: ${t('wallet.unlock.met', { met, total })}`} tone="tertiary" />
+      </div>
+      <ul className="flex flex-wrap gap-2" aria-label={t('wallet.unlock.missing')}>
         {status.conditions
           .filter((c) => c.condition.type !== 'first_sign_in')
           .map((c, index) => (

@@ -377,6 +377,14 @@ export function StyleguidePage() {
                 <MoneyText value="24953.66" trend className="text-on-surface" />
               </li>
               <li className="flex flex-wrap justify-between gap-2">
+                <span>Movimiento que entra: success, con signo e ícono (D-170)</span>
+                <MoneyText value="1284958.86" trend flow />
+              </li>
+              <li className="flex flex-wrap justify-between gap-2">
+                <span>Movimiento que sale: error, con signo e ícono (D-170)</span>
+                <MoneyText value="-26000" trend flow />
+              </li>
+              <li className="flex flex-wrap justify-between gap-2">
                 <span>Pérdida de poder de compra (warning, no error)</span>
                 <span className="inline-flex items-center gap-1 rounded-full bg-warning-container px-2 py-0.5 text-label-medium text-on-warning-container">
                   <MoneyText value="-29862.01" trend />

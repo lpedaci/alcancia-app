@@ -554,7 +554,8 @@
         "high_rate_debt": "Sin deudas de tasa alta",
         "investor_profile_done": "Test de perfil de inversor"
       },
-      "goTo": "Ir a {{section}}"
+      "goTo": "Ir a {{section}}",
+      "missing": "Qué falta"
     },
     "categorize": {
       "none": "Sin categoría",
