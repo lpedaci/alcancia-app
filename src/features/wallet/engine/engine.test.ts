@@ -11,7 +11,11 @@ import {
   dayOfMonth,
   essentialMonthlyExpenses,
   monthOf,
+  averageMonthlyContribution,
+  essentialMonthlyExpenses as essentials,
   monthBreakdown,
+  monthsToGoal,
+  setPocketGoal,
   moveToPocket,
   paidToday,
   raiseExpense,
@@ -204,5 +208,22 @@ describe('budget of the month (section 8, step 7.3)', () => {
     const w = raiseExpense(createWallet('p-test'), 'phone', '22000');
     const after = advanceDays(w, 15);
     expect(after.movements.find((m) => m.expenseKey === 'phone')?.amount).toBe('-22000.00');
+  });
+});
+
+describe('pockets with a goal (section 7, step 7.4)', () => {
+  it('"Ahorro" can get a goal, and the estimated months follow the average pace (hand calculation)', () => {
+    let w = advanceDays(createWallet('p-test'), 1);
+    w = createPocket(w, { id: POCKET_SAVINGS, name: 'Ahorro' });
+    w = moveToPocket(w, POCKET_SAVINGS, '200000');
+    w = setPocketGoal(w, POCKET_SAVINGS, '1000000', { currentPrice: '900000.00', months: 6, day: 1 });
+    const pocket = w.pockets[0]!;
+    expect(pocket).toMatchObject({ goal: '1000000.00', plan: { months: 6 } });
+    expect(averageMonthlyContribution(w, pocket).toFixed(2)).toBe('200000.00');
+    expect(monthsToGoal(w, pocket)).toBe(4); // (1.000.000 − 200.000) ÷ 200.000
+  });
+
+  it('three months of essential expenses at month-1 prices are $ 1.950.000', () => {
+    expect(essentials(createWallet('p-test')).times(3).toFixed(2)).toBe('1950000.00');
   });
 });

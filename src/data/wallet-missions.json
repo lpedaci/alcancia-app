@@ -601,7 +601,112 @@
       "levelId": "level-4",
       "title": "Crea tu fondo de emergencia",
       "minutes": 3,
-      "objective": "Crear el apartado de emergencia con una meta de 3 a 6 meses de gastos básicos."
+      "objective": "Crear el apartado de emergencia con una meta de 3 a 6 meses de gastos básicos.",
+      "initial": "salary",
+      "steps": [
+        {
+          "id": "why",
+          "kind": "card",
+          "title": "Un fondo para lo que no se planea",
+          "body": "Un fondo de emergencia cubre de 3 a 6 meses de gastos básicos, para imprevistos reales como un problema de salud o quedarte sin trabajo. Con él, un imprevisto no te obliga a endeudarte.",
+          "sourceIds": [
+            "A-35"
+          ],
+          "fuerte": "Primero lo que te protege. Armemos tu fondo."
+        },
+        {
+          "id": "target",
+          "kind": "numeric",
+          "prompt": "Tus gastos esenciales son de {{essentials}} por mes (alquiler, supermercado, servicios y transporte). ¿Cuánto es un fondo de 3 meses?",
+          "help": "Monto en pesos, por ejemplo: 1.500.000",
+          "expected": "essential_months",
+          "param": "3",
+          "tolerance": "1.00",
+          "onCorrect": "create_emergency",
+          "hint": "Multiplica los gastos esenciales por 3: {{essentials}} × 3 = {{expected}}. Prueba con ese monto.",
+          "feedback": "Guardado. Creaste el apartado \"Fondo de emergencia\" con una meta de {{amount}}.",
+          "sourceIds": [
+            "A-35"
+          ]
+        },
+        {
+          "id": "first",
+          "kind": "decision",
+          "prompt": "¿Cuánto separas este mes para empezar?",
+          "options": [
+            {
+              "id": "p10",
+              "text": "$ 128.495,89, el 10 % del sueldo",
+              "action": "save_emergency",
+              "value": "128495.89",
+              "feedback": "Separado. A ese ritmo llegas a la meta en 16 meses: cada aporte cuenta."
+            },
+            {
+              "id": "p20",
+              "text": "$ 256.991,77, el 20 % del sueldo",
+              "action": "save_emergency",
+              "value": "256991.77",
+              "feedback": "Separado. A ese ritmo llegas a la meta en 8 meses."
+            },
+            {
+              "id": "p25",
+              "text": "$ 321.239,72, el 25 % del sueldo",
+              "action": "save_emergency",
+              "value": "321239.72",
+              "feedback": "Separado. A ese ritmo llegas a la meta en 7 meses. Revisa que el resto del mes te alcance."
+            }
+          ]
+        },
+        {
+          "id": "where",
+          "kind": "single",
+          "prompt": "¿Dónde conviene tener el fondo de emergencia?",
+          "options": [
+            {
+              "id": "liquid",
+              "text": "Donde pueda usarlo en 24 horas y sin riesgo de perder valor",
+              "feedback": "Correcto. El fondo busca estar disponible y no perder valor, por ejemplo en una cuenta remunerada o un fondo money market. Lo vas a practicar en Rendir."
+            },
+            {
+              "id": "stocks",
+              "text": "En acciones, para que rinda más",
+              "feedback": "Las acciones pueden bajar justo cuando necesitas el dinero. El fondo busca liquidez y bajo riesgo. Prueba de nuevo."
+            },
+            {
+              "id": "locked",
+              "text": "En una inversión que no puedo retirar hasta dentro de un año",
+              "feedback": "Si no lo puedes retirar, no sirve para una emergencia. Tiene que estar disponible en 24 horas. Prueba de nuevo."
+            }
+          ],
+          "correct": "liquid",
+          "sourceIds": [
+            "A-36"
+          ]
+        },
+        {
+          "id": "summary",
+          "kind": "summary"
+        }
+      ],
+      "criteria": [
+        {
+          "id": "goal",
+          "description": "Tu fondo tiene una meta de al menos 3 meses de gastos esenciales",
+          "check": "emergency_goal",
+          "param": "3"
+        },
+        {
+          "id": "funded",
+          "description": "Hiciste tu primer aporte",
+          "check": "emergency_funded"
+        },
+        {
+          "id": "where",
+          "description": "Elegiste dónde guardarlo según liquidez y riesgo",
+          "check": "step_correct",
+          "param": "where"
+        }
+      ]
     },
     {
       "id": "mission-5",

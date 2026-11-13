@@ -354,6 +354,34 @@ export function payQr(state: WalletState, { amount, merchant, category }: { amou
   return next;
 }
 
+/** Sets or changes the goal of a pocket; "Ahorro" of level 1 can become a pocket with a goal (D-53). */
+export function setPocketGoal(state: WalletState, pocketId: string, goal: string, plan?: Pocket['plan']): WalletState {
+  const next = clone(state);
+  const pocket = next.pockets.find((p) => p.id === pocketId);
+  if (!pocket) throw new WalletError('unknown_pocket');
+  pocket.goal = toMoneyString(roundCents(goal));
+  if (plan) pocket.plan = plan;
+  return next;
+}
+
+/** Net amount set aside per month in a pocket, averaged since its first contribution (for the estimated date). */
+export function averageMonthlyContribution(state: WalletState, pocket: Pocket): Decimal {
+  const moves = state.movements.filter((m) => (m.type === 'pocket_in' || m.type === 'pocket_out') && m.counterparty === `Apartado: ${pocket.name}`);
+  if (moves.length === 0) return ZERO;
+  const first = Math.min(...moves.map((m) => m.day));
+  const months = Math.max(1, Math.ceil((state.day - first + 1) / DAYS_IN_MONTH));
+  return sum(moves.map((m) => D(m.amount).neg())).div(months);
+}
+
+/** Months left to reach a pocket's goal at its average pace, rounded up; null without a goal or a pace. */
+export function monthsToGoal(state: WalletState, pocket: Pocket): number | null {
+  if (!pocket.goal) return null;
+  const missing = D(pocket.goal).minus(pocket.amount);
+  if (missing.lte(0)) return 0;
+  const pace = averageMonthlyContribution(state, pocket);
+  return pace.gt(0) ? missing.div(pace).ceil().toNumber() : null;
+}
+
 /** A price change of a service from now on (mission 7: "subió el celular"). */
 export function raiseExpense(state: WalletState, key: ExpenseKey, amount: string): WalletState {
   const next = clone(state);

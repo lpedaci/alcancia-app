@@ -33,6 +33,8 @@ export const PAGES: CheckedPage[] = [
   { id: 'p3-qr-diego', path: '/#/app/pay/qr', as: 'p-diego' },
   { id: 'p3-bills-mariana', path: '/#/app/pay/bills', as: 'p-mariana' },
   { id: 'p4-budget-mariana', path: '/#/app/save/budget', as: 'p-mariana' },
+  { id: 'p5-pockets-mariana', path: '/#/app/save/pockets', as: 'p-mariana' },
+  { id: 'p12-mission-fund-mariana', path: '/#/app/missions/mission-emergency-fund', as: 'p-mariana' },
   { id: 'p12-mission-7-mariana', path: '/#/app/missions/mission-7', as: 'p-mariana' },
   { id: 'p12-mission-6-diego', path: '/#/app/missions/mission-6', as: 'p-diego' },
   { id: 'investor-profile', path: '/#/app/learn/investor-profile', as: 'p-mariana' },

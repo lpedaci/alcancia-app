@@ -1421,5 +1421,86 @@
       "label": "{{from}} al {{to}}",
       "savedLine": "Separado:"
     }
+  },
+  "pockets": {
+    "intro": "Separa dinero para lo que importa: tu fondo de emergencia primero, y después tus metas. Cada meta se ajusta por la inflación del escenario.",
+    "context": "Tus apartados",
+    "count_one": "{{count}} apartado",
+    "count_other": "{{count}} apartados",
+    "add": "Separar dinero",
+    "withdraw": "Retirar",
+    "fuerte": {
+      "locked": "Apartados y metas se abre con un mes cerrado en verde y el desafío del nivel 3.",
+      "fund": "Tu fondo cubre {{months}} meses de gastos esenciales. Primero lo que te protege.",
+      "noFund": "Empecemos por tu fondo de emergencia: es lo que te protege de un imprevisto."
+    },
+    "fund": {
+      "title": "Fondo de emergencia",
+      "months": "Cubre {{months}} meses",
+      "progressLabel": "Meses de gastos esenciales que cubre tu fondo",
+      "progress": "{{months}} de 3 meses",
+      "essentials": "Gastos esenciales por mes",
+      "three": "Meta de 3 meses",
+      "six": "Meta de 6 meses",
+      "invest": "Con 3 meses cubiertos, y sin deudas de tasa alta, se abre Invertir. Hasta 6 meses es una referencia habitual si tus ingresos son variables.",
+      "ready": "Tu fondo cubre al menos 3 meses. Mantenerlo disponible y sin riesgo es lo que importa ahora.",
+      "none": "Todavía no tienes un fondo de emergencia.",
+      "target": "Una meta de 3 meses de tus gastos esenciales sería de",
+      "create": "Crear mi fondo de emergencia"
+    },
+    "goals": {
+      "title": "Tus metas y apartados",
+      "empty": "Todavía no tienes otras metas. Crea una con el formulario \"Nueva meta\".",
+      "reached": "Meta alcanzada",
+      "progressLabel": "Avance de la meta {{name}}",
+      "goal": "Meta ajustada por inflación",
+      "today": "Precio de hoy",
+      "eta": "Fecha estimada a tu ritmo",
+      "noPace": "Sin aportes todavía",
+      "noGoal": "Apartado sin meta. Si le pones una, vas a ver cuánto te falta y una fecha estimada.",
+      "setGoal": "Ponerle meta"
+    },
+    "new": {
+      "title": "Nueva meta",
+      "name": "Nombre de la meta",
+      "nameHelp": "Por ejemplo: Vacaciones, Curso de inglés",
+      "nameMissing": "Escribe un nombre para tu meta.",
+      "price": "Cuánto cuesta hoy",
+      "priceHelp": "Monto en pesos, por ejemplo: 900.000",
+      "priceMissing": "Escribe cuánto cuesta hoy, por ejemplo: 900.000.",
+      "term": "Plazo",
+      "termHelp": "En cuánto tiempo quieres llegar.",
+      "months_one": "{{count}} mes",
+      "months_other": "{{count}} meses",
+      "futurePrice": "Precio estimado al final:",
+      "monthly": "Para llegar, separa por mes:",
+      "assumption": "Escenario de ejemplo: inflación de {{inflation}} mensual, sin rendimiento. Es un escenario, no una predicción.",
+      "create": "Crear meta",
+      "saved": "Meta creada"
+    },
+    "move": {
+      "inTitle": "Separar en {{name}}",
+      "outTitle": "Retirar de {{name}}",
+      "goalTitle": "Meta de {{name}}",
+      "goalBody": "Escribe el monto al que quieres llegar.",
+      "available": "El apartado es parte de tu misma cuenta: el dinero sigue siendo tuyo.",
+      "balance": "Saldo disponible:",
+      "inPocket": "En este apartado:",
+      "warning": "Este dinero es para tu futuro o para una emergencia real. Si lo retiras para otra cosa, el mes ya no cierra en verde.",
+      "amount": "Monto",
+      "amountHelp": "Monto en pesos, por ejemplo: 50.000",
+      "missing": "Escribe un monto mayor que cero, por ejemplo: 50.000.",
+      "done": {
+        "in": "Dinero separado",
+        "out": "Dinero retirado",
+        "goal": "Meta guardada"
+      }
+    },
+    "errors": {
+      "amount_not_positive": "El monto tiene que ser mayor que cero.",
+      "insufficient_balance": "No alcanza el saldo disponible para separar ese monto.",
+      "insufficient_pocket": "El apartado no tiene ese monto.",
+      "unknown_pocket": "No encontramos ese apartado."
+    }
   }
 }

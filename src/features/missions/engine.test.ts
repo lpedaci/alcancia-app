@@ -27,9 +27,9 @@ function play(def: MissionDef, run: MissionRun, input?: string) {
 }
 
 describe('mission catalog (D-59, D-166)', () => {
-  it('has the 13 phase A missions; levels 0 to 3 are playable', () => {
+  it('has the 13 phase A missions; levels 0 to 4 are playable', () => {
     expect(MISSION_DEFS).toHaveLength(13);
-    expect(MISSION_DEFS.filter((m) => isPlayable(m)).map((m) => m.id)).toEqual(['mission-security', 'mission-1', 'mission-2', 'mission-3', 'mission-6', 'mission-7']);
+    expect(MISSION_DEFS.filter((m) => isPlayable(m)).map((m) => m.id)).toEqual(['mission-security', 'mission-1', 'mission-2', 'mission-3', 'mission-6', 'mission-7', 'mission-emergency-fund']);
   });
 
   it('every playable mission ends with a summary and its criteria point to real steps', () => {
@@ -203,5 +203,21 @@ describe('mission 7 "Mes completo" (step 7.3)', () => {
     expect(run.wallet.day).toBe(30);
     expect(run.wallet.monthSummaries[0]).toMatchObject({ month: 0, green: true });
     expect(criteriaStatus(def, run).every((c) => c.met)).toBe(true);
+  });
+});
+
+describe('mission "Crea tu fondo de emergencia" (step 7.4)', () => {
+  const def = missionById('mission-emergency-fund')!;
+
+  it('3 months of $ 650.000 make a goal of $ 1.950.000, and the first contribution funds it (hand calculation)', () => {
+    let run = play(def, startMission(def, buildMariana())).run;
+    const wrong = answerStep(def, run, '650.000');
+    expect(wrong.feedback?.text).toContain('1.950.000');
+    run = play(def, wrong.run, '1.950.000').run;
+    expect(run.wallet.pockets.find((p) => p.isEmergencyFund)).toMatchObject({ goal: '1950000.00', amount: '0.00' });
+    run = play(def, run, 'p20').run;
+    expect(run.wallet.pockets.find((p) => p.isEmergencyFund)?.amount).toBe('256991.77');
+    run = play(def, answerStep(def, run, 'stocks').run, 'liquid').run;
+    expect(finishMission(def, run).finished).toBe(true);
   });
 });

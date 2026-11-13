@@ -9,6 +9,8 @@ import {
   completeMission,
   createPocket,
   createWallet,
+  emergencyFund,
+  essentialMonthlyExpenses,
   moveToPocket,
   payQr,
   setDailyLimit,
@@ -16,7 +18,7 @@ import {
   setTwoFactor,
   transferOut,
 } from '@/features/wallet/engine/engine';
-import { POCKET_SAVINGS } from '@/features/wallet/engine/demo';
+import { POCKET_EMERGENCY, POCKET_SAVINGS } from '@/features/wallet/engine/demo';
 import type { WalletState } from '@/features/wallet/engine/types';
 
 /**
@@ -42,8 +44,10 @@ export type ActionId =
   | 'pay_qr'
   | 'pay_repair'
   | 'raise_phone'
-  | 'close_month';
-export type CheckId = 'two_factor_on' | 'daily_limit_set' | 'step_correct' | 'step_done' | 'salary_received' | 'savings_percent' | 'paid_to' | 'month_green' | 'savings_kept';
+  | 'close_month'
+  | 'create_emergency'
+  | 'save_emergency';
+export type CheckId = 'two_factor_on' | 'daily_limit_set' | 'step_correct' | 'step_done' | 'salary_received' | 'savings_percent' | 'paid_to' | 'month_green' | 'savings_kept' | 'emergency_goal' | 'emergency_funded';
 
 interface StepBase {
   id: string;
@@ -70,7 +74,7 @@ export type MissionStep =
       kind: 'numeric';
       prompt: string;
       help: string;
-      expected: 'salary_percent';
+      expected: 'salary_percent' | 'essential_months';
       param: string;
       tolerance: string;
       onCorrect?: ActionId;
@@ -151,11 +155,13 @@ const percentOfSalary = (wallet: WalletState, fraction: string) => roundCents(D(
 export function fillText(text: string, run: MissionRun, extra: { expected?: string; amount?: string } = {}): string {
   return text
     .replaceAll('{{salary}}', formatMoney(run.wallet.salary))
+    .replaceAll('{{essentials}}', formatMoney(essentialMonthlyExpenses(run.wallet)))
     .replaceAll('{{expected}}', extra.expected ? formatMoney(extra.expected) : '')
     .replaceAll('{{amount}}', extra.amount ? formatMoney(extra.amount) : '');
 }
 
 export function expectedAmount(step: Extract<MissionStep, { kind: 'numeric' }>, run: MissionRun): string {
+  if (step.expected === 'essential_months') return toMoneyString(essentialMonthlyExpenses(run.wallet).times(step.param));
   return toMoneyString(percentOfSalary(run.wallet, step.param));
 }
 
@@ -183,6 +189,10 @@ function applyAction(wallet: WalletState, action: ActionId, value?: string, targ
       return raiseExpense(wallet, 'phone', value ?? wallet.expenses.phone);
     case 'close_month':
       return advanceMonth(wallet);
+    case 'create_emergency':
+      return createPocket(wallet, { id: POCKET_EMERGENCY, name: 'Fondo de emergencia', isEmergencyFund: true, goal: toMoneyString(value ?? '0') });
+    case 'save_emergency':
+      return moveToPocket(wallet, POCKET_EMERGENCY, value ?? '0');
     case 'save_to_savings': {
       const withPocket = createPocket(wallet, { id: POCKET_SAVINGS, name: 'Ahorro' });
       return moveToPocket(withPocket, POCKET_SAVINGS, value ?? '0');
@@ -326,6 +336,12 @@ export function checkCriterion(criterion: Criterion, run: MissionRun): boolean {
       return wallet.movements.some((m) => m.type === 'income');
     case 'month_green':
       return wallet.monthSummaries.find((m) => m.month === Number(criterion.param ?? '0'))?.green === true;
+    case 'emergency_goal': {
+      const fund = emergencyFund(wallet);
+      return Boolean(fund?.goal) && D(fund!.goal!).gte(essentialMonthlyExpenses(wallet).times(criterion.param ?? '3').minus('1.00'));
+    }
+    case 'emergency_funded':
+      return D(emergencyFund(wallet)?.amount ?? '0').gt(0);
     case 'savings_kept':
       return !wallet.movements.some((m) => m.type === 'pocket_out');
     case 'paid_to':

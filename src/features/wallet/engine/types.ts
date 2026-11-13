@@ -42,6 +42,8 @@ export interface Pocket {
   goal?: MoneyString;
   /** Only one pocket can be the emergency fund (wallet-engine.md, section 7). */
   isEmergencyFund?: boolean;
+  /** How the goal was set (SIM-8): today's price and term, so the card can explain the adjustment. */
+  plan?: { currentPrice: MoneyString; months: number; day: number };
 }
 
 export type ExpenseKey =
