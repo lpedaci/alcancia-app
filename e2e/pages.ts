@@ -57,6 +57,8 @@ export const PAGES: CheckedPage[] = [
   { id: 'p9-learn-diego', path: '/#/app/learn', as: 'p-diego' },
   { id: 'p10-guide-diego', path: '/#/app/learn/guides/module-17-guide-1', as: 'p-diego' },
   { id: 'p11-challenge-diego', path: '/#/app/learn/challenges/challenge-level-2', as: 'p-diego' },
+  { id: 'p10-guide-m06-mariana', path: '/#/app/learn/guides/module-06-guide-1', as: 'p-mariana' },
+  { id: 'p11-challenge-l6-mariana', path: '/#/app/learn/challenges/challenge-level-6', as: 'p-mariana' },
   { id: 't1-tutor', path: '/#/tutor', as: 'p-kevin' },
   { id: 'o1-admin', path: '/#/admin', as: 'p-paula' },
   { id: 'd1-sponsor', path: '/#/sponsor', as: 'p-ricardo' },

@@ -85,6 +85,22 @@ Texto completo en `src/data/guides.json` (una guía por módulo) y `src/data/que
 
 Cálculos verificados a mano: $ 1.559.263,32 − $ 274.304,46 = $ 1.284.958,86; 50 % = $ 642.479,43; 30 % = $ 385.487,66; 20 % = $ 256.991,77; $ 700.000 × 3 = $ 2.100.000; con $ 250.000 por mes se llega en 9 meses (8 × 250.000 = 2.000.000 no alcanza).
 
+## Tanda del paso 8: guías y bancos de los niveles 5 y 6 (D-177)
+
+Texto completo en `src/data/guides.json` y `src/data/question-banks.json` (5 preguntas por módulo). **Estado:** borrador para revisión de Lourdes; las ampliaciones (módulos 6, 8, 10 y 11), además, para revisión del Lic. Kevin Giampieri.
+
+| Módulo | Guía | Banco (tipos) | Fuentes |
+| --- | --- | --- | --- |
+| 5 · El orden importa | "Primero lo que cuesta más" (5 min) | opción única (orden, equivalencia del 120 %, qué hacer primero), verdadero o falso (invertir con deuda cara), clasificar (deudas caras o baratas) | A-23 |
+| 6 · Tarjeta y CFT | "Lo que cuesta pagar el mínimo" (7 min) | opción única (CFT, tiempo pagando el mínimo), numérica (mínimo del 10 % de $ 240.000), verdadero o falso (el mínimo no evita intereses), unir pares (TNA, TEA, CFT) | T, B-04 |
+| 7 · Salir de deudas | "Bola de nieve o avalancha" (6 min) | opción única (qué ataca cada método, cuál paga menos, cuál motiva), ordenar (ejemplos de A-25 y A-29) | A-24, A-25, A-28 a A-30 |
+| 8 · Cuotas o contado | "Cuotas o contado" (6 min) | opción única (escenario del 3 %, por qué pesa menos una cuota), numérica (contado con 15 % de descuento), verdadero o falso (con 1,5 % conviene el contado), opción múltiple (qué mirar) | B-04 (ampliación) |
+| 9 · Inflación | "El ladrón silencioso" (5 min) | numérica (poder de compra a 12 meses), opción única (inflación acumulada, quién publica el IPC, invertir como defensa), verdadero o falso (dinero quieto) | A-21, B-40, T |
+| 10 · Tasas | "Tasas sin misterio" (7 min) | numérica (tasa de 30 días), opción única (tasa real negativa, qué comparar), unir pares (TNA, TEA, tasa real), verdadero o falso (TEA y TNA) | ampliación |
+| 11 · Plazo fijo, UVA y money market | "Dónde dejar el dinero que no usas hoy" (7 min) | numérica (plazo fijo de 30 días, monto cubierto por la garantía), opción única (UVA, garantía de un money market), clasificar (liquidez) | B-01 a B-03, B-14, B-26 |
+
+Cálculos (casos de `formulas.md`): mínimo $ 240.000 × 0,1 = $ 24.000; tarjeta de $ 100.000 al 60 % pagando el 10 %: 55 meses y $ 83.880,36 de intereses (F-14); 12 cuotas de $ 10.000 al 3 % valen $ 99.540,04 frente a $ 102.000 de contado, y al 1,5 % valen $ 109.075,05 (F-10, F-11); $ 100.000 ÷ 1,03^12 = $ 70.137,99 y 1,03^12 − 1 ≈ 42,6 %; 36 % × 30 ÷ 365 = 2,96 % y 1,0296 ÷ 1,03 − 1 ≈ −0,04 % (F-03); $ 1.000.000 × (1 + 0,36 × 30 ÷ 365) = $ 1.029.589,04, que en poder de compra son $ 999.601,01 (F-08). Desafíos: nivel 5 con 2 preguntas por módulo (8 en total) y nivel 6 con 3 por módulo (9), más los de suficiencia.
+
 ## Nivel 1 · Cuenta
 
 ### Misiones del paso 6 (D-166)

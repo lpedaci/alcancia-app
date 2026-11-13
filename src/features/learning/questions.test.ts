@@ -37,9 +37,9 @@ function rightAnswer(q: LearningQuestion): Answer {
   }
 }
 
-describe('content of levels 1 to 4 (D-61)', () => {
-  it('has one guide for each phase A module of levels 1 to 4, with the Gagné sequence', () => {
-    const modules = levels.filter((l) => ['level-1', 'level-2', 'level-3', 'level-4'].includes(l.id)).flatMap((l) => l.guideModuleIds);
+describe('content of levels 1 to 6 (D-61)', () => {
+  it('has one guide for each phase A module of levels 1 to 6, with the Gagné sequence', () => {
+    const modules = levels.filter((l) => ['level-1', 'level-2', 'level-3', 'level-4', 'level-5', 'level-6'].includes(l.id)).flatMap((l) => l.guideModuleIds);
     expect(GUIDES.map((g) => g.moduleId).sort()).toEqual([...modules].sort());
     for (const guide of GUIDES) {
       const types = guide.blocks.map((b) => b.type);
@@ -123,10 +123,10 @@ describe('challenges (D-57)', () => {
     expect(scoreAttempt(drawn, answers)).toEqual({ score: 0.5, moduleScores: { 'module-01': 1, 'module-02': 0 }, right: 3, total: 6 });
   });
 
-  it('has a level challenge for levels 1 to 4 and a mastery challenge for levels 2 to 4', () => {
-    expect(CHALLENGES.filter((c) => !c.mastery).map((c) => c.levelId)).toEqual(['level-1', 'level-2', 'level-3', 'level-4']);
-    expect(CHALLENGES.filter((c) => c.mastery).map((c) => c.levelId)).toEqual(['level-2', 'level-3', 'level-4']);
-    for (const level of levels.filter((l) => ['level-2', 'level-3', 'level-4'].includes(l.id))) {
+  it('has a level challenge for levels 1 to 6 and a mastery challenge for levels 2 to 6', () => {
+    expect(CHALLENGES.filter((c) => !c.mastery).map((c) => c.levelId)).toEqual(['level-1', 'level-2', 'level-3', 'level-4', 'level-5', 'level-6']);
+    expect(CHALLENGES.filter((c) => c.mastery).map((c) => c.levelId)).toEqual(['level-2', 'level-3', 'level-4', 'level-5', 'level-6']);
+    for (const level of levels.filter((l) => ['level-2', 'level-3', 'level-4', 'level-5', 'level-6'].includes(l.id))) {
       expect(CHALLENGES.map((c) => c.id)).toContain(level.masteryChallengeId);
     }
   });

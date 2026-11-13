@@ -66,6 +66,52 @@
         "module-04": 5
       },
       "passingScore": 0.7
+    },
+    {
+      "id": "challenge-level-5",
+      "levelId": "level-5",
+      "mastery": false,
+      "questionsPerModule": {
+        "module-05": 2,
+        "module-06": 2,
+        "module-07": 2,
+        "module-08": 2
+      },
+      "passingScore": 0.7
+    },
+    {
+      "id": "mastery-level-5",
+      "levelId": "level-5",
+      "mastery": true,
+      "questionsPerModule": {
+        "module-05": 2,
+        "module-06": 2,
+        "module-07": 2,
+        "module-08": 2
+      },
+      "passingScore": 0.7
+    },
+    {
+      "id": "challenge-level-6",
+      "levelId": "level-6",
+      "mastery": false,
+      "questionsPerModule": {
+        "module-09": 3,
+        "module-10": 3,
+        "module-11": 3
+      },
+      "passingScore": 0.7
+    },
+    {
+      "id": "mastery-level-6",
+      "levelId": "level-6",
+      "mastery": true,
+      "questionsPerModule": {
+        "module-09": 3,
+        "module-10": 3,
+        "module-11": 3
+      },
+      "passingScore": 0.7
     }
   ]
 }

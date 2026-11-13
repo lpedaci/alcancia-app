@@ -1054,6 +1054,1142 @@
       "sourceIds": [
         "A-36"
       ]
+    },
+    {
+      "id": "m05-order",
+      "moduleId": "module-05",
+      "type": "single",
+      "prompt": "Según el material del taller, ¿en qué orden conviene ordenar tus finanzas?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Pagar deudas caras, después ahorrar, después invertir"
+        },
+        {
+          "id": "b",
+          "text": "Invertir primero, para que el dinero crezca"
+        },
+        {
+          "id": "c",
+          "text": "Ahorrar todo y pagar las deudas al final"
+        }
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "feedback": {
+        "a": "Correcto. Primero las deudas caras, después el ahorro (el fondo de emergencia) y recién después invertir.",
+        "b": "Invertir con deudas caras suele costar más de lo que rinde. El orden es: deudas, ahorro, inversión.",
+        "c": "Mientras la deuda cara sigue, sus intereses crecen. Primero se pagan las deudas caras."
+      },
+      "sourceIds": [
+        "A-23"
+      ]
+    },
+    {
+      "id": "m05-equivalent",
+      "moduleId": "module-05",
+      "type": "single",
+      "prompt": "Si tu tarjeta cobra 120 % anual, pagar esa deuda equivale a…",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ganar un 120 % asegurado"
+        },
+        {
+          "id": "b",
+          "text": "Perder el dinero que pagas"
+        },
+        {
+          "id": "c",
+          "text": "Ganar lo mismo que un plazo fijo"
+        }
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "feedback": {
+        "a": "Correcto. Cada peso que no se financia al 120 % es un 120 % que dejas de pagar: un rendimiento asegurado.",
+        "b": "El dinero no se pierde: deja de generar intereses en tu contra.",
+        "c": "Es mucho más: dejas de pagar un 120 % anual, que ningún ahorro de bajo riesgo suele igualar."
+      },
+      "sourceIds": [
+        "A-23"
+      ]
+    },
+    {
+      "id": "m05-invest",
+      "moduleId": "module-05",
+      "type": "true_false_why",
+      "prompt": "Si tienes una deuda de tarjeta al 120 % anual, conviene invertir antes de pagarla.",
+      "options": [
+        {
+          "id": "true",
+          "text": "Verdadero"
+        },
+        {
+          "id": "false",
+          "text": "Falso"
+        }
+      ],
+      "correctOptionIds": [
+        "false"
+      ],
+      "why": {
+        "prompt": "¿Por qué?",
+        "options": [
+          {
+            "id": "w1",
+            "text": "Porque es muy difícil que una inversión rinda más que lo que cuesta esa deuda, y la deuda es segura"
+          },
+          {
+            "id": "w2",
+            "text": "Porque invertir está prohibido si tienes deudas"
+          }
+        ],
+        "correct": "w1"
+      },
+      "feedback": {
+        "correct": "Correcto. La deuda cara es un costo seguro; el rendimiento de una inversión no lo es.",
+        "incorrect": "Es falso: es muy difícil que una inversión le gane a una deuda del 120 % anual, y la deuda es un costo seguro."
+      },
+      "sourceIds": [
+        "A-23"
+      ]
+    },
+    {
+      "id": "m05-expensive",
+      "moduleId": "module-05",
+      "type": "categorize",
+      "prompt": "Clasifica cada deuda según su costo.",
+      "categorize": {
+        "categories": [
+          {
+            "id": "high",
+            "label": "Cara: conviene pagarla primero"
+          },
+          {
+            "id": "low",
+            "label": "Barata o sin interés"
+          }
+        ],
+        "items": [
+          {
+            "id": "i1",
+            "text": "Saldo de tarjeta financiado al 120 % anual",
+            "categoryId": "high"
+          },
+          {
+            "id": "i2",
+            "text": "Préstamo personal con CFT del 90 % anual",
+            "categoryId": "high"
+          },
+          {
+            "id": "i3",
+            "text": "Compra en cuotas sin interés",
+            "categoryId": "low"
+          },
+          {
+            "id": "i4",
+            "text": "Dinero que te prestó tu familia sin interés",
+            "categoryId": "low"
+          }
+        ]
+      },
+      "feedback": {
+        "correct": "Correcto. Las deudas con tasa alta crecen rápido; las cuotas sin interés o un préstamo familiar sin interés no.",
+        "incorrect": "Las caras son la tarjeta financiada y el préstamo con CFT alto. Las cuotas sin interés y un préstamo familiar sin interés no generan intereses."
+      },
+      "sourceIds": [
+        "A-23"
+      ]
+    },
+    {
+      "id": "m05-first",
+      "moduleId": "module-05",
+      "type": "single",
+      "prompt": "Tienes un saldo de tarjeta financiado y algo de dinero extra este mes. ¿Qué haces primero?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Pago más que el mínimo de la tarjeta"
+        },
+        {
+          "id": "b",
+          "text": "Compro un CEDEAR"
+        },
+        {
+          "id": "c",
+          "text": "Lo guardo sin rendimiento y pago el mínimo"
+        }
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "feedback": {
+        "a": "Correcto. Bajar la deuda cara es lo que más \"rinde\" en tu situación.",
+        "b": "Primero conviene bajar la deuda cara: su costo seguro supera lo que suele rendir una inversión.",
+        "c": "Pagando el mínimo, el resto sigue generando intereses. Conviene pagar más."
+      },
+      "sourceIds": [
+        "A-23"
+      ]
+    },
+    {
+      "id": "m06-cft",
+      "moduleId": "module-06",
+      "type": "single",
+      "prompt": "¿Qué indica el costo financiero total (CFT)?",
+      "options": [
+        {
+          "id": "a",
+          "text": "La tasa más las comisiones y los cargos del crédito"
+        },
+        {
+          "id": "b",
+          "text": "Solo la tasa nominal anual"
+        },
+        {
+          "id": "c",
+          "text": "La inflación del año"
+        }
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "feedback": {
+        "a": "Correcto. El CFT suma a la tasa las comisiones y los cargos: es el número para comparar créditos.",
+        "b": "La TNA es solo la tasa. El CFT agrega comisiones y cargos.",
+        "c": "La inflación no forma parte del CFT: el CFT mide lo que cuesta el crédito."
+      },
+      "sourceIds": [
+        "B-04"
+      ]
+    },
+    {
+      "id": "m06-minimum",
+      "moduleId": "module-06",
+      "type": "numeric",
+      "prompt": "Con un saldo de $ 240.000 y un pago mínimo del 10 %, ¿cuánto es el primer pago mínimo, sin contar intereses?",
+      "numeric": {
+        "answer": "24000",
+        "tolerance": "1.00",
+        "unit": "ARS"
+      },
+      "help": "Monto en pesos, por ejemplo: 20.000",
+      "feedback": {
+        "correct": "Correcto. $ 240.000 × 0,1 = $ 24.000. Lo demás queda financiado y genera intereses.",
+        "incorrect": "El pago mínimo es el saldo por el porcentaje: $ 240.000 × 0,1 = $ 24.000."
+      },
+      "sourceIds": [
+        "T"
+      ]
+    },
+    {
+      "id": "m06-myth",
+      "moduleId": "module-06",
+      "type": "true_false_why",
+      "prompt": "Si pagas el mínimo a tiempo, no pagas intereses.",
+      "options": [
+        {
+          "id": "true",
+          "text": "Verdadero"
+        },
+        {
+          "id": "false",
+          "text": "Falso"
+        }
+      ],
+      "correctOptionIds": [
+        "false"
+      ],
+      "why": {
+        "prompt": "¿Por qué?",
+        "options": [
+          {
+            "id": "w1",
+            "text": "Porque lo que no pagas del resumen se financia y genera intereses"
+          },
+          {
+            "id": "w2",
+            "text": "Porque el mínimo incluye una multa fija"
+          }
+        ],
+        "correct": "w1"
+      },
+      "feedback": {
+        "correct": "Correcto. Pagar el mínimo evita la mora, pero el resto se financia a la tasa de la tarjeta.",
+        "incorrect": "Es falso: pagar el mínimo evita la mora, pero lo que no pagas genera intereses."
+      },
+      "sourceIds": [
+        "T"
+      ]
+    },
+    {
+      "id": "m06-time",
+      "moduleId": "module-06",
+      "type": "single",
+      "prompt": "Un saldo de $ 100.000 con TNA del 60 %, pagando solo el mínimo del 10 % y sin consumos nuevos, ¿cuánto tarda en pagarse?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Alrededor de 10 meses"
+        },
+        {
+          "id": "b",
+          "text": "Alrededor de 55 meses"
+        },
+        {
+          "id": "c",
+          "text": "Se paga el mes siguiente"
+        }
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "feedback": {
+        "a": "Tarda mucho más: cada mes el mínimo baja junto con el saldo, y los intereses siguen.",
+        "b": "Correcto. En ese escenario tarda 55 meses y se pagan $ 83.880,36 de intereses.",
+        "c": "Con el mínimo, se paga solo una parte por mes."
+      },
+      "sourceIds": [
+        "T"
+      ]
+    },
+    {
+      "id": "m06-terms",
+      "moduleId": "module-06",
+      "type": "matching",
+      "prompt": "Une cada término con lo que significa.",
+      "matching": {
+        "left": [
+          {
+            "id": "tna",
+            "text": "TNA"
+          },
+          {
+            "id": "tea",
+            "text": "TEA"
+          },
+          {
+            "id": "cft",
+            "text": "CFT"
+          }
+        ],
+        "right": [
+          {
+            "id": "d1",
+            "text": "Tasa anual de referencia, sin capitalización"
+          },
+          {
+            "id": "d2",
+            "text": "Tasa anual con la capitalización de intereses"
+          },
+          {
+            "id": "d3",
+            "text": "Lo que cuesta el crédito con comisiones y cargos"
+          }
+        ],
+        "pairs": [
+          [
+            "tna",
+            "d1"
+          ],
+          [
+            "tea",
+            "d2"
+          ],
+          [
+            "cft",
+            "d3"
+          ]
+        ]
+      },
+      "feedback": {
+        "correct": "Correcto. Para comparar créditos, mira el CFT.",
+        "incorrect": "TNA: tasa de referencia. TEA: con la capitalización. CFT: con comisiones y cargos, el número para comparar."
+      },
+      "sourceIds": [
+        "B-04"
+      ]
+    },
+    {
+      "id": "m07-snowball",
+      "moduleId": "module-07",
+      "type": "single",
+      "prompt": "En el método bola de nieve, ¿qué deuda se ataca primero?",
+      "options": [
+        {
+          "id": "a",
+          "text": "La de menor saldo"
+        },
+        {
+          "id": "b",
+          "text": "La de tasa más alta"
+        },
+        {
+          "id": "c",
+          "text": "La más antigua"
+        }
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "feedback": {
+        "a": "Correcto. Se paga primero la más chica para ver resultados rápido; al saldarla, su cuota se suma a la siguiente.",
+        "b": "Esa es la avalancha. La bola de nieve ataca primero la de menor saldo.",
+        "c": "La antigüedad no define el orden: la bola de nieve ataca la de menor saldo."
+      },
+      "sourceIds": [
+        "A-24",
+        "A-25"
+      ]
+    },
+    {
+      "id": "m07-avalanche",
+      "moduleId": "module-07",
+      "type": "single",
+      "prompt": "¿Qué método paga menos intereses en total?",
+      "options": [
+        {
+          "id": "a",
+          "text": "La avalancha"
+        },
+        {
+          "id": "b",
+          "text": "La bola de nieve"
+        },
+        {
+          "id": "c",
+          "text": "Siempre pagan lo mismo"
+        }
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "feedback": {
+        "a": "Correcto. Al atacar primero la de tasa más alta, la avalancha es la que menos intereses paga.",
+        "b": "La bola de nieve motiva antes, pero suele pagar más intereses que la avalancha.",
+        "c": "No: el orden cambia cuánto interés se paga. La avalancha paga menos."
+      },
+      "sourceIds": [
+        "A-28",
+        "A-29"
+      ]
+    },
+    {
+      "id": "m07-avalanche-order",
+      "moduleId": "module-07",
+      "type": "ordering",
+      "prompt": "Con la avalancha, ordena estas deudas de la primera a la última en atacar.",
+      "ordering": {
+        "items": [
+          {
+            "id": "a",
+            "text": "Tarjeta, 150 % anual, $ 40.000"
+          },
+          {
+            "id": "b",
+            "text": "Financiera, 110 % anual, $ 15.000"
+          },
+          {
+            "id": "c",
+            "text": "Crédito bancario, 80 % anual, $ 200.000"
+          }
+        ],
+        "correctOrder": [
+          "a",
+          "b",
+          "c"
+        ]
+      },
+      "feedback": {
+        "correct": "Correcto. La avalancha va de la tasa más alta a la más baja.",
+        "incorrect": "La avalancha ordena por tasa, de mayor a menor: tarjeta (150 %), financiera (110 %) y crédito bancario (80 %)."
+      },
+      "sourceIds": [
+        "A-29"
+      ]
+    },
+    {
+      "id": "m07-snowball-order",
+      "moduleId": "module-07",
+      "type": "ordering",
+      "prompt": "Con la bola de nieve, ordena estas deudas de la primera a la última en atacar.",
+      "ordering": {
+        "items": [
+          {
+            "id": "a",
+            "text": "Tarjeta de ropa, $ 5.000"
+          },
+          {
+            "id": "b",
+            "text": "Préstamo personal, $ 25.000"
+          },
+          {
+            "id": "c",
+            "text": "Crédito del auto, $ 100.000"
+          }
+        ],
+        "correctOrder": [
+          "a",
+          "b",
+          "c"
+        ]
+      },
+      "feedback": {
+        "correct": "Correcto. La bola de nieve va del saldo más chico al más grande.",
+        "incorrect": "La bola de nieve ordena por saldo, de menor a mayor: tarjeta de ropa, préstamo personal y crédito del auto."
+      },
+      "sourceIds": [
+        "A-25"
+      ]
+    },
+    {
+      "id": "m07-choose",
+      "moduleId": "module-07",
+      "type": "single",
+      "prompt": "Te cuesta sostener un plan y necesitas ver avances pronto. ¿Qué método puede ayudarte más?",
+      "options": [
+        {
+          "id": "a",
+          "text": "La bola de nieve"
+        },
+        {
+          "id": "b",
+          "text": "La avalancha"
+        },
+        {
+          "id": "c",
+          "text": "Pagar solo los mínimos"
+        }
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "feedback": {
+        "a": "Correcto. Saldar rápido una deuda chica motiva a seguir. Si priorizas pagar menos intereses, la avalancha.",
+        "b": "La avalancha paga menos intereses, pero la primera deuda puede tardar más en saldarse.",
+        "c": "Pagando solo los mínimos, las deudas tardan mucho y cuestan más."
+      },
+      "sourceIds": [
+        "A-30"
+      ]
+    },
+    {
+      "id": "m08-scenario",
+      "moduleId": "module-08",
+      "type": "single",
+      "prompt": "Un producto cuesta $ 120.000 en 12 cuotas sin interés o $ 102.000 de contado. Con inflación del 3 % mensual, las cuotas valen hoy $ 99.540,04. ¿Qué cuesta menos en ese escenario?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Las cuotas"
+        },
+        {
+          "id": "b",
+          "text": "El contado"
+        },
+        {
+          "id": "c",
+          "text": "Cuestan lo mismo"
+        }
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "feedback": {
+        "a": "Correcto. En ese escenario, las cuotas cuestan $ 2.459,96 menos en pesos de hoy.",
+        "b": "Compara en pesos de hoy: las cuotas valen $ 99.540,04, menos que los $ 102.000 del contado.",
+        "c": "No: en pesos de hoy, las cuotas valen $ 99.540,04 y el contado $ 102.000."
+      },
+      "sourceIds": []
+    },
+    {
+      "id": "m08-cash",
+      "moduleId": "module-08",
+      "type": "numeric",
+      "prompt": "¿Cuánto es el precio de contado de $ 120.000 con un 15 % de descuento?",
+      "numeric": {
+        "answer": "102000",
+        "tolerance": "1.00",
+        "unit": "ARS"
+      },
+      "help": "Monto en pesos, por ejemplo: 100.000",
+      "feedback": {
+        "correct": "Correcto. $ 120.000 × 0,85 = $ 102.000.",
+        "incorrect": "Al precio le restas el 15 %: $ 120.000 × 0,85 = $ 102.000."
+      },
+      "sourceIds": []
+    },
+    {
+      "id": "m08-myth",
+      "moduleId": "module-08",
+      "type": "true_false_why",
+      "prompt": "Las cuotas sin interés siempre convienen.",
+      "options": [
+        {
+          "id": "true",
+          "text": "Verdadero"
+        },
+        {
+          "id": "false",
+          "text": "Falso"
+        }
+      ],
+      "correctOptionIds": [
+        "false"
+      ],
+      "why": {
+        "prompt": "¿Por qué?",
+        "options": [
+          {
+            "id": "w1",
+            "text": "Porque depende de la inflación y del descuento de contado: con inflación baja y buen descuento, conviene el contado"
+          },
+          {
+            "id": "w2",
+            "text": "Porque las cuotas siempre tienen interés escondido"
+          }
+        ],
+        "correct": "w1"
+      },
+      "feedback": {
+        "correct": "Correcto. Con 1,5 % mensual, el mismo caso cambia: las cuotas valen $ 109.075,05 y conviene el contado.",
+        "incorrect": "Es falso: depende del escenario. Con inflación baja y un buen descuento, puede convenir el contado."
+      },
+      "sourceIds": []
+    },
+    {
+      "id": "m08-why",
+      "moduleId": "module-08",
+      "type": "single",
+      "prompt": "¿Por qué una cuota futura \"pesa\" menos que el mismo monto hoy?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Porque la inflación hace que ese dinero compre menos cuando la pagas"
+        },
+        {
+          "id": "b",
+          "text": "Porque las cuotas tienen descuento"
+        },
+        {
+          "id": "c",
+          "text": "Porque el comercio te devuelve una parte"
+        }
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "feedback": {
+        "a": "Correcto. Con inflación, los mismos pesos compran menos con el tiempo.",
+        "b": "No hay descuento: el monto es el mismo, pero vale menos con el tiempo por la inflación.",
+        "c": "No hay devolución: la diferencia viene de la inflación."
+      },
+      "sourceIds": []
+    },
+    {
+      "id": "m08-check",
+      "moduleId": "module-08",
+      "type": "multiple",
+      "prompt": "¿Qué conviene mirar antes de comprar en cuotas? Elige todas las que correspondan.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Si de verdad son sin interés (mirar el CFT)"
+        },
+        {
+          "id": "b",
+          "text": "El descuento por pagar de contado"
+        },
+        {
+          "id": "c",
+          "text": "Si la cuota entra en tu presupuesto todos los meses"
+        },
+        {
+          "id": "d",
+          "text": "El color del producto"
+        }
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "feedback": {
+        "correct": "Correcto. CFT, descuento de contado y que la cuota entre en tu presupuesto.",
+        "incorrect": "Mira el CFT (que de verdad sean sin interés), el descuento de contado y que la cuota entre en tu presupuesto."
+      },
+      "sourceIds": [
+        "B-04"
+      ]
+    },
+    {
+      "id": "m09-power",
+      "moduleId": "module-09",
+      "type": "numeric",
+      "prompt": "Con inflación del 3 % mensual, ¿cuánto compran dentro de 12 meses $ 100.000 de hoy? (en pesos de hoy)",
+      "numeric": {
+        "answer": "70137.99",
+        "tolerance": "1.00",
+        "unit": "ARS"
+      },
+      "help": "Monto en pesos, por ejemplo: 80.000",
+      "feedback": {
+        "correct": "Correcto. $ 100.000 ÷ 1,03^12 = $ 70.137,99: compran un 29,9 % menos.",
+        "incorrect": "Divide por la inflación acumulada: $ 100.000 ÷ 1,03^12 = $ 70.137,99."
+      },
+      "sourceIds": [
+        "A-21"
+      ]
+    },
+    {
+      "id": "m09-accumulated",
+      "moduleId": "module-09",
+      "type": "single",
+      "prompt": "Con inflación del 3 % mensual, ¿cuánto suben los precios en 12 meses?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Cerca de 42,6 %"
+        },
+        {
+          "id": "b",
+          "text": "Exactamente 36 %"
+        },
+        {
+          "id": "c",
+          "text": "3 %"
+        }
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "feedback": {
+        "a": "Correcto. Se acumula: 1,03^12 − 1 ≈ 42,6 %.",
+        "b": "No se suma: se acumula. 1,03^12 − 1 ≈ 42,6 %.",
+        "c": "El 3 % es de un mes; en 12 meses se acumula a cerca de 42,6 %."
+      },
+      "sourceIds": [
+        "A-21"
+      ]
+    },
+    {
+      "id": "m09-still",
+      "moduleId": "module-09",
+      "type": "true_false_why",
+      "prompt": "Si guardas el dinero quieto, no pierdes nada.",
+      "options": [
+        {
+          "id": "true",
+          "text": "Verdadero"
+        },
+        {
+          "id": "false",
+          "text": "Falso"
+        }
+      ],
+      "correctOptionIds": [
+        "false"
+      ],
+      "why": {
+        "prompt": "¿Por qué?",
+        "options": [
+          {
+            "id": "w1",
+            "text": "Porque con inflación ese dinero compra menos con el tiempo"
+          },
+          {
+            "id": "w2",
+            "text": "Porque el banco cobra por guardarlo"
+          }
+        ],
+        "correct": "w1"
+      },
+      "feedback": {
+        "correct": "Correcto. El dinero quieto pierde poder de compra: por eso la inflación es \"el ladrón silencioso\".",
+        "incorrect": "Es falso: con inflación, el mismo dinero compra menos con el tiempo."
+      },
+      "sourceIds": [
+        "A-21"
+      ]
+    },
+    {
+      "id": "m09-source",
+      "moduleId": "module-09",
+      "type": "single",
+      "prompt": "¿Quién publica el índice de precios al consumidor (IPC) en Argentina?",
+      "options": [
+        {
+          "id": "a",
+          "text": "El INDEC"
+        },
+        {
+          "id": "b",
+          "text": "Cada banco"
+        },
+        {
+          "id": "c",
+          "text": "Las billeteras virtuales"
+        }
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "feedback": {
+        "a": "Correcto. El IPC lo publica el INDEC.",
+        "b": "Los bancos no publican el IPC: lo publica el INDEC.",
+        "c": "Las billeteras no publican el IPC: lo publica el INDEC."
+      },
+      "sourceIds": [
+        "B-40"
+      ]
+    },
+    {
+      "id": "m09-defense",
+      "moduleId": "module-09",
+      "type": "single",
+      "prompt": "Según el material del taller, ¿qué es invertir frente a la inflación?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Una estrategia de defensa del poder de compra"
+        },
+        {
+          "id": "b",
+          "text": "Una forma de ganar asegurada"
+        },
+        {
+          "id": "c",
+          "text": "Algo que solo hacen los bancos"
+        }
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "feedback": {
+        "a": "Correcto. Invertir busca que el dinero no pierda poder de compra, siempre con riesgo.",
+        "b": "Ninguna inversión tiene ganancia asegurada: es una estrategia de defensa, con riesgo.",
+        "c": "Cualquier persona puede invertir a través de un agente registrado; es una estrategia de defensa."
+      },
+      "sourceIds": [
+        "A-21"
+      ]
+    },
+    {
+      "id": "m10-period",
+      "moduleId": "module-10",
+      "type": "numeric",
+      "prompt": "Con una TNA del 36 %, ¿cuál es la tasa de un plazo de 30 días? (en porcentaje)",
+      "numeric": {
+        "answer": "2.96",
+        "tolerance": "0.01",
+        "unit": "percent"
+      },
+      "help": "Porcentaje con dos decimales, por ejemplo: 2,50",
+      "feedback": {
+        "correct": "Correcto. 36 % × 30 ÷ 365 = 2,96 % en 30 días.",
+        "incorrect": "La tasa del período es TNA × días ÷ 365: 36 % × 30 ÷ 365 = 2,96 %."
+      },
+      "sourceIds": []
+    },
+    {
+      "id": "m10-real",
+      "moduleId": "module-10",
+      "type": "single",
+      "prompt": "Un plazo fijo paga 2,96 % en 30 días y la inflación del mes es 3 %. ¿Qué pasa con tu poder de compra?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Baja un poco: la tasa real es negativa"
+        },
+        {
+          "id": "b",
+          "text": "Sube un 2,96 %"
+        },
+        {
+          "id": "c",
+          "text": "No cambia"
+        }
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "feedback": {
+        "a": "Correcto. 1,0296 ÷ 1,03 − 1 ≈ −0,04 %: hay más pesos, pero compran un poco menos.",
+        "b": "Hay que descontar la inflación: la tasa real es 1,0296 ÷ 1,03 − 1 ≈ −0,04 %.",
+        "c": "Cambia un poco: la tasa real es negativa, cerca de −0,04 %."
+      },
+      "sourceIds": []
+    },
+    {
+      "id": "m10-terms",
+      "moduleId": "module-10",
+      "type": "matching",
+      "prompt": "Une cada tasa con su definición.",
+      "matching": {
+        "left": [
+          {
+            "id": "tna",
+            "text": "TNA"
+          },
+          {
+            "id": "tea",
+            "text": "TEA"
+          },
+          {
+            "id": "real",
+            "text": "Tasa real"
+          }
+        ],
+        "right": [
+          {
+            "id": "d1",
+            "text": "Tasa anual de referencia"
+          },
+          {
+            "id": "d2",
+            "text": "Tasa anual con capitalización de intereses"
+          },
+          {
+            "id": "d3",
+            "text": "Lo que gana o pierde tu poder de compra, descontada la inflación"
+          }
+        ],
+        "pairs": [
+          [
+            "tna",
+            "d1"
+          ],
+          [
+            "tea",
+            "d2"
+          ],
+          [
+            "real",
+            "d3"
+          ]
+        ]
+      },
+      "feedback": {
+        "correct": "Correcto. La tasa que importa para tu poder de compra es la real.",
+        "incorrect": "TNA: referencia anual. TEA: con capitalización. Tasa real: descuenta la inflación."
+      },
+      "sourceIds": []
+    },
+    {
+      "id": "m10-tea",
+      "moduleId": "module-10",
+      "type": "true_false_why",
+      "prompt": "La TEA es siempre igual a la TNA.",
+      "options": [
+        {
+          "id": "true",
+          "text": "Verdadero"
+        },
+        {
+          "id": "false",
+          "text": "Falso"
+        }
+      ],
+      "correctOptionIds": [
+        "false"
+      ],
+      "why": {
+        "prompt": "¿Por qué?",
+        "options": [
+          {
+            "id": "w1",
+            "text": "Porque la TEA suma la capitalización de los intereses, así que suele ser mayor"
+          },
+          {
+            "id": "w2",
+            "text": "Porque la TEA incluye la inflación"
+          }
+        ],
+        "correct": "w1"
+      },
+      "feedback": {
+        "correct": "Correcto. Al reinvertir los intereses, la TEA queda por encima de la TNA.",
+        "incorrect": "Es falso: la TEA suma la capitalización de los intereses, por eso suele ser mayor que la TNA."
+      },
+      "sourceIds": []
+    },
+    {
+      "id": "m10-compare",
+      "moduleId": "module-10",
+      "type": "single",
+      "prompt": "Para saber si un plazo fijo le gana a la inflación, ¿qué comparas?",
+      "options": [
+        {
+          "id": "a",
+          "text": "La tasa del período con la inflación del mismo período"
+        },
+        {
+          "id": "b",
+          "text": "La TNA con la inflación de un mes"
+        },
+        {
+          "id": "c",
+          "text": "El monto final con el inicial"
+        }
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "feedback": {
+        "a": "Correcto. Hay que comparar períodos iguales: la tasa de 30 días con la inflación de 30 días.",
+        "b": "Son períodos distintos: la TNA es anual y la inflación, mensual.",
+        "c": "El monto final siempre es mayor en pesos; hay que descontar la inflación."
+      },
+      "sourceIds": []
+    },
+    {
+      "id": "m11-fixed",
+      "moduleId": "module-11",
+      "type": "numeric",
+      "prompt": "Un plazo fijo tradicional de $ 1.000.000 a 30 días con TNA del 36 %, ¿con cuánto termina?",
+      "numeric": {
+        "answer": "1029589.04",
+        "tolerance": "1.00",
+        "unit": "ARS"
+      },
+      "help": "Monto en pesos, por ejemplo: 1.020.000",
+      "feedback": {
+        "correct": "Correcto. $ 1.000.000 × (1 + 0,36 × 30 ÷ 365) = $ 1.029.589,04.",
+        "incorrect": "Suma el interés del período: $ 1.000.000 × (1 + 0,36 × 30 ÷ 365) = $ 1.029.589,04."
+      },
+      "sourceIds": []
+    },
+    {
+      "id": "m11-uva",
+      "moduleId": "module-11",
+      "type": "single",
+      "prompt": "¿Qué tiene de distinto el plazo fijo UVA?",
+      "options": [
+        {
+          "id": "a",
+          "text": "El capital se ajusta por inflación (CER) y suma una tasa pequeña"
+        },
+        {
+          "id": "b",
+          "text": "Paga siempre más que el tradicional"
+        },
+        {
+          "id": "c",
+          "text": "Se puede retirar en cualquier momento sin costo"
+        }
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "feedback": {
+        "a": "Correcto. Se ajusta por inflación; sus condiciones (plazo mínimo, precancelación) dependen del banco, y no todos lo ofrecen.",
+        "b": "Depende del escenario: si la inflación baja, el tradicional puede rendir más.",
+        "c": "Tiene plazos mínimos que dependen del banco; la precancelación, si existe, paga menos."
+      },
+      "sourceIds": [
+        "B-03"
+      ]
+    },
+    {
+      "id": "m11-mm",
+      "moduleId": "module-11",
+      "type": "single",
+      "prompt": "Un fondo money market, ¿tiene la garantía de los depósitos?",
+      "options": [
+        {
+          "id": "a",
+          "text": "No: es un fondo común de inversión, no un depósito"
+        },
+        {
+          "id": "b",
+          "text": "Sí, igual que un plazo fijo"
+        },
+        {
+          "id": "c",
+          "text": "Solo los primeros 30 días"
+        }
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "feedback": {
+        "a": "Correcto. Es un fondo regulado por la CNV, de bajo riesgo, pero no un depósito: no tiene esa garantía y su rendimiento varía.",
+        "b": "Un fondo no es un depósito: no tiene la garantía de los depósitos.",
+        "c": "No existe ese plazo: los fondos no tienen la garantía de los depósitos."
+      },
+      "sourceIds": [
+        "B-14",
+        "B-26"
+      ]
+    },
+    {
+      "id": "m11-liquidity",
+      "moduleId": "module-11",
+      "type": "categorize",
+      "prompt": "Clasifica cada opción según cuándo puedes usar el dinero.",
+      "categorize": {
+        "categories": [
+          {
+            "id": "now",
+            "label": "En el día"
+          },
+          {
+            "id": "maturity",
+            "label": "Al vencimiento"
+          }
+        ],
+        "items": [
+          {
+            "id": "i1",
+            "text": "Cuenta remunerada",
+            "categoryId": "now"
+          },
+          {
+            "id": "i2",
+            "text": "Fondo money market",
+            "categoryId": "now"
+          },
+          {
+            "id": "i3",
+            "text": "Plazo fijo tradicional",
+            "categoryId": "maturity"
+          },
+          {
+            "id": "i4",
+            "text": "Plazo fijo UVA",
+            "categoryId": "maturity"
+          }
+        ]
+      },
+      "feedback": {
+        "correct": "Correcto. Cuenta y fondo money market tienen liquidez en el día; los plazos fijos, al vencimiento.",
+        "incorrect": "La cuenta remunerada y el money market se rescatan en el día; los plazos fijos, al vencimiento."
+      },
+      "sourceIds": [
+        "B-26"
+      ]
+    },
+    {
+      "id": "m11-guarantee",
+      "moduleId": "module-11",
+      "type": "numeric",
+      "prompt": "La garantía de los depósitos cubre hasta $ 50.000.000 por persona y por entidad. Si tienes $ 30.000.000 en plazo fijo en un banco, ¿cuánto queda cubierto?",
+      "numeric": {
+        "answer": "30000000",
+        "tolerance": "1.00",
+        "unit": "ARS"
+      },
+      "help": "Monto en pesos, por ejemplo: 10.000.000",
+      "feedback": {
+        "correct": "Correcto. Está por debajo del tope: quedan cubiertos los $ 30.000.000.",
+        "incorrect": "Como está por debajo del tope de $ 50.000.000, queda cubierto todo: $ 30.000.000."
+      },
+      "sourceIds": [
+        "B-01"
+      ]
     }
   ]
 }

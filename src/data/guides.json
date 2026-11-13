@@ -679,6 +679,743 @@
         "A-35",
         "A-36"
       ]
+    },
+    {
+      "id": "module-05-guide-1",
+      "moduleId": "module-05",
+      "title": "Primero lo que cuesta más",
+      "minutes": 5,
+      "blocks": [
+        {
+          "type": "hook",
+          "body": "Tienes $ 100.000 extra este mes y una tarjeta financiada. ¿Los inviertes o pagas la tarjeta?"
+        },
+        {
+          "type": "objective",
+          "body": "Al terminar vas a poder ordenar tus decisiones de dinero: pagar deudas caras, después ahorrar y después invertir."
+        },
+        {
+          "type": "recall",
+          "question": {
+            "id": "g05-recall",
+            "moduleId": "module-05",
+            "type": "single",
+            "prompt": "¿Tienes hoy alguna deuda con interés, como la tarjeta financiada?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Sí"
+              },
+              {
+                "id": "b",
+                "text": "No"
+              }
+            ],
+            "correctOptionIds": [
+              "a"
+            ],
+            "feedback": {
+              "a": "Es muy común. Esta guía te ayuda a decidir por dónde empezar.",
+              "b": "Bien. Igual vale conocer el orden para cuando aparezca una."
+            },
+            "sourceIds": []
+          }
+        },
+        {
+          "type": "text",
+          "title": "Pagar una deuda también rinde",
+          "body": "Si tu tarjeta cobra **120 % anual**, cada peso que dejas de financiar es un **120 % que no pagas**: un rendimiento asegurado que ninguna inversión de bajo riesgo suele igualar."
+        },
+        {
+          "type": "text",
+          "title": "El orden",
+          "body": "**Primero** las deudas caras. **Después** el ahorro: tu fondo de emergencia. **Recién después**, invertir. Es la misma lógica con la que se abre la billetera: Invertir se desbloquea cuando tienes fondo y no tienes deudas caras."
+        },
+        {
+          "type": "example",
+          "title": "Ejemplo resuelto",
+          "steps": [
+            "Deuda de tarjeta: $ 100.000 al 120 % anual.",
+            "Si la pagas, dejas de generar unos $ 10.000 de intereses por mes.",
+            "Para que una inversión te convenga más, tendría que rendir más que eso, sin riesgo.",
+            "Por eso, primero la tarjeta."
+          ]
+        },
+        {
+          "type": "practice",
+          "question": {
+            "id": "m05-first",
+            "moduleId": "module-05",
+            "type": "single",
+            "prompt": "Tienes un saldo de tarjeta financiado y algo de dinero extra este mes. ¿Qué haces primero?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Pago más que el mínimo de la tarjeta"
+              },
+              {
+                "id": "b",
+                "text": "Compro un CEDEAR"
+              },
+              {
+                "id": "c",
+                "text": "Lo guardo sin rendimiento y pago el mínimo"
+              }
+            ],
+            "correctOptionIds": [
+              "a"
+            ],
+            "feedback": {
+              "a": "Correcto. Bajar la deuda cara es lo que más \"rinde\" en tu situación.",
+              "b": "Primero conviene bajar la deuda cara: su costo seguro supera lo que suele rendir una inversión.",
+              "c": "Pagando el mínimo, el resto sigue generando intereses. Conviene pagar más."
+            },
+            "sourceIds": [
+              "A-23"
+            ]
+          }
+        },
+        {
+          "type": "takeaway",
+          "body": "Para tu vida: lista tus deudas con su tasa o su CFT, y marca cuál cuesta más."
+        }
+      ],
+      "sourceIds": [
+        "A-23"
+      ]
+    },
+    {
+      "id": "module-06-guide-1",
+      "moduleId": "module-06",
+      "title": "Lo que cuesta pagar el mínimo",
+      "minutes": 7,
+      "blocks": [
+        {
+          "type": "hook",
+          "body": "Llega el resumen de la tarjeta: $ 240.000. El pago mínimo es mucho menor y parece la salida fácil."
+        },
+        {
+          "type": "objective",
+          "body": "Al terminar vas a poder calcular cuánto cuesta pagar el mínimo y comparar créditos con el costo financiero total (CFT)."
+        },
+        {
+          "type": "recall",
+          "question": {
+            "id": "g06-recall",
+            "moduleId": "module-06",
+            "type": "single",
+            "prompt": "¿Alguna vez pagaste solo el mínimo de la tarjeta?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Sí"
+              },
+              {
+                "id": "b",
+                "text": "No"
+              }
+            ],
+            "correctOptionIds": [
+              "a"
+            ],
+            "feedback": {
+              "a": "Muchas personas lo hacen. Veamos cuánto cuesta.",
+              "b": "Bien. Igual vale saber cuánto costaría."
+            },
+            "sourceIds": []
+          }
+        },
+        {
+          "type": "text",
+          "title": "El pago mínimo",
+          "body": "El **pago mínimo** evita la mora, pero lo que no pagas se **financia** a la tasa de la tarjeta y aparece en el resumen siguiente, con intereses."
+        },
+        {
+          "type": "text",
+          "title": "TNA, TEA y CFT",
+          "body": "La **TNA** es la tasa de referencia. La **TEA** suma la capitalización de los intereses. El **CFT** suma, además, las comisiones y los cargos: las entidades deben informarlo destacado, y es **el número para comparar** créditos."
+        },
+        {
+          "type": "example",
+          "title": "Ejemplo resuelto",
+          "steps": [
+            "Saldo: $ 100.000, TNA del 60 %, pago mínimo del 10 %, sin consumos nuevos.",
+            "Cada mes se suman intereses y se paga el 10 % del saldo.",
+            "Para terminar de pagarlo hacen falta 55 meses.",
+            "En total, se pagan $ 83.880,36 de intereses."
+          ]
+        },
+        {
+          "type": "practice",
+          "question": {
+            "id": "m06-minimum",
+            "moduleId": "module-06",
+            "type": "numeric",
+            "prompt": "Con un saldo de $ 240.000 y un pago mínimo del 10 %, ¿cuánto es el primer pago mínimo, sin contar intereses?",
+            "numeric": {
+              "answer": "24000",
+              "tolerance": "1.00",
+              "unit": "ARS"
+            },
+            "help": "Monto en pesos, por ejemplo: 20.000",
+            "feedback": {
+              "correct": "Correcto. $ 240.000 × 0,1 = $ 24.000. Lo demás queda financiado y genera intereses.",
+              "incorrect": "El pago mínimo es el saldo por el porcentaje: $ 240.000 × 0,1 = $ 24.000."
+            },
+            "sourceIds": [
+              "T"
+            ]
+          }
+        },
+        {
+          "type": "takeaway",
+          "body": "Para tu vida: busca en tu último resumen el CFT y el pago total, y compáralos con el mínimo."
+        }
+      ],
+      "sourceIds": [
+        "T",
+        "B-04"
+      ]
+    },
+    {
+      "id": "module-07-guide-1",
+      "moduleId": "module-07",
+      "title": "Bola de nieve o avalancha",
+      "minutes": 6,
+      "blocks": [
+        {
+          "type": "hook",
+          "body": "Tienes tres deudas y algo de dinero extra cada mes. ¿Por cuál empiezas?"
+        },
+        {
+          "type": "objective",
+          "body": "Al terminar vas a poder ordenar tus deudas con el método bola de nieve o con la avalancha, y elegir el que mejor te sirve."
+        },
+        {
+          "type": "recall",
+          "question": {
+            "id": "g07-recall",
+            "moduleId": "module-07",
+            "type": "single",
+            "prompt": "Si tuvieras varias deudas, ¿por cuál empezarías?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Por la más chica"
+              },
+              {
+                "id": "b",
+                "text": "Por la más cara"
+              }
+            ],
+            "correctOptionIds": [
+              "b"
+            ],
+            "feedback": {
+              "a": "Es la idea de la bola de nieve. Veamos también la otra opción.",
+              "b": "Es la idea de la avalancha. Veamos también la otra opción."
+            },
+            "sourceIds": []
+          }
+        },
+        {
+          "type": "text",
+          "title": "Bola de nieve",
+          "body": "Pagas **todos los mínimos** y pones **todo el extra** en la deuda de **menor saldo**. Al saldarla, su cuota se suma a la siguiente: la capacidad de pago crece con cada deuda saldada."
+        },
+        {
+          "type": "text",
+          "title": "Avalancha",
+          "body": "Pagas todos los mínimos y pones el extra en la deuda de **tasa más alta**. Es el método que **menos intereses paga**. La bola de nieve sirve si necesitas motivación y resultados rápidos."
+        },
+        {
+          "type": "example",
+          "title": "Ejemplo resuelto: la avalancha",
+          "steps": [
+            "Tarjeta: 150 % anual, $ 40.000.",
+            "Financiera: 110 % anual, $ 15.000.",
+            "Crédito bancario: 80 % anual, $ 200.000.",
+            "Orden de la avalancha: tarjeta, financiera y crédito bancario."
+          ]
+        },
+        {
+          "type": "practice",
+          "question": {
+            "id": "m07-avalanche",
+            "moduleId": "module-07",
+            "type": "single",
+            "prompt": "¿Qué método paga menos intereses en total?",
+            "options": [
+              {
+                "id": "a",
+                "text": "La avalancha"
+              },
+              {
+                "id": "b",
+                "text": "La bola de nieve"
+              },
+              {
+                "id": "c",
+                "text": "Siempre pagan lo mismo"
+              }
+            ],
+            "correctOptionIds": [
+              "a"
+            ],
+            "feedback": {
+              "a": "Correcto. Al atacar primero la de tasa más alta, la avalancha es la que menos intereses paga.",
+              "b": "La bola de nieve motiva antes, pero suele pagar más intereses que la avalancha.",
+              "c": "No: el orden cambia cuánto interés se paga. La avalancha paga menos."
+            },
+            "sourceIds": [
+              "A-28",
+              "A-29"
+            ]
+          }
+        },
+        {
+          "type": "takeaway",
+          "body": "Para tu vida: ordena tus deudas con los dos métodos y prueba ambos en la herramienta SIM-9."
+        }
+      ],
+      "sourceIds": [
+        "A-24",
+        "A-25",
+        "A-28",
+        "A-29",
+        "A-30"
+      ]
+    },
+    {
+      "id": "module-08-guide-1",
+      "moduleId": "module-08",
+      "title": "Cuotas o contado",
+      "minutes": 6,
+      "blocks": [
+        {
+          "type": "hook",
+          "body": "Te ofrecen 12 cuotas sin interés o un 15 % de descuento de contado. ¿Qué conviene?"
+        },
+        {
+          "type": "objective",
+          "body": "Al terminar vas a poder comparar cuotas sin interés con un precio de contado, en un escenario de inflación."
+        },
+        {
+          "type": "recall",
+          "question": {
+            "id": "g08-recall",
+            "moduleId": "module-08",
+            "type": "single",
+            "prompt": "¿Qué eliges cuando te ofrecen cuotas sin interés?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Casi siempre las cuotas"
+              },
+              {
+                "id": "b",
+                "text": "Depende del descuento"
+              }
+            ],
+            "correctOptionIds": [
+              "b"
+            ],
+            "feedback": {
+              "a": "Muchas veces conviene, pero no siempre. Veamos cómo saberlo.",
+              "b": "Bien: depende del descuento y de la inflación."
+            },
+            "sourceIds": []
+          }
+        },
+        {
+          "type": "text",
+          "title": "Una cuota futura vale menos",
+          "body": "Con inflación, el dinero compra menos con el tiempo. Una cuota que pagas dentro de seis meses \"pesa\" menos que el mismo monto hoy. Por eso se compara el **valor de hoy** de las cuotas con el **precio de contado**."
+        },
+        {
+          "type": "text",
+          "title": "Depende del escenario",
+          "body": "Con inflación alta y poco descuento, suelen convenir las cuotas. Con inflación baja y un buen descuento, puede convenir el contado. Y siempre conviene mirar el **CFT**: que de verdad sean sin interés."
+        },
+        {
+          "type": "example",
+          "title": "Ejemplo resuelto",
+          "steps": [
+            "Precio: $ 120.000 en 12 cuotas de $ 10.000.",
+            "Contado con 15 % de descuento: $ 102.000.",
+            "Con inflación del 3 % mensual, las cuotas valen hoy $ 99.540,04.",
+            "En ese escenario, las cuotas cuestan $ 2.459,96 menos."
+          ]
+        },
+        {
+          "type": "practice",
+          "question": {
+            "id": "m08-myth",
+            "moduleId": "module-08",
+            "type": "true_false_why",
+            "prompt": "Las cuotas sin interés siempre convienen.",
+            "options": [
+              {
+                "id": "true",
+                "text": "Verdadero"
+              },
+              {
+                "id": "false",
+                "text": "Falso"
+              }
+            ],
+            "correctOptionIds": [
+              "false"
+            ],
+            "why": {
+              "prompt": "¿Por qué?",
+              "options": [
+                {
+                  "id": "w1",
+                  "text": "Porque depende de la inflación y del descuento de contado: con inflación baja y buen descuento, conviene el contado"
+                },
+                {
+                  "id": "w2",
+                  "text": "Porque las cuotas siempre tienen interés escondido"
+                }
+              ],
+              "correct": "w1"
+            },
+            "feedback": {
+              "correct": "Correcto. Con 1,5 % mensual, el mismo caso cambia: las cuotas valen $ 109.075,05 y conviene el contado.",
+              "incorrect": "Es falso: depende del escenario. Con inflación baja y un buen descuento, puede convenir el contado."
+            },
+            "sourceIds": []
+          }
+        },
+        {
+          "type": "takeaway",
+          "body": "Para tu vida: la próxima compra en cuotas, pregunta el precio de contado y hazlo en la herramienta SIM-6."
+        }
+      ],
+      "sourceIds": [
+        "B-04"
+      ]
+    },
+    {
+      "id": "module-09-guide-1",
+      "moduleId": "module-09",
+      "title": "El ladrón silencioso",
+      "minutes": 5,
+      "blocks": [
+        {
+          "type": "hook",
+          "body": "Guardas $ 100.000 en un cajón. En un año siguen siendo $ 100.000, pero ya no alcanzan para lo mismo."
+        },
+        {
+          "type": "objective",
+          "body": "Al terminar vas a poder calcular cuánto poder de compra pierde el dinero quieto con un escenario de inflación."
+        },
+        {
+          "type": "recall",
+          "question": {
+            "id": "g09-recall",
+            "moduleId": "module-09",
+            "type": "single",
+            "prompt": "¿Notaste que lo mismo cuesta más que hace un año?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Sí"
+              },
+              {
+                "id": "b",
+                "text": "No mucho"
+              }
+            ],
+            "correctOptionIds": [
+              "a"
+            ],
+            "feedback": {
+              "a": "Eso es la inflación. Veamos cómo medirla.",
+              "b": "Igual vale medirla: se acumula mes a mes."
+            },
+            "sourceIds": []
+          }
+        },
+        {
+          "type": "text",
+          "title": "Qué es la inflación",
+          "body": "Es la suba general de los precios. El **IPC** lo publica el INDEC. Con inflación, el **dinero quieto** pierde **poder de compra**: compra menos con el tiempo."
+        },
+        {
+          "type": "text",
+          "title": "Se acumula",
+          "body": "La inflación mensual **no se suma: se acumula**. Con 3 % por mes, en 12 meses los precios suben cerca de **42,6 %**, no 36 %."
+        },
+        {
+          "type": "example",
+          "title": "Ejemplo resuelto",
+          "steps": [
+            "Monto: $ 100.000.",
+            "Inflación del escenario: 3 % mensual.",
+            "En 12 meses: $ 100.000 ÷ 1,03^12 = $ 70.137,99 en pesos de hoy.",
+            "Pierde un 29,9 % de poder de compra."
+          ]
+        },
+        {
+          "type": "practice",
+          "question": {
+            "id": "m09-accumulated",
+            "moduleId": "module-09",
+            "type": "single",
+            "prompt": "Con inflación del 3 % mensual, ¿cuánto suben los precios en 12 meses?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Cerca de 42,6 %"
+              },
+              {
+                "id": "b",
+                "text": "Exactamente 36 %"
+              },
+              {
+                "id": "c",
+                "text": "3 %"
+              }
+            ],
+            "correctOptionIds": [
+              "a"
+            ],
+            "feedback": {
+              "a": "Correcto. Se acumula: 1,03^12 − 1 ≈ 42,6 %.",
+              "b": "No se suma: se acumula. 1,03^12 − 1 ≈ 42,6 %.",
+              "c": "El 3 % es de un mes; en 12 meses se acumula a cerca de 42,6 %."
+            },
+            "sourceIds": [
+              "A-21"
+            ]
+          }
+        },
+        {
+          "type": "takeaway",
+          "body": "Para tu vida: mira en el sitio del INDEC la inflación del último mes y pruébala en el simulador de inflación."
+        }
+      ],
+      "sourceIds": [
+        "A-21",
+        "B-40",
+        "T"
+      ]
+    },
+    {
+      "id": "module-10-guide-1",
+      "moduleId": "module-10",
+      "title": "Tasas sin misterio",
+      "minutes": 7,
+      "blocks": [
+        {
+          "type": "hook",
+          "body": "Un plazo fijo ofrece \"36 % anual\". Parece mucho, pero ¿le gana a la inflación?"
+        },
+        {
+          "type": "objective",
+          "body": "Al terminar vas a poder pasar de la TNA a la tasa de un plazo y calcular la tasa real frente a la inflación."
+        },
+        {
+          "type": "recall",
+          "question": {
+            "id": "g10-recall",
+            "moduleId": "module-10",
+            "type": "single",
+            "prompt": "¿Sabes qué significa la TNA?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Sí"
+              },
+              {
+                "id": "b",
+                "text": "No del todo"
+              }
+            ],
+            "correctOptionIds": [
+              "b"
+            ],
+            "feedback": {
+              "a": "Bien. Vamos a ver cómo usarla para comparar.",
+              "b": "Es muy común. Lo vemos paso a paso."
+            },
+            "sourceIds": []
+          }
+        },
+        {
+          "type": "text",
+          "title": "De la TNA al período",
+          "body": "La **TNA** es una tasa anual de referencia. Lo que cobras en un plazo de **d** días es **TNA × d ÷ 365**. La **TEA** suma la capitalización de los intereses."
+        },
+        {
+          "type": "text",
+          "title": "La tasa real",
+          "body": "Para saber si le ganas a la inflación, compara la tasa del período con la inflación del **mismo período**: **tasa real = (1 + tasa) ÷ (1 + inflación) − 1**. Si es negativa, hay más pesos pero compran menos."
+        },
+        {
+          "type": "example",
+          "title": "Ejemplo resuelto",
+          "steps": [
+            "TNA del 36 % a 30 días: 36 % × 30 ÷ 365 = 2,96 %.",
+            "Inflación del mes: 3 %.",
+            "Tasa real: 1,0296 ÷ 1,03 − 1 ≈ −0,04 %.",
+            "En ese escenario, el plazo fijo no le gana a la inflación."
+          ]
+        },
+        {
+          "type": "practice",
+          "question": {
+            "id": "m10-period",
+            "moduleId": "module-10",
+            "type": "numeric",
+            "prompt": "Con una TNA del 36 %, ¿cuál es la tasa de un plazo de 30 días? (en porcentaje)",
+            "numeric": {
+              "answer": "2.96",
+              "tolerance": "0.01",
+              "unit": "percent"
+            },
+            "help": "Porcentaje con dos decimales, por ejemplo: 2,50",
+            "feedback": {
+              "correct": "Correcto. 36 % × 30 ÷ 365 = 2,96 % en 30 días.",
+              "incorrect": "La tasa del período es TNA × días ÷ 365: 36 % × 30 ÷ 365 = 2,96 %."
+            },
+            "sourceIds": []
+          }
+        },
+        {
+          "type": "takeaway",
+          "body": "Para tu vida: toma una tasa que veas esta semana y calcula su tasa real en la herramienta SIM-4."
+        }
+      ],
+      "sourceIds": [
+        "B-40"
+      ]
+    },
+    {
+      "id": "module-11-guide-1",
+      "moduleId": "module-11",
+      "title": "Dónde dejar el dinero que no usas hoy",
+      "minutes": 7,
+      "blocks": [
+        {
+          "type": "hook",
+          "body": "Tienes ahorros que no vas a usar este mes. ¿Plazo fijo, UVA o un fondo money market?"
+        },
+        {
+          "type": "objective",
+          "body": "Al terminar vas a poder comparar plazo fijo tradicional, UVA y fondo money market por rendimiento, liquidez y protección."
+        },
+        {
+          "type": "recall",
+          "question": {
+            "id": "g11-recall",
+            "moduleId": "module-11",
+            "type": "single",
+            "prompt": "¿Tu dinero ahorrado hoy rinde algo?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Sí"
+              },
+              {
+                "id": "b",
+                "text": "No"
+              }
+            ],
+            "correctOptionIds": [
+              "b"
+            ],
+            "feedback": {
+              "a": "Bien. Veamos qué protección tiene cada opción.",
+              "b": "Es común. Veamos las opciones de bajo riesgo."
+            },
+            "sourceIds": []
+          }
+        },
+        {
+          "type": "text",
+          "title": "Plazo fijo tradicional y UVA",
+          "body": "El **tradicional** paga una tasa fija y el dinero está disponible **al vencimiento** (plazo mínimo de 30 días). El **UVA** ajusta el capital por inflación (CER) y suma una tasa pequeña; no todos los bancos lo ofrecen y sus condiciones dependen de cada uno. Los depósitos en bancos tienen la **garantía de los depósitos**, hoy hasta $ 50.000.000 por persona y por entidad."
+        },
+        {
+          "type": "text",
+          "title": "Fondo money market",
+          "body": "Es un **fondo común de inversión** de bajo riesgo y muy corto plazo, regulado por la CNV: el dinero se rescata **en el día** y el rendimiento **varía a diario**. **No es un depósito**: no tiene la garantía de los depósitos. Muchas \"cuentas que rinden\" de billeteras son, en realidad, un fondo."
+        },
+        {
+          "type": "example",
+          "title": "Ejemplo resuelto",
+          "steps": [
+            "Plazo fijo tradicional: $ 1.000.000 a 30 días con TNA del 36 %.",
+            "Interés: $ 1.000.000 × 0,36 × 30 ÷ 365 = $ 29.589,04.",
+            "Total: $ 1.029.589,04, disponible al vencimiento.",
+            "Con inflación del 3 %, en poder de compra son $ 999.601,01."
+          ]
+        },
+        {
+          "type": "practice",
+          "question": {
+            "id": "m11-liquidity",
+            "moduleId": "module-11",
+            "type": "categorize",
+            "prompt": "Clasifica cada opción según cuándo puedes usar el dinero.",
+            "categorize": {
+              "categories": [
+                {
+                  "id": "now",
+                  "label": "En el día"
+                },
+                {
+                  "id": "maturity",
+                  "label": "Al vencimiento"
+                }
+              ],
+              "items": [
+                {
+                  "id": "i1",
+                  "text": "Cuenta remunerada",
+                  "categoryId": "now"
+                },
+                {
+                  "id": "i2",
+                  "text": "Fondo money market",
+                  "categoryId": "now"
+                },
+                {
+                  "id": "i3",
+                  "text": "Plazo fijo tradicional",
+                  "categoryId": "maturity"
+                },
+                {
+                  "id": "i4",
+                  "text": "Plazo fijo UVA",
+                  "categoryId": "maturity"
+                }
+              ]
+            },
+            "feedback": {
+              "correct": "Correcto. Cuenta y fondo money market tienen liquidez en el día; los plazos fijos, al vencimiento.",
+              "incorrect": "La cuenta remunerada y el money market se rescatan en el día; los plazos fijos, al vencimiento."
+            },
+            "sourceIds": [
+              "B-26"
+            ]
+          }
+        },
+        {
+          "type": "takeaway",
+          "body": "Para tu vida: fíjate si tu dinero \"que rinde\" está en una cuenta o en un fondo, y compara las opciones en la herramienta SIM-12."
+        }
+      ],
+      "sourceIds": [
+        "B-01",
+        "B-02",
+        "B-03",
+        "B-14",
+        "B-26"
+      ]
     }
   ]
 }
