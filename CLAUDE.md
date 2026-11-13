@@ -46,6 +46,10 @@
 | D-67 | **El test de perfil de inversor se hace antes de abrir Invertir:** se ofrece desde la tarjeta "qué falta" de Invertir y desde la guía del módulo 13, aunque la sección esté bloqueada. Es educativo y su resultado nunca se traduce en una cartera (1.2). Al abrir la cuenta comitente (5.4) se reutiliza el resultado | Confirmada |
 | D-68 | **Montos sin cortes de línea:** entre `$`, `USD` o `−` y el número va siempre un espacio de no separación, para que el signo nunca quede solo al final de una línea (2.9) | Confirmada |
 | D-69 | **Cómo se presenta el producto:** "Simulador de finanzas personales" (para equipos de trabajo) en lugar de "plataforma de aprendizaje corporativo" en la landing y la pestaña; el carácter B2B se mantiene en el cuerpo del hero, los recorridos y el pie. El cartel fijo de la billetera dice **"Simulador de finanzas personales · dinero ficticio"**: lo de dinero ficticio no se quita nunca (D-154 y D-156 de Claude Code) | Confirmada |
+| D-70 | **Hosting y seguridad del front:** el prototipo se queda en **GitHub Pages**. `docs/security.md` y la sección "Seguridad y privacidad" del sistema de diseño documentan qué se protege hoy (CSP en `<meta>`, sin `dangerouslySetInnerHTML`, dependencias auditadas en la CI, sin datos reales, montos en el navegador) y sus límites (GitHub Pages no permite encabezados HTTP propios). **Mejora futura:** con un dominio propio, Cloudflare (delante de GitHub Pages o con Cloudflare Pages y un archivo `_headers` versionado) para sumar encabezados reales: `frame-ancestors`, HSTS, `X-Content-Type-Options`, `Referrer-Policy` y `Permissions-Policy`, más protección ante bots y denegación de servicio (8.3, 9) | Confirmada |
+| D-71 | **Atribución de Magnific en el pie de la landing:** las fotos de las personas de la demo usan la licencia gratuita, que pide la línea "Designed by Magnific" con enlace junto al recurso o en el pie del sitio. Va en el pie de la landing, discreta, y también en el case study, la documentación y el sistema de diseño (ajusta D-165 de Claude Code) | Confirmada |
+| D-72 | **Barra inferior con el nombre del destino activo:** en celular y tablet, los 5 destinos van con ícono y solo el activo muestra su nombre, sobre el indicador en píldora; los demás conservan el nombre accesible y un tooltip (ajusta D-164) | Confirmada |
+| D-73 | **El tutor de la demo se llama Kevin Giovanni** (homenaje intencional al Lic. Kevin Giampieri, que validó el contenido). Reemplaza a Andrés Molina en todo el producto, los datos y `docs/` | Confirmada |
 | D-29 | **Invertir (cuenta comitente de práctica, SIM-14)** pasa a la **fase A** como nivel 7 (5.0, 5.4); cripto queda en fase B | Confirmada |
 | D-24 | La presentación del taller **no se sube** al repositorio: la base de contenido es su resumen en el Anexo A | Confirmada |
 | D-25 | Los datos regulatorios salen de fuentes oficiales (BCRA, CNV, BYMA, Caja de Valores, argentina.gob.ar, INDEC) y se registran en el Anexo B con fecha de verificación | Confirmada |
@@ -236,7 +240,7 @@ Aprendizaje de Rumbo: la sobriedad (sin degradés, pocas sombras, paleta fría) 
 3. **KPIs con vida:** ícono en contenedor de color, sparkline, etiqueta, número grande y píldora de variación debajo.
 4. **Gráficos protagonistas** con relleno plano y tooltip oscuro (`inverse-surface`).
 5. **Navegación lateral flotante** plegable a íconos, con el ítem activo en píldora `primary`; barra superior flotante con logo, "Ver como", Ayuda y Notificaciones.
-6. **Personas con color de rol:** las cinco personas de la demo tienen foto de perfil con un anillo del color de su rol (fotos de stock de Magnific con licencia gratuita, atribuidas en el case study, la documentación y el sistema de diseño, D-165 de Claude Code); el resto, iniciales sobre el contenedor del rol.
+6. **Personas con color de rol:** las cinco personas de la demo tienen foto de perfil con un anillo del color de su rol (fotos de stock de Magnific con licencia gratuita, atribuidas en el pie de la landing, el case study, la documentación y el sistema de diseño; D-165 de Claude Code y D-71); el resto, iniciales sobre el contenedor del rol.
 7. **Bienvenida guiada** de 3 o 4 pasos al primer ingreso de cada rol, con zona ilustrativa hecha con componentes reales en miniatura, puntos de progreso, "Anterior" y "Continuar" (como el video `original-d624f662` de las referencias).
 8. **Mapa de niveles como línea de tiempo (5.0):** un tramo por nivel, con estado (completado, en curso, bloqueado con qué falta) con ícono y texto, y el nivel actual destacado.
 9. **Anatomía del simulador** (patrón propio, el más importante del producto):
@@ -287,7 +291,7 @@ Con **Motion**, de 150 a 300 ms y curvas de M3:
 ### 2.8 Reglas de uso
 - Si una referencia contradice este documento en **funcionalidad**, manda este documento; en **aspecto visual**, manda la referencia (salvo los degradés).
 - Tokens en `src/styles/tokens.css` y en el tema de Tailwind antes de construir pantallas; página interna `/styleguide`.
-- **Sitio público del sistema de diseño** en `/#/design-system`, como el de Rumbo: principios, arquitectura de tokens, color (con contraste leído en vivo), tipografía, espacio y forma, íconos, movimiento, componentes reales, patrones (con el número de decisión que los originó), accesibilidad y voz y tono. Sumar una sección propia: **"Cómo mostramos el dinero"** (formato de montos, porcentajes, ganancias y pérdidas, supuestos y avisos). `docs/design-system.md` es su versión en Markdown.
+- **Sitio público del sistema de diseño** en `/#/design-system`, como el de Rumbo: principios, arquitectura de tokens, color (con contraste leído en vivo), tipografía, espacio y forma, íconos, movimiento, componentes reales, patrones (con el número de decisión que los originó), accesibilidad y voz y tono. Sumar dos secciones propias: **"Cómo mostramos el dinero"** (formato de montos, porcentajes, ganancias y pérdidas, supuestos y avisos) y **"Seguridad y privacidad"** (D-70): las capas de la seguridad simulada como patrones de diseño (cartel "dinero ficticio", marca propia, sin datos reales, montos solo en el navegador, umbral de 5, lo que ve cada rol), qué protege hoy el front en GitHub Pages y qué se sumaría en producción, con enlace a `docs/security.md`. **Créditos:** las fotos de stock y cualquier otro recurso con licencia que pida atribución se acreditan también aquí, además del pie (D-71). `docs/design-system.md` es su versión en Markdown.
 
 ### 2.9 Voz y tono
 
@@ -734,8 +738,8 @@ Las misiones se habilitan desde el mapa de niveles (P9) y desde la sección de l
 - Accesibilidad: cambios de saldo anunciados con región en vivo, todo operable con teclado, alternativa al escaneo de QR, sin límite de tiempo y con "reducir animaciones".
 - **Navegación por tamaño de pantalla** (clases de ventana de Material 3, verificadas en los 6 anchos de 2.7). Hay una sola navegación, la de la billetera; los roles de tutor, admin y decisor conservan su propio layout:
   - **Destinos principales (los mismos en todos los tamaños):** Inicio · Pagar (transferir, QR, servicios y "Tarjeta y préstamos", D-56) · Ahorrar (presupuesto, apartados y rendir) · Invertir · Aprender (mapa de niveles, logros, guías, desafíos y herramientas). Perfil, seguridad y comprobantes van en el avatar de la barra superior. Los destinos bloqueados se muestran con candado y abren su tarjeta de "qué falta".
-  - **Celular (menos de 600 px; 320 y 375):** la app a pantalla completa. Barra superior con el nombre de la sección, Fuerte y avatar. **Barra de navegación inferior** con los 5 destinos, solo con íconos (el nombre queda para lectores de pantalla, D-164). La misión activa es una tarjeta fija arriba del contenido que se expande como hoja inferior.
-  - **Tablet (600 a 1199 px; 768 y 1024):** igual que en celular, **barra de navegación inferior** con los 5 destinos solo con íconos (D-164 de Claude Code, pedido de Lourdes). La misión activa es una tarjeta compacta arriba del contenido.
+  - **Celular (menos de 600 px; 320 y 375):** la app a pantalla completa. Barra superior con el nombre de la sección, Fuerte y avatar. **Barra de navegación inferior** con los 5 destinos: íconos, y el nombre visible **solo en el destino activo** (D-72, ajusta D-164); los demás nombres quedan para lectores de pantalla y en un tooltip. La misión activa es una tarjeta fija arriba del contenido que se expande como hoja inferior.
+  - **Tablet (600 a 1199 px; 768 y 1024):** igual que en celular, **barra de navegación inferior** con los 5 destinos, íconos y el nombre visible solo en el destino activo (D-164 de Claude Code, pedido de Lourdes; D-72). La misión activa es una tarjeta compacta arriba del contenido.
   - **Escritorio (1200 px o más; 1280 y 1440):** **menú lateral** con los 5 destinos y sus subsecciones desplegables (por ejemplo, Pagar > Transferir, QR, Servicios, Tarjeta y préstamos; Ahorrar > Presupuesto, Apartados, Rendir), más el indicador de nivel. Layout bento en tres zonas: saldo y acciones rápidas, movimientos o sección activa, y panel fijo de la misión con Fuerte. Ancho máximo de lectura de 1200 px, centrado.
   - En todos los tamaños: el destino activo se marca con el indicador de Material 3 y `aria-current`; el foco vuelve al título de la sección al cambiar de destino; objetivos táctiles de 48 × 48 px; las hojas inferiores se cierran con Escape y devuelven el foco.
 
@@ -1012,6 +1016,7 @@ Identidad con SSO (OIDC o SAML) y MFA del proveedor; sesiones en cookies `HttpOn
 ---
 
 ## 9. Fuera del alcance y líneas futuras
+- **Encabezados de seguridad por HTTP con Cloudflare** y dominio propio (D-70): hoy no se puede en GitHub Pages.
 - **Datos en vivo** (tasas, UVA, inflación) desde fuentes oficiales: requiere backend o un proceso de actualización; hoy son escenarios de ejemplo.
 - Recomendaciones personalizadas de productos, conexión con cuentas bancarias o billeteras, y cualquier operación real: **fuera por decisión de diseño**, no solo por alcance.
 - Integración real con LMS corporativos (SCORM, xAPI, cmi5) y con Teams o Slack.
@@ -1103,7 +1108,7 @@ En `docs/`, en Markdown, con diagramas Mermaid y citas en **APA 7**. Índice en 
 - **14.10 `formulas.md`:** cada fórmula con su explicación, supuestos, simplificaciones y casos de prueba calculados a mano.
 - **14.11 `issues.md`, `decisions.md`, `progress.md` y `questions.md`** (dudas de contenido y datos pendientes de verificar, incluidos los ⚠ de los Anexos B y C).
 - **14.13 `wallet-engine.md`:** reglas de la economía simulada (cobro del sueldo, débitos, inflación sobre precios, cálculo de "meses de gastos" y origen de las deudas de la simulación).
-- **14.12 `security.md`.**
+- **14.12 `security.md`** (con las capas actuales en GitHub Pages, sus límites y la mejora futura con Cloudflare, D-70).
 
 ---
 
