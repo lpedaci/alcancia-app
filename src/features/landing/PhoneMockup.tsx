@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from 'motion/react';
 import type { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { MoneyText } from '@/components/money/MoneyText';
+import { Logo } from '@/components/layout/Logo';
 import { Avatar } from '@/components/ui/Avatar';
 import { Icon, type IconName } from '@/components/ui/Icon';
 import { Fuerte } from '@/features/companion/Fuerte';
@@ -62,40 +63,54 @@ const NAV: { key: 'home' | 'pay' | 'save' | 'invest' | 'learn'; icon: IconName }
   { key: 'learn', icon: 'school' },
 ];
 
+/** Bottom navigation of phones (D-72): icons only, and the name only under the active destination. */
 export function BottomNav({ active }: { active: 'home' | 'learn' }) {
   const { t } = useTranslation();
   return (
-    <div className="grid shrink-0 grid-cols-5 border-t border-outline-variant bg-surface-container-lowest px-1 pt-1.5 pb-3">
+    <div className="grid shrink-0 grid-cols-5 border-t border-outline-variant bg-surface-container-lowest px-1 pt-2 pb-3">
       {NAV.map(({ key, icon }) => (
-        <span key={key} className={cn('flex min-w-0 flex-col items-center gap-0.5 text-label-small', key === active ? 'text-on-surface' : 'text-on-surface-variant')}>
-          <span className={cn('relative flex h-6 w-10 items-center justify-center rounded-full', key === active && 'bg-primary-container text-on-primary-container')}>
-            <Icon name={icon} size={18} filled={key === active} />
+        <span key={key} className={cn('flex min-w-0 flex-col items-center gap-0.5', key === active ? 'text-on-surface' : 'text-on-surface-variant')}>
+          <span className={cn('relative flex h-7 w-11 items-center justify-center rounded-full', key === active && 'bg-secondary-container text-on-secondary-container')}>
+            <Icon name={icon} size={20} filled={key === active} />
             {key === 'invest' && <Icon name="lock" size={16} className="absolute -right-0.5 -bottom-0.5 rounded-full bg-surface-container-lowest" />}
           </span>
-          <span className="max-w-full truncate">{t(`wallet.nav.${key}`)}</span>
+          {key === active && <span className="max-w-full truncate text-label-small">{t(`wallet.nav.${key}`)}</span>}
         </span>
       ))}
     </div>
   );
 }
 
-/** Practice banner and top bar of the wallet on phones (5.3): Fuerte, the section, help, notifications, avatar. */
-export function AppTopBar({ section }: { section: string }) {
+/**
+ * Top bar of the wallet on phones (D-169): the logo with the "Dinero ficticio" chip on the same row,
+ * "Ver como", notifications and the avatar. The section is named by the page, not by the bar.
+ */
+export function AppTopBar({ person = 'mariana' }: { person?: 'mariana' | 'diego'; section?: string }) {
   const { t } = useTranslation();
   return (
-    <>
-      <p className="flex shrink-0 items-center justify-center gap-1 bg-inverse-surface px-3 py-1 text-label-small text-inverse-on-surface">
+    <div className="flex h-12 shrink-0 items-center gap-1.5 border-b border-outline-variant bg-surface-container-lowest px-3">
+      <Logo compact />
+      <span className="inline-flex items-center gap-1 rounded-full border border-outline-variant bg-surface-container px-2 py-0.5 text-label-small whitespace-nowrap text-on-surface-variant">
         <Icon name="info" size={16} />
-        {t('wallet.practiceBanner')}
-      </p>
-      <div className="flex h-12 shrink-0 items-center gap-2 border-b border-outline-variant bg-surface-container-lowest px-3">
-        <Fuerte state="neutral" lights={LIGHTS} size={1.75} />
-        <span className="min-w-0 flex-1 truncate text-title-small text-on-surface">{section}</span>
-        <Icon name="help" size={20} className="text-on-surface-variant" />
-        <Icon name="notifications" size={20} className="text-on-surface-variant" />
-        <Avatar name={MARIANA_NAME} role="participant" personId="p-mariana" size="sm" />
-      </div>
-    </>
+        {t('wallet.practiceBannerShort')}
+      </span>
+      <span className="flex-1" />
+      <span className="flex size-7 items-center justify-center rounded-sm border border-outline text-primary">
+        <Icon name="swap_horiz" size={16} />
+      </span>
+      <Icon name="notifications" size={20} className="text-on-surface-variant" />
+      <Avatar name={person === 'diego' ? 'Diego Suárez' : MARIANA_NAME} role="participant" personId={`p-${person}`} size="sm" />
+    </div>
+  );
+}
+
+/** Fuerte floating over the bottom navigation (D-160, D-164), as in the wallet. */
+function FloatingFuerte() {
+  return (
+    <span aria-hidden className="pointer-events-none absolute right-2 bottom-16 z-10">
+      <Fuerte state="greeting" lights={LIGHTS} size={2.75} />
+      <span className="absolute top-1 right-1 size-2.5 rounded-full border-2 border-surface-container-lowest bg-primary" />
+    </span>
   );
 }
 
@@ -105,59 +120,51 @@ const card = 'flex flex-col gap-2 rounded-lg border border-outline-variant bg-su
 function HomeScreen() {
   const { t } = useTranslation();
   const power = purchasingPowerToday(MARIANA);
-  const actions: { key: 'transfer' | 'qr' | 'bills' | 'pockets'; icon: IconName }[] = [
-    { key: 'transfer', icon: 'send_money' },
-    { key: 'qr', icon: 'qr_code_scanner' },
-    { key: 'bills', icon: 'receipt_long' },
-    { key: 'pockets', icon: 'savings' },
-  ];
+  const chip = 'inline-flex items-center gap-1 rounded-full border border-outline-variant bg-surface-container-lowest px-2 py-0.5 text-label-small';
   return (
     <>
-      <AppTopBar section={t('wallet.nav.home')} />
-      <div className="flex min-h-0 flex-1 flex-col gap-2.5 overflow-hidden px-3 py-3">
-        {/* Active mission: fixed card above the content on phones */}
+      <AppTopBar />
+      <div className="relative flex min-h-0 flex-1 flex-col gap-2.5 overflow-hidden px-3 py-3">
+        {/* Active mission: compact card above the content */}
         <div className="flex items-center gap-2 rounded-lg border border-primary bg-surface-container-lowest p-2.5">
           <span className="flex size-8 shrink-0 items-center justify-center rounded-md bg-primary-container text-on-primary-container">
             <Icon name="flag" size={16} />
           </span>
           <span className="min-w-0 flex-1">
-            <span className="block truncate text-label-small text-primary">
-              {t('wallet.home.mission.kickerMinutes', { minutes: 5 })}
-            </span>
+            <span className="block truncate text-label-small text-primary">{t('wallet.home.mission.kickerMinutes', { minutes: 5 })}</span>
             <span className="block truncate text-title-small text-on-surface">{ACTIVE_MISSION}</span>
           </span>
-          <Icon name="keyboard_arrow_up" size={20} className="text-on-surface-variant" />
+          <Icon name="arrow_forward" size={18} className="text-primary" />
         </div>
-        {/* Greeting */}
-        <div className="flex flex-col gap-1.5 rounded-lg bg-primary-container p-3 text-on-primary-container">
-          <p className="text-label-small">
-            {formatDate(walletDate(MARIANA.day))} · {t('wallet.home.day', { day: MARIANA.day })}
-          </p>
+        {/* Greeting with white context chips and the controls of time in one even row (D-162, D-169) */}
+        <div className="flex flex-col gap-2 rounded-lg bg-primary-container p-3 text-on-primary-container">
+          <span className="flex flex-wrap gap-1">
+            <span className={cn(chip, 'text-on-surface-variant')}>
+              <Icon name="calendar_month" size={16} className="text-primary" />
+              {formatDate(walletDate(MARIANA.day))}
+            </span>
+          </span>
           <p className="text-title-large">
             {t('wallet.home.hello')} <span className="text-primary">Mariana</span>
           </p>
-          <p className="text-body-small">{t('wallet.home.fuerteInvest', { months: '2,3' })}</p>
-          <div className="flex flex-wrap gap-1.5 pt-0.5">
-            <span className="rounded-full bg-surface-container-lowest px-2 py-0.5 text-label-small text-on-surface">
+          <span className="flex flex-wrap gap-1">
+            <span className={cn(chip, 'text-on-surface')}>
+              <Icon name="route" size={16} className="text-primary" />
               {t('wallet.home.chipLevel', { level: 6, section: t('wallet.sections.level-6') })}
             </span>
-            <span className="rounded-full bg-tertiary-container px-2 py-0.5 text-label-small text-on-tertiary-container">{t('wallet.home.chipNext', { section: t('wallet.sections.level-7') })}</span>
-          </div>
-          <div className="flex flex-wrap gap-1.5 pt-1">
-            <span className="inline-flex items-center gap-1 rounded-sm bg-secondary-container px-2 py-1 text-label-small text-on-secondary-container">
-              <Icon name="skip_next" size={16} />
-              {t('wallet.home.advance.day')}
-            </span>
-            <span className="inline-flex items-center gap-1 rounded-sm border border-outline px-2 py-1 text-label-small text-primary">
-              <Icon name="fast_forward" size={16} />
-              {t('wallet.home.advance.week')}
-            </span>
-          </div>
+          </span>
+          <span className="grid grid-cols-3 gap-0.5 rounded-md bg-surface-container-lowest p-0.5">
+            {(['day', 'week', 'month'] as const).map((k) => (
+              <span key={k} className="truncate rounded-sm px-1 py-1 text-center text-label-small text-primary">
+                {t(`wallet.home.time.${k}`)}
+              </span>
+            ))}
+          </span>
         </div>
-        {/* Balance */}
+        {/* Balance with alias and CVU stacked (D-170) */}
         <div className={card}>
           <div className="flex items-center justify-between gap-2">
-            <p className="text-label-medium text-on-surface-variant">{t('wallet.home.balance.title')}</p>
+            <p className="text-label-medium text-on-surface">{t('wallet.home.balance.title')}</p>
             <span className="flex size-7 items-center justify-center rounded-md bg-primary-container text-on-primary-container">
               <Icon name="account_balance_wallet" size={16} />
             </span>
@@ -174,22 +181,12 @@ function HomeScreen() {
               <MoneyText value={power.toFixed(2)} />
             </span>
           </p>
+          <span className="flex flex-col gap-0.5 border-t border-outline-variant pt-2">
+            <span className="text-label-small text-on-surface-variant">{t('wallet.home.balance.alias')}</span>
+            <span className="text-label-medium text-on-surface">alcancia.practica.mariana</span>
+          </span>
         </div>
-        {/* Quick actions */}
-        <div className={card}>
-          <p className="text-label-medium text-on-surface-variant">{t('wallet.home.actions.title')}</p>
-          {/* Two per row, as the wallet's container query lays them out at 320 px */}
-          <div className="grid grid-cols-2 gap-2">
-            {actions.map(({ key, icon }) => (
-              <span key={key} className="flex min-w-0 flex-col items-center gap-1 text-center text-label-small text-on-surface">
-                <span className="flex size-9 items-center justify-center rounded-full bg-secondary-container text-on-secondary-container">
-                  <Icon name={icon} size={18} />
-                </span>
-                {t(`wallet.home.actions.${key}`)}
-              </span>
-            ))}
-          </div>
-        </div>
+        <FloatingFuerte />
       </div>
       <BottomNav active="home" />
     </>
@@ -201,8 +198,8 @@ function LevelsScreen() {
   const names = t('landing.phone.levels', { returnObjects: true }) as string[];
   return (
     <>
-      <AppTopBar section={t('wallet.nav.learn')} />
-      <div className="flex min-h-0 flex-1 flex-col gap-3 overflow-hidden px-3.5 py-3">
+      <AppTopBar />
+      <div className="relative flex min-h-0 flex-1 flex-col gap-3 overflow-hidden px-3.5 py-3">
         <div>
           <p className="text-title-medium text-on-surface">{t('landing.phone.levelsTitle')}</p>
           <p className="text-label-small text-on-surface-variant">{t('landing.phone.levelsSubtitle')}</p>
@@ -240,6 +237,7 @@ function LevelsScreen() {
             <span className="block h-1.5 w-2/3 rounded-full bg-tertiary" />
           </span>
         </div>
+        <FloatingFuerte />
       </div>
       <BottomNav active="learn" />
     </>
@@ -256,8 +254,8 @@ function ToolScreen() {
   const line = points.map((v, m) => `${x(m).toFixed(1)},${y(v).toFixed(1)}`).join(' ');
   return (
     <>
-      <AppTopBar section={t('wallet.nav.learn')} />
-      <div className="flex min-h-0 flex-1 flex-col gap-3 overflow-hidden px-3.5 py-3">
+      <AppTopBar />
+      <div className="relative flex min-h-0 flex-1 flex-col gap-3 overflow-hidden px-3.5 py-3">
         <p className="text-title-medium text-on-surface">{t('landing.phone.toolTitle')}</p>
         <div className="flex gap-1">
           {['1,5 %', '3 %', '6 %'].map((s, i) => (
@@ -290,6 +288,7 @@ function ToolScreen() {
         <p className="mt-auto flex items-center gap-1 text-label-small text-on-surface-variant">
           <Icon name="info" size={16} /> {t('landing.phone.toolScenario')}: 3 % · {t('landing.phone.toolExample')}
         </p>
+        <FloatingFuerte />
       </div>
       <BottomNav active="learn" />
     </>

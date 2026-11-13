@@ -281,7 +281,7 @@ export function LandingPage() {
               <figure className="mx-auto flex w-80 max-w-full flex-col items-center gap-3">
                 <PhoneFrame label={t('landing.anywhere.phoneLabel')}>
                   <StatusBar />
-                  <AppTopBar section={t('wallet.nav.learn')} />
+                  <AppTopBar person="diego" />
                   <div className="flex min-h-0 flex-1 flex-col gap-3 overflow-hidden px-3.5 py-3">
                     <GuidePreview />
                     <WorkedExample />
