@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
+import { MoneyInput } from '@/components/money/MoneyInput';
 import { MoneyText } from '@/components/money/MoneyText';
 import { Avatar } from '@/components/ui/Avatar';
 import { Button } from '@/components/ui/Button';
@@ -12,9 +13,9 @@ import { toast } from '@/components/ui/toast-store';
 import { findPerson } from '@/features/auth/auth-service';
 import { AccountData } from '@/features/onboarding/AccountData';
 import { WalletShell } from '@/features/wallet/WalletShell';
-import { paidToday, setDailyLimit, setTwoFactor } from '@/features/wallet/engine/engine';
+import { MIN_DAILY_LIMIT, paidToday, setDailyLimit, setTwoFactor } from '@/features/wallet/engine/engine';
 import { walletDate } from '@/lib/dates';
-import { formatMoney } from '@/lib/money';
+import { formatMoney, parseDecimalInput } from '@/lib/money';
 import { type FuertePresence, readLocal, writeLocal } from '@/store/local-store';
 import { useCurrentUser } from '@/store/session-store';
 import { clearWallet, useWallet } from '@/store/wallet-store';
@@ -48,6 +49,20 @@ export function ProfilePage() {
   const [presence, setPresence] = useState<FuertePresence>(() => readLocal(personId).fuertePresence ?? 'chatty');
   const [confirmReset, setConfirmReset] = useState(false);
   const security = wallet.securitySettings;
+  // Own limit, at least $ 1.000 (D-222); the error appears only after trying to save
+  const [ownLimit, setOwnLimit] = useState('');
+  const [limitError, setLimitError] = useState<string | undefined>();
+  const saveOwnLimit = () => {
+    const parsed = parseDecimalInput(ownLimit);
+    if (!parsed || Number(parsed) < Number(MIN_DAILY_LIMIT)) {
+      setLimitError(t('profile.security.limitTooLow', { min: formatMoney(MIN_DAILY_LIMIT, { decimals: 0 }) }));
+      return;
+    }
+    setWallet((w) => setDailyLimit(w, parsed));
+    setLimitError(undefined);
+    setOwnLimit('');
+    toast.success(t('profile.security.limitSaved'));
+  };
   const card = 'flex flex-col gap-4 rounded-xl border border-outline-variant bg-surface-container-lowest p-(--space-card-padding)';
 
   const changePresence = (value: FuertePresence) => {
@@ -122,6 +137,22 @@ export function ProfilePage() {
               }}
               options={LIMITS.map((value) => ({ value, label: t('profile.security.limitOption', { amount: formatMoney(value, { decimals: 0 }) }) }))}
             />
+            <div className="flex flex-wrap items-start gap-3">
+              <MoneyInput
+                label={t('profile.security.limitOwn')}
+                helperText={t('profile.security.limitOwnHelp', { min: formatMoney(MIN_DAILY_LIMIT, { decimals: 0 }) })}
+                value={ownLimit}
+                onChange={(e) => {
+                  setOwnLimit(e.target.value);
+                  if (limitError) setLimitError(undefined);
+                }}
+                error={limitError}
+                className="min-w-0 flex-1 basis-48"
+              />
+              <Button variant="tonal" className="mt-7 shrink-0" onClick={saveOwnLimit}>
+                {t('profile.security.limitSave')}
+              </Button>
+            </div>
             {security.dailyLimit ? (
               <div className="flex flex-col gap-1.5">
                 <ProgressBar

@@ -579,8 +579,12 @@ export function raiseExpense(state: WalletState, key: ExpenseKey, amount: string
   return next;
 }
 
-/** Daily transfer limit of practice (mission "Configura tu seguridad", 5.3 Seguridad). */
+/** The lowest daily limit the person can set (D-222). */
+export const MIN_DAILY_LIMIT = '1000.00';
+
+/** Daily transfer limit of practice (mission "Configura tu seguridad", 5.3 Seguridad); at least $ 1.000 (D-222). */
 export function setDailyLimit(state: WalletState, amount: string | undefined): WalletState {
+  if (amount !== undefined && roundCents(amount).lt(MIN_DAILY_LIMIT)) throw new WalletError('limit_too_low');
   const next = clone(state);
   next.securitySettings = { ...next.securitySettings, dailyLimit: amount === undefined ? undefined : toMoneyString(roundCents(amount)) };
   return next;

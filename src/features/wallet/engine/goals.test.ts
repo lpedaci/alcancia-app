@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { D } from '@/lib/finance';
-import { advanceDays, createPocket, createWallet, deletePocket, moveToPocket, nextGoalPocketId, setPocketGoal, WalletError } from './engine';
+import { setDailyLimit, advanceDays, createPocket, createWallet, deletePocket, moveToPocket, nextGoalPocketId, setPocketGoal, WalletError } from './engine';
 
 describe('new goal pockets', () => {
   it('gives every new goal its own id, so five goals are five pockets', () => {
@@ -45,5 +45,12 @@ describe('deleting a goal (D-220)', () => {
     const s = createPocket(createPocket(createWallet('p'), { id: 'pocket-savings', name: 'Ahorro' }), { id: 'fund', name: 'Fondo', isEmergencyFund: true });
     expect(() => deletePocket(s, 'pocket-savings')).toThrow(WalletError);
     expect(() => deletePocket(s, 'fund')).toThrow(WalletError);
+  });
+});
+
+describe('daily limit (D-222)', () => {
+  it('accepts $ 1.000 or more and refuses less', () => {
+    expect(setDailyLimit(createWallet('p'), '1000').securitySettings.dailyLimit).toBe('1000.00');
+    expect(() => setDailyLimit(createWallet('p'), '999.99')).toThrow(WalletError);
   });
 });

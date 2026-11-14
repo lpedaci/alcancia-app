@@ -1120,7 +1120,11 @@
       "limitUsedLabel": "Uso del límite de hoy",
       "limitUsed": "Hoy usaste {{used}} de {{limit}}.",
       "limitReset": "El contador vuelve a cero cada día.",
-      "limitNone": "Sin límite: elige uno para proteger tu cuenta."
+      "limitNone": "Sin límite: elige uno para proteger tu cuenta.",
+      "limitOwn": "Otro monto",
+      "limitOwnHelp": "Mínimo {{min}}, por ejemplo: 50.000",
+      "limitSave": "Guardar límite",
+      "limitTooLow": "El límite tiene que ser de al menos {{min}}, por ejemplo: 50.000."
     },
     "fuerte": {
       "title": "Fuerte",
