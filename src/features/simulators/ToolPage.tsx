@@ -5,6 +5,7 @@ import { useCurrentUser } from '@/store/session-store';
 import { useWallet } from '@/store/wallet-store';
 import { WalletShell } from '@/features/wallet/WalletShell';
 import { InflationSimulator } from './InflationSimulator';
+import { fuerteLine } from '@/features/companion/fuerte-lines';
 
 /**
  * P13 · SIM-3 inside the wallet (Aprender > Herramientas). The page h1 comes first, then the
@@ -18,7 +19,7 @@ export function InflationToolPage() {
   // F4: inside the wallet the amount starts with the last practice salary (D-142).
   const salary = [...wallet.movements].reverse().find((m) => m.type === 'income')?.amount.replace('-', '') ?? wallet.salary;
   return (
-    <WalletShell section={t('wallet.nav.learn')} fuerte={{ state: 'neutral', message: t('sim3.fuerte') }}>
+    <WalletShell section={t('wallet.nav.learn')} fuerte={{ state: 'neutral', message: fuerteLine('sim3.fuerte') }}>
       <div className="flex flex-col gap-4">
         <nav aria-label={t('wallet.breadcrumbs')} className="text-body-small text-on-surface-variant">
           <ol className="flex flex-wrap items-center gap-1">

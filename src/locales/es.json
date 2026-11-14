@@ -338,7 +338,6 @@
   "sim3": {
     "title": "Inflación y poder de compra",
     "intro": "Mira cuánto pierde tu dinero si lo guardas sin moverlo, con un escenario de inflación de ejemplo.",
-    "fuerte": "Prueba con tu sueldo de práctica. Después compáralo con otro escenario.",
     "dataLabel": "Datos del escenario",
     "amount": {
       "label": "Monto",
@@ -403,7 +402,7 @@
     "newTab": "(se abre en una pestaña nueva)",
     "compare": {
       "save": "Guardar escenario",
-      "help": "Guarda hasta dos escenarios para compararlos lado a lado. Quedan solo en esta pantalla.",
+      "help": "Guarda hasta dos escenarios para compararlos lado a lado. Quedan solo en este navegador.",
       "listLabel": "Escenarios guardados",
       "name": "Escenario {{n}}",
       "remove": "Quitar escenario {{n}}",
@@ -449,7 +448,6 @@
       "date": "{{date}}",
       "day": "día {{day}} de la billetera",
       "hello": "Hola,",
-      "fuerteLine": "Tu fondo de emergencia ya cubre 2 meses. Falta uno para desbloquear Invertir.",
       "context": "Tu progreso",
       "chipLevel": "Nivel {{level}} · {{section}}",
       "chipNext": "Próximo desbloqueo: {{section}}",
@@ -491,7 +489,6 @@
         "progress": "Avance de la misión",
         "stepOf": "Paso {{step}} de {{steps}}",
         "continue": "Seguir la misión",
-        "fuerte": "Ojo con esto: \"cuenta remunerada\" y \"fondo\" no son lo mismo. Mira qué protección tiene cada una.",
         "kickerMinutes": "Misión activa · {{minutes}} min",
         "start": "Empezar la misión",
         "none": "No tienes misiones pendientes en las secciones abiertas."
@@ -500,10 +497,6 @@
         "title": "¿Por qué importa?",
         "body": "En una billetera, la mayor parte del dinero \"que rinde\" suele estar en un fondo money market, no en la cuenta: no tiene la garantía de los depósitos."
       },
-      "fuerteInvest": "Tu fondo de emergencia ya cubre {{months}} meses. Con 3, y el test de perfil, se abre Invertir.",
-      "fuerteBudget": "Categorizaste {{current}} de 10 movimientos. Con 10 y el desafío del nivel 2, se abre Presupuesto.",
-      "fuerteGeneric": "Tu próximo desbloqueo es {{section}}. Mira lo que falta en la tarjeta de abajo.",
-      "fuerteAllOpen": "Abriste todas las secciones. Ahora, a practicar sin apuro.",
       "time": {
         "label": "Avanzar el tiempo",
         "day": "Un día",
@@ -614,7 +607,6 @@
       "title": "Test de perfil de inversor",
       "intro": "Los brókers lo piden antes de abrir una cuenta para ofrecerte productos acordes a tu horizonte y a cuánto riesgo toleras. Hacerlo acá te muestra cómo es y para qué sirve.",
       "notAdvice": "Contenido educativo. Tu resultado no es una recomendación ni se traduce en una cartera: solo te ayuda a entender qué preguntas te van a hacer.",
-      "fuerte": "Este test no tiene respuestas correctas. Contesta lo que harías de verdad, no lo que suena mejor.",
       "required": "Elige una opción.",
       "submit": "Ver mi perfil",
       "again": "Hacer el test de nuevo",
@@ -664,8 +656,6 @@
       }
     },
     "mission": {
-      "fuerte": "Una misión es práctica con red: si te equivocas, te explico qué pasó.",
-      "fuerteDone": "Guardado. Misión completa.",
       "lockedTitle": "La misión \"{{title}}\" está bloqueada",
       "kicker": "Misión · {{minutes}} min",
       "objective": "Objetivo:",
@@ -708,7 +698,8 @@
       "classifyTitle": "Clasifica",
       "classifyHelp": "Elige una categoría para este mensaje."
     },
-    "practiceBannerShort": "Dinero ficticio"
+    "practiceBannerShort": "Dinero ficticio",
+    "printBanner": "Alcancía · Simulador de finanzas personales · dinero ficticio · Contenido educativo, no es asesoramiento financiero"
   },
   "roles": {
     "participant": "Participante",
@@ -949,27 +940,18 @@
     "back": "Anterior",
     "introProgress": "Bienvenida",
     "slideOf": "Paso {{n}} de {{total}}",
-    "fuerte": {
-      "overview": "Hola, {{name}}. Acá está tu punto de partida y tu ruta.",
-      "account": "Esta cuenta es de práctica: equivocarte sale gratis.",
-      "quiz": "No hay respuestas malas en los hábitos. En el resto, te explico al final.",
-      "result": "Guardado. Ya sé por dónde empezar contigo."
-    },
     "intro": {
       "wallet": {
         "title": "Hola, {{name}}. Te damos la bienvenida a Alcancía",
-        "body": "Es una billetera de práctica: cobras, pagas, ahorras e inviertes con dinero ficticio, y aprendes mientras lo haces.",
-        "fuerte": "Hola, {{name}}. Soy Fuerte. Acá manejas dinero de práctica, así que equivocarte sale gratis."
+        "body": "Es una billetera de práctica: cobras, pagas, ahorras e inviertes con dinero ficticio, y aprendes mientras lo haces."
       },
       "levels": {
         "title": "La cuenta se abre por niveles",
-        "body": "Empiezas con lo básico. Cada sección se desbloquea al cumplir metas y desafíos, y si ya sabes un tema, puedes demostrarlo con \"Ya sé esto\" y avanzar.",
-        "fuerte": "Primero lo que te protege, después lo que te hace crecer."
+        "body": "Empiezas con lo básico. Cada sección se desbloquea al cumplir metas y desafíos, y si ya sabes un tema, puedes demostrarlo con \"Ya sé esto\" y avanzar."
       },
       "privacy": {
         "title": "Tus datos son tuyos",
-        "body": "Tu empresa ve tu avance en los módulos, nunca tus montos ni tus respuestas sobre hábitos. Lo que cargas en la billetera queda en este navegador.",
-        "fuerte": "Lo que guardas acá, lo ves solo tú."
+        "body": "Tu empresa ve tu avance en los módulos, nunca tus montos ni tus respuestas sobre hábitos. Lo que cargas en la billetera queda en este navegador."
       }
     },
     "account": {
@@ -1053,7 +1035,6 @@
   },
   "profile": {
     "section": "Perfil",
-    "fuerteLine": "Acá eliges cómo te acompaño y cuidas tu cuenta.",
     "account": "Tu cuenta de práctica",
     "accountNote": "Todos estos datos son de ejemplo. Alcancía nunca pide datos personales reales.",
     "conocerte": "Ver Conocerte y tu ruta",
@@ -1117,11 +1098,10 @@
       "matchHelp": "Elige la definición que corresponde.",
       "categoryHelp": "Elige la categoría.",
       "choose": "Elegir…",
-      "check": "Comprobar"
+      "check": "Comprobar",
+      "simOpen": "Abrir el simulador: {{name}}"
     },
     "guide": {
-      "fuerte": "Una guía corta: si algo no queda claro, vuelve atrás cuando quieras.",
-      "fuerteDone": "Guardado. Una guía menos.",
       "locked": "La guía \"{{title}}\" está bloqueada",
       "kicker": "Guía · módulo {{module}} · {{minutes}} min",
       "progress": "Avance de la guía",
@@ -1150,9 +1130,6 @@
       "openTool": "Abrir la herramienta \"{{name}}\""
     },
     "challenge": {
-      "fuerte": "Sin apuro: no hay límite de tiempo.",
-      "fuertePassed": "Guardado. Desafío aprobado.",
-      "fuerteRetry": "Pasó lo que pasa cuando algo es nuevo. Revisa las explicaciones y vuelve a intentarlo.",
       "locked": "{{title}} está bloqueado",
       "kicker": "Desafío de nivel",
       "masteryKicker": "Ya sé esto",
@@ -1195,7 +1172,6 @@
       "retryBody_other": "Se aprueba con {{score}}. Te quedan {{count}} intentos y cuenta el mejor."
     },
     "map": {
-      "fuerte": "Acá ves todo tu camino. Lo bloqueado se ve, y te dice qué falta.",
       "title": "Aprender",
       "intro": "Tu mapa de niveles: qué completaste, en qué estás y qué falta para abrir lo que sigue. Nada se pierde: puedes volver a cualquier guía o misión.",
       "levels": "Mapa de niveles",
@@ -1255,7 +1231,6 @@
       "page": {
         "title": "Fuentes",
         "intro": "De dónde sale cada contenido de Alcancía: el contenido validado del taller, las fuentes oficiales con su fecha de verificación y los cálculos verificados a mano.",
-        "fuerte": "Todo lo que te explico tiene de dónde salir. Acá lo puedes revisar.",
         "baseTitle": "Contenido base",
         "workshop": "Taller \"Del aula al primer trabajo\", de Lourdes Pedaci",
         "workshopBody": "Sitio del taller con las secciones \"El recibo de sueldo\" y \"Finanzas personales\", sus calculadoras y el escape room \"Tu primer sueldo\".",
@@ -1272,6 +1247,50 @@
         "officialBody": "Normas y datos del BCRA, la CNV, BYMA, Caja de Valores, argentina.gob.ar e INDEC. Cada una con la fecha en que se verificó."
       },
       "allShort": "Ver todas"
+    },
+    "weekly": {
+      "title": "Desafío semanal",
+      "intro": "Tu tutor propone una práctica corta para tu vida real. Cuéntale cómo te fue: solo ve tu respuesta, nunca tus montos.",
+      "chip": "Desafío semanal de tu tutor",
+      "empty": "Todavía no hay desafíos semanales para tu cohorte. Cuando tu tutor asigne uno, aparece acá.",
+      "due": "Vence el {{date}}",
+      "overdue": "Venció el {{date}}: igual puedes contar cómo te fue",
+      "question": "¿Lo cumpliste?",
+      "results": {
+        "done": "Sí",
+        "partial": "En parte",
+        "not_done": "No"
+      },
+      "resultError": "Elige una opción: sí, en parte o no.",
+      "reflection": "Reflexión",
+      "reflectionHelp": "Qué aprendiste o qué te costó. Queda solo en este navegador: tu tutor no la ve. Por ejemplo: anotar los gastos chicos me mostró cuánto gasto en café.",
+      "send": "Enviar autoinforme",
+      "sent": "Autoinforme enviado",
+      "yourReport": "Tu respuesta: {{result}}",
+      "onlyYou": "Tu reflexión, solo la ves tú",
+      "change": "Cambiar respuesta",
+      "past": "Desafíos anteriores",
+      "notReported": "Sin responder"
+    },
+    "ask": {
+      "title": "Tus consultas",
+      "intro": "Pregúntale a tu tutor sobre los módulos. Responde en los días siguientes.",
+      "empty": "Todavía no hiciste ninguna consulta.",
+      "open": "Hacer una consulta",
+      "module": "Módulo",
+      "modulePlaceholder": "Elige un módulo",
+      "moduleHelp": "El módulo sobre el que quieres preguntar.",
+      "moduleError": "Elige el módulo de tu consulta.",
+      "text": "Tu consulta",
+      "textHelp": "Qué no te quedó claro, con al menos 10 caracteres. Por ejemplo: ¿por qué el CFT es más alto que la TNA?",
+      "textError": "Escribe tu consulta, con al menos 10 caracteres.",
+      "privacy": "No incluyas montos ni datos personales: la consulta es sobre el aprendizaje, no sobre tu situación.",
+      "send": "Enviar consulta",
+      "sent": "Consulta enviada",
+      "waiting": "Esperando respuesta",
+      "answered": "Respuesta de tu tutor, del {{date}}",
+      "guideTitle": "¿Te quedó una duda?",
+      "guideIntro": "Pregúntale a tu tutor sobre este módulo. La respuesta aparece en Aprender, en Tus consultas."
     }
   },
   "pay": {
@@ -1280,14 +1299,6 @@
     "back": "Volver a Pagar",
     "cancel": "Cancelar",
     "source": "Fuente: {{source}}",
-    "fuerte": {
-      "locked": "Pagar se abre con tu primer cobro y el desafío del nivel 1.",
-      "home": "Acá practicas lo que harías en cualquier billetera, sin riesgo.",
-      "transfer": "Antes de confirmar, mira el titular. Es lo que más importa.",
-      "confirm": "Ojo con esto: si el titular no es quien esperabas, cancela.",
-      "qr": "Cualquier billetera lee cualquier QR. Revisa el monto antes de pagar.",
-      "bills": "Los débitos se repiten todos los meses. Revisarlos es un buen hábito."
-    },
     "actions": {
       "transfer": "A un alias, CBU o CVU, revisando el titular antes de confirmar.",
       "qr": "En un comercio ficticio, con QR interoperable.",
@@ -1369,7 +1380,8 @@
       "example": "ejemplo",
       "date": "Fecha",
       "amount": "Monto",
-      "note": "Comprobante ficticio de la billetera de práctica: no sirve como constancia real."
+      "note": "Comprobante ficticio de la billetera de práctica: no sirve como constancia real.",
+      "print": "Descargar en PDF o imprimir"
     },
     "why": {
       "transferTitle": "¿Por qué importa revisar el titular?",
@@ -1394,11 +1406,6 @@
     "intro": "Cómo se reparte tu mes frente a una referencia. Las reglas son un punto de partida, no una obligación: cada vida tiene sus gastos.",
     "context": "Mes de la billetera",
     "monthRange": "Mes en curso: {{from}} al {{to}}",
-    "fuerte": {
-      "locked": "Presupuesto se abre con 10 movimientos categorizados y el desafío del nivel 2.",
-      "home": "Mirar adónde va el sueldo es el primer paso para decidir.",
-      "green": "Guardado. Este mes viene en verde."
-    },
     "totals": {
       "income": "Ingresos del mes",
       "spent": "Gastado",
@@ -1460,11 +1467,6 @@
     "count_other": "{{count}} apartados",
     "add": "Separar dinero",
     "withdraw": "Retirar",
-    "fuerte": {
-      "locked": "Apartados y metas se abre con un mes cerrado en verde y el desafío del nivel 3.",
-      "fund": "Tu fondo cubre {{months}} meses de gastos esenciales. Primero lo que te protege.",
-      "noFund": "Empecemos por tu fondo de emergencia: es lo que te protege de un imprevisto."
-    },
     "fund": {
       "title": "Fondo de emergencia",
       "months": "Cubre {{months}} meses",
@@ -1537,7 +1539,6 @@
   "sims": {
     "common": {
       "intro": "Las doce herramientas juntas. Cada una calcula un escenario con valores de ejemplo o con los datos de tu billetera de práctica: nada sale de tu navegador.",
-      "fuerte": "Las herramientas no adivinan el futuro: muestran escenarios. Cambia los datos y mira qué pasa.",
       "sectionLocked": "su sección se abre en el nivel {{level}}",
       "data": "Datos del escenario",
       "slider": "{{label}}, deslizador",
@@ -1555,7 +1556,8 @@
       "value": "Valor",
       "option": "Opción",
       "method": "Método",
-      "scenario": "Escenario"
+      "scenario": "Escenario",
+      "print": "Imprimir o guardar en PDF"
     },
     "SIM-3": {
       "short": "Cuánto compra tu dinero con inflación, mes a mes."
@@ -1564,7 +1566,6 @@
       "title": "Presupuesto mensual",
       "short": "Tu ingreso, tus gastos y cuánto queda, frente a 50/30/20 o 70/20/10.",
       "intro": "Arma tu mes y compáralo con una regla de referencia. La regla es un punto de partida, no una obligación.",
-      "fuerte": "Ojo con esto: la regla orienta, pero tu presupuesto lo decides tú.",
       "fields": {
         "income": {
           "label": "Ingreso neto del mes",
@@ -1619,7 +1620,6 @@
       "title": "Fondo de emergencia",
       "short": "Cuánto necesitas, cuánto te falta y en cuántos meses llegas.",
       "intro": "Calcula tu fondo de emergencia con tus gastos esenciales y cuántos meses te lleva armarlo.",
-      "fuerte": "Primero lo que te protege, después lo que te hace crecer.",
       "fields": {
         "essentials": {
           "label": "Gastos esenciales por mes",
@@ -1666,7 +1666,6 @@
       "title": "Tasa real",
       "short": "Si una tasa le gana o no a la inflación del escenario.",
       "intro": "Pasa de la tasa nominal anual (TNA) a la tasa del período y compárala con la inflación del mismo período.",
-      "fuerte": "La tasa que importa es la que queda después de la inflación.",
       "fields": {
         "tna": {
           "label": "Tasa nominal anual (TNA)",
@@ -1708,7 +1707,6 @@
       "title": "Plazo fijo tradicional o UVA",
       "short": "Cuánto queda en pesos y en poder de compra con cada uno.",
       "intro": "Compara un plazo fijo tradicional con uno UVA (ajustado por inflación) en el mismo escenario.",
-      "fuerte": "Ojo con esto: no todos los bancos ofrecen plazo fijo UVA, y sus condiciones cambian.",
       "fields": {
         "amount": {
           "label": "Monto",
@@ -1758,7 +1756,6 @@
       "title": "Cuotas sin interés o contado",
       "short": "Qué conviene en un escenario: descuento hoy o cuotas que la inflación achica.",
       "intro": "Compara el precio de contado con descuento contra el valor de hoy de las cuotas, con la inflación del escenario.",
-      "fuerte": "Cuotas sin interés no siempre es lo mismo que más barato. Hagamos la cuenta.",
       "fields": {
         "price": {
           "label": "Precio en cuotas",
@@ -1814,7 +1811,6 @@
       "title": "Tarjeta de crédito",
       "short": "Cuánto cuesta pagar el mínimo frente a pagar el total.",
       "intro": "Mira cuánto tardas y cuánto pagas de intereses si solo pagas el mínimo, sin consumos nuevos.",
-      "fuerte": "Muchas personas pagan el mínimo. Veamos cuánto cuesta.",
       "fields": {
         "balance": {
           "label": "Saldo del resumen",
@@ -1866,7 +1862,6 @@
       "title": "Meta de ahorro con inflación",
       "short": "Cuánto costará tu meta y cuánto separar por mes.",
       "intro": "Ajusta el precio de tu meta por la inflación del escenario y calcula cuánto separar cada mes.",
-      "fuerte": "Una meta con fecha y monto es más fácil de cumplir.",
       "fields": {
         "price": {
           "label": "Cuánto cuesta hoy",
@@ -1907,7 +1902,6 @@
       "title": "Salir de deudas: bola de nieve o avalancha",
       "short": "Dos formas de ordenar tus deudas, comparadas lado a lado.",
       "intro": "Compara pagar primero la deuda más chica (bola de nieve) o la de tasa más alta (avalancha), con el mismo monto por mes.",
-      "fuerte": "Los dos métodos sirven: uno motiva antes y el otro paga menos intereses.",
       "fields": {
         "b1": {
           "label": "Deuda 1 · saldo",
@@ -1977,7 +1971,6 @@
       "title": "Interés compuesto y aportes periódicos",
       "short": "Cuánto crece un aporte mensual con el tiempo.",
       "intro": "Mira cómo crece un capital con aportes mensuales y una tasa anual de ejemplo.",
-      "fuerte": "El tiempo es el factor más potente del interés compuesto.",
       "fields": {
         "currency": {
           "label": "Moneda",
@@ -2029,7 +2022,6 @@
       "title": "CEDEAR: de la acción al precio en pesos",
       "short": "Cómo se forma el precio de un CEDEAR y qué lo mueve.",
       "intro": "Calcula el precio teórico de un CEDEAR a partir del precio en dólares, el ratio y el tipo de cambio implícito. Todos los valores son de ejemplo.",
-      "fuerte": "Un CEDEAR se mueve por dos cosas: la acción y el tipo de cambio.",
       "fields": {
         "usdPrice": {
           "label": "Precio de la acción o del ETF en dólares",
@@ -2066,7 +2058,6 @@
       "title": "¿Dónde guardo mi fondo de emergencia?",
       "short": "Compara liquidez, rendimiento y protección de tres opciones.",
       "intro": "Compara una cuenta remunerada, un plazo fijo y un fondo money market con tasas de ejemplo. No es una recomendación: es una comparación de características.",
-      "fuerte": "Para el fondo de emergencia, estar disponible pesa más que rendir.",
       "fields": {
         "amount": {
           "label": "Monto",
@@ -2139,11 +2130,6 @@
     "example": "Oferta de ejemplo",
     "why": "Una cuota baja no dice cuánto cuesta un crédito: el CFT suma la tasa, las comisiones y los cargos, y la entidad debe informarlo destacado.",
     "legal": "Contenido educativo. No es asesoramiento financiero ni una recomendación. La tarjeta, la financiera y el comercio son ficticios, y las tasas son valores de ejemplo del escenario: consulta los valores vigentes en las fuentes oficiales.",
-    "fuerte": {
-      "locked": "Tarjeta y préstamos se abre con el desafío del nivel 4. Primero tu fondo, después el crédito.",
-      "home": "Esta tarjeta trae un resumen del mes pasado. Veamos cuánto cuesta cada forma de pagarlo.",
-      "debt": "Ojo con esto: tienes una deuda de tasa alta. Mientras exista, Invertir sigue cerrado."
-    },
     "card": {
       "limit": "Límite de ejemplo:",
       "financed": "Saldo financiado",
@@ -2245,11 +2231,6 @@
     "inflationChip": "Inflación del escenario: {{value}} mensual",
     "why": "Una cuenta remunerada y un fondo money market no son lo mismo: la cuenta es una cuenta de pago y el fondo, una inversión. Ninguno de los dos tiene la garantía de los depósitos.",
     "legal": "Contenido educativo. No es asesoramiento financiero ni una recomendación. Las tasas son valores de ejemplo del escenario y las opciones son de práctica: consulta los valores vigentes en las fuentes oficiales.",
-    "fuerte": {
-      "locked": "Rendir se abre cuando tengas tu fondo de emergencia creado y el desafío del nivel 5.",
-      "home": "Tu saldo rinde. Ahora la pregunta es si le gana a la inflación.",
-      "none": "Tu saldo está quieto. Lee las fichas y elige dónde rinde."
-    },
     "mode": {
       "title": "Dónde rinde tu saldo",
       "intro": "El rendimiento se calcula cada día sobre tu saldo disponible y tus apartados. Lee la ficha de cada opción antes de elegir.",
@@ -2347,14 +2328,6 @@
     "why": "Lo que compras con un agente registrado queda en una subcuenta comitente a tu nombre en Caja de Valores. Y antes de invertir, primero el fondo de emergencia y sin deudas caras.",
     "legal": "Contenido educativo. No es asesoramiento financiero ni una recomendación de inversión. El bróker, los precios, la serie y los costos son de ejemplo y ficticios. Los rendimientos pasados no garantizan rendimientos futuros.",
     "back": "Volver a Invertir",
-    "fuerte": {
-      "locked": "Invertir se abre cuando tengas tu fondo de emergencia armado. Primero lo que te protege, después lo que te hace crecer.",
-      "open": "Abramos tu cuenta de práctica. Acá equivocarte sale gratis.",
-      "home": "Tu cuenta comitente de práctica. Mira el riesgo de cada instrumento antes de comprar.",
-      "high": "Ojo con esto: riesgo alto quiere decir que el precio puede bajar mucho. Solo con dinero que no necesitas pronto.",
-      "medium": "Un bono también cambia de precio. Mira la ficha antes de decidir.",
-      "low": "Bajo riesgo, rendimiento que varía a diario y sin garantía de los depósitos."
-    },
     "sheet": {
       "label": "Ficha del instrumento",
       "risk": {
@@ -3826,5 +3799,11 @@
   },
   "layout": {
     "backToTop": "Volver arriba"
+  },
+  "glossary": {
+    "chip": "Glosario",
+    "open": "{{term}}: ver qué significa",
+    "label": "Qué significa {{term}}",
+    "source": "Fuente:"
   }
 }

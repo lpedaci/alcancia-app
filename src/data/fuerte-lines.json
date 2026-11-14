@@ -1,5 +1,5 @@
 {
-  "note": "Fuerte's lines by event and state (CLAUDE.md 5.0.1). L&D can edit them without touching code. Two sentences at most, no judgment, no product recommendations, no promises. Variants avoid repeating the same line.",
+  "note": "Fuerte's lines (CLAUDE.md 5.0.1, RF-33, D-206). L&D can edit them without touching code. `lines` are keyed by where Fuerte speaks; `events` are the generic moments of 5.0.1. Each has the state of the illustration and one or more variants: the app picks one per session so Fuerte does not repeat itself. Two sentences at most, no judgment, no product recommendations, no promises, no urgency. {{name}} and similar placeholders are filled by the app.",
   "events": {
     "welcome": {
       "state": "greeting",
@@ -43,11 +43,377 @@
     },
     "question": {
       "state": "thinking",
-      "variants": ["Pensemos esta juntos. No hay apuro."]
+      "variants": [
+        "Pensemos esta juntos. No hay apuro."
+      ]
     },
     "silenced": {
       "state": "sleeping",
-      "variants": ["Me quedo en silencio. Las tarjetas de aprendizaje siguen apareciendo."]
+      "variants": [
+        "Me quedo en silencio. Las tarjetas de aprendizaje siguen apareciendo."
+      ]
+    }
+  },
+  "lines": {
+    "budget.fuerte.green": {
+      "state": "celebration",
+      "variants": [
+        "Guardado. Este mes viene en verde."
+      ]
+    },
+    "budget.fuerte.home": {
+      "state": "neutral",
+      "variants": [
+        "Mirar adónde va el sueldo es el primer paso para decidir.",
+        "Ver adónde va tu sueldo es el primer paso para decidir qué cambiar."
+      ]
+    },
+    "budget.fuerte.locked": {
+      "state": "thinking",
+      "variants": [
+        "Presupuesto se abre con 10 movimientos categorizados y el desafío del nivel 2."
+      ]
+    },
+    "credit.fuerte.debt": {
+      "state": "attention",
+      "variants": [
+        "Ojo con esto: tienes una deuda de tasa alta. Mientras exista, Invertir sigue cerrado."
+      ]
+    },
+    "credit.fuerte.home": {
+      "state": "neutral",
+      "variants": [
+        "Esta tarjeta trae un resumen del mes pasado. Veamos cuánto cuesta cada forma de pagarlo."
+      ]
+    },
+    "credit.fuerte.locked": {
+      "state": "thinking",
+      "variants": [
+        "Tarjeta y préstamos se abre con el desafío del nivel 4. Primero tu fondo, después el crédito."
+      ]
+    },
+    "invest.fuerte.high": {
+      "state": "attention",
+      "variants": [
+        "Ojo con esto: riesgo alto quiere decir que el precio puede bajar mucho. Solo con dinero que no necesitas pronto."
+      ]
+    },
+    "invest.fuerte.home": {
+      "state": "neutral",
+      "variants": [
+        "Tu cuenta comitente de práctica. Mira el riesgo de cada instrumento antes de comprar."
+      ]
+    },
+    "invest.fuerte.locked": {
+      "state": "thinking",
+      "variants": [
+        "Invertir se abre cuando tengas tu fondo de emergencia armado. Primero lo que te protege, después lo que te hace crecer."
+      ]
+    },
+    "invest.fuerte.low": {
+      "state": "neutral",
+      "variants": [
+        "Bajo riesgo, rendimiento que varía a diario y sin garantía de los depósitos."
+      ]
+    },
+    "invest.fuerte.medium": {
+      "state": "neutral",
+      "variants": [
+        "Un bono también cambia de precio. Mira la ficha antes de decidir."
+      ]
+    },
+    "invest.fuerte.open": {
+      "state": "neutral",
+      "variants": [
+        "Abramos tu cuenta de práctica. Acá equivocarte sale gratis."
+      ]
+    },
+    "learn.challenge.fuerte": {
+      "state": "neutral",
+      "variants": [
+        "Sin apuro: no hay límite de tiempo.",
+        "Tómate el tiempo que necesites: no hay reloj."
+      ]
+    },
+    "learn.challenge.fuertePassed": {
+      "state": "celebration",
+      "variants": [
+        "Guardado. Desafío aprobado."
+      ]
+    },
+    "learn.challenge.fuerteRetry": {
+      "state": "neutral",
+      "variants": [
+        "Pasó lo que pasa cuando algo es nuevo. Revisa las explicaciones y vuelve a intentarlo."
+      ]
+    },
+    "learn.guide.fuerte": {
+      "state": "neutral",
+      "variants": [
+        "Una guía corta: si algo no queda claro, vuelve atrás cuando quieras.",
+        "Pocos minutos y una idea por pantalla. Si algo no queda claro, vuelve atrás."
+      ]
+    },
+    "learn.guide.fuerteDone": {
+      "state": "celebration",
+      "variants": [
+        "Guardado. Una guía menos."
+      ]
+    },
+    "learn.map.fuerte": {
+      "state": "neutral",
+      "variants": [
+        "Acá ves todo tu camino. Lo bloqueado se ve, y te dice qué falta.",
+        "Tu camino, nivel por nivel. Nada se pierde: puedes volver a cualquier guía o misión."
+      ]
+    },
+    "learn.sources.page.fuerte": {
+      "state": "neutral",
+      "variants": [
+        "Todo lo que te explico tiene de dónde salir. Acá lo puedes revisar."
+      ]
+    },
+    "pay.fuerte.bills": {
+      "state": "neutral",
+      "variants": [
+        "Los débitos se repiten todos los meses. Revisarlos es un buen hábito."
+      ]
+    },
+    "pay.fuerte.confirm": {
+      "state": "attention",
+      "variants": [
+        "Ojo con esto: si el titular no es quien esperabas, cancela."
+      ]
+    },
+    "pay.fuerte.home": {
+      "state": "neutral",
+      "variants": [
+        "Acá practicas lo que harías en cualquier billetera, sin riesgo.",
+        "Practicar pagos acá no cuesta nada. Equivocarte, tampoco."
+      ]
+    },
+    "pay.fuerte.locked": {
+      "state": "thinking",
+      "variants": [
+        "Pagar se abre con tu primer cobro y el desafío del nivel 1."
+      ]
+    },
+    "pay.fuerte.qr": {
+      "state": "neutral",
+      "variants": [
+        "Cualquier billetera lee cualquier QR. Revisa el monto antes de pagar."
+      ]
+    },
+    "pay.fuerte.transfer": {
+      "state": "neutral",
+      "variants": [
+        "Antes de confirmar, mira el titular. Es lo que más importa."
+      ]
+    },
+    "pockets.fuerte.fund": {
+      "state": "neutral",
+      "variants": [
+        "Tu fondo cubre {{months}} meses de gastos esenciales. Primero lo que te protege."
+      ]
+    },
+    "pockets.fuerte.locked": {
+      "state": "thinking",
+      "variants": [
+        "Apartados y metas se abre con un mes cerrado en verde y el desafío del nivel 3."
+      ]
+    },
+    "pockets.fuerte.noFund": {
+      "state": "neutral",
+      "variants": [
+        "Empecemos por tu fondo de emergencia: es lo que te protege de un imprevisto."
+      ]
+    },
+    "profile.fuerteLine": {
+      "state": "neutral",
+      "variants": [
+        "Acá eliges cómo te acompaño y cuidas tu cuenta."
+      ]
+    },
+    "sim3.fuerte": {
+      "state": "neutral",
+      "variants": [
+        "Prueba con tu sueldo de práctica. Después compáralo con otro escenario."
+      ]
+    },
+    "sims.SIM-1.fuerte": {
+      "state": "attention",
+      "variants": [
+        "Ojo con esto: la regla orienta, pero tu presupuesto lo decides tú."
+      ]
+    },
+    "sims.SIM-10.fuerte": {
+      "state": "neutral",
+      "variants": [
+        "El tiempo es el factor más potente del interés compuesto."
+      ]
+    },
+    "sims.SIM-11.fuerte": {
+      "state": "neutral",
+      "variants": [
+        "Un CEDEAR se mueve por dos cosas: la acción y el tipo de cambio."
+      ]
+    },
+    "sims.SIM-12.fuerte": {
+      "state": "neutral",
+      "variants": [
+        "Para el fondo de emergencia, estar disponible pesa más que rendir."
+      ]
+    },
+    "sims.SIM-2.fuerte": {
+      "state": "neutral",
+      "variants": [
+        "Primero lo que te protege, después lo que te hace crecer."
+      ]
+    },
+    "sims.SIM-4.fuerte": {
+      "state": "neutral",
+      "variants": [
+        "La tasa que importa es la que queda después de la inflación."
+      ]
+    },
+    "sims.SIM-5.fuerte": {
+      "state": "attention",
+      "variants": [
+        "Ojo con esto: no todos los bancos ofrecen plazo fijo UVA, y sus condiciones cambian."
+      ]
+    },
+    "sims.SIM-6.fuerte": {
+      "state": "neutral",
+      "variants": [
+        "Cuotas sin interés no siempre es lo mismo que más barato. Hagamos la cuenta."
+      ]
+    },
+    "sims.SIM-7.fuerte": {
+      "state": "neutral",
+      "variants": [
+        "Muchas personas pagan el mínimo. Veamos cuánto cuesta."
+      ]
+    },
+    "sims.SIM-8.fuerte": {
+      "state": "neutral",
+      "variants": [
+        "Una meta con fecha y monto es más fácil de cumplir."
+      ]
+    },
+    "sims.SIM-9.fuerte": {
+      "state": "neutral",
+      "variants": [
+        "Los dos métodos sirven: uno motiva antes y el otro paga menos intereses."
+      ]
+    },
+    "sims.common.fuerte": {
+      "state": "neutral",
+      "variants": [
+        "Las herramientas no adivinan el futuro: muestran escenarios. Cambia los datos y mira qué pasa.",
+        "Una herramienta muestra escenarios, no el futuro. Prueba cambiar un dato y mira qué pasa."
+      ]
+    },
+    "wallet.home.fuerteAllOpen": {
+      "state": "neutral",
+      "variants": [
+        "Abriste todas las secciones. Ahora, a practicar sin apuro."
+      ]
+    },
+    "wallet.home.fuerteBudget": {
+      "state": "neutral",
+      "variants": [
+        "Categorizaste {{current}} de 10 movimientos. Con 10 y el desafío del nivel 2, se abre Presupuesto."
+      ]
+    },
+    "wallet.home.fuerteGeneric": {
+      "state": "neutral",
+      "variants": [
+        "Tu próximo desbloqueo es {{section}}. Mira lo que falta en la tarjeta de abajo."
+      ]
+    },
+    "wallet.home.fuerteInvest": {
+      "state": "neutral",
+      "variants": [
+        "Tu fondo de emergencia ya cubre {{months}} meses. Con 3, y el test de perfil, se abre Invertir."
+      ]
+    },
+    "wallet.mission.fuerte": {
+      "state": "neutral",
+      "variants": [
+        "Una misión es práctica con red: si te equivocas, te explico qué pasó."
+      ]
+    },
+    "wallet.mission.fuerteDone": {
+      "state": "celebration",
+      "variants": [
+        "Guardado. Misión completa."
+      ]
+    },
+    "wallet.profile.fuerte": {
+      "state": "neutral",
+      "variants": [
+        "Este test no tiene respuestas correctas. Contesta lo que harías de verdad, no lo que suena mejor."
+      ]
+    },
+    "welcome.fuerte.account": {
+      "state": "neutral",
+      "variants": [
+        "Esta cuenta es de práctica: equivocarte sale gratis."
+      ]
+    },
+    "welcome.fuerte.overview": {
+      "state": "greeting",
+      "variants": [
+        "Hola, {{name}}. Acá está tu punto de partida y tu ruta."
+      ]
+    },
+    "welcome.fuerte.quiz": {
+      "state": "neutral",
+      "variants": [
+        "No hay respuestas malas en los hábitos. En el resto, te explico al final."
+      ]
+    },
+    "welcome.fuerte.result": {
+      "state": "celebration",
+      "variants": [
+        "Guardado. Ya sé por dónde empezar contigo."
+      ]
+    },
+    "welcome.intro.levels.fuerte": {
+      "state": "neutral",
+      "variants": [
+        "Primero lo que te protege, después lo que te hace crecer."
+      ]
+    },
+    "welcome.intro.privacy.fuerte": {
+      "state": "neutral",
+      "variants": [
+        "Lo que guardas acá, lo ves solo tú."
+      ]
+    },
+    "welcome.intro.wallet.fuerte": {
+      "state": "greeting",
+      "variants": [
+        "Hola, {{name}}. Soy Fuerte. Acá manejas dinero de práctica, así que equivocarte sale gratis."
+      ]
+    },
+    "yield.fuerte.home": {
+      "state": "neutral",
+      "variants": [
+        "Tu saldo rinde. Ahora la pregunta es si le gana a la inflación."
+      ]
+    },
+    "yield.fuerte.locked": {
+      "state": "thinking",
+      "variants": [
+        "Rendir se abre cuando tengas tu fondo de emergencia creado y el desafío del nivel 5."
+      ]
+    },
+    "yield.fuerte.none": {
+      "state": "neutral",
+      "variants": [
+        "Tu saldo está quieto. Lee las fichas y elige dónde rinde."
+      ]
     }
   }
 }

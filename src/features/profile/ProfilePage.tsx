@@ -17,6 +17,7 @@ import { formatMoney } from '@/lib/money';
 import { type FuertePresence, readLocal, writeLocal } from '@/store/local-store';
 import { useCurrentUser } from '@/store/session-store';
 import { clearWallet, useWallet } from '@/store/wallet-store';
+import { fuerteLine } from '@/features/companion/fuerte-lines';
 
 /**
  * P14, profile, security and receipts (CLAUDE.md 5.3, information-architecture.md): the practice
@@ -53,7 +54,7 @@ export function ProfilePage() {
   };
 
   return (
-    <WalletShell section={t('profile.section')} fuerte={{ state: 'neutral', message: t('profile.fuerteLine') }}>
+    <WalletShell section={t('profile.section')} fuerte={{ state: 'neutral', message: fuerteLine('profile.fuerteLine') }}>
       <div className="grid max-w-6xl grid-cols-[minmax(0,1fr)] gap-6 large:grid-cols-2 large:items-start">
         <header className="flex items-center gap-4 large:col-span-2">
           {person && <Avatar name={person.name} role={person.role} personId={person.id} size="xl" />}

@@ -15,6 +15,8 @@ import { cn } from '@/lib/utils';
 import { useDataStore } from '@/store/data-store';
 import { useCurrentUser } from '@/store/session-store';
 import { challengeById, guideOfModule, MODULES, moduleById } from './questions';
+import { MyQuestions, WeeklyChallenges } from './Tutoring';
+import { fuerteLine } from '@/features/companion/fuerte-lines';
 
 /**
  * P9, Aprender (5.0, 2.2.1 pattern 8): the map of levels as a timeline, one stretch per level with
@@ -61,7 +63,7 @@ export function LearnPage() {
     });
 
   return (
-    <WalletShell section={t('wallet.nav.learn')} fuerte={{ state: 'neutral', message: t('learn.map.fuerte') }}>
+    <WalletShell section={t('wallet.nav.learn')} fuerte={{ state: 'neutral', message: fuerteLine('learn.map.fuerte') }}>
       <div className="flex flex-col gap-6">
         <header className="flex flex-col gap-2">
           <h1 className="text-headline-medium text-on-surface">{t('learn.map.title')}</h1>
@@ -138,6 +140,9 @@ export function LearnPage() {
             </ol>
           </section>
 
+          <div className="flex min-w-0 flex-col gap-6">
+          <WeeklyChallenges personId={personId} />
+          <MyQuestions personId={personId} />
           {/* Achievements */}
           <section aria-labelledby="badges-title" className="flex flex-col gap-6 rounded-xl border border-outline-variant bg-surface-container-lowest p-(--space-card-padding)">
             <h2 id="badges-title" className="text-title-large text-on-surface">
@@ -186,6 +191,7 @@ export function LearnPage() {
               </Link>
             </div>
           </section>
+          </div>
         </div>
       </div>
     </WalletShell>

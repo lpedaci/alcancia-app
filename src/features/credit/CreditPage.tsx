@@ -41,6 +41,7 @@ import { cn } from '@/lib/utils';
 import { useDataStore } from '@/store/data-store';
 import { useCurrentUser } from '@/store/session-store';
 import { useWallet } from '@/store/wallet-store';
+import { fuerteLine } from '@/features/companion/fuerte-lines';
 
 /**
  * P7, Pagar > Tarjeta y préstamos (level 5, CLAUDE.md 5.3 "Ofertas", D-56, D-178): the practice card
@@ -58,7 +59,7 @@ export function CreditPage() {
   const status = statuses.find((s) => s.level.id === 'level-5');
   if (status && !isOpen('level-5')) {
     return (
-      <WalletShell section={t('wallet.nav.pay')} fuerte={{ state: 'thinking', message: t('credit.fuerte.locked') }}>
+      <WalletShell section={t('wallet.nav.pay')} fuerte={{ state: 'thinking', message: fuerteLine('credit.fuerte.locked') }}>
         <div className="flex flex-col gap-6">
           <h1 className="text-headline-medium text-on-surface">{t('wallet.placeholder.lockedTitle', { section: t('wallet.sub.credit') })}</h1>
           <UnlockCard status={status} />
@@ -119,7 +120,7 @@ function Credit() {
   return (
     <WalletShell
       section={t('wallet.nav.pay')}
-      fuerte={{ state: highRate > 0 ? 'attention' : 'neutral', message: highRate > 0 ? t('credit.fuerte.debt') : t('credit.fuerte.home'), why: t('credit.why') }}
+      fuerte={{ state: highRate > 0 ? 'attention' : 'neutral', message: highRate > 0 ? fuerteLine('credit.fuerte.debt') : fuerteLine('credit.fuerte.home'), why: t('credit.why') }}
     >
       <div className="flex flex-col gap-6">
         <header className="flex flex-col gap-3">

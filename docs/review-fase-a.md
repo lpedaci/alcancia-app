@@ -2,6 +2,22 @@
 
 > Fecha: 13/11/2026 · Paso 14 de la spec (sección 10), con el formato de la sección 13. Revisa lo construido en los pasos 0 a 13 contra los criterios de aceptación de la sección 11 y los requerimientos de [`requirements.md`](requirements.md). Dice qué está hecho con su evidencia, qué falta y qué no se pudo verificar.
 
+## Actualización: faltantes completados (paso 14b, 13/11/2026)
+
+Después de esta revisión se construyeron los 8 faltantes de la sección 4 (D-202 a D-207):
+
+| Requerimiento | Qué se hizo |
+| --- | --- |
+| RF-50 | Desafío semanal en Aprender: autoinforme "Sí, En parte, No" y reflexión que queda solo en el navegador |
+| Consultas | "Tus consultas" en Aprender y "¿Te quedó una duda?" en cada guía; llegan a la bandeja de tutoría (T5) |
+| RF-62 | Escenarios guardados en el espacio local de cada persona: siguen al recargar |
+| RF-47 | Glosario con 15 términos y chips en la primera aparición dentro de las guías |
+| RF-43 | Ejercicio con simulador: el noveno tipo de 5.1, con dos preguntas verificadas a mano |
+| RF-33 | Las 59 frases de Fuerte en `fuerte-lines.json`, con variantes por sesión |
+| RF-64 y RF-36 | Resumen imprimible de cada herramienta y comprobante en PDF, con el aviso de dinero ficticio |
+
+Evidencia: 526 tests unitarios (incluidos los nuevos de glosario, Fuerte, tutoría, escenarios y ejercicio con simulador) y 632 de Playwright en verde. Lo que sigue sin verificar es lo de la sección 6. Las tablas de abajo quedan como estaban el día de la revisión.
+
 ## 1. Resumen
 
 La fase A está **casi completa**. Funcionan las 33 pantallas de la sección 6, con los cuatro roles, en el sitio publicado (https://lpedaci.github.io/alcancia-app/):

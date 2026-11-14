@@ -72,6 +72,10 @@ interface DataState extends OrgData {
   addChallengeAttempt: (attempt: ChallengeAttempt, items?: ItemResponse[]) => void;
   /** T3: a weekly challenge for a cohort (F5). */
   assignWeeklyChallenge: (challenge: WeeklyChallenge) => void;
+  /** F5: the participant's self-report of a weekly challenge; only the result is shared, the reflection stays local. */
+  reportWeeklyChallenge: (report: WeeklyChallengeReport) => void;
+  /** F6: a participant's question about a module, for the tutor's inbox (T5). */
+  askQuestion: (question: TutorQuestion) => void;
   /** T5: the tutor's answer to a question about a module (never economic data). */
   answerQuestion: (questionId: string, text: string, at: string) => void;
   /** T2: the tutor enables a level for a person or a cohort, with a reason that is recorded (5.0). */
@@ -128,6 +132,11 @@ export const useDataStore = create<DataState>()(
       addChallengeAttempt: (attempt, items = []) =>
         set((state) => ({ challengeAttempts: [...state.challengeAttempts, attempt], itemResponses: [...state.itemResponses, ...items] })),
       assignWeeklyChallenge: (challenge) => set((state) => ({ weeklyChallenges: [...state.weeklyChallenges, challenge] })),
+      reportWeeklyChallenge: (report) =>
+        set((state) => ({
+          weeklyReports: [...state.weeklyReports.filter((r) => !(r.challengeId === report.challengeId && r.personId === report.personId)), report],
+        })),
+      askQuestion: (question) => set((state) => ({ tutorQuestions: [...state.tutorQuestions, question] })),
       answerQuestion: (questionId, text, at) =>
         set((state) => ({
           tutorQuestions: state.tutorQuestions.map((q) => (q.id === questionId ? { ...q, answer: { text, answeredAt: at } } : q)),

@@ -85,6 +85,12 @@ Texto completo en `src/data/guides.json` (una guía por módulo) y `src/data/que
 
 Cálculos verificados a mano: $ 1.559.263,32 − $ 274.304,46 = $ 1.284.958,86; 50 % = $ 642.479,43; 30 % = $ 385.487,66; 20 % = $ 256.991,77; $ 700.000 × 3 = $ 2.100.000; con $ 250.000 por mes se llega en 9 meses (8 × 250.000 = 2.000.000 no alcanza).
 
+## Faltantes de la fase A (paso 14b, 13/11/2026)
+
+- **Glosario integrado (D-204):** `src/data/glossary.json` con 15 términos (TNA, TEM, TEA, CFT, UVA, CER, CVU, CBU, PSPCP, FCI, money market, ALyC, ETF, CEDEAR y DCA). Cada definición sale de la fuente oficial del Anexo B que la respalda (B-03, B-04, B-06, B-10, B-12, B-14, B-16, B-19 a B-21, B-25, B-26, B-30, B-31, B-33, B-40) o de la presentación (A-49 para DCA). En las guías, cada término lleva un chip la primera vez que aparece. **Ampliación: pendiente de revisión del Lic. Kevin Giampieri** (la redacción de las definiciones).
+- **Ejercicios con simulador (D-205):** `m06-sim-minimum` (SIM-7, caso F-15: 237 meses) y `m12-sim-compound` (SIM-10, A-55 y caso F-19: USD 1.008.712,49). Un test verifica que la respuesta esperada es lo que calcula el simulador con esos datos.
+- **Textos de Fuerte (D-206):** las 59 frases de Fuerte pasan del archivo de idioma a `src/data/fuerte-lines.json`, con su estado y variantes. Se sumaron segundas variantes en 6 frases frecuentes (mapa de niveles, Pagar, herramientas, guías, presupuesto y desafíos), con el mismo sentido.
+
 ## Revisión de Lourdes de los niveles 1 a 6 (13/11/2026, D-182)
 
 Las 13 guías y sus bancos quedan revisados por Lourdes con estas correcciones:

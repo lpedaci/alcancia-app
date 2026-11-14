@@ -22,6 +22,7 @@ import { useWallet } from '@/store/wallet-store';
 import { advanceDays, advanceMonth, CATEGORIZABLE, categorize, pocketsTotal, purchasingPowerToday, walletMetrics } from './engine/engine';
 import type { BudgetCategory, WalletMovement } from './engine/types';
 import { WalletShell } from './WalletShell';
+import { fuerteLine } from '@/features/companion/fuerte-lines';
 
 /**
  * P1 · Inicio de la cuenta (CLAUDE.md 6) with the person's own wallet (step 6): active mission,
@@ -92,10 +93,10 @@ export function WalletHomePage() {
   };
 
   // Fuerte's note: what the next unlock needs, and why the current section matters.
-  let fuerteMessage = t('wallet.home.fuerteAllOpen');
-  if (next?.level.id === 'level-7') fuerteMessage = t('wallet.home.fuerteInvest', { months: formatNumber(metrics.emergency_months, 1) });
-  else if (next?.level.id === 'level-3') fuerteMessage = t('wallet.home.fuerteBudget', { current: metrics.categorized_movements });
-  else if (next) fuerteMessage = t('wallet.home.fuerteGeneric', { section: nextSection });
+  let fuerteMessage = fuerteLine('wallet.home.fuerteAllOpen');
+  if (next?.level.id === 'level-7') fuerteMessage = fuerteLine('wallet.home.fuerteInvest', { months: formatNumber(metrics.emergency_months, 1) });
+  else if (next?.level.id === 'level-3') fuerteMessage = fuerteLine('wallet.home.fuerteBudget', { current: metrics.categorized_movements });
+  else if (next) fuerteMessage = fuerteLine('wallet.home.fuerteGeneric', { section: nextSection });
   const whyKey = current ? WHY_BY_LEVEL[current.level.id] : undefined;
 
   const missionAction = activeMission ? (

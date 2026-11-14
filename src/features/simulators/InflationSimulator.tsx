@@ -1,5 +1,8 @@
 import { useEffect, useId, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
+import type { LocalScenario } from "@/types/domain";
+import { useSavedScenarios } from "./use-saved-scenarios";
+import { PrintButton } from "@/components/ui/PrintButton";
 import {
   Area,
   AreaChart,
@@ -53,6 +56,14 @@ interface SavedScenario {
   months: number;
 }
 
+/** Saved inputs back to the scenario shape (RF-62: stored as text in `LocalScenario`). */
+const toScenario = (s: LocalScenario): SavedScenario => ({
+  id: s.id,
+  amount: s.inputs.amount ?? '0',
+  monthlyInflation: s.inputs.monthlyInflation ?? '0',
+  months: Number(s.inputs.months ?? 12),
+});
+
 const MONTHS_MIN = 1;
 const MONTHS_MAX = 60;
 const ANNOUNCE_DELAY = 700;
@@ -96,7 +107,8 @@ export function InflationSimulator({
   const [customText, setCustomText] = useState("3");
   const [months, setMonths] = useState(12);
   const [showTable, setShowTable] = useState(false);
-  const [saved, setSaved] = useState<SavedScenario[]>([]);
+  const savedScenarios = useSavedScenarios('SIM-3');
+  const saved = savedScenarios.saved.map(toScenario);
 
   const amount = parseDecimalInput(amountText);
   const monthlyInflation =
@@ -165,17 +177,7 @@ export function InflationSimulator({
 
   const saveScenario = () => {
     if (!result) return;
-    setSaved((list) =>
-      [
-        {
-          id: `${Date.now()}`,
-          amount: amount!,
-          monthlyInflation: monthlyInflation!,
-          months,
-        },
-        ...list,
-      ].slice(0, 2),
-    );
+    savedScenarios.save({ amount: amount!, monthlyInflation: monthlyInflation!, months: String(months) });
   };
 
   return (
@@ -500,7 +502,7 @@ export function InflationSimulator({
           {/* Compare scenarios */}
           {compare && (
             <div className="flex flex-col gap-3">
-              <div className="flex flex-wrap items-center gap-2">
+              <div className="flex flex-wrap items-center gap-2 print:hidden">
                 <Button
                   variant="tonal"
                   size="s"
@@ -510,6 +512,7 @@ export function InflationSimulator({
                 >
                   {t("sim3.compare.save")}
                 </Button>
+                <PrintButton label={t("sims.common.print")} />
                 <p className="text-body-small text-on-surface-variant">
                   {t("sim3.compare.help")}
                 </p>
@@ -538,11 +541,7 @@ export function InflationSimulator({
                             label={t("sim3.compare.remove", {
                               n: saved.length - index,
                             })}
-                            onClick={() =>
-                              setSaved((list) =>
-                                list.filter((x) => x.id !== s.id),
-                              )
-                            }
+                            onClick={() => savedScenarios.remove(s.id)}
                           />
                         </div>
                         <p className="text-body-small text-on-surface-variant">

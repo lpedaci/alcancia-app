@@ -1420,6 +1420,33 @@
       ]
     },
     {
+      "id": "m06-sim-minimum",
+      "moduleId": "module-06",
+      "type": "simulator_task",
+      "prompt": "Abre el simulador de tarjeta con el caso de ejemplo: saldo de $ 100.000, tasa de ejemplo (TNA) del 120 % y pago mínimo del 10 %, con un mínimo de $ 1.000 por mes. Si pagas solo el mínimo y no haces compras nuevas, ¿en cuántos meses terminas de pagar?",
+      "simulatorTask": {
+        "simId": "SIM-7",
+        "preset": {
+          "balance": "100000",
+          "tna": "120",
+          "cft": "150",
+          "minimum": "10"
+        },
+        "answer": "237",
+        "tolerance": "0",
+        "unit": "months"
+      },
+      "help": "Cantidad de meses, en números. Por ejemplo: 24",
+      "feedback": {
+        "correct": "Correcto: 237 meses, casi 20 años. Con una tasa tan alta, el mínimo apenas cubre los intereses y el saldo baja muy despacio.",
+        "incorrect": "Mira la píldora de meses o la tabla del simulador con estos datos: son 237 meses, casi 20 años. Con una tasa tan alta, el mínimo apenas cubre los intereses."
+      },
+      "sourceIds": [
+        "F-15",
+        "B-04"
+      ]
+    },
+    {
       "id": "m07-snowball",
       "moduleId": "module-07",
       "type": "single",
@@ -2375,6 +2402,34 @@
       },
       "sourceIds": [
         "T",
+        "A-55",
+        "F-19"
+      ]
+    },
+    {
+      "id": "m12-sim-compound",
+      "moduleId": "module-12",
+      "type": "simulator_task",
+      "prompt": "Abre la herramienta de interés compuesto con el caso de ejemplo: USD 200 por mes, una tasa de ejemplo del 12 % anual y 33 años. ¿Qué capital final muestra?",
+      "simulatorTask": {
+        "simId": "SIM-10",
+        "preset": {
+          "currency": "USD",
+          "initial": "0",
+          "monthly": "200",
+          "rate": "12",
+          "years": "33"
+        },
+        "answer": "1008712.49",
+        "tolerance": "1",
+        "unit": "USD"
+      },
+      "help": "Monto en dólares, por ejemplo: 250.000",
+      "feedback": {
+        "correct": "Correcto: alrededor de USD 1.008.712. De eso, USD 79.200 son tus aportes y el resto es interés compuesto: el tiempo es el factor más potente. Es un escenario, no una promesa.",
+        "incorrect": "Mira el resultado principal del simulador con estos datos: alrededor de USD 1.008.712. Tus aportes suman USD 79.200; el resto es interés compuesto. Es un escenario, no una promesa."
+      },
+      "sourceIds": [
         "A-55",
         "F-19"
       ]

@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'motion/react';
-import { Fragment, type ReactNode, useEffect, useRef, useState } from 'react';
+import { Fragment, type ReactNode, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useParams } from 'react-router';
 import { DEMO_TODAY } from '@/app/config';
@@ -20,7 +20,11 @@ import { useCurrentUser } from '@/store/session-store';
 import type { GuideProgress } from '@/types/domain';
 import { CheckButton, QuestionView } from './QuestionView';
 import { SourceList } from './SourceList';
+import { AskTutorForm } from './Tutoring';
+import { distributeTerms, introducedTerms } from '@/features/glossary/glossary';
+import { GlossaryText } from '@/features/glossary/GlossaryText';
 import { type Answer, feedbackFor, type Guide, type GuideBlock, guideById, isAnswered, isCorrect, moduleById } from './questions';
+import { fuerteLine } from '@/features/companion/fuerte-lines';
 
 /**
  * P10, a guide (F3, 2.2.1 pattern 10): one short block per screen with progress on top, following
@@ -35,13 +39,40 @@ export function GuidePage() {
 }
 
 /** Bold text written as **this** in the content, without injecting HTML (8.2). */
-function RichText({ text }: { text: string }) {
+function RichText({ text, terms }: { text: string; terms?: Set<string> }) {
   const parts = text.split(/\*\*(.+?)\*\*/g);
+  const termsOf = distributeTerms(parts, terms);
   return (
     <>
-      {parts.map((part, i) => (i % 2 === 1 ? <strong key={i} className="font-semibold text-on-surface">{part}</strong> : <Fragment key={i}>{part}</Fragment>))}
+      {parts.map((part, i) =>
+        i % 2 === 1 ? (
+          <strong key={i} className="font-semibold text-on-surface">
+            <GlossaryText text={part} terms={termsOf[i]} />
+          </strong>
+        ) : (
+          <Fragment key={i}>
+            <GlossaryText text={part} terms={termsOf[i]} />
+          </Fragment>
+        ),
+      )}
     </>
   );
+}
+
+/** The plain text of a block, to find where each glossary term appears first (1.1.1, D-204). */
+function blockText(block: GuideBlock): string {
+  switch (block.type) {
+    case 'hook':
+    case 'objective':
+    case 'takeaway':
+      return block.body;
+    case 'text':
+      return block.body;
+    case 'example':
+      return block.steps.join(' ');
+    default:
+      return '';
+  }
 }
 
 function GuideReader({ guide }: { guide: Guide }) {
@@ -52,6 +83,8 @@ function GuideReader({ guide }: { guide: Guide }) {
   const markGuideDone = useDataStore((s) => s.markGuideDone);
   const alreadyDone = useDataStore((s) => s.guideProgress.some((g) => g.personId === personId && g.guideIdsDone.includes(guide.id)));
   const module = moduleById(guide.moduleId);
+  // Glossary chips at each term's first appearance in the guide (1.1.1, D-204).
+  const newTerms = useMemo(() => introducedTerms(guide.blocks.map(blockText)), [guide]);
   const levelId = module?.levelId ?? '';
   const level = LEVELS.find((l) => l.id === levelId);
 
@@ -71,7 +104,7 @@ function GuideReader({ guide }: { guide: Guide }) {
   const status = statuses.find((s) => s.level.id === levelId);
   if (status && !isOpen(levelId)) {
     return (
-      <WalletShell section={t('wallet.nav.learn')} fuerte={{ state: 'thinking', message: t('learn.guide.fuerte') }}>
+      <WalletShell section={t('wallet.nav.learn')} fuerte={{ state: 'thinking', message: fuerteLine('learn.guide.fuerte') }}>
         <div className="flex flex-col gap-6">
           <h1 className="text-headline-medium text-on-surface">{t('learn.guide.locked', { title: guide.title })}</h1>
           <UnlockCard status={status} />
@@ -103,7 +136,7 @@ function GuideReader({ guide }: { guide: Guide }) {
   const slide = reduce ? 0 : 32;
 
   return (
-    <WalletShell section={t('wallet.nav.learn')} fuerte={{ state: finished ? 'celebration' : isQuestion ? 'thinking' : 'neutral', message: finished ? t('learn.guide.fuerteDone') : t('learn.guide.fuerte') }}>
+    <WalletShell section={t('wallet.nav.learn')} fuerte={{ state: finished ? 'celebration' : isQuestion ? 'thinking' : 'neutral', message: finished ? fuerteLine('learn.guide.fuerteDone') : fuerteLine('learn.guide.fuerte') }}>
       {/* A guide panel (D-172): the reading on the left, the outline of the guide on the right from 1200 px */}
       <div className="grid grid-cols-[minmax(0,1fr)] gap-6 large:grid-cols-[minmax(0,1fr)_22rem] large:items-start">
         <div className="flex min-w-0 flex-col gap-6">
@@ -158,6 +191,7 @@ function GuideReader({ guide }: { guide: Guide }) {
                 >
                   <Block
                     block={block}
+                    terms={newTerms[index]}
                     headingRef={headingRef}
                     answer={answers[index]}
                     checked={checked[index] ?? false}
@@ -254,6 +288,7 @@ function GuideReader({ guide }: { guide: Guide }) {
             className="border-t border-outline-variant pt-4"
             codes={[...guide.sourceIds, ...guide.blocks.flatMap((b) => (b.type === 'recall' || b.type === 'practice' ? b.question.sourceIds : []))]}
           />
+          <AskAboutGuide personId={personId} moduleId={guide.moduleId} />
         </aside>
       </div>
     </WalletShell>
@@ -271,6 +306,7 @@ const capitalize = (text: string) => text.charAt(0).toUpperCase() + text.slice(1
 
 function Block({
   block,
+  terms,
   headingRef,
   answer,
   checked,
@@ -278,6 +314,8 @@ function Block({
   onCheck,
 }: {
   block: GuideBlock;
+  /** Glossary terms that appear for the first time in this block (D-204). */
+  terms?: Set<string>;
   headingRef: React.RefObject<HTMLHeadingElement>;
   answer: Answer | undefined;
   checked: boolean;
@@ -296,7 +334,9 @@ function Block({
         <>
           <IconTile icon="lightbulb" tone="tertiary" />
           {title(t('learn.guide.hook'))}
-          <p className="text-body-large text-on-surface">{block.body}</p>
+          <p className="text-body-large text-on-surface">
+            <GlossaryText text={block.body} terms={terms} />
+          </p>
         </>
       );
     case 'objective':
@@ -304,7 +344,9 @@ function Block({
         <>
           <IconTile icon="flag" tone="primary" />
           {title(t('learn.guide.objective'))}
-          <p className="text-body-large text-on-surface">{block.body}</p>
+          <p className="text-body-large text-on-surface">
+            <GlossaryText text={block.body} terms={terms} />
+          </p>
         </>
       );
     case 'text':
@@ -312,11 +354,12 @@ function Block({
         <>
           {title(block.title)}
           <p className="text-body-large text-on-surface-variant">
-            <RichText text={block.body} />
+            <RichText text={block.body} terms={terms} />
           </p>
         </>
       );
-    case 'example':
+    case 'example': {
+      const stepTerms = distributeTerms(block.steps, terms);
       return (
         <>
           {title(block.title)}
@@ -326,19 +369,24 @@ function Block({
                 <span aria-hidden className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary-container text-label-large text-on-primary-container tabular-nums">
                   {i + 1}
                 </span>
-                <span className="pt-0.5 text-body-large text-on-surface tabular-nums">{step}</span>
+                <span className="pt-0.5 text-body-large text-on-surface tabular-nums">
+                  <GlossaryText text={step} terms={stepTerms[i]} />
+                </span>
               </li>
             ))}
           </ol>
         </>
       );
+    }
     case 'takeaway':
       return (
         <>
           {title(t('learn.guide.takeaway'))}
           <div className="flex items-start gap-3 rounded-lg bg-tertiary-container p-4 text-on-tertiary-container">
             <Icon name="event_available" className="mt-0.5 shrink-0" />
-            <p className="text-body-large">{capitalize(block.body.replace(/^Para tu vida:\s*/, ''))}</p>
+            <p className="text-body-large">
+              <GlossaryText text={capitalize(block.body.replace(/^Para tu vida:\s*/, ''))} terms={terms} />
+            </p>
           </div>
           {block.toolId && (
             <Button asChild variant="tonal" leadingIcon="calculate" className="self-start">
@@ -367,4 +415,23 @@ function Block({
       );
     }
   }
+}
+
+/** F6: a question to the tutor about this guide's module, collapsed until asked for (D-202). */
+function AskAboutGuide({ personId, moduleId }: { personId: string; moduleId: string }) {
+  const { t } = useTranslation();
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="flex flex-col gap-3 border-t border-outline-variant pt-4">
+      <h3 className="text-title-small text-on-surface">{t('learn.ask.guideTitle')}</h3>
+      <p className="text-body-small text-on-surface-variant">{t('learn.ask.guideIntro')}</p>
+      {open ? (
+        <AskTutorForm personId={personId} moduleId={moduleId} />
+      ) : (
+        <Button variant="tonal" leadingIcon="forum" className="self-start" onClick={() => setOpen(true)}>
+          {t('learn.ask.open')}
+        </Button>
+      )}
+    </div>
+  );
 }

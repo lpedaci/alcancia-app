@@ -2,6 +2,10 @@ import '@testing-library/jest-dom/vitest';
 import { cleanup, configure } from '@testing-library/react';
 import { afterEach } from 'vitest';
 import '@/app/i18n';
+import { setFuerteSeed } from '@/features/companion/fuerte-lines';
+
+// Fuerte's variants (D-206): always the first one in tests.
+setFuerteSeed(0);
 
 // Screens load on demand (route-level code splitting): wait up to 5 s in a busy test run.
 configure({ asyncUtilTimeout: 5000 });

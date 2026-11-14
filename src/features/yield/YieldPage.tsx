@@ -38,6 +38,7 @@ import { cn } from '@/lib/utils';
 import { useDataStore } from '@/store/data-store';
 import { useCurrentUser } from '@/store/session-store';
 import { useWallet } from '@/store/wallet-store';
+import { fuerteLine } from '@/features/companion/fuerte-lines';
 
 /**
  * P6, Ahorrar > Rendir (level 6, CLAUDE.md 5.3 "Hacer rendir el saldo" and "Ganarle o no a la
@@ -55,7 +56,7 @@ export function YieldPage() {
   const status = statuses.find((s) => s.level.id === 'level-6');
   if (status && !isOpen('level-6')) {
     return (
-      <WalletShell section={t('wallet.sub.yield')} fuerte={{ state: 'thinking', message: t('yield.fuerte.locked') }}>
+      <WalletShell section={t('wallet.sub.yield')} fuerte={{ state: 'thinking', message: fuerteLine('yield.fuerte.locked') }}>
         <div className="flex flex-col gap-6">
           <h1 className="text-headline-medium text-on-surface">{t('wallet.placeholder.lockedTitle', { section: t('wallet.sub.yield') })}</h1>
           <UnlockCard status={status} />
@@ -86,7 +87,7 @@ function Yield() {
   return (
     <WalletShell
       section={t('wallet.sub.yield')}
-      fuerte={{ state: 'neutral', message: wallet.yieldMode === 'none' ? t('yield.fuerte.none') : t('yield.fuerte.home'), why: t('yield.why') }}
+      fuerte={{ state: 'neutral', message: wallet.yieldMode === 'none' ? fuerteLine('yield.fuerte.none') : fuerteLine('yield.fuerte.home'), why: t('yield.why') }}
     >
       <div className="flex flex-col gap-6">
         <header className="flex flex-col gap-3">

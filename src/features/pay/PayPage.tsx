@@ -1,5 +1,6 @@
 import { type FormEvent, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { PrintButton } from '@/components/ui/PrintButton';
 import { Link, useParams } from 'react-router';
 import { MoneyInput } from '@/components/money/MoneyInput';
 import { MoneyText } from '@/components/money/MoneyText';
@@ -28,6 +29,7 @@ import { cn } from '@/lib/utils';
 import { useDataStore } from '@/store/data-store';
 import { useCurrentUser } from '@/store/session-store';
 import { useWallet } from '@/store/wallet-store';
+import { fuerteLine } from '@/features/companion/fuerte-lines';
 
 /**
  * P3, Pagar (level 2, CLAUDE.md 5.3, D-173): transfer to an alias with the holder and entity shown
@@ -60,7 +62,7 @@ export function PayPage() {
   const status = statuses.find((s) => s.level.id === 'level-2');
   if (status && !isOpen('level-2')) {
     return (
-      <WalletShell section={t('wallet.nav.pay')} fuerte={{ state: 'thinking', message: t('pay.fuerte.locked') }}>
+      <WalletShell section={t('wallet.nav.pay')} fuerte={{ state: 'thinking', message: fuerteLine('pay.fuerte.locked') }}>
         <div className="flex flex-col gap-6">
           <h1 className="text-headline-medium text-on-surface">{t('wallet.placeholder.lockedTitle', { section: t('wallet.nav.pay') })}</h1>
           <UnlockCard status={status} />
@@ -111,6 +113,7 @@ function Receipt({ movement, rows, headingRef }: { movement: WalletMovement; row
         </div>
       </dl>
       <p className="text-body-small text-on-surface-variant">{t('pay.receipt.note')}</p>
+      <PrintButton label={t('pay.receipt.print')} className="self-start" />
     </section>
   );
 }
@@ -153,7 +156,7 @@ function PayHome() {
   ];
 
   return (
-    <WalletShell section={t('wallet.nav.pay')} fuerte={{ state: 'neutral', message: t('pay.fuerte.home'), why: t('wallet.fuerte.why.pay') }}>
+    <WalletShell section={t('wallet.nav.pay')} fuerte={{ state: 'neutral', message: fuerteLine('pay.fuerte.home'), why: t('wallet.fuerte.why.pay') }}>
       <div className="flex flex-col gap-6">
         <header className="flex flex-col gap-2">
           <h1 className="text-headline-medium text-on-surface">{t('wallet.nav.pay')}</h1>
@@ -295,7 +298,7 @@ function TransferFlow() {
   };
 
   return (
-    <WalletShell section={t('wallet.nav.pay')} fuerte={{ state: stage === 'confirm' ? 'attention' : 'neutral', message: stage === 'confirm' ? t('pay.fuerte.confirm') : t('pay.fuerte.transfer') }}>
+    <WalletShell section={t('wallet.nav.pay')} fuerte={{ state: stage === 'confirm' ? 'attention' : 'neutral', message: stage === 'confirm' ? fuerteLine('pay.fuerte.confirm') : fuerteLine('pay.fuerte.transfer') }}>
       <div className="grid grid-cols-[minmax(0,1fr)] gap-6 large:grid-cols-[minmax(0,1fr)_22rem] large:items-start">
         <div className="flex min-w-0 flex-col gap-6">
           <p className="flex items-center gap-2 text-label-large text-primary">
@@ -439,7 +442,7 @@ function QrFlow() {
   };
 
   return (
-    <WalletShell section={t('wallet.nav.pay')} fuerte={{ state: 'neutral', message: t('pay.fuerte.qr') }}>
+    <WalletShell section={t('wallet.nav.pay')} fuerte={{ state: 'neutral', message: fuerteLine('pay.fuerte.qr') }}>
       <div className="grid grid-cols-[minmax(0,1fr)] gap-6 large:grid-cols-[minmax(0,1fr)_22rem] large:items-start">
         <div className="flex min-w-0 flex-col gap-6">
           <p className="flex items-center gap-2 text-label-large text-primary">
@@ -539,7 +542,7 @@ function BillsPage() {
   };
 
   return (
-    <WalletShell section={t('wallet.nav.pay')} fuerte={{ state: 'neutral', message: t('pay.fuerte.bills') }}>
+    <WalletShell section={t('wallet.nav.pay')} fuerte={{ state: 'neutral', message: fuerteLine('pay.fuerte.bills') }}>
       <div className="grid grid-cols-[minmax(0,1fr)] gap-6 large:grid-cols-[minmax(0,1fr)_22rem] large:items-start">
         <section aria-labelledby="bills-title" className={cn(card, '@container')}>
           <p className="flex items-center gap-2 text-label-large text-primary">

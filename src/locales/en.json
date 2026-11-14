@@ -338,7 +338,6 @@
   "sim3": {
     "title": "Inflation and purchasing power",
     "intro": "See how much your money loses if you keep it idle, with an example inflation scenario.",
-    "fuerte": "Try it with your practice salary. Then compare it with another scenario.",
     "dataLabel": "Scenario data",
     "amount": {
       "label": "Amount",
@@ -403,7 +402,7 @@
     "newTab": "(opens in a new tab)",
     "compare": {
       "save": "Save scenario",
-      "help": "Save up to two scenarios to compare them side by side. They stay on this screen only.",
+      "help": "Save up to two scenarios to compare them side by side. They stay only in this browser.",
       "listLabel": "Saved scenarios",
       "name": "Scenario {{n}}",
       "remove": "Remove scenario {{n}}",

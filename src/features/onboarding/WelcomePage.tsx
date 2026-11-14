@@ -39,6 +39,7 @@ import {
   route,
   scoreKnowledge,
 } from "./conocerte";
+import { fuerteLine } from '@/features/companion/fuerte-lines';
 
 /**
  * P2, "Abrir tu cuenta" (level 0, flows.md 2.1): a guided welcome with Fuerte, the simulated sign-up
@@ -87,22 +88,22 @@ export function WelcomePage() {
   const fuerte = {
     overview: {
       state: "greeting" as const,
-      message: t("welcome.fuerte.overview", { name: firstName }),
+      message: fuerteLine("welcome.fuerte.overview", { name: firstName }),
     },
     intro: {
       state: "greeting" as const,
-      message: t(`welcome.intro.${INTRO_SLIDES[slide]}.fuerte`, {
+      message: fuerteLine(`welcome.intro.${INTRO_SLIDES[slide]}.fuerte`, {
         name: firstName,
       }),
     },
     account: {
       state: "neutral" as const,
-      message: t("welcome.fuerte.account"),
+      message: fuerteLine("welcome.fuerte.account"),
     },
-    quiz: { state: "thinking" as const, message: t("welcome.fuerte.quiz") },
+    quiz: { state: "thinking" as const, message: fuerteLine("welcome.fuerte.quiz") },
     result: {
       state: "celebration" as const,
-      message: t("welcome.fuerte.result"),
+      message: fuerteLine("welcome.fuerte.result"),
     },
   }[stage];
 

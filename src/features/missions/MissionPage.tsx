@@ -39,6 +39,7 @@ import {
   startMission,
   walletAfter,
 } from './engine';
+import { fuerteLine } from '@/features/companion/fuerte-lines';
 
 /**
  * P12, a mission (CLAUDE.md 5.3, flows.md 2.3): objective, steps with progress, feedback that
@@ -88,7 +89,7 @@ function MissionRunner({ def }: { def: MissionDef & { steps: MissionStep[] } }) 
   }, [stepIndex]);
 
   const level = statuses.find((s) => s.level.id === def.levelId);
-  const fuerteDefault = t('wallet.mission.fuerte');
+  const fuerteDefault = fuerteLine('wallet.mission.fuerte');
 
   if (level && !isOpen(def.levelId)) {
     return (
@@ -163,7 +164,7 @@ function MissionRunner({ def }: { def: MissionDef & { steps: MissionStep[] } }) 
     recordMission(personId, def.id, DEMO_TODAY);
   };
 
-  const fuerteMessage = run.finished ? t('wallet.mission.fuerteDone') : (step.fuerte ? fillText(step.fuerte, run) : fuerteDefault);
+  const fuerteMessage = run.finished ? fuerteLine('wallet.mission.fuerteDone') : (step.fuerte ? fillText(step.fuerte, run) : fuerteDefault);
 
   return (
     <WalletShell section={t('wallet.nav.learn')} fuerte={{ state: run.finished ? 'celebration' : step.kind === 'single' ? 'thinking' : 'neutral', message: fuerteMessage }}>

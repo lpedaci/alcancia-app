@@ -6,6 +6,7 @@ import { MoneyInput } from '@/components/money/MoneyInput';
 import { PercentInput } from '@/components/money/PercentInput';
 import { Button } from '@/components/ui/Button';
 import { Icon } from '@/components/ui/Icon';
+import { PrintButton } from '@/components/ui/PrintButton';
 import { IconButton } from '@/components/ui/IconButton';
 import { SegmentedButton } from '@/components/ui/SegmentedButton';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableHeaderCell, TableRow } from '@/components/ui/Table';
@@ -13,6 +14,7 @@ import { D } from '@/lib/finance';
 import { formatCompactMoney, formatNumber, NBSP, parseDecimalInput } from '@/lib/money';
 import { cn } from '@/lib/utils';
 import type { SimChart, SimDef, SimField, SimOutput, SimValues } from './defs';
+import { useSavedScenarios } from './use-saved-scenarios';
 
 /**
  * The anatomy of every tool (CLAUDE.md 2.2.1 pattern 9, D-176): data on the left with help and
@@ -121,7 +123,7 @@ export function GenericSimulator({ def, preset, labelledBy }: { def: SimDef; pre
     Object.fromEntries(def.fields.map((f) => [f.id, initialText(f, preset?.[f.id] ?? f.default)])),
   );
   const [showTable, setShowTable] = useState(false);
-  const [saved, setSaved] = useState<{ id: string; main: string; label: string }[]>([]);
+  const { saved, save, remove } = useSavedScenarios(def.id);
 
   const values = parse(def, texts);
   const output: SimOutput | null = useMemo(() => (values ? def.compute(values, t) : null), [values && JSON.stringify(values), def, t]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -136,11 +138,18 @@ export function GenericSimulator({ def, preset, labelledBy }: { def: SimDef; pre
   const assumptions = t(k('assumptions'), { returnObjects: true }) as string[];
   const sources = def.sources.map((id) => sourceById(id)).filter((s) => s !== undefined);
   const set = (id: string, value: string) => setTexts((prev) => ({ ...prev, [id]: value }));
-  const summary = def.fields
-    .filter((f) => f.kind !== 'choice')
-    .slice(0, 3)
-    .map((f) => `${t(k(`fields.${f.id}.short`), { defaultValue: t(k(`fields.${f.id}.label`)) })}: ${texts[f.id]}${f.kind === 'percent' ? `${NBSP}%` : ''}`)
-    .join(' · ');
+  const summaryOf = (inputs: Record<string, string>) =>
+    def.fields
+      .filter((f) => f.kind !== 'choice')
+      .slice(0, 3)
+      .map((f) => `${t(k(`fields.${f.id}.short`), { defaultValue: t(k(`fields.${f.id}.label`)) })}: ${inputs[f.id] ?? ''}${f.kind === 'percent' ? `${NBSP}%` : ''}`)
+      .join(' · ');
+  // A saved scenario keeps its inputs; its result is computed again, so it always matches the formulas.
+  const savedViews = saved.flatMap((s) => {
+    const v = parse(def, { ...texts, ...s.inputs });
+    const out = v ? def.compute(v, t) : null;
+    return out ? [{ id: s.id, main: out.main, label: summaryOf(s.inputs) }] : [];
+  });
 
   return (
     <section aria-labelledby={labelledBy} className="@container flex min-w-0 flex-col gap-4">
@@ -308,24 +317,25 @@ export function GenericSimulator({ def, preset, labelledBy }: { def: SimDef; pre
           )}
 
           <div className="flex flex-col gap-3">
-            <div className="flex flex-wrap items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2 print:hidden">
               <Button
                 variant="tonal"
                 leadingIcon="compare_arrows"
                 disabledReason={output ? undefined : t('sims.common.invalid')}
-                onClick={() => output && setSaved((list) => [{ id: `${Date.now()}`, main: output.main, label: summary }, ...list].slice(0, 2))}
+                onClick={() => output && save(texts)}
               >
                 {t('sim3.compare.save')}
               </Button>
+              <PrintButton label={t('sims.common.print')} />
               <p className="text-body-small text-on-surface-variant">{t('sim3.compare.help')}</p>
             </div>
-            {saved.length > 0 && (
+            {savedViews.length > 0 && (
               <ul className="grid grid-cols-1 gap-3 @xl:grid-cols-2" aria-label={t('sim3.compare.listLabel')}>
-                {saved.map((s, index) => (
+                {savedViews.map((s, index) => (
                   <li key={s.id} className="flex min-w-0 flex-col gap-1 rounded-lg border border-outline-variant bg-surface-container-lowest p-4">
                     <div className="flex items-start justify-between gap-2">
-                      <p className="text-title-small text-on-surface">{t('sim3.compare.name', { n: saved.length - index })}</p>
-                      <IconButton icon="close" size="xs" label={t('sim3.compare.remove', { n: saved.length - index })} onClick={() => setSaved((list) => list.filter((x) => x.id !== s.id))} />
+                      <p className="text-title-small text-on-surface">{t('sim3.compare.name', { n: savedViews.length - index })}</p>
+                      <IconButton icon="close" size="xs" label={t('sim3.compare.remove', { n: savedViews.length - index })} onClick={() => remove(s.id)} />
                     </div>
                     <p className="text-body-small text-on-surface-variant">{s.label}</p>
                     <p className="text-title-large break-words text-on-surface">{s.main}</p>

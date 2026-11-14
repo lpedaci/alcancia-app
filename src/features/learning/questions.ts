@@ -30,7 +30,9 @@ export type LearningQuestion =
   | (Base & { type: 'numeric'; numeric: { answer: string; tolerance: string; unit: 'ARS' | 'USD' | 'percent' | 'months' }; help: string })
   | (Base & { type: 'ordering'; ordering: { items: Option[]; correctOrder: string[] } })
   | (Base & { type: 'matching'; matching: { left: Option[]; right: Option[]; pairs: [string, string][] } })
-  | (Base & { type: 'categorize'; categorize: { categories: { id: string; label: string }[]; items: (Option & { categoryId: string })[] } });
+  | (Base & { type: 'categorize'; categorize: { categories: { id: string; label: string }[]; items: (Option & { categoryId: string })[] } })
+  /** Exercise with a simulator (5.1, RF-43, D-205): the tool embedded with a preset, and the result typed as a number. */
+  | (Base & { type: 'simulator_task'; simulatorTask: { simId: string; preset: Record<string, string>; answer: string; tolerance: string; unit: 'ARS' | 'USD' | 'percent' | 'months' }; help: string });
 
 /** single: option id · multiple: ids · true_false_why: { value, why } · numeric: typed text · ordering: ids in order · matching and categorize: id → id. */
 export type Answer = string | string[] | Record<string, string>;
@@ -93,6 +95,7 @@ export function isAnswered(question: LearningQuestion, answer: Answer | undefine
       return Boolean(a.value && a.why);
     }
     case 'numeric':
+    case 'simulator_task':
       return typeof answer === 'string' && parseDecimalInput(answer) !== null;
     case 'ordering':
       return Array.isArray(answer) && answer.length === question.ordering.items.length;
@@ -121,6 +124,10 @@ export function isCorrect(question: LearningQuestion, answer: Answer | undefined
     case 'numeric': {
       const value = parseDecimalInput(answer as string)!;
       return new Decimal(value).minus(question.numeric.answer).abs().lte(question.numeric.tolerance);
+    }
+    case 'simulator_task': {
+      const value = parseDecimalInput(answer as string)!;
+      return new Decimal(value).minus(question.simulatorTask.answer).abs().lte(question.simulatorTask.tolerance);
     }
     case 'ordering':
       return (answer as string[]).join() === question.ordering.correctOrder.join();

@@ -55,6 +55,7 @@ export const PAGES: CheckedPage[] = [
   { id: 'p12-mission-security', path: '/#/app/missions/mission-security', as: 'p-mariana' },
   { id: 'p14-profile-mariana', path: '/#/app/profile', as: 'p-mariana' },
   { id: 'p9-learn-diego', path: '/#/app/learn', as: 'p-diego' },
+  { id: 'p9-learn-mariana', path: '/#/app/learn', as: 'p-mariana' },
   { id: 'p10-guide-diego', path: '/#/app/learn/guides/module-17-guide-1', as: 'p-diego' },
   { id: 'p11-challenge-diego', path: '/#/app/learn/challenges/challenge-level-2', as: 'p-diego' },
   { id: 'p10-guide-m06-mariana', path: '/#/app/learn/guides/module-06-guide-1', as: 'p-mariana' },

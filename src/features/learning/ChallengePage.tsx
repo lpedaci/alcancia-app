@@ -31,6 +31,7 @@ import {
   scoreAttempt,
   startingOrder,
 } from './questions';
+import { fuerteLine } from '@/features/companion/fuerte-lines';
 
 /**
  * P11, a level challenge or a mastery challenge ("Ya sé esto", D-57, 5.1): questions drawn from the
@@ -78,7 +79,7 @@ function ChallengeRunner({ challenge }: { challenge: ChallengeDef }) {
   // A level challenge is taken inside its level; a mastery challenge is the way in (5.0).
   if (!challenge.mastery && status && !isOpen(level.id)) {
     return (
-      <WalletShell section={t('wallet.nav.learn')} fuerte={{ state: 'thinking', message: t('learn.challenge.fuerte') }}>
+      <WalletShell section={t('wallet.nav.learn')} fuerte={{ state: 'thinking', message: fuerteLine('learn.challenge.fuerte') }}>
         <div className="flex max-w-3xl flex-col gap-6">
           <h1 className="text-headline-medium text-on-surface">{t('learn.challenge.locked', { title })}</h1>
           <UnlockCard status={status} />
@@ -118,7 +119,7 @@ function ChallengeRunner({ challenge }: { challenge: ChallengeDef }) {
     setResult(score);
   };
 
-  const fuerteMessage = result ? (result.score >= passing ? t('learn.challenge.fuertePassed') : t('learn.challenge.fuerteRetry')) : t('learn.challenge.fuerte');
+  const fuerteMessage = result ? (result.score >= passing ? fuerteLine('learn.challenge.fuertePassed') : fuerteLine('learn.challenge.fuerteRetry')) : fuerteLine('learn.challenge.fuerte');
 
   return (
     <WalletShell section={t('wallet.nav.learn')} fuerte={{ state: result ? (result.score >= passing ? 'celebration' : 'thinking') : 'neutral', message: fuerteMessage }}>

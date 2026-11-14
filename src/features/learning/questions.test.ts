@@ -18,6 +18,8 @@ import {
   seeded,
   startingOrder,
 } from './questions';
+import { compoundGrowth, minimumPaymentSchedule } from '@/lib/finance';
+import { simById } from '@/features/simulators/defs';
 
 const byId = (id: string) => BANK.find((q) => q.id === id)!;
 
@@ -40,6 +42,8 @@ function rightAnswer(q: LearningQuestion): Answer {
       return Object.fromEntries(q.matching.pairs);
     case 'categorize':
       return Object.fromEntries(q.categorize.items.map((i) => [i.id, i.categoryId]));
+    case 'simulator_task':
+      return q.simulatorTask.answer.replace('.', ',');
   }
 }
 
@@ -189,5 +193,30 @@ describe('sources shown with full names (review of 13/11/2026)', () => {
     expect(shown[1]!.name).toContain('Lic. Kevin Giampieri (diapositivas 14, 23)');
     expect(shown[2]).toMatchObject({ verifiedAt: '2026-11-12' });
     expect(shown[3]).toMatchObject({ verifiedAt: '2026-11-11' });
+  });
+});
+
+describe('exercises with a simulator (5.1, RF-43, D-205)', () => {
+  const tasks = BANK.filter((q): q is Extract<LearningQuestion, { type: 'simulator_task' }> => q.type === 'simulator_task');
+
+  it('exist, with a simulator that exists and a preset for its fields', () => {
+    expect(tasks.length).toBeGreaterThanOrEqual(2);
+    for (const q of tasks) {
+      const def = simById(q.simulatorTask.simId);
+      expect(def, q.id).toBeDefined();
+      for (const key of Object.keys(q.simulatorTask.preset)) expect(def!.fields.map((f) => f.id), q.id).toContain(key);
+    }
+  });
+
+  it('expect exactly what the simulator computes with the preset (hand-checked cases F-15 and F-19)', () => {
+    const card = tasks.find((q) => q.simulatorTask.simId === 'SIM-7')!;
+    const p = card.simulatorTask.preset;
+    const months = minimumPaymentSchedule({ balance: p.balance!, tna: String(Number(p.tna) / 100), minimumRate: String(Number(p.minimum) / 100) }).months;
+    expect(String(months)).toBe(card.simulatorTask.answer);
+
+    const compound = tasks.find((q) => q.simulatorTask.simId === 'SIM-10')!;
+    const c = compound.simulatorTask.preset;
+    const final = compoundGrowth({ initial: c.initial!, monthly: c.monthly!, annualRate: String(Number(c.rate) / 100), years: Number(c.years) }).final;
+    expect(final.toFixed(2)).toBe(compound.simulatorTask.answer);
   });
 });

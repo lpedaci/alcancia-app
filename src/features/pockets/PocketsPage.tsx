@@ -38,6 +38,7 @@ import { cn } from '@/lib/utils';
 import { useDataStore } from '@/store/data-store';
 import { useCurrentUser } from '@/store/session-store';
 import { useWallet } from '@/store/wallet-store';
+import { fuerteLine } from '@/features/companion/fuerte-lines';
 
 /**
  * P5, Apartados y metas (level 4, CLAUDE.md 5.3, F5, D-175): the emergency fund with the months of
@@ -55,7 +56,7 @@ export function PocketsPage() {
   const status = statuses.find((s) => s.level.id === 'level-4');
   if (status && !isOpen('level-4')) {
     return (
-      <WalletShell section={t('wallet.sub.pockets')} fuerte={{ state: 'thinking', message: t('pockets.fuerte.locked') }}>
+      <WalletShell section={t('wallet.sub.pockets')} fuerte={{ state: 'thinking', message: fuerteLine('pockets.fuerte.locked') }}>
         <div className="flex flex-col gap-6">
           <h1 className="text-headline-medium text-on-surface">{t('wallet.placeholder.lockedTitle', { section: t('wallet.sub.pockets') })}</h1>
           <UnlockCard status={status} />
@@ -93,7 +94,7 @@ function Pockets() {
   return (
     <WalletShell
       section={t('wallet.sub.pockets')}
-      fuerte={{ state: 'neutral', message: fund ? t('pockets.fuerte.fund', { months: monthsText }) : t('pockets.fuerte.noFund'), why: t('wallet.fuerte.why.pockets') }}
+      fuerte={{ state: 'neutral', message: fund ? fuerteLine('pockets.fuerte.fund', { months: monthsText }) : fuerteLine('pockets.fuerte.noFund'), why: t('wallet.fuerte.why.pockets') }}
     >
       <div className="flex flex-col gap-6">
         <header className="flex flex-col gap-3">

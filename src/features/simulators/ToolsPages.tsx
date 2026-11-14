@@ -9,6 +9,7 @@ import { useCurrentUser } from '@/store/session-store';
 import { useWallet } from '@/store/wallet-store';
 import { GenericSimulator } from './GenericSimulator';
 import { simById, TOOL_IDS, TOOL_LEVEL } from './defs';
+import { fuerteLine } from '@/features/companion/fuerte-lines';
 
 /**
  * P13, Herramientas (CLAUDE.md F4, D-176): the 12 tools together under Aprender, grouped by the
@@ -24,7 +25,7 @@ export function ToolsPage() {
   const groups = ['level-3', 'level-4', 'level-5', 'level-6', 'level-7'];
 
   return (
-    <WalletShell section={t('wallet.nav.learn')} fuerte={{ state: 'neutral', message: t('sims.common.fuerte') }}>
+    <WalletShell section={t('wallet.nav.learn')} fuerte={{ state: 'neutral', message: fuerteLine('sims.common.fuerte') }}>
       <div className="flex flex-col gap-6">
         <Breadcrumbs current={t('wallet.sub.tools')} />
         <header className="flex flex-col gap-2">
@@ -113,7 +114,7 @@ export function SimToolPage() {
   const preset = def.preset?.(wallet);
   const titleId = `p13-${def.id}-title`;
   return (
-    <WalletShell section={t('wallet.nav.learn')} fuerte={{ state: 'neutral', message: t(`sims.${def.id}.fuerte`) }}>
+    <WalletShell section={t('wallet.nav.learn')} fuerte={{ state: 'neutral', message: fuerteLine(`sims.${def.id}.fuerte`) }}>
       <div className="flex flex-col gap-4">
         <Breadcrumbs current={t(`sims.${def.id}.title`)} />
         <h1 id={titleId} className="text-headline-medium text-on-surface">

@@ -22,6 +22,7 @@ import { cn } from '@/lib/utils';
 import { useDataStore } from '@/store/data-store';
 import { useCurrentUser } from '@/store/session-store';
 import { useWallet } from '@/store/wallet-store';
+import { fuerteLine } from '@/features/companion/fuerte-lines';
 
 /**
  * P4, Presupuesto (level 3, CLAUDE.md 5.3, D-174): the month in progress against a reference split
@@ -40,7 +41,7 @@ export function BudgetPage() {
   const status = statuses.find((s) => s.level.id === 'level-3');
   if (status && !isOpen('level-3')) {
     return (
-      <WalletShell section={t('wallet.sub.budget')} fuerte={{ state: 'thinking', message: t('budget.fuerte.locked') }}>
+      <WalletShell section={t('wallet.sub.budget')} fuerte={{ state: 'thinking', message: fuerteLine('budget.fuerte.locked') }}>
         <div className="flex flex-col gap-6">
           <h1 className="text-headline-medium text-on-surface">{t('wallet.placeholder.lockedTitle', { section: t('wallet.sub.budget') })}</h1>
           <UnlockCard status={status} />
@@ -97,7 +98,7 @@ function Budget() {
   ];
 
   return (
-    <WalletShell section={t('wallet.sub.budget')} fuerte={{ state: b.green ? 'celebration' : 'neutral', message: b.green ? t('budget.fuerte.green') : t('budget.fuerte.home'), why: t('wallet.fuerte.why.budget') }}>
+    <WalletShell section={t('wallet.sub.budget')} fuerte={{ state: b.green ? 'celebration' : 'neutral', message: b.green ? fuerteLine('budget.fuerte.green') : fuerteLine('budget.fuerte.home'), why: t('wallet.fuerte.why.budget') }}>
       <div className="flex flex-col gap-6">
         <header className="flex flex-col gap-3">
           <h1 className="text-headline-medium text-on-surface">{t('wallet.sub.budget')}</h1>

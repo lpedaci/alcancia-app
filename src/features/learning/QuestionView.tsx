@@ -3,9 +3,13 @@ import { MoneyInput } from '@/components/money/MoneyInput';
 import { PercentInput } from '@/components/money/PercentInput';
 import { Button } from '@/components/ui/Button';
 import { Checkbox } from '@/components/ui/Checkbox';
+import { Icon } from '@/components/ui/Icon';
 import { IconButton } from '@/components/ui/IconButton';
 import { RadioGroup } from '@/components/ui/RadioGroup';
 import { Select } from '@/components/ui/Select';
+import { TextField } from '@/components/ui/TextField';
+import { GenericSimulator } from '@/features/simulators/GenericSimulator';
+import { simById } from '@/features/simulators/defs';
 import type { Answer, LearningQuestion } from './questions';
 
 /**
@@ -98,6 +102,8 @@ export function QuestionView({
       if (question.numeric.unit === 'percent') return <PercentInput {...field} />;
       return <MoneyInput {...field} currency={question.numeric.unit === 'USD' ? 'USD' : 'ARS'} />;
     }
+    case 'simulator_task':
+      return <SimulatorTask question={question} value={value as string | undefined} onChange={onChange} disabled={disabled} idPrefix={name} />;
     case 'ordering': {
       const order = (value as string[]) ?? question.ordering.items.map((i) => i.id);
       const move = (index: number, delta: number) => {
@@ -182,5 +188,52 @@ export function CheckButton({ onClick, disabled }: { onClick: () => void; disabl
     <Button variant="tonal" className="self-start" leadingIcon="check" onClick={onClick} disabled={disabled}>
       {t('learn.q.check')}
     </Button>
+  );
+}
+
+/**
+ * Exercise with a simulator (5.1, RF-43, D-205): the real tool, preset with the case, inside a
+ * disclosure so the question stays short; the person reads the result and types it in a field with
+ * its unit. Everything works with the keyboard, like the simulator itself (2.10).
+ */
+function SimulatorTask({
+  question,
+  value,
+  onChange,
+  disabled,
+  idPrefix,
+}: {
+  question: Extract<LearningQuestion, { type: 'simulator_task' }>;
+  value: string | undefined;
+  onChange: (answer: Answer) => void;
+  disabled: boolean;
+  idPrefix: string;
+}) {
+  const { t } = useTranslation();
+  const def = simById(question.simulatorTask.simId);
+  const unit = question.simulatorTask.unit;
+  const field = { label: question.prompt, helperText: question.help, disabled, value: value ?? '', onChange: (e: React.ChangeEvent<HTMLInputElement>) => onChange(e.target.value) };
+  const titleId = `${idPrefix}-sim-title`;
+  return (
+    <div className="flex flex-col gap-4">
+      {def && (
+        <details className="group rounded-lg border border-outline-variant bg-surface-container">
+          <summary className="flex min-h-12 cursor-pointer list-none items-center gap-2 px-4 py-3 text-label-large text-primary">
+            <Icon name="chevron_right" size={20} className="transition-transform group-open:rotate-90" />
+            <span id={titleId}>{t('learn.q.simOpen', { name: t(`sims.${def.id}.title`) })}</span>
+          </summary>
+          <div className="border-t border-outline-variant bg-surface p-3">
+            <GenericSimulator def={def} preset={question.simulatorTask.preset} labelledBy={titleId} />
+          </div>
+        </details>
+      )}
+      {unit === 'percent' ? (
+        <PercentInput {...field} />
+      ) : unit === 'months' ? (
+        <TextField {...field} inputMode="numeric" autoComplete="off" />
+      ) : (
+        <MoneyInput {...field} currency={unit === 'USD' ? 'USD' : 'ARS'} />
+      )}
+    </div>
   );
 }

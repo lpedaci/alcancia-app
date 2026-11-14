@@ -10,6 +10,7 @@ import { WalletShell } from '@/features/wallet/WalletShell';
 import { formatDate } from '@/lib/dates';
 import { cn } from '@/lib/utils';
 import { SOURCE_KIND_ICON } from './source-kinds';
+import { fuerteLine } from '@/features/companion/fuerte-lines';
 
 /**
  * Aprender > Fuentes (pedido de Lourdes, D-187): every source of the content in one place, with its
@@ -56,7 +57,7 @@ export function SourcesPage() {
   const formula: ContentSource & { body: string } = { key: 'F', kind: 'formula', short: '', name: t('learn.sources.page.formulas'), url: FORMULAS_URL, body: t('learn.sources.page.formulasBody') };
 
   return (
-    <WalletShell section={t('wallet.nav.learn')} fuerte={{ state: 'neutral', message: t('learn.sources.page.fuerte') }}>
+    <WalletShell section={t('wallet.nav.learn')} fuerte={{ state: 'neutral', message: fuerteLine('learn.sources.page.fuerte') }}>
       <div className="flex flex-col gap-6">
         <header className="flex flex-col gap-2">
           <h1 className="text-headline-medium text-on-surface">{t('learn.sources.page.title')}</h1>

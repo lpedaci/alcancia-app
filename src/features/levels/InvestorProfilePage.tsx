@@ -8,6 +8,7 @@ import { RadioGroup } from '@/components/ui/RadioGroup';
 import { WalletShell } from '@/features/wallet/WalletShell';
 import { type InvestorProfile, readLocal, writeLocal } from '@/store/local-store';
 import { useCurrentUser } from '@/store/session-store';
+import { fuerteLine } from '@/features/companion/fuerte-lines';
 
 /**
  * Educational investor profile test (D-67, A-54, module 13). Offered from the "qué falta" card of
@@ -42,7 +43,7 @@ export function InvestorProfilePage() {
   };
 
   return (
-    <WalletShell section={t('wallet.nav.learn')} fuerte={{ state: 'thinking', message: t('wallet.profile.fuerte') }}>
+    <WalletShell section={t('wallet.nav.learn')} fuerte={{ state: 'thinking', message: fuerteLine('wallet.profile.fuerte') }}>
       <div className="flex max-w-3xl flex-col gap-6">
         <header className="flex flex-col gap-2">
           <p className="text-label-large text-primary">{t('wallet.profile.kicker')}</p>

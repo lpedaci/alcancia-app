@@ -36,10 +36,10 @@
 | RF-30 | Rendir: cuenta remunerada y fondo money market de práctica; plazo fijo y UVA de práctica | M | Rendimiento diario acreditado; fichas con protección de cada opción | Hecho (paso 8.4, D-180) |
 | RF-31 | Tarjeta y préstamos: tarjeta de práctica con resumen, préstamo preaprobado y compra en cuotas | M | El CFT siempre visible antes de decidir | Hecho (paso 8.3, D-178) |
 | RF-32 | Invertir: cuenta comitente de práctica con el bróker ficticio (5.4) | M | Los 7 pasos de 5.4; serie de precios sintética rotulada | Hecho (paso 9, D-185, D-186) |
-| RF-33 | Fuerte con 6 estados, mensajes de `fuerte-lines.json` y 3 niveles de presencia | M | Nunca interrumpe dos veces la misma acción; mensaje anunciado como texto | Parcial (paso 6): 3 niveles de presencia en P14, Fuerte flotante y movible; faltan los mensajes de `fuerte-lines.json` |
+| RF-33 | Fuerte con 6 estados, mensajes de `fuerte-lines.json` y 3 niveles de presencia | M | Nunca interrumpe dos veces la misma acción; mensaje anunciado como texto | Hecho (D-206) |
 | RF-34 | "¿Por qué importa?" y tarjetas de aprendizaje en el momento justo | M | Una por acción como máximo; no se repite si ya se respondió bien | Hecho: "¿Por qué importa?" en Inicio y en cada flujo de Pagar, tarjetas de aprendizaje en las misiones |
 | RF-35 | Cartel fijo "Simulador de finanzas personales · dinero ficticio" y ningún dato real pedido | M | Revisión de formularios: no hay campos de DNI, CBU, tarjeta ni contraseña reales | Hecho: cartel fijo en toda la billetera y ningún campo de datos reales |
-| RF-36 | Comprobantes y resumen del mes | S | Comprobante ficticio descargable; resumen en cada cierre | Parcial: comprobante en pantalla al pagar y resumen de cada mes cerrado; falta el comprobante descargable |
+| RF-36 | Comprobantes y resumen del mes | S | Comprobante ficticio descargable; resumen en cada cierre | Hecho: comprobante descargable en PDF o imprimible y resumen de cada mes cerrado (D-207) |
 | RF-37 | Empezar de cero la billetera con confirmación | M | No borra el avance de aprendizaje | Hecho (paso 6, P14) |
 
 ### 1.3 Aprendizaje (F2, F3, 5.1)
@@ -49,14 +49,14 @@
 | RF-40 | "Conocerte" con 10 a 12 preguntas, resultado por 5 dimensiones en barras horizontales con tabla | M | Hábitos sin juicio y solo en el navegador (D-62) | Hecho (paso 6, P2, D-167) |
 | RF-41 | Ruta explicada dentro de cada nivel y repetición final para pre y post | M | Frase que explica el orden | Hecho (paso 6): ruta explicada y "Repetir Conocerte" (final) |
 | RF-42 | 16 guías de fase A con la secuencia de Gagné (D-61) | M | Cada una con objetivo observable y "Para tu vida" | Hecho: 17 guías (los 16 módulos de fase A más la guía base del 18, D-61, D-65) |
-| RF-43 | Los 9 tipos de pregunta de 5.1 con alternativa accesible al arrastre | M | Ordenar con "Subir" y "Bajar"; unir con selects; clasificar con menú | Parcial: 7 tipos en los desafíos y el caso con decisiones como paso de las misiones; falta el ejercicio con simulador |
+| RF-43 | Los 9 tipos de pregunta de 5.1 con alternativa accesible al arrastre | M | Ordenar con "Subir" y "Bajar"; unir con selects; clasificar con menú | Hecho: los 9 tipos (D-205) |
 | RF-44 | Desafíos de nivel con los bancos de sus módulos, mejor intento e intentos configurables (D-57) | M | Insignia por módulo según su parte | Hecho para los niveles 1 a 4 (paso 7, D-171) |
 | RF-45 | 13 misiones con el motor declarativo (D-59) | M | Cada una con objetivo, pasos, evento, devolución y criterios de éxito | Hecho: las 13 misiones (D-59) |
 | RF-46 | Mapa de niveles como línea de tiempo y logros | M | Estado con ícono y texto | Hecho (paso 7, P9) |
-| RF-47 | Glosario integrado con chip en el primer uso | M | Términos de 1.1.1 | Pendiente |
+| RF-47 | Glosario integrado con chip en el primer uso | M | Términos de 1.1.1 | Hecho en las guías (D-204); el glosario completo con búsqueda es F10, fase B |
 | RF-48 | Fichas "Brókers registrados" y "Billeteras y fintech" verificadas | M | Solo filas verificadas en el registro oficial, con fecha | Hecho (paso 3); antes de publicar se vuelve a revisar PPI (Q-15) |
 | RF-49 | Satisfacción de 1 a 5 al terminar cada guía | S | Alimenta Kirkpatrick 1 | Hecho (paso 7, P10) |
-| RF-50 | Desafíos semanales con autoinforme y reflexión opcional | M | La reflexión no sale del navegador de la persona | Pendiente |
+| RF-50 | Desafíos semanales con autoinforme y reflexión opcional | M | La reflexión no sale del navegador de la persona | Hecho (D-202) |
 | RF-51 | Registro de eventos tipo xAPI en misiones | C | Visor en fase B (F21) | Parcial: las misiones registran los enunciados; el visor llega en F21 |
 
 ### 1.4 Herramientas (F4)
@@ -65,9 +65,9 @@
 | --- | --- | --- | --- | --- |
 | RF-60 | SIM-1 a SIM-12 con la anatomía de 2.2.1 | M | Datos, resultado, frase, gráfico con tabla, "Qué significa esto", supuestos, comparar, "Prueba cambiar…" y aviso legal | Hecho (paso 8.1, D-176): SIM-3 propio y los otros 11 con el simulador genérico; tests con los casos de formulas.md |
 | RF-61 | Escenarios de ejemplo de `scenarios.json` y "Dónde ver los valores reales" | M | Rotulados "Valores de ejemplo" | Hecho (paso 8.1): tasas e inflación por defecto del escenario medio, rotuladas como ejemplo, con las fuentes oficiales de cada herramienta |
-| RF-62 | Guardar y comparar dos escenarios, en el navegador | M | `LocalScenario` por persona | Parcial: se comparan escenarios en la sesión; no se guardan en `LocalScenario` al recargar |
+| RF-62 | Guardar y comparar dos escenarios, en el navegador | M | `LocalScenario` por persona | Hecho (D-203) |
 | RF-63 | Precargar herramientas con datos de la billetera | S | SIM-2 con los gastos esenciales del último mes | Hecho (paso 8.1): SIM-1, SIM-2 y SIM-12 se precargan con la billetera |
-| RF-64 | Exportar el resultado como resumen imprimible con supuestos | S | Vista de impresión | Pendiente |
+| RF-64 | Exportar el resultado como resumen imprimible con supuestos | S | Vista de impresión | Hecho (D-207) |
 
 ### 1.5 Tutor, admin y decisor (F1, F6 a F8)
 

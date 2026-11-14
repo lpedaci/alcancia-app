@@ -232,7 +232,7 @@ export function WalletShell({ section, children, fuerte }: { section: string; ch
           data-wallet-side-nav
           aria-label={t('wallet.nav.label')}
           className={cn(
-            'sticky top-3 hidden h-[calc(100dvh-1.5rem)] shrink-0 flex-col overflow-hidden rounded-xl border border-outline-variant bg-surface-container-lowest large:flex',
+            'sticky top-3 hidden h-[calc(100dvh-1.5rem)] shrink-0 flex-col overflow-hidden rounded-xl border border-outline-variant bg-surface-container-lowest large:flex print:!hidden',
             expanded ? 'w-64' : 'w-20',
           )}
         >
@@ -302,7 +302,7 @@ export function WalletShell({ section, children, fuerte }: { section: string; ch
         <div className="min-w-0 flex-1">
           {/* Top bar: on phones the logo and the section; from tablets, a floating bar with the section title */}
           {/* From tablets, the header covers the gap above the floating bar so content never shows behind it */}
-          <header data-wallet-header className="sticky top-0 z-30 border-b border-outline-variant bg-surface-container-lowest large:-mt-3 large:border-0 large:bg-surface large:pt-3">
+          <header data-wallet-header className="sticky top-0 z-30 print:!hidden border-b border-outline-variant bg-surface-container-lowest large:-mt-3 large:border-0 large:bg-surface large:pt-3">
             <div className="flex min-h-16 items-center gap-1 px-(--space-gutter) py-2 sm:gap-2 medium:px-6 large:gap-2 large:rounded-xl large:border large:border-outline-variant large:bg-surface-container-lowest large:px-4">
               <Link to="/app" className="inline-flex shrink-0 rounded-sm large:hidden">
                 <Logo compact />
@@ -323,7 +323,9 @@ export function WalletShell({ section, children, fuerte }: { section: string; ch
               <UserMenu />
             </div>
           </header>
-          <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-[120rem] px-(--space-gutter) pt-6 pb-28 focus:outline-none medium:px-6 large:pb-28">
+          <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-[120rem] px-(--space-gutter) pt-6 pb-28 focus:outline-none medium:px-6 large:pb-28 print:p-0">
+            {/* Printed pages (receipts, simulator summaries) keep the notice: "dinero ficticio" is never removed (D-69). */}
+            <p className="mb-4 hidden border-b border-outline-variant pb-2 text-label-large text-on-surface print:block">{t('wallet.printBanner')}</p>
             {children}
           </main>
         </div>
@@ -335,7 +337,7 @@ export function WalletShell({ section, children, fuerte }: { section: string; ch
       <nav
         data-wallet-bottom-nav
         aria-label={t('wallet.nav.label')}
-        className="fixed inset-x-0 bottom-0 z-30 border-t border-outline-variant bg-surface-container-lowest pb-[env(safe-area-inset-bottom)] large:hidden"
+        className="fixed inset-x-0 bottom-0 z-30 border-t border-outline-variant bg-surface-container-lowest pb-[env(safe-area-inset-bottom)] large:hidden print:!hidden"
       >
         <ul className="mx-auto grid max-w-xl grid-cols-5">
           {DESTINATIONS.map((d) => {
@@ -374,9 +376,11 @@ export function WalletShell({ section, children, fuerte }: { section: string; ch
 
       {/* Presence chosen in the profile (5.0.1): "Silencio" hides Fuerte; learning cards stay. */}
       {fuerte && presence !== 'silent' && (
-        <FuerteFab state={fuerte.state} lights={lights} message={fuerte.message} why={fuerte.why} notify={presence === 'chatty'}>
-          {fuerte.action}
-        </FuerteFab>
+        <div className="print:hidden">
+          <FuerteFab state={fuerte.state} lights={lights} message={fuerte.message} why={fuerte.why} notify={presence === 'chatty'}>
+            {fuerte.action}
+          </FuerteFab>
+        </div>
       )}
     </div>
   );

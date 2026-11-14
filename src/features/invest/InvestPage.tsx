@@ -32,6 +32,7 @@ import { readLocal } from '@/store/local-store';
 import { useCurrentUser } from '@/store/session-store';
 import { useWallet } from '@/store/wallet-store';
 import { BROKER_NAME, buy, buyPreview, fundBrokerage, instrumentById, INSTRUMENTS, openBrokerage, portfolioValue, positions, quote, sell, withdrawBrokerage } from './engine';
+import { fuerteLine } from '@/features/companion/fuerte-lines';
 
 /**
  * P8, Invertir (level 7, CLAUDE.md 5.4, SIM-14, D-186): the practice brokerage account at a
@@ -51,7 +52,7 @@ function useInvestGate() {
   const status = statuses.find((s) => s.level.id === 'level-7');
   if (status && !isOpen('level-7')) {
     return (
-      <WalletShell section={t('wallet.nav.invest')} fuerte={{ state: 'thinking', message: t('invest.fuerte.locked') }}>
+      <WalletShell section={t('wallet.nav.invest')} fuerte={{ state: 'thinking', message: fuerteLine('invest.fuerte.locked') }}>
         <div className="flex flex-col gap-6">
           <h1 className="text-headline-medium text-on-surface">{t('wallet.placeholder.lockedTitle', { section: t('wallet.nav.invest') })}</h1>
           <UnlockCard status={status} />
@@ -119,7 +120,7 @@ function Invest() {
   const account = wallet.brokerage;
 
   return (
-    <WalletShell section={t('wallet.nav.invest')} fuerte={{ state: 'neutral', message: account ? t('invest.fuerte.home') : t('invest.fuerte.open'), why: t('invest.why') }}>
+    <WalletShell section={t('wallet.nav.invest')} fuerte={{ state: 'neutral', message: account ? fuerteLine('invest.fuerte.home') : fuerteLine('invest.fuerte.open'), why: t('invest.why') }}>
       <div className="flex flex-col gap-6">
         <header className="flex flex-col gap-3">
           <h1 className="text-headline-medium text-on-surface">{t('wallet.nav.invest')}</h1>
@@ -570,7 +571,7 @@ function Instrument() {
   };
 
   return (
-    <WalletShell section={t('wallet.nav.invest')} fuerte={{ state: def.risk === 'high' ? 'attention' : 'neutral', message: t(`invest.fuerte.${def.risk}`) }}>
+    <WalletShell section={t('wallet.nav.invest')} fuerte={{ state: def.risk === 'high' ? 'attention' : 'neutral', message: fuerteLine(`invest.fuerte.${def.risk}`) }}>
       <div className="flex flex-col gap-6">
         <header className="flex flex-col gap-3">
           <Link to="/app/invest" className="flex w-fit items-center gap-1 text-label-large text-primary underline-offset-4 hover:underline">
