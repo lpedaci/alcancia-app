@@ -179,3 +179,75 @@ En esta revisión se actualizaron dos cosas:
 2. Tu recorrido con lector de pantalla y Lighthouse sobre el sitio publicado, o sumar Firefox, WebKit y la cobertura a las pruebas.
 3. Enviar al Lic. Kevin Giampieri las ampliaciones de `content.md` y las preguntas abiertas.
 4. Fase B, pasos 15 a 28 (F9 a F22), en el orden de la spec.
+
+## Auditoría previa al ajuste (14/11/2026)
+
+> Contraste de lo construido (commit ae66098) con los criterios de la sección 11 de la spec actualizada, incluidos los del ajuste de fase A (D-74 a D-82). Sin cambios de código. Los pasos 15 a 21 todavía no empezaron (`progress.md` termina en el cierre de INC-02).
+
+### Resultados de las suites
+
+| Suite | Resultado |
+| --- | --- |
+| Lint (`eslint .`) | 0 errores, 0 avisos |
+| Tipos (`tsc -b`) | Sin errores |
+| Tests unitarios (Vitest) | 526 de 526, en 36 archivos |
+| Playwright con el servidor de desarrollo (desbordes en 6 anchos, axe a 375 y 1280 px, un `h1` por página) | 632 de 632 (70 páginas por 6 anchos, más axe y `h1` a 375 y 1280 px) |
+| Build de producción | Sin errores |
+
+### Hallazgos de Lourdes, verificados
+
+| # | Hallazgo | Verificación | Evidencia |
+| --- | --- | --- | --- |
+| 1 | Las 13 tarjetas de aprendizaje viven como pasos de las misiones; el campo `learningCards` con `trigger` no se usa | **Confirmado, con una precisión:** el campo no está sin usar, directamente no existe. Las 13 tarjetas son pasos `"kind": "card"` dentro de las misiones y solo aparecen al jugarlas. No hay `learning-cards.json` ni un motor que escuche las acciones de la billetera | `src/data/wallet-missions.json` (13 pasos `card`, 0 `learningCards`); `src/features/missions/engine.ts`, línea 85 |
+| 2 | "¿Por qué importa?" existe en Pagar y en el menú de Fuerte, pero no en Rendir, Presupuesto, Apartados ni Invertir | **Corregido en parte:** Rendir, Presupuesto, Apartados, Invertir, Tarjeta y préstamos e Inicio sí lo tienen, pero **solo dentro del panel de Fuerte**. Como tarjeta visible en la pantalla está solo en los tres flujos de Pagar. Con la presencia "Silencio", Fuerte no aparece y esas explicaciones desaparecen, lo que contradice 5.0.1. Perfil no lo tiene en ningún lado. Ninguno lleva a una parte de una guía (D-78) | `WhyCard` solo en `src/features/pay/PayPage.tsx` (líneas 415, 522 y 622); el resto pasa `why` a `WalletShell` y de ahí a `FuerteFab` |
+| 3 | Hay 0 preguntas `branching` en `question-banks.json` | **Confirmado:** 0. Los casos con decisiones existen solo como pasos `decision` de las misiones (9) | `src/data/question-banks.json` |
+| 4 | D-179: "El préstamo tentador" se juega en una cuenta de práctica aparte | **Confirmado y más amplio:** **12 de las 13 misiones** se juegan en una cuenta de práctica aparte (`initial: fresh` o `salary`). Solo "Configura tu seguridad" usa la billetera de la persona (`current`). Ninguna de las cinco misiones de D-77 deja huella | `src/features/missions/engine.ts`, líneas 125 a 129 y 293; `initial` de cada misión en `wallet-missions.json` |
+| 5 | La insignia del módulo 18 de Mariana dice "Pendiente" con el nivel 2 completado | **Confirmado; la regla funciona, el rótulo no explica.** Mariana aprobó el desafío del nivel 2 con 72 %, pero su parte del módulo 18 fue 63 %: por D-57, la insignia no se obtiene. "Pendiente" no dice por qué ni cómo conseguirla | `src/data/seed.json` (intento `challenge-level-2` de `p-mariana`: módulo 17 al 80 %, módulo 18 al 63 %); `LearnPage.tsx` |
+| 6 | En el pie de fuentes de Rendir se ve "Cálculo F-03, F-08, F-09" | **Confirmado:** el rótulo corto de los casos de `formulas.md` repite los códigos | `src/app/content-sources.ts`, línea 102 |
+| 7 | En P1, Mariana ve "El préstamo tentador" (nivel 5) como misión activa con el saludo "Nivel 6 · Rendir" | **Confirmado:** la misión sugerida es la primera sin completar de cualquier nivel abierto, en orden. Mariana tiene pendiente la del nivel 5 y la interfaz no aclara que quedó del nivel anterior | `src/features/levels/use-levels.ts`, línea 78 |
+
+### Criterios de la sección 11
+
+| Criterio | Estado | Evidencia |
+| --- | --- | --- |
+| Desde la landing se elige el rol y se entra en un clic, con SSO y MFA simulados | Cumple | Recorrido sobre el sitio publicado el 14/11/2026 (landing, Mariana, SSO, aviso de privacidad, "Hola, Mariana"); tests de `auth` |
+| El simulador de inflación funciona en la landing sin iniciar sesión | Cumple | SIM-3 en G0; `g0-landing` en las pruebas de desbordes y axe |
+| Diego en el celular: lección, evaluación y desafío sin desbordes ni gestos sin alternativa | Cumple | Páginas de Diego a 320 y 375 px en la prueba de desbordes; QR con lista |
+| Las evaluaciones usan los tipos de 5.1, con alternativa al arrastre y retroalimentación | Cumple | 9 tipos (D-205): 8 en los desafíos y el caso con decisiones en las misiones |
+| El diagnóstico genera niveles por dimensión y una ruta; se puede repetir | Cumple | P2; tests de "Conocerte" |
+| Cada lección sigue F3 y cada módulo tiene objetivo observable y evaluación | Cumple | 17 guías; `questions.test.ts` |
+| Los 12 simuladores calculan bien, con casos a mano | Cumple | Tests de `src/lib/finance/` (F-01 a F-34) |
+| Ningún cálculo de dinero usa `number` | Cumple | `Decimal` en `lib/finance`; montos como texto |
+| Cada resultado muestra supuestos, frase, gráfico con tabla y aviso legal | Cumple | Simulador genérico y SIM-3 |
+| Ningún valor presentado como actual ni recomendaciones; entidades reales solo en las fichas | Cumple | Valores rotulados "de ejemplo"; fichas de los Anexos C y D. D-79 cambiará esta regla en la fase B |
+| Billetera, no campus: mapa, bloqueos con qué falta, suficiencia, tutoría, modo demo | Cumple | P1, P9, T2; `engine.test.ts` de niveles |
+| Las misiones se completan en celular y escritorio, con devolución, sin datos reales | Cumple | 13 misiones; tests del motor de misiones. Se juegan en una cuenta aparte (ver el criterio del ajuste) |
+| Los paneles muestran solo métricas agregadas de las misiones | Cumple | `privacy-boundaries.test.ts`, `tutor-data.test.ts`, `org-data.test.ts` |
+| Montos y metas fuera de las vistas de otros roles | Cumple | `privacy-boundaries.test.ts` |
+| Ninguna métrica para grupos de menos de 5 | Cumple | `metrics.test.ts`; cohorte Comercial en T2 |
+| CSV con validación fila por fila y corrección | Cumple | O3; `org-data.test.ts` |
+| Paneles calculados desde los datos, Kirkpatrick 1 a 3 | Cumple | O1 y D1 |
+| Español neutro, vocabulario y números de 2.9 | Cumple | Test de vocabulario en `App.test.tsx`; tests de `money.ts` |
+| Campos con máscara, ayuda y ejemplo; deslizadores con campo | Cumple | `MoneyInput`, `PercentInput` |
+| axe sin errores, teclado y resultados anunciados al lector de pantalla | **Parcial** | axe sin errores en todas las páginas del recorrido. Falta la prueba con lector de pantalla (la haces tú) |
+| Sin desbordes en 6 anchos y montos largos enteros | Cumple | Prueba de desbordes en 6 anchos con capturas en `docs/screenshots/` |
+| Sin degradés ni sombras en tarjetas; animaciones que respetan "reducir animaciones" | Cumple | `no-raw-values.test.ts` |
+| Sistema de diseño público con "Cómo mostramos el dinero" | Cumple | G8 (D-199) |
+| CSP, `npm audit` en CI y deploy público | Cumple | D-200; deploy del 14/11/2026 en verde después de recrear el repositorio |
+| Documentación de la sección 14 completa y coherente | **Parcial** | Falta `docs/market-data.md` (14.14, nuevo). `requirements.md`, `learning-design.md` y `wallet-engine.md` todavía no reflejan D-74 a D-82 (paso 15) |
+| **Ajuste:** en el modo libre, cada acción del catálogo de 5.3 dispara su tarjeta una vez, con fuente y pregunta, respetando la presencia de Fuerte | **No cumple** | No existe `learning-cards.json`; las tarjetas solo aparecen dentro de las misiones (hallazgo 1) |
+| **Ajuste:** cada pantalla tiene "¿Por qué importa?" que lleva a la parte exacta de una guía, con "Volver" sin perder lo cargado | **No cumple** | Visible solo en Pagar; en el resto, dentro del panel de Fuerte; Perfil sin él; ningún enlace a partes de guías (hallazgo 2) |
+| **Ajuste:** las misiones de D-77 dejan huella (deuda, cuotas, intereses, monto perdido) y la devolución explica cómo revertirla | **No cumple** | 12 de 13 misiones en una cuenta aparte (hallazgo 4) |
+| **Ajuste:** los desafíos de los niveles 5 y 6 tienen al menos una pregunta de caso con decisiones | **No cumple** | 0 preguntas `branching` en los bancos (hallazgo 3) |
+| **Ajuste:** `docs/market-data.md` documenta las fuentes reales y el plan de fase B | **No cumple** | El documento no existe |
+| **Ajuste:** los estados de demo de Mariana y Diego siguen coherentes | Cumple hoy | `engine.test.ts` de niveles (Mariana con los niveles 0 a 6 completos e Invertir bloqueado) y `seed.test.ts` (Diego en el nivel 2). Hay que volver a verificarlo después del paso 18 |
+
+### Otros puntos que encontré
+
+- **Con Fuerte en "Silencio" se pierden las explicaciones:** con esa presencia, todos los "¿Por qué importa?" que viven en su panel desaparecen. La spec dice que en "Silencio" las tarjetas de aprendizaje siguen apareciendo, así que el paso 16 tiene que sacarlas del personaje.
+- **Las misiones en la billetera propia (paso 18) tocan 12 misiones, no 5:** D-77 nombra cinco, pero las demás también se juegan en una cuenta aparte. Propongo pasar a la billetera propia solo las cinco de D-77 y dejar las siete restantes como están, porque practican flujos sin consecuencias que cambien desbloqueos. Lo confirmas en el paso 15.
+- **Invertir:** el punto 6 de 5.4 ya coincide con lo construido (precio de ejemplo y serie sintética rotulada). Falta el enlace a BYMADATA, que entra en el paso 20.
+
+### Resumen
+
+Cumplen 23 de los 25 criterios de base y 2 quedan parciales: el lector de pantalla, que haces tú, y la documentación, que entra en el paso 15. De los 6 criterios del ajuste, 5 no se cumplen y 1 se cumple hoy, que es lo esperable antes de empezar los pasos 15 a 21.
