@@ -9,6 +9,8 @@ import { Icon, type IconName } from '@/components/ui/Icon';
 import { IconButton } from '@/components/ui/IconButton';
 import { Tooltip } from '@/components/ui/Tooltip';
 import { FuerteFab } from '@/features/companion/FuerteFab';
+import { LearningCardHost } from '@/features/learning-cards/LearningCardHost';
+import { InboxMenu } from './InboxMenu';
 import type { FuerteState } from '@/features/companion/Fuerte';
 import { completedLights } from '@/features/levels/engine';
 import { LEVEL_ROUTE } from '@/features/levels/UnlockCard';
@@ -319,7 +321,7 @@ export function WalletShell({ section, children, fuerte }: { section: string; ch
               <span className="flex-1" />
               <ViewAsMenu />
               <IconButton icon="help" label={t('wallet.help')} className="hidden sm:inline-flex" />
-              <IconButton icon="notifications" label={t('wallet.notifications', { count: 2 })} />
+              <InboxMenu personId={user?.personId ?? ''} />
               <UserMenu />
             </div>
           </header>
@@ -373,6 +375,9 @@ export function WalletShell({ section, children, fuerte }: { section: string; ch
           })}
         </ul>
       </nav>
+
+      {/* Learning cards of the free mode (D-76): they appear after an action, with or without Fuerte. */}
+      {user && <LearningCardHost personId={user.personId} showFuerte={presence !== 'silent'} />}
 
       {/* Presence chosen in the profile (5.0.1): "Silencio" hides Fuerte; learning cards stay. */}
       {fuerte && presence !== 'silent' && (

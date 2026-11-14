@@ -1,0 +1,475 @@
+{
+  "note": "Learning cards of the free mode (CLAUDE.md 5.3, D-76) and the texts of \"¿Por qué importa?\" of each wallet screen (D-209). L&D can add cards without touching code. Each card: a trigger (an action of the wallet) and an optional condition, a title and a body of 20 to 40 seconds, its sources (A-xx, B-xx, F-xx, T), an optional one-tap question and the exact part of a guide that explains it (D-78; parts count from 1, as the guide shows them). Order matters: when one action triggers several cards, the first one wins (one card per action).",
+  "cards": [
+    {
+      "id": "card-salary-save-first",
+      "trigger": "salary_received",
+      "condition": "no_saving_since_last_salary",
+      "title": "Primero separa, después gastas",
+      "body": "Cobraste tu sueldo y desde el cobro anterior no separaste ahorro. Si apartas una parte apenas cobras, el ahorro no depende de lo que sobre a fin de mes. La regla 50/30/20 propone un 20 % como punto de partida, no como obligación.",
+      "sourceIds": [
+        "A-32",
+        "T"
+      ],
+      "question": {
+        "prompt": "¿Cuándo conviene separar el ahorro del mes?",
+        "options": [
+          {
+            "id": "first",
+            "text": "Apenas cobras"
+          },
+          {
+            "id": "last",
+            "text": "Con lo que sobre a fin de mes"
+          }
+        ],
+        "correct": "first",
+        "feedback": {
+          "correct": "Así es. Si el ahorro sale primero, el resto del mes se arma con lo que queda.",
+          "incorrect": "A fin de mes muchas veces no sobra nada. Separar apenas cobras convierte el ahorro en un gasto fijo más."
+        }
+      },
+      "guide": {
+        "guideId": "module-03-guide-1",
+        "part": 4
+      },
+      "action": {
+        "label": "Separar en un apartado",
+        "to": "/app/save/pockets"
+      }
+    },
+    {
+      "id": "card-subscription-first-debit",
+      "trigger": "subscription_first_debit",
+      "title": "Un débito que se repite",
+      "body": "Se debitó una suscripción. Los débitos automáticos se repiten todos los meses, la uses o no: son un gasto hormiga típico. Revisarlos una vez por mes y dar de baja lo que no usas es un buen hábito.",
+      "sourceIds": [
+        "A-15",
+        "A-34"
+      ],
+      "question": {
+        "prompt": "Una suscripción de $ 5.000 por mes, ¿cuánto suma en un año?",
+        "options": [
+          {
+            "id": "year",
+            "text": "$ 60.000"
+          },
+          {
+            "id": "month",
+            "text": "$ 5.000"
+          },
+          {
+            "id": "half",
+            "text": "$ 30.000"
+          }
+        ],
+        "correct": "year",
+        "feedback": {
+          "correct": "Correcto: $ 5.000 × 12 = $ 60.000. De a poco, pesa.",
+          "incorrect": "Se debita todos los meses: $ 5.000 × 12 = $ 60.000 en un año."
+        }
+      },
+      "guide": {
+        "guideId": "module-03-guide-1",
+        "part": 7
+      },
+      "action": {
+        "label": "Revisar mis débitos",
+        "to": "/app/pay/bills"
+      }
+    },
+    {
+      "id": "card-transfer-new-payee",
+      "trigger": "transfer_new_payee",
+      "title": "Una transferencia no vuelve",
+      "body": "Le transferiste a alguien por primera vez. Las transferencias inmediatas se acreditan en segundos y no se pueden deshacer desde la app: revisar el titular antes de confirmar es la mejor protección.",
+      "sourceIds": [
+        "B-15",
+        "B-16"
+      ],
+      "question": {
+        "prompt": "Antes de confirmar una transferencia, ¿qué revisas?",
+        "options": [
+          {
+            "id": "holder",
+            "text": "Que el titular sea la persona a la que le pagas"
+          },
+          {
+            "id": "alias",
+            "text": "Que el alias se parezca al que te pasaron"
+          }
+        ],
+        "correct": "holder",
+        "feedback": {
+          "correct": "Exacto. Un alias parecido puede ser de otra persona; el titular no se confunde.",
+          "incorrect": "Un alias parecido puede ser de otra persona. Lo que confirma a quién le pagas es el titular."
+        }
+      },
+      "guide": {
+        "guideId": "module-17-guide-1",
+        "part": 6
+      }
+    },
+    {
+      "id": "card-yield-account-or-fund",
+      "trigger": "yield_mode_chosen",
+      "title": "Cuenta o fondo: no es lo mismo",
+      "body": "Elegiste dónde rinde tu saldo. En una cuenta remunerada, el dinero sigue en una cuenta de pago; en un fondo money market, compraste cuotapartes de un FCI y el rendimiento cambia cada día. Ninguno de los dos tiene la garantía de los depósitos.",
+      "sourceIds": [
+        "B-12",
+        "B-14",
+        "B-26"
+      ],
+      "question": {
+        "prompt": "Verdadero o falso: el fondo money market tiene la garantía de los depósitos.",
+        "options": [
+          {
+            "id": "false",
+            "text": "Falso"
+          },
+          {
+            "id": "true",
+            "text": "Verdadero"
+          }
+        ],
+        "correct": "false",
+        "feedback": {
+          "correct": "Correcto. Es una inversión en un fondo regulado por la CNV, no un depósito.",
+          "incorrect": "Es falso: el fondo es una inversión regulada por la CNV, no un depósito, así que no tiene esa garantía."
+        }
+      },
+      "guide": {
+        "guideId": "module-11-guide-1",
+        "part": 5
+      }
+    },
+    {
+      "id": "card-deposit-negative-real-rate",
+      "trigger": "term_deposit_made",
+      "condition": "real_rate_negative",
+      "title": "Este plazo fijo le pierde a la inflación",
+      "body": "Con la tasa de este plazo fijo y la inflación del escenario, la tasa real del período es negativa: al vencer vas a tener más pesos, pero van a comprar menos. Es un escenario con valores de ejemplo, no una predicción.",
+      "sourceIds": [
+        "F-03",
+        "B-40"
+      ],
+      "question": {
+        "prompt": "Si un plazo fijo paga 2,5 % en el mes y la inflación del mes es 3 %, la tasa real es…",
+        "options": [
+          {
+            "id": "negative",
+            "text": "Negativa"
+          },
+          {
+            "id": "positive",
+            "text": "Positiva"
+          }
+        ],
+        "correct": "negative",
+        "feedback": {
+          "correct": "Así es: (1,025 ÷ 1,03) − 1 ≈ −0,5 %. Tienes más pesos, pero compran menos.",
+          "incorrect": "Es negativa: (1,025 ÷ 1,03) − 1 ≈ −0,5 %. Los precios suben más que tus pesos."
+        }
+      },
+      "guide": {
+        "guideId": "module-09-guide-1",
+        "part": 5
+      }
+    },
+    {
+      "id": "card-card-paid-partially",
+      "trigger": "card_paid_partially",
+      "title": "Lo que no pagas, se financia",
+      "body": "Pagaste menos que el total del resumen. Lo que quede sin pagar al vencimiento se financia a la tasa de la tarjeta y genera intereses. El costo financiero total (CFT) suma además comisiones y cargos.",
+      "sourceIds": [
+        "B-04",
+        "F-14"
+      ],
+      "question": {
+        "prompt": "Si pagas solo el mínimo, ¿qué pasa con el resto?",
+        "options": [
+          {
+            "id": "financed",
+            "text": "Se financia con intereses"
+          },
+          {
+            "id": "free",
+            "text": "Pasa al mes siguiente sin costo"
+          }
+        ],
+        "correct": "financed",
+        "feedback": {
+          "correct": "Correcto. Por eso pagar el total, si se puede, evita los intereses.",
+          "incorrect": "No es gratis: el resto se financia con la tasa de la tarjeta, y los intereses se suman al próximo resumen."
+        }
+      },
+      "guide": {
+        "guideId": "module-06-guide-1",
+        "part": 4
+      },
+      "action": {
+        "label": "Ver mi tarjeta",
+        "to": "/app/pay/credit"
+      }
+    },
+    {
+      "id": "card-installment-purchase",
+      "trigger": "installment_purchase",
+      "title": "Cuotas o contado: depende del escenario",
+      "body": "Compraste en cuotas. Con inflación, una cuota futura vale menos que hoy; pero si el contado tiene descuento, puede convertirse en la mejor opción. Lo que conviene sale de comparar el valor de hoy de las cuotas con el precio de contado.",
+      "sourceIds": [
+        "F-10",
+        "F-11"
+      ],
+      "question": {
+        "prompt": "¿Qué comparas para decidir entre cuotas y contado?",
+        "options": [
+          {
+            "id": "pv",
+            "text": "El valor de hoy de las cuotas frente al contado con descuento"
+          },
+          {
+            "id": "count",
+            "text": "Solo cuántas cuotas son"
+          }
+        ],
+        "correct": "pv",
+        "feedback": {
+          "correct": "Exacto. La herramienta de cuotas o contado hace esa cuenta con el escenario que elijas.",
+          "incorrect": "La cantidad de cuotas no alcanza: hay que llevar las cuotas a valor de hoy y compararlas con el contado."
+        }
+      },
+      "guide": {
+        "guideId": "module-08-guide-1",
+        "part": 4
+      }
+    },
+    {
+      "id": "card-loan-taken",
+      "trigger": "loan_taken",
+      "title": "Mira el CFT, no la cuota",
+      "body": "Tomaste un préstamo. Una cuota baja no dice cuánto cuesta: el costo financiero total (CFT) suma tasa, comisiones y cargos. Mientras tengas una deuda de tasa alta, Invertir sigue cerrado: primero lo que cuesta más.",
+      "sourceIds": [
+        "B-04",
+        "A-23"
+      ],
+      "question": {
+        "prompt": "¿Qué número usas para comparar préstamos?",
+        "options": [
+          {
+            "id": "cft",
+            "text": "El CFT"
+          },
+          {
+            "id": "installment",
+            "text": "La cuota mensual"
+          }
+        ],
+        "correct": "cft",
+        "feedback": {
+          "correct": "Así es. Las entidades tienen que informarlo destacado, junto con la TNA y la TEA.",
+          "incorrect": "La cuota depende del plazo. El CFT es el que suma todo lo que pagas y permite comparar."
+        }
+      },
+      "guide": {
+        "guideId": "module-06-guide-1",
+        "part": 5
+      },
+      "action": {
+        "label": "Ver Tus deudas",
+        "to": "/app/pay/credit"
+      }
+    },
+    {
+      "id": "card-invest-without-fund",
+      "trigger": "investment_bought",
+      "condition": "emergency_below_3_months",
+      "title": "Primero lo que te protege",
+      "body": "Compraste un instrumento sin un fondo de emergencia de 3 meses de gastos. Si aparece un imprevisto, podrías tener que vender en un mal momento. El orden del programa es pagar deudas caras, armar el fondo y después invertir.",
+      "sourceIds": [
+        "A-23",
+        "A-35"
+      ],
+      "question": {
+        "prompt": "¿Cuál es el orden que propone el programa?",
+        "options": [
+          {
+            "id": "order",
+            "text": "Deudas caras, fondo de emergencia, invertir"
+          },
+          {
+            "id": "invest",
+            "text": "Invertir primero, el fondo después"
+          }
+        ],
+        "correct": "order",
+        "feedback": {
+          "correct": "Correcto. El fondo evita vender una inversión justo cuando necesitas el dinero.",
+          "incorrect": "Primero lo que te protege: sin fondo, un imprevisto te puede obligar a vender en una caída."
+        }
+      },
+      "guide": {
+        "guideId": "module-05-guide-1",
+        "part": 5
+      },
+      "action": {
+        "label": "Ver mi fondo de emergencia",
+        "to": "/app/save/pockets"
+      }
+    },
+    {
+      "id": "card-suspicious-message",
+      "trigger": "message_received",
+      "condition": "suspicious",
+      "title": "Ojo con este mensaje",
+      "body": "Te llegó un mensaje que pide un código, apura con una suspensión o promete una ganancia garantizada. Nadie legítimo te pide un código por chat, y un rendimiento garantizado es una señal de alerta. Revisa la campana y repórtalo.",
+      "sourceIds": [
+        "B-24"
+      ],
+      "question": {
+        "prompt": "¿Qué haces con un mensaje que te pide el código que te llegó por SMS?",
+        "options": [
+          {
+            "id": "report",
+            "text": "No lo comparto y lo reporto"
+          },
+          {
+            "id": "share",
+            "text": "Lo comparto si dice ser soporte"
+          }
+        ],
+        "correct": "report",
+        "feedback": {
+          "correct": "Exacto. El código es tuyo: con él, otra persona puede entrar a tu cuenta.",
+          "incorrect": "Ningún soporte legítimo te pide un código. Si lo compartes, otra persona puede entrar a tu cuenta."
+        }
+      },
+      "guide": {
+        "guideId": "module-18-guide-1",
+        "part": 5
+      }
+    }
+  ],
+  "screens": {
+    "account": {
+      "body": "Tu recibo dice cuánto cobras en bruto, pero lo que entra en la cuenta es el neto: con ese número se arma el presupuesto del mes.",
+      "sourceIds": [
+        "T"
+      ],
+      "guide": {
+        "guideId": "module-01-guide-1",
+        "part": 4
+      }
+    },
+    "pay": {
+      "body": "Las transferencias inmediatas se acreditan en segundos y no se pueden deshacer desde la app: revisar el titular antes de confirmar es la mejor protección.",
+      "sourceIds": [
+        "B-15"
+      ],
+      "guide": {
+        "guideId": "module-17-guide-1",
+        "part": 6
+      }
+    },
+    "transfer": {
+      "title": "¿Por qué importa revisar el titular?",
+      "body": "Una transferencia inmediata se acredita en segundos entre CBU y CVU y no se puede deshacer desde la app. El alias no alcanza: confirma que el titular sea quien esperas.",
+      "sourceIds": [
+        "B-15",
+        "B-16"
+      ],
+      "guide": {
+        "guideId": "module-17-guide-1",
+        "part": 6
+      }
+    },
+    "qr": {
+      "title": "¿Por qué importa el QR interoperable?",
+      "body": "Cualquier billetera o app bancaria puede leer cualquier QR, sin tarjeta de débito. Lo que cambia es de dónde sale el dinero: revisa el monto y guarda el comprobante.",
+      "sourceIds": [
+        "B-15"
+      ],
+      "guide": {
+        "guideId": "module-17-guide-1",
+        "part": 7
+      }
+    },
+    "bills": {
+      "title": "¿Por qué importan los débitos?",
+      "body": "Los gastos fijos se repiten todos los meses. Las suscripciones que no usas son gastos hormiga: de a poco, pesan. Revisarlas una vez por mes ayuda a cortarlas a tiempo.",
+      "sourceIds": [
+        "T",
+        "A-15",
+        "A-34"
+      ],
+      "guide": {
+        "guideId": "module-03-guide-1",
+        "part": 7
+      }
+    },
+    "credit": {
+      "body": "Una cuota baja no dice cuánto cuesta un crédito: el costo financiero total (CFT) suma la tasa, las comisiones y los cargos, y la entidad debe informarlo destacado.",
+      "sourceIds": [
+        "B-04"
+      ],
+      "guide": {
+        "guideId": "module-06-guide-1",
+        "part": 5
+      }
+    },
+    "budget": {
+      "body": "Anotar todo durante un mes muestra los gastos hormiga, que pueden llegar al 15 % del ingreso. Con el reparto a la vista, decides qué cambiar.",
+      "sourceIds": [
+        "A-34",
+        "A-32"
+      ],
+      "guide": {
+        "guideId": "module-03-guide-1",
+        "part": 4
+      }
+    },
+    "pockets": {
+      "body": "Un fondo de emergencia de 3 a 6 meses de gastos básicos evita endeudarte cuando aparece un imprevisto. Separarlo en un apartado ayuda a no gastarlo sin querer.",
+      "sourceIds": [
+        "A-35",
+        "A-36"
+      ],
+      "guide": {
+        "guideId": "module-04-guide-1",
+        "part": 4
+      }
+    },
+    "yield": {
+      "body": "Una cuenta remunerada y un fondo money market no son lo mismo: la cuenta es una cuenta de pago y el fondo, una inversión. Ninguno de los dos tiene la garantía de los depósitos.",
+      "sourceIds": [
+        "B-12",
+        "B-14"
+      ],
+      "guide": {
+        "guideId": "module-11-guide-1",
+        "part": 5
+      }
+    },
+    "invest": {
+      "body": "Lo que compras con un agente registrado queda en una subcuenta comitente a tu nombre en Caja de Valores. Y antes de invertir, primero el fondo de emergencia y sin deudas caras.",
+      "sourceIds": [
+        "B-22",
+        "A-23"
+      ],
+      "guide": {
+        "guideId": "module-13-guide-1",
+        "part": 5
+      }
+    },
+    "profile": {
+      "body": "El segundo factor y un límite diario protegen tu cuenta si alguien consigue tu contraseña. Y el código que te llega es solo tuyo: nadie legítimo te lo pide.",
+      "sourceIds": [
+        "B-24"
+      ],
+      "guide": {
+        "guideId": "module-18-guide-1",
+        "part": 5
+      }
+    }
+  }
+}

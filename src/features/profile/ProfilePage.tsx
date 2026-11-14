@@ -18,6 +18,7 @@ import { type FuertePresence, readLocal, writeLocal } from '@/store/local-store'
 import { useCurrentUser } from '@/store/session-store';
 import { clearWallet, useWallet } from '@/store/wallet-store';
 import { fuerteLine } from '@/features/companion/fuerte-lines';
+import { WhyMatters } from '@/features/learning-cards/WhyMatters';
 
 /**
  * P14, profile, security and receipts (CLAUDE.md 5.3, information-architecture.md): the practice
@@ -63,6 +64,7 @@ export function ProfilePage() {
             <p className="text-body-large text-on-surface-variant">{person?.jobOrProgram}</p>
           </div>
         </header>
+        <WhyMatters screen="profile" className="large:col-span-2" />
 
         <section aria-labelledby="profile-account" className={card}>
           <h2 id="profile-account" className="text-title-large text-on-surface">

@@ -413,7 +413,6 @@
   "wallet": {
     "practiceBanner": "Simulador de finanzas personales · dinero ficticio",
     "help": "Ayuda",
-    "notifications": "Notificaciones, {{count}} sin leer",
     "profileMenu": "Menú de {{name}}: perfil, seguridad y comprobantes",
     "breadcrumbs": "Estás en",
     "nav": {
@@ -493,10 +492,6 @@
         "start": "Empezar la misión",
         "none": "No tienes misiones pendientes en las secciones abiertas."
       },
-      "why": {
-        "title": "¿Por qué importa?",
-        "body": "En una billetera, la mayor parte del dinero \"que rinde\" suele estar en un fondo money market, no en la cuenta: no tiene la garantía de los depósitos."
-      },
       "time": {
         "label": "Avanzar el tiempo",
         "day": "Un día",
@@ -571,15 +566,6 @@
       "title": "Fuerte",
       "close": "Cerrar",
       "whyTitle": "¿Por qué importa?",
-      "why": {
-        "account": "Tu recibo dice cuánto cobras en bruto, pero lo que entra en la cuenta es el neto: con ese número se arma el presupuesto del mes.",
-        "pay": "Las transferencias inmediatas se acreditan en segundos y no se pueden deshacer desde la app: revisar el titular antes de confirmar es la mejor protección.",
-        "budget": "Anotar todo durante un mes muestra los gastos hormiga, que pueden llegar al 15 % del ingreso.",
-        "pockets": "Un fondo de emergencia de 3 a 6 meses de gastos básicos evita endeudarte cuando aparece un imprevisto.",
-        "credit": "La TNA no dice todo: el costo financiero total (CFT) suma comisiones y cargos, y es el número para comparar.",
-        "yield": "En una billetera, la mayor parte del dinero \"que rinde\" suele estar en un fondo money market, no en la cuenta: no tiene la garantía de los depósitos.",
-        "invest": "Invertir viene después de protegerte: con fondo de emergencia y sin deudas caras, una caída no te obliga a vender."
-      },
       "dragHint": "Puedes arrastrarme a otro lugar.",
       "moveLeft": "Mover a la izquierda",
       "moveRight": "Mover a la derecha"
@@ -699,7 +685,40 @@
       "classifyHelp": "Elige una categoría para este mensaje."
     },
     "practiceBannerShort": "Dinero ficticio",
-    "printBanner": "Alcancía · Simulador de finanzas personales · dinero ficticio · Contenido educativo, no es asesoramiento financiero"
+    "printBanner": "Alcancía · Simulador de finanzas personales · dinero ficticio · Contenido educativo, no es asesoramiento financiero",
+    "inbox": {
+      "label": "Mensajes",
+      "labelUnread_one": "Mensajes: {{count}} sin leer",
+      "labelUnread_other": "Mensajes: {{count}} sin leer",
+      "title": "Mensajes",
+      "empty": "Todavía no tienes mensajes. Los avisos de la billetera aparecen acá.",
+      "report": "Reportar como sospechoso",
+      "reportedPill": "Reportado",
+      "reported": "Mensaje reportado. Bien visto: no compartas códigos ni entres a enlaces que no conoces.",
+      "reportedLegit": "Lo reportaste, pero este aviso venía del canal oficial de la billetera y no pedía datos. Ante la duda, reportar siempre está bien.",
+      "templates": {
+        "statement-ready": {
+          "from": "Alcancía · avisos de la app",
+          "body": "Tu resumen del mes ya está disponible en Perfil, en Comprobantes y resumen."
+        },
+        "security-tip": {
+          "from": "Alcancía · avisos de la app",
+          "body": "Recuerda: nadie de Alcancía te va a pedir tu código ni tu contraseña por mensaje."
+        },
+        "fake-support": {
+          "from": "Soporte de la billetera · número desconocido",
+          "body": "Detectamos un problema con tu cuenta. Para no perder tu saldo, respóndenos ahora con el código que te llegó por SMS."
+        },
+        "lookalike-link": {
+          "from": "Alcancia-seguridad (ficticio)",
+          "body": "Tu cuenta será suspendida hoy. Valida tus datos en alcancia-verificar.ejemplo antes de las 18:00."
+        },
+        "guaranteed-return": {
+          "from": "Inversiones Rápidas (ficticio)",
+          "body": "Duplica tu dinero en 30 días con rendimiento garantizado. Quedan pocos cupos: transfiere hoy."
+        }
+      }
+    }
   },
   "roles": {
     "participant": "Participante",
@@ -1382,14 +1401,6 @@
       "amount": "Monto",
       "note": "Comprobante ficticio de la billetera de práctica: no sirve como constancia real.",
       "print": "Descargar en PDF o imprimir"
-    },
-    "why": {
-      "transferTitle": "¿Por qué importa revisar el titular?",
-      "transfer": "Una transferencia inmediata se acredita en segundos entre CBU y CVU y no se puede deshacer desde la app. El alias no alcanza: confirma que el titular sea quien esperas.",
-      "qrTitle": "¿Por qué importa el QR interoperable?",
-      "qr": "Cualquier billetera o app bancaria puede leer cualquier QR, sin tarjeta de débito. Lo que cambia es de dónde sale el dinero: revisa el monto y guarda el comprobante.",
-      "billsTitle": "¿Por qué importan los débitos?",
-      "bills": "Los gastos fijos se repiten todos los meses. Las suscripciones que no usas son gastos hormiga: de a poco, pesan. Revisarlas una vez por mes ayuda a cortarlas a tiempo."
     },
     "errors": {
       "amount_not_positive": "Escribe un monto mayor que cero.",
@@ -2128,7 +2139,6 @@
     "debtCount_one": "{{count}} deuda activa",
     "debtCount_other": "{{count}} deudas activas",
     "example": "Oferta de ejemplo",
-    "why": "Una cuota baja no dice cuánto cuesta un crédito: el CFT suma la tasa, las comisiones y los cargos, y la entidad debe informarlo destacado.",
     "legal": "Contenido educativo. No es asesoramiento financiero ni una recomendación. La tarjeta, la financiera y el comercio son ficticios, y las tasas son valores de ejemplo del escenario: consulta los valores vigentes en las fuentes oficiales.",
     "card": {
       "limit": "Límite de ejemplo:",
@@ -2229,7 +2239,6 @@
     "intro": "Elige dónde rinde tu saldo, compáralo con la inflación del escenario y practica con plazos fijos. Las tasas son valores de ejemplo, no las vigentes.",
     "context": "Datos de Rendir",
     "inflationChip": "Inflación del escenario: {{value}} mensual",
-    "why": "Una cuenta remunerada y un fondo money market no son lo mismo: la cuenta es una cuenta de pago y el fondo, una inversión. Ninguno de los dos tiene la garantía de los depósitos.",
     "legal": "Contenido educativo. No es asesoramiento financiero ni una recomendación. Las tasas son valores de ejemplo del escenario y las opciones son de práctica: consulta los valores vigentes en las fuentes oficiales.",
     "mode": {
       "title": "Dónde rinde tu saldo",
@@ -2325,7 +2334,6 @@
       "moderate": "moderado",
       "aggressive": "agresivo"
     },
-    "why": "Lo que compras con un agente registrado queda en una subcuenta comitente a tu nombre en Caja de Valores. Y antes de invertir, primero el fondo de emergencia y sin deudas caras.",
     "legal": "Contenido educativo. No es asesoramiento financiero ni una recomendación de inversión. El bróker, los precios, la serie y los costos son de ejemplo y ficticios. Los rendimientos pasados no garantizan rendimientos futuros.",
     "back": "Volver a Invertir",
     "sheet": {
@@ -3805,5 +3813,12 @@
     "open": "{{term}}: ver qué significa",
     "label": "Qué significa {{term}}",
     "source": "Fuente:"
+  },
+  "cards": {
+    "kicker": "Tarjeta de aprendizaje",
+    "close": "Cerrar la tarjeta",
+    "understood": "Entendido",
+    "why": "¿Por qué importa?",
+    "toGuide": "Ver en la guía"
   }
 }

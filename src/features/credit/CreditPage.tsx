@@ -42,6 +42,7 @@ import { useDataStore } from '@/store/data-store';
 import { useCurrentUser } from '@/store/session-store';
 import { useWallet } from '@/store/wallet-store';
 import { fuerteLine } from '@/features/companion/fuerte-lines';
+import { WhyMatters, whyText } from '@/features/learning-cards/WhyMatters';
 
 /**
  * P7, Pagar > Tarjeta y préstamos (level 5, CLAUDE.md 5.3 "Ofertas", D-56, D-178): the practice card
@@ -62,6 +63,7 @@ export function CreditPage() {
       <WalletShell section={t('wallet.nav.pay')} fuerte={{ state: 'thinking', message: fuerteLine('credit.fuerte.locked') }}>
         <div className="flex flex-col gap-6">
           <h1 className="text-headline-medium text-on-surface">{t('wallet.placeholder.lockedTitle', { section: t('wallet.sub.credit') })}</h1>
+          <WhyMatters screen="credit" />
           <UnlockCard status={status} />
         </div>
       </WalletShell>
@@ -120,7 +122,7 @@ function Credit() {
   return (
     <WalletShell
       section={t('wallet.nav.pay')}
-      fuerte={{ state: highRate > 0 ? 'attention' : 'neutral', message: highRate > 0 ? fuerteLine('credit.fuerte.debt') : fuerteLine('credit.fuerte.home'), why: t('credit.why') }}
+      fuerte={{ state: highRate > 0 ? 'attention' : 'neutral', message: highRate > 0 ? fuerteLine('credit.fuerte.debt') : fuerteLine('credit.fuerte.home'), why: whyText('credit') }}
     >
       <div className="flex flex-col gap-6">
         <header className="flex flex-col gap-3">
@@ -130,6 +132,7 @@ function Credit() {
           </Link>
           <h1 className="text-headline-medium text-on-surface">{t('wallet.sub.credit')}</h1>
           <p className="text-body-large text-on-surface-variant">{t('credit.intro')}</p>
+          <WhyMatters screen="credit" />
           <MetaChips
             label={t('credit.context')}
             items={[

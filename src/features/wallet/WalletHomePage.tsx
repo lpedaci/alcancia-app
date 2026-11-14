@@ -23,6 +23,8 @@ import { advanceDays, advanceMonth, CATEGORIZABLE, categorize, pocketsTotal, pur
 import type { BudgetCategory, WalletMovement } from './engine/types';
 import { WalletShell } from './WalletShell';
 import { fuerteLine } from '@/features/companion/fuerte-lines';
+import { WhyMatters, whyText } from '@/features/learning-cards/WhyMatters';
+import type { WhyScreen } from '@/features/learning-cards/cards';
 
 /**
  * P1 · Inicio de la cuenta (CLAUDE.md 6) with the person's own wallet (step 6): active mission,
@@ -37,7 +39,7 @@ const QUICK_ACTIONS: { key: string; icon: IconName; to: string }[] = [
   { key: 'pockets', icon: 'savings', to: '/app/save/pockets' },
 ];
 
-const WHY_BY_LEVEL: Record<string, string> = {
+const WHY_BY_LEVEL: Record<string, WhyScreen> = {
   'level-1': 'account',
   'level-2': 'pay',
   'level-3': 'budget',
@@ -112,7 +114,7 @@ export function WalletHomePage() {
   return (
     <WalletShell
       section={t('wallet.nav.home')}
-      fuerte={{ state: 'greeting', message: fuerteMessage, why: whyKey ? t(`wallet.fuerte.why.${whyKey}`) : undefined, action: missionAction }}
+      fuerte={{ state: 'greeting', message: fuerteMessage, why: whyKey ? whyText(whyKey) : undefined, action: missionAction }}
     >
       <div className="flex flex-col gap-(--space-bento-gap)">
         {/* Active mission: one compact card above the content, at every size (5.3) */}
@@ -153,6 +155,7 @@ export function WalletHomePage() {
                 ...(next ? [{ icon: 'lock' as const, label: t('wallet.home.chipNext', { section: nextSection }) }] : []),
               ]}
             />
+            {whyKey && <WhyMatters screen={whyKey} />}
           </div>
           <div className="flex flex-col gap-1.5">
             <p id="time-label" className="text-label-medium">{t('wallet.home.time.label')}</p>

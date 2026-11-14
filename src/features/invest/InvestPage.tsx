@@ -33,6 +33,7 @@ import { useCurrentUser } from '@/store/session-store';
 import { useWallet } from '@/store/wallet-store';
 import { BROKER_NAME, buy, buyPreview, fundBrokerage, instrumentById, INSTRUMENTS, openBrokerage, portfolioValue, positions, quote, sell, withdrawBrokerage } from './engine';
 import { fuerteLine } from '@/features/companion/fuerte-lines';
+import { WhyMatters, whyText } from '@/features/learning-cards/WhyMatters';
 
 /**
  * P8, Invertir (level 7, CLAUDE.md 5.4, SIM-14, D-186): the practice brokerage account at a
@@ -55,6 +56,7 @@ function useInvestGate() {
       <WalletShell section={t('wallet.nav.invest')} fuerte={{ state: 'thinking', message: fuerteLine('invest.fuerte.locked') }}>
         <div className="flex flex-col gap-6">
           <h1 className="text-headline-medium text-on-surface">{t('wallet.placeholder.lockedTitle', { section: t('wallet.nav.invest') })}</h1>
+          <WhyMatters screen="invest" />
           <UnlockCard status={status} />
         </div>
       </WalletShell>
@@ -120,11 +122,12 @@ function Invest() {
   const account = wallet.brokerage;
 
   return (
-    <WalletShell section={t('wallet.nav.invest')} fuerte={{ state: 'neutral', message: account ? fuerteLine('invest.fuerte.home') : fuerteLine('invest.fuerte.open'), why: t('invest.why') }}>
+    <WalletShell section={t('wallet.nav.invest')} fuerte={{ state: 'neutral', message: account ? fuerteLine('invest.fuerte.home') : fuerteLine('invest.fuerte.open'), why: whyText('invest') }}>
       <div className="flex flex-col gap-6">
         <header className="flex flex-col gap-3">
           <h1 className="text-headline-medium text-on-surface">{t('wallet.nav.invest')}</h1>
           <p className="text-body-large text-on-surface-variant">{t('invest.intro')}</p>
+          <WhyMatters screen="invest" />
           <MetaChips
             label={t('invest.context')}
             items={[

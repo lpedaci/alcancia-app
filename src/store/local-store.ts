@@ -24,6 +24,10 @@ export interface LocalData {
   conocerteDraft?: { answers: Record<string, string>; index: number; kind: 'initial' | 'final' };
   /** Presence of Fuerte chosen in the profile (5.0.1): talkative by default. */
   fuertePresence?: FuertePresence;
+  /** Learning cards shown and answered well (D-76), shared by missions and the free mode. */
+  learningCards?: { shown: string[]; correct: string[] };
+  /** xAPI-like statements of the cards (F21): verb, card and simulated day, never amounts. */
+  cardStatements?: { verb: 'experienced' | 'answered' | 'passed'; object: string; day: number }[];
 }
 
 export type FuertePresence = 'chatty' | 'important' | 'silent';

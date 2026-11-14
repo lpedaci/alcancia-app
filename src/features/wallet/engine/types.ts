@@ -182,6 +182,19 @@ export interface BrokerageAccount {
 
 export type YieldMode = 'none' | 'remunerated' | 'money_market';
 
+/**
+ * A message in the wallet's inbox (the bell, D-102). One arrives on day 15 of each simulated month
+ * from the second one: legitimate notices and suspicious ones alternate (wallet-engine.md, section 10).
+ * Senders are always fictitious (1.1.1).
+ */
+export interface InboxMessage {
+  id: string;
+  day: number;
+  templateId: string;
+  suspicious: boolean;
+  status: 'unread' | 'read' | 'reported';
+}
+
 export interface WalletState {
   version: 1;
   personId: string;
@@ -210,6 +223,8 @@ export interface WalletState {
   deposits?: TermDeposit[];
   /** Practice brokerage account at the fictitious broker (level 7, SIM-14, spec 5.4). */
   brokerage?: BrokerageAccount;
+  /** Inbox of the bell (D-76: a suspicious message triggers its learning card). Optional for older states. */
+  messages?: InboxMessage[];
   /** Sequence for movement ids, so the state is deterministic. */
   seq: number;
 }

@@ -14,7 +14,6 @@ import { TextField } from '@/components/ui/TextField';
 import { toast } from '@/components/ui/toast-store';
 import paymentsJson from '@/data/payments.json';
 import { guideOfModule } from '@/features/learning/questions';
-import { SourceList } from '@/features/learning/SourceList';
 import { UnlockCard } from '@/features/levels/UnlockCard';
 import { LEVELS, MISSIONS, useLevels } from '@/features/levels/use-levels';
 import { CreditPage } from '@/features/credit/CreditPage';
@@ -30,6 +29,7 @@ import { useDataStore } from '@/store/data-store';
 import { useCurrentUser } from '@/store/session-store';
 import { useWallet } from '@/store/wallet-store';
 import { fuerteLine } from '@/features/companion/fuerte-lines';
+import { WhyMatters, whyText } from '@/features/learning-cards/WhyMatters';
 
 /**
  * P3, Pagar (level 2, CLAUDE.md 5.3, D-173): transfer to an alias with the holder and entity shown
@@ -65,6 +65,7 @@ export function PayPage() {
       <WalletShell section={t('wallet.nav.pay')} fuerte={{ state: 'thinking', message: fuerteLine('pay.fuerte.locked') }}>
         <div className="flex flex-col gap-6">
           <h1 className="text-headline-medium text-on-surface">{t('wallet.placeholder.lockedTitle', { section: t('wallet.nav.pay') })}</h1>
+          <WhyMatters screen="pay" />
           <UnlockCard status={status} />
         </div>
       </WalletShell>
@@ -118,19 +119,6 @@ function Receipt({ movement, rows, headingRef }: { movement: WalletMovement; row
   );
 }
 
-/** "¿Por qué importa?" (5.3): a short learning card with its official source. */
-function WhyCard({ title, body, source }: { title: string; body: string; source: string }) {
-  return (
-    <aside className="flex items-start gap-3 rounded-lg bg-info-container p-4 text-on-info-container">
-      <Icon name="lightbulb" className="mt-0.5 shrink-0 text-info" />
-      <div className="flex flex-col gap-1">
-        <p className="text-title-small">{title}</p>
-        <p className="text-body-medium">{body}</p>
-        <SourceList codes={source.split(', ')} legal={false} className="pt-1 text-on-info-container" />
-      </div>
-    </aside>
-  );
-}
 
 // ---------------------------------------------------------------- Hub
 
@@ -156,11 +144,12 @@ function PayHome() {
   ];
 
   return (
-    <WalletShell section={t('wallet.nav.pay')} fuerte={{ state: 'neutral', message: fuerteLine('pay.fuerte.home'), why: t('wallet.fuerte.why.pay') }}>
+    <WalletShell section={t('wallet.nav.pay')} fuerte={{ state: 'neutral', message: fuerteLine('pay.fuerte.home'), why: whyText('pay') }}>
       <div className="flex flex-col gap-6">
         <header className="flex flex-col gap-2">
           <h1 className="text-headline-medium text-on-surface">{t('wallet.nav.pay')}</h1>
           <p className="text-body-large text-on-surface-variant">{t('pay.intro')}</p>
+          <WhyMatters screen="pay" />
         </header>
 
         <ul className="grid grid-cols-[minmax(0,1fr)] gap-(--space-bento-gap) sm:grid-cols-2 large:grid-cols-4">
@@ -412,7 +401,7 @@ function TransferFlow() {
             </>
           )}
         </div>
-        <WhyCard title={t('pay.why.transferTitle')} body={t('pay.why.transfer')} source="B-15, B-16" />
+        <WhyMatters screen="transfer" />
       </div>
     </WalletShell>
   );
@@ -519,7 +508,7 @@ function QrFlow() {
             </>
           )}
         </div>
-        <WhyCard title={t('pay.why.qrTitle')} body={t('pay.why.qr')} source="B-15" />
+        <WhyMatters screen="qr" />
       </div>
     </WalletShell>
   );
@@ -619,7 +608,7 @@ function BillsPage() {
           {wallet.pendingDebit && <InlineAlert tone="warning">{t('pay.bills.pending')}</InlineAlert>}
           <p className="text-body-small text-on-surface-variant">{t('pay.bills.note')}</p>
         </section>
-        <WhyCard title={t('pay.why.billsTitle')} body={t('pay.why.bills')} source="T, A-15, A-34" />
+        <WhyMatters screen="bills" />
       </div>
       <ConfirmDialog
         open={confirmCancel}

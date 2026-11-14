@@ -19,7 +19,7 @@ import {
   uvaDeposit,
   ZERO,
 } from '@/lib/finance';
-import { EMPLOYER, EXPENSE_DEFS, EXPENSES_START, SALARY_START } from './profile';
+import { EMPLOYER, EXPENSE_DEFS, EXPENSES_START, LEGIT_TEMPLATES, SALARY_START, SUSPICIOUS_TEMPLATES } from './profile';
 import type {
   BudgetCategory,
   ExpenseAmounts,
@@ -222,6 +222,7 @@ function processDay(state: WalletState): boolean {
     addMovement(state, { type: 'income', amount: D(state.salary), counterparty: EMPLOYER, suggestedCategory: undefined });
   }
 
+  if (dom === 15 && month > 0) deliverMessage(state, month);
   closeDueStatement(state);
   payOutDeposits(state);
   if (!chargeDebits(state, debitsOf(state, dom))) return false;
@@ -318,6 +319,28 @@ function resumePending(state: WalletState): boolean {
 }
 
 export const clone = (state: WalletState): WalletState => structuredClone(state);
+
+/**
+ * One message on day 15 of each month from the second one: odd months a suspicious one (rotating the
+ * three forms of module 18), even months a legitimate notice. Deterministic, so demo states and tests
+ * are stable (section 1).
+ */
+function deliverMessage(state: WalletState, month: number) {
+  const suspicious = month % 2 === 1;
+  const pool = suspicious ? SUSPICIOUS_TEMPLATES : LEGIT_TEMPLATES;
+  const index = Math.floor((month - 1) / 2) % pool.length;
+  state.seq += 1;
+  state.messages = [...(state.messages ?? []), { id: `message-${state.seq}`, day: state.day, templateId: pool[index]!, suspicious, status: 'unread' }];
+}
+
+/** Reads or reports a message of the inbox (D-76). Reporting is final; reading never undoes a report. */
+export function markMessage(state: WalletState, messageId: string, status: 'read' | 'reported'): WalletState {
+  const next = clone(state);
+  next.messages = (next.messages ?? []).map((m) => (m.id === messageId && m.status !== 'reported' ? { ...m, status } : m));
+  return next;
+}
+
+export const unreadMessages = (state: Pick<WalletState, 'messages'>) => (state.messages ?? []).filter((m) => m.status === 'unread').length;
 
 /** "Avanzar un día / una semana" and replays: processes n days, stopping at a pending debit. */
 export function advanceDays(state: WalletState, days: number): WalletState {

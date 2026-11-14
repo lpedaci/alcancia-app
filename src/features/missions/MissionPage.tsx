@@ -40,6 +40,8 @@ import {
   walletAfter,
 } from './engine';
 import { fuerteLine } from '@/features/companion/fuerte-lines';
+import { emptyRecord, recordCard } from '@/features/learning-cards/cards';
+import { LearningCardContent } from '@/features/learning-cards/LearningCard';
 
 /**
  * P12, a mission (CLAUDE.md 5.3, flows.md 2.3): objective, steps with progress, feedback that
@@ -301,11 +303,19 @@ function StepBody({
       return (
         <>
           <IconTile icon={step.kind === 'event' ? 'notifications' : 'lightbulb'} tone={step.kind === 'event' ? 'warning' : 'tertiary'} />
-          {title(step.title)}
-          <p className="max-w-prose text-body-large text-on-surface">{fillText(step.body, run)}</p>
-          <Sources ids={step.sourceIds} />
+          {/* The same card content as the free mode (D-76): missions and free mode share component and record */}
+          <LearningCardContent heading={title(step.title)} body={fillText(step.body, run)} sourceIds={step.sourceIds} />
           {step.kind === 'card' && !result?.done && (
-            <Button variant="tonal" className="self-start" leadingIcon="check" onClick={() => onAnswer()}>
+            <Button
+              variant="tonal"
+              className="self-start"
+              leadingIcon="check"
+              onClick={() => {
+                const personId = run.wallet.personId;
+                writeLocal(personId, (d) => ({ ...d, learningCards: recordCard(d.learningCards ?? emptyRecord(), `${def.id}:${step.id}`) }));
+                onAnswer();
+              }}
+            >
               {t('wallet.mission.understood')}
             </Button>
           )}

@@ -45,3 +45,11 @@ export const EXPENSES_START: ExpenseAmounts = {
 };
 
 export const EMPLOYER = 'Sueldo · Andina Servicios S.A.';
+
+/**
+ * Inbox templates (wallet-engine.md, section 10; D-76). Texts live in the locale files under
+ * `wallet.inbox.templates`. Suspicious ones follow the three usual forms of module 18 (B-24): a fake
+ * support asking for a code, a look-alike link and a "guaranteed" investment.
+ */
+export const LEGIT_TEMPLATES = ['statement-ready', 'security-tip'] as const;
+export const SUSPICIOUS_TEMPLATES = ['fake-support', 'lookalike-link', 'guaranteed-return'] as const;

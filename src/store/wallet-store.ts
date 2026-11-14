@@ -36,7 +36,18 @@ export function readWallet(personId: string): WalletState {
   return result;
 }
 
+/** Listeners of each change of a wallet, with the state before and after (learning cards, D-76). */
+type ChangeListener = (personId: string, prev: WalletState, next: WalletState) => void;
+const changeListeners = new Set<ChangeListener>();
+export function onWalletChange(listener: ChangeListener) {
+  changeListeners.add(listener);
+  return () => {
+    changeListeners.delete(listener);
+  };
+}
+
 export function writeWallet(personId: string, state: WalletState) {
+  const prev = cache.get(personId);
   cache.set(personId, state);
   try {
     localStorage.setItem(walletKey(personId), JSON.stringify(state));
@@ -44,6 +55,7 @@ export function writeWallet(personId: string, state: WalletState) {
     // Storage full or blocked (private mode): the session keeps working without saving.
   }
   notify();
+  if (prev && prev !== state) changeListeners.forEach((listener) => listener(personId, prev, state));
 }
 
 /** "Empezar de cero" and "Restablecer demo": back to the initial state of the person. */
