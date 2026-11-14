@@ -207,7 +207,7 @@ describe('sources shown with full names (review of 13/11/2026)', () => {
     };
     [BANK, GUIDES, missions].forEach((source) => walk(source));
     expect([...codes].filter((c) => !isKnownSourceCode(c))).toEqual([]);
-    const shown = describeSources(['T', 'A-23', 'A-14', 'B-04', 'B-02', 'F-14']);
+    const shown = describeSources(['T', 'A-23', 'A-14', 'B-04', 'B-11', 'F-14']);
     expect(shown.map((s) => s.kind)).toEqual(['workshop', 'presentation', 'official', 'official', 'formula']);
     expect(shown[0]).toMatchObject({ name: 'Taller "Del aula al primer trabajo", de Lourdes Pedaci', url: 'https://lpedaci.github.io/taller-primerempleo/' });
     expect(shown[1]!.name).toContain('Lic. Kevin Giampieri (diapositivas 14, 23)');

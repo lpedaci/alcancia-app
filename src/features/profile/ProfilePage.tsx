@@ -5,13 +5,14 @@ import { MoneyText } from '@/components/money/MoneyText';
 import { Avatar } from '@/components/ui/Avatar';
 import { Button } from '@/components/ui/Button';
 import { ConfirmDialog } from '@/components/ui/Dialog';
+import { ProgressBar } from '@/components/ui/ProgressBar';
 import { SegmentedButton } from '@/components/ui/SegmentedButton';
 import { StatusPill } from '@/components/ui/StatusPill';
 import { toast } from '@/components/ui/toast-store';
 import { findPerson } from '@/features/auth/auth-service';
 import { AccountData } from '@/features/onboarding/AccountData';
 import { WalletShell } from '@/features/wallet/WalletShell';
-import { setDailyLimit, setTwoFactor } from '@/features/wallet/engine/engine';
+import { paidToday, setDailyLimit, setTwoFactor } from '@/features/wallet/engine/engine';
 import { walletDate } from '@/lib/dates';
 import { formatMoney } from '@/lib/money';
 import { type FuertePresence, readLocal, writeLocal } from '@/store/local-store';
@@ -57,7 +58,7 @@ export function ProfilePage() {
 
   return (
     <WalletShell section={t('profile.section')} fuerte={{ state: 'neutral', message: fuerteLine('profile.fuerteLine') }}>
-      <div className="grid max-w-6xl grid-cols-[minmax(0,1fr)] gap-6 large:grid-cols-2 large:items-start">
+      <div className="grid grid-cols-[minmax(0,1fr)] gap-(--space-bento-gap) large:grid-cols-2 large:items-stretch">
         <header className="flex items-center gap-4 large:col-span-2">
           {person && <Avatar name={person.name} role={person.role} personId={person.id} size="xl" />}
           <div className="min-w-0">
@@ -106,7 +107,11 @@ export function ProfilePage() {
             </div>
           </div>
           {!security.twoFactor && <p className="text-body-small text-on-surface-variant">{t('profile.security.offNote')}</p>}
-          <div className="flex flex-col gap-2 border-t border-outline-variant pt-4">
+          <div className="flex flex-col gap-3 border-t border-outline-variant pt-4">
+            <div className="flex flex-col gap-1">
+              <p className="text-title-small text-on-surface">{t('profile.security.limit')}</p>
+              <p className="text-body-small text-on-surface-variant">{t('profile.security.limitWhat')}</p>
+            </div>
             <SegmentedButton
               label={t('profile.security.limit')}
               value={security.dailyLimit ?? ''}
@@ -117,33 +122,31 @@ export function ProfilePage() {
               }}
               options={LIMITS.map((value) => ({ value, label: t('profile.security.limitOption', { amount: formatMoney(value, { decimals: 0 }) }) }))}
             />
-            <p className="text-body-small text-on-surface-variant">{t('profile.security.limitHelp')}</p>
+            {security.dailyLimit ? (
+              <div className="flex flex-col gap-1.5">
+                <ProgressBar
+                  value={Math.min(100, paidToday(wallet).div(security.dailyLimit).times(100).toNumber())}
+                  label={t('profile.security.limitUsedLabel')}
+                  valueText={t('profile.security.limitUsed', { used: formatMoney(paidToday(wallet).toFixed(2)), limit: formatMoney(security.dailyLimit, { decimals: 0 }) })}
+                />
+                <p className="text-body-small text-on-surface-variant">{t('profile.security.limitReset')}</p>
+              </div>
+            ) : (
+              <p className="text-body-small text-on-surface-variant">{t('profile.security.limitNone')}</p>
+            )}
           </div>
         </section>
 
-        <section aria-labelledby="profile-fuerte" className={card}>
-          <h2 id="profile-fuerte" className="text-title-large text-on-surface">
-            {t('profile.fuerte.title')}
-          </h2>
-          <SegmentedButton
-            label={t('profile.fuerte.label')}
-            value={presence}
-            onValueChange={(value) => value && changePresence(value as FuertePresence)}
-            options={PRESENCES.map((value) => ({ value, label: t(`profile.fuerte.options.${value}`) }))}
-          />
-          <p className="text-body-medium text-on-surface-variant">{t(`profile.fuerte.help.${presence}`)}</p>
-        </section>
-
-        <section aria-labelledby="profile-receipts" className={card}>
+        <section aria-labelledby="profile-receipts" className={`${card} large:col-span-2`}>
           <h2 id="profile-receipts" className="text-title-large text-on-surface">
             {t('profile.receipts.title')}
           </h2>
           {wallet.monthSummaries.length === 0 ? (
             <p className="text-body-medium text-on-surface-variant">{t('profile.receipts.empty')}</p>
           ) : (
-            <ul className="flex flex-col gap-3">
+            <ul className="grid grid-fill-3 gap-3">
               {[...wallet.monthSummaries].reverse().map((m) => (
-                <li key={m.month} className="flex flex-col gap-3 rounded-lg bg-surface-container px-4 py-3">
+                <li key={m.month} className="@container flex min-w-0 flex-col gap-3 rounded-lg bg-surface-container px-4 py-3">
                   <div className="flex flex-wrap items-center justify-between gap-2">
                     <p className="text-title-small text-on-surface">{monthLabel(m.month)}</p>
                     <StatusPill
@@ -152,7 +155,7 @@ export function ProfilePage() {
                       label={m.green ? t('profile.receipts.green') : t('profile.receipts.notGreen')}
                     />
                   </div>
-                  <dl className="grid grid-cols-2 gap-x-4 gap-y-1 text-body-small sm:grid-cols-4">
+                  <dl className="grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)] gap-x-4 gap-y-2 text-body-small @xl:grid-cols-4">
                     {(
                       [
                         ['income', m.income],
@@ -185,6 +188,19 @@ export function ProfilePage() {
             {t('profile.reset.action')}
           </Button>
         </section>
+        <section aria-labelledby="profile-fuerte" className={card}>
+          <h2 id="profile-fuerte" className="text-title-large text-on-surface">
+            {t('profile.fuerte.title')}
+          </h2>
+          <SegmentedButton
+            label={t('profile.fuerte.label')}
+            value={presence}
+            onValueChange={(value) => value && changePresence(value as FuertePresence)}
+            options={PRESENCES.map((value) => ({ value, label: t(`profile.fuerte.options.${value}`) }))}
+          />
+          <p className="text-body-medium text-on-surface-variant">{t(`profile.fuerte.help.${presence}`)}</p>
+        </section>
+
       </div>
       <ConfirmDialog
         open={confirmReset}

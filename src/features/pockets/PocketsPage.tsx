@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 import { MoneyInput } from '@/components/money/MoneyInput';
 import { MoneyText } from '@/components/money/MoneyText';
 import { Button } from '@/components/ui/Button';
-import { Dialog, DialogClose, DialogContent } from '@/components/ui/Dialog';
+import { ConfirmDialog, Dialog, DialogClose, DialogContent } from '@/components/ui/Dialog';
 import { Icon } from '@/components/ui/Icon';
 import { IconTile } from '@/components/ui/IconTile';
 import { InlineAlert } from '@/components/ui/InlineAlert';
@@ -21,6 +21,8 @@ import { LEVELS, MISSIONS, useLevels } from '@/features/levels/use-levels';
 import { WalletShell } from '@/features/wallet/WalletShell';
 import {
   createPocket,
+  deletePocket,
+  nextGoalPocketId,
   DAYS_IN_MONTH,
   essentialMonthlyExpenses,
   moveToPocket,
@@ -33,7 +35,7 @@ import {
 import type { Pocket } from '@/features/wallet/engine/types';
 import { formatDate, walletDate } from '@/lib/dates';
 import { D, savingsGoal } from '@/lib/finance';
-import { formatNumber, formatPercent, parseDecimalInput } from '@/lib/money';
+import { formatMoney, formatNumber, formatPercent, parseDecimalInput } from '@/lib/money';
 import { cn } from '@/lib/utils';
 import { useDataStore } from '@/store/data-store';
 import { useCurrentUser } from '@/store/session-store';
@@ -58,9 +60,19 @@ export function PocketsPage() {
   const status = statuses.find((s) => s.level.id === 'level-4');
   if (status && !isOpen('level-4')) {
     return (
-      <WalletShell section={t('wallet.sub.pockets')} fuerte={{ state: 'thinking', message: fuerteLine('pockets.fuerte.locked') }}>
+      <WalletShell
+        section={t('wallet.sub.pockets')}
+        fuerte={{
+          state: 'thinking',
+          message: fuerteLine('pockets.fuerte.locked'),
+        }}
+      >
         <div className="flex flex-col gap-6">
-          <h1 className="text-headline-medium text-on-surface">{t('wallet.placeholder.lockedTitle', { section: t('wallet.sub.pockets') })}</h1>
+          <h1 className="text-headline-medium text-on-surface">
+            {t('wallet.placeholder.lockedTitle', {
+              section: t('wallet.sub.pockets'),
+            })}
+          </h1>
           <WhyMatters screen="pockets" />
           <UnlockCard status={status} />
         </div>
@@ -86,6 +98,7 @@ function Pockets() {
   const metrics = walletMetrics(wallet);
   const fund = wallet.pockets.find((p) => p.isEmergencyFund);
   const others = wallet.pockets.filter((p) => !p.isEmergencyFund);
+  const [creating, setCreating] = useState(false);
   const months = D(metrics.emergency_months);
   const level = LEVELS.find((l) => l.id === 'level-4')!;
   const guide = guideOfModule(level.guideModuleIds[0]!);
@@ -97,7 +110,11 @@ function Pockets() {
   return (
     <WalletShell
       section={t('wallet.sub.pockets')}
-      fuerte={{ state: 'neutral', message: fund ? fuerteLine('pockets.fuerte.fund', { months: monthsText }) : fuerteLine('pockets.fuerte.noFund'), why: whyText('pockets') }}
+      fuerte={{
+        state: 'neutral',
+        message: fund ? fuerteLine('pockets.fuerte.fund', { months: monthsText }) : fuerteLine('pockets.fuerte.noFund'),
+        why: whyText('pockets'),
+      }}
     >
       <div className="flex flex-col gap-6">
         <header className="flex flex-col gap-3">
@@ -107,13 +124,53 @@ function Pockets() {
           <MetaChips
             label={t('pockets.context')}
             items={[
-              { icon: 'savings', label: t('pockets.count', { count: wallet.pockets.length }) },
-              { icon: 'calendar_month', label: formatDate(walletDate(wallet.day)), dateTime: walletDate(wallet.day) },
+              {
+                icon: 'savings',
+                label: t('pockets.count', { count: wallet.pockets.length }),
+              },
+              {
+                icon: 'calendar_month',
+                label: formatDate(walletDate(wallet.day)),
+                dateTime: walletDate(wallet.day),
+              },
             ]}
           />
         </header>
 
-        <div className="grid grid-cols-[minmax(0,1fr)] gap-(--space-bento-gap) large:grid-cols-[minmax(0,2fr)_minmax(20rem,1fr)] large:items-start">
+        {/* Where the money goes (Lourdes, 14/11/2026): a pocket is part of the same account, so what you
+            withdraw or a deleted goal returns to the available balance, shown here next to what is set aside */}
+        <ul className="grid grid-cols-[minmax(0,1fr)] gap-(--space-bento-gap) sm:grid-cols-2" aria-live="polite">
+          {[
+            {
+              icon: 'account_balance_wallet' as const,
+              tone: 'primary' as const,
+              label: t('pockets.summary.available'),
+              value: wallet.balance,
+              note: t('pockets.summary.availableNote'),
+            },
+            {
+              icon: 'savings' as const,
+              tone: 'tertiary' as const,
+              label: t('pockets.summary.setAside'),
+              value: wallet.pockets.reduce((sum, p) => sum.plus(p.amount), D(0)).toFixed(2),
+              note: t('pockets.summary.setAsideNote', { count: wallet.pockets.length }),
+            },
+          ].map((item) => (
+            <li key={item.label} className="flex min-w-0 items-start gap-3 rounded-xl border border-outline-variant bg-surface-container-lowest p-4">
+              <IconTile icon={item.icon} tone={item.tone} size="sm" />
+              <div className="flex min-w-0 flex-col gap-0.5">
+                <p className="text-label-medium text-on-surface-variant">{item.label}</p>
+                <p className="text-title-large text-on-surface">
+                  <MoneyText value={item.value} />
+                </p>
+                <p className="text-body-small text-on-surface-variant">{item.note}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+
+        {/* One column at full width (Lourdes, 14/11/2026, D-217): the fund, the goals with "Nueva meta", and learn */}
+        <div className="flex min-w-0 flex-col gap-(--space-bento-gap)">
           {/* Emergency fund: the months it covers, the condition that opens Invertir (5.0) */}
           <section aria-labelledby="fund-title" className={cn(card, '@container border-primary')}>
             <div className="flex flex-wrap items-start justify-between gap-3">
@@ -139,7 +196,7 @@ function Pockets() {
                   tone="tertiary"
                   size="lg"
                 />
-                <dl className="grid grid-cols-[minmax(0,1fr)] gap-3 sm:grid-cols-3">
+                <dl className="grid grid-cols-[minmax(0,1fr)] gap-3 @lg:grid-cols-3">
                   {[
                     [t('pockets.fund.essentials'), essentials.toFixed(2)],
                     [t('pockets.fund.three'), essentials.times(3).toFixed(2)],
@@ -177,60 +234,76 @@ function Pockets() {
               </>
             )}
           </section>
-
-          <div className="flex min-w-0 flex-col gap-(--space-bento-gap)">
-            <NewGoal />
-            <section aria-labelledby="learn-title" className={card}>
-              <h2 id="learn-title" className="text-title-large text-on-surface">
-                {t('pay.learn.title')}
-              </h2>
-              <div className="flex flex-col divide-y divide-outline-variant">
-                {guide && (
-                  <Link to={`/app/learn/guides/${guide.id}`} className="flex items-center gap-3 py-3 hover:bg-surface-container">
-                    <Icon name={guideDone ? 'check_circle' : 'menu_book'} filled={guideDone} className={guideDone ? 'text-success' : 'text-primary'} />
-                    <span className="min-w-0 flex-1">
-                      <span className="block text-body-medium text-on-surface">{guide.title}</span>
-                      <span className="block text-body-small text-on-surface-variant">{t('pay.learn.guideMeta', { minutes: guide.minutes })}</span>
-                    </span>
-                    <Icon name="chevron_right" size={20} className="text-on-surface-variant" />
-                  </Link>
-                )}
-                {mission && (
-                  <Link to={`/app/missions/${mission.id}`} className="flex items-center gap-3 py-3 hover:bg-surface-container">
-                    <Icon name={missionDone ? 'check_circle' : 'flag'} filled={missionDone} className={missionDone ? 'text-success' : 'text-primary'} />
-                    <span className="min-w-0 flex-1">
-                      <span className="block text-body-medium text-on-surface">{mission.title}</span>
-                      <span className="block text-body-small text-on-surface-variant">
-                        {t('pay.learn.missionMeta', { minutes: mission.minutes })}
-                        {missionDone && ` · ${t('learn.map.done')}`}
-                      </span>
-                    </span>
-                    <Icon name="chevron_right" size={20} className="text-on-surface-variant" />
-                  </Link>
-                )}
+          {/* Goal cards (2.2.1 pattern 13) */}
+          <section aria-labelledby="goals-title" className="flex flex-col gap-4">
+            <h2 id="goals-title" className="text-title-large text-on-surface">
+              {t('pockets.goals.title')}
+            </h2>
+            {/* Create first, above the goals already made (Lourdes, 14/11/2026) */}
+            <div className="flex flex-col gap-4 rounded-xl border border-dashed border-primary bg-primary-container/40 p-(--space-card-padding) sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex min-w-0 items-start gap-3">
+                <IconTile icon="flag" tone="primary" />
+                <div className="flex min-w-0 flex-col gap-1">
+                  <h3 className="text-title-medium text-on-surface">{t('pockets.new.stripTitle')}</h3>
+                  <p className="text-body-medium text-on-surface-variant">{t('pockets.new.stripBody')}</p>
+                </div>
               </div>
-            </section>
-          </div>
-        </div>
+              <Button leadingIcon="add" className="shrink-0 self-start sm:self-auto" onClick={() => setCreating(true)}>
+                {t('pockets.new.title')}
+              </Button>
+            </div>
+            {others.length === 0 ? (
+              <p className="text-body-medium text-on-surface-variant">{t('pockets.goals.empty')}</p>
+            ) : (
+              <ul className="grid grid-fill-3 gap-(--space-bento-gap)">
+                {others.map((p) => (
+                  <GoalCard key={p.id} pocket={p} onMove={setMove} />
+                ))}
+              </ul>
+            )}
+          </section>
 
-        {/* Goal cards (2.2.1 pattern 13) */}
-        <section aria-labelledby="goals-title" className="flex flex-col gap-4">
-          <h2 id="goals-title" className="text-title-large text-on-surface">
-            {t('pockets.goals.title')}
-          </h2>
-          {others.length === 0 ? (
-            <p className="text-body-medium text-on-surface-variant">{t('pockets.goals.empty')}</p>
-          ) : (
-            <ul className="grid grid-cols-[minmax(0,1fr)] gap-(--space-bento-gap) md:grid-cols-2 large:grid-cols-3">
-              {others.map((p) => (
-                <GoalCard key={p.id} pocket={p} onMove={setMove} />
-              ))}
-            </ul>
-          )}
-        </section>
+          <section aria-labelledby="learn-title" className={cn(card, '@container')}>
+            <h2 id="learn-title" className="text-title-large text-on-surface">
+              {t('pay.learn.title')}
+            </h2>
+            <div className="grid grid-cols-[minmax(0,1fr)] gap-3 @2xl:grid-cols-2">
+              {guide && (
+                <Link
+                  to={`/app/learn/guides/${guide.id}`}
+                  className="flex items-center gap-3 rounded-lg border border-outline-variant p-3 transition-colors duration-150 hover:bg-surface-container"
+                >
+                  <Icon name={guideDone ? 'check_circle' : 'menu_book'} filled={guideDone} className={guideDone ? 'text-success' : 'text-primary'} />
+                  <span className="min-w-0 flex-1">
+                    <span className="block text-body-medium text-on-surface">{guide.title}</span>
+                    <span className="block text-body-small text-on-surface-variant">{t('pay.learn.guideMeta', { minutes: guide.minutes })}</span>
+                  </span>
+                  <Icon name="chevron_right" size={20} className="text-on-surface-variant" />
+                </Link>
+              )}
+              {mission && (
+                <Link
+                  to={`/app/missions/${mission.id}`}
+                  className="flex items-center gap-3 rounded-lg border border-outline-variant p-3 transition-colors duration-150 hover:bg-surface-container"
+                >
+                  <Icon name={missionDone ? 'check_circle' : 'flag'} filled={missionDone} className={missionDone ? 'text-success' : 'text-primary'} />
+                  <span className="min-w-0 flex-1">
+                    <span className="block text-body-medium text-on-surface">{mission.title}</span>
+                    <span className="block text-body-small text-on-surface-variant">
+                      {t('pay.learn.missionMeta', { minutes: mission.minutes })}
+                      {missionDone && ` · ${t('learn.map.done')}`}
+                    </span>
+                  </span>
+                  <Icon name="chevron_right" size={20} className="text-on-surface-variant" />
+                </Link>
+              )}
+            </div>
+          </section>
+        </div>
       </div>
 
       {move && <MoveDialog move={move} onClose={() => setMove(undefined)} />}
+      {creating && <NewGoalDialog onClose={() => setCreating(false)} />}
     </WalletShell>
   );
 }
@@ -238,7 +311,14 @@ function Pockets() {
 function GoalCard({ pocket, onMove }: { pocket: Pocket; onMove: (m: Move) => void }) {
   const { t } = useTranslation();
   const user = useCurrentUser();
-  const [wallet] = useWallet(user?.personId ?? '');
+  const [wallet, setWallet] = useWallet(user?.personId ?? '');
+  const [deleting, setDeleting] = useState(false);
+  // The basic "Ahorro" pocket (D-53) and the emergency fund stay (D-220)
+  const removable = !pocket.isEmergencyFund && pocket.id !== 'pocket-savings';
+  const remove = () => {
+    setWallet((w) => deletePocket(w, pocket.id));
+    toast.success(t('pockets.delete.done', { name: pocket.name }));
+  };
   const left = monthsToGoal(wallet, pocket);
   const progress = pocket.goal ? Math.min(100, D(pocket.amount).div(pocket.goal).times(100).toNumber()) : 0;
   const reached = pocket.goal && D(pocket.amount).gte(pocket.goal);
@@ -295,13 +375,29 @@ function GoalCard({ pocket, onMove }: { pocket: Pocket; onMove: (m: Move) => voi
             {t('pockets.goals.setGoal')}
           </Button>
         )}
+        {removable && (
+          <Button size="xs" variant="text" leadingIcon="delete" className="ml-auto" onClick={() => setDeleting(true)}>
+            {t('pockets.delete.action')}
+            <span className="sr-only"> {pocket.name}</span>
+          </Button>
+        )}
       </div>
+      {removable && (
+        <ConfirmDialog
+          open={deleting}
+          onOpenChange={setDeleting}
+          title={t('pockets.delete.title', { name: pocket.name })}
+          description={D(pocket.amount).gt(0) ? t('pockets.delete.bodyMoney', { amount: formatMoney(pocket.amount) }) : t('pockets.delete.bodyEmpty')}
+          confirmLabel={t('pockets.delete.confirm')}
+          onConfirm={remove}
+        />
+      )}
     </li>
   );
 }
 
 /** New goal with inflation (SIM-8): today's price and term give the goal at the end and the monthly saving. */
-function NewGoal() {
+function NewGoalDialog({ onClose }: { onClose: () => void }) {
   const { t } = useTranslation();
   const user = useCurrentUser();
   const [wallet, setWallet] = useWallet(user?.personId ?? '');
@@ -311,45 +407,98 @@ function NewGoal() {
   const [tried, setTried] = useState(false);
   const inflation = scenarios.find((s) => s.id === wallet.scenarioId)?.monthlyInflation ?? '0.03';
   const parsed = parseDecimalInput(price);
-  const plan = parsed && D(parsed).gt(0) ? savingsGoal({ currentPrice: parsed, months: Number(term), monthlyInflation: inflation, monthlyReturn: '0' }) : undefined;
+  const plan =
+    parsed && D(parsed).gt(0)
+      ? savingsGoal({
+          currentPrice: parsed,
+          months: Number(term),
+          monthlyInflation: inflation,
+          monthlyReturn: '0',
+        })
+      : undefined;
 
   const submit = (event: FormEvent) => {
     event.preventDefault();
     setTried(true);
     if (!name.trim() || !plan || !parsed) return;
-    const id = `pocket-goal-${wallet.seq + 1}`;
-    setWallet((w) =>
-      setPocketGoal(createPocket(w, { id, name: name.trim() }), id, plan.futurePrice.toFixed(2), { currentPrice: D(parsed).toFixed(2), months: Number(term), day: w.day }),
-    );
+    setWallet((w) => {
+      const id = nextGoalPocketId(w);
+      return setPocketGoal(createPocket(w, { id, name: name.trim() }), id, plan.futurePrice.toFixed(2), {
+        currentPrice: D(parsed).toFixed(2),
+        months: Number(term),
+        day: w.day,
+      });
+    });
     toast.success(t('pockets.new.saved'));
     setName('');
     setPrice('');
     setTried(false);
+    onClose();
   };
+  const formId = 'new-goal-form';
 
   return (
-    <form noValidate onSubmit={submit} aria-labelledby="new-goal-title" className={card}>
-      <h2 id="new-goal-title" className="text-title-large text-on-surface">
-        {t('pockets.new.title')}
-      </h2>
-      <TextField label={t('pockets.new.name')} helperText={t('pockets.new.nameHelp')} value={name} onChange={(e) => setName(e.target.value)} error={tried && !name.trim() ? t('pockets.new.nameMissing') : undefined} maxLength={40} />
-      <MoneyInput label={t('pockets.new.price')} helperText={t('pockets.new.priceHelp')} value={price} onChange={(e) => setPrice(e.target.value)} error={tried && !plan ? t('pockets.new.priceMissing') : undefined} />
-      <Select label={t('pockets.new.term')} helperText={t('pockets.new.termHelp')} value={term} onChange={(e) => setTerm(e.target.value)} options={TERMS.map((m) => ({ value: m, label: t('pockets.new.months', { count: Number(m) }) }))} />
-      {plan && (
-        <div className="flex flex-col gap-1 rounded-lg bg-info-container p-3 text-on-info-container" aria-live="polite">
-          <p className="text-body-medium">
-            {t('pockets.new.futurePrice')} <MoneyText value={plan.futurePrice.toFixed(2)} className="font-semibold" />
-          </p>
-          <p className="text-body-medium">
-            {t('pockets.new.monthly')} <MoneyText value={plan.monthlySaving.toFixed(2)} className="font-semibold" />
-          </p>
-          <p className="text-body-small">{t('pockets.new.assumption', { inflation: formatPercent(inflation, { decimals: 1 }) })}</p>
-        </div>
-      )}
-      <Button type="submit" className="self-start" leadingIcon="flag">
-        {t('pockets.new.create')}
-      </Button>
-    </form>
+    <Dialog open onOpenChange={(open) => !open && onClose()}>
+      <DialogContent
+        title={t('pockets.new.title')}
+        description={t('pockets.new.stripBody')}
+        actions={
+          <>
+            <DialogClose asChild>
+              <Button variant="outlined" fullWidth className="sm:w-auto">
+                {t('pay.cancel')}
+              </Button>
+            </DialogClose>
+            <Button type="submit" form={formId} fullWidth className="sm:w-auto" leadingIcon="flag">
+              {t('pockets.new.create')}
+            </Button>
+          </>
+        }
+      >
+        <form id={formId} noValidate onSubmit={submit} className="flex flex-col gap-4">
+          <TextField
+            label={t('pockets.new.name')}
+            helperText={t('pockets.new.nameHelp')}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            error={tried && !name.trim() ? t('pockets.new.nameMissing') : undefined}
+            maxLength={40}
+          />
+          <MoneyInput
+            label={t('pockets.new.price')}
+            helperText={t('pockets.new.priceHelp')}
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+            error={tried && !plan ? t('pockets.new.priceMissing') : undefined}
+          />
+          <Select
+            label={t('pockets.new.term')}
+            helperText={t('pockets.new.termHelp')}
+            value={term}
+            onChange={(e) => setTerm(e.target.value)}
+            options={TERMS.map((m) => ({
+              value: m,
+              label: t('pockets.new.months', { count: Number(m) }),
+            }))}
+          />
+          {plan && (
+            <div className="flex flex-col gap-1 rounded-lg bg-info-container p-3 text-on-info-container" aria-live="polite">
+              <p className="text-body-medium">
+                {t('pockets.new.futurePrice')} <MoneyText value={plan.futurePrice.toFixed(2)} className="font-semibold" />
+              </p>
+              <p className="text-body-medium">
+                {t('pockets.new.monthly')} <MoneyText value={plan.monthlySaving.toFixed(2)} className="font-semibold" />
+              </p>
+              <p className="text-body-small">
+                {t('pockets.new.assumption', {
+                  inflation: formatPercent(inflation, { decimals: 1 }),
+                })}
+              </p>
+            </div>
+          )}
+        </form>
+      </DialogContent>
+    </Dialog>
   );
 }
 
@@ -360,7 +509,12 @@ function MoveDialog({ move, onClose }: { move: Move; onClose: () => void }) {
   const [amount, setAmount] = useState('');
   const [failure, setFailure] = useState<string | undefined>();
   const protectedPocket = move.pocket.isEmergencyFund || move.pocket.id === 'pocket-savings';
-  const title = move.kind === 'in' ? t('pockets.move.inTitle', { name: move.pocket.name }) : move.kind === 'out' ? t('pockets.move.outTitle', { name: move.pocket.name }) : t('pockets.move.goalTitle', { name: move.pocket.name });
+  const title =
+    move.kind === 'in'
+      ? t('pockets.move.inTitle', { name: move.pocket.name })
+      : move.kind === 'out'
+        ? t('pockets.move.outTitle', { name: move.pocket.name })
+        : t('pockets.move.goalTitle', { name: move.pocket.name });
 
   const confirm = () => {
     const parsed = parseDecimalInput(amount);
@@ -401,6 +555,11 @@ function MoveDialog({ move, onClose }: { move: Move; onClose: () => void }) {
           {move.kind !== 'goal' && (
             <p className="text-body-medium text-on-surface-variant">
               {move.kind === 'in' ? t('pockets.move.balance') : t('pockets.move.inPocket')} <MoneyText value={move.kind === 'in' ? wallet.balance : move.pocket.amount} />
+            </p>
+          )}
+          {move.kind === 'out' && (
+            <p className="text-body-medium text-on-surface-variant">
+              {t('pockets.move.goesTo')} <MoneyText value={wallet.balance} />
             </p>
           )}
           {move.kind === 'out' && protectedPocket && <InlineAlert tone="warning">{t('pockets.move.warning')}</InlineAlert>}

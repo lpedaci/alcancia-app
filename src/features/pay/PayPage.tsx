@@ -153,10 +153,10 @@ function PayHome() {
           <WhyMatters screen="pay" />
         </header>
 
-        <ul className="grid grid-cols-[minmax(0,1fr)] gap-(--space-bento-gap) sm:grid-cols-2 large:grid-cols-4">
+        <ul className="grid grid-fill-4 gap-(--space-bento-gap)">
           {actions.map((a) => (
             <li key={a.key}>
-              <Link to={a.to} className="group flex h-full flex-col gap-3 rounded-xl border border-outline-variant bg-surface-container-lowest p-(--space-card-padding) hover:border-primary">
+              <Link to={a.to} className="group flex h-full flex-col gap-2 rounded-xl border border-outline-variant bg-surface-container-lowest p-(--space-card-padding) hover:border-primary">
                 <span className="flex items-start justify-between gap-2">
                   <IconTile icon={a.icon} tone={a.locked ? 'secondary' : 'primary'} />
                   <Icon name={a.locked ? 'lock' : 'arrow_forward'} size={20} className="text-on-surface-variant transition-transform group-hover:translate-x-0.5 motion-reduce:transform-none" />
@@ -165,7 +165,7 @@ function PayHome() {
                   {t(`wallet.sub.${a.key}`)}
                   {a.locked && <span className="sr-only">, {t('wallet.nav.locked')}</span>}
                 </span>
-                <span className="text-body-medium text-on-surface-variant">{t(`pay.actions.${a.key}`)}</span>
+                <span className="text-body-medium text-on-surface-variant">{t(a.locked ? `pay.actions.${a.key}Locked` : `pay.actions.${a.key}`, { defaultValue: t(`pay.actions.${a.key}`) })}</span>
               </Link>
             </li>
           ))}

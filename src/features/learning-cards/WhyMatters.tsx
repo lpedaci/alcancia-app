@@ -33,13 +33,20 @@ export function WhyMatters({ screen, className }: { screen: WhyScreen; className
         <Icon name="keyboard_arrow_down" size={18} className={cn('transition-transform duration-150', open && 'rotate-180')} />
       </button>
       {open && (
-        <div id={panelId} className="flex max-w-prose flex-col gap-3 rounded-lg border border-outline-variant bg-tertiary-container p-4 text-on-tertiary-container">
-          <p className="text-body-medium">{why.body}</p>
-          <Link to={guideHref(why.guide, pathname)} onClick={() => rememberScroll(pathname)} className="inline-flex min-h-12 w-fit items-center gap-1.5 text-label-large underline underline-offset-4 md:min-h-6">
-            <Icon name="menu_book" size={18} />
-            {t('cards.toGuide')}
-          </Link>
-          <SourceList codes={why.sourceIds} legal={false} />
+        <div id={panelId} className="@container rounded-lg border border-outline-variant bg-tertiary-container p-4 text-on-tertiary-container md:p-5">
+          {/* Full width (Lourdes, 14/11/2026): the concept first and, beside it when there is room, where to go next */}
+          <div className="grid grid-cols-[minmax(0,1fr)] gap-4 @3xl:grid-cols-[minmax(0,3fr)_minmax(16rem,2fr)] @3xl:gap-6">
+            <div className="flex min-w-0 flex-col gap-3">
+              <p className="max-w-prose text-body-large">{why.body}</p>
+              <Link to={guideHref(why.guide, pathname)} onClick={() => rememberScroll(pathname)} className="inline-flex min-h-12 w-fit items-center gap-1.5 text-label-large underline underline-offset-4 md:min-h-6">
+                <Icon name="menu_book" size={18} />
+                {t('cards.toGuide')}
+              </Link>
+            </div>
+            <div className="min-w-0 @3xl:border-l @3xl:border-on-tertiary-container/15 @3xl:pl-6">
+              <SourceList codes={why.sourceIds} legal={false} />
+            </div>
+          </div>
         </div>
       )}
     </div>

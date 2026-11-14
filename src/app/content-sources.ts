@@ -15,7 +15,7 @@ const ANNEX_B_VERIFIED = '2026-11-11';
 /** Annex B code → official source of sources.ts, or a name when the document has no public link of its own. */
 const OFFICIAL: Record<string, string | { name: string }> = {
   'B-01': 'bcra-a8407',
-  'B-02': { name: 'BCRA, normas "Depósitos e inversiones a plazo"' },
+  'B-02': 'bcra-depinv',
   'B-03': { name: 'BCRA, Comunicación "A" 8246: plazo fijo UVA' },
   'B-04': 'bcra-tasas',
   'B-05': 'ley-25065',

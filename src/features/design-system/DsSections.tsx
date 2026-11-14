@@ -9,6 +9,7 @@ import { Icon, type IconName } from '@/components/ui/Icon';
 import { IconTile } from '@/components/ui/IconTile';
 import { InlineAlert } from '@/components/ui/InlineAlert';
 import { KpiCard, KpiRow } from '@/components/ui/KpiCard';
+import { OptionCard } from '@/components/ui/OptionCard';
 import { MetaChips } from '@/components/ui/MetaChips';
 import { ProgressBar } from '@/components/ui/ProgressBar';
 import { SegmentedButton } from '@/components/ui/SegmentedButton';
@@ -145,6 +146,39 @@ export function ComponentsSection() {
           </div>
           <SegmentedProgress done={3} total={5} label={c('progress')} valueText={c('stepsValue')} />
         </div>
+      </Specimen>
+
+      <Specimen title={c('option')} note={c('optionNote')} className="xl:col-span-2">
+        <ul className="grid grid-cols-[minmax(0,1fr)] gap-3 @2xl:grid-cols-2">
+          <OptionCard
+            as="li"
+            icon="savings"
+            title={c('optionA')}
+            selected
+            selectedLabel={c('optionChosen')}
+            highlight={{ label: c('optionRate'), value: c('optionRateA') }}
+            facts={[
+              { label: c('optionRisk'), value: c('optionLow') },
+              { label: c('optionLiquidity'), value: c('optionNow') },
+            ]}
+          />
+          <OptionCard
+            as="li"
+            icon="query_stats"
+            title={c('optionB')}
+            selectedLabel={c('optionChosen')}
+            highlight={{ label: c('optionRate'), value: c('optionRateB') }}
+            facts={[
+              { label: c('optionRisk'), value: c('optionLow') },
+              { label: c('optionLiquidity'), value: c('optionDay') },
+            ]}
+            action={
+              <Button variant="outlined" size="xs">
+                {c('optionChoose')}
+              </Button>
+            }
+          />
+        </ul>
       </Specimen>
 
       <Specimen title={c('sources')} note={c('sourcesNote')} className="xl:col-span-2">

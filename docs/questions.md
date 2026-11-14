@@ -5,6 +5,7 @@
 | ID | Dato | Origen | Qué falta | Quién lo resuelve | Estado |
 | --- | --- | --- | --- | --- | --- |
 | Q-01 | Tasa mínima del plazo fijo tradicional para personas | B-02 | Confirmar si sigue vigente; por defecto no se menciona | Kevin / norma del BCRA | Abierta |
+| Q-16 | Plazo mínimo del plazo fijo UVA | B-02, B-03 | ¿Cuál es el plazo mínimo vigente? | Claude Code, en la norma | **Resuelta (14/11/2026):** 90 días para depósitos en UVA (BCRA, texto ordenado "Depósitos e inversiones a plazo", punto 1.12.3, al 11/09/2026, última comunicación "A" 8479); el plazo fijo tradicional, 30 días (punto 1.12.1.1). Fuente agregada a `sources.ts` |
 | Q-02 | Límite del interés compensatorio de tarjetas (25 % sobre préstamos personales) | B-05 | Confirmar la redacción con el texto de la Ley 25.065 | Verificación en la norma | Abierta |
 | Q-03 | Nombres de las variantes de fondos money market | B-26 | Confirmar con la RG CNV 1038 | Verificación en la norma | Abierta |
 | Q-04 | Horario de negociación desde el 02/11/2026 | B-35 | Confirmar en https://byma.com.ar/mercado/horarios (la fuente fue prensa) | Verificación en BYMA | Abierta |

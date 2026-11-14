@@ -412,6 +412,13 @@ export function createPocket(state: WalletState, pocket: Omit<Pocket, 'amount'>)
   return next;
 }
 
+/** The id for a new goal pocket: the first `pocket-goal-N` not taken yet. */
+export function nextGoalPocketId(state: WalletState): string {
+  let n = state.pockets.length + 1;
+  while (state.pockets.some((p) => p.id === `pocket-goal-${n}`)) n += 1;
+  return `pocket-goal-${n}`;
+}
+
 export function markEmergencyFund(state: WalletState, pocketId: string, goal?: string): WalletState {
   const next = clone(state);
   next.pockets = next.pockets.map((p) =>
@@ -444,6 +451,20 @@ export function withdrawFromPocket(state: WalletState, pocketId: string, amount:
   pocket.amount = toMoneyString(D(pocket.amount).minus(value));
   addMovement(next, { type: 'pocket_out', amount: value, counterparty: `Apartado: ${pocket.name}` });
   return next;
+}
+
+/**
+ * Deletes a goal pocket (D-220): what it holds goes back to the available balance as a pocket_out
+ * movement, then the pocket disappears. The basic "Ahorro" pocket (D-53) and the emergency fund
+ * cannot be deleted: missions and the Invertir unlock read them.
+ */
+export function deletePocket(state: WalletState, pocketId: string): WalletState {
+  const pocket = state.pockets.find((p) => p.id === pocketId);
+  if (!pocket) throw new WalletError('unknown_pocket');
+  if (pocket.isEmergencyFund || pocket.id === 'pocket-savings') throw new WalletError('protected_pocket');
+  const emptied = D(pocket.amount).gt(0) ? withdrawFromPocket(state, pocketId, pocket.amount) : clone(state);
+  emptied.pockets = emptied.pockets.filter((p) => p.id !== pocketId);
+  return emptied;
 }
 
 /** The person confirms or changes the category of a movement (D-114). */

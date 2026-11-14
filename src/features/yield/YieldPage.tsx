@@ -9,6 +9,7 @@ import { Icon, type IconName } from '@/components/ui/Icon';
 import { IconTile } from '@/components/ui/IconTile';
 import { InlineAlert } from '@/components/ui/InlineAlert';
 import { MetaChips } from '@/components/ui/MetaChips';
+import { OptionCard } from '@/components/ui/OptionCard';
 import { RadioGroup } from '@/components/ui/RadioGroup';
 import { SegmentedButton } from '@/components/ui/SegmentedButton';
 import { StatusPill } from '@/components/ui/StatusPill';
@@ -112,36 +113,31 @@ function Yield() {
               {t('yield.mode.title')}
             </h2>
             <p className="text-body-medium text-on-surface-variant">{t('yield.mode.intro')}</p>
-            <ul className="grid grid-cols-[minmax(0,1fr)] gap-3 @xl:grid-cols-3">
+            <ul className="grid grid-cols-[minmax(0,1fr)] gap-3 @2xl:grid-cols-3">
               {MODES.map(({ mode, icon }) => {
                 const selected = wallet.yieldMode === mode;
                 const rate = tnaOf(wallet, mode);
                 return (
-                  <li key={mode} className={cn('flex flex-col gap-3 rounded-lg border p-4', selected ? 'border-primary bg-primary-container/40' : 'border-outline-variant')}>
-                    <span className="flex items-start justify-between gap-2">
-                      <IconTile icon={icon} tone={selected ? 'primary' : 'secondary'} size="sm" />
-                      {selected && <StatusPill tone="primary" icon="check" label={t('yield.mode.current')} />}
-                    </span>
-                    <h3 className="text-title-medium text-on-surface">{t(`yield.mode.${mode}.name`)}</h3>
-                    <dl className="flex flex-col gap-2 text-body-small">
-                      {(['rate', 'risk', 'liquidity', 'currency', 'protection'] as const).map((row) => (
-                        <div key={row} className="flex flex-col">
-                          <dt className="text-label-medium text-on-surface-variant">{t(`yield.sheet.${row}`)}</dt>
-                          <dd className="text-on-surface">
-                            {row === 'rate'
-                              ? rate
-                                ? t(mode === 'money_market' ? 'yield.sheet.rateVaries' : 'yield.sheet.rateValue', { value: formatPercent(rate, { decimals: 1 }) })
-                                : t('yield.sheet.noRate')
-                              : t(`yield.mode.${mode}.${row}`)}
-                          </dd>
-                        </div>
-                      ))}
-                    </dl>
-                    {!selected && (
+                  <OptionCard
+                    key={mode}
+                    as="li"
+                    icon={icon}
+                    title={t(`yield.mode.${mode}.name`)}
+                    selected={selected}
+                    selectedLabel={t('yield.mode.current')}
+                    highlight={{
+                      label: t('yield.sheet.rate'),
+                      value: rate ? t('yield.sheet.rateValue', { value: formatPercent(rate, { decimals: 1 }) }) : t('yield.sheet.noRate'),
+                      caption: mode === 'money_market' ? t('yield.sheet.rateVariesNote') : undefined,
+                    }}
+                    facts={(['risk', 'liquidity', 'currency', 'protection'] as const).map((row) => ({
+                      label: t(`yield.sheet.${row}`),
+                      value: t(`yield.mode.${mode}.${row}`),
+                    }))}
+                    action={
                       <Button
                         variant="outlined"
                         size="xs"
-                        className="mt-auto self-start"
                         onClick={() => {
                           setWallet((w) => setYieldMode(w, mode));
                           toast.success(t('yield.mode.changed', { name: t(`yield.mode.${mode}.name`) }));
@@ -150,8 +146,8 @@ function Yield() {
                         {t('yield.mode.choose')}
                         <span className="sr-only"> {t(`yield.mode.${mode}.name`)}</span>
                       </Button>
-                    )}
-                  </li>
+                    }
+                  />
                 );
               })}
             </ul>

@@ -47,7 +47,7 @@ export function ToolsPage() {
                   </span>
                 )}
               </h2>
-              <ul className="grid grid-cols-[minmax(0,1fr)] gap-(--space-bento-gap) md:grid-cols-2 large:grid-cols-3">
+              <ul className="grid grid-fill-3 gap-(--space-bento-gap)">
                 {ids.map((id) => (
                   <li key={id}>
                     <Link to={`/app/tools/${id}`} className="group flex h-full flex-col gap-3 rounded-xl border border-outline-variant bg-surface-container-lowest p-(--space-card-padding) hover:border-primary">

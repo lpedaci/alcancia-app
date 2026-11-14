@@ -260,6 +260,20 @@
 
 /* Sideways scrolling without a visible scrollbar ): chip rows and tables on phones and tablets (2.7).
    The content still scrolls with touch, trackpad and keyboard. */
+/*
+ * Lists of cards (Lourdes, 14/11/2026): they use the full width, three per row at most; with more,
+ * the rest goes to the next row. One card takes the row and two take half each (auto-fit collapses
+ * the empty tracks). Never narrower than 16rem, or one per row when the screen is narrower than that.
+ */
+/* Short tiles (D-217): up to 4 per row, filling the width; fewer per row as the screen narrows */
+@utility grid-fill-4 {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, max(13rem, calc((100% - 3 * var(--space-bento-gap)) / 4))), 1fr));
+}
+
+@utility grid-fill-3 {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, max(16rem, calc((100% - 2 * var(--space-bento-gap)) / 3))), 1fr));
+}
+
 @utility scrollbar-none {
   scrollbar-width: none;
   &::-webkit-scrollbar {

@@ -1115,8 +1115,12 @@
       "offNote": "Sin segundo factor, alcanza con la contraseña para entrar a tu cuenta.",
       "limit": "Límite diario de transferencias",
       "limitOption": "{{amount}}",
-      "limitHelp": "Si alguien entrara a tu cuenta, el límite frena cuánto se puede llevar en un día.",
-      "limitSaved": "Límite guardado"
+      "limitSaved": "Límite guardado",
+      "limitWhat": "Es lo máximo que puedes transferir o pagar con QR en un día. Si alguien entrara a tu cuenta, no podría llevarse más que eso.",
+      "limitUsedLabel": "Uso del límite de hoy",
+      "limitUsed": "Hoy usaste {{used}} de {{limit}}.",
+      "limitReset": "El contador vuelve a cero cada día.",
+      "limitNone": "Sin límite: elige uno para proteger tu cuenta."
     },
     "fuerte": {
       "title": "Fuerte",
@@ -1284,7 +1288,7 @@
       "conocerte": "Conocerte y tu ruta",
       "profile": "Test de perfil de inversor",
       "tools": "Simulador de inflación",
-      "badgeBelow": "Tu parte de este módulo en el desafío quedó en {{part}}, bajo {{passing}}. Cuenta tu mejor intento: puedes volver a intentarlo.",
+      "badgeBelow": "Tu parte de este módulo en el desafío quedó en {{part}}, bajo {{passing}}. Vale tu mejor intento: puedes volver a intentarlo.",
       "badgeHow": "Se obtiene con tu parte de este módulo en el desafío del nivel {{level}}.",
       "badgeTry": "Ir al desafío del nivel {{level}}"
     },
@@ -1373,10 +1377,11 @@
     "cancel": "Cancelar",
     "source": "Fuente: {{source}}",
     "actions": {
-      "transfer": "A un alias, CBU o CVU, revisando el titular antes de confirmar.",
-      "qr": "En un comercio ficticio, con QR interoperable.",
-      "bills": "Luz, gas, celular y suscripciones que se debitan solas.",
-      "credit": "Tarjeta, préstamos y cuotas. Se abre en el nivel 5."
+      "transfer": "A un alias, CBU o CVU",
+      "qr": "En comercios, con cualquier QR",
+      "bills": "Luz, celular y suscripciones",
+      "credit": "Tarjeta, préstamos y cuotas",
+      "creditLocked": "Se abre en el nivel 5"
     },
     "learn": {
       "title": "Aprende y practica",
@@ -1574,7 +1579,9 @@
       "monthly": "Para llegar, separa por mes:",
       "assumption": "Escenario de ejemplo: inflación de {{inflation}} mensual, sin rendimiento. Es un escenario, no una predicción.",
       "create": "Crear meta",
-      "saved": "Meta creada"
+      "saved": "Meta creada",
+      "stripTitle": "Crea una meta",
+      "stripBody": "Ponle nombre, cuánto cuesta hoy y en qué plazo quieres llegar. La ajustamos por la inflación del escenario."
     },
     "move": {
       "inTitle": "Separar en {{name}}",
@@ -1590,15 +1597,32 @@
       "missing": "Escribe un monto mayor que cero, por ejemplo: 50.000.",
       "done": {
         "in": "Dinero separado",
-        "out": "Dinero retirado",
+        "out": "Dinero retirado: volvió a tu saldo disponible",
         "goal": "Meta guardada"
-      }
+      },
+      "goesTo": "Lo que retires vuelve a tu saldo disponible, que hoy es de"
     },
     "errors": {
       "amount_not_positive": "El monto tiene que ser mayor que cero.",
       "insufficient_balance": "No alcanza el saldo disponible para separar ese monto.",
       "insufficient_pocket": "El apartado no tiene ese monto.",
-      "unknown_pocket": "No encontramos ese apartado."
+      "unknown_pocket": "No encontramos ese apartado.",
+      "protected_pocket": "Este apartado no se puede eliminar."
+    },
+    "delete": {
+      "action": "Eliminar",
+      "title": "¿Eliminar la meta \"{{name}}\"?",
+      "bodyMoney": "Los {{amount}} de este apartado vuelven a tu saldo disponible. La meta no se puede recuperar.",
+      "bodyEmpty": "El apartado está vacío, así que tu saldo no cambia. La meta no se puede recuperar.",
+      "confirm": "Eliminar meta",
+      "done": "Meta eliminada: el dinero volvió a tu saldo"
+    },
+    "summary": {
+      "available": "Saldo disponible",
+      "availableNote": "Lo que retiras de un apartado, o de una meta que eliminas, vuelve acá.",
+      "setAside": "Separado en apartados",
+      "setAsideNote_one": "En {{count}} apartado, dentro de tu misma cuenta.",
+      "setAsideNote_other": "En {{count}} apartados, dentro de tu misma cuenta."
     }
   },
   "sims": {
@@ -2331,7 +2355,8 @@
       "risk": "Riesgo",
       "liquidity": "Liquidez",
       "currency": "Moneda",
-      "protection": "Protección"
+      "protection": "Protección",
+      "rateVariesNote": "En promedio: varía cada día"
     },
     "real": {
       "title": "¿Le ganas a la inflación?",
@@ -3490,7 +3515,21 @@
       "progressValue": "2 de 3 meses",
       "sources": "Fuentes",
       "sourcesNote": "Al pie de cada sección con datos: chips cortos que abren Aprender > Fuentes, sobre surface-container-high (D-182, D-187).",
-      "stepsValue": "Paso 3 de 5"
+      "stepsValue": "Paso 3 de 5",
+      "option": "Tarjetas de opción",
+      "optionNote": "Para comparar opciones antes de elegir una (D-218): la misma ficha en todas, el dato que se compara más grande y la elegida en primary-container con borde y píldora con check.",
+      "optionA": "Opción A",
+      "optionB": "Opción B",
+      "optionChosen": "Elegida",
+      "optionChoose": "Elegir",
+      "optionRate": "Tasa de ejemplo",
+      "optionRisk": "Riesgo",
+      "optionLiquidity": "Liquidez",
+      "optionRateA": "TNA 30 %",
+      "optionRateB": "TNA 31 % en promedio",
+      "optionLow": "Bajo",
+      "optionNow": "Inmediata",
+      "optionDay": "En el día"
     },
     "fuerte": {
       "states": {

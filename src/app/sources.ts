@@ -9,6 +9,7 @@ const VERIFIED = '2026-11-12';
 
 export const OFFICIAL_SOURCES = [
   { id: 'bcra-a8407', name: 'BCRA, Comunicación "A" 8407: garantía de los depósitos', url: 'https://www.bcra.gob.ar/Pdfs/comytexord/A8407.pdf' },
+  { id: 'bcra-depinv', name: 'BCRA, texto ordenado "Depósitos e inversiones a plazo"', url: 'https://www.bcra.gob.ar/archivos/Pdfs/texord/t-depinv.pdf', verifiedAt: '2026-11-14' },
   { id: 'bcra-tasas', name: 'BCRA, texto ordenado "Tasas de interés en las operaciones de crédito"', url: 'https://www.bcra.gob.ar/archivos/Pdfs/Texord/t-tasint.pdf' },
   { id: 'gob-usuarios-financieros', name: 'argentina.gob.ar: costo financiero total y Central de Deudores', url: 'https://www.argentina.gob.ar/node/371108' },
   { id: 'ley-25065', name: 'Ley 25.065 de tarjetas de crédito', url: 'https://www.argentina.gob.ar/normativa/nacional/ley-25065-1998-55556/texto' },
@@ -28,7 +29,7 @@ export const OFFICIAL_SOURCES = [
   { id: 'cajval-cedears', name: 'Caja de Valores, CEDEARs y CEDEARs de ETF', url: 'https://cajadevalores.com.ar/Servicios/Cedears' },
   { id: 'byma-alycs', name: 'BYMA, nómina de ALyC', url: 'https://www.byma.com.ar/mercado/para-agentes-miembros/listado-de-alycs' },
   { id: 'indec', name: 'INDEC, índice de precios al consumidor', url: 'https://www.indec.gob.ar' },
-].map((source) => ({ ...source, verifiedAt: VERIFIED })) satisfies OfficialSource[];
+].map((source) => ({ verifiedAt: VERIFIED, ...source })) satisfies OfficialSource[];
 
 export type OfficialSourceId = (typeof OFFICIAL_SOURCES)[number]['id'];
 

@@ -118,111 +118,154 @@ function Budget() {
 
         <div className="grid grid-cols-[minmax(0,1fr)] gap-(--space-bento-gap) large:grid-cols-[minmax(0,2fr)_minmax(20rem,1fr)] large:items-start">
           {/* The split of the month against the reference (SIM-1 with the wallet's data) */}
-          <section aria-labelledby="split-title" className={card}>
-            <div className="flex flex-wrap items-start justify-between gap-3">
-              <h2 id="split-title" className="text-title-large text-on-surface">
-                {t('budget.split.title')}
-              </h2>
-              <SegmentedButton
-                label={t('budget.split.rule')}
-                value={rule}
-                onValueChange={(v) => v && setRule(v as BudgetRule)}
-                options={[
-                  { value: '50/30/20', label: '50/30/20' },
-                  { value: '70/20/10', label: '70/20/10' },
-                ]}
-              />
-            </div>
-            <dl className="grid grid-cols-[minmax(0,1fr)] gap-3 sm:grid-cols-3">
-              {[
-                ['income', b.income],
-                ['spent', b.needs.plus(spentWants)],
-                ['saved', b.saved],
-              ].map(([key, value]) => (
-                <div key={key as string} className="flex flex-col gap-1 rounded-lg bg-surface-container p-3">
-                  <dt className="text-label-medium text-on-surface-variant">{t(`budget.totals.${key}`)}</dt>
-                  <dd className="text-title-large text-on-surface">
-                    <MoneyText value={(value as Decimal).toFixed(2)} />
-                  </dd>
-                </div>
-              ))}
-            </dl>
-            <p className="text-body-large text-on-surface" aria-live="polite">
-              {conclusion}
-            </p>
-            {asTable ? (
-              <TableContainer label={t('budget.split.title')}>
-                <Table>
-                  <TableHead>
-                    <TableRow>
-                      <TableHeaderCell>{t('budget.split.category')}</TableHeaderCell>
-                      <TableHeaderCell className="text-right">{t('budget.split.actual')}</TableHeaderCell>
-                      <TableHeaderCell className="text-right">{t('budget.split.share')}</TableHeaderCell>
-                      <TableHeaderCell className="text-right">{t('budget.split.reference')}</TableHeaderCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {CATEGORIES.map((c) => (
-                      <TableRow key={c}>
-                        <TableCell>{t(`budget.cat.${rule}.${c}`)}</TableCell>
-                        <TableCell className="text-right">
-                          <MoneyText value={actual[c].toFixed(2)} />
-                        </TableCell>
-                        <TableCell className="text-right tabular-nums">{pct(actual[c], b.income)}</TableCell>
-                        <TableCell className="text-right">
-                          <MoneyText value={target[c].toFixed(2)} />
-                        </TableCell>
+          <div className="flex min-w-0 flex-col gap-(--space-bento-gap)">
+            <section aria-labelledby="split-title" className={cn(card, '@container')}>
+              <div className="flex flex-wrap items-start justify-between gap-3">
+                <h2 id="split-title" className="text-title-large text-on-surface">
+                  {t('budget.split.title')}
+                </h2>
+                <SegmentedButton
+                  label={t('budget.split.rule')}
+                  value={rule}
+                  onValueChange={(v) => v && setRule(v as BudgetRule)}
+                  options={[
+                    { value: '50/30/20', label: '50/30/20' },
+                    { value: '70/20/10', label: '70/20/10' },
+                  ]}
+                />
+              </div>
+              {/* Three amounts side by side only when the card itself has room (2.7: container queries, never cut) */}
+              <dl className="grid grid-cols-[minmax(0,1fr)] gap-3 @lg:grid-cols-3">
+                {[
+                  ['income', b.income],
+                  ['spent', b.needs.plus(spentWants)],
+                  ['saved', b.saved],
+                ].map(([key, value]) => (
+                  <div key={key as string} className="flex flex-col gap-1 rounded-lg bg-surface-container p-3">
+                    <dt className="text-label-medium text-on-surface-variant">{t(`budget.totals.${key}`)}</dt>
+                    <dd className="text-title-medium text-on-surface @3xl:text-title-large">
+                      <MoneyText value={(value as Decimal).toFixed(2)} />
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+              <p className="text-body-large text-on-surface" aria-live="polite">
+                {conclusion}
+              </p>
+              {asTable ? (
+                <TableContainer label={t('budget.split.title')}>
+                  <Table>
+                    <TableHead>
+                      <TableRow>
+                        <TableHeaderCell>{t('budget.split.category')}</TableHeaderCell>
+                        <TableHeaderCell className="text-right">{t('budget.split.actual')}</TableHeaderCell>
+                        <TableHeaderCell className="text-right">{t('budget.split.share')}</TableHeaderCell>
+                        <TableHeaderCell className="text-right">{t('budget.split.reference')}</TableHeaderCell>
                       </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            ) : (
-              <ul className="flex flex-col gap-5">
-                {CATEGORIES.map((c, i) => {
-                  const share = b.income.gt(0) ? Math.min(1, actual[c].div(b.income).toNumber()) : 0;
-                  const ref = b.income.gt(0) ? target[c].div(b.income).toNumber() : 0;
-                  const above = c !== 'savings' && actual[c].gt(target[c]);
-                  return (
-                    <li key={c} className="flex flex-col gap-2">
-                      <p className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-                        <span className="text-title-small text-on-surface">{t(`budget.cat.${rule}.${c}`)}</span>
-                        <span className="text-label-large text-on-surface tabular-nums">
-                          <MoneyText value={actual[c].toFixed(2)} /> · {pct(actual[c], b.income)}
-                        </span>
-                      </p>
-                      {/* Bar with the reference as a tick; series colors, never status colors (2.1.1) */}
-                      <div className="relative h-3 rounded-full bg-surface-container-high" aria-hidden>
-                        <div
-                          className={cn(
-                            'h-full rounded-full transition-[width] duration-300 ease-standard motion-reduce:transition-none',
-                            i === 0 ? 'bg-primary' : i === 1 ? 'bg-chart-3' : 'bg-tertiary',
-                          )}
-                          style={{ width: `${share * 100}%` }}
-                        />
-                        <span className="absolute -top-1 -bottom-1 w-0.5 rounded-full bg-on-surface" style={{ left: `calc(${ref * 100}% - 1px)` }} />
-                      </div>
-                      <p className="flex flex-wrap items-center gap-x-2 text-body-small text-on-surface-variant">
-                        {t('budget.split.referenceLine', { share: pct(target[c], b.income) })}
-                        {above && (
-                          <span className="inline-flex items-center gap-1 text-on-surface">
-                            <Icon name="info" size={16} className="text-info" />
-                            {t('budget.split.above')}
+                    </TableHead>
+                    <TableBody>
+                      {CATEGORIES.map((c) => (
+                        <TableRow key={c}>
+                          <TableCell>{t(`budget.cat.${rule}.${c}`)}</TableCell>
+                          <TableCell className="text-right">
+                            <MoneyText value={actual[c].toFixed(2)} />
+                          </TableCell>
+                          <TableCell className="text-right tabular-nums">{pct(actual[c], b.income)}</TableCell>
+                          <TableCell className="text-right">
+                            <MoneyText value={target[c].toFixed(2)} />
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              ) : (
+                <ul className="flex flex-col gap-5">
+                  {CATEGORIES.map((c, i) => {
+                    const share = b.income.gt(0) ? Math.min(1, actual[c].div(b.income).toNumber()) : 0;
+                    const ref = b.income.gt(0) ? target[c].div(b.income).toNumber() : 0;
+                    const above = c !== 'savings' && actual[c].gt(target[c]);
+                    return (
+                      <li key={c} className="flex flex-col gap-2">
+                        <p className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+                          <span className="text-title-small text-on-surface">{t(`budget.cat.${rule}.${c}`)}</span>
+                          <span className="text-label-large text-on-surface tabular-nums">
+                            <MoneyText value={actual[c].toFixed(2)} /> · {pct(actual[c], b.income)}
                           </span>
-                        )}
-                      </p>
+                        </p>
+                        {/* Bar with the reference as a tick; series colors, never status colors (2.1.1) */}
+                        <div className="relative h-3 rounded-full bg-surface-container-high" aria-hidden>
+                          <div
+                            className={cn(
+                              'h-full rounded-full transition-[width] duration-300 ease-standard motion-reduce:transition-none',
+                              i === 0 ? 'bg-primary' : i === 1 ? 'bg-chart-3' : 'bg-tertiary',
+                            )}
+                            style={{ width: `${share * 100}%` }}
+                          />
+                          <span className="absolute -top-1 -bottom-1 w-0.5 rounded-full bg-on-surface" style={{ left: `calc(${ref * 100}% - 1px)` }} />
+                        </div>
+                        <p className="flex flex-wrap items-center gap-x-2 text-body-small text-on-surface-variant">
+                          {t('budget.split.referenceLine', { share: pct(target[c], b.income) })}
+                          {above && (
+                            <span className="inline-flex items-center gap-1 text-on-surface">
+                              <Icon name="info" size={16} className="text-info" />
+                              {t('budget.split.above')}
+                            </span>
+                          )}
+                        </p>
+                      </li>
+                    );
+                  })}
+                </ul>
+              )}
+              <div className="flex flex-wrap items-center justify-between gap-3 border-t border-outline-variant pt-4">
+                <p className="text-body-small text-on-surface-variant">{t('budget.split.note')}</p>
+                <Button variant="text" size="xs" leadingIcon={asTable ? 'bar_chart' : 'table_rows'} onClick={() => setAsTable(!asTable)}>
+                  {asTable ? t('welcome.result.asChart') : t('welcome.result.asTable')}
+                </Button>
+              </div>
+            </section>
+            <section aria-labelledby="todo-title" className={card}>
+              <h2 id="todo-title" className="text-title-large text-on-surface">
+                {t('budget.todo.title')}
+              </h2>
+              {toCategorize.length === 0 ? (
+                <p className="text-body-medium text-on-surface-variant">{t('budget.todo.empty')}</p>
+              ) : (
+                <ul className="flex flex-col divide-y divide-outline-variant">
+                  {toCategorize.map((m) => (
+                    <li key={m.id} className="flex flex-col gap-3 py-3">
+                      <span className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+                        <span className="min-w-0">
+                          <span className="block text-body-medium text-on-surface">{m.counterparty}</span>
+                          <span className="block text-body-small text-on-surface-variant">
+                            {formatDate(walletDate(m.day))}
+                            {m.suggestedCategory && ` · ${t('budget.todo.suggested', { category: t(`budget.cat.50/30/20.${m.suggestedCategory}`) })}`}
+                          </span>
+                        </span>
+                        <MoneyText value={m.amount} trend flow className="text-label-large" />
+                      </span>
+                      <span className="flex flex-wrap gap-2" role="group" aria-label={t('budget.todo.choose', { name: m.counterparty })}>
+                        {CATEGORIES.map((c) => (
+                          <Button
+                            key={c}
+                            variant={m.suggestedCategory === c ? 'tonal' : 'outlined'}
+                            size="xs"
+                            onClick={() => {
+                              setWallet((w) => categorize(w, m.id, c));
+                              toast.success(t('budget.todo.done'));
+                            }}
+                          >
+                            {t(`budget.cat.50/30/20.${c}`)}
+                          </Button>
+                        ))}
+                      </span>
                     </li>
-                  );
-                })}
-              </ul>
-            )}
-            <div className="flex flex-wrap items-center justify-between gap-3 border-t border-outline-variant pt-4">
-              <p className="text-body-small text-on-surface-variant">{t('budget.split.note')}</p>
-              <Button variant="text" size="xs" leadingIcon={asTable ? 'bar_chart' : 'table_rows'} onClick={() => setAsTable(!asTable)}>
-                {asTable ? t('welcome.result.asChart') : t('welcome.result.asTable')}
-              </Button>
-            </div>
-          </section>
+                  ))}
+                </ul>
+              )}
+            </section>
+          </div>
 
           <div className="flex min-w-0 flex-col gap-(--space-bento-gap)">
             {/* Green month: the three checks, each with icon and text */}
@@ -277,76 +320,31 @@ function Budget() {
                 )}
               </div>
             </section>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-[minmax(0,1fr)] gap-(--space-bento-gap) large:grid-cols-2 large:items-start">
-          {/* Movements left to categorize (they count for level 3 and for an accurate split) */}
-          <section aria-labelledby="todo-title" className={card}>
-            <h2 id="todo-title" className="text-title-large text-on-surface">
-              {t('budget.todo.title')}
-            </h2>
-            {toCategorize.length === 0 ? (
-              <p className="text-body-medium text-on-surface-variant">{t('budget.todo.empty')}</p>
-            ) : (
-              <ul className="flex flex-col divide-y divide-outline-variant">
-                {toCategorize.map((m) => (
-                  <li key={m.id} className="flex flex-col gap-3 py-3">
-                    <span className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+            <section aria-labelledby="months-title" className={card}>
+              <h2 id="months-title" className="text-title-large text-on-surface">
+                {t('budget.months.title')}
+              </h2>
+              {wallet.monthSummaries.length === 0 ? (
+                <p className="text-body-medium text-on-surface-variant">{t('budget.months.empty')}</p>
+              ) : (
+                <ul className="flex flex-col divide-y divide-outline-variant">
+                  {[...wallet.monthSummaries].reverse().map((s) => (
+                    <li key={s.month} className="flex flex-wrap items-center justify-between gap-3 py-3">
                       <span className="min-w-0">
-                        <span className="block text-body-medium text-on-surface">{m.counterparty}</span>
+                        <span className="block text-body-medium text-on-surface">
+                          {t('budget.months.label', { from: formatDate(walletDate(s.month * DAYS_IN_MONTH + 1)), to: formatDate(walletDate((s.month + 1) * DAYS_IN_MONTH)) })}
+                        </span>
                         <span className="block text-body-small text-on-surface-variant">
-                          {formatDate(walletDate(m.day))}
-                          {m.suggestedCategory && ` · ${t('budget.todo.suggested', { category: t(`budget.cat.50/30/20.${m.suggestedCategory}`) })}`}
+                          {t('budget.months.savedLine')} <MoneyText value={s.saved} /> · {pct(s.saved, s.income)}
                         </span>
                       </span>
-                      <MoneyText value={m.amount} trend flow className="text-label-large" />
-                    </span>
-                    <span className="flex flex-wrap gap-2" role="group" aria-label={t('budget.todo.choose', { name: m.counterparty })}>
-                      {CATEGORIES.map((c) => (
-                        <Button
-                          key={c}
-                          variant={m.suggestedCategory === c ? 'tonal' : 'outlined'}
-                          size="xs"
-                          onClick={() => {
-                            setWallet((w) => categorize(w, m.id, c));
-                            toast.success(t('budget.todo.done'));
-                          }}
-                        >
-                          {t(`budget.cat.50/30/20.${c}`)}
-                        </Button>
-                      ))}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </section>
-
-          <section aria-labelledby="months-title" className={card}>
-            <h2 id="months-title" className="text-title-large text-on-surface">
-              {t('budget.months.title')}
-            </h2>
-            {wallet.monthSummaries.length === 0 ? (
-              <p className="text-body-medium text-on-surface-variant">{t('budget.months.empty')}</p>
-            ) : (
-              <ul className="flex flex-col divide-y divide-outline-variant">
-                {[...wallet.monthSummaries].reverse().map((s) => (
-                  <li key={s.month} className="flex flex-wrap items-center justify-between gap-3 py-3">
-                    <span className="min-w-0">
-                      <span className="block text-body-medium text-on-surface">
-                        {t('budget.months.label', { from: formatDate(walletDate(s.month * DAYS_IN_MONTH + 1)), to: formatDate(walletDate((s.month + 1) * DAYS_IN_MONTH)) })}
-                      </span>
-                      <span className="block text-body-small text-on-surface-variant">
-                        {t('budget.months.savedLine')} <MoneyText value={s.saved} /> · {pct(s.saved, s.income)}
-                      </span>
-                    </span>
-                    <StatusPill tone={s.green ? 'success' : 'warning'} icon={s.green ? 'check_circle' : 'schedule'} label={s.green ? t('budget.green.yes') : t('profile.receipts.notGreen')} />
-                  </li>
-                ))}
-              </ul>
-            )}
-          </section>
+                      <StatusPill tone={s.green ? 'success' : 'warning'} icon={s.green ? 'check_circle' : 'schedule'} label={s.green ? t('budget.green.yes') : t('profile.receipts.notGreen')} />
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </section>
+          </div>
         </div>
       </div>
     </WalletShell>

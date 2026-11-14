@@ -81,7 +81,7 @@ Curvas de M3 (estándar, enfatizada al entrar y al salir) y duraciones de 150, 2
 
 ## Componentes
 
-Muestras vivas en el sitio: botones (Filled, tonal, outlined, text, danger, deshabilitado con explicación y tamaños XS, S y M), campos (texto con error, `MoneyInput`, `PercentInput`), estados y chips (`StatusPill`, `MetaChips`, `SegmentedButton`), `KpiCard`, avisos (`InlineAlert` en cuatro tonos), progreso (`ProgressBar`, `SegmentedProgress`) y el pie de fuentes (`SourceList`).
+Muestras vivas en el sitio: botones (Filled, tonal, outlined, text, danger, deshabilitado con explicación y tamaños XS, S y M), campos (texto con error, `MoneyInput`, `PercentInput`), estados y chips (`StatusPill`, `MetaChips`, `SegmentedButton`), `KpiCard`, tarjetas de opción (`OptionCard`, D-218), avisos (`InlineAlert` en cuatro tonos), progreso (`ProgressBar`, `SegmentedProgress`) y el pie de fuentes (`SourceList`).
 
 ## Fuerte
 

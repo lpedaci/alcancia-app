@@ -1243,7 +1243,7 @@
       "id": "m05-case-vacation-loan",
       "moduleId": "module-05",
       "type": "branching",
-      "prompt": "Un caso con decisiones: este mes te quedan $ 100.000 libres, tienes el resumen de la tarjeta financiado a una tasa de ejemplo (TNA) del 60 % y te ofrecen un préstamo para irte de vacaciones.",
+      "prompt": "Un caso con decisiones: ya tienes tu fondo de emergencia cubierto. Este mes te quedan $ 100.000 libres, tienes el resumen de la tarjeta financiado a una tasa de ejemplo (TNA) del 60 % y te ofrecen un préstamo para irte de vacaciones.",
       "branching": {
         "startNodeId": "start",
         "nodes": {
@@ -2232,16 +2232,16 @@
             ]
           },
           "uva": {
-            "text": "El plazo fijo UVA ajusta el capital por inflación (a través del CER) y suma una tasa adicional, pero suele pedir un plazo mínimo más largo y no todos los bancos lo ofrecen. ¿Qué miras para decidir?",
+            "text": "El plazo fijo UVA ajusta el capital por inflación (a través del CER) y suma una tasa adicional, pero por norma del BCRA su plazo mínimo es de 90 días, y no todos los bancos lo ofrecen. Este dinero es para un mes: ¿qué concluyes?",
             "choices": [
               {
                 "id": "term",
-                "text": "Si puedo dejar el dinero quieto todo ese plazo",
+                "text": "Para este mes no aplica: el UVA sirve para dinero que puedo dejar quieto al menos 90 días",
                 "outcome": "uvaTerm"
               },
               {
                 "id": "rate",
-                "text": "Solo cuál tiene la tasa más alta",
+                "text": "Lo elijo igual: es el que protege de la inflación",
                 "outcome": "uvaRate"
               }
             ]
@@ -2262,11 +2262,11 @@
           },
           "uvaTerm": {
             "good": true,
-            "feedback": "Bien: la UVA protege contra la inflación, pero solo si puedes dejar el dinero el plazo mínimo. Las condiciones cambian según el banco, así que hay que consultarlas."
+            "feedback": "Exacto: el plazo fijo UVA sirve para dinero que puedes dejar quieto al menos 90 días, no para este mes. Para un mes, compara la tasa real de las opciones que te lo devuelven a tiempo."
           },
           "uvaRate": {
             "good": false,
-            "feedback": "La tasa sola no alcanza: el plazo fijo UVA pide dejar el dinero más tiempo. Si lo necesitas antes, la protección contra la inflación no te sirve."
+            "feedback": "Protege de la inflación, pero pide al menos 90 días: si necesitas el dinero en un mes, no te sirve. Para este horizonte, compara las opciones de 30 días por su tasa real."
           }
         }
       },
@@ -2275,6 +2275,7 @@
         "F-03",
         "F-08",
         "F-09",
+        "B-02",
         "B-03"
       ]
     },
