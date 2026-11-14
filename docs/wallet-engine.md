@@ -6,7 +6,7 @@
 
 1. **Determinista:** el mismo estado inicial y las mismas acciones dan siempre el mismo resultado. No hay azar; las "variaciones" (por ejemplo, el rendimiento diario del fondo money market) salen de series fijas en `scenarios.json`. Así los tests son reproducibles y la demo se ve igual para cualquier visitante.
 2. **Solo dinero ficticio y local:** todo vive en `walletStore`, en el navegador, en un espacio separado por persona (spec 7). Ningún dato del motor llega a otro rol (D-58, D-62).
-3. **Errores con red:** el motor permite decisiones malas (aceptar un préstamo caro, transferir al alias equivocado) y registra su consecuencia; nunca deja la cuenta en un estado del que no se pueda salir, y "Empezar de cero" siempre está disponible.
+3. **Errores con red y con huella (D-77, D-208):** el motor permite decisiones malas (aceptar un préstamo caro, transferir al alias equivocado, responder un mensaje falso) y su consecuencia **queda en la billetera de la persona**: saldo, movimientos, deudas, apartados y desbloqueos. Cada consecuencia se revierte con una acción de la simulación (pagar, cancelar, reportar), nunca con "deshacer". El motor nunca deja la cuenta en un estado del que no se pueda salir, y "Empezar de cero" siempre está disponible.
 4. **Simple de explicar:** cada regla se puede contar en una frase en "¿Por qué importa?". Lo que se simplifica se dice en los supuestos.
 
 ## 2. Tiempo
@@ -146,6 +146,7 @@ Solo estas métricas, calculadas en el navegador de la persona y consumidas por 
 | D-113 | "Deuda de tasa alta" = TEA mayor que la inflación anual del escenario | Sección 9 | Aprobada, provisoria hasta que la confirme Kevin |
 | D-114 | Categorizar desde Inicio en los niveles 1 y 2, con categorías sugeridas que se confirman | Sección 8 | Aprobada |
 | D-115 | Definición de "mes en verde" | Sección 8 | Aprobada |
+| D-208 | Todas las misiones se juegan en la billetera de la persona; excepciones solo si rompen algo; repetir usa una copia de práctica | Sección 16 | Aprobada por Lourdes (14/11/2026) |
 ## 15. Implementación (paso 6)
 
 - Código en `src/features/wallet/engine/`: `types.ts` (estado), `profile.ts` (tabla 4), `engine.ts` (tiempo, precios, sueldo, débitos, rendimiento, apartados, categorías, cierre de mes y métricas) y `demo.ts` (guiones de Diego y Mariana). Tests en `engine.test.ts`, con casos calculados a mano.
@@ -159,3 +160,35 @@ Solo estas métricas, calculadas en el navegador de la persona y consumidas por 
   - **Cancelar antes:** un préstamo o una compra en cuotas se puede cancelar con el capital que falta (valor actual de las cuotas restantes a la tasa del plan), sin los intereses futuros.
   - **Deudas activas y `high_rate_debt`:** cuentan el resumen financiado de la tarjeta y los planes con cuotas por pagar. Es de tasa alta si su TEA supera la inflación anual del escenario (D-113); un resumen todavía no vencido no es deuda, y las cuotas sin interés no son de tasa alta.
 - **Rendir (paso 8.4, D-180):** `tnaOf` con el factor diario del fondo, `depositQuote`, `makeDeposit`, `activeDeposits` y `yieldOfMonth`, con tests en `yield.test.ts`. El estado de demo de Mariana no cambia: usa la cuenta remunerada desde el día 125.
+
+## 16. Las misiones se juegan en tu billetera (D-77, D-208)
+
+> Agregada el 14/11/2026 (paso 15). Reemplaza la regla de D-179 ("El préstamo tentador" en una cuenta de práctica aparte). Cómo entra y cómo se revierte cada consecuencia, con sus casos calculados a mano, se define en el paso 18, antes de tocar el motor.
+
+**Regla:** todas las misiones se juegan en la billetera de la persona, porque lo que hace tiene que quedar registrado: saldo, movimientos, deudas, apartados y desbloqueos. Una misión solo se juega aparte si jugarla en la billetera **rompe algo**:
+
+1. el **estado de demo** de Mariana o de Diego (spec 7);
+2. una **mecánica que necesita un escenario fijo** para que la evidencia sea verificable;
+3. un **riesgo de que la persona quede sin poder avanzar** (por ejemplo, sin saldo y sin forma de conseguirlo dentro de la simulación).
+
+Cada excepción se justifica en la tabla de abajo y la interfaz dice que esa misión es una práctica aparte.
+
+| Misión | Hoy | Decisión | Por qué |
+| --- | --- | --- | --- |
+| Configura tu seguridad (nivel 0) | Billetera propia | Billetera propia | Ya cumple la regla |
+| 1 · Tu primer cobro | Cuenta nueva (`fresh`) | Billetera propia | Es el primer cobro de la persona; la suscripción sorpresa de $ 4.990 (D-55) queda como débito real y se cancela desde Servicios |
+| 2 · Transfiere sin errores | Cuenta aparte (`salary`) | Billetera propia | Si confirma el alias equivocado, sale de verdad un **monto chico** ($ 12.000, menos del 1 % del sueldo de práctica), para que nadie quede sin saldo para seguir. La devolución explica que una transferencia inmediata no se deshace desde la app (B-15) y qué hacer en la vida real: contactar a quien la recibió y hacer el reclamo en la billetera, **sin prometer que el dinero se recupera** |
+| 3 · Paga con QR | Cuenta aparte | Billetera propia | El pago del comedor ($ 3.500) queda en movimientos y se puede categorizar |
+| 6 · El mensaje falso | Cuenta aparte | Billetera propia (D-77) | Compartir el código descuenta el monto; reportarlo lo evita |
+| 7 · Mes completo | Cuenta aparte | Billetera propia (D-77) | La suba del servicio y el imprevisto de $ 85.000 entran en el mes real de la persona |
+| Crea tu fondo de emergencia | Cuenta aparte | Billetera propia | El fondo cuenta para `emergency_months` y para desbloquear Rendir e Invertir; si el saldo no alcanza para una opción, la opción lo dice y propone avanzar hasta el próximo cobro (evita el bloqueo del criterio 3) |
+| 5 · El préstamo tentador | Cuenta aparte | Billetera propia (D-77) | El préstamo tomado queda en Tus deudas, sus cuotas se debitan y bloquea Invertir hasta saldarlo |
+| Sal de tus deudas | Cuenta aparte | Billetera propia (D-77) | Aplica el plan a las deudas propias; si no hay ninguna, sigue usando el caso de A-29 de un compañero ficticio (la parte vigente de D-179) |
+| 4 · ¿Cuenta o fondo? | Cuenta aparte | Billetera propia | Elegir dónde rinde el saldo y avanzar 30 días mueve el tiempo real de la persona (cobro, débitos, rendimiento, inflación) |
+| Abre tu cuenta comitente | Cuenta aparte | Billetera propia | La cuenta comitente queda abierta en Invertir, con el resultado del test de perfil de la persona (D-67) en lugar del perfil de ejemplo |
+| Tu primer CEDEAR de ETF | Cuenta aparte | Billetera propia | La tenencia queda en Invertir; si la cuenta ya está abierta, se salta ese paso; el monto a transferir se ajusta al costo de los 4 CEDEARs en lugar de fijarse en $ 300.000 |
+| Aguanta la caída | Cuenta aparte | Billetera propia (D-77) | Vender en la caída realiza la pérdida en la tenencia propia; mantener la deja recuperarse con la serie sintética |
+
+**Repetir una misión ya completada (aprobado por Lourdes el 14/11/2026):** la primera vez se juega en la billetera propia. **"Repetir para practicar"** usa una copia de la billetera rotulada como práctica, sin consecuencias, con el rótulo visible durante toda la misión, porque aplicarla de nuevo duplicaría sus efectos (un segundo "primer cobro", otro fondo, otra transferencia) y rompería el estado de la billetera (criterio 1). Los estados de demo de Mariana y Diego ya traen sus misiones completadas, así que esta regla también los protege.
+
+**Clasificación aprobada por Lourdes el 14/11/2026:** las 13 misiones se juegan en la billetera propia. La única excepción es el caso de A-29 en "Sal de tus deudas" cuando la persona no tiene deudas.

@@ -37,7 +37,7 @@
 | RF-31 | Tarjeta y préstamos: tarjeta de práctica con resumen, préstamo preaprobado y compra en cuotas | M | El CFT siempre visible antes de decidir | Hecho (paso 8.3, D-178) |
 | RF-32 | Invertir: cuenta comitente de práctica con el bróker ficticio (5.4) | M | Los 7 pasos de 5.4; serie de precios sintética rotulada | Hecho (paso 9, D-185, D-186) |
 | RF-33 | Fuerte con 6 estados, mensajes de `fuerte-lines.json` y 3 niveles de presencia | M | Nunca interrumpe dos veces la misma acción; mensaje anunciado como texto | Hecho (D-206) |
-| RF-34 | "¿Por qué importa?" y tarjetas de aprendizaje en el momento justo | M | Una por acción como máximo; no se repite si ya se respondió bien | Hecho: "¿Por qué importa?" en Inicio y en cada flujo de Pagar, tarjetas de aprendizaje en las misiones |
+| RF-34 | "¿Por qué importa?" y tarjetas de aprendizaje en el momento justo | M | Una por acción como máximo; no se repite si ya se respondió bien | **Reabierto por el ajuste (14/11/2026):** "¿Por qué importa?" visible solo en los flujos de Pagar; en el resto vive dentro del panel de Fuerte y desaparece en "Silencio". Las tarjetas solo existen como pasos de las misiones. Lo completan RF-83 y RF-84 |
 | RF-35 | Cartel fijo "Simulador de finanzas personales · dinero ficticio" y ningún dato real pedido | M | Revisión de formularios: no hay campos de DNI, CBU, tarjeta ni contraseña reales | Hecho: cartel fijo en toda la billetera y ningún campo de datos reales |
 | RF-36 | Comprobantes y resumen del mes | S | Comprobante ficticio descargable; resumen en cada cierre | Hecho: comprobante descargable en PDF o imprimible y resumen de cada mes cerrado (D-207) |
 | RF-37 | Empezar de cero la billetera con confirmación | M | No borra el avance de aprendizaje | Hecho (paso 6, P14) |
@@ -51,7 +51,7 @@
 | RF-42 | 16 guías de fase A con la secuencia de Gagné (D-61) | M | Cada una con objetivo observable y "Para tu vida" | Hecho: 17 guías (los 16 módulos de fase A más la guía base del 18, D-61, D-65) |
 | RF-43 | Los 9 tipos de pregunta de 5.1 con alternativa accesible al arrastre | M | Ordenar con "Subir" y "Bajar"; unir con selects; clasificar con menú | Hecho: los 9 tipos (D-205) |
 | RF-44 | Desafíos de nivel con los bancos de sus módulos, mejor intento e intentos configurables (D-57) | M | Insignia por módulo según su parte | Hecho para los niveles 1 a 4 (paso 7, D-171) |
-| RF-45 | 13 misiones con el motor declarativo (D-59) | M | Cada una con objetivo, pasos, evento, devolución y criterios de éxito | Hecho: las 13 misiones (D-59) |
+| RF-45 | 13 misiones con el motor declarativo (D-59), jugadas en la billetera de la persona (D-77, D-208). "Repetir para practicar" usa una copia rotulada como práctica, sin consecuencias | M | Cada una con objetivo, pasos, evento, devolución y criterios de éxito. La primera vez deja su huella en la billetera (saldo, movimientos, deudas, apartados, desbloqueos); la repetición no toca la billetera y muestra el rótulo de práctica durante toda la misión. Única excepción: "Sal de tus deudas" usa el caso de A-29 cuando la persona no tiene deudas | Parcial: las 13 misiones existen (D-59); pasan a la billetera propia en el paso 18 (RF-86) |
 | RF-46 | Mapa de niveles como línea de tiempo y logros | M | Estado con ícono y texto | Hecho (paso 7, P9) |
 | RF-47 | Glosario integrado con chip en el primer uso | M | Términos de 1.1.1 | Hecho en las guías (D-204); el glosario completo con búsqueda es F10, fase B |
 | RF-48 | Fichas "Brókers registrados" y "Billeteras y fintech" verificadas | M | Solo filas verificadas en el registro oficial, con fecha | Hecho (paso 3); antes de publicar se vuelve a revisar PPI (Q-15) |
@@ -92,9 +92,23 @@
 | RF-81 | Sistema de diseño público con "Cómo mostramos el dinero" | M | Secciones de 2.8 | Hecho (paso 12, D-199) |
 | RF-82 | Indexación, Open Graph, favicon y manifiesto (spec 15) | S | `og-image.png` de 1200 × 630 | Hecho (paso 13, D-201) |
 
+### 1.6.1 Ajuste de fase A (D-74 a D-82, pasos 15 a 21)
+
+| ID | Requerimiento | Prioridad | Criterio de aceptación | Estado |
+| --- | --- | --- | --- | --- |
+| RF-83 | Tarjetas de aprendizaje en el modo libre desde `learning-cards.json`, con el catálogo mínimo de 5.3 (D-76) | M | Sin misión activa, cada acción del catálogo dispara su tarjeta una sola vez, con fuente y pregunta; no interrumpe dos veces la misma acción ni repite lo respondido bien; misiones y modo libre comparten componente y reglas (tests) | Pendiente (paso 16) |
+| RF-84 | "¿Por qué importa?" visible en cada pantalla de la billetera, también con Fuerte en "Silencio", e incluido Perfil (D-76, D-209) | M | Inicio, Pagar y sus flujos, Tarjeta y préstamos, Presupuesto, Apartados, Rendir, Invertir y Perfil; el panel de Fuerte puede repetirlo, pero no es el único lugar | Pendiente (paso 16) |
+| RF-85 | La guía nace de la acción: enlace a una parte de la guía con "Volver a <sección>" (D-78) | M | `/app/learn/guides/:guideId?part=n&from=<ruta>`; al volver, la pantalla de origen conserva lo cargado. Caso de prueba: la tarjeta de tasa real negativa de Rendir lleva a "Se acumula" de la guía del módulo 9 y vuelve a Rendir | Pendiente (paso 17) |
+| RF-86 | Todas las misiones se juegan en la billetera de la persona y dejan su huella (D-77, D-208) | M | Saldo, movimientos, deudas, apartados y desbloqueos registran lo hecho; cada consecuencia se revierte con una acción de la simulación, nunca con "deshacer"; las excepciones están justificadas en `wallet-engine.md`; Mariana sigue en el nivel 6 con Invertir bloqueado por el fondo y Diego en el nivel 2 (tests con casos de `formulas.md`) | Pendiente (paso 18) |
+| RF-87 | Preguntas de caso con decisiones (`branching`) en los desafíos de los niveles 5 y 6 (D-81) | M | Al menos una por nivel, con alternativa accesible (una pantalla por paso, volver y ver el camino) y retroalimentación por camino | Pendiente (paso 19) |
+| RF-88 | La insignia de un módulo no obtenida explica por qué y cómo volver a intentarlo (D-210) | S | Dice que la parte del módulo en el desafío quedó bajo 70 % y enlaza el desafío; la regla de D-57 no cambia | Pendiente (paso 19) |
+| RF-89 | Los chips de fuentes no muestran códigos internos | S | "Cálculo F-03, F-08, F-09" pasa a "Cálculo verificado a mano"; el detalle sigue en la página de Fuentes | Pendiente (paso 19) |
+| RF-90 | La misión sugerida en P1 es la del nivel actual, o explica que quedó una del nivel anterior | S | Mariana (nivel 6) ve la misión de su nivel o un rótulo que dice de qué nivel es la pendiente | Pendiente (paso 19) |
+| RF-91 | Investigación de valores reales (D-79): `docs/market-data.md` y `scripts/fetch-market.mjs` de prueba, sin cambiar la interfaz; enlace a BYMADATA en Invertir | S | Identificadores de la API v4.0 del BCRA verificados; validación con Zod; qué pasa si una fuente falla; lo no confirmado en `questions.md`; precios de acciones y CEDEARs siguen de ejemplo | Pendiente (paso 20) |
+
 ### 1.7 Fase B (Won't en fase A)
 
-F9 a F22: recordatorios, glosario completo, módulos 16 y 18 completos, certificados, sesiones, constructor de lecciones, seguimiento a 30 días con recordatorio, Mi privacidad, inglés completo, escape room, repaso espaciado, aprendizaje social, visor xAPI y cripto. Prioridad **W**.
+Valores reales del mercado con fecha y fuente en Rendir, Tarjeta y préstamos y las herramientas (D-79, 5.6); tres contextos de uso con vocabulario por contexto (D-74, 5.5); modo integrado en un producto ficticio (D-75); meta colectiva por cohorte sin rankings (D-80). F9 a F22: recordatorios, glosario completo, módulos 16 y 18 completos, certificados, sesiones, constructor de lecciones, seguimiento a 30 días con recordatorio, Mi privacidad, inglés completo, escape room, repaso espaciado, aprendizaje social, visor xAPI y cripto. Prioridad **W**.
 
 ## 2. Requerimientos no funcionales (ISO/IEC 25010:2023)
 

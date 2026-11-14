@@ -12,6 +12,18 @@ Alcancía no enseña finanzas "sobre" una billetera: **enseña dentro de una bil
 | Aprendizaje experiencial y situado | Práctica en un contexto parecido al real, con consecuencias y reflexión | Misiones, herramientas, tarjetas en el momento justo |
 | Prácticas corporativas (LMS y LXP) | Programa asignado, cohortes, seguimiento, medición de impacto | Paneles de tutor, admin y decisor (5.2) |
 
+### 1.1 Ajuste después de la fase A: aprender en el momento justo y con consecuencias (D-76 a D-78)
+
+Una auditoría del 13/11/2026 encontró que el aprendizaje todavía dependía de **entrar** a una misión o a una guía: las tarjetas vivían dentro de las misiones, las misiones se jugaban en una cuenta aparte y los errores no dejaban huella. El ajuste lleva el aprendizaje a la acción:
+
+| Principio | Qué cambia | Por qué |
+| --- | --- | --- |
+| **El momento justo también en el modo libre** (D-76) | Las tarjetas se disparan por acciones de la billetera, haya o no misión, desde un catálogo declarativo (`learning-cards.json`). "¿Por qué importa?" está visible en cada pantalla, también con Fuerte en "Silencio" (D-209) | La explicación llega cuando la persona tiene la pregunta, no antes ni en otro lugar. Una tarjeta por acción y sin repetir lo ya respondido bien, para no saturar |
+| **Las acciones tienen consecuencias** (D-77, D-208) | Todas las misiones se juegan en la billetera de la persona: un préstamo queda en Tus deudas y bloquea Invertir, pagar el mínimo genera intereses, una estafa descuenta el monto. Se revierte con acciones de la simulación (pagar, cancelar, reportar), nunca con "deshacer" | La consecuencia es la retroalimentación más fuerte del aprendizaje experiencial (Kolb, 1984): vivir el costo, reflexionar con la devolución y probar otra decisión. "Equivocarte es gratis" sigue valiendo: el dinero es ficticio y "Empezar de cero" está siempre |
+| **La guía nace de la acción** (D-78) | Una tarjeta o un "¿Por qué importa?" llevan a la parte exacta de la guía y ofrecen volver a la pantalla de origen, con lo cargado intacto | El contenido se consulta como apoyo al desempeño, sin perder el hilo de la tarea (aprendizaje en el flujo de trabajo) |
+
+Los paneles no cambian: tutoría y L&D siguen viendo solo avance de aprendizaje agregado (D-58). Las tarjetas mostradas y respondidas se registran como eventos tipo xAPI para F21, sin montos.
+
 ## 2. Análisis del público
 
 ### 2.1 Principios de andragogía aplicados
@@ -125,6 +137,7 @@ Los nueve eventos de instrucción de Gagné, Wager, Golas y Keller (2005), compr
 - **Sumativa:** desafío de nivel con 70 % mínimo (configurable en F1), mejor intento; los reportes muestran también el primero. Si se agotan los intentos, el tutor puede habilitar el nivel con motivo (D-57).
 - **Bancos de preguntas:** uno por módulo, con orden aleatorio de preguntas y opciones (salvo "ordenar"). En fase A, cada banco tiene al menos el doble de preguntas de las que usa un desafío, para que los reintentos no sean idénticos.
 - **Variedad con propósito:** el tipo de pregunta sale de lo que se quiere comprobar (tabla de 5.1), por ejemplo respuesta numérica para un cálculo y caso con decisiones para un juicio.
+- **Caso con decisiones también en los desafíos** (D-81): los niveles 5 y 6 suman preguntas `branching` (préstamo, tarjeta, tasa real), con retroalimentación por camino, además de las decisiones de las misiones.
 - **Sin límite de tiempo** (WCAG 2.2.1) y con alternativa accesible a todo arrastre.
 - **Retroalimentación** que explica por qué, nunca solo "Correcto" o "Incorrecto".
 
@@ -200,5 +213,7 @@ Gagné, R. M., Wager, W. W., Golas, K. C., & Keller, J. M. (2005). *Principles o
 Kirkpatrick, J. D., & Kirkpatrick, W. K. (2016). *Kirkpatrick's four levels of training evaluation*. ATD Press.
 
 Knowles, M. S., Holton, E. F., III, & Swanson, R. A. (2015). *The adult learner: The definitive classic in adult education and human resource development* (8.ª ed.). Routledge.
+
+Kolb, D. A. (1984). *Experiential learning: Experience as the source of learning and development*. Prentice Hall.
 
 Wiggins, G., & McTighe, J. (2005). *Understanding by design* (2.ª ed. ampliada). ASCD.
