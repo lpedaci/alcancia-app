@@ -52,7 +52,7 @@ describe('mission catalog (D-59, D-166)', () => {
 });
 
 describe('mission 1 "Tu primer cobro" (5.3, D-53, D-54, D-55)', () => {
-  const start = () => startMission(mission1, buildMariana());
+  const start = () => startMission(mission1, buildMariana(), { replay: true });
 
   it('runs on a fresh practice account, not on the person wallet', () => {
     const run = start();
@@ -150,7 +150,7 @@ describe('mission "Configura tu seguridad" (level 0)', () => {
 });
 
 describe('missions of level 2 (step 7)', () => {
-  const start = (id: string) => startMission(missionById(id)!, buildMariana());
+  const start = (id: string) => startMission(missionById(id)!, buildMariana(), { replay: true });
 
   it('mission 2: confirming with the wrong holder sends the money to another person, and the fix pays Sofía', () => {
     const def = missionById('mission-2')!;
@@ -192,7 +192,7 @@ describe('mission 7 "Mes completo" (step 7.3)', () => {
   const def = missionById('mission-7')!;
 
   it('closes month 0 in green after saving 10 % and paying the repair from the balance (hand calculation)', () => {
-    let run = startMission(def, buildMariana());
+    let run = startMission(def, buildMariana(), { replay: true });
     run = play(def, run).run; // card
     const low = answerStep(def, run, '64.247,94'); // 5 %: not enough
     expect(low.feedback?.text).toContain('128.495,89'); // $ 1.284.958,86 × 0,1
@@ -212,7 +212,7 @@ describe('mission "Crea tu fondo de emergencia" (step 7.4)', () => {
   const def = missionById('mission-emergency-fund')!;
 
   it('3 months of $ 650.000 make a goal of $ 1.950.000, and the first contribution funds it (hand calculation)', () => {
-    let run = play(def, startMission(def, buildMariana())).run;
+    let run = play(def, startMission(def, buildMariana(), { replay: true })).run;
     const wrong = answerStep(def, run, '650.000');
     expect(wrong.feedback?.text).toContain('1.950.000');
     run = play(def, wrong.run, '1.950.000').run;
@@ -229,7 +229,7 @@ describe('mission "El préstamo tentador" (step 8.3)', () => {
   const plain = (text?: string) => (text ?? '').replaceAll(String.fromCharCode(160), ' ');
 
   it('fills the offer of the scenario, asks for the CFT and the total, and accepting creates a high-rate debt', () => {
-    let run = play(def, startMission(def, createWallet('p'))).run;
+    let run = play(def, startMission(def, createWallet('p'), { replay: true })).run;
     expect(plain(answerStep(def, run, 'tna').feedback?.text)).not.toContain('{{');
     const cft = answerStep(def, run, 'cft');
     expect(plain(cft.feedback?.text)).toContain('81,8 %');
@@ -266,12 +266,14 @@ describe('mission "Sal de tus deudas" (step 8.3)', () => {
   });
 
   it('is completed by ordering with both methods, choosing one and applying it', () => {
-    let run = play(def, startMission(def, createWallet('p'))).run;
+    let run = play(def, startMission(def, createWallet('p'), { replay: true })).run;
     run = play(def, answerStep(def, run, 'fin').run, 'card').run;
     run = play(def, run, 'fin').run;
     run = play(def, run).run;
     run = play(def, run, 'snowball').run;
     run = play(def, answerStep(def, run, 'split').run, 'priority').run;
+    // D-77: the person decides what to do with her own debts (none in a practice copy).
+    run = play(def, run, 'later').run;
     expect(criteriaStatus(def, run).every((c) => c.met)).toBe(true);
   });
 });
@@ -279,7 +281,7 @@ describe('mission "Sal de tus deudas" (step 8.3)', () => {
 describe('mission texts', () => {
   it('every text shown on screen is filled in: no {{placeholder}} is left', () => {
     for (const def of MISSION_DEFS.filter((m) => isPlayable(m))) {
-      const run = startMission(def, createWallet('p'));
+      const run = startMission(def, createWallet('p'), { replay: true });
       for (const step of def.steps!) {
         const texts = Object.entries(step)
           .filter(([key, value]) => typeof value === 'string' && ['title', 'body', 'prompt', 'instruction', 'fuerte'].includes(key))
@@ -296,7 +298,7 @@ describe('mission "¿Cuenta o fondo?" (step 8.4)', () => {
   const plain = (text?: string) => (text ?? '').replaceAll(String.fromCharCode(160), ' ');
 
   it('chooses where the balance yields, shows a month of yield and asks what protects a fund', () => {
-    let run = play(def, startMission(def, createWallet('p'))).run;
+    let run = play(def, startMission(def, createWallet('p'), { replay: true })).run;
     run = play(def, run, 'money_market').run;
     expect(run.wallet.yieldMode).toBe('money_market');
     const advanced = answerStep(def, run);
@@ -316,7 +318,7 @@ describe('level 7 missions (step 9.3)', () => {
 
   it('"Abre tu cuenta comitente": opens, funds from the wallet and checks custody and verification', () => {
     const def = missionById('mission-broker-account')!;
-    let run = play(def, startMission(def, createWallet('p'))).run;
+    let run = play(def, startMission(def, createWallet('p'), { replay: true })).run;
     run = play(def, run).run;
     expect(run.wallet.brokerage).toBeDefined();
     run = play(def, run, 'f200').run;
@@ -328,7 +330,7 @@ describe('level 7 missions (step 9.3)', () => {
 
   it('"Tu primer CEDEAR de ETF": the theoretical price of the run day, the purchase and its costs', () => {
     const def = missionById('mission-first-cedear')!;
-    let run = play(def, startMission(def, createWallet('p'))).run;
+    let run = play(def, startMission(def, createWallet('p'), { replay: true })).run;
     run = play(def, run).run;
     // Day 1: USD 600 ÷ 20 × (1.500 × 1,03^(1/30)) = $ 45.044,36.
     const right = answerStep(def, run, '45.044,36');
@@ -341,7 +343,7 @@ describe('level 7 missions (step 9.3)', () => {
 
   it('"Aguanta la caída": four months later the example investment is down; ten more and it has recovered', () => {
     const def = missionById('mission-hold-the-drop')!;
-    let run = startMission(def, createWallet('p'));
+    let run = startMission(def, createWallet('p'), { replay: true });
     run = play(def, run).run;
     const drop = answerStep(def, run);
     expect(plain(drop.feedback?.text)).toMatch(/−\d/);

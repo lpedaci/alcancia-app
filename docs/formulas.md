@@ -297,6 +297,21 @@ Datos, costos y serie en `src/data/invest.json`; todo es de ejemplo y ficticio (
 
 **Caso F-34** · fondo de práctica a 30 días con TNA 31 % → **$ 1.025,80**; bono de ejemplo a 30 días con TNA 34 % y factor 1,01 → **$ 1.038,22**.
 
+## 19. Consecuencias en la billetera (D-77, paso 18)
+
+Casos con el escenario medio (préstamo personal TNA 55 %, tarjeta TNA 60 %), calculados a mano con aritmética decimal y redondeo a centavos.
+
+**Caso F-35 · Préstamo tomado en "El préstamo tentador"** (F-29, F-30):
+- Capital $ 600.000; comisión de otorgamiento 5 % = $ 30.000; **se acreditan $ 570.000 netos** en el saldo.
+- Cuota del sistema francés con `i = 0,55 / 12 = 0,0458333…` y 24 cuotas: **$ 41.737,16**, que se debita el mismo día del mes, un mes después de tomarlo.
+- Si se pagan las 24: $ 41.737,16 × 24 = $ 1.001.691,84, es decir **$ 401.691,84 de intereses**, más la comisión.
+- Cancelación anticipada después de la primera cuota: el capital que falta es el valor actual de las 23 cuotas restantes, `41.737,16 × (1 − (1 + i)^−23) / i` = **$ 585.762,83** (la cuenta "capital por (1 + i) menos la cuota" da $ 585.762,84; el centavo sale de redondear la cuota).
+- Mientras el préstamo esté activo, su TEA (≈ 71,2 %) es mayor que la inflación anual del escenario (≈ 42,6 %): es deuda de tasa alta y **Invertir sigue bloqueado** (D-113).
+
+**Caso F-36 · Pagar solo el mínimo de la tarjeta** (F-31): resumen de $ 240.000, mínimo 10 % = **$ 24.000** pagados; al vencer, los $ 216.000 restantes se financian 30 días: `216.000 × (1 + 0,60 × 30 / 365)` = **$ 226.652,05** en el resumen siguiente, es decir **$ 10.652,05 de intereses** por haber pagado solo el mínimo.
+
+**Caso F-37 · Caer en un mensaje falso** (D-211): con un saldo de $ 100.000, responder con el código o abrir el enlace descuenta **$ 30.000** al instante (saldo $ 70.000) y deja programado un segundo intento de $ 30.000 al día siguiente. Si la persona lo reporta antes, el segundo intento no ocurre y el saldo queda en **$ 70.000**; si no, queda en **$ 40.000**. En "Transferir para invertir" la persona misma transfiere **$ 50.000** y no hay segundo intento. Si el saldo es menor, se descuenta lo que haya. El monto perdido no vuelve: reportar evita una pérdida mayor, no recupera lo que se fue (sin prometer recuperos).
+
 ## 16. Métrica con umbral de privacidad
 
 **Regla (`metrics.ts`):** `aggregate(grupo)` devuelve "datos insuficientes" si `personas < privacyThreshold` (mínimo 5); si no, el valor agregado. Además, en una misma vista no se muestra un total y sus partes si al restar se pudiera deducir un grupo de menos de 5.
@@ -329,6 +344,9 @@ Datos, costos y serie en `src/data/invest.json`; todo es de ejemplo y ficticio (
 | F-30 | `annualCostRate(...)` | 0,8178 (81,8 %) |
 | F-31 | `financedStatement(...)` | $ 226.652,05 |
 | F-32 a F-34 | `quote(...)`, `buyPreview(...)` (invest/engine.ts) | $ 36.517,13 · $ 181.044 · $ 1.025,80 |
+| F-35 | `acceptLoan(...)`, `planLeft(...)` en la billetera | $ 570.000 netos · cuota $ 41.737,16 · $ 585.762,83 |
+| F-36 | `payCard(...)` y el cierre del resumen | $ 226.652,05 · $ 10.652,05 de intereses |
+| F-37 | `fallForScam(...)`, `markMessage(...)` | $ 70.000 si se reporta · $ 40.000 si no |
 
 ## Referencias
 

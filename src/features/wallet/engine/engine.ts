@@ -223,6 +223,7 @@ function processDay(state: WalletState): boolean {
   }
 
   if (dom === 15 && month > 0) deliverMessage(state, month);
+  chargePendingScam(state);
   closeDueStatement(state);
   payOutDeposits(state);
   if (!chargeDebits(state, debitsOf(state, dom))) return false;
@@ -340,10 +341,45 @@ function deliverMessage(state: WalletState, month: number) {
 export function markMessage(state: WalletState, messageId: string, status: 'read' | 'reported' | 'fell'): WalletState {
   const next = clone(state);
   next.messages = (next.messages ?? []).map((m) => (m.id === messageId && (m.status === 'unread' || m.status === 'read') ? { ...m, status } : m));
-  return next;
+  // Reporting the message that let someone in stops their second attempt (F-37).
+  return status === 'reported' ? reportScam(next, messageId) : next;
 }
 
 export const unreadMessages = (state: Pick<WalletState, 'messages'>) => (state.messages ?? []).filter((m) => m.status === 'unread').length;
+
+/** F-37: what a fake message takes. Small amounts, so nobody is left without money to go on (D-208). */
+export const SCAM_LOSS = '30000.00';
+export const SCAM_TRANSFER = '50000.00';
+export const SCAM_COUNTERPARTY = 'Transferencia no reconocida · cuenta desconocida (ficticia)';
+
+/**
+ * Falling for a fake message (D-77, D-211, F-37). Giving the code or opening the link lets someone in:
+ * $ 30.000 leave now and a second attempt is scheduled for the next day. Transferring "to invest"
+ * sends $ 50.000 once. With less balance, what there is. What left does not come back.
+ */
+export function fallForScam(state: WalletState, source: string, kind: 'reply_code' | 'open_link' | 'transfer'): WalletState {
+  const next = clone(state);
+  const amount = Decimal.min(D(kind === 'transfer' ? SCAM_TRANSFER : SCAM_LOSS), Decimal.max(D(next.balance), 0));
+  if (amount.gt(0)) addMovement(next, { type: 'transfer_out', amount: amount.neg(), counterparty: SCAM_COUNTERPARTY, suggestedCategory: 'wants', scam: true });
+  if (kind !== 'transfer') next.scamPending = { day: next.day + 1, amount: SCAM_LOSS, source };
+  return next;
+}
+
+/** Reporting stops the second attempt (F-37). It does not bring back what already left. */
+export function reportScam(state: WalletState, source?: string): WalletState {
+  if (!state.scamPending || (source && state.scamPending.source !== source)) return state;
+  const next = clone(state);
+  next.scamPending = undefined;
+  return next;
+}
+
+function chargePendingScam(state: WalletState) {
+  const pending = state.scamPending;
+  if (!pending || state.day < pending.day) return;
+  state.scamPending = undefined;
+  const amount = Decimal.min(D(pending.amount), Decimal.max(D(state.balance), 0));
+  if (amount.gt(0)) addMovement(state, { type: 'transfer_out', amount: amount.neg(), counterparty: SCAM_COUNTERPARTY, suggestedCategory: 'wants', scam: true });
+}
 
 /** "Avanzar un día / una semana" and replays: processes n days, stopping at a pending debit. */
 export function advanceDays(state: WalletState, days: number): WalletState {

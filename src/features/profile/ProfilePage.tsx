@@ -19,6 +19,7 @@ import { useCurrentUser } from '@/store/session-store';
 import { clearWallet, useWallet } from '@/store/wallet-store';
 import { fuerteLine } from '@/features/companion/fuerte-lines';
 import { WhyMatters } from '@/features/learning-cards/WhyMatters';
+import { clearReturnState } from '@/lib/use-return-state';
 
 /**
  * P14, profile, security and receipts (CLAUDE.md 5.3, information-architecture.md): the practice
@@ -193,6 +194,7 @@ export function ProfilePage() {
         confirmLabel={t('profile.reset.action')}
         onConfirm={() => {
           clearWallet(personId);
+          clearReturnState(personId);
           writeLocal(personId, (d) => ({ ...d, missionRuns: {} }));
           toast.success(t('profile.reset.done'));
         }}

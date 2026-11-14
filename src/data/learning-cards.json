@@ -42,7 +42,7 @@
       "id": "card-subscription-first-debit",
       "trigger": "subscription_first_debit",
       "title": "Un débito que se repite",
-      "body": "Se debitó una suscripción. Los débitos automáticos se repiten todos los meses, la uses o no: son un gasto hormiga típico. Revisarlos una vez por mes y dar de baja lo que no usas es un buen hábito.",
+      "body": "Se debitó una suscripción. Los débitos automáticos se repiten todos los meses, la uses o no: es un gasto fijo fácil de olvidar; si no la usas, se vuelve un gasto hormiga. Revisarlos una vez por mes y dar de baja lo que no usas es un buen hábito.",
       "sourceIds": [
         "A-15",
         "A-34"

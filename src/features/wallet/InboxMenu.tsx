@@ -8,7 +8,7 @@ import { toast } from '@/components/ui/toast-store';
 import { formatDate, walletDate } from '@/lib/dates';
 import { cn } from '@/lib/utils';
 import { useWallet } from '@/store/wallet-store';
-import { markMessage, unreadMessages } from './engine/engine';
+import { fallForScam, markMessage, unreadMessages } from './engine/engine';
 import { MESSAGE_BAIT, type SUSPICIOUS_TEMPLATES } from './engine/profile';
 import type { InboxMessage } from './engine/types';
 
@@ -29,7 +29,8 @@ export function InboxMenu({ personId }: { personId: string }) {
     toast[m.suspicious ? 'success' : 'info'](t(m.suspicious ? 'wallet.inbox.reported' : 'wallet.inbox.reportedLegit'));
   };
   const fall = (m: InboxMessage) => {
-    update((s) => markMessage(s, m.id, 'fell'));
+    const bait = MESSAGE_BAIT[m.templateId as (typeof SUSPICIOUS_TEMPLATES)[number]];
+    update((s) => fallForScam(markMessage(s, m.id, 'fell'), m.id, bait));
     toast.info(t('wallet.inbox.fell'));
   };
 
@@ -62,7 +63,7 @@ export function InboxMenu({ personId }: { personId: string }) {
           ) : (
             <ul className="flex max-h-96 flex-col gap-2 overflow-y-auto">
               {messages.map((m) => (
-                <MessageItem key={m.id} message={m} onReport={() => report(m)} onFall={() => fall(m)} />
+                <MessageItem key={m.id} message={m} pending={wallet.scamPending?.source === m.id} onReport={() => report(m)} onFall={() => fall(m)} />
               ))}
             </ul>
           )}
@@ -72,7 +73,7 @@ export function InboxMenu({ personId }: { personId: string }) {
   );
 }
 
-function MessageItem({ message: m, onReport, onFall }: { message: InboxMessage; onReport: () => void; onFall: () => void }) {
+function MessageItem({ message: m, pending, onReport, onFall }: { message: InboxMessage; pending: boolean; onReport: () => void; onFall: () => void }) {
   const { t } = useTranslation();
   const key = `wallet.inbox.templates.${m.templateId}`;
   const signals = m.suspicious ? (t(`${key}.signals`, { returnObjects: true }) as string[]) : [];
@@ -113,7 +114,13 @@ function MessageItem({ message: m, onReport, onFall }: { message: InboxMessage; 
           </ul>
           {m.status === 'fell' && <span className="mt-1 block">{t('wallet.inbox.fellReal')}</span>}
         </InlineAlert>
-      ) : (
+      ) : null}
+      {m.status === 'fell' && pending && (
+        <Button variant="tonal" size="xs" leadingIcon="flag" className="self-start" onClick={onReport}>
+          {t('wallet.inbox.reportAfter')}
+        </Button>
+      )}
+      {m.suspicious || m.status !== 'reported' ? null : (
         <div className="flex flex-col gap-1">
           <StatusPill tone="neutral" icon="flag" label={t('wallet.inbox.reportedPill')} className="self-start" />
           <p className="text-body-small text-on-surface-variant">{t('wallet.inbox.legitNote')}</p>

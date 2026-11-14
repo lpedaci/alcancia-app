@@ -14,6 +14,7 @@ import { clearLocal } from '@/store/local-store';
 import { clearWallet } from '@/store/wallet-store';
 import { type LogoutReason, useSessionStore } from '@/store/session-store';
 import type { AccessRequest, AccessRequestReason, AuthMethod, Person, Role, Session } from '@/types/domain';
+import { clearReturnState } from '@/lib/use-return-state';
 
 export const DEMO_PASSWORD = 'Demo.2026!';
 export const DEMO_MFA_CODE = '246810';
@@ -148,6 +149,7 @@ export function acceptPrivacyNotice(personId: string) {
 }
 
 export function signOut(reason: Extract<LogoutReason, 'manual' | 'expired'> = 'manual') {
+  clearReturnState();
   session().endSession(reason);
 }
 
@@ -159,6 +161,7 @@ export function switchPerson(personId: string): string {
   const person = findPerson(personId);
   if (!person || !DEMO_PERSON_IDS.includes(personId)) return '/login';
   if (session().session) session().endSession('switch');
+  clearReturnState();
   session().setReturnTo(null);
   return openSession(person, 'sso_microsoft', 'switch');
 }
@@ -173,6 +176,7 @@ export function resetDemo() {
     clearLocal(person.id);
     clearWallet(person.id);
   }
+  clearReturnState();
   session().resetSessionState();
   session().endSession('reset');
 }

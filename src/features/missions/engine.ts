@@ -3,6 +3,13 @@ import { D, periodRate, realRate, roundCents, toMoneyString } from '@/lib/financ
 import { formatMoney, formatPercent, parseDecimalInput } from '@/lib/money';
 import {
   acceptLoan,
+  activeDebts,
+  fallForScam,
+  monthOf,
+  payCard,
+  payOffPlan,
+  reportScam,
+  WalletError,
   advanceDays,
   advanceMonth,
   raiseExpense,
@@ -23,9 +30,9 @@ import {
   setTwoFactor,
   transferOut,
 } from '@/features/wallet/engine/engine';
-import { buy, fundBrokerage, openBrokerage, portfolioValue, positions, quote, sell } from '@/features/invest/engine';
+import { buy, buyPreview, fundBrokerage, openBrokerage, portfolioValue, positions, quote, sell } from '@/features/invest/engine';
 import { POCKET_EMERGENCY, POCKET_SAVINGS } from '@/features/wallet/engine/demo';
-import type { WalletState } from '@/features/wallet/engine/types';
+import type { InvestorProfileId, WalletState } from '@/features/wallet/engine/types';
 
 /**
  * Declarative mission engine (CLAUDE.md 5.3, D-166). A mission is data in `wallet-missions.json`:
@@ -41,6 +48,11 @@ import type { WalletState } from '@/features/wallet/engine/types';
 
 export type ActionId =
   | 'receive_salary'
+  /** D-77: falling for the fake message of mission 6, and reporting it (F-37). */
+  | 'fall_scam'
+  | 'report_scam'
+  /** D-77: "Sal de tus deudas" applies the chosen method to the person's own debts. */
+  | 'payoff_priority'
   | 'enable_two_factor'
   | 'set_daily_limit'
   | 'charge_subscription'
@@ -126,6 +138,8 @@ export interface MissionDef {
    * `current`: a copy of the person's wallet, kept on completion.
    */
   initial?: 'fresh' | 'salary' | 'current';
+  /** An exception of D-208: it is always a practice apart, with the reason shown to the person. */
+  practiceOnly?: boolean;
   steps?: MissionStep[];
   criteria?: Criterion[];
 }
@@ -156,10 +170,22 @@ export interface MissionRun {
   wallet: WalletState;
   results: Record<string, StepResult>;
   statements: MissionStatement[];
-  /** Wallet before each decision, so changing your mind replays from there. */
+  /** Wallet before each decision, so changing your mind replays from there (practice only, D-77). */
   snapshots: Record<string, WalletState>;
   finished: boolean;
+  /**
+   * D-208: `own` plays in the person's wallet and every step is kept; `practice` is a labelled copy
+   * that is never kept ("Repetir para practicar", or a mission that is an exception). Runs saved
+   * before D-208 have none and behave as practice.
+   */
+  mode?: 'own' | 'practice';
+  /** Simulated day when the run started: criteria about "this month" or "since you started" use it. */
+  startDay?: number;
+  /** The person's own investor profile (D-67), for the brokerage account opened in her wallet. */
+  profile?: InvestorProfileId;
 }
+
+export const isOwnRun = (run: MissionRun) => run.mode === 'own';
 
 export interface Feedback {
   tone: 'success' | 'info';
@@ -190,7 +216,7 @@ export function fillText(text: string, run: MissionRun, extra: { expected?: stri
       .replaceAll('{{tna}}', formatPercent(offer.tna, { decimals: 1 }))
       .replaceAll('{{cft}}', formatPercent(offer.cft, { decimals: 1 }));
     const scenario = scenarioOf(run.wallet);
-    const earned = run.wallet.movements.filter((m) => m.type === 'yield').reduce((sum, m) => sum.plus(m.amount), D(0));
+    const earned = run.wallet.movements.filter((m) => m.type === 'yield' && m.day > (run.startDay ?? 0)).reduce((sum, m) => sum.plus(m.amount), D(0));
     const modeTna = tnaOf(run.wallet, run.wallet.yieldMode) ?? '0';
     // Real rate of 30 days with the chosen option's example TNA (F-03); the fund's varies day by day.
     const real = realRate(periodRate(modeTna, 30), scenario.monthlyInflation);
@@ -227,8 +253,39 @@ export function expectedAmount(step: Extract<MissionStep, { kind: 'numeric' }>, 
   return toMoneyString(percentOfSalary(run.wallet, step.param));
 }
 
-function applyAction(wallet: WalletState, action: ActionId, value?: string, target?: string): WalletState {
+interface ActionContext {
+  profile: InvestorProfileId;
+  /** Answer of the mission's method decision ("Sal de tus deudas"). */
+  method?: string;
+}
+
+/** Opens the practice brokerage account only if the person does not have one yet (D-208). */
+const ensureBrokerage = (wallet: WalletState, profile: InvestorProfileId) => (wallet.brokerage ? wallet : openBrokerage(wallet, profile));
+
+/** Money the brokerage account still needs for `units` example CEDEARs, costs included (F-33). */
+function neededFor(wallet: WalletState, units: number): string {
+  const cost = buyPreview(wallet, CEDEAR, units).totalCost;
+  const missing = D(cost).minus(wallet.brokerage?.cash ?? '0');
+  return missing.gt(0) ? missing.toFixed(2) : '0';
+}
+
+/** D-77, "Sal de tus deudas": pays off the priority debt by the chosen method, if the balance allows. */
+function payOffPriority(wallet: WalletState, method?: string): WalletState {
+  const debts = activeDebts(wallet).filter((d) => d.kind !== 'card' || d.balance.gt(0));
+  if (debts.length === 0) return wallet;
+  const sorted = [...debts].sort((a, b) => (method === 'snowball' ? a.balance.comparedTo(b.balance) : b.tea.comparedTo(a.tea)));
+  const first = sorted[0]!;
+  return first.kind === 'card' ? payCard(wallet, first.balance.toFixed(2)) : payOffPlan(wallet, first.id);
+}
+
+function applyAction(wallet: WalletState, action: ActionId, value?: string, target?: string, ctx: ActionContext = { profile: 'moderate' }): WalletState {
   switch (action) {
+    case 'fall_scam':
+      return fallForScam(wallet, 'mission-6', 'reply_code');
+    case 'report_scam':
+      return reportScam(wallet, 'mission-6');
+    case 'payoff_priority':
+      return payOffPriority(wallet, ctx.method);
     case 'receive_salary':
       // Day 0 → day 1: the engine credits the net salary first thing (D-158).
       return wallet.day === 0 ? advanceDays(wallet, 1) : wallet;
@@ -269,16 +326,24 @@ function applyAction(wallet: WalletState, action: ActionId, value?: string, targ
       return advanceDays(wallet, 30);
     case 'advance_days':
       return advanceDays(wallet, Number(value ?? '1'));
-    // The practice account uses an example moderate profile: the person's own test result stays in
-    // her browser's local data, outside the mission (D-67).
+    // In the person's wallet the account uses her own test result (D-67); a practice copy uses the
+    // example moderate profile.
     case 'open_brokerage':
-      return openBrokerage(wallet, 'moderate');
+      return ensureBrokerage(wallet, ctx.profile);
     case 'fund_brokerage':
       return fundBrokerage(wallet, value ?? '0');
-    case 'setup_brokerage':
-      return fundBrokerage(openBrokerage(wallet, 'moderate'), value ?? '0');
-    case 'setup_buy':
-      return buy(fundBrokerage(openBrokerage(wallet, 'moderate'), value ?? '0'), CEDEAR, Number(target ?? '1'));
+    case 'setup_brokerage': {
+      // D-208: open only if needed and transfer what 4 CEDEARs cost, not a fixed amount.
+      const open = ensureBrokerage(wallet, ctx.profile);
+      const needed = neededFor(open, Number(value ?? '4'));
+      return D(needed).gt(0) ? fundBrokerage(open, needed) : open;
+    }
+    case 'setup_buy': {
+      const open = ensureBrokerage(wallet, ctx.profile);
+      const units = Number(target ?? '1');
+      const needed = neededFor(open, units);
+      return buy(D(needed).gt(0) ? fundBrokerage(open, needed) : open, CEDEAR, units);
+    }
     case 'buy_cedear':
       return buy(wallet, CEDEAR, Number(value ?? '1'), target === '24h' ? '24h' : 'ci');
     case 'sell_cedear': {
@@ -288,10 +353,31 @@ function applyAction(wallet: WalletState, action: ActionId, value?: string, targ
   }
 }
 
-export function startMission(def: MissionDef, current: WalletState): MissionRun {
-  const fresh = createWallet(current.personId, current.scenarioId);
-  const wallet = def.initial === 'fresh' ? fresh : def.initial === 'salary' ? advanceDays(fresh, 1) : structuredClone(current);
-  return { missionId: def.id, step: 0, wallet, results: {}, statements: [{ verb: 'started', object: def.id }], snapshots: {}, finished: false };
+/**
+ * D-208: the first time, a mission plays in the person's wallet. "Repetir para practicar" (a mission
+ * already completed) and the exceptions (`practiceOnly`) play in a labelled copy: the mission's own
+ * practice scenario, never kept.
+ */
+export function startMission(def: MissionDef, current: WalletState, options: { replay?: boolean; profile?: InvestorProfileId } = {}): MissionRun {
+  const mode = def.practiceOnly || options.replay ? 'practice' : 'own';
+  let wallet: WalletState;
+  if (mode === 'own') wallet = structuredClone(current);
+  else {
+    const fresh = createWallet(current.personId, current.scenarioId);
+    wallet = def.initial === 'fresh' ? fresh : def.initial === 'salary' ? advanceDays(fresh, 1) : structuredClone(current);
+  }
+  return {
+    missionId: def.id,
+    step: 0,
+    wallet,
+    results: {},
+    statements: [{ verb: 'started', object: def.id }],
+    snapshots: {},
+    finished: false,
+    mode,
+    startDay: wallet.day,
+    profile: mode === 'own' ? (options.profile ?? 'moderate') : 'moderate',
+  };
 }
 
 export const currentStep = (def: MissionDef, run: MissionRun): MissionStep | undefined => def.steps?.[run.step];
@@ -301,9 +387,21 @@ export const currentStep = (def: MissionDef, run: MissionRun): MissionStep | und
  * (numeric); cards, events and actions need none. The run does not move: call `nextStep` when the
  * step is done, so the person reads the feedback first.
  */
-export function answerStep(def: MissionDef, run: MissionRun, input?: string): { run: MissionRun; feedback?: Feedback } {
+export function answerStep(def: MissionDef, run: MissionRun, input?: string): { run: MissionRun; feedback?: Feedback; error?: string } {
+  try {
+    return answerUnsafe(def, run, input);
+  } catch (err) {
+    // D-208, criterion 3: a step that does not fit the balance does not advance, and the page says why
+    // and how to go on (advance to the next salary or move money from a pocket).
+    if (err instanceof WalletError) return { run, error: err.message };
+    throw err;
+  }
+}
+
+function answerUnsafe(def: MissionDef, run: MissionRun, input?: string): { run: MissionRun; feedback?: Feedback } {
   const step = currentStep(def, run);
   if (!step || run.finished) return { run };
+  const ctx: ActionContext = { profile: run.profile ?? 'moderate', method: run.results['method']?.answer };
   const previous = run.results[step.id] ?? { attempts: 0, done: false };
   const record = (result: StepResult, statement: MissionStatement, wallet = run.wallet, snapshots = run.snapshots): MissionRun => ({
     ...run,
@@ -319,17 +417,18 @@ export function answerStep(def: MissionDef, run: MissionRun, input?: string): { 
     case 'event':
     case 'action': {
       if (previous.done) return { run };
-      const wallet = applyAction(run.wallet, step.action, step.value, step.target);
+      const wallet = applyAction(run.wallet, step.action, step.value, step.target, ctx);
       const feedback = step.kind === 'action' ? { tone: 'success' as const, text: fillText(step.done, { ...run, wallet }) } : undefined;
       return { run: record({ ...previous, done: true }, { verb: 'acted', object: `${def.id}/${step.id}` }, wallet), feedback };
     }
     case 'decision': {
       const option = step.options.find((o) => o.id === input);
       if (!option) return { run };
-      // A decision has no wrong answer: it has a consequence. Changing it replays from the wallet
-      // as it was before the first choice.
+      // In the person's wallet a decision is final: it is reverted with an action of the simulation,
+      // never by choosing again (D-77). In a practice copy, changing it replays from before.
+      if (isOwnRun(run) && previous.done) return { run };
       const base = run.snapshots[step.id] ?? run.wallet;
-      const wallet = option.action ? applyAction(base, option.action, option.value, option.target) : base;
+      const wallet = option.action ? applyAction(base, option.action, option.value, option.target, ctx) : base;
       return {
         run: record(
           { answer: option.id, attempts: previous.attempts + 1, done: true },
@@ -346,7 +445,7 @@ export function answerStep(def: MissionDef, run: MissionRun, input?: string): { 
       if (!option) return { run };
       const correct = option.id === step.correct;
       // An option can have a consequence in the simulation (5.3: errors are allowed and have one).
-      const wallet = option.action ? applyAction(run.wallet, option.action, option.value, option.target) : run.wallet;
+      const wallet = option.action ? applyAction(run.wallet, option.action, option.value, option.target, ctx) : run.wallet;
       return {
         run: record(
           { answer: option.id, correct, attempts: previous.attempts + 1, done: correct },
@@ -364,7 +463,7 @@ export function answerStep(def: MissionDef, run: MissionRun, input?: string): { 
       const amount = toMoneyString(parsed);
       const correct = D(amount).minus(expected).abs().lte(step.tolerance);
       let wallet = run.wallet;
-      if (correct && step.onCorrect) wallet = applyAction(wallet, step.onCorrect, amount);
+      if (correct && step.onCorrect) wallet = applyAction(wallet, step.onCorrect, amount, undefined, ctx);
       return {
         run: record(
           { answer: amount, correct, attempts: previous.attempts + 1, done: correct },
@@ -423,7 +522,8 @@ export function checkCriterion(criterion: Criterion, run: MissionRun): boolean {
     case 'salary_received':
       return wallet.movements.some((m) => m.type === 'income');
     case 'month_green':
-      return wallet.monthSummaries.find((m) => m.month === Number(criterion.param ?? '0'))?.green === true;
+      // The month counts from the one the run started in (in the person's wallet it is her current month).
+      return wallet.monthSummaries.find((m) => m.month === monthOf(Math.max(1, run.startDay ?? 0)) + Number(criterion.param ?? '0'))?.green === true;
     case 'emergency_goal': {
       const fund = emergencyFund(wallet);
       return Boolean(fund?.goal) && D(fund!.goal!).gte(essentialMonthlyExpenses(wallet).times(criterion.param ?? '3').minus('1.00'));
@@ -437,13 +537,17 @@ export function checkCriterion(criterion: Criterion, run: MissionRun): boolean {
     case 'holds':
       return Boolean(wallet.brokerage?.trades.some((t) => t.side === 'buy' && t.instrumentId === criterion.param));
     case 'savings_kept':
-      return !wallet.movements.some((m) => m.type === 'pocket_out');
+      return !wallet.movements.some((m) => m.type === 'pocket_out' && m.day >= (run.startDay ?? 0));
     case 'paid_to':
       return wallet.movements.some((m) => (m.type === 'transfer_out' || m.type === 'qr_payment') && !m.expenseKey && m.counterparty === criterion.param);
     case 'savings_percent': {
       const pocket = wallet.pockets.find((p) => p.id === POCKET_SAVINGS);
       if (!pocket) return false;
-      return D(pocket.amount).minus(percentOfSalary(wallet, criterion.param ?? '0')).abs().lte('1.00');
+      // What this run moved into "Ahorro" (the person may already have had savings there).
+      const moved = wallet.movements
+        .filter((m) => m.type === 'pocket_in' && m.counterparty === 'Apartado: Ahorro' && m.day >= (run.startDay ?? 0))
+        .reduce((sum, m) => sum.minus(m.amount), D(0));
+      return moved.minus(percentOfSalary(wallet, criterion.param ?? '0')).abs().lte('1.00');
     }
   }
 }
@@ -467,7 +571,11 @@ export function finishMission(def: MissionDef, run: MissionRun): MissionRun {
  */
 export function walletAfter(def: MissionDef, run: MissionRun, current: WalletState): WalletState {
   if (!run.finished) return current;
-  return def.initial === 'current' ? run.wallet : completeMission(current, def.id);
+  // D-208: in the person's wallet everything was already kept step by step; a practice copy only
+  // records the completion (and a replay, not even that: it was already completed).
+  if (isOwnRun(run)) return run.wallet;
+  if (run.mode === undefined && def.initial === 'current') return run.wallet;
+  return completeMission(current, def.id);
 }
 
 /** Attempts of a mission, for the tutor's aggregated view: how many answers were needed (5.3). */

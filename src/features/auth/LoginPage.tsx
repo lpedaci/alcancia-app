@@ -18,6 +18,7 @@ import { DEMO_PASSWORD, findPerson, hasConsent, personIdForDemoKey, signInWithPa
 import { AuthLayout } from './AuthLayout';
 import { LoginShowcase } from './LoginShowcase';
 import { SsoButton } from './SsoButton';
+import { clearReturnState } from '@/lib/use-return-state';
 
 const schema = z.object({ email: emailField, password: requiredText });
 type LoginValues = z.infer<typeof schema>;
@@ -66,7 +67,11 @@ export function LoginPage() {
   }, [problem]);
 
   useEffect(() => {
-    if (otherJourney) useSessionStore.getState().endSession('switch');
+    if (otherJourney) {
+      // Another person from the landing: what the previous one kept for the guide is cleared (D-212).
+      clearReturnState();
+      useSessionStore.getState().endSession('switch');
+    }
   }, [otherJourney]);
 
   if (session && !otherJourney) return <Navigate to={hasConsent(session.personId) ? homePath(session) : '/consent'} replace />;

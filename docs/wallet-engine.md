@@ -194,3 +194,31 @@ Cada excepción se justifica en la tabla de abajo y la interfaz dice que esa mis
 **Repetir una misión ya completada (aprobado por Lourdes el 14/11/2026):** la primera vez se juega en la billetera propia. **"Repetir para practicar"** usa una copia de la billetera rotulada como práctica, sin consecuencias, con el rótulo visible durante toda la misión, porque aplicarla de nuevo duplicaría sus efectos (un segundo "primer cobro", otro fondo, otra transferencia) y rompería el estado de la billetera (criterio 1). Los estados de demo de Mariana y Diego ya traen sus misiones completadas, así que esta regla también los protege.
 
 **Clasificación aprobada por Lourdes el 14/11/2026:** las 13 misiones se juegan en la billetera propia. La única excepción es el caso de A-29 en "Sal de tus deudas" cuando la persona no tiene deudas.
+
+## 17. Cómo entra y cómo se revierte cada consecuencia (D-77, paso 18)
+
+> Definido el 14/11/2026, antes de tocar el motor. Los casos con números están en `formulas.md` (F-35 a F-37) y tienen tests.
+
+**Cómo se juega una misión en la billetera propia.** La primera vez, la misión trabaja sobre la billetera de la persona: cada paso que mueve dinero se guarda en el momento, igual que si lo hiciera desde Pagar o Rendir, y dispara las mismas tarjetas de aprendizaje (salvo durante la misión, que tiene las suyas). Si la persona sale y vuelve, la misión retoma con la billetera actualizada. **Una decisión tomada no se cambia** dentro de la misión: se revierte con una acción de la simulación, y la devolución dice cuál. "Repetir para practicar" usa una copia rotulada como práctica, que nunca se guarda.
+
+**Si el saldo no alcanza** para un paso, el paso no avanza y la devolución lo dice, con la salida: avanzar hasta el próximo cobro o pasar dinero desde un apartado (criterio 3 de la sección 16).
+
+| Misión | Qué deja en la billetera | Cómo se revierte en la simulación |
+| --- | --- | --- |
+| Configura tu seguridad | Segundo factor y límite diario | Desde Perfil, cuando quieras |
+| 1 · Tu primer cobro | El sueldo, el 20 % en "Ahorro" y la suscripción sorpresa de $ 4.990 (D-55) | Dar de baja la suscripción en Servicios; retirar del apartado |
+| 2 · Transfiere sin errores | Si confirma el alias equivocado: $ 12.000 al titular equivocado (D-208) | No se deshace (B-15): la devolución explica contactar a quien lo recibió y reclamar en la billetera, sin prometer que vuelve |
+| 3 · Paga con QR | El pago de $ 3.500 en el comedor | No se revierte: es un gasto real del mes |
+| 6 · El mensaje falso | Si comparte el código: la pérdida de F-37 y un segundo intento programado | Reportar el mensaje evita el segundo intento; lo perdido no vuelve |
+| 7 · Mes completo | La suba del celular, el imprevisto de $ 85.000, el ahorro del mes y el cierre del mes en la billetera propia | El mes cerrado queda en el resumen; el siguiente se puede cerrar en verde |
+| Crea tu fondo de emergencia | El apartado "Fondo de emergencia" con meta y el primer monto | Retirar del apartado (cuenta como uso fuera de emergencia en el resumen del mes) |
+| 5 · El préstamo tentador | Si acepta: $ 570.000 netos, la deuda en Tus deudas, la cuota de $ 41.737,16 cada mes e Invertir bloqueado (F-35) | Saldarlo en Tarjeta y préstamos > Tus deudas ("Cancelar ahora", el capital que falta); con la deuda saldada, Invertir vuelve a depender solo del fondo y del desafío |
+| Sal de tus deudas | Con deudas propias: el método elegido se aplica saldando la deuda prioritaria (la de mayor tasa en la avalancha, la de menor saldo en la bola de nieve) si el saldo alcanza. Sin deudas: el caso de A-29 de Tomás, sin cambios en la billetera | Es la reversión misma de las deudas |
+| 4 · ¿Cuenta o fondo? | Dónde rinde el saldo y 30 días de la billetera (cobro, débitos, rendimiento, inflación) | Cambiar dónde rinde en Rendir; el tiempo no vuelve atrás |
+| Abre tu cuenta comitente | La cuenta comitente con el perfil del test de la persona (D-67) y el primer fondeo | Rescatar el efectivo de la cuenta a la billetera |
+| Tu primer CEDEAR de ETF | La compra de 4 CEDEARs (F-33) con lo necesario transferido, en la tenencia propia | Venderlos en Invertir |
+| Aguanta la caída | Ver la nota de abajo | |
+| **Modo libre: caer en un mensaje de la campana** | La pérdida de F-37 | Reportar antes del día siguiente evita el segundo intento |
+| **Modo libre: pagar el mínimo** | El resto se financia al vencer (F-36) y es deuda de tasa alta | Pagar el total del resumen siguiente |
+
+**Nota sobre "Aguanta la caída" (pregunta abierta para Lourdes):** la misión avanza 4 meses y después 10 (420 días) y su caída depende de los primeros 150 días de la serie sintética de precios. Jugada en la billetera propia, adelantaría más de un año la vida de la persona (14 cobros y todos sus débitos) y, en el día en que esté, la serie podría no caer. Mientras Lourdes decide, sigue como práctica aparte (rotulada) y es la única misión con esa excepción, por el criterio 2 de la sección 16.

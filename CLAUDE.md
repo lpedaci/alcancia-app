@@ -724,7 +724,7 @@ Fuerte, la caja fuerte naranja del escape room "Tu primer sueldo", pasa a ser el
 | Cobrar | Recibe su sueldo de demo (el neto del módulo 1) o una transferencia de un banco ficticio | Leer el neto del recibo y planificar el mes (1, 3; taller) |
 | Transferir | Envía a un alias, CBU o CVU; la confirmación muestra titular y entidad ficticios | Revisar titular antes de confirmar; las transferencias inmediatas se acreditan en segundos y no se pueden deshacer desde la app (17; B-15) |
 | Pagar con QR | Escanea un QR de un comercio ficticio (con alternativa sin cámara: elegir de una lista) | QR interoperable: cualquier billetera lee cualquier QR (17; B-15) |
-| Pagar servicios | Paga luz, celular y una suscripción ficticios; puede programar débitos | Gastos fijos frente a variables; suscripciones como gasto hormiga (2, 3; A-15, A-34) |
+| Pagar servicios | Paga luz, celular y una suscripción ficticios; puede programar débitos | Gastos fijos frente a variables; suscripciones sin uso como gasto hormiga (2, 3; A-15, A-34) |
 | Hacer rendir el saldo | Elige entre **cuenta remunerada** y **fondo money market** de práctica; ve el rendimiento diario al avanzar el tiempo | Cuenta o fondo: qué es cada uno, liquidez, riesgo y garantía; en Argentina, la mayor parte del dinero "en billeteras" está invertido en fondos de dinero y no en la cuenta (10, 11, 17; B-12, B-13, B-14, B-17) |
 | Ganarle o no a la inflación | Compara su rendimiento con la inflación del escenario | Tasa real (9, 10; SIM-4) |
 | Presupuesto | Categoriza movimientos y ve su reparto frente a 50/30/20 o 70/20/10 | Reglas de presupuesto y gastos hormiga (3; A-32 a A-34) |

@@ -93,7 +93,7 @@ export function detectFacts(prev: WalletState, next: WalletState): { trigger: Ca
 
   // Transfers the person makes (expenses of the profile, like the rent, are not new payees).
   const payees = new Set(prev.movements.filter((m) => m.type === 'transfer_out').map((m) => m.counterparty));
-  if (added.some((m) => m.type === 'transfer_out' && !m.expenseKey && !payees.has(m.counterparty))) {
+  if (added.some((m) => m.type === 'transfer_out' && !m.expenseKey && !m.scam && !payees.has(m.counterparty))) {
     facts.push({ trigger: 'transfer_new_payee', conditions: [] });
   }
 

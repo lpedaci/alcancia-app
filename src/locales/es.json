@@ -650,7 +650,7 @@
       "currentNote": "Lo que configures queda guardado en tu billetera.",
       "alreadyDone": "Ya completaste esta misión. Puedes repetirla cuando quieras: nada se pierde.",
       "start": "Empezar la misión",
-      "replay": "Repetir la misión",
+      "replay": "Repetir para practicar",
       "progress": "Avance de la misión",
       "stepOf": "Paso {{step}} de {{total}}",
       "freshWallet": "Cuenta de práctica de la misión",
@@ -682,7 +682,22 @@
       "doneBody": "Quedó registrada en tu avance. Tu tutor solo ve que la completaste, nunca tus montos ni tus respuestas.",
       "salaryNote": "Se juega en una cuenta de práctica con tu primer sueldo ya cobrado: no cambia el saldo de tu billetera.",
       "classifyTitle": "Clasifica",
-      "classifyHelp": "Elige una categoría para este mensaje."
+      "classifyHelp": "Elige una categoría para este mensaje.",
+      "ownNote": "Se juega en tu billetera: lo que hagas queda registrado (saldo, movimientos, deudas, apartados) y se revierte con acciones, como en la vida real.",
+      "replayNote": "Ya completaste esta misión. Repetirla es una práctica: se juega en una copia y no cambia tu billetera.",
+      "practiceOnlyNote": "Esta misión se juega en una copia de práctica: avanza más de un año y necesita una caída fija de precios, así que no toca tu billetera.",
+      "practiceBannerTitle": "Práctica",
+      "practiceBanner": "Esta repetición se juega en una copia: nada de lo que hagas cambia tu billetera.",
+      "practiceOnlyReason": "Esta misión se juega en una copia: avanza más de un año y necesita una caída fija de precios. Nada de lo que hagas cambia tu billetera.",
+      "decisionFinal": "En tu billetera, esta decisión ya quedó tomada. Si quieres revertirla, hazlo con una acción: por ejemplo, saldar el préstamo en Tus deudas.",
+      "errors": {
+        "insufficient_balance": "No te alcanza el saldo para este paso. Avanza hasta tu próximo cobro desde Inicio o pasa dinero desde un apartado, y vuelve: la misión te espera acá.",
+        "insufficient_pocket": "El apartado no tiene ese monto. Elige un monto menor.",
+        "insufficient_broker_cash": "Tu cuenta comitente no tiene efectivo suficiente. Transfiere desde tu billetera y vuelve.",
+        "loan_active": "Ya tienes un préstamo activo de esta oferta. Para tomar otro, primero sáldalo en Tus deudas.",
+        "daily_limit": "Superas tu límite diario. Cámbialo en Perfil o espera al día siguiente.",
+        "generic": "Este paso no se pudo hacer con tu billetera como está. Revisa tu saldo y vuelve a intentarlo."
+      }
     },
     "practiceBannerShort": "Dinero ficticio",
     "printBanner": "Alcancía · Simulador de finanzas personales · dinero ficticio · Contenido educativo, no es asesoramiento financiero",
@@ -741,9 +756,10 @@
       "baitNote": "Es una práctica: nada sale de la app.",
       "reportedTitle": "Bien visto. Estas eran las señales:",
       "fellTitle": "Era un intento de estafa. Pasó lo que pasa en la vida real; mira las señales que tenía:",
-      "fellReal": "En la vida real: no sigas respondiendo, cambia tu contraseña, avisa a tu billetera por su canal oficial y haz la denuncia. La próxima vez, reporta antes de responder.",
+      "fellReal": "En la vida real: no sigas respondiendo, cambia tu contraseña, avisa a tu billetera por su canal oficial y haz la denuncia. Reportarlo frena nuevos intentos, pero lo que ya salió no vuelve.",
       "legitNote": "Este aviso es legítimo: viene del canal oficial y no pide datos.",
-      "fell": "Caíste en el mensaje de práctica. Lee las señales para reconocerlo la próxima vez."
+      "fell": "Caíste en el mensaje de práctica. Lee las señales para reconocerlo la próxima vez.",
+      "reportAfter": "Reportar ahora para frenar otro intento"
     }
   },
   "roles": {

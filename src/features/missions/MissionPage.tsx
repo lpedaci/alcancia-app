@@ -19,6 +19,7 @@ import { WalletShell } from '@/features/wallet/WalletShell';
 import { pocketsTotal } from '@/features/wallet/engine/engine';
 import { useDataStore } from '@/store/data-store';
 import { readLocal, writeLocal } from '@/store/local-store';
+import { readWallet } from '@/store/wallet-store';
 import { useCurrentUser } from '@/store/session-store';
 import { useWallet } from '@/store/wallet-store';
 import {
@@ -29,6 +30,7 @@ import {
   type Feedback,
   fillText,
   finishMission,
+  isOwnRun,
   isPlayable,
   type MissionDef,
   type MissionRun,
@@ -70,12 +72,18 @@ function MissionRunner({ def }: { def: MissionDef & { steps: MissionStep[] } }) 
   const recordMission = useDataStore((s) => s.recordMission);
   const done = wallet.completedMissionIds.includes(def.id);
 
-  const [run, setRun] = useState<MissionRun | undefined>(() => readLocal(personId).missionRuns?.[def.id]);
+  // D-208: a run in the person's wallet resumes with the wallet as it is now (she may have used it meanwhile).
+  const [run, setRun] = useState<MissionRun | undefined>(() => {
+    const saved = readLocal(personId).missionRuns?.[def.id];
+    return saved && isOwnRun(saved) && !saved.finished ? { ...saved, wallet: readWallet(personId) } : saved;
+  });
   const [feedback, setFeedback] = useState<Feedback | undefined>();
   const headingRef = useRef<HTMLHeadingElement>(null);
 
   const save = (next: MissionRun | undefined) => {
     setRun(next);
+    // In the person's wallet every step is kept as it happens, like any other action (D-77, D-208).
+    if (next && isOwnRun(next) && !next.finished) setWallet(() => next.wallet);
     writeLocal(personId, (d) => {
       const runs = { ...(d.missionRuns ?? {}) };
       if (next) runs[def.id] = next;
@@ -106,7 +114,7 @@ function MissionRunner({ def }: { def: MissionDef & { steps: MissionStep[] } }) 
 
   const begin = () => {
     setFeedback(undefined);
-    save(enter(def, startMission(def, wallet)));
+    save(enter(def, startMission(def, wallet, { replay: done, profile: readLocal(personId).investorProfile })));
   };
 
   // ---------- Start screen ----------
@@ -128,7 +136,7 @@ function MissionRunner({ def }: { def: MissionDef & { steps: MissionStep[] } }) 
               ))}
             </ul>
             <p className="text-body-medium text-on-surface-variant">
-              {def.initial === 'current' ? t('wallet.mission.currentNote') : def.initial === 'salary' ? t('wallet.mission.salaryNote') : t('wallet.mission.freshNote')}
+              {def.practiceOnly ? t('wallet.mission.practiceOnlyNote') : done ? t('wallet.mission.replayNote') : t('wallet.mission.ownNote')}
             </p>
             {done && <InlineAlert tone="success">{t('wallet.mission.alreadyDone')}</InlineAlert>}
             <Button className="self-start" leadingIcon={done ? 'replay' : 'play_arrow'} onClick={begin}>
@@ -147,7 +155,7 @@ function MissionRunner({ def }: { def: MissionDef & { steps: MissionStep[] } }) 
   const answer = (input?: string) => {
     const answered = answerStep(def, run, input);
     save(answered.run);
-    setFeedback(answered.feedback);
+    setFeedback(answered.error ? { tone: 'info', text: t(`wallet.mission.errors.${answered.error}`, { defaultValue: t('wallet.mission.errors.generic') }) } : answered.feedback);
   };
   const goNext = () => {
     setFeedback(undefined);
@@ -161,7 +169,7 @@ function MissionRunner({ def }: { def: MissionDef & { steps: MissionStep[] } }) 
     const finished = finishMission(def, run);
     if (!finished.finished) return;
     save(finished);
-    // A `current` mission keeps its settings; a `fresh` one only records the completion (D-166).
+    // D-208: in the person's wallet everything was kept step by step; a practice copy is never kept.
     setWallet((current) => walletAfter(def, finished, current));
     recordMission(personId, def.id, DEMO_TODAY);
   };
@@ -178,8 +186,14 @@ function MissionRunner({ def }: { def: MissionDef & { steps: MissionStep[] } }) 
           valueText={t('wallet.mission.stepOf', { step: Math.min(run.step + 1, total), total })}
         />
 
+        {/* D-208: a practice copy is labelled during the whole mission */}
+        {!isOwnRun(run) && (
+          <InlineAlert tone="info" title={t('wallet.mission.practiceBannerTitle')}>
+            {def.practiceOnly ? t('wallet.mission.practiceOnlyReason') : t('wallet.mission.practiceBanner')}
+          </InlineAlert>
+        )}
         {/* Only when the mission moves money: a mission about messages has nothing to show here */}
-        {(def.initial === 'current' || run.wallet.movements.length > 0) && <PracticeWallet run={run} fresh={def.initial !== 'current'} />}
+        {(isOwnRun(run) || run.wallet.movements.length > 0) && <PracticeWallet run={run} fresh={!isOwnRun(run)} />}
 
         <section aria-labelledby="step-title" className="flex flex-col gap-4 rounded-xl border border-outline-variant bg-surface-container-lowest p-(--space-card-padding)">
           <StepBody
@@ -335,7 +349,8 @@ function StepBody({
       );
     case 'single':
     case 'decision': {
-      const locked = step.kind === 'single' && result?.correct;
+      // A decision in the person's wallet is final (D-77): it is reverted in the simulation, not here.
+      const locked = (step.kind === 'single' && result?.correct) || (step.kind === 'decision' && isOwnRun(run) && result?.done);
       const submit = (event: FormEvent) => {
         event.preventDefault();
         setTried(true);
@@ -356,6 +371,7 @@ function StepBody({
             onChange={(e) => setChoice(e.target.value)}
           />
           <Sources ids={step.sourceIds} />
+          {step.kind === 'decision' && locked && <p className="max-w-prose text-body-medium text-on-surface-variant">{t('wallet.mission.decisionFinal')}</p>}
           {!locked && (
             <Button type="submit" variant={result?.done ? 'outlined' : 'filled'} className="self-start" leadingIcon="check">
               {step.kind === 'decision' && result?.done ? t('wallet.mission.change') : t('wallet.mission.answer')}

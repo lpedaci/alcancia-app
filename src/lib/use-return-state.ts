@@ -63,3 +63,22 @@ export function safeReturnPath(from: string | null): string | undefined {
   if (!from || !from.startsWith('/app') || from.startsWith('//') || from.includes('://')) return undefined;
   return from;
 }
+
+/**
+ * D-212 (condition of Lourdes, 14/11/2026): what was kept for the trip to the guide is cleared when
+ * the session closes, when "Ver como" changes the person and with "Empezar de cero" (only that
+ * person's fields). Without a person, it clears everyone's.
+ */
+export function clearReturnState(personId?: string) {
+  try {
+    const keys: string[] = [];
+    for (let i = 0; i < sessionStorage.length; i += 1) {
+      const key = sessionStorage.key(i);
+      if (!key) continue;
+      if (key.startsWith(personId ? `${PREFIX}${personId}:` : PREFIX) || (!personId && key.startsWith(SCROLL))) keys.push(key);
+    }
+    keys.forEach((key) => sessionStorage.removeItem(key));
+  } catch {
+    // Blocked storage: there is nothing kept.
+  }
+}

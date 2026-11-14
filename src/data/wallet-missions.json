@@ -250,7 +250,7 @@
               "action": "transfer",
               "value": "12000.00",
               "target": "Sofía Ramírez · alias sofia.ramirez.practica",
-              "feedback": "Pasó lo mismo que en la vida real: el dinero se acreditó en segundos a otra persona y no se puede deshacer desde la app. Habría que pedirle a Sofía Ramírez que lo devuelva. ¿Qué tendrías que haber hecho?"
+              "feedback": "Pasó lo mismo que en la vida real: los $ 12.000 se acreditaron en segundos a otra persona y no se pueden deshacer desde la app. En la vida real: contacta a quien lo recibió y haz el reclamo en tu billetera, aunque no siempre se recupera. ¿Qué tendrías que haber hecho?"
             },
             {
               "id": "cancel",
@@ -449,7 +449,8 @@
             {
               "id": "report",
               "text": "Lo reporto y no respondo",
-              "feedback": "Guardado. Reportarlo ayuda a cuidar a otras personas, y no compartir el código protege tu cuenta."
+              "feedback": "Guardado. Reportarlo frena cualquier nuevo intento y ayuda a cuidar a otras personas; no compartir el código protege tu cuenta.",
+              "action": "report_scam"
             },
             {
               "id": "ask",
@@ -459,7 +460,8 @@
             {
               "id": "give",
               "text": "Le paso el código y después cambio la contraseña",
-              "feedback": "Con el código pueden entrar antes de que cambies nada. El código no se comparte nunca. Prueba de nuevo."
+              "feedback": "Pasó lo que pasa en la vida real: con el código entraron y se llevaron $ 30.000 de tu billetera, y mañana van a intentar de nuevo. Lo que salió no vuelve; reportarlo frena el próximo intento. Elige la opción que lo frena.",
+              "action": "fall_scam"
             }
           ],
           "correct": "report",
@@ -777,7 +779,7 @@
             {
               "id": "accept",
               "text": "La acepto",
-              "feedback": "Pasó lo mismo que en la vida real: tienes {{loanReceived}} hoy y una cuota de {{installment}} durante 24 meses. Es una deuda de tasa alta: mientras exista, Invertir no se abre.",
+              "feedback": "Pasó lo mismo que en la vida real: tienes {{loanReceived}} hoy y una cuota de {{installment}} durante 24 meses, y ya está en Tus deudas. Es una deuda de tasa alta: mientras exista, Invertir no se abre. Si quieres revertirlo, sáldalo en Tarjeta y préstamos, en Tus deudas.",
               "action": "accept_loan"
             },
             {
@@ -951,6 +953,29 @@
           ]
         },
         {
+          "id": "apply",
+          "kind": "decision",
+          "body": "Ahora, tus deudas. Si en tu billetera tienes un préstamo, una compra en cuotas o el resumen de la tarjeta financiado, puedes aplicar el método que elegiste: saldar ahora la deuda que va primero.",
+          "prompt": "¿Aplicas tu método a tus deudas?",
+          "options": [
+            {
+              "id": "apply",
+              "text": "Saldar ahora mi deuda prioritaria",
+              "action": "payoff_priority",
+              "feedback": "Guardado. Si tenías una deuda en tu billetera, saldaste la que va primero con tu método: mírala en Tus deudas. Si no tenías ninguna, no cambia nada y el caso de Tomás fue tu práctica."
+            },
+            {
+              "id": "later",
+              "text": "Lo hago más adelante",
+              "feedback": "Está bien. Cuando quieras, en Tarjeta y préstamos, Tus deudas, puedes saldar una deuda antes de tiempo."
+            }
+          ],
+          "sourceIds": [
+            "A-28",
+            "A-30"
+          ]
+        },
+        {
           "id": "summary",
           "kind": "summary"
         }
@@ -979,6 +1004,12 @@
           "description": "Aplicaste el plan al dinero extra",
           "check": "step_correct",
           "param": "rule"
+        },
+        {
+          "id": "applied",
+          "description": "Decidir qué hacer con tus propias deudas",
+          "check": "step_done",
+          "param": "apply"
         }
       ]
     },
@@ -1274,11 +1305,11 @@
         {
           "id": "setup",
           "kind": "action",
-          "instruction": "Abre tu cuenta de práctica y transfiere $ 300.000 desde tu billetera.",
-          "button": "Abrir y fondear",
+          "instruction": "Abre tu cuenta comitente de práctica, si todavía no la tienes, y transfiere desde tu billetera lo necesario para 4 CEDEARs.",
+          "button": "Preparar la cuenta",
           "action": "setup_brokerage",
-          "value": "300000",
-          "done": "Listo: tienes $ 300.000 en tu cuenta comitente de práctica."
+          "value": "4",
+          "done": "Listo: tu cuenta comitente tiene lo necesario para comprar 4 CEDEARs."
         },
         {
           "id": "sheet",
@@ -1506,7 +1537,8 @@
           "check": "step_correct",
           "param": "lesson"
         }
-      ]
+      ],
+      "practiceOnly": true
     }
   ]
 }

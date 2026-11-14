@@ -41,6 +41,8 @@ export interface WalletMovement {
   suggestedCategory?: BudgetCategory;
   /** Confirmed by the person: only these count for `categorized_movements`. */
   category?: BudgetCategory;
+  /** Money lost to a fake message (F-37, D-77): not a payment the person chose. */
+  scam?: boolean;
 }
 
 export interface Pocket {
@@ -226,6 +228,8 @@ export interface WalletState {
   brokerage?: BrokerageAccount;
   /** Inbox of the bell (D-76: a suspicious message triggers its learning card). Optional for older states. */
   messages?: InboxMessage[];
+  /** After falling for a fake message: a second attempt the next day, unless it is reported (F-37). */
+  scamPending?: { day: number; amount: MoneyString; source: string };
   /** Sequence for movement ids, so the state is deterministic. */
   seq: number;
 }
