@@ -289,12 +289,13 @@ function TransferFlow() {
 
   return (
     <WalletShell section={t('wallet.nav.pay')} fuerte={{ state: stage === 'confirm' ? 'attention' : 'neutral', message: stage === 'confirm' ? fuerteLine('pay.fuerte.confirm') : fuerteLine('pay.fuerte.transfer') }}>
-      <div className="grid grid-cols-[minmax(0,1fr)] gap-6 large:grid-cols-[minmax(0,1fr)_22rem] large:items-start">
+      <div className="flex min-w-0 flex-col gap-6">
         <div className="flex min-w-0 flex-col gap-6">
           <p className="flex items-center gap-2 text-label-large text-primary">
             <Icon name="send_money" size={18} />
             {t('wallet.sub.transfer')}
           </p>
+          <WhyMatters screen="transfer" />
           {stage === 'form' && (
             <form noValidate onSubmit={next} className={card} aria-labelledby="transfer-title">
               <h1 id="transfer-title" ref={headingRef} tabIndex={-1} className="text-headline-medium text-on-surface focus:outline-none">
@@ -402,7 +403,6 @@ function TransferFlow() {
             </>
           )}
         </div>
-        <WhyMatters screen="transfer" />
       </div>
     </WalletShell>
   );
@@ -433,12 +433,13 @@ function QrFlow() {
 
   return (
     <WalletShell section={t('wallet.nav.pay')} fuerte={{ state: 'neutral', message: fuerteLine('pay.fuerte.qr') }}>
-      <div className="grid grid-cols-[minmax(0,1fr)] gap-6 large:grid-cols-[minmax(0,1fr)_22rem] large:items-start">
+      <div className="flex min-w-0 flex-col gap-6">
         <div className="flex min-w-0 flex-col gap-6">
           <p className="flex items-center gap-2 text-label-large text-primary">
             <Icon name="qr_code_scanner" size={18} />
             {t('wallet.sub.qr')}
           </p>
+          <WhyMatters screen="qr" />
           {stage === 'scan' && (
             <section aria-labelledby="qr-title" className={card}>
               <h1 id="qr-title" ref={headingRef} tabIndex={-1} className="text-headline-medium text-on-surface focus:outline-none">
@@ -509,7 +510,6 @@ function QrFlow() {
             </>
           )}
         </div>
-        <WhyMatters screen="qr" />
       </div>
     </WalletShell>
   );
@@ -533,7 +533,8 @@ function BillsPage() {
 
   return (
     <WalletShell section={t('wallet.nav.pay')} fuerte={{ state: 'neutral', message: fuerteLine('pay.fuerte.bills') }}>
-      <div className="grid grid-cols-[minmax(0,1fr)] gap-6 large:grid-cols-[minmax(0,1fr)_22rem] large:items-start">
+      <div className="flex min-w-0 flex-col gap-6">
+        <WhyMatters screen="bills" />
         <section aria-labelledby="bills-title" className={cn(card, '@container')}>
           <p className="flex items-center gap-2 text-label-large text-primary">
             <Icon name="receipt_long" size={18} />
@@ -609,7 +610,6 @@ function BillsPage() {
           {wallet.pendingDebit && <InlineAlert tone="warning">{t('pay.bills.pending')}</InlineAlert>}
           <p className="text-body-small text-on-surface-variant">{t('pay.bills.note')}</p>
         </section>
-        <WhyMatters screen="bills" />
       </div>
       <ConfirmDialog
         open={confirmCancel}

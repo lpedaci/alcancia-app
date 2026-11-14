@@ -428,7 +428,8 @@
       "menuCollapse": "Contraer el menú",
       "menuExpand": "Expandir el menú",
       "showSub": "Mostrar las opciones de {{name}}",
-      "hideSub": "Ocultar las opciones de {{name}}"
+      "hideSub": "Ocultar las opciones de {{name}}",
+      "menuPin": "Dejar el menú abierto"
     },
     "sub": {
       "transfer": "Transferir",
@@ -1525,7 +1526,10 @@
       "empty": "Este mes no hay movimientos sin categoría.",
       "suggested": "sugerida: {{category}}",
       "choose": "Categoría de {{name}}",
-      "done": "Movimiento categorizado"
+      "done": "Movimiento categorizado",
+      "confirmTitle": "¿Categorizar como {{category}}?",
+      "confirmBody": "{{name}}, por {{amount}}, pasa a contar como {{category}} en el presupuesto de este mes.",
+      "confirmAction": "Categorizar como {{category}}"
     },
     "months": {
       "title": "Meses cerrados",
@@ -3544,7 +3548,8 @@
         "thinking": "Pensativo",
         "attention": "Atención",
         "celebration": "Celebración",
-        "sleeping": "Dormido"
+        "sleeping": "Dormido",
+        "sorry": "Apenado"
       },
       "lights": "Las siete luces muestran los niveles completados, una por nivel.",
       "rules": [

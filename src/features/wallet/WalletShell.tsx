@@ -1,4 +1,4 @@
-import { type ReactNode, useEffect, useState } from 'react';
+import { type ReactNode, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router';
 import { SkipLink } from '@/components/layout/InPageLink';
@@ -92,6 +92,9 @@ export interface FuerteNote {
   action?: ReactNode;
 }
 
+/** How long the pointer rests on the folded menu before it opens over the page (D-224). */
+const PEEK_DELAY_MS = 700;
+
 export function WalletShell({ section, children, fuerte }: { section: string; children: ReactNode; fuerte?: FuerteNote }) {
   const { t } = useTranslation();
   const { pathname } = useLocation();
@@ -107,9 +110,25 @@ export function WalletShell({ section, children, fuerte }: { section: string; ch
   useRestoreScroll(pathname);
   const isLarge = useMediaQuery('(min-width: 75rem)', true);
   const [expandedPref, setExpandedPref] = useState<boolean | null>(readNavPref);
-  const expanded = expandedPref ?? isLarge;
+  const pinned = expandedPref ?? isLarge;
+  // Folded menu (D-224): resting the pointer on it opens it over the page for a moment, without
+  // moving the content; leaving it or Escape folds it again. The button below still pins it.
+  const [peek, setPeek] = useState(false);
+  const peekTimer = useRef<number | undefined>(undefined);
+  const expanded = pinned || peek;
+  const startPeek = () => {
+    if (pinned) return;
+    window.clearTimeout(peekTimer.current);
+    peekTimer.current = window.setTimeout(() => setPeek(true), PEEK_DELAY_MS);
+  };
+  const endPeek = () => {
+    window.clearTimeout(peekTimer.current);
+    setPeek(false);
+  };
+  useEffect(() => () => window.clearTimeout(peekTimer.current), []);
   const toggleNav = () => {
-    const value = !expanded;
+    endPeek();
+    const value = !pinned;
     setExpandedPref(value);
     try {
       localStorage.setItem(NAV_PREF, value ? '1' : '0');
@@ -232,13 +251,21 @@ export function WalletShell({ section, children, fuerte }: { section: string; ch
       {/* Floating panels (2.2.1, pattern 5): the side menu reaches the top and holds the menu button and
           the logo; the top bar floats beside it. On phones, a plain top bar and the bottom navigation. */}
       <div className="large:flex large:items-start large:gap-3 large:p-3">
+        {/* The slot keeps the folded width while the menu opens over the page (D-224) */}
+        <div className={cn('sticky top-3 hidden h-[calc(100dvh-1.5rem)] shrink-0 large:block print:!hidden', pinned ? 'w-64' : 'w-20', peek ? 'z-40' : 'z-20')}>
         <nav
           id="wallet-nav"
           data-wallet-side-nav
           aria-label={t('wallet.nav.label')}
+          onMouseEnter={startPeek}
+          onMouseLeave={endPeek}
+          onKeyDown={(e) => {
+            if (e.key === 'Escape' && peek) endPeek();
+          }}
           className={cn(
-            'sticky top-3 hidden h-[calc(100dvh-1.5rem)] shrink-0 flex-col overflow-hidden rounded-xl border border-outline-variant bg-surface-container-lowest large:flex print:!hidden',
+            'absolute inset-y-0 left-0 flex flex-col overflow-hidden rounded-xl border border-outline-variant bg-surface-container-lowest transition-[width] duration-200 ease-standard motion-reduce:transition-none',
             expanded ? 'w-64' : 'w-20',
+            peek && 'z-40 shadow-(--elevation-2)',
           )}
         >
           {/* The brand on top, always a link to Inicio (common pattern: the logo leads home) */}
@@ -291,18 +318,19 @@ export function WalletShell({ section, children, fuerte }: { section: string; ch
               </Link>
             )}
           </div>
-          {/* Fold control at the bottom of the panel, away from the brand */}
+          {/* Fold control at the bottom of the panel, away from the brand. It pins the menu open or folded */}
           <div className={cn('flex shrink-0 border-t border-outline-variant p-2', expanded ? 'justify-end' : 'justify-center')}>
             <IconButton
-              icon={expanded ? 'chevron_left' : 'chevron_right'}
-              label={expanded ? t('wallet.nav.menuCollapse') : t('wallet.nav.menuExpand')}
+              icon={pinned ? 'chevron_left' : 'chevron_right'}
+              label={pinned ? t('wallet.nav.menuCollapse') : t(peek ? 'wallet.nav.menuPin' : 'wallet.nav.menuExpand')}
               tooltipSide="right"
-              aria-expanded={expanded}
+              aria-expanded={pinned}
               aria-controls="wallet-nav-items"
               onClick={toggleNav}
             />
           </div>
         </nav>
+        </div>
 
         <div className="min-w-0 flex-1">
           {/* Top bar: on phones the logo and the section; from tablets, a floating bar with the section title */}

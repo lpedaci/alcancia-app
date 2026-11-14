@@ -16,7 +16,7 @@ La arquitectura del sitio (índice lateral desde 1200 px, hoja de secciones en c
 | | [Íconos](#íconos) | Material Symbols Rounded 300 y sus reglas |
 | | [Movimiento](#movimiento) | Curvas dibujadas, duraciones y usos |
 | Componentes | [Componentes](#componentes) | Botones, campos, estados y chips, KPIs, avisos, progreso y fuentes |
-| | [Fuerte](#fuerte) | Seis estados y reglas de comportamiento |
+| | [Fuerte](#fuerte) | Siete estados y reglas de comportamiento |
 | Patrones | [Patrones](#patrones) | Doce patrones con el número de su decisión |
 | | [Cómo mostramos el dinero](#cómo-mostramos-el-dinero) | Formato, montos largos, crédito, campos con máscara y reglas |
 | | [Seguridad y privacidad](#seguridad-y-privacidad) | Tres capas, privacidad diseñada y qué ve cada rol |
@@ -85,7 +85,7 @@ Muestras vivas en el sitio: botones (Filled, tonal, outlined, text, danger, desh
 
 ## Fuerte
 
-Seis estados (neutral, saludo, pensativo, atención, celebración y dormido) con siete luces, una por nivel completado. Habla en los momentos clave, nunca interrumpe dos veces la misma acción, no juzga ni recomienda, se puede silenciar y su mensaje se anuncia como texto (5.0.1, D-51, D-134).
+Siete estados (neutral, saludo, pensativo, atención, celebración, dormido y apenado, D-225) con siete luces, una por nivel completado. Habla en los momentos clave, nunca interrumpe dos veces la misma acción, no juzga ni recomienda, se puede silenciar y su mensaje se anuncia como texto (5.0.1, D-51, D-134).
 
 ## Patrones
 

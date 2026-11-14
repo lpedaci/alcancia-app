@@ -56,9 +56,11 @@ export function QuestionsPage() {
           <p className="text-body-medium text-on-surface-variant">{t(`tutor.questions.empty.${filter}`)}</p>
         </section>
       ) : (
-        <ul className="grid grid-cols-[minmax(0,1fr)] gap-(--space-bento-gap) large:grid-cols-2 large:items-start">
+        // Flexible columns (Lourdes, 14/11/2026): each card takes the height it needs and the next one
+        // fills the space below, with no gaps (CSS columns; reading order goes down each column)
+        <ul className="columns-1 gap-x-(--space-bento-gap) large:columns-2">
           {list.map((q) => (
-            <li key={q.id}>
+            <li key={q.id} className="mb-(--space-bento-gap) break-inside-avoid">
               <QuestionCard question={q} />
             </li>
           ))}

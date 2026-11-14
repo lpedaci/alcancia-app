@@ -146,102 +146,6 @@ function Credit() {
         <div className="grid grid-cols-[minmax(0,1fr)] gap-(--space-bento-gap) large:grid-cols-[minmax(0,3fr)_minmax(20rem,2fr)] large:items-start">
           <div className="flex min-w-0 flex-col gap-(--space-bento-gap)">
             <CardStatementSection />
-
-            {/* Loan offer: the CFT stands out, before the installment (B-04) */}
-            <section aria-labelledby="loan-title" className={cn(card, '@container')}>
-              <div className="flex flex-wrap items-start justify-between gap-3">
-                <div className="flex items-center gap-3">
-                  <IconTile icon="request_quote" tone="secondary" />
-                  <div className="min-w-0">
-                    <h2 id="loan-title" className="text-title-large text-on-surface">
-                      {t('credit.loan.title')}
-                    </h2>
-                    <p className="text-body-small text-on-surface-variant">{t('credit.loan.lender')}</p>
-                  </div>
-                </div>
-                <StatusPill tone="neutral" icon="info" label={t('credit.example')} />
-              </div>
-              <p className="text-body-large text-on-surface">{t('credit.loan.body', { principal: formatMoney(offer.principal), count: offer.months, installment: formatMoney(offer.installment) })}</p>
-              <MetaChips
-                label={t('credit.loan.terms')}
-                items={[
-                  { icon: 'calendar_month', label: t('credit.loan.chipMonths', { count: offer.months }) },
-                  { icon: 'payments', label: t('credit.loan.chipInstallment', { amount: formatMoney(offer.installment) }) },
-                  { icon: 'percent', label: t('credit.loan.chipCommission', { rate: formatPercent('0.05', { decimals: 0 }) }) },
-                ]}
-              />
-              {/* The CFT first and in attention color: it is the number to compare credits (B-04) */}
-              <dl className="grid grid-cols-[minmax(0,1fr)] gap-3 @md:grid-cols-2">
-                <Fact label={t('credit.loan.cft')} tone="warning" icon="warning">
-                  {formatPercent(offer.cft, { decimals: 1 })}
-                </Fact>
-                <Fact label={t('credit.loan.tna')}>{formatPercent(offer.tna, { decimals: 1 })}</Fact>
-                <Fact label={t('credit.loan.received')}>
-                  <MoneyText value={offer.received} />
-                </Fact>
-                <Fact label={t('credit.loan.total')} tone="warning" icon="trending_up">
-                  <MoneyText value={offer.total} />
-                </Fact>
-              </dl>
-              <InlineAlert tone="info" live="none">
-                {t('credit.loan.explain', { commission: formatMoney(offer.commission), extra: formatMoney(offer.total.minus(offer.received)) })}
-              </InlineAlert>
-              {loanActive && <InlineAlert tone="info">{t('credit.loan.active')}</InlineAlert>}
-              <div className="flex flex-wrap gap-3">
-                <Button asChild variant="tonal" leadingIcon="flag">
-                  <Link to="/app/missions/mission-5">{t('credit.loan.mission')}</Link>
-                </Button>
-                <Button variant="outlined" disabled={loanActive} onClick={() => setConfirm('loan')}>
-                  {t('credit.loan.accept')}
-                </Button>
-              </div>
-            </section>
-
-            {/* Installments without interest or cash with a discount (F-10, SIM-6) */}
-            <section aria-labelledby="purchase-title" className={cn(card, '@container')}>
-              <div className="flex flex-wrap items-start justify-between gap-3">
-                <div className="flex items-center gap-3">
-                  <IconTile icon="shopping_bag" tone="secondary" />
-                  <div className="min-w-0">
-                    <h2 id="purchase-title" className="text-title-large text-on-surface">
-                      {t('credit.purchase.title')}
-                    </h2>
-                    <p className="text-body-small text-on-surface-variant">{PURCHASE_OFFER.merchant}</p>
-                  </div>
-                </div>
-                <StatusPill tone="neutral" icon="info" label={t('credit.example')} />
-              </div>
-              <p className="text-body-large text-on-surface">{t('credit.purchase.body', { item: PURCHASE_OFFER.item.toLowerCase() })}</p>
-              <MetaChips
-                label={t('credit.purchase.terms')}
-                items={[
-                  { icon: 'shopping_bag', label: t('credit.purchase.chipPrice', { amount: formatMoney(PURCHASE_OFFER.price) }) },
-                  { icon: 'percent', label: t('credit.purchase.chipNoInterest') },
-                ]}
-              />
-              <dl className="grid grid-cols-[minmax(0,1fr)] gap-3 @md:grid-cols-2">
-                <Fact label={t('credit.purchase.installmentsLabel', { count: PURCHASE_OFFER.months })} icon="calendar_month">
-                  <MoneyText value={D(PURCHASE_OFFER.price).div(PURCHASE_OFFER.months)} />
-                </Fact>
-                <Fact label={t('credit.purchase.cashLabel')} icon="payments">
-                  <MoneyText value={cashPrice} />
-                </Fact>
-              </dl>
-              <InlineAlert tone="info" live="none">
-                {t('credit.purchase.explain')}
-              </InlineAlert>
-              <div className="flex flex-wrap gap-3">
-                <Button asChild variant="tonal" leadingIcon="calculate">
-                  <Link to="/app/tools/SIM-6">{t('credit.purchase.compare')}</Link>
-                </Button>
-                <Button variant="outlined" onClick={() => setConfirm('installments')}>
-                  {t('credit.purchase.installments')}
-                </Button>
-                <Button variant="outlined" onClick={() => setConfirm('cash')}>
-                  {t('credit.purchase.cash')}
-                </Button>
-              </div>
-            </section>
           </div>
 
           <div className="flex min-w-0 flex-col gap-(--space-bento-gap)">
@@ -249,6 +153,102 @@ function Credit() {
             <LearnSection />
           </div>
         </div>
+        {/* The two offers at full width: they carry the numbers to compare (Lourdes, 14/11/2026) */}
+        {/* Loan offer: the CFT stands out, before the installment (B-04) */}
+        <section aria-labelledby="loan-title" className={cn(card, '@container')}>
+          <div className="flex flex-wrap items-start justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <IconTile icon="request_quote" tone="secondary" />
+              <div className="min-w-0">
+                <h2 id="loan-title" className="text-title-large text-on-surface">
+                  {t('credit.loan.title')}
+                </h2>
+                <p className="text-body-small text-on-surface-variant">{t('credit.loan.lender')}</p>
+              </div>
+            </div>
+            <StatusPill tone="neutral" icon="info" label={t('credit.example')} />
+          </div>
+          <p className="text-body-large text-on-surface">{t('credit.loan.body', { principal: formatMoney(offer.principal), count: offer.months, installment: formatMoney(offer.installment) })}</p>
+          <MetaChips
+            label={t('credit.loan.terms')}
+            items={[
+              { icon: 'calendar_month', label: t('credit.loan.chipMonths', { count: offer.months }) },
+              { icon: 'payments', label: t('credit.loan.chipInstallment', { amount: formatMoney(offer.installment) }) },
+              { icon: 'percent', label: t('credit.loan.chipCommission', { rate: formatPercent('0.05', { decimals: 0 }) }) },
+            ]}
+          />
+          {/* The CFT first and in attention color: it is the number to compare credits (B-04) */}
+          <dl className="grid grid-cols-[minmax(0,1fr)] gap-3 @md:grid-cols-2 @3xl:grid-cols-4">
+            <Fact label={t('credit.loan.cft')} tone="warning" icon="warning">
+              {formatPercent(offer.cft, { decimals: 1 })}
+            </Fact>
+            <Fact label={t('credit.loan.tna')}>{formatPercent(offer.tna, { decimals: 1 })}</Fact>
+            <Fact label={t('credit.loan.received')}>
+              <MoneyText value={offer.received} />
+            </Fact>
+            <Fact label={t('credit.loan.total')} tone="warning" icon="trending_up">
+              <MoneyText value={offer.total} />
+            </Fact>
+          </dl>
+          <InlineAlert tone="info" live="none">
+            {t('credit.loan.explain', { commission: formatMoney(offer.commission), extra: formatMoney(offer.total.minus(offer.received)) })}
+          </InlineAlert>
+          {loanActive && <InlineAlert tone="info">{t('credit.loan.active')}</InlineAlert>}
+          <div className="flex flex-wrap gap-3">
+            <Button asChild variant="tonal" leadingIcon="flag">
+              <Link to="/app/missions/mission-5">{t('credit.loan.mission')}</Link>
+            </Button>
+            <Button variant="outlined" disabled={loanActive} onClick={() => setConfirm('loan')}>
+              {t('credit.loan.accept')}
+            </Button>
+          </div>
+        </section>
+
+        {/* Installments without interest or cash with a discount (F-10, SIM-6) */}
+        <section aria-labelledby="purchase-title" className={cn(card, '@container')}>
+          <div className="flex flex-wrap items-start justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <IconTile icon="shopping_bag" tone="secondary" />
+              <div className="min-w-0">
+                <h2 id="purchase-title" className="text-title-large text-on-surface">
+                  {t('credit.purchase.title')}
+                </h2>
+                <p className="text-body-small text-on-surface-variant">{PURCHASE_OFFER.merchant}</p>
+              </div>
+            </div>
+            <StatusPill tone="neutral" icon="info" label={t('credit.example')} />
+          </div>
+          <p className="text-body-large text-on-surface">{t('credit.purchase.body', { item: PURCHASE_OFFER.item.toLowerCase() })}</p>
+          <MetaChips
+            label={t('credit.purchase.terms')}
+            items={[
+              { icon: 'shopping_bag', label: t('credit.purchase.chipPrice', { amount: formatMoney(PURCHASE_OFFER.price) }) },
+              { icon: 'percent', label: t('credit.purchase.chipNoInterest') },
+            ]}
+          />
+          <dl className="grid grid-cols-[minmax(0,1fr)] gap-3 @md:grid-cols-2">
+            <Fact label={t('credit.purchase.installmentsLabel', { count: PURCHASE_OFFER.months })} icon="calendar_month">
+              <MoneyText value={D(PURCHASE_OFFER.price).div(PURCHASE_OFFER.months)} />
+            </Fact>
+            <Fact label={t('credit.purchase.cashLabel')} icon="payments">
+              <MoneyText value={cashPrice} />
+            </Fact>
+          </dl>
+          <InlineAlert tone="info" live="none">
+            {t('credit.purchase.explain')}
+          </InlineAlert>
+          <div className="flex flex-wrap gap-3">
+            <Button asChild variant="tonal" leadingIcon="calculate">
+              <Link to="/app/tools/SIM-6">{t('credit.purchase.compare')}</Link>
+            </Button>
+            <Button variant="outlined" onClick={() => setConfirm('installments')}>
+              {t('credit.purchase.installments')}
+            </Button>
+            <Button variant="outlined" onClick={() => setConfirm('cash')}>
+              {t('credit.purchase.cash')}
+            </Button>
+          </div>
+        </section>
         <SourceList variant="footer" codes={['T', 'A-23', 'A-28', 'A-29', 'B-04', 'B-05', 'B-06', 'F-10', 'F-14', 'F-29', 'F-30', 'F-31']} legalText={t('credit.legal')} />
       </div>
 

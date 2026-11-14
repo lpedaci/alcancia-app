@@ -11,9 +11,9 @@ import { cn } from '@/lib/utils';
  *
  * Lights: one per completed level of the wallet (levels 1 to 7).
  */
-export type FuerteState = 'neutral' | 'greeting' | 'thinking' | 'attention' | 'celebration' | 'sleeping';
+export type FuerteState = 'neutral' | 'greeting' | 'thinking' | 'attention' | 'celebration' | 'sleeping' | 'sorry';
 
-export const FUERTE_STATES: FuerteState[] = ['neutral', 'greeting', 'thinking', 'attention', 'celebration', 'sleeping'];
+export const FUERTE_STATES: FuerteState[] = ['neutral', 'greeting', 'thinking', 'attention', 'celebration', 'sleeping', 'sorry'];
 
 export interface FuerteProps {
   state?: FuerteState;
@@ -34,11 +34,14 @@ const BROWS: Record<FuerteState, { left: string; right: string }> = {
   attention: { left: 'translate(0 -1) rotate(-16 63 53)', right: 'translate(0 -1) rotate(16 97 53)' },
   celebration: { left: 'translate(0 -3)', right: 'translate(0 -3)' },
   sleeping: { left: 'translate(0 2)', right: 'translate(0 2)' },
+  // Sorry (D-225): brows raised in the middle, the classic "uy", softer than attention
+  sorry: { left: 'translate(0 -2) rotate(-22 63 53)', right: 'translate(0 -2) rotate(22 97 53)' },
 };
 
 const PUPILS: Partial<Record<FuerteState, string>> = {
   thinking: 'translate(3.5 -4.5)',
   attention: 'translate(0 2.5)',
+  sorry: 'translate(-2.5 3.5)',
 };
 
 const DIAL: Record<FuerteState, number> = {
@@ -48,6 +51,7 @@ const DIAL: Record<FuerteState, number> = {
   attention: 0,
   celebration: 120,
   sleeping: 0,
+  sorry: -25,
 };
 
 const star = (x: number) => `M${x} 57l3.4 8.6 8.6 3.4-8.6 3.4-3.4 8.6-3.4-8.6-8.6-3.4 8.6-3.4z`;
@@ -55,7 +59,7 @@ const star = (x: number) => `M${x} 57l3.4 8.6 8.6 3.4-8.6 3.4-3.4 8.6-3.4-8.6-8.
 export function Fuerte({ state = 'neutral', lights = 0, size = 8, className }: FuerteProps) {
   const reduce = useShouldReduceMotion();
   const clipId = useId();
-  const lit = state === 'celebration' ? LIGHTS : Math.max(0, Math.min(LIGHTS, lights));
+  const lit = state === 'celebration' ? LIGHTS : state === 'sorry' ? Math.min(1, lights) : Math.max(0, Math.min(LIGHTS, lights));
   const brows = BROWS[state];
 
   return (
@@ -98,6 +102,10 @@ export function Fuerte({ state = 'neutral', lights = 0, size = 8, className }: F
           <circle cx="152" cy="31" r="3.4" />
         </g>
       )}
+      {state === 'sorry' && (
+        // A drop of sweat on the forehead, flat (2.2): embarrassed, not alarmed
+        <path d="M150 18c-4 6-6 9.5-6 12.5a6 6 0 0 0 12 0c0-3-2-6.5-6-12.5z" className="fill-info-container stroke-info" strokeWidth="1.6" />
+      )}
       {state === 'sleeping' && (
         <g className="stroke-on-surface-variant" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" fill="none">
           <path d="M146 22h9l-9 10h9M158 6h6l-6 7h6" />
@@ -133,8 +141,8 @@ export function Fuerte({ state = 'neutral', lights = 0, size = 8, className }: F
         </g>
       ) : (
         <g>
-          <circle cx="63" cy="69" r={state === 'attention' ? 12 : 11} className="fill-surface-container-lowest" />
-          <circle cx="97" cy="69" r={state === 'attention' ? 12 : 11} className="fill-surface-container-lowest" />
+          <circle cx="63" cy="69" r={state === 'attention' ? 12 : state === 'sorry' ? 10 : 11} className="fill-surface-container-lowest" />
+          <circle cx="97" cy="69" r={state === 'attention' ? 12 : state === 'sorry' ? 10 : 11} className="fill-surface-container-lowest" />
           <g transform={PUPILS[state]}>
             <circle cx="63" cy="70" r="5.6" className="fill-on-surface" />
             <circle cx="97" cy="70" r="5.6" className="fill-on-surface" />

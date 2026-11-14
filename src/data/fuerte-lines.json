@@ -52,6 +52,12 @@
       "variants": [
         "Me quedo en silencio. Las tarjetas de aprendizaje siguen apareciendo."
       ]
+    },
+    "unexpected_error": {
+      "state": "sorry",
+      "variants": [
+        "Uy, esto se me trabó a mí, no a ti. Tu billetera de práctica sigue guardada tal como la dejaste."
+      ]
     }
   },
   "lines": {

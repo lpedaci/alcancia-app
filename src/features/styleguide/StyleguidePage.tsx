@@ -465,14 +465,14 @@ export function StyleguidePage() {
         </div>
       </Section>
 
-      <Section id="fuerte" title="Fuerte: seis estados (5.0.1)">
+      <Section id="fuerte" title="Fuerte: siete estados (5.0.1, D-225)">
         <Panel className="flex flex-col gap-4">
-          <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 xl:grid-cols-6">
+          <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 xl:grid-cols-7">
             {FUERTE_STATES.map((state, i) => (
               <li key={state} className="flex flex-col items-center gap-2 rounded-lg bg-surface p-3">
                 <Fuerte state={state} lights={i + 1} size={7} />
                 <span className="text-label-medium text-on-surface">
-                  {{ neutral: 'Neutral', greeting: 'Saludo', thinking: 'Pensativo', attention: 'Atención', celebration: 'Celebración', sleeping: 'Dormido' }[state]}
+                  {{ neutral: 'Neutral', greeting: 'Saludo', thinking: 'Pensativo', attention: 'Atención', celebration: 'Celebración', sleeping: 'Dormido', sorry: 'Apenado' }[state]}
                 </span>
               </li>
             ))}

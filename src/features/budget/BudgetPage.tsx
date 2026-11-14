@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 import { MoneyText } from '@/components/money/MoneyText';
 import { Button } from '@/components/ui/Button';
+import { ConfirmDialog } from '@/components/ui/Dialog';
 import { Icon } from '@/components/ui/Icon';
 import { MetaChips } from '@/components/ui/MetaChips';
 import { SegmentedButton } from '@/components/ui/SegmentedButton';
@@ -17,7 +18,7 @@ import { CATEGORIZABLE, categorize, DAYS_IN_MONTH, monthBreakdown, monthOf } fro
 import type { BudgetCategory } from '@/features/wallet/engine/types';
 import { formatDate, walletDate } from '@/lib/dates';
 import { budgetSplit, type BudgetRule, D, type Decimal } from '@/lib/finance';
-import { formatPercent } from '@/lib/money';
+import { formatMoney, formatPercent } from '@/lib/money';
 import { cn } from '@/lib/utils';
 import { useDataStore } from '@/store/data-store';
 import { useCurrentUser } from '@/store/session-store';
@@ -67,6 +68,8 @@ function Budget() {
   const allGuides = useDataStore((s) => s.guideProgress);
   const [rule, setRule] = useReturnState<BudgetRule>('budget.rule', '50/30/20');
   const [asTable, setAsTable] = useState(false);
+  // Confirm before categorizing (Lourdes, 14/11/2026): one tap should not file a movement by mistake
+  const [pending, setPending] = useState<{ id: string; name: string; amount: string; category: BudgetCategory } | undefined>();
 
   const month = Math.max(0, monthOf(wallet.day));
   const b = monthBreakdown(wallet, month);
@@ -251,10 +254,7 @@ function Budget() {
                             key={c}
                             variant={m.suggestedCategory === c ? 'tonal' : 'outlined'}
                             size="xs"
-                            onClick={() => {
-                              setWallet((w) => categorize(w, m.id, c));
-                              toast.success(t('budget.todo.done'));
-                            }}
+                            onClick={() => setPending({ id: m.id, name: m.counterparty, amount: m.amount, category: c })}
                           >
                             {t(`budget.cat.50/30/20.${c}`)}
                           </Button>
@@ -347,6 +347,20 @@ function Budget() {
           </div>
         </div>
       </div>
+      <ConfirmDialog
+        open={pending !== undefined}
+        onOpenChange={(open) => !open && setPending(undefined)}
+        title={pending ? t('budget.todo.confirmTitle', { category: t(`budget.cat.50/30/20.${pending.category}`) }) : ''}
+        description={pending ? t('budget.todo.confirmBody', { name: pending.name, amount: formatMoney(D(pending.amount).abs().toFixed(2)), category: t(`budget.cat.50/30/20.${pending.category}`) }) : ''}
+        confirmLabel={pending ? t('budget.todo.confirmAction', { category: t(`budget.cat.50/30/20.${pending.category}`) }) : ''}
+        destructive={false}
+        onConfirm={() => {
+          if (!pending) return;
+          setWallet((w) => categorize(w, pending.id, pending.category));
+          setPending(undefined);
+          toast.success(t('budget.todo.done'));
+        }}
+      />
     </WalletShell>
   );
 }
