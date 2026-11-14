@@ -25,6 +25,7 @@ export const OFFICIAL_SOURCES = [
   { id: 'gob-fci', name: 'argentina.gob.ar: fondos comunes de inversión', url: 'https://www.argentina.gob.ar/node/268483' },
   { id: 'cnv-psav', name: 'CNV, Registro de proveedores de servicios de activos virtuales (PSAV)', url: 'https://www.cnv.gov.ar/SitioWeb/RegistrosPublicos/Psav' },
   { id: 'byma-cedears', name: 'BYMA, CEDEARs y ratios de conversión', url: 'https://byma.com.ar/productos/productos-financieros/cedears' },
+  { id: 'bymadata', name: 'BYMADATA, el sitio de datos de BYMA (precios reales)', url: 'https://open.bymadata.com.ar/#/dashboard', verifiedAt: '2026-11-14' },
   { id: 'byma-horarios', name: 'BYMA, horarios de negociación', url: 'https://byma.com.ar/mercado/horarios' },
   { id: 'cajval-cedears', name: 'Caja de Valores, CEDEARs y CEDEARs de ETF', url: 'https://cajadevalores.com.ar/Servicios/Cedears' },
   { id: 'byma-alycs', name: 'BYMA, nómina de ALyC', url: 'https://www.byma.com.ar/mercado/para-agentes-miembros/listado-de-alycs' },

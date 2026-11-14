@@ -2560,7 +2560,9 @@
       "hideTable": "Ocultar la tabla",
       "past": "Serie sintética de ejemplo, no son datos reales. Los rendimientos pasados no garantizan rendimientos futuros.",
       "noHistory": "El gráfico se arma a medida que pasa el tiempo desde que abriste la cuenta. Usa \"Avanzar un mes\" en Inicio para ver cómo cambia el precio de ejemplo.",
-      "formulaShort": "Dólares ÷ ratio × tipo de cambio"
+      "formulaShort": "Dólares ÷ ratio × tipo de cambio",
+      "realPrices": "Los precios de esta cuenta son de ejemplo y no cambian con el mercado. Para ver los precios reales, consulta",
+      "bymadata": "BYMADATA, el sitio de datos de BYMA"
     },
     "order": {
       "title": "Comprar o vender",

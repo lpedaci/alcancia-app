@@ -34,6 +34,9 @@ import { useWallet } from '@/store/wallet-store';
 import { BROKER_NAME, buy, buyPreview, fundBrokerage, instrumentById, INSTRUMENTS, openBrokerage, portfolioValue, positions, quote, sell, withdrawBrokerage } from './engine';
 import { fuerteLine } from '@/features/companion/fuerte-lines';
 import { WhyMatters, whyText } from '@/features/learning-cards/WhyMatters';
+
+/** BYMADATA, BYMA's data site, as BYMA itself links it (D-79; docs/market-data.md). */
+const BYMADATA_URL = 'https://open.bymadata.com.ar/#/dashboard';
 import { useReturnState } from '@/lib/use-return-state';
 
 /**
@@ -609,6 +612,15 @@ function Instrument() {
                 )}
               </dl>
               {q.usdPrice && <InlineAlert tone="info" live="none">{t('invest.price.cedear')}</InlineAlert>}
+              {/* D-79: prices stay as examples (BYMA requires a license); the real ones, in BYMADATA */}
+              <p className="text-body-small text-on-surface-variant">
+                {t('invest.price.realPrices')}{' '}
+                <a href={BYMADATA_URL} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-12 items-center gap-1 text-label-large text-primary underline underline-offset-4 md:min-h-6">
+                  {t('invest.price.bymadata')}
+                  <Icon name="open_in_new" size={16} />
+                  <span className="sr-only"> {t('learn.sources.newTab')}</span>
+                </a>
+              </p>
               <div className="flex flex-col gap-2">
                 <h3 className="text-title-medium text-on-surface">{t('invest.price.chartTitle')}</h3>
                 {data.length >= 2 && (

@@ -16,6 +16,7 @@
 | [Fórmulas](formulas.md) | 14.10 | Revisado; casos F-01 a F-37 con tests |
 | [Decisiones](decisions.md) · [Progreso](progress.md) · [Incidencias](issues.md) · [Preguntas](questions.md) | 14.11 | Al día |
 | [Seguridad y privacidad](security.md) | 14.12 | Capas actuales con su verificación, límites y mejora futura (D-70, D-200) |
+| [Valores reales del mercado](market-data.md) | 14.14 | Investigación del paso 20: fuentes, identificadores y plan de respaldo (D-79) |
 | [Motor económico de la billetera](wallet-engine.md) | 14.13 | Revisado (tanda 2), ampliado en los pasos 6 a 9 |
 | [Auditoría visual](visual-audit.md) | 2.2 | Paso 4 (piloto visual) |
 | [Revisión intermedia de la fase A](review-fase-a.md) | 13 | Paso 14, con la auditoría y el ajuste |

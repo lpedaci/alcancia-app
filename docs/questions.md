@@ -6,6 +6,10 @@
 | --- | --- | --- | --- | --- | --- |
 | Q-01 | Tasa mínima del plazo fijo tradicional para personas | B-02 | Confirmar si sigue vigente; por defecto no se menciona | Kevin / norma del BCRA | Abierta |
 | Q-16 | Plazo mínimo del plazo fijo UVA | B-02, B-03 | ¿Cuál es el plazo mínimo vigente? | Claude Code, en la norma | **Resuelta (14/11/2026):** 90 días para depósitos en UVA (BCRA, texto ordenado "Depósitos e inversiones a plazo", punto 1.12.3, al 11/09/2026, última comunicación "A" 8479); el plazo fijo tradicional, 30 días (punto 1.12.1.1). Fuente agregada a `sources.ts` |
+| Q-17 | Enlace a BYMADATA | D-79, 5.6 | El 14/11/2026, `open.bymadata.com.ar` mostraba "Sitio en mantenimiento" y `www.bymadata.com.ar` no respondía. ¿Sigue siendo el enlace que publica BYMA? | Claude Code, antes de publicar la fase B | Pendiente |
+| Q-18 | Series 1190 y 1227 del BCRA | 5.6, market-data.md | Las tasas de plazo fijo de personas humanas y del plazo fijo UVA están fuera de "Principales Variables". ¿Se siguen publicando con el mismo identificador? | Claude Code, en el paso 22 | Pendiente |
+| Q-19 | Inflación: BCRA o INDEC | D-223 | Se toma la variable 27 del BCRA, que coincide con el IPC del INDEC redondeado a un decimal. Si dejara de publicarse, el reemplazo es la serie del INDEC en datos.gob.ar | Lourdes confirma la decisión | Pendiente de confirmación |
+| Q-20 | Límite de pedidos de la API del BCRA | 5.6 | La API v4.0 no documenta un límite de pedidos. Con 11 pedidos por día no debería haber problema | Claude Code, en el paso 22 | Pendiente |
 | Q-02 | Límite del interés compensatorio de tarjetas (25 % sobre préstamos personales) | B-05 | Confirmar la redacción con el texto de la Ley 25.065 | Verificación en la norma | Abierta |
 | Q-03 | Nombres de las variantes de fondos money market | B-26 | Confirmar con la RG CNV 1038 | Verificación en la norma | Abierta |
 | Q-04 | Horario de negociación desde el 02/11/2026 | B-35 | Confirmar en https://byma.com.ar/mercado/horarios (la fuente fue prensa) | Verificación en BYMA | Abierta |

@@ -311,6 +311,7 @@ npm run dev
 | `npm run icons` | Regenera los íconos SVG de Material Symbols que usa la app |
 | `npm run seed` | Regenera los datos semilla de la demo |
 | `npm run og-image` | Regenera la imagen para redes (con `npm run dev` corriendo) |
+| `npm run market` | Prueba local de valores reales del BCRA (fase B; no lo usa la interfaz todavía) |
 
 ### Agregar contenido sin tocar código
 
@@ -395,6 +396,7 @@ La CI corre lint, tipos, tests unitarios, `npm audit` y las pruebas de producci�
 | [content.md](docs/content.md) | Objetivo, evidencia y fuentes de cada módulo |
 | [formulas.md](docs/formulas.md) | Cada fórmula con sus supuestos y casos calculados a mano |
 | [wallet-engine.md](docs/wallet-engine.md) | Reglas de la economía simulada y sus consecuencias |
+| [market-data.md](docs/market-data.md) | Valores reales del mercado: fuentes, identificadores y qué pasa si fallan |
 | [security.md](docs/security.md) | Seguridad y privacidad: capas, límites y producción |
 | [visual-audit.md](docs/visual-audit.md) | Referencias visuales y qué se tomó de cada una |
 | [review-fase-a.md](docs/review-fase-a.md) | Revisión de la fase A y de su ajuste |

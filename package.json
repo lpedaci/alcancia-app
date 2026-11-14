@@ -20,6 +20,7 @@
     "icons": "node scripts/generate-icons.mjs",
     "seed": "node scripts/generate-seed.mjs",
     "og-image": "node scripts/generate-og-image.mjs",
+    "market": "node scripts/fetch-market.mjs",
     "prepare": "git config core.hooksPath .githooks || true"
   },
   "dependencies": {
