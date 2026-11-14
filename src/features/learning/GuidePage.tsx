@@ -1,7 +1,8 @@
 import { AnimatePresence, motion } from 'motion/react';
 import { Fragment, type ReactNode, useEffect, useMemo, useRef, useState } from 'react';
+import { type TFunction } from 'i18next';
 import { useTranslation } from 'react-i18next';
-import { Link, useParams } from 'react-router';
+import { Link, useParams, useSearchParams } from 'react-router';
 import { DEMO_TODAY } from '@/app/config';
 import { Button } from '@/components/ui/Button';
 import { ChoiceGroup } from '@/components/ui/ChoiceGroup';
@@ -25,6 +26,7 @@ import { distributeTerms, introducedTerms } from '@/features/glossary/glossary';
 import { GlossaryText } from '@/features/glossary/GlossaryText';
 import { type Answer, feedbackFor, type Guide, type GuideBlock, guideById, isAnswered, isCorrect, moduleById } from './questions';
 import { fuerteLine } from '@/features/companion/fuerte-lines';
+import { safeReturnPath } from '@/lib/use-return-state';
 
 /**
  * P10, a guide (F3, 2.2.1 pattern 10): one short block per screen with progress on top, following
@@ -33,9 +35,46 @@ import { fuerteLine } from '@/features/companion/fuerte-lines';
  */
 export function GuidePage() {
   const { guideId = '' } = useParams();
+  const [params] = useSearchParams();
   const guide = guideById(guideId);
   if (!guide) return <NotFoundPage />;
-  return <GuideReader key={guide.id} guide={guide} />;
+  // D-78: a learning card or a "¿Por qué importa?" opens the exact part, from 1 as the guide shows it,
+  // and offers to go back to the screen it came from.
+  const part = Number(params.get('part'));
+  const start = Number.isInteger(part) && part >= 1 && part <= guide.blocks.length ? part - 1 : 0;
+  const from = safeReturnPath(params.get('from'));
+  return <GuideReader key={`${guide.id}:${start}:${from ?? ''}`} guide={guide} start={start} from={from} />;
+}
+
+/** The name of the screen to go back to, for "Volver a <sección>" (D-78). */
+function returnLabel(path: string, t: TFunction): string {
+  const rules: [RegExp, string][] = [
+    [/^\/app\/pay\/transfer/, 'wallet.sub.transfer'],
+    [/^\/app\/pay\/qr/, 'wallet.sub.qr'],
+    [/^\/app\/pay\/bills/, 'wallet.sub.bills'],
+    [/^\/app\/pay\/credit/, 'wallet.sub.credit'],
+    [/^\/app\/pay/, 'wallet.nav.pay'],
+    [/^\/app\/save\/budget/, 'wallet.sub.budget'],
+    [/^\/app\/save\/pockets/, 'wallet.sub.pockets'],
+    [/^\/app\/save\/yield/, 'wallet.sub.yield'],
+    [/^\/app\/invest/, 'wallet.nav.invest'],
+    [/^\/app\/profile/, 'wallet.sub.profile'],
+    [/^\/app\/tools/, 'wallet.sub.tools'],
+    [/^\/app\/learn/, 'wallet.nav.learn'],
+    [/^\/app\/?$/, 'wallet.nav.home'],
+  ];
+  const key = rules.find(([re]) => re.test(path))?.[1];
+  return key ? t(key) : t('learn.guide.previousScreen');
+}
+
+function BackToOrigin({ from, className }: { from: string; className?: string }) {
+  const { t } = useTranslation();
+  return (
+    <Link to={from} className={cn('inline-flex min-h-12 w-fit items-center gap-1.5 text-label-large text-primary hover:underline md:min-h-6', className)}>
+      <Icon name="arrow_back" size={18} />
+      {t('learn.guide.backTo', { section: returnLabel(from, t) })}
+    </Link>
+  );
 }
 
 /** Bold text written as **this** in the content, without injecting HTML (8.2). */
@@ -75,7 +114,7 @@ function blockText(block: GuideBlock): string {
   }
 }
 
-function GuideReader({ guide }: { guide: Guide }) {
+function GuideReader({ guide, start = 0, from }: { guide: Guide; start?: number; from?: string }) {
   const { t } = useTranslation();
   const user = useCurrentUser();
   const personId = user?.personId ?? '';
@@ -88,12 +127,13 @@ function GuideReader({ guide }: { guide: Guide }) {
   const levelId = module?.levelId ?? '';
   const level = LEVELS.find((l) => l.id === levelId);
 
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(start);
   const [answers, setAnswers] = useState<Record<number, Answer>>({});
   const [checked, setChecked] = useState<Record<number, boolean>>({});
   const [satisfaction, setSatisfaction] = useState<string | undefined>();
   const [finished, setFinished] = useState(false);
-  const [visited, setVisited] = useState(0);
+  // Parts before the one opened by a link stay reachable from the outline.
+  const [visited, setVisited] = useState(start);
   const [direction, setDirection] = useState(1);
   const reduce = useShouldReduceMotion();
   const headingRef = useRef<HTMLHeadingElement>(null);
@@ -141,6 +181,7 @@ function GuideReader({ guide }: { guide: Guide }) {
       <div className="grid grid-cols-[minmax(0,1fr)] gap-6 large:grid-cols-[minmax(0,1fr)_22rem] large:items-start">
         <div className="flex min-w-0 flex-col gap-6">
           <header className="flex flex-col gap-3">
+            {from && <BackToOrigin from={from} />}
             <p className="flex flex-wrap items-center gap-x-2 text-label-large text-primary">
               <Icon name="menu_book" size={18} />
               {t('learn.guide.kicker', { module: module?.order, minutes: guide.minutes })}
@@ -172,9 +213,15 @@ function GuideReader({ guide }: { guide: Guide }) {
                     <Link to={`/app/learn/challenges/${challengeId}`}>{t('learn.guide.toChallenge', { level: level?.order })}</Link>
                   </Button>
                 )}
-                <Button asChild variant="outlined" leadingIcon="school">
-                  <Link to="/app/learn">{t('learn.guide.backToLearn')}</Link>
-                </Button>
+                {from ? (
+                  <Button asChild variant="outlined" leadingIcon="arrow_back">
+                    <Link to={from}>{t('learn.guide.backTo', { section: returnLabel(from, t) })}</Link>
+                  </Button>
+                ) : (
+                  <Button asChild variant="outlined" leadingIcon="school">
+                    <Link to="/app/learn">{t('learn.guide.backToLearn')}</Link>
+                  </Button>
+                )}
               </div>
             </motion.section>
           ) : (

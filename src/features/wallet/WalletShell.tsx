@@ -19,6 +19,7 @@ import { useMediaQuery } from '@/lib/use-media-query';
 import { cn } from '@/lib/utils';
 import { readLocal } from '@/store/local-store';
 import { useCurrentUser } from '@/store/session-store';
+import { useRestoreScroll } from '@/lib/use-return-state';
 
 /**
  * The participant's only navigation (CLAUDE.md 5.3): the same 5 destinations at every size.
@@ -102,6 +103,8 @@ export function WalletShell({ section, children, fuerte }: { section: string; ch
   useEffect(() => {
     document.title = `${section} · Alcancía`;
   }, [section]);
+  // Back from a part of a guide (D-78): the screen comes back to where it was.
+  useRestoreScroll(pathname);
   const isLarge = useMediaQuery('(min-width: 75rem)', true);
   const [expandedPref, setExpandedPref] = useState<boolean | null>(readNavPref);
   const expanded = expandedPref ?? isLarge;

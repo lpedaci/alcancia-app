@@ -40,6 +40,7 @@ import { useCurrentUser } from '@/store/session-store';
 import { useWallet } from '@/store/wallet-store';
 import { fuerteLine } from '@/features/companion/fuerte-lines';
 import { WhyMatters, whyText } from '@/features/learning-cards/WhyMatters';
+import { useReturnState } from '@/lib/use-return-state';
 
 /**
  * P5, Apartados y metas (level 4, CLAUDE.md 5.3, F5, D-175): the emergency fund with the months of
@@ -304,9 +305,9 @@ function NewGoal() {
   const { t } = useTranslation();
   const user = useCurrentUser();
   const [wallet, setWallet] = useWallet(user?.personId ?? '');
-  const [name, setName] = useState('');
-  const [price, setPrice] = useState('');
-  const [term, setTerm] = useState<string>('12');
+  const [name, setName] = useReturnState('pockets.goal.name', '');
+  const [price, setPrice] = useReturnState('pockets.goal.price', '');
+  const [term, setTerm] = useReturnState<string>('pockets.goal.term', '12');
   const [tried, setTried] = useState(false);
   const inflation = scenarios.find((s) => s.id === wallet.scenarioId)?.monthlyInflation ?? '0.03';
   const parsed = parseDecimalInput(price);

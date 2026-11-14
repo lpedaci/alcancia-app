@@ -34,6 +34,7 @@ import { useWallet } from '@/store/wallet-store';
 import { BROKER_NAME, buy, buyPreview, fundBrokerage, instrumentById, INSTRUMENTS, openBrokerage, portfolioValue, positions, quote, sell, withdrawBrokerage } from './engine';
 import { fuerteLine } from '@/features/companion/fuerte-lines';
 import { WhyMatters, whyText } from '@/features/learning-cards/WhyMatters';
+import { useReturnState } from '@/lib/use-return-state';
 
 /**
  * P8, Invertir (level 7, CLAUDE.md 5.4, SIM-14, D-186): the practice brokerage account at a
@@ -540,8 +541,8 @@ function Instrument() {
   const { t } = useTranslation();
   const user = useCurrentUser();
   const [wallet, setWallet] = useWallet(user?.personId ?? '');
-  const [quantity, setQuantity] = useState('1');
-  const [settlement, setSettlement] = useState<Trade['settlement']>('ci');
+  const [quantity, setQuantity] = useReturnState('invest.buy.quantity', '1');
+  const [settlement, setSettlement] = useReturnState<Trade['settlement']>('invest.buy.settlement', 'ci');
   const [failure, setFailure] = useState<string | undefined>();
   const [confirm, setConfirm] = useState<'buy' | 'sell' | undefined>();
   const [showTable, setShowTable] = useState(false);

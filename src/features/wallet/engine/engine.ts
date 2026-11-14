@@ -333,10 +333,13 @@ function deliverMessage(state: WalletState, month: number) {
   state.messages = [...(state.messages ?? []), { id: `message-${state.seq}`, day: state.day, templateId: pool[index]!, suspicious, status: 'unread' }];
 }
 
-/** Reads or reports a message of the inbox (D-76). Reporting is final; reading never undoes a report. */
-export function markMessage(state: WalletState, messageId: string, status: 'read' | 'reported'): WalletState {
+/**
+ * Reads, reports or takes the bait of a message (D-76, D-211). Reporting and falling are final:
+ * reading never undoes them. The money consequence of falling arrives with D-77 (step 18).
+ */
+export function markMessage(state: WalletState, messageId: string, status: 'read' | 'reported' | 'fell'): WalletState {
   const next = clone(state);
-  next.messages = (next.messages ?? []).map((m) => (m.id === messageId && m.status !== 'reported' ? { ...m, status } : m));
+  next.messages = (next.messages ?? []).map((m) => (m.id === messageId && (m.status === 'unread' || m.status === 'read') ? { ...m, status } : m));
   return next;
 }
 

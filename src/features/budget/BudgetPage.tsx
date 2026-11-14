@@ -24,6 +24,7 @@ import { useCurrentUser } from '@/store/session-store';
 import { useWallet } from '@/store/wallet-store';
 import { fuerteLine } from '@/features/companion/fuerte-lines';
 import { WhyMatters, whyText } from '@/features/learning-cards/WhyMatters';
+import { useReturnState } from '@/lib/use-return-state';
 
 /**
  * P4, Presupuesto (level 3, CLAUDE.md 5.3, D-174): the month in progress against a reference split
@@ -64,7 +65,7 @@ function Budget() {
   const { wallet: levelWallet } = useLevels(personId);
   const allMissions = useDataStore((s) => s.missionCompletions);
   const allGuides = useDataStore((s) => s.guideProgress);
-  const [rule, setRule] = useState<BudgetRule>('50/30/20');
+  const [rule, setRule] = useReturnState<BudgetRule>('budget.rule', '50/30/20');
   const [asTable, setAsTable] = useState(false);
 
   const month = Math.max(0, monthOf(wallet.day));

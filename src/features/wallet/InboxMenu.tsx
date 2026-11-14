@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/Button';
 import { Icon } from '@/components/ui/Icon';
+import { InlineAlert } from '@/components/ui/InlineAlert';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/Popover';
 import { StatusPill } from '@/components/ui/StatusPill';
 import { toast } from '@/components/ui/toast-store';
@@ -8,11 +9,14 @@ import { formatDate, walletDate } from '@/lib/dates';
 import { cn } from '@/lib/utils';
 import { useWallet } from '@/store/wallet-store';
 import { markMessage, unreadMessages } from './engine/engine';
+import { MESSAGE_BAIT, type SUSPICIOUS_TEMPLATES } from './engine/profile';
+import type { InboxMessage } from './engine/types';
 
 /**
- * The bell of the wallet (D-102): an inbox with legitimate notices and suspicious messages, one a
- * month (wallet-engine.md, section 10). Reporting a suspicious one is the habit of module 18 (B-24);
- * reporting a legitimate one explains why it was not. Senders are always fictitious (1.1.1).
+ * The bell of the wallet (D-102, D-211): an inbox with legitimate notices and suspicious messages, one
+ * a month (wallet-engine.md, section 10). Rules of D-211: invented senders, brands and domains; no
+ * link that leaves the app ("abrir el enlace" is simulated here); and every suspicious message, when
+ * it is reported or when the person takes the bait, ends in feedback with the signals it had (B-24).
  */
 export function InboxMenu({ personId }: { personId: string }) {
   const { t } = useTranslation();
@@ -20,15 +24,19 @@ export function InboxMenu({ personId }: { personId: string }) {
   const messages = [...(wallet.messages ?? [])].reverse();
   const unread = unreadMessages(wallet);
 
-  const report = (id: string, suspicious: boolean) => {
-    update((s) => markMessage(s, id, 'reported'));
-    toast[suspicious ? 'success' : 'info'](t(suspicious ? 'wallet.inbox.reported' : 'wallet.inbox.reportedLegit'));
+  const report = (m: InboxMessage) => {
+    update((s) => markMessage(s, m.id, 'reported'));
+    toast[m.suspicious ? 'success' : 'info'](t(m.suspicious ? 'wallet.inbox.reported' : 'wallet.inbox.reportedLegit'));
+  };
+  const fall = (m: InboxMessage) => {
+    update((s) => markMessage(s, m.id, 'fell'));
+    toast.info(t('wallet.inbox.fell'));
   };
 
   return (
     <Popover
       onOpenChange={(open) => {
-        // Opening the bell marks what is visible as read; a report is never undone.
+        // Closing the bell marks what was visible as read; a report or a fall is never undone.
         if (!open && unread > 0) update((s) => (s.messages ?? []).reduce((acc, m) => (m.status === 'unread' ? markMessage(acc, m.id, 'read') : acc), s));
       }}
     >
@@ -54,25 +62,63 @@ export function InboxMenu({ personId }: { personId: string }) {
           ) : (
             <ul className="flex max-h-96 flex-col gap-2 overflow-y-auto">
               {messages.map((m) => (
-                <li key={m.id} className={cn('flex flex-col gap-1.5 rounded-lg border border-outline-variant p-3', m.status === 'unread' && 'bg-surface-container')}>
-                  <div className="flex flex-wrap items-center justify-between gap-2">
-                    <p className="text-label-large text-on-surface">{t(`wallet.inbox.templates.${m.templateId}.from`)}</p>
-                    <span className="text-label-medium text-on-surface-variant tabular-nums">{formatDate(walletDate(m.day))}</span>
-                  </div>
-                  <p className="text-body-medium text-on-surface">{t(`wallet.inbox.templates.${m.templateId}.body`)}</p>
-                  {m.status === 'reported' ? (
-                    <StatusPill tone={m.suspicious ? 'success' : 'neutral'} icon="flag" label={t('wallet.inbox.reportedPill')} className="self-start" />
-                  ) : (
-                    <Button variant="text" size="xs" leadingIcon="flag" className="self-start" onClick={() => report(m.id, m.suspicious)}>
-                      {t('wallet.inbox.report')}
-                    </Button>
-                  )}
-                </li>
+                <MessageItem key={m.id} message={m} onReport={() => report(m)} onFall={() => fall(m)} />
               ))}
             </ul>
           )}
         </div>
       </PopoverContent>
     </Popover>
+  );
+}
+
+function MessageItem({ message: m, onReport, onFall }: { message: InboxMessage; onReport: () => void; onFall: () => void }) {
+  const { t } = useTranslation();
+  const key = `wallet.inbox.templates.${m.templateId}`;
+  const signals = m.suspicious ? (t(`${key}.signals`, { returnObjects: true }) as string[]) : [];
+  const bait = m.suspicious ? MESSAGE_BAIT[m.templateId as (typeof SUSPICIOUS_TEMPLATES)[number]] : undefined;
+  const open = m.status === 'unread' || m.status === 'read';
+
+  return (
+    <li data-message={m.templateId} className={cn('flex flex-col gap-2 rounded-lg border border-outline-variant p-3', m.status === 'unread' && 'bg-surface-container')}>
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <p className="text-label-large text-on-surface">{t(`${key}.from`)}</p>
+        <span className="text-label-medium text-on-surface-variant tabular-nums">{formatDate(walletDate(m.day))}</span>
+      </div>
+      <p className="text-body-medium text-on-surface">{t(`${key}.body`)}</p>
+      {open ? (
+        <div className="flex flex-wrap gap-x-2 gap-y-1">
+          <Button variant="text" size="xs" leadingIcon="flag" onClick={onReport}>
+            {t('wallet.inbox.report')}
+          </Button>
+          {bait && (
+            <Button variant="text" size="xs" leadingIcon="touch_app" onClick={onFall} aria-describedby={`${m.id}-bait-note`}>
+              {t(`wallet.inbox.bait.${bait}`)}
+            </Button>
+          )}
+          {bait && (
+            <p id={`${m.id}-bait-note`} className="w-full text-body-small text-on-surface-variant">
+              {t('wallet.inbox.baitNote')}
+            </p>
+          )}
+        </div>
+      ) : m.suspicious ? (
+        // D-211: the feedback with the signals, after reporting or after taking the bait.
+        <InlineAlert tone={m.status === 'reported' ? 'success' : 'info'}>
+          <span className="block font-medium">{t(m.status === 'reported' ? 'wallet.inbox.reportedTitle' : 'wallet.inbox.fellTitle')}</span>
+          <ul className="mt-1 list-disc pl-5">
+            {signals.map((s) => (
+              <li key={s}>{s}</li>
+            ))}
+          </ul>
+          {m.status === 'fell' && <span className="mt-1 block">{t('wallet.inbox.fellReal')}</span>}
+        </InlineAlert>
+      ) : (
+        <div className="flex flex-col gap-1">
+          <StatusPill tone="neutral" icon="flag" label={t('wallet.inbox.reportedPill')} className="self-start" />
+          <p className="text-body-small text-on-surface-variant">{t('wallet.inbox.legitNote')}</p>
+        </div>
+      )}
+    </li>
   );
 }

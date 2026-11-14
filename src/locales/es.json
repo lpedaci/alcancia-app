@@ -707,17 +707,43 @@
         },
         "fake-support": {
           "from": "Soporte de la billetera · número desconocido",
-          "body": "Detectamos un problema con tu cuenta. Para no perder tu saldo, respóndenos ahora con el código que te llegó por SMS."
+          "body": "Detectamos un problema con tu cuenta. Para no perder tu saldo, respóndenos ahora con el código que te llegó por SMS.",
+          "signals": [
+            "Pide el código que te llegó por SMS: nadie legítimo lo pide",
+            "Apura con perder el saldo y te pide responder ahora",
+            "Llega de un número desconocido, no del canal oficial de la app"
+          ]
         },
         "lookalike-link": {
           "from": "Alcancia-seguridad (ficticio)",
-          "body": "Tu cuenta será suspendida hoy. Valida tus datos en alcancia-verificar.ejemplo antes de las 18:00."
+          "body": "Tu cuenta será suspendida hoy. Valida tus datos en alcancia-verificar.example antes de las 18:00.",
+          "signals": [
+            "El dominio se parece al de la app pero no es el oficial",
+            "Amenaza con suspender tu cuenta",
+            "Pone un plazo de horas para que no lo pienses"
+          ]
         },
         "guaranteed-return": {
           "from": "Inversiones Rápidas (ficticio)",
-          "body": "Duplica tu dinero en 30 días con rendimiento garantizado. Quedan pocos cupos: transfiere hoy."
+          "body": "Duplica tu dinero en 30 días con rendimiento garantizado. Quedan pocos cupos: transfiere hoy.",
+          "signals": [
+            "Promete un rendimiento garantizado: ninguna inversión lo garantiza",
+            "Apura con pocos cupos",
+            "Te pide transferir hoy a alguien que no está registrado"
+          ]
         }
-      }
+      },
+      "bait": {
+        "reply_code": "Responder con el código",
+        "open_link": "Abrir el enlace",
+        "transfer": "Transferir para invertir"
+      },
+      "baitNote": "Es una práctica: nada sale de la app.",
+      "reportedTitle": "Bien visto. Estas eran las señales:",
+      "fellTitle": "Era un intento de estafa. Pasó lo que pasa en la vida real; mira las señales que tenía:",
+      "fellReal": "En la vida real: no sigas respondiendo, cambia tu contraseña, avisa a tu billetera por su canal oficial y haz la denuncia. La próxima vez, reporta antes de responder.",
+      "legitNote": "Este aviso es legítimo: viene del canal oficial y no pide datos.",
+      "fell": "Caíste en el mensaje de práctica. Lee las señales para reconocerlo la próxima vez."
     }
   },
   "roles": {
@@ -1146,7 +1172,9 @@
       "outline": "En esta guía",
       "outlineMeta": "{{parts}} partes · {{minutes}} min",
       "goTo": ", volver a esta parte",
-      "openTool": "Abrir la herramienta \"{{name}}\""
+      "openTool": "Abrir la herramienta \"{{name}}\"",
+      "backTo": "Volver a {{section}}",
+      "previousScreen": "la pantalla anterior"
     },
     "challenge": {
       "locked": "{{title}} está bloqueado",

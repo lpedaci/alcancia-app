@@ -192,7 +192,8 @@ export interface InboxMessage {
   day: number;
   templateId: string;
   suspicious: boolean;
-  status: 'unread' | 'read' | 'reported';
+  /** `fell`: the person took the bait (simulated, D-211); like a report, it is final. */
+  status: 'unread' | 'read' | 'reported' | 'fell';
 }
 
 export interface WalletState {

@@ -53,3 +53,13 @@ export const EMPLOYER = 'Sueldo · Andina Servicios S.A.';
  */
 export const LEGIT_TEMPLATES = ['statement-ready', 'security-tip'] as const;
 export const SUSPICIOUS_TEMPLATES = ['fake-support', 'lookalike-link', 'guaranteed-return'] as const;
+
+/**
+ * D-211: what taking the bait of each suspicious message means. It is always simulated inside the
+ * wallet: no message has a link that leaves the app, and senders, brands and domains are invented.
+ */
+export const MESSAGE_BAIT: Record<(typeof SUSPICIOUS_TEMPLATES)[number], 'reply_code' | 'open_link' | 'transfer'> = {
+  'fake-support': 'reply_code',
+  'lookalike-link': 'open_link',
+  'guaranteed-return': 'transfer',
+};

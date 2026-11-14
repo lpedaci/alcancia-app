@@ -43,6 +43,7 @@ import { useCurrentUser } from '@/store/session-store';
 import { useWallet } from '@/store/wallet-store';
 import { fuerteLine } from '@/features/companion/fuerte-lines';
 import { WhyMatters, whyText } from '@/features/learning-cards/WhyMatters';
+import { useReturnState } from '@/lib/use-return-state';
 
 /**
  * P7, Pagar > Tarjeta y préstamos (level 5, CLAUDE.md 5.3 "Ofertas", D-56, D-178): the practice card
@@ -299,8 +300,8 @@ function CardStatementSection() {
   const { t } = useTranslation();
   const user = useCurrentUser();
   const [wallet, setWallet] = useWallet(user?.personId ?? '');
-  const [choice, setChoice] = useState<PayChoice>('total');
-  const [other, setOther] = useState('');
+  const [choice, setChoice] = useReturnState<PayChoice>('credit.pay.choice', 'total');
+  const [other, setOther] = useReturnState('credit.pay.other', '');
   const [failure, setFailure] = useState<string | undefined>();
   const practice = wallet.card;
   const statement = practice?.statement;

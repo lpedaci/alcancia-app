@@ -108,7 +108,7 @@ Perfil de gastos ficticio, igual para Mariana y Diego (las diferencias entre ell
 | Alias con error de tipeo | Misión 2 | Revisar titular antes de confirmar (B-15) |
 | Pago en un comercio ficticio | Misión 3 | QR interoperable y comprobante |
 | Tres mensajes, uno falso | Misión 6 (llegan a la campana, D-102) | Señales de estafa (B-24) |
-| Un mensaje por mes en la campana (D-211) | Día 15 de cada mes simulado desde el segundo: los meses impares, uno sospechoso (falso soporte que pide un código, enlace parecido o "inversión garantizada", rotando); los pares, un aviso legítimo de la app | Practicar en el modo libre lo de la misión 6: la tarjeta "Ojo con este mensaje" (D-76) y el hábito de reportar. Reportar un aviso legítimo explica por qué no lo era; un reporte no se deshace |
+| Un mensaje por mes en la campana (D-211) | Día 15 de cada mes simulado desde el segundo: los meses impares, uno sospechoso (falso soporte que pide un código, enlace parecido o "inversión garantizada", rotando); los pares, un aviso legítimo de la app | Practicar en el modo libre lo de la misión 6: la tarjeta "Ojo con este mensaje" (D-76) y el hábito de reportar. Reportar un aviso legítimo explica por qué no lo era; un reporte no se deshace. Reglas de D-211: remitentes, marcas y dominios inventados (`.example` o `.demo`); ningún enlace sale de la app ("Abrir el enlace" y las demás acciones son simuladas); al reportar o al caer, la devolución muestra las señales del mensaje |
 | Suba de un servicio y gasto imprevisto ($ 85.000, una reparación) | Misión 7 | Cerrar el mes en verde con imprevistos |
 | Oferta de préstamo preaprobado y de compra en cuotas | Nivel 5 (misión 5) | CFT frente a TNA (B-04) |
 | Resumen de la tarjeta de práctica | Al habilitarse el nivel 5 | Pago mínimo frente a total (SIM-7) |
@@ -148,7 +148,7 @@ Solo estas métricas, calculadas en el navegador de la persona y consumidas por 
 | D-114 | Categorizar desde Inicio en los niveles 1 y 2, con categorías sugeridas que se confirman | Sección 8 | Aprobada |
 | D-115 | Definición de "mes en verde" | Sección 8 | Aprobada |
 | D-208 | Todas las misiones se juegan en la billetera de la persona; excepciones solo si rompen algo; repetir usa una copia de práctica | Sección 16 | Aprobada por Lourdes (14/11/2026) |
-| D-211 | Bandeja de mensajes de la campana con un mensaje por mes (`WalletState.messages`) | Sección 10 | Lourdes revisa (paso 16) |
+| D-211 | Bandeja de mensajes de la campana con un mensaje por mes (`WalletState.messages`), con las reglas de remitentes inventados, sin enlaces externos y con devolución | Sección 10 | Aprobada por Lourdes (14/11/2026) |
 ## 15. Implementación (paso 6)
 
 - Código en `src/features/wallet/engine/`: `types.ts` (estado), `profile.ts` (tabla 4), `engine.ts` (tiempo, precios, sueldo, débitos, rendimiento, apartados, categorías, cierre de mes y métricas) y `demo.ts` (guiones de Diego y Mariana). Tests en `engine.test.ts`, con casos calculados a mano.

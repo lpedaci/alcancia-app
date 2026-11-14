@@ -5,6 +5,7 @@ import { Icon } from '@/components/ui/Icon';
 import { SourceList } from '@/features/learning/SourceList';
 import { cn } from '@/lib/utils';
 import { guideHref, SCREEN_WHY, type WhyScreen } from './cards';
+import { rememberScroll } from '@/lib/use-return-state';
 
 /**
  * "¿Por qué importa?" on every screen of the wallet (5.3, D-76, D-209): visible in the page itself,
@@ -34,7 +35,7 @@ export function WhyMatters({ screen, className }: { screen: WhyScreen; className
       {open && (
         <div id={panelId} className="flex max-w-prose flex-col gap-3 rounded-lg border border-outline-variant bg-tertiary-container p-4 text-on-tertiary-container">
           <p className="text-body-medium">{why.body}</p>
-          <Link to={guideHref(why.guide, pathname)} className="inline-flex min-h-12 w-fit items-center gap-1.5 text-label-large underline underline-offset-4 md:min-h-6">
+          <Link to={guideHref(why.guide, pathname)} onClick={() => rememberScroll(pathname)} className="inline-flex min-h-12 w-fit items-center gap-1.5 text-label-large underline underline-offset-4 md:min-h-6">
             <Icon name="menu_book" size={18} />
             {t('cards.toGuide')}
           </Link>

@@ -40,6 +40,7 @@ import { useCurrentUser } from '@/store/session-store';
 import { useWallet } from '@/store/wallet-store';
 import { fuerteLine } from '@/features/companion/fuerte-lines';
 import { WhyMatters, whyText } from '@/features/learning-cards/WhyMatters';
+import { useReturnState } from '@/lib/use-return-state';
 
 /**
  * P6, Ahorrar > Rendir (level 6, CLAUDE.md 5.3 "Hacer rendir el saldo" and "Ganarle o no a la
@@ -210,9 +211,9 @@ function DepositSection() {
   const { t } = useTranslation();
   const user = useCurrentUser();
   const [wallet, setWallet] = useWallet(user?.personId ?? '');
-  const [kind, setKind] = useState<TermDeposit['kind']>('traditional');
-  const [days, setDays] = useState<number>(30);
-  const [amount, setAmount] = useState('');
+  const [kind, setKind] = useReturnState<TermDeposit['kind']>('yield.deposit.kind', 'traditional');
+  const [days, setDays] = useReturnState<number>('yield.deposit.days', 30);
+  const [amount, setAmount] = useReturnState('yield.deposit.amount', '');
   const [tried, setTried] = useState(false);
   const [failure, setFailure] = useState<string | undefined>();
   const [confirm, setConfirm] = useState(false);

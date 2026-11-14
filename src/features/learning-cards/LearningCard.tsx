@@ -10,6 +10,7 @@ import { Fuerte } from '@/features/companion/Fuerte';
 import { SourceList } from '@/features/learning/SourceList';
 import { cn } from '@/lib/utils';
 import { type CardQuestion, type GuideLink, guideHref } from './cards';
+import { rememberScroll } from '@/lib/use-return-state';
 
 /**
  * The content of a learning card (5.3, D-76), shared by the steps of a mission and the cards of the
@@ -82,7 +83,7 @@ export function LearningCardContent({
       {(guide || action) && (
         <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
           {guide && (
-            <Link to={guideHref(guide, pathname)} className="inline-flex min-h-12 items-center gap-1.5 text-label-large text-primary hover:underline md:min-h-6">
+            <Link to={guideHref(guide, pathname)} onClick={() => rememberScroll(pathname)} className="inline-flex min-h-12 items-center gap-1.5 text-label-large text-primary hover:underline md:min-h-6">
               <Icon name="menu_book" size={18} />
               {t('cards.toGuide')}
             </Link>

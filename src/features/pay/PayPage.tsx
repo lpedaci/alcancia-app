@@ -30,6 +30,7 @@ import { useCurrentUser } from '@/store/session-store';
 import { useWallet } from '@/store/wallet-store';
 import { fuerteLine } from '@/features/companion/fuerte-lines';
 import { WhyMatters, whyText } from '@/features/learning-cards/WhyMatters';
+import { useReturnState } from '@/lib/use-return-state';
 
 /**
  * P3, Pagar (level 2, CLAUDE.md 5.3, D-173): transfer to an alias with the holder and entity shown
@@ -255,8 +256,8 @@ function TransferFlow() {
   const personId = user?.personId ?? '';
   const [wallet, setWallet] = useWallet(personId);
   const [stage, setStage] = useState<'form' | 'confirm' | 'receipt'>('form');
-  const [alias, setAlias] = useState('');
-  const [amount, setAmount] = useState('');
+  const [alias, setAlias] = useReturnState('pay.transfer.alias', '');
+  const [amount, setAmount] = useReturnState('pay.transfer.amount', '');
   const [tried, setTried] = useState(false);
   const [failure, setFailure] = useState<string | undefined>();
   const [movement, setMovement] = useState<WalletMovement | undefined>();
