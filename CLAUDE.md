@@ -1,4 +1,4 @@
-# Alcancía · Plataforma corporativa de aprendizaje en finanzas personales (MVP)
+# Alcancía · Simulador de finanzas personales para organizaciones, aulas y productos (MVP)
 
 > Nombre de trabajo: **Alcancía** (provisorio, se puede cambiar; ver D-02 en la sección 0).
 > Autora: Lourdes Pedaci, Experience Designer (Learning y UX/UI).
@@ -12,6 +12,8 @@
 
 > Numeración: las decisiones de esta tabla las define Lourdes. Claude Code numera las suyas en `docs/decisions.md` a partir de **D-100** (cambio del 12/11/2026, para no chocar con las referencias a D-31, D-32 y D-38 de antes del reinicio); las de la spec usan D-01 a D-99.
 >
+> **Ajuste del 13/11/2026 (después de la fase A):** una auditoría comparó lo construido con la idea central ("aprender finanzas usando una billetera virtual") y con el mercado. De ahí salen las decisiones D-74 a D-82: el aprendizaje en el momento justo también en el modo libre, consecuencias reales dentro de la billetera, valores reales del mercado con dinero ficticio y tres contextos de uso en lugar de solo el corporativo. D-04 queda reemplazada por D-74. El orden de trabajo (sección 10) suma un **ajuste de fase A** antes de la fase B y reordena la fase B.
+>
 > **Reinicio del 12/11/2026:** el proyecto se vuelve a construir desde cero con esta versión de la spec. Las decisiones de Claude Code ya aprobadas en la versión anterior se incorporaron a esta tabla (D-52, D-54, D-55) y la verificación de billeteras y fintech, al Anexo D. Lo construido antes no se reutiliza salvo que Lourdes lo indique.
 
 | ID | Decisión | Estado |
@@ -19,7 +21,7 @@
 | D-01 | Paleta de 2.1.1 (índigo + verde azulado) | Provisoria, confirmar en el piloto visual |
 | D-02 | Nombre "Alcancía" | Provisorio |
 | D-03 | Español latinoamericano neutro y profesional, con **tú** | Confirmada por Lourdes |
-| D-04 | **Solo contexto empresa** (plataforma corporativa de aprendizaje). Reemplaza la propuesta de institución terciaria: se descarta el contexto educativo | Confirmada por Lourdes |
+| D-04 | ~~Solo contexto empresa~~. **Reemplazada por D-74** el 13/11/2026 | Reemplazada |
 | D-20 | El rol que acompaña a las cohortes se llama **tutor** (no "docente" ni "facilitador") | Confirmada por Lourdes |
 | D-21 | Base de contenido: presentación del Lic. Kevin Giampieri y sitio del taller (1.1); ampliaciones marcadas para su revisión | Confirmada |
 | D-22 | Se nombran instrumentos e índices como ejemplo educativo. Se nombran **brókers (ALyC) registrados en la CNV** en una ficha informativa neutral (Anexo C). No se nombran bancos (billeteras y fintech: ver D-26) | Confirmada |
@@ -45,11 +47,20 @@
 | D-66 | **`design-references/` no se publica:** queda solo en la computadora de Lourdes (`.gitignore`) y se quita del historial del repositorio, como en Rumbo (2.2) | Confirmada |
 | D-67 | **El test de perfil de inversor se hace antes de abrir Invertir:** se ofrece desde la tarjeta "qué falta" de Invertir y desde la guía del módulo 13, aunque la sección esté bloqueada. Es educativo y su resultado nunca se traduce en una cartera (1.2). Al abrir la cuenta comitente (5.4) se reutiliza el resultado | Confirmada |
 | D-68 | **Montos sin cortes de línea:** entre `$`, `USD` o `−` y el número va siempre un espacio de no separación, para que el signo nunca quede solo al final de una línea (2.9) | Confirmada |
-| D-69 | **Cómo se presenta el producto:** "Simulador de finanzas personales" (para equipos de trabajo) en lugar de "plataforma de aprendizaje corporativo" en la landing y la pestaña; el carácter B2B se mantiene en el cuerpo del hero, los recorridos y el pie. El cartel fijo de la billetera dice **"Simulador de finanzas personales · dinero ficticio"**: lo de dinero ficticio no se quita nunca (D-154 y D-156 de Claude Code) | Confirmada |
+| D-69 | **Cómo se presenta el producto:** "Simulador de finanzas personales" en lugar de "plataforma de aprendizaje corporativo" en la landing y la pestaña; desde D-74, "para equipos, aulas y productos" en lugar de "para equipos de trabajo". El carácter B2B se mantiene en el cuerpo del hero, los recorridos y el pie. El cartel fijo de la billetera dice **"Simulador de finanzas personales · dinero ficticio"**: lo de dinero ficticio no se quita nunca (D-154 y D-156 de Claude Code) | Confirmada |
 | D-70 | **Hosting y seguridad del front:** el prototipo se queda en **GitHub Pages**. `docs/security.md` y la sección "Seguridad y privacidad" del sistema de diseño documentan qué se protege hoy (CSP en `<meta>`, sin `dangerouslySetInnerHTML`, dependencias auditadas en la CI, sin datos reales, montos en el navegador) y sus límites (GitHub Pages no permite encabezados HTTP propios). **Mejora futura:** con un dominio propio, Cloudflare (delante de GitHub Pages o con Cloudflare Pages y un archivo `_headers` versionado) para sumar encabezados reales: `frame-ancestors`, HSTS, `X-Content-Type-Options`, `Referrer-Policy` y `Permissions-Policy`, más protección ante bots y denegación de servicio (8.3, 9) | Confirmada |
 | D-71 | **Atribución de Magnific en el pie de la landing:** las fotos de las personas de la demo usan la licencia gratuita, que pide la línea "Designed by Magnific" con enlace junto al recurso o en el pie del sitio. Va en el pie de la landing, discreta, y también en el case study, la documentación y el sistema de diseño (ajusta D-165 de Claude Code) | Confirmada |
 | D-72 | **Barra inferior con el nombre del destino activo:** en celular y tablet, los 5 destinos van con ícono y solo el activo muestra su nombre, sobre el indicador en píldora; los demás conservan el nombre accesible y un tooltip (ajusta D-164) | Confirmada |
 | D-73 | **El tutor de la demo se llama Kevin Giovanni** (homenaje intencional al Lic. Kevin Giampieri, que validó el contenido). Reemplaza a Andrés Molina en todo el producto, los datos y `docs/` | Confirmada |
+| D-74 | **Tres contextos de uso con la misma billetera** (5.5): **organización** (empresa que lo ofrece a su gente, como Andina), **institución educativa** (nivel superior y formación profesional, con personas de 18 años o más) y **producto existente** (una billetera o app financiera que integra Alcancía para sus usuarios). Cambian el vocabulario, los roles visibles y la landing; la billetera, los niveles, las misiones y la privacidad son las mismas. Reemplaza D-04. La escuela secundaria queda fuera: implica menores de edad (8.3) | Confirmada la dirección; el alcance educativo es provisorio, Lourdes confirma |
+| D-75 | **Modo integrado en un producto** (5.5): Alcancía puede vivir dentro de la app de un socio. En la demo, el socio es **ficticio** ("Billetera de Ejemplo"), con marca propia hecha con los tokens, y nunca imita una app real (1.1.1). Se nombran productos reales solo como ejemplo de mercado en el case study, nunca en la interfaz | Confirmada |
+| D-76 | **Aprendizaje en el momento justo también en el modo libre** (5.3): las tarjetas de aprendizaje se disparan por acciones de la billetera aunque no haya una misión activa, desde un catálogo declarativo (`src/data/learning-cards.json`). Cada pantalla de la billetera tiene su "¿Por qué importa?". Fase A (ajuste) | Confirmada |
+| D-77 | **Las acciones tienen consecuencias en la billetera** (5.3): las misiones se juegan en la billetera de la persona, no en una cuenta aparte. Un préstamo tomado aparece en Tus deudas, sus cuotas se debitan y bloquea Invertir hasta saldarlo; pagar el mínimo genera intereses; caer en una estafa descuenta el monto. Se revierte con acciones dentro de la simulación (pagar, cancelar, reportar), nunca con "deshacer"; "Empezar de cero" sigue disponible. Revisa D-179 de Claude Code | Confirmada |
+| D-78 | **La guía nace de la acción:** una tarjeta de aprendizaje o un "¿Por qué importa?" llevan a la **parte exacta** de la guía que lo explica y ofrecen volver a la pantalla de origen, con el estado intacto | Confirmada |
+| D-79 | **Valores reales del mercado con dinero ficticio** (5.6): tasas, UVA, CER, tipo de cambio e inflación salen de fuentes oficiales y se muestran con fecha y fuente; el dinero sigue siendo ficticio y el futuro sigue siendo un escenario. Los precios de acciones y CEDEARs siguen siendo **de ejemplo**: BYMA exige licencia para mostrarlos y no se va a gestionar. Invertir enlaza a BYMADATA para ver los precios reales. Reemplaza el principio "nunca tasas actuales" de la sección 1. Fase B, con la investigación en el ajuste de fase A | Confirmada la dirección; fuentes provisorias |
+| D-80 | **Meta colectiva por cohorte** (fase B): la cohorte comparte una meta de conducta ("el 80 % con el fondo de emergencia iniciado"), con plazo y avance agregado. Sin rankings ni comparación entre personas; respeta el umbral de 5. Inspirado en las simulaciones grupales de BYMA LAB, sin su ranking | Confirmada |
+| D-81 | **Caso con decisiones también en los desafíos de nivel:** al menos una pregunta `branching` en los bancos de los niveles 5 y 6 (préstamo, tarjeta, tasa real), además de las decisiones de las misiones | Confirmada |
+| D-82 | **La fase A se cierra con un ajuste** (pasos 15 a 21 de la sección 10) antes de empezar la fase B, que se renumera desde el paso 22 | Confirmada |
 | D-29 | **Invertir (cuenta comitente de práctica, SIM-14)** pasa a la **fase A** como nivel 7 (5.0, 5.4); cripto queda en fase B | Confirmada |
 | D-24 | La presentación del taller **no se sube** al repositorio: la base de contenido es su resumen en el Anexo A | Confirmada |
 | D-25 | Los datos regulatorios salen de fuentes oficiales (BCRA, CNV, BYMA, Caja de Valores, argentina.gob.ar, INDEC) y se registran en el Anexo B con fecha de verificación | Confirmada |
@@ -59,7 +70,7 @@
 
 ## 1. Qué es este proyecto
 
-Una **plataforma corporativa de aprendizaje** sobre bienestar financiero: una empresa la ofrece a su gente como beneficio y como capacitación. **Para quien aprende, la plataforma es una billetera virtual y plataforma de inversión simulada** (D-50, 1.3): no entra a "un curso", entra a su cuenta. Combina lo que hoy usa el mercado corporativo de aprendizaje: la estructura y el seguimiento de un **LMS** (programas asignados, cohortes, evaluaciones, reportes) con la experiencia personalizada de una **LXP** (diagnóstico, ruta adaptativa, aprendizaje práctico, recordatorios en el momento justo). Ver 5.2.
+Un **simulador de finanzas personales** para aprender usando una billetera virtual. Lo puede ofrecer una **organización** a su gente, como beneficio y capacitación; una **institución educativa** a sus estudiantes; o un **producto existente**, como una billetera o app financiera, a sus usuarios (D-74, 5.5). **Para quien aprende, es una billetera virtual y plataforma de inversión simulada** (D-50, 1.3): no entra a "un curso", entra a su cuenta. Combina lo que hoy usa el mercado corporativo de aprendizaje: la estructura y el seguimiento de un **LMS** (programas asignados, cohortes, evaluaciones, reportes) con la experiencia personalizada de una **LXP** (diagnóstico, ruta adaptativa, aprendizaje práctico, recordatorios en el momento justo). Ver 5.2.
 
 El contenido está pensado para **Argentina**: inflación, plazo fijo tradicional y UVA, tasas TNA y TEA, costo financiero total, cuotas sin interés, aguinaldo.
 
@@ -73,7 +84,7 @@ El objetivo es **mostrar en un portfolio** el diseño de experiencias de aprendi
 - **Sin backend:** datos en JSON en `src/data/`, manejados en el cliente.
 - **Educación, no asesoramiento:** la plataforma enseña conceptos y deja practicar con escenarios. **Nunca recomienda** un producto, una entidad financiera ni una decisión de inversión concreta, y lo dice en forma visible (ver 1.2).
 - **Datos financieros ficticios o locales:** en la demo, todos los montos son ficticios. Lo que una persona carga en un simulador queda **solo en su navegador** y la empresa nunca lo ve.
-- **Supuestos editables y fechados, nunca "tasas actuales":** sin backend no hay datos en vivo. Los valores por defecto son **escenarios de ejemplo** rotulados como tales, con enlaces a las fuentes oficiales para consultar los valores reales.
+- **Valores reales, dinero ficticio (D-79, 5.6):** las tasas, la UVA, el CER, el tipo de cambio y la inflación del punto de partida son **valores reales con fecha y fuente**, tomados de fuentes oficiales en cada build. El dinero es siempre ficticio y lo que viene después de hoy es un **escenario** editable y rotulado, nunca una predicción. Si no hay datos reales disponibles, se usan los escenarios de ejemplo y se avisa.
 - **Cálculos verificables:** cada fórmula está documentada en `docs/formulas.md` y tiene tests unitarios con casos calculados a mano.
 - **Privacidad por diseño:** la empresa solo ve métricas de aprendizaje agregadas, con un mínimo de personas por grupo. Nunca ve la situación financiera de nadie.
 - **Seguridad de nivel corporativo en tres capas**, igual que Rumbo: simulada en la interfaz, aplicada de verdad en el front y documentada para producción (sección 8).
@@ -92,7 +103,7 @@ El objetivo es **mostrar en un portfolio** el diseño de experiencias de aprendi
   - **Simuladores (F4)** → **herramientas** dentro de las secciones (la calculadora de tasa real en Rendir, la de CFT en Crédito, la de CEDEAR en Invertir) y también juntas en "Herramientas".
   - **Metas y desafíos (F5)** → **apartados con meta** y **logros**; los desafíos semanales del tutor siguen igual.
   - **Diagnóstico (F2)** → "**Conocerte**", parte de la apertura de la cuenta. Sus resultados pueden **desbloquear secciones** directamente si la persona ya sabe (5.0).
-- **Lo corporativo no cambia:** landing, acceso con SSO y MFA simulados, roles, paneles del tutor, el admin de L&D y el decisor, cohortes, privacidad y medición de impacto siguen igual. Solo cambia lo que ve el participante.
+- **Lo de la organización no cambia:** landing, acceso con SSO y MFA simulados, roles, paneles del tutor, el admin de L&D y el decisor, cohortes, privacidad y medición de impacto siguen igual. Solo cambia lo que ve el participante. Según el contexto (5.5) cambian los nombres de los roles y qué paneles existen.
 - **La landing** sigue mostrando SIM-3 sin iniciar sesión y presenta el producto como "la billetera donde tu equipo aprende finanzas usándola".
 
 ### 1.1 Fuente del contenido
@@ -116,7 +127,7 @@ Reglas para usar esa base:
 El programa se organiza en **cinco tramos** (ver el catálogo en F3): bases y mentalidad; deudas y crédito; ahorro e inflación; invertir y mercado de capitales; billeteras, fintech y seguridad.
 
 Reglas:
-- **Nada de valores presentados como actuales.** Los simuladores usan escenarios de ejemplo, con el texto "Valores de ejemplo para aprender. Consulta los valores vigentes en las fuentes oficiales".
+- **Valores reales solo con fecha y fuente (D-79):** un valor real se muestra siempre como "Valor al DD/MM/AAAA · Fuente: BCRA" (o la que corresponda). Los escenarios futuros y los valores de ejemplo conservan el texto "Valores de ejemplo para aprender. Consulta los valores vigentes en las fuentes oficiales". Nunca se presenta un valor sin fecha como si fuera de hoy.
 - **Fuentes oficiales para consultar**, en un panel "Dónde ver los valores reales": Banco Central de la República Argentina (tasas, UVA, CER, garantía de los depósitos, registro de proveedores de servicios de pago, Central de Deudores), INDEC (IPC), Comisión Nacional de Valores (registros públicos de agentes, idóneos y PSAV, alertas al inversor, fondos comunes de inversión), Bolsas y Mercados Argentinos (listado y ratios de CEDEARs, horarios) y Caja de Valores (custodia y CEDEARs de ETF). Las URL del Anexo B van a `src/app/sources.ts` con su fecha de verificación; si alguna dejó de responder al construir, regístralo en `docs/questions.md` y no la reemplaces por una fuente no oficial.
 - **Instrumentos e índices sí:** se pueden nombrar como ejemplos educativos (acciones, bonos, obligaciones negociables, FCI, CEDEARs, ETFs como los que replican el S&P 500, el Nasdaq 100 o el ACWI, Bitcoin), igual que en el material del taller.
 - **Brókers sí, con reglas (D-22, Anexo C):** se nombran ALyC registradas en la CNV en la ficha "Brókers registrados", con razón social, categoría y matrícula, en orden alfabético y con el enlace al Registro Público de Agentes de la CNV para que la persona verifique. Sin logos, sin comisiones, sin rankings, sin "el mejor" ni enlaces de alta. Los flujos simulados (por ejemplo, abrir una cuenta en SIM o en una lección) usan siempre un **bróker ficticio** ("Bróker de Ejemplo S.A., matrícula ficticia") para no imitar la interfaz de una empresa real.
@@ -427,7 +438,9 @@ docs/
 
 ## 4. Empresa y roles del MVP
 
-### 4.1 Empresa de demo
+### 4.1 Organización de demo
+
+> Desde D-74 hay tres contextos de demo (5.5). Andina es el principal y el que tiene todos los datos semilla; los otros dos reutilizan la billetera y suman solo lo propio de su contexto.
 **Andina Servicios S.A.**, empresa de logística con unas 500 personas en cuatro áreas: Operaciones (incluye un centro de distribución), Administración, Tecnología y Comercial. Ofrece Alcancía dentro de su programa de bienestar.
 
 Esto obliga a diseñar para públicos distintos dentro de la misma empresa, como pasa en el mercado corporativo:
@@ -693,8 +706,11 @@ Fuerte, la caja fuerte naranja del escape room "Tu primer sueldo", pasa a ser el
 **Qué es:** una billetera virtual **ficticia** dentro de Alcancía donde la persona usa dinero de mentira para hacer lo mismo que haría en una billetera real (cobrar, transferir, pagar con QR, hacer rendir el saldo, armar presupuesto, separar ahorro, cuidarse de estafas) y **aprende mientras lo hace**. No es un juego aparte: es el lugar donde se practican los módulos 1, 3, 4, 6, 9, 10, 11, 17 y 18.
 
 **Principios de diseño**
-- **Aprender haciendo, con red:** "Acá equivocarte es gratis". Los errores (transferir a un alias mal escrito, aceptar un préstamo caro, responder un mensaje falso) se permiten, tienen consecuencia dentro de la simulación y siempre terminan en una devolución que explica qué pasó y qué hacer en la vida real.
-- **Aprendizaje en el momento justo:** cada pantalla tiene un botón "¿Por qué importa?" y ciertas acciones disparan una **tarjeta de aprendizaje** de 20 a 40 segundos (concepto + dato oficial con su código B-xx + una pregunta de un toque). No se interrumpe más de una vez por acción ni se repite si ya se respondió bien.
+- **Aprender haciendo, con red:** "Acá equivocarte es gratis". Los errores (transferir a un alias mal escrito, aceptar un préstamo caro, responder un mensaje falso) se permiten, **dejan su huella en la billetera** (D-77: saldo, deudas, cuotas, desbloqueos) y siempre terminan en una devolución que explica qué pasó, cómo revertirlo dentro de la simulación y qué hacer en la vida real. Las misiones se juegan en la billetera de la persona, no en una cuenta aparte.
+- **Aprendizaje en el momento justo (D-76):** cada pantalla de la billetera tiene un botón "¿Por qué importa?" y ciertas acciones disparan una **tarjeta de aprendizaje** de 20 a 40 segundos (concepto + dato oficial con su fuente + una pregunta de un toque), **haya o no una misión activa**. No se interrumpe más de una vez por acción ni se repite si ya se respondió bien. Desde la tarjeta, "Ver en la guía" lleva a la parte exacta que lo explica y "Volver" regresa a la pantalla de origen (D-78).
+  - **Catálogo mínimo de disparadores del modo libre:** cobrar el sueldo sin separar ahorro; el primer débito automático de una suscripción; transferir a un alias nuevo; elegir dónde rinde el saldo (cuenta o fondo); constituir un plazo fijo con tasa real negativa en el escenario; pagar el mínimo de la tarjeta; aceptar una compra en cuotas; tomar un préstamo; intentar una compra en Invertir sin fondo de emergencia; recibir un mensaje sospechoso.
+  - El catálogo vive en `src/data/learning-cards.json` (disparador, condición, título, cuerpo, fuentes, pregunta opcional, guía y parte de destino), para que L&D sume tarjetas sin tocar código. Cada tarjeta mostrada y respondida se registra como evento tipo xAPI (F21).
+  - Fuerte respeta su nivel de presencia: en "Silencio", la tarjeta aparece sin el personaje.
 - **Dos modos:** **Misiones** (guiado, con objetivos y pasos) y **Libre** (explorar con el saldo que haya). El modo libre igual registra lo aprendido.
 - **Fuerte como compañero (5.0.1):** acompaña toda la experiencia con personalidad propia; se puede silenciar.
 - **Marca propia y evidente:** se llama Alcancía (D-28), con la paleta y los componentes del sistema de diseño, cartel fijo "Simulador de finanzas personales · dinero ficticio" (D-69: "dinero ficticio" no se quita nunca). Nada imita los colores, íconos, tipografía ni flujos de una billetera real (1.1.1).
@@ -751,8 +767,53 @@ Un bróker **ficticio** ("Bróker de Ejemplo S.A., matrícula ficticia") conecta
 3. **Elegir un instrumento** entre ejemplos: CEDEAR de un ETF que replica el S&P 500, fondo money market, bono de ejemplo. Cada uno con su ficha estándar (riesgo, liquidez, moneda).
 4. **Comprar:** ver precio de ejemplo con fecha, ratio y tipo de cambio implícito (SIM-11), comisión y derechos de mercado ficticios, plazo de liquidación (contado inmediato o 24 horas, B-34).
 5. **Ver la tenencia** "en tu subcuenta comitente" con la explicación de Caja de Valores (B-22).
-6. **Seguir en el tiempo** con una serie de precios **sintética y rotulada como ejemplo** (no datos reales), con años buenos y malos, para practicar no vender en pánico y comparar con aportes periódicos (SIM-10).
+6. **Seguir en el tiempo:** desde un precio de partida de ejemplo (D-79: los precios de acciones y CEDEARs no son reales), el futuro avanza con una serie **sintética y rotulada como escenario**, con años buenos y malos, para practicar no vender en pánico y comparar con aportes periódicos (SIM-10).
 7. **Verificar al bróker real que elegirías** en la ficha del Anexo C, con el enlace al registro de la CNV.
+
+### 5.5 Contextos de uso y versatilidad (D-74, D-75; fase B)
+
+La misma billetera funciona en tres contextos. Lo que cambia se configura con datos (`Organization.kind` y un archivo de vocabulario por contexto), no con pantallas distintas.
+
+| | Organización | Institución educativa | Producto existente |
+| --- | --- | --- | --- |
+| Ejemplo de demo | Andina Servicios S.A. (4.1) | Instituto Superior de Ejemplo (ficticio) | Billetera de Ejemplo (socio ficticio, D-75) |
+| Quién aprende | Persona colaboradora | Estudiante (18 años o más) | Usuario de la app del socio |
+| Quién acompaña | Tutor o tutora | Tutor o tutora (D-20) | Nadie: aprendizaje autónomo con Fuerte |
+| Quién configura | Admin de L&D y Beneficios | Coordinación académica | Equipo de producto del socio |
+| Quién ve el impacto | Decisor (Compensaciones) | Dirección | Equipo de producto del socio |
+| Cómo se entra | SSO de trabajo simulado | Cuenta institucional simulada | Desde la app del socio, sin segundo inicio de sesión |
+| Recordatorios (F9) | Correo, Teams o Slack simulados | Correo y campus virtual simulados | Notificación de la app del socio, simulada |
+| Contenido propio | Recibo de sueldo de Andina | Beca o primer ingreso de ejemplo en lugar del sueldo; se adapta el módulo 1 | El que defina el socio; el módulo 17 enseña a leer la leyenda legal de cualquier billetera |
+
+**Reglas**
+- **Mismo código de roles** (`ld_admin`, `tutor`, `participant`, `sponsor`), con nombres visibles por contexto en los archivos de idioma de `src/locales/`. En el contexto de producto no hay tutoría ni cohortes visibles para el usuario; el equipo del socio ve solo métricas agregadas con el umbral de 5.
+- **La privacidad no cambia con el contexto:** ni la organización, ni la institución, ni el socio ven montos, movimientos, metas ni respuestas de hábitos.
+- **Modo integrado (D-75):** la billetera se puede mostrar sin la barra superior de Alcancía, dentro de la app del socio. La demo lo muestra con una página propia que simula la app de Billetera de Ejemplo y abre Alcancía en su interior. La marca del socio es ficticia y se arma con los tokens (otro `primary`, otro logo); nunca se imita una app real. Alcancía avisa al socio lo que pasa (misión completada, nivel desbloqueado) con eventos tipo xAPI documentados (F21), sin datos económicos.
+- **Landing:** la sección "Un recorrido para cada rol" suma un selector de contexto ("Organización", "Institución educativa", "Producto"), y el hero presenta el producto como simulador "para equipos, aulas y productos" (D-69).
+- **"Ver como"** suma el contexto: primero el contexto, después la persona.
+- **Educación:** solo nivel superior y formación profesional, con personas de 18 años o más. La escuela secundaria queda como línea futura, porque implica menores (8.3).
+- El case study puede nombrar productos reales del mercado como ejemplo de dónde podría integrarse, pero la interfaz nunca los nombra ni los imita.
+
+### 5.6 Valores reales del mercado (D-79; investigación en el ajuste de fase A, construcción en fase B)
+
+**Idea:** el dinero es ficticio, pero el mundo es el real. La persona practica con las tasas, la inflación y el tipo de cambio de verdad, con fecha y fuente.
+
+**Cómo, sin backend**
+- Una tarea de **GitHub Actions programada una vez por día** corre el build: un script (`scripts/fetch-market.mjs`) consulta las fuentes, valida los datos con Zod y escribe `public/market/snapshot.json` con cada valor, su fecha y su fuente. El sitio publicado lee ese archivo del mismo origen, así la CSP no cambia (`connect-src 'self'`) y no hay llamadas desde el navegador a terceros.
+- Si una fuente falla, el build no se rompe: se conserva el último valor válido con su fecha original o se usa el escenario de ejemplo, y la interfaz lo dice ("Valor al 10/11/2026: no pudimos actualizarlo hoy").
+- No se versiona un archivo por día en el repositorio: el snapshot se genera en el build.
+
+**Fuentes**
+| Dato | Fuente | Estado |
+| --- | --- | --- |
+| Tasas de referencia (plazo fijo, BADLAR), UVA, CER, tipo de cambio, inflación mensual | API pública de estadísticas monetarias del BCRA, versión 4.0 (`api.bcra.gob.ar/estadisticas/v4.0/monetarias`), sin clave | Verificar los identificadores de cada variable en el ajuste |
+| IPC | INDEC (B-40), o la serie que publique el BCRA | Verificar |
+| Precios de acciones, CEDEARs y bonos | No se usan datos reales: BYMA exige licencia para mostrarlos y no se va a gestionar | **Series de ejemplo**, rotuladas, con un enlace a BYMADATA para consultar los precios reales. No usar los endpoints públicos de open.bymadata ni fuentes de terceros que los repliquen |
+
+**En la interfaz**
+- Cada valor real con "Valor al DD/MM/AAAA · Fuente: …" y enlace a la fuente.
+- Lo que viene después del punto de partida, al "Avanzar un día / una semana / un mes", es un escenario: la persona elige si la inflación sigue como la última real, sube o baja, y la interfaz lo rotula.
+- Los avisos de 1.2 siguen siempre: una ganancia o pérdida con valores reales se puede leer como recomendación, así que el escenario y el aviso legal quedan visibles en cada resultado.
 
 ### F5. Metas y desafíos (participante)
 > Con D-50, las metas son **apartados con meta** dentro de Ahorrar, y las insignias son los **logros** de 5.0.
@@ -894,7 +955,18 @@ type Level = 'beginner' | 'intermediate' | 'advanced';
 
 interface Organization {
   id: string; name: string; logoUrl?: string; privacyThreshold: number;   // mínimo 5
+  kind: 'employer' | 'education' | 'product';   // D-74, 5.5; define vocabulario y roles visibles
 }
+
+// Tarjetas del momento justo en el modo libre (D-76): src/data/learning-cards.json
+interface LearningCard {
+  id: string; trigger: string; condition?: string;   // acción de la billetera y condición opcional
+  title: string; body: string; sourceIds: string[]; question?: Question;
+  guide: { guideId: string; part: number };           // D-78: parte exacta de la guía
+}
+
+// Valores reales (D-79): public/market/snapshot.json, generado en el build
+interface MarketValue { id: string; label: string; value: string; unit: 'percent' | 'ARS' | 'index'; date: string; sourceId: string }
 
 // Pensado para la futura academia corporativa: Academy > Program > Module > Lesson
 interface Program {
@@ -1017,7 +1089,8 @@ Identidad con SSO (OIDC o SAML) y MFA del proveedor; sesiones en cookies `HttpOn
 
 ## 9. Fuera del alcance y líneas futuras
 - **Encabezados de seguridad por HTTP con Cloudflare** y dominio propio (D-70): hoy no se puede en GitHub Pages.
-- **Datos en vivo** (tasas, UVA, inflación) desde fuentes oficiales: requiere backend o un proceso de actualización; hoy son escenarios de ejemplo.
+- **Datos en tiempo real** dentro de una sesión: fuera de alcance. Desde D-79, los valores reales llegan una vez por día con el build (5.6).
+- **Escuela secundaria** como contexto educativo: línea futura (D-74).
 - Recomendaciones personalizadas de productos, conexión con cuentas bancarias o billeteras, y cualquier operación real: **fuera por decisión de diseño**, no solo por alcance.
 - Integración real con LMS corporativos (SCORM, xAPI, cmi5) y con Teams o Slack.
 - La academia corporativa con varios programas (ciberseguridad, IA, etc.): siguiente proyecto.
@@ -1044,8 +1117,33 @@ Identidad con SSO (OIDC o SAML) y MFA del proveedor; sesiones en cookies `HttpOn
 13. Pulido, seguridad real del front y `docs/security.md`.
 14. **Revisión intermedia** en `docs/review-fase-a.md`.
 
-### Fase B
-15 a 28. F9 a F22, en ese orden, y el informe final.
+> Estado al 13/11/2026: pasos 0 a 14 y el paso 14b hechos (ver `docs/progress.md` y `docs/review-fase-a.md`).
+
+### Ajuste de fase A (D-82)
+15. **Documentación del ajuste:** registrar D-74 a D-82 en `docs/decisions.md` (como decisiones de la spec, con la fecha), sumar los requerimientos nuevos a `docs/requirements.md` y actualizar `docs/learning-design.md` (aprendizaje en el momento justo y consecuencias) y `docs/wallet-engine.md` (reglas de D-77). Lourdes revisa.
+16. **Tarjetas en el momento justo en el modo libre (D-76):** `learning-cards.json` con el catálogo mínimo de 5.3, el motor que escucha las acciones de la billetera, la regla de no interrumpir dos veces y no repetir, y "¿Por qué importa?" en cada pantalla de la billetera (Inicio, Pagar y sus flujos, Tarjeta y préstamos, Presupuesto, Apartados, Rendir, Invertir, Perfil). Tests del motor.
+17. **La guía nace de la acción (D-78):** las guías aceptan un enlace a una parte (`/app/learn/guides/:guideId?part=n&from=<ruta>`), muestran "Volver a <sección>" y conservan el estado de la pantalla de origen. Las tarjetas y los "¿Por qué importa?" usan esos enlaces.
+18. **Consecuencias en la billetera (D-77):** las misiones "El préstamo tentador", "Sal de tus deudas", "El mensaje falso", "Mes completo" y "Aguanta la caída" se juegan en la billetera de la persona. Reglas en el motor: préstamo en Tus deudas con cuotas que se debitan al avanzar el tiempo, intereses por pagar el mínimo, monto perdido por una estafa, y cómo se revierte cada una. Revisar los estados de demo de Mariana y Diego para que sigan coherentes. Tests de cada regla con casos calculados a mano en `docs/formulas.md`.
+19. **Evaluación y detalles de la auditoría:** preguntas `branching` en los bancos de los niveles 5 y 6 (D-81); la insignia de un módulo no obtenida dice cómo obtenerla en lugar de "Pendiente"; los chips de fuentes no muestran códigos internos (por ejemplo, "Cálculo F-03, F-08, F-09" pasa a "Cálculo verificado a mano"); en P1, la misión sugerida es la del nivel actual, o explica que quedó una del anterior.
+20. **Investigación de valores reales (D-79, solo documentación y un script de prueba):** verificar en la API del BCRA los identificadores de cada variable de 5.6, probar el script `scripts/fetch-market.mjs` en local sin conectarlo a la interfaz, y documentar en `docs/market-data.md` fuentes, frecuencia, formato, qué pasa si fallan y qué falta para los precios de BYMA. Las dudas van a `docs/questions.md`.
+21. **Revisión del ajuste:** tests, axe y desbordes en los 6 anchos, capturas de las pantallas tocadas, y una sección "Ajuste" en `docs/review-fase-a.md` con los criterios de la sección 11 que se sumaron.
+
+### Fase B (reordenada el 13/11/2026)
+22. **Valores reales del mercado (D-79, 5.6):** el script en GitHub Actions, el snapshot y su uso en Rendir, Tarjeta y préstamos, las herramientas y el punto de partida de los escenarios.
+23. **Contextos de uso (D-74, 5.5):** `Organization.kind`, vocabulario por contexto, "Ver como" con contexto, landing con el selector, y los datos semilla del Instituto Superior de Ejemplo.
+24. **Modo integrado en un producto (D-75, 5.5) y F21 (registro tipo xAPI):** la página que simula la app de Billetera de Ejemplo, Alcancía sin su barra superior y los eventos que se envían al socio.
+25. **F19 y F9:** repaso espaciado y recordatorios, con los canales de cada contexto.
+26. **Meta colectiva por cohorte (D-80) y F20:** aprendizaje social por cohorte.
+27. **Contenido:** guías 2 y 3 de cada módulo (D-61), F11 (módulos 16 y 18) y F22 (nivel 8, cripto).
+28. **F18:** escape room "Tu primer sueldo" con Fuerte.
+29. **F12:** insignias y certificados.
+30. **F15:** seguimiento a 30 días.
+31. **F14:** constructor de lecciones, que también arma tarjetas de aprendizaje para `learning-cards.json`.
+32. **F13:** sesiones con el tutor.
+33. **F16:** Mi privacidad.
+34. **F10:** glosario completo con búsqueda y biblioteca.
+35. **F17:** preferencias e inglés completo.
+36. **Informe final** en `docs/review.md`.
 
 Después de cada paso: build, tests y deploy en verde.
 
@@ -1078,6 +1176,14 @@ Después de cada paso: build, tests y deploy en verde.
 - [ ] CSP, `npm audit` en CI y deploy público funcionando.
 - [ ] Documentación de la sección 14 completa y coherente con lo construido.
 
+**Criterios del ajuste de fase A (D-82)**
+- [ ] En el modo libre, sin misión activa, cada acción del catálogo mínimo de 5.3 dispara su tarjeta una sola vez, con fuente y pregunta, y respeta el nivel de presencia de Fuerte (tests).
+- [ ] Cada pantalla de la billetera tiene "¿Por qué importa?" y lleva a la parte exacta de una guía, con "Volver" a la pantalla de origen sin perder lo cargado.
+- [ ] Las misiones de D-77 dejan su huella en la billetera (deuda, cuotas, intereses, monto perdido) y la devolución explica cómo revertirla dentro de la simulación (tests con casos calculados a mano).
+- [ ] Los desafíos de los niveles 5 y 6 tienen al menos una pregunta de caso con decisiones.
+- [ ] `docs/market-data.md` documenta las fuentes reales verificadas y el plan de fase B, sin cambiar todavía la interfaz.
+- [ ] Los estados de demo de Mariana y Diego siguen coherentes después de los cambios.
+
 ---
 
 ## 12. Cómo trabajar y registrar dudas
@@ -1108,6 +1214,7 @@ En `docs/`, en Markdown, con diagramas Mermaid y citas en **APA 7**. Índice en 
 - **14.10 `formulas.md`:** cada fórmula con su explicación, supuestos, simplificaciones y casos de prueba calculados a mano.
 - **14.11 `issues.md`, `decisions.md`, `progress.md` y `questions.md`** (dudas de contenido y datos pendientes de verificar, incluidos los ⚠ de los Anexos B y C).
 - **14.13 `wallet-engine.md`:** reglas de la economía simulada (cobro del sueldo, débitos, inflación sobre precios, cálculo de "meses de gastos" y origen de las deudas de la simulación).
+- **14.14 `market-data.md`:** fuentes de los valores reales (D-79), identificadores, frecuencia, validación, qué pasa si fallan y por qué los precios de acciones y CEDEARs quedan de ejemplo.
 - **14.12 `security.md`** (con las capas actuales en GitHub Pages, sus límites y la mejora futura con Cloudflare, D-70).
 
 ---
