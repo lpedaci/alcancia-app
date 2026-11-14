@@ -18,7 +18,7 @@ Una auditoría del 13/11/2026 encontró que el aprendizaje todavía dependía de
 
 | Principio | Qué cambia | Por qué |
 | --- | --- | --- |
-| **El momento justo también en el modo libre** (D-76) | Las tarjetas se disparan por acciones de la billetera, haya o no misión, desde un catálogo declarativo (`learning-cards.json`). "¿Por qué importa?" está visible en cada pantalla, también con Fuerte en "Silencio" (D-209) | La explicación llega cuando la persona tiene la pregunta, no antes ni en otro lugar. Una tarjeta por acción y sin repetir lo ya respondido bien, para no saturar |
+| **El momento justo también en el modo libre** (D-76) | Las tarjetas se disparan por acciones de la billetera, haya o no misión, desde un catálogo declarativo (`learning-cards.json`). "¿Por qué importa?" está visible en cada pantalla, también con Fuerte en "Silencio" (D-209) | La explicación llega cuando la persona tiene la pregunta, no antes ni en otro lugar: el aprendizaje en el momento de la necesidad (Gottfredson y Mosher, 2011). Una tarjeta por acción y sin repetir lo ya respondido bien, para no saturar |
 | **Las acciones tienen consecuencias** (D-77, D-208) | Todas las misiones se juegan en la billetera de la persona: un préstamo queda en Tus deudas y bloquea Invertir, pagar el mínimo genera intereses, una estafa descuenta el monto. Se revierte con acciones de la simulación (pagar, cancelar, reportar), nunca con "deshacer" | La consecuencia es la retroalimentación más fuerte del aprendizaje experiencial (Kolb, 1984): vivir el costo, reflexionar con la devolución y probar otra decisión. "Equivocarte es gratis" sigue valiendo: el dinero es ficticio y "Empezar de cero" está siempre |
 | **La guía nace de la acción** (D-78) | Una tarjeta o un "¿Por qué importa?" llevan a la parte exacta de la guía y ofrecen volver a la pantalla de origen, con lo cargado intacto | El contenido se consulta como apoyo al desempeño, sin perder el hilo de la tarea (aprendizaje en el flujo de trabajo) |
 
@@ -209,6 +209,8 @@ Se documentan sus mecánicas antes de adaptarlo (F18). Pendiente para la fase B:
 Anderson, L. W., & Krathwohl, D. R. (Eds.). (2001). *A taxonomy for learning, teaching, and assessing: A revision of Bloom's taxonomy of educational objectives*. Longman.
 
 Gagné, R. M., Wager, W. W., Golas, K. C., & Keller, J. M. (2005). *Principles of instructional design* (5.ª ed.). Wadsworth.
+
+Gottfredson, C., & Mosher, B. (2011). *Innovative performance support: Strategies and practices for learning in the workflow*. McGraw-Hill.
 
 Kirkpatrick, J. D., & Kirkpatrick, W. K. (2016). *Kirkpatrick's four levels of training evaluation*. ATD Press.
 
