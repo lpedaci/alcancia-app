@@ -74,10 +74,16 @@ export function useLevels(personId: string) {
 
   const isOpen = (levelId: string) => statuses.find((s) => s.level.id === levelId)?.status !== 'locked';
   const done = new Set([...missionCompletions.filter((m) => m.personId === personId).map((m) => m.missionId), ...wallet.completedMissionIds]);
-  // Active mission: the first one not done in an unlocked level, in level order (5.3).
-  const activeMission = MISSIONS.find((m) => isOpen(m.levelId) && !done.has(m.id));
+  const current = currentLevel(statuses);
+  // Active mission (5.3, RF-90): the current level's first; if none is left there, one still pending
+  // from an earlier open level, which the home says (`activeMissionFromEarlier`).
+  const pending = MISSIONS.filter((m) => isOpen(m.levelId) && !done.has(m.id));
+  const ofCurrent = pending.find((m) => m.levelId === current?.level.id);
+  const activeMission = ofCurrent ?? pending[0];
+  const activeMissionLevel = activeMission ? statuses.find((s) => s.level.id === activeMission.levelId)?.level.order : undefined;
+  const activeMissionFromEarlier = Boolean(activeMission && !ofCurrent && current && activeMission.levelId !== current.level.id);
 
-  return { statuses, current: currentLevel(statuses), next: nextUnlock(statuses), isOpen, activeMission, wallet };
+  return { statuses, current, next: nextUnlock(statuses), isOpen, activeMission, activeMissionLevel, activeMissionFromEarlier, wallet };
 }
 
 export type { LevelStatus };

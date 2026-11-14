@@ -1428,12 +1428,12 @@
         {
           "id": "setup",
           "kind": "action",
-          "instruction": "Abre tu cuenta de práctica, transfiere $ 300.000 y compra 4 CEDEARs de ejemplo.",
-          "button": "Abrir, fondear y comprar",
+          "instruction": "Prepara el escenario: si ya tienes CEDEARs en tu cuenta comitente, partimos de tu cartera; si no, de una cartera de ejemplo con 4 CEDEARs.",
+          "button": "Preparar el escenario",
           "action": "setup_buy",
           "value": "300000",
           "target": "4",
-          "done": "Listo: tienes 4 CEDEARs de ejemplo. Pagaste {{portfolioCost}}, con los costos incluidos."
+          "done": "Listo: el escenario de práctica tiene tu punto de partida."
         },
         {
           "id": "drop",

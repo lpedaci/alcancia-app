@@ -14,6 +14,7 @@ import {
   walletMetrics,
 } from '@/features/wallet/engine/engine';
 import type { WalletState } from '@/features/wallet/engine/types';
+import { buy, fundBrokerage, openBrokerage } from '@/features/invest/engine';
 import { D } from '@/lib/finance';
 import { answerStep, checkCriterion, finishMission, type MissionDef, type MissionRun, missionById, nextStep, startMission, walletAfter } from './engine';
 
@@ -68,6 +69,8 @@ describe('"El préstamo tentador" in the wallet (F-35)', () => {
     const loan = activeDebts(run.wallet).find((d) => d.kind === 'loan')!;
     expect(loan.highRate).toBe(true);
     expect(run.wallet.plans!.at(-1)!.installment).toBe('41737.16');
+    // Until the first installment, Tus deudas shows the original principal.
+    expect(loan.balance.toFixed(2)).toBe('600000.00');
     expect(walletMetrics(run.wallet).high_rate_debt).toBeGreaterThan(0);
   });
 
@@ -166,4 +169,35 @@ it('finishing a mission in the wallet keeps what happened and records the comple
   run = { ...run, wallet: { ...run.wallet, securitySettings: { twoFactor: true, dailyLimit: '200000.00' } } };
   const finished = finishMission(def, { ...run, results: Object.fromEntries(def.steps!.map((s) => [s.id, { attempts: 1, done: true, correct: true }])) });
   if (finished.finished) expect(walletAfter(def, finished, buildMariana()).securitySettings.twoFactor).toBe(true);
+});
+
+describe('"Aguanta la caída" from the real portfolio (D-214)', () => {
+  const def = missionById('mission-hold-the-drop')!;
+  const owner = () => buy(fundBrokerage(openBrokerage(buildMariana(), 'moderate'), '200000'), 'cedear-sp500', 3);
+  const plainText = (text?: string) => (text ?? '').replace(/\u00a0/g, ' ');
+
+  it('starts from the person\'s CEDEARs and brokerage cash, in a practice copy', () => {
+    const current = owner();
+    const run = startMission(def, current);
+    expect(run).toMatchObject({ mode: 'practice', portfolio: 'own' });
+    expect(run.wallet.brokerage!.holdings).toEqual(current.brokerage!.holdings);
+    expect(run.wallet.brokerage!.cash).toBe(current.brokerage!.cash);
+    // Setting up buys nothing: the scenario starts from what she has.
+    const setup = answerStep(def, run);
+    expect(setup.run.wallet.brokerage!.trades).toHaveLength(current.brokerage!.trades.length);
+  });
+
+  it('the drop happens from the mission day, and the person wallet does not change', () => {
+    const current = owner();
+    let run = play(def, startMission(def, current));
+    const drop = answerStep(def, run);
+    expect(plainText(drop.feedback?.text)).toMatch(/−\d/);
+    run = { ...drop.run, finished: true };
+    expect(walletAfter(def, run, current).brokerage).toEqual(current.brokerage);
+    expect(walletAfter(def, run, current).balance).toBe(current.balance);
+  });
+
+  it('without CEDEARs, uses an example portfolio and says so', () => {
+    expect(startMission(def, buildMariana())).toMatchObject({ mode: 'practice', portfolio: 'example' });
+  });
 });

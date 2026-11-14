@@ -31,6 +31,18 @@ export type LearningQuestion =
   | (Base & { type: 'ordering'; ordering: { items: Option[]; correctOrder: string[] } })
   | (Base & { type: 'matching'; matching: { left: Option[]; right: Option[]; pairs: [string, string][] } })
   | (Base & { type: 'categorize'; categorize: { categories: { id: string; label: string }[]; items: (Option & { categoryId: string })[] } })
+  /**
+   * Case with decisions (5.1, D-81, D-216): each choice leads to a consequence and the next decision.
+   * The answer is the path of choice ids; it ends in an outcome, good or not, with its own feedback.
+   */
+  | (Base & {
+      type: 'branching';
+      branching: {
+        startNodeId: string;
+        nodes: Record<string, { text: string; choices: { id: string; text: string; next?: string; outcome?: string }[] }>;
+        outcomes: Record<string, { good: boolean; feedback: string }>;
+      };
+    })
   /** Exercise with a simulator (5.1, RF-43, D-205): the tool embedded with a preset, and the result typed as a number. */
   | (Base & { type: 'simulator_task'; simulatorTask: { simId: string; preset: Record<string, string>; answer: string; tolerance: string; unit: 'ARS' | 'USD' | 'percent' | 'months' }; help: string });
 
@@ -60,6 +72,30 @@ export interface ChallengeDef {
   mastery: boolean;
   questionsPerModule: Record<string, number>;
   passingScore: number;
+  /** Questions every draw includes, within their module's count (D-81: the case with decisions). */
+  alwaysInclude?: string[];
+}
+
+type Branching = Extract<LearningQuestion, { type: 'branching' }>;
+
+/** Where a path of choices leads in a case with decisions: the steps taken and the node or outcome reached. */
+export function branchState(question: Branching, path: string[]) {
+  const steps: { nodeId: string; choiceId: string }[] = [];
+  let nodeId: string | undefined = question.branching.startNodeId;
+  let outcome: string | undefined;
+  for (const choiceId of path) {
+    const node: Branching['branching']['nodes'][string] | undefined = nodeId ? question.branching.nodes[nodeId] : undefined;
+    const choice: { id: string; text: string; next?: string; outcome?: string } | undefined = node?.choices.find((c) => c.id === choiceId);
+    if (!node || !choice || !nodeId) break;
+    steps.push({ nodeId, choiceId });
+    if (choice.outcome) {
+      outcome = choice.outcome;
+      nodeId = undefined;
+      break;
+    }
+    nodeId = choice.next;
+  }
+  return { steps, nodeId, outcome };
 }
 
 export interface ModuleMeta {
@@ -97,6 +133,8 @@ export function isAnswered(question: LearningQuestion, answer: Answer | undefine
     case 'numeric':
     case 'simulator_task':
       return typeof answer === 'string' && parseDecimalInput(answer) !== null;
+    case 'branching':
+      return Array.isArray(answer) && branchState(question, answer).outcome !== undefined;
     case 'ordering':
       return Array.isArray(answer) && answer.length === question.ordering.items.length;
     case 'matching':
@@ -125,6 +163,10 @@ export function isCorrect(question: LearningQuestion, answer: Answer | undefined
       const value = parseDecimalInput(answer as string)!;
       return new Decimal(value).minus(question.numeric.answer).abs().lte(question.numeric.tolerance);
     }
+    case 'branching': {
+      const outcome = branchState(question, answer as string[]).outcome;
+      return Boolean(outcome && question.branching.outcomes[outcome]?.good);
+    }
     case 'simulator_task': {
       const value = parseDecimalInput(answer as string)!;
       return new Decimal(value).minus(question.simulatorTask.answer).abs().lte(question.simulatorTask.tolerance);
@@ -141,6 +183,11 @@ export function isCorrect(question: LearningQuestion, answer: Answer | undefined
 /** The explanation for this answer: per option for single choice, right or wrong for the rest. */
 export function feedbackFor(question: LearningQuestion, answer: Answer | undefined): string {
   if ((question.type === 'single' || question.type === 'reflection') && typeof answer === 'string' && question.feedback[answer]) return question.feedback[answer];
+  // A case with decisions explains the path that was taken (D-81).
+  if (question.type === 'branching' && Array.isArray(answer)) {
+    const outcome = branchState(question, answer).outcome;
+    if (outcome) return question.branching.outcomes[outcome]?.feedback ?? '';
+  }
   return isCorrect(question, answer) ? (question.feedback.correct ?? '') : (question.feedback.incorrect ?? '');
 }
 
@@ -177,7 +224,11 @@ function withShuffledOptions(question: LearningQuestion, random: () => number): 
 export function drawChallenge(challenge: ChallengeDef, random: () => number = Math.random): LearningQuestion[] {
   const picked: LearningQuestion[] = [];
   for (const [moduleId, count] of Object.entries(challenge.questionsPerModule)) {
-    picked.push(...shuffle(BANK.filter((q) => q.moduleId === moduleId), random).slice(0, count));
+    const bank = BANK.filter((q) => q.moduleId === moduleId);
+    // D-81: the case with decisions is always in the challenge, inside its module's share.
+    const fixed = bank.filter((q) => challenge.alwaysInclude?.includes(q.id));
+    const rest = shuffle(bank.filter((q) => !fixed.includes(q)), random);
+    picked.push(...[...fixed, ...rest].slice(0, count));
   }
   return shuffle(picked, random).map((q) => withShuffledOptions(q, random));
 }

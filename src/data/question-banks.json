@@ -1240,6 +1240,95 @@
       ]
     },
     {
+      "id": "m05-case-vacation-loan",
+      "moduleId": "module-05",
+      "type": "branching",
+      "prompt": "Un caso con decisiones: este mes te quedan $ 100.000 libres, tienes el resumen de la tarjeta financiado a una tasa de ejemplo (TNA) del 60 % y te ofrecen un préstamo para irte de vacaciones.",
+      "branching": {
+        "startNodeId": "start",
+        "nodes": {
+          "start": {
+            "text": "¿Qué haces primero?",
+            "choices": [
+              {
+                "id": "card",
+                "text": "Uso los $ 100.000 para bajar la deuda de la tarjeta",
+                "outcome": "order"
+              },
+              {
+                "id": "loan",
+                "text": "Pido el préstamo: la cuota entra en mi sueldo",
+                "next": "offer"
+              },
+              {
+                "id": "fund",
+                "text": "Dejo los $ 100.000 en un fondo money market",
+                "next": "fund"
+              }
+            ]
+          },
+          "offer": {
+            "text": "La oferta tiene una TNA de ejemplo del 55 % y un costo financiero total (CFT) del 81,8 %. ¿Qué haces antes de firmar?",
+            "choices": [
+              {
+                "id": "read",
+                "text": "Miro el CFT y el total: pagaría mucho más de lo que recibo, así que primero bajo la tarjeta",
+                "outcome": "reconsider"
+              },
+              {
+                "id": "sign",
+                "text": "Firmo: lo importante es que la cuota entre en el sueldo",
+                "outcome": "stacked"
+              }
+            ]
+          },
+          "fund": {
+            "text": "El fondo rinde alrededor de un 31 % anual (tasa de ejemplo) y la tarjeta cobra un 60 %. ¿Qué conviene en este escenario?",
+            "choices": [
+              {
+                "id": "pay",
+                "text": "Sacarlos del fondo y pagar la tarjeta",
+                "outcome": "orderLate"
+              },
+              {
+                "id": "keep",
+                "text": "Dejarlos en el fondo: algo rinden",
+                "outcome": "cost"
+              }
+            ]
+          }
+        },
+        "outcomes": {
+          "order": {
+            "good": true,
+            "feedback": "Bien: pagar una deuda que cobra 60 % anual equivale a ganar ese 60 % seguro. Primero lo que cuesta más; después, ahorrar e invertir."
+          },
+          "reconsider": {
+            "good": true,
+            "feedback": "Mirar el CFT antes de firmar es el hábito clave: muestra que pagarías bastante más de lo que recibes. Y con una deuda cara abierta, conviene saldarla antes de sumar otra."
+          },
+          "stacked": {
+            "good": false,
+            "feedback": "Muchas personas miran solo la cuota. Así sumas una deuda de tasa alta a otra: el CFT de 81,8 % dice cuánto cuesta de verdad. Primero lo que cuesta más."
+          },
+          "orderLate": {
+            "good": true,
+            "feedback": "Bien visto: el fondo rinde menos de lo que cuesta la tarjeta, así que pagarla primero es lo que más te ahorra en este escenario."
+          },
+          "cost": {
+            "good": false,
+            "feedback": "El fondo rinde menos de lo que cuesta la tarjeta: cada mes, la diferencia juega en contra. En este escenario conviene pagar primero la tarjeta."
+          }
+        }
+      },
+      "feedback": {},
+      "sourceIds": [
+        "A-23",
+        "B-04",
+        "F-30"
+      ]
+    },
+    {
       "id": "m06-cft",
       "moduleId": "module-06",
       "type": "single",
@@ -2097,6 +2186,96 @@
       },
       "sourceIds": [
         "F-03"
+      ]
+    },
+    {
+      "id": "m10-case-idle-money",
+      "moduleId": "module-10",
+      "type": "branching",
+      "prompt": "Un caso con decisiones: tienes $ 200.000 que no vas a usar por un mes. En el escenario de ejemplo, la inflación es del 3 % mensual.",
+      "branching": {
+        "startNodeId": "start",
+        "nodes": {
+          "start": {
+            "text": "¿Qué haces con ese dinero?",
+            "choices": [
+              {
+                "id": "fixed",
+                "text": "Lo pongo en un plazo fijo tradicional de ejemplo, con TNA del 34 %",
+                "next": "fixed"
+              },
+              {
+                "id": "uva",
+                "text": "Comparo con un plazo fijo UVA de ejemplo",
+                "next": "uva"
+              },
+              {
+                "id": "idle",
+                "text": "Lo dejo en la cuenta, sin rendimiento",
+                "outcome": "idle"
+              }
+            ]
+          },
+          "fixed": {
+            "text": "Con TNA del 34 %, en 30 días rinde cerca de 2,8 %. ¿Le gana a la inflación del escenario?",
+            "choices": [
+              {
+                "id": "yes",
+                "text": "Sí: algo rinde",
+                "outcome": "nominal"
+              },
+              {
+                "id": "no",
+                "text": "No: 2,8 % es menos que 3 %, así que la tasa real es negativa",
+                "outcome": "real"
+              }
+            ]
+          },
+          "uva": {
+            "text": "El plazo fijo UVA ajusta el capital por inflación (a través del CER) y suma una tasa adicional, pero suele pedir un plazo mínimo más largo y no todos los bancos lo ofrecen. ¿Qué miras para decidir?",
+            "choices": [
+              {
+                "id": "term",
+                "text": "Si puedo dejar el dinero quieto todo ese plazo",
+                "outcome": "uvaTerm"
+              },
+              {
+                "id": "rate",
+                "text": "Solo cuál tiene la tasa más alta",
+                "outcome": "uvaRate"
+              }
+            ]
+          }
+        },
+        "outcomes": {
+          "idle": {
+            "good": false,
+            "feedback": "Quieto, con 3 % mensual de inflación, pierde poder de compra todos los meses. Aunque sea por un mes, conviene comparar dónde puede rendir y cuál es su tasa real."
+          },
+          "nominal": {
+            "good": false,
+            "feedback": "Rendir no alcanza: hay que compararlo con la inflación. (1 + 0,028) ÷ (1 + 0,03) − 1 ≈ −0,2 %: tendrías más pesos, pero comprarían un poco menos."
+          },
+          "real": {
+            "good": true,
+            "feedback": "Exacto: la tasa real es (1 + 0,028) ÷ (1 + 0,03) − 1 ≈ −0,2 %. Mirar la tasa real es lo que te dice si tu dinero gana o pierde poder de compra."
+          },
+          "uvaTerm": {
+            "good": true,
+            "feedback": "Bien: la UVA protege contra la inflación, pero solo si puedes dejar el dinero el plazo mínimo. Las condiciones cambian según el banco, así que hay que consultarlas."
+          },
+          "uvaRate": {
+            "good": false,
+            "feedback": "La tasa sola no alcanza: el plazo fijo UVA pide dejar el dinero más tiempo. Si lo necesitas antes, la protección contra la inflación no te sirve."
+          }
+        }
+      },
+      "feedback": {},
+      "sourceIds": [
+        "F-03",
+        "F-08",
+        "F-09",
+        "B-03"
       ]
     },
     {

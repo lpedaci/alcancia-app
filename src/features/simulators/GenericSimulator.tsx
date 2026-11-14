@@ -350,7 +350,7 @@ export function GenericSimulator({ def, preset, labelledBy }: { def: SimDef; pre
       <p className="border-t border-outline-variant pt-3 text-body-small text-on-surface-variant">{t('sim3.legal')}</p>
 
       {output && (
-        <div aria-hidden className="sticky bottom-20 z-10 flex items-center justify-between gap-3 rounded-lg bg-inverse-surface px-4 py-3 text-inverse-on-surface shadow-elevation-2 @3xl:hidden">
+        <div aria-hidden className="sticky bottom-[var(--sticky-result-offset,5rem)] z-10 flex items-center justify-between gap-3 rounded-lg bg-inverse-surface px-4 py-3 text-inverse-on-surface shadow-elevation-2 @3xl:hidden">
           <span className="min-w-0 truncate text-label-large">{output.mainLabel}</span>
           <span className="shrink-0 text-title-medium tabular-nums">{output.main}</span>
         </div>

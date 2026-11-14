@@ -26,6 +26,8 @@ export interface LocalData {
   fuertePresence?: FuertePresence;
   /** Learning cards shown and answered well (D-76), shared by missions and the free mode. */
   learningCards?: { shown: string[]; correct: string[] };
+  /** Decisions taken in a practice scenario (D-214): what the person chose, never amounts. */
+  learningEvents?: { verb: 'decided'; object: string; response: string; day: number }[];
   /** xAPI-like statements of the cards (F21): verb, card and simulated day, never amounts. */
   cardStatements?: { verb: 'experienced' | 'answered' | 'passed'; object: string; day: number }[];
 }

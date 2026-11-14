@@ -32,7 +32,7 @@ export function LearnPage() {
   const { t } = useTranslation();
   const user = useCurrentUser();
   const personId = user?.personId ?? '';
-  const { statuses, current, wallet } = useLevels(personId);
+  const { statuses, current, wallet, isOpen } = useLevels(personId);
   // Select whole arrays (stable references) and filter here, so the store snapshot never changes on read.
   const allGuides = useDataStore((s) => s.guideProgress);
   const allAttempts = useDataStore((s) => s.challengeAttempts);
@@ -166,11 +166,31 @@ export function LearnPage() {
             <ul className="flex flex-col gap-2" aria-label={t('learn.map.badges')}>
               {MODULES.filter((m) => m.phase === 'A' && guideOfModule(m.id)).map((m) => {
                 const earned = badges.has(m.id);
+                // D-210: a badge not earned says why and how to try again; the rule of D-57 does not change.
+                const level = statuses.find((s) => s.level.id === moduleById(m.id)?.levelId)?.level;
+                const part = attempts.reduce<number | undefined>((best, a) => (a.moduleScores[m.id] === undefined ? best : Math.max(best ?? 0, a.moduleScores[m.id]!)), undefined);
+                const why = earned
+                  ? undefined
+                  : part === undefined
+                    ? t('learn.map.badgeHow', { level: level?.order })
+                    : t('learn.map.badgeBelow', { part: pct(part), passing: pct(passing), level: level?.order });
                 return (
-                  <li key={m.id} className={cn('flex items-center gap-3 rounded-lg px-3 py-2', earned ? 'bg-tertiary-container text-on-tertiary-container' : 'border border-dashed border-outline-variant text-on-surface-variant')}>
-                    <Icon name="military_tech" size={20} filled={earned} />
-                    <span className="min-w-0 flex-1 text-body-medium">{t('learn.challenge.module', { n: m.order, title: m.title })}</span>
-                    <span className="text-label-medium">{earned ? t('learn.map.earned') : t('learn.map.notEarned')}</span>
+                  <li key={m.id} className={cn('flex flex-col gap-1 rounded-lg px-3 py-2', earned ? 'bg-tertiary-container text-on-tertiary-container' : 'border border-dashed border-outline-variant text-on-surface-variant')}>
+                    <span className="flex items-center gap-3">
+                      <Icon name="military_tech" size={20} filled={earned} />
+                      <span className="min-w-0 flex-1 text-body-medium">{t('learn.challenge.module', { n: m.order, title: m.title })}</span>
+                      <span className="text-label-medium">{earned ? t('learn.map.earned') : t('learn.map.notEarned')}</span>
+                    </span>
+                    {why && (
+                      <span className="pl-8 text-body-small">
+                        {why}{' '}
+                        {level?.challengeId && isOpen(level.id) && (
+                          <Link to={`/app/learn/challenges/${level.challengeId}`} className="text-primary underline underline-offset-2">
+                            {t('learn.map.badgeTry', { level: level.order })}
+                          </Link>
+                        )}
+                      </span>
+                    )}
                   </li>
                 );
               })}

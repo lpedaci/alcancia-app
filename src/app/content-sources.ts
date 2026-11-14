@@ -99,7 +99,7 @@ export function describeSources(codes: string[]): ContentSource[] {
       key: 'F',
       kind: 'formula',
       name: `Cálculo verificado a mano: ${cases.length === 1 ? 'caso' : 'casos'} ${cases.join(', ')} de las fórmulas del proyecto`,
-      short: `Cálculo ${cases.join(', ')}`,
+      short: 'Cálculo verificado a mano',
       url: FORMULAS_URL,
     });
   }

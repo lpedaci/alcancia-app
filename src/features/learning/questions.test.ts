@@ -44,6 +44,20 @@ function rightAnswer(q: LearningQuestion): Answer {
       return Object.fromEntries(q.categorize.items.map((i) => [i.id, i.categoryId]));
     case 'simulator_task':
       return q.simulatorTask.answer.replace('.', ',');
+    case 'branching': {
+      // The first path that ends in a good outcome.
+      const walk = (nodeId: string, path: string[]): string[] | undefined => {
+        for (const c of q.branching.nodes[nodeId]!.choices) {
+          if (c.outcome && q.branching.outcomes[c.outcome]?.good) return [...path, c.id];
+          if (c.next) {
+            const found = walk(c.next, [...path, c.id]);
+            if (found) return found;
+          }
+        }
+        return undefined;
+      };
+      return walk(q.branching.startNodeId, [])!;
+    }
   }
 }
 
@@ -66,7 +80,13 @@ describe('content of levels 1 to 7 (D-61)', () => {
     for (const q of BANK) {
       expect(isCorrect(q, rightAnswer(q)), q.id).toBe(true);
       expect(feedbackFor(q, rightAnswer(q)), q.id).toBeTruthy();
-      if (q.type !== 'single') expect(q.feedback.incorrect, q.id).toBeTruthy();
+      if (q.type === 'branching') {
+        // Every path ends in an outcome with its own feedback, and at least one path is good (D-81).
+        const outcomes = Object.values(q.branching.outcomes);
+        expect(outcomes.every((o) => o.feedback.length > 20), q.id).toBe(true);
+        expect(outcomes.some((o) => o.good) && outcomes.some((o) => !o.good), q.id).toBe(true);
+        for (const node of Object.values(q.branching.nodes)) for (const c of node.choices) expect(Boolean(c.next ? q.branching.nodes[c.next] : q.branching.outcomes[c.outcome ?? '']), `${q.id}/${c.id}`).toBe(true);
+      } else if (q.type !== 'single') expect(q.feedback.incorrect, q.id).toBeTruthy();
       else for (const o of q.options) expect(q.feedback[o.id], `${q.id}/${o.id}`).toBeTruthy();
     }
   });
@@ -218,5 +238,23 @@ describe('exercises with a simulator (5.1, RF-43, D-205)', () => {
     const c = compound.simulatorTask.preset;
     const final = compoundGrowth({ initial: c.initial!, monthly: c.monthly!, annualRate: String(Number(c.rate) / 100), years: Number(c.years) }).final;
     expect(final.toFixed(2)).toBe(compound.simulatorTask.answer);
+  });
+});
+
+describe('cases with decisions in the challenges of levels 5 and 6 (D-81)', () => {
+  it('every draw of those challenges includes one', () => {
+    for (const challenge of CHALLENGES.filter((c) => c.levelId === 'level-5' || c.levelId === 'level-6')) {
+      for (let seed = 1; seed <= 20; seed += 1) {
+        expect(drawChallenge(challenge, seeded(seed)).some((q) => q.type === 'branching'), `${challenge.id} #${seed}`).toBe(true);
+      }
+    }
+  });
+
+  it('a path that ends well scores, one that does not explains why, and an unfinished path is not answered', () => {
+    const q = BANK.find((x) => x.id === 'm10-case-idle-money') as Extract<LearningQuestion, { type: 'branching' }>;
+    expect(isCorrect(q, ['fixed', 'no'])).toBe(true);
+    expect(isCorrect(q, ['fixed', 'yes'])).toBe(false);
+    expect(feedbackFor(q, ['fixed', 'yes'])).toContain('−0,2 %');
+    expect(isAnswered(q, ['fixed'])).toBe(false);
   });
 });

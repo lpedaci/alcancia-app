@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { MoneyInput } from '@/components/money/MoneyInput';
 import { PercentInput } from '@/components/money/PercentInput';
@@ -10,7 +11,7 @@ import { Select } from '@/components/ui/Select';
 import { TextField } from '@/components/ui/TextField';
 import { GenericSimulator } from '@/features/simulators/GenericSimulator';
 import { simById } from '@/features/simulators/defs';
-import type { Answer, LearningQuestion } from './questions';
+import { type Answer, branchState, type LearningQuestion } from './questions';
 
 /**
  * One question of any phase A type (5.1) with its accessible alternative: radios and checkboxes in
@@ -102,6 +103,8 @@ export function QuestionView({
       if (question.numeric.unit === 'percent') return <PercentInput {...field} />;
       return <MoneyInput {...field} currency={question.numeric.unit === 'USD' ? 'USD' : 'ARS'} />;
     }
+    case 'branching':
+      return <BranchingCase question={question} value={(value as string[] | undefined) ?? []} onChange={onChange} disabled={disabled} idPrefix={name} />;
     case 'simulator_task':
       return <SimulatorTask question={question} value={value as string | undefined} onChange={onChange} disabled={disabled} idPrefix={name} />;
     case 'ordering': {
@@ -233,6 +236,85 @@ function SimulatorTask({
         <TextField {...field} inputMode="numeric" autoComplete="off" />
       ) : (
         <MoneyInput {...field} currency={unit === 'USD' ? 'USD' : 'ARS'} />
+      )}
+    </div>
+  );
+}
+
+/**
+ * Case with decisions (5.1, D-81): one decision per screen, the path taken in sight, and "Volver al
+ * paso anterior" to change it. Radios in a fieldset, so it works with the keyboard and screen readers;
+ * the feedback for the path comes from the parent (at the end, in a challenge).
+ */
+function BranchingCase({
+  question,
+  value,
+  onChange,
+  disabled,
+  idPrefix,
+}: {
+  question: Extract<LearningQuestion, { type: 'branching' }>;
+  value: string[];
+  onChange: (answer: Answer) => void;
+  disabled: boolean;
+  idPrefix: string;
+}) {
+  const { t } = useTranslation();
+  const [choice, setChoice] = useState<string | undefined>();
+  const state = branchState(question, value);
+  const node = state.nodeId ? question.branching.nodes[state.nodeId] : undefined;
+  const choose = () => {
+    if (!choice) return;
+    onChange([...value, choice]);
+    setChoice(undefined);
+  };
+  return (
+    <div className="flex flex-col gap-4">
+      <p className="text-title-small text-on-surface">{question.prompt}</p>
+      {state.steps.length > 0 && (
+        <div className="flex flex-col gap-2 rounded-lg bg-surface-container p-3">
+          <p className="text-label-medium text-on-surface-variant">{t('learn.q.branchPath')}</p>
+          <ol className="flex flex-col gap-2">
+            {state.steps.map((s, i) => {
+              const n = question.branching.nodes[s.nodeId]!;
+              const c = n.choices.find((x) => x.id === s.choiceId)!;
+              return (
+                <li key={`${s.nodeId}-${i}`} className="text-body-medium text-on-surface">
+                  <span className="block text-on-surface-variant">{n.text}</span>
+                  <span className="mt-0.5 flex items-start gap-1.5 font-medium">
+                    <Icon name="check" size={16} className="mt-0.5 shrink-0 text-primary" />
+                    {c.text}
+                  </span>
+                </li>
+              );
+            })}
+          </ol>
+          {!disabled && (
+            <Button variant="text" size="xs" leadingIcon="arrow_back" className="self-start" onClick={() => onChange(value.slice(0, -1))}>
+              {t('learn.q.branchBack')}
+            </Button>
+          )}
+        </div>
+      )}
+      {node ? (
+        <div className="flex flex-col gap-3">
+          <RadioGroup
+            name={`${idPrefix}-${state.nodeId}`}
+            legend={node.text}
+            disabled={disabled}
+            options={node.choices.map((c) => ({ value: c.id, label: c.text }))}
+            value={choice ?? ''}
+            onChange={(e) => setChoice(e.target.value)}
+          />
+          <Button variant="tonal" className="self-start" leadingIcon="arrow_forward" disabled={disabled || !choice} onClick={choose}>
+            {t('learn.q.branchChoose')}
+          </Button>
+        </div>
+      ) : (
+        <p className="flex items-center gap-2 text-body-medium text-on-surface">
+          <Icon name="flag" size={18} className="text-primary" />
+          {t('learn.q.branchEnd')}
+        </p>
       )}
     </div>
   );

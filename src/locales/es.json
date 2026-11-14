@@ -490,7 +490,8 @@
         "continue": "Seguir la misión",
         "kickerMinutes": "Misión activa · {{minutes}} min",
         "start": "Empezar la misión",
-        "none": "No tienes misiones pendientes en las secciones abiertas."
+        "none": "No tienes misiones pendientes en las secciones abiertas.",
+        "kickerEarlier": "Te quedó del nivel {{level}} · {{minutes}} min"
       },
       "time": {
         "label": "Avanzar el tiempo",
@@ -685,8 +686,8 @@
       "classifyHelp": "Elige una categoría para este mensaje.",
       "ownNote": "Se juega en tu billetera: lo que hagas queda registrado (saldo, movimientos, deudas, apartados) y se revierte con acciones, como en la vida real.",
       "replayNote": "Ya completaste esta misión. Repetirla es una práctica: se juega en una copia y no cambia tu billetera.",
-      "practiceOnlyNote": "Esta misión se juega en una copia de práctica: avanza más de un año y necesita una caída fija de precios, así que no toca tu billetera.",
-      "practiceBannerTitle": "Práctica",
+      "practiceOnlyNote": "Esta misión es un escenario de práctica: avanza más de un año con una caída de precios de ejemplo. Parte de tu cartera real si ya tienes CEDEARs (si no, de una de ejemplo) y no cambia tu billetera.",
+      "practiceBannerTitle": "Escenario de práctica",
       "practiceBanner": "Esta repetición se juega en una copia: nada de lo que hagas cambia tu billetera.",
       "practiceOnlyReason": "Esta misión se juega en una copia: avanza más de un año y necesita una caída fija de precios. Nada de lo que hagas cambia tu billetera.",
       "decisionFinal": "En tu billetera, esta decisión ya quedó tomada. Si quieres revertirla, hazlo con una acción: por ejemplo, saldar el préstamo en Tus deudas.",
@@ -697,7 +698,9 @@
         "loan_active": "Ya tienes un préstamo activo de esta oferta. Para tomar otro, primero sáldalo en Tus deudas.",
         "daily_limit": "Superas tu límite diario. Cámbialo en Perfil o espera al día siguiente.",
         "generic": "Este paso no se pudo hacer con tu billetera como está. Revisa tu saldo y vuelve a intentarlo."
-      }
+      },
+      "scenarioOwn": "Parte de tu cartera real: tus CEDEARs y el efectivo de tu cuenta comitente, con la serie de precios de ejemplo desde hoy. Tu billetera no cambia; queda registrada la decisión que tomes frente a la caída.",
+      "scenarioExample": "Todavía no tienes CEDEARs, así que usamos una cartera de ejemplo. Tu billetera no cambia; queda registrada la decisión que tomes frente a la caída."
     },
     "practiceBannerShort": "Dinero ficticio",
     "printBanner": "Alcancía · Simulador de finanzas personales · dinero ficticio · Contenido educativo, no es asesoramiento financiero",
@@ -1160,7 +1163,11 @@
       "categoryHelp": "Elige la categoría.",
       "choose": "Elegir…",
       "check": "Comprobar",
-      "simOpen": "Abrir el simulador: {{name}}"
+      "simOpen": "Abrir el simulador: {{name}}",
+      "branchPath": "Tu camino hasta ahora",
+      "branchBack": "Volver al paso anterior",
+      "branchChoose": "Elegir y seguir",
+      "branchEnd": "Llegaste al final del caso. Puedes volver al paso anterior para cambiar tu camino."
     },
     "guide": {
       "locked": "La guía \"{{title}}\" está bloqueada",
@@ -1272,11 +1279,14 @@
       "lightsValue": "{{n}} de 7",
       "badges": "Insignias por módulo",
       "earned": "Obtenida",
-      "notEarned": "Pendiente",
+      "notEarned": "Sin obtener",
       "badgesNote": "Cada insignia sale de la parte del módulo en el desafío de su nivel. Sin rankings ni rachas: celebran lo que aprendiste.",
       "conocerte": "Conocerte y tu ruta",
       "profile": "Test de perfil de inversor",
-      "tools": "Simulador de inflación"
+      "tools": "Simulador de inflación",
+      "badgeBelow": "Tu parte de este módulo en el desafío quedó en {{part}}, bajo {{passing}}. Cuenta tu mejor intento: puedes volver a intentarlo.",
+      "badgeHow": "Se obtiene con tu parte de este módulo en el desafío del nivel {{level}}.",
+      "badgeTry": "Ir al desafío del nivel {{level}}"
     },
     "sources": {
       "title": "Fuentes",

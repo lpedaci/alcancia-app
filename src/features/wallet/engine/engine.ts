@@ -724,6 +724,9 @@ export function buyInCash(state: WalletState): WalletState {
 /** What is still owed of a plan: the remaining principal of a loan, or the installments left. */
 export function planLeft(plan: InstallmentPlan): Decimal {
   if (plan.closed) return ZERO;
+  // Until the first installment, what is owed is the original principal (Lourdes, 14/11/2026): the
+  // present value of the rounded installments would show $ 599.999,99, a cent that teaches nothing.
+  if (plan.paid === 0) return D(plan.principal);
   return remainingPrincipal({ installment: plan.installment, tna: plan.tna, remaining: plan.count - plan.paid });
 }
 

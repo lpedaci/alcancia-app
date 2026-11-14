@@ -183,6 +183,11 @@ export interface MissionRun {
   startDay?: number;
   /** The person's own investor profile (D-67), for the brokerage account opened in her wallet. */
   profile?: InvestorProfileId;
+  /**
+   * "Aguanta la caída" (D-214): the practice scenario starts from the person's real portfolio when she
+   * has CEDEARs (`own`), or from an example one when she does not yet (`example`).
+   */
+  portfolio?: 'own' | 'example';
 }
 
 export const isOwnRun = (run: MissionRun) => run.mode === 'own';
@@ -339,6 +344,8 @@ function applyAction(wallet: WalletState, action: ActionId, value?: string, targ
       return D(needed).gt(0) ? fundBrokerage(open, needed) : open;
     }
     case 'setup_buy': {
+      // With the person's own CEDEARs, the scenario starts from them: nothing to buy (D-214).
+      if ((wallet.brokerage?.holdings ?? []).some((h) => h.instrumentId === CEDEAR && h.quantity > 0)) return wallet;
       const open = ensureBrokerage(wallet, ctx.profile);
       const units = Number(target ?? '1');
       const needed = neededFor(open, units);
@@ -361,8 +368,17 @@ function applyAction(wallet: WalletState, action: ActionId, value?: string, targ
 export function startMission(def: MissionDef, current: WalletState, options: { replay?: boolean; profile?: InvestorProfileId } = {}): MissionRun {
   const mode = def.practiceOnly || options.replay ? 'practice' : 'own';
   let wallet: WalletState;
+  let portfolio: MissionRun['portfolio'];
+  const ownsCedears = (current.brokerage?.holdings ?? []).some((h) => h.instrumentId === CEDEAR && h.quantity > 0);
   if (mode === 'own') wallet = structuredClone(current);
-  else {
+  else if (def.practiceOnly && ownsCedears) {
+    // D-214: a copy of the real portfolio (CEDEARs and brokerage cash), labelled "Escenario de práctica".
+    // The example price series starts again today, so the drop of the scenario always happens.
+    wallet = structuredClone(current);
+    wallet.brokerage!.openedDay = wallet.day;
+    portfolio = 'own';
+  } else {
+    if (def.practiceOnly) portfolio = 'example';
     const fresh = createWallet(current.personId, current.scenarioId);
     wallet = def.initial === 'fresh' ? fresh : def.initial === 'salary' ? advanceDays(fresh, 1) : structuredClone(current);
   }
@@ -375,6 +391,7 @@ export function startMission(def: MissionDef, current: WalletState, options: { r
     snapshots: {},
     finished: false,
     mode,
+    portfolio,
     startDay: wallet.day,
     profile: mode === 'own' ? (options.profile ?? 'moderate') : 'moderate',
   };

@@ -580,7 +580,7 @@ export function InflationSimulator({
         <div
           aria-hidden
           className={cn(
-            "sticky bottom-3 z-10 flex items-center justify-between gap-3 rounded-lg bg-inverse-surface px-4 py-3 text-inverse-on-surface shadow-elevation-2 @3xl:hidden",
+            "sticky bottom-[var(--sticky-result-offset,0.75rem)] z-10 flex items-center justify-between gap-3 rounded-lg bg-inverse-surface px-4 py-3 text-inverse-on-surface shadow-elevation-2 @3xl:hidden",
           )}
         >
           <span className="text-label-large">

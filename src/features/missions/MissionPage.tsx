@@ -154,6 +154,12 @@ function MissionRunner({ def }: { def: MissionDef & { steps: MissionStep[] } }) 
 
   const answer = (input?: string) => {
     const answered = answerStep(def, run, input);
+    // D-214: in a practice scenario the wallet does not change; the decision is kept as a learning
+    // event in the person's browser (never shared, D-58).
+    const current = currentStep(def, run);
+    if (def.practiceOnly && current?.kind === 'decision' && input && !answered.error) {
+      writeLocal(personId, (d) => ({ ...d, learningEvents: [...(d.learningEvents ?? []), { verb: 'decided', object: `${def.id}/${current.id}`, response: input, day: readWallet(personId).day }] }));
+    }
     save(answered.run);
     setFeedback(answered.error ? { tone: 'info', text: t(`wallet.mission.errors.${answered.error}`, { defaultValue: t('wallet.mission.errors.generic') }) } : answered.feedback);
   };
@@ -189,7 +195,7 @@ function MissionRunner({ def }: { def: MissionDef & { steps: MissionStep[] } }) 
         {/* D-208: a practice copy is labelled during the whole mission */}
         {!isOwnRun(run) && (
           <InlineAlert tone="info" title={t('wallet.mission.practiceBannerTitle')}>
-            {def.practiceOnly ? t('wallet.mission.practiceOnlyReason') : t('wallet.mission.practiceBanner')}
+            {run.portfolio === 'own' ? t('wallet.mission.scenarioOwn') : run.portfolio === 'example' ? t('wallet.mission.scenarioExample') : t('wallet.mission.practiceBanner')}
           </InlineAlert>
         )}
         {/* Only when the mission moves money: a mission about messages has nothing to show here */}

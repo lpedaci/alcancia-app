@@ -74,7 +74,7 @@ export function WalletHomePage() {
   const person = findPerson(personId);
   const firstName = person?.name.split(' ')[0] ?? '';
   const [wallet, update] = useWallet(personId);
-  const { current, next, activeMission } = useLevels(personId);
+  const { current, next, activeMission, activeMissionLevel, activeMissionFromEarlier } = useLevels(personId);
   const [announcement, setAnnouncement] = useState('');
   // A participant who has not opened her account yet starts there (flows.md 2.1, P2).
   const accountOpened = useDataStore((s) => s.diagnostics.some((d) => d.personId === personId && d.kind === 'initial'));
@@ -126,7 +126,7 @@ export function WalletHomePage() {
             <IconTile icon="flag" size="sm" className="self-start" />
             {/* The objective wraps up to two lines instead of being cut (2.7) */}
             <span className="flex min-w-0 flex-1 flex-col gap-0.5">
-              <span className="text-label-medium text-primary">{t('wallet.home.mission.kickerMinutes', { minutes: activeMission.minutes })}</span>
+              <span className="text-label-medium text-primary">{activeMissionFromEarlier ? t('wallet.home.mission.kickerEarlier', { level: activeMissionLevel, minutes: activeMission.minutes }) : t('wallet.home.mission.kickerMinutes', { minutes: activeMission.minutes })}</span>
               <span className="text-title-medium text-pretty text-on-surface">{activeMission.title}</span>
               <span className="hidden text-body-small text-pretty text-on-surface-variant md:line-clamp-2">{activeMission.objective}</span>
             </span>

@@ -305,6 +305,7 @@ Casos con el escenario medio (préstamo personal TNA 55 %, tarjeta TNA 60 %), ca
 - Capital $ 600.000; comisión de otorgamiento 5 % = $ 30.000; **se acreditan $ 570.000 netos** en el saldo.
 - Cuota del sistema francés con `i = 0,55 / 12 = 0,0458333…` y 24 cuotas: **$ 41.737,16**, que se debita el mismo día del mes, un mes después de tomarlo.
 - Si se pagan las 24: $ 41.737,16 × 24 = $ 1.001.691,84, es decir **$ 401.691,84 de intereses**, más la comisión.
+- Antes de la primera cuota, Tus deudas muestra el **capital original, $ 600.000**, y cancelarlo cuesta eso (el valor actual de las 24 cuotas redondeadas daría $ 599.999,99, un centavo que no enseña nada).
 - Cancelación anticipada después de la primera cuota: el capital que falta es el valor actual de las 23 cuotas restantes, `41.737,16 × (1 − (1 + i)^−23) / i` = **$ 585.762,83** (la cuenta "capital por (1 + i) menos la cuota" da $ 585.762,84; el centavo sale de redondear la cuota).
 - Mientras el préstamo esté activo, su TEA (≈ 71,2 %) es mayor que la inflación anual del escenario (≈ 42,6 %): es deuda de tasa alta y **Invertir sigue bloqueado** (D-113).
 

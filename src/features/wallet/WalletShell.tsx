@@ -8,7 +8,7 @@ import { ViewAsMenu } from '@/components/layout/ViewAsMenu';
 import { Icon, type IconName } from '@/components/ui/Icon';
 import { IconButton } from '@/components/ui/IconButton';
 import { Tooltip } from '@/components/ui/Tooltip';
-import { FuerteFab } from '@/features/companion/FuerteFab';
+import { FuerteFab, fuerteSide, SIDE_EVENT } from '@/features/companion/FuerteFab';
 import { LearningCardHost } from '@/features/learning-cards/LearningCardHost';
 import { InboxMenu } from './InboxMenu';
 import type { FuerteState } from '@/features/companion/Fuerte';
@@ -103,6 +103,15 @@ export function WalletShell({ section, children, fuerte }: { section: string; ch
   useEffect(() => {
     document.title = `${section} · Alcancía`;
   }, [section]);
+  // D-215: from 600 px a free lane on Fuerte's side, so he never covers content; on phones, extra
+  // space at the end of the page so nothing ends hidden under him.
+  const [fuerteAt, setFuerteAt] = useState(fuerteSide);
+  useEffect(() => {
+    const onSide = (e: Event) => setFuerteAt((e as CustomEvent<'left' | 'right'>).detail);
+    window.addEventListener(SIDE_EVENT, onSide);
+    return () => window.removeEventListener(SIDE_EVENT, onSide);
+  }, []);
+  const fuerteShown = Boolean(fuerte) && presence !== 'silent';
   // Back from a part of a guide (D-78): the screen comes back to where it was.
   useRestoreScroll(pathname);
   const isLarge = useMediaQuery('(min-width: 75rem)', true);
@@ -328,7 +337,18 @@ export function WalletShell({ section, children, fuerte }: { section: string; ch
               <UserMenu />
             </div>
           </header>
-          <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-[120rem] px-(--space-gutter) pt-6 pb-28 focus:outline-none medium:px-6 large:pb-28 print:p-0">
+          <main
+            id="main-content"
+            tabIndex={-1}
+            className={cn(
+              'mx-auto w-full max-w-[120rem] px-(--space-gutter) pt-6 pb-28 focus:outline-none medium:px-6 large:pb-28 print:p-0',
+              // Sticky results of the tools (2.2.1, pattern 9) stay above the bottom navigation and above Fuerte.
+              '[--sticky-result-offset:5rem] large:[--sticky-result-offset:0.75rem]',
+              fuerteShown && 'pb-44 medium:pb-28 max-medium:[--sticky-result-offset:10.5rem]',
+              fuerteShown && fuerteAt === 'right' && 'medium:pr-[6.75rem] large:pr-[7.5rem]',
+              fuerteShown && fuerteAt === 'left' && 'medium:pl-[6.75rem] large:pl-[7.5rem]',
+            )}
+          >
             {/* Printed pages (receipts, simulator summaries) keep the notice: "dinero ficticio" is never removed (D-69). */}
             <p className="mb-4 hidden border-b border-outline-variant pb-2 text-label-large text-on-surface print:block">{t('wallet.printBanner')}</p>
             {children}

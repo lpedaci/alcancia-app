@@ -189,7 +189,7 @@ Cada excepción se justifica en la tabla de abajo y la interfaz dice que esa mis
 | 4 · ¿Cuenta o fondo? | Cuenta aparte | Billetera propia | Elegir dónde rinde el saldo y avanzar 30 días mueve el tiempo real de la persona (cobro, débitos, rendimiento, inflación) |
 | Abre tu cuenta comitente | Cuenta aparte | Billetera propia | La cuenta comitente queda abierta en Invertir, con el resultado del test de perfil de la persona (D-67) en lugar del perfil de ejemplo |
 | Tu primer CEDEAR de ETF | Cuenta aparte | Billetera propia | La tenencia queda en Invertir; si la cuenta ya está abierta, se salta ese paso; el monto a transferir se ajusta al costo de los 4 CEDEARs en lugar de fijarse en $ 300.000 |
-| Aguanta la caída | Cuenta aparte | Billetera propia (D-77) | Vender en la caída realiza la pérdida en la tenencia propia; mantener la deja recuperarse con la serie sintética |
+| Aguanta la caída | Cuenta aparte | **Escenario de práctica desde la cartera real (D-214)** | Avanza 420 días con una caída fija: se juega en una copia rotulada, y se registra la decisión |
 
 **Repetir una misión ya completada (aprobado por Lourdes el 14/11/2026):** la primera vez se juega en la billetera propia. **"Repetir para practicar"** usa una copia de la billetera rotulada como práctica, sin consecuencias, con el rótulo visible durante toda la misión, porque aplicarla de nuevo duplicaría sus efectos (un segundo "primer cobro", otro fondo, otra transferencia) y rompería el estado de la billetera (criterio 1). Los estados de demo de Mariana y Diego ya traen sus misiones completadas, así que esta regla también los protege.
 
@@ -217,8 +217,8 @@ Cada excepción se justifica en la tabla de abajo y la interfaz dice que esa mis
 | 4 · ¿Cuenta o fondo? | Dónde rinde el saldo y 30 días de la billetera (cobro, débitos, rendimiento, inflación) | Cambiar dónde rinde en Rendir; el tiempo no vuelve atrás |
 | Abre tu cuenta comitente | La cuenta comitente con el perfil del test de la persona (D-67) y el primer fondeo | Rescatar el efectivo de la cuenta a la billetera |
 | Tu primer CEDEAR de ETF | La compra de 4 CEDEARs (F-33) con lo necesario transferido, en la tenencia propia | Venderlos en Invertir |
-| Aguanta la caída | Ver la nota de abajo | |
+| Aguanta la caída | Nada: es un escenario de práctica (D-214) | Se registra la decisión frente a la caída como evento de aprendizaje |
 | **Modo libre: caer en un mensaje de la campana** | La pérdida de F-37 | Reportar antes del día siguiente evita el segundo intento |
 | **Modo libre: pagar el mínimo** | El resto se financia al vencer (F-36) y es deuda de tasa alta | Pagar el total del resumen siguiente |
 
-**Nota sobre "Aguanta la caída" (pregunta abierta para Lourdes):** la misión avanza 4 meses y después 10 (420 días) y su caída depende de los primeros 150 días de la serie sintética de precios. Jugada en la billetera propia, adelantaría más de un año la vida de la persona (14 cobros y todos sus débitos) y, en el día en que esté, la serie podría no caer. Mientras Lourdes decide, sigue como práctica aparte (rotulada) y es la única misión con esa excepción, por el criterio 2 de la sección 16.
+**"Aguanta la caída" (D-214, aprobada por Lourdes el 14/11/2026):** es la única excepción, por el criterio 2 de la sección 16: avanza 420 días y necesita una caída fija de precios. Se juega en una copia rotulada "Escenario de práctica" que parte de la **cartera real** de la persona (sus CEDEARs y el efectivo de su cuenta comitente), con la serie de precios de ejemplo desde el día de la misión, así la caída siempre ocurre. La billetera propia no cambia; lo que se registra es la decisión frente a la caída (mantener, vender o seguir aportando), como evento de aprendizaje en el navegador de la persona. Si todavía no tiene CEDEARs, la copia usa una cartera de ejemplo y lo dice.

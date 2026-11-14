@@ -47,6 +47,15 @@ function savePlace(place: Place) {
   } catch {
     // The place only lasts for this visit.
   }
+  // The wallet keeps a free lane on Fuerte's side so he never covers content (D-215).
+  window.dispatchEvent(new CustomEvent(SIDE_EVENT, { detail: place.side }));
+}
+
+export const SIDE_EVENT = 'alcancia:fuerte-side';
+
+/** Fuerte's side (left or right), for the wallet's free lane (D-215). */
+export function fuerteSide(): Side {
+  return readPlace().side;
 }
 
 /** The free area: below the top bar, above the bottom navigation and right of the side menu (when shown). */
@@ -170,6 +179,7 @@ export function FuerteFab({
       <PopoverPrimitive.Trigger asChild>
         <button
           type="button"
+          data-fuerte-fab
           aria-label={unread ? t('wallet.fuerte.unread') : t('wallet.fuerte.open')}
           onPointerDown={onPointerDown}
           onPointerMove={onPointerMove}
