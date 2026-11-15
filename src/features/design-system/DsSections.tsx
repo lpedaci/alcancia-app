@@ -9,6 +9,7 @@ import { Icon, type IconName } from '@/components/ui/Icon';
 import { IconTile } from '@/components/ui/IconTile';
 import { InlineAlert } from '@/components/ui/InlineAlert';
 import { KpiCard, KpiRow } from '@/components/ui/KpiCard';
+import { ListLinkRow } from '@/components/ui/ListLinkRow';
 import { OptionCard } from '@/components/ui/OptionCard';
 import { MasteryButton } from '@/features/levels/MasteryButton';
 import { MetaChips } from '@/components/ui/MetaChips';
@@ -232,6 +233,16 @@ export function ComponentsSection() {
               <span className="text-label-medium text-balance text-on-surface">{c(key)}</span>
             </li>
           ))}
+        </ul>
+      </Specimen>
+      <Specimen title={c('linkRows')} note={c('linkRowsNote')}>
+        <ul className="flex flex-col gap-2">
+          <li>
+            <ListLinkRow to="/design-system" icon="replay" title={c('linkRowA')} detail={c('linkRowADetail')} />
+          </li>
+          <li>
+            <ListLinkRow to="/design-system" icon="calculate" title={c('linkRowB')} detail={c('linkRowBDetail')} />
+          </li>
         </ul>
       </Specimen>
       <Specimen title={c('stackTable')} note={c('stackTableNote')}>

@@ -1544,13 +1544,17 @@
       "badgesNote": "Cada insignia sale de la parte del módulo en el desafío de su nivel. Sin rankings ni rachas: celebran lo que aprendiste.",
       "conocerte": "Conocerte y tu ruta",
       "profile": "Test de perfil de inversor",
-      "tools": "Simulador de inflación",
+      "tools": "Herramientas",
       "badgeBelow": "Tu parte de este módulo en el desafío quedó en {{part}}, bajo {{passing}}. Vale tu mejor intento: puedes volver a intentarlo.",
       "badgeHow": "Se obtiene con tu parte de este módulo en el desafío del nivel {{level}}.",
       "badgeTry": "Ir al desafío del nivel {{level}}",
       "badgesAll": "Ver todas las insignias ({{count}})",
       "badgesLess": "Ver menos",
-      "guideMetaDeeper": "Módulo {{n}} · guía {{k}}, para profundizar · {{minutes}} min"
+      "guideMetaDeeper": "Módulo {{n}} · guía {{k}}, para profundizar · {{minutes}} min",
+      "shortcuts": "Atajos",
+      "conocerteDetail": "Repite el diagnóstico y mira tu ruta",
+      "profileDetail": "Educativo: describe tus rasgos, sin recomendarte nada",
+      "toolsDetail": "Los 12 simuladores, con valores de ejemplo"
     },
     "sources": {
       "title": "Fuentes",
@@ -3990,7 +3994,13 @@
       "stackActive": "Activas",
       "stackRowA": "Operaciones · Centro de distribución y oficina",
       "stackRowB": "Administración",
-      "stackInsufficient": "Datos insuficientes"
+      "stackInsufficient": "Datos insuficientes",
+      "linkRows": "Filas con una sola acción (ListLinkRow)",
+      "linkRowsNote": "D-279, D-294 y D-301: cuando una fila lleva a un solo lugar, toda la fila es el enlace: superficie tonal, ícono, título, una línea de detalle opcional y un chevron. El hover y el foco van en la fila, nunca un subrayado en una palabra. Se usa en Repasos, en los atajos de Aprender y en listas parecidas.",
+      "linkRowA": "Tu recibo de sueldo",
+      "linkRowADetail": "A 7 días de la guía · 3 preguntas",
+      "linkRowB": "Herramientas",
+      "linkRowBDetail": "Los 12 simuladores, con valores de ejemplo"
     },
     "fuerte": {
       "states": {
@@ -4145,6 +4155,11 @@
         "D-299",
         "Chips de contexto debajo del título",
         "En celular y tablet, los dos principales en una fila, nunca en dos líneas; desde 840 px, todos."
+      ],
+      [
+        "D-301",
+        "Atajos como filas",
+        "Los accesos de una sección van como filas tocables con una línea de detalle, igual que los repasos; no como enlaces sueltos subrayados."
       ]
     ],
     "money": {

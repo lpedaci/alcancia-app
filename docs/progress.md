@@ -102,3 +102,5 @@
 | 15/11/2026 | 27 · Contenido, tanda 4 | Guías 2 de los módulos 12, 13, 14 y 15 en borrador, validadas con tests y con los números calculados a mano, y documento `docs/content-review/tanda-4.md` | Esperando la revisión de Lourdes |
 | 15/11/2026 | 27 · Contenido, tanda 4 aprobada | Las guías 2 de los módulos 12, 13, 14 y 15 pasan a la app como guías para profundizar | Hecho |
 | 15/11/2026 | 27 · Contenido, tanda 5 | Guías 3 de los módulos 1, 2, 3 y 4 (tramo Bases) en borrador, validadas con tests y con los números calculados a mano, y documento `docs/content-review/tanda-5.md`. Las guías 3 se dividen por tramos: siguen las tandas 6 (deudas), 7 (ahorro e inflación) y 8 (invertir y billeteras) | Esperando la revisión de Lourdes |
+| 15/11/2026 | 27 · Contenido, tanda 5 aprobada | Las guías 3 de los módulos 1 a 4 pasan a la app como guías para profundizar | Hecho |
+| 15/11/2026 | 27 · Contenido, tanda 6 | Guías 3 de los módulos 5, 6, 7 y 8 (tramo Deudas y crédito) en borrador, validadas con tests y documento `docs/content-review/tanda-6.md` | Esperando la revisión de Lourdes |

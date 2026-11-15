@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 import { Button } from '@/components/ui/Button';
+import { ListLinkRow } from '@/components/ui/ListLinkRow';
 import { Icon, type IconName } from '@/components/ui/Icon';
 import { StatusPill } from '@/components/ui/StatusPill';
 import { ConditionChip } from '@/features/levels/UnlockCard';
@@ -252,19 +253,20 @@ export function LearnPage() {
                 </Button>
               )}
               <p className="-mt-3 text-body-small text-on-surface-variant">{t('learn.map.badgesNote')}</p>
-              <div className="flex flex-col gap-3 border-t border-outline-variant pt-5">
-                <Link to="/app/welcome" className="inline-flex items-center gap-2 text-label-large text-primary hover:underline">
-                  <Icon name="person" size={18} />
-                  {t('learn.map.conocerte')}
-                </Link>
-                <Link to="/app/learn/investor-profile" className="inline-flex items-center gap-2 text-label-large text-primary hover:underline">
-                  <Icon name="psychology" size={18} />
-                  {t('learn.map.profile')}
-                </Link>
-                <Link to="/app/tools/SIM-3" className="inline-flex items-center gap-2 text-label-large text-primary hover:underline">
-                  <Icon name="calculate" size={18} />
-                  {t('learn.map.tools')}
-                </Link>
+              {/* Shortcuts as whole-row links with a line of detail (D-301), like the reviews list */}
+              <div className="flex flex-col gap-2 border-t border-outline-variant pt-5">
+                <h3 className="text-title-small text-on-surface">{t('learn.map.shortcuts')}</h3>
+                <ul className="grid grid-cols-[minmax(0,1fr)] gap-2">
+                  <li>
+                    <ListLinkRow to="/app/welcome" icon="person" title={t('learn.map.conocerte')} detail={t('learn.map.conocerteDetail')} />
+                  </li>
+                  <li>
+                    <ListLinkRow to="/app/learn/investor-profile" icon="psychology" title={t('learn.map.profile')} detail={t('learn.map.profileDetail')} />
+                  </li>
+                  <li>
+                    <ListLinkRow to="/app/tools" icon="calculate" title={t('learn.map.tools')} detail={t('learn.map.toolsDetail')} />
+                  </li>
+                </ul>
               </div>
             </section>
           </div>

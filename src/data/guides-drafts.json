@@ -2,26 +2,26 @@
   "note": "Phase B drafts of guides 2 and 3 (step 27, D-61). NOT shown in the app: each batch goes through Lourdes's review, with the extensions marked for Lic. Kevin Giampieri; after approval a guide moves to guides.json.",
   "guides": [
     {
-      "id": "module-01-guide-3",
-      "moduleId": "module-01",
-      "title": "Controlar tus descuentos",
+      "id": "module-05-guide-3",
+      "moduleId": "module-05",
+      "title": "Si te ofrecen refinanciar",
       "minutes": 6,
       "blocks": [
         {
           "type": "hook",
-          "body": "Tu recibo trae varias líneas de descuentos. Casi nadie las revisa, pero en un minuto puedes saber si los números tienen sentido."
+          "body": "Te llega una oferta: \"Cancela tu tarjeta con un préstamo y paga menos\". A veces es cierto. A veces solo cambia la deuda de lugar."
         },
         {
           "type": "objective",
-          "body": "Al terminar vas a poder calcular los tres aportes principales sobre tu sueldo remunerativo y reconocer qué parte de tus descuentos corresponde a otros conceptos."
+          "body": "Al terminar vas a poder comparar el costo mensual de dos deudas con su tasa y decidir cuándo refinanciar reduce lo que pagas."
         },
         {
           "type": "recall",
           "question": {
-            "id": "g01c-recall",
-            "moduleId": "module-01",
+            "id": "g05c-recall",
+            "moduleId": "module-05",
             "type": "reflection",
-            "prompt": "¿Revisaste alguna vez las líneas de descuentos de tu recibo?",
+            "prompt": "¿Alguna vez cambiaste una deuda por otra?",
             "options": [
               {
                 "id": "a",
@@ -33,97 +33,113 @@
               }
             ],
             "feedback": {
-              "a": "Bien. En esta guía ves cómo controlarlas con una cuenta corta.",
-              "b": "Es muy común. En esta guía ves qué mirar primero."
+              "a": "Bien. En esta guía ves cómo saber si te convino.",
+              "b": "En esta guía ves qué mirar si te lo ofrecen."
             },
             "sourceIds": []
           }
         },
         {
           "type": "text",
-          "title": "Los tres aportes principales",
-          "body": "Sobre tu sueldo **remunerativo** se descuentan, entre otros, **jubilación (11 %)**, **obra social (3 %)** y **Ley 19.032 (3 %)**: juntos suman **17 %**. Las sumas **no remunerativas** en general no llevan aportes jubilatorios, así que no entran en esa cuenta."
+          "title": "Cambiar una deuda por otra",
+          "body": "**Refinanciar** es tomar una deuda nueva para pagar otra. Solo reduce lo que pagas si la deuda nueva **cuesta menos**: compara el **CFT** de las dos, porque suma la tasa, las comisiones y los cargos. Pagar una deuda cara es un ahorro asegurado; cambiarla por otra igual de cara no lo es."
         },
         {
           "type": "text",
-          "title": "Lo que queda son otros conceptos",
-          "body": "Si tus descuentos son mayores que ese 17 %, la diferencia corresponde a **otros conceptos** de tu recibo: por ejemplo, los que fija tu convenio. No es un error, pero conviene saber cuáles son. Si algo no te cierra, la consulta va a Recursos Humanos."
+          "title": "La condición que más se olvida",
+          "body": "Si refinancias la tarjeta y la vuelves a usar, ahora tienes **dos deudas**. Refinanciar sirve cuando además dejas de sumar consumos financiados. Y antes de pedir un crédito, puedes revisar tu situación en la **Central de Deudores** del BCRA: es lo que mira la entidad."
         },
         {
           "type": "example",
-          "title": "Ejemplo resuelto: el recibo del taller",
+          "title": "Ejemplo resuelto: $ 100.000 durante 30 días",
           "steps": [
-            "Remunerativo: $ 1.469.263,32. Descuentos del recibo: $ 274.304,46.",
-            "Tres aportes principales: 17 % × $ 1.469.263,32 = $ 249.774,76.",
-            "Otros conceptos: $ 274.304,46 − $ 249.774,76 = $ 24.529,70.",
-            "Los $ 90.000 no remunerativos no entran en la cuenta del 17 %."
+            "Tarjeta con una TNA de ejemplo del 120 %: 100.000 × 1,20 × 30 ÷ 365 = $ 9.863,01 de intereses en el mes.",
+            "Préstamo con una TNA de ejemplo del 70 %: 100.000 × 0,70 × 30 ÷ 365 = $ 5.753,42.",
+            "Diferencia: $ 4.109,59 por mes, sin contar comisiones ni impuestos. Por eso hay que mirar el CFT, no solo la TNA.",
+            "Solo conviene si el CFT del préstamo es menor y no vuelves a financiar con la tarjeta."
           ]
         },
         {
           "type": "practice",
           "question": {
-            "id": "m01-contributions",
-            "moduleId": "module-01",
-            "type": "numeric",
-            "prompt": "Tu sueldo remunerativo es de $ 1.000.000. ¿Cuánto suman la jubilación (11 %), la obra social (3 %) y la Ley 19.032 (3 %)?",
-            "numeric": {
-              "answer": "170000",
-              "tolerance": "1.00",
-              "unit": "ARS"
-            },
-            "help": "Monto en pesos, por ejemplo: 150.000",
+            "id": "m05-refinance",
+            "moduleId": "module-05",
+            "type": "single",
+            "prompt": "Te ofrecen un préstamo para cancelar el saldo de tu tarjeta. ¿Cuándo te conviene?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Si su CFT es menor que el de la tarjeta y dejas de financiar con la tarjeta"
+              },
+              {
+                "id": "b",
+                "text": "Si la cuota es más baja que el pago mínimo de la tarjeta"
+              },
+              {
+                "id": "c",
+                "text": "Siempre: así tienes una sola deuda"
+              }
+            ],
+            "correctOptionIds": [
+              "a"
+            ],
             "feedback": {
-              "correct": "Correcto. 11 % + 3 % + 3 % = 17 %, y 17 % × $ 1.000.000 = $ 170.000.",
-              "incorrect": "Suma los tres porcentajes, 11 % + 3 % + 3 % = 17 %, y aplícalos al remunerativo: 17 % × $ 1.000.000 = $ 170.000."
+              "a": "Correcto. El CFT dice cuál cuesta menos, y la deuda baja solo si no vuelves a financiar con la tarjeta.",
+              "b": "Una cuota baja puede esconder un plazo largo y un costo total mayor. Compara el CFT y, además, deja de financiar con la tarjeta.",
+              "c": "No siempre: si el préstamo cuesta más, o si vuelves a usar la tarjeta, terminas pagando más. Compara el CFT."
             },
             "sourceIds": [
-              "T"
+              "A-23",
+              "B-04"
             ]
           }
         },
         {
           "type": "takeaway",
-          "body": "Para tu vida: en tu recibo, calcula el 17 % de tu sueldo remunerativo y compáralo con tus descuentos. Anota qué otros conceptos explican la diferencia."
+          "body": "Para tu vida: si tienes una deuda cara, busca el CFT en tu resumen o tu contrato. Ese es el número para comparar cualquier oferta de refinanciación."
         }
       ],
       "sourceIds": [
-        "T"
+        "A-23",
+        "B-04",
+        "B-06",
+        "F-01"
       ],
       "review": {
         "status": "draft",
-        "batch": 5,
+        "batch": 6,
         "validated": [
-          "Aportes de jubilación (11 %), obra social (3 %) y Ley 19.032 (3 %), entre otros (T)",
-          "Las sumas no remunerativas en general no llevan aportes jubilatorios (T)",
-          "Recibo del taller: remunerativo $ 1.469.263,32, no remunerativo $ 90.000 y descuentos $ 274.304,46 (T)"
+          "Pagar una deuda cara equivale a un ahorro asegurado (A-23)",
+          "El CFT suma tasa, comisiones y cargos y se informa destacado (B-04)",
+          "La Central de Deudores del BCRA (B-06)"
         ],
         "extensions": [
-          "Control de los tres aportes como 17 % del remunerativo y la diferencia como otros conceptos del recibo: $ 249.774,76 y $ 24.529,70, calculados a mano",
-          "No se nombra qué conceptos son, porque dependen del convenio"
+          "Refinanciar: cuándo reduce el costo y la condición de no volver a financiar",
+          "Ejemplo de interés de 30 días con TNA de ejemplo del 120 % y del 70 % ($ 9.863,01 y $ 5.753,42), con la fórmula F-01 y calculado a mano"
         ]
       }
     },
     {
-      "id": "module-02-guide-3",
-      "moduleId": "module-02",
-      "title": "Lo que se ve y lo que se tiene",
+      "id": "module-06-guide-3",
+      "moduleId": "module-06",
+      "title": "La tasa lo cambia todo",
       "minutes": 6,
       "blocks": [
         {
           "type": "hook",
-          "body": "Una persona estrena auto y viaja seguido. Otra vive igual que hace años. ¿Quién tiene más dinero? Lo que se ve no siempre lo dice."
+          "body": "Dos tarjetas, el mismo saldo de $ 100.000 y el mismo pago mínimo del 10 %. Con una terminas de pagar en cuatro años y medio. Con la otra, en casi veinte."
         },
         {
           "type": "objective",
-          "body": "Al terminar vas a poder distinguir gastos visibles de patrimonio y explicar por qué endeudarse por estatus reduce tu riqueza."
+          "body": "Al terminar vas a poder explicar cómo la tasa cambia el tiempo y el costo de pagar solo el mínimo, y elegir la forma de pago que menos cuesta."
         },
         {
           "type": "recall",
           "question": {
-            "id": "g02c-recall",
-            "moduleId": "module-02",
+            "id": "g06c-recall",
+            "moduleId": "module-06",
             "type": "reflection",
-            "prompt": "¿Alguna vez compraste algo más por cómo se ve que por lo que necesitabas?",
+            "prompt": "¿Sabes qué tasa cobra tu tarjeta cuando financias?",
             "options": [
               {
                 "id": "a",
@@ -132,6 +148,124 @@
               {
                 "id": "b",
                 "text": "No"
+              }
+            ],
+            "feedback": {
+              "a": "Bien. En esta guía ves cuánto pesa ese número.",
+              "b": "Está en tu resumen, con el CFT destacado. En esta guía ves por qué conviene buscarla."
+            },
+            "sourceIds": []
+          }
+        },
+        {
+          "type": "text",
+          "title": "El mínimo crece con los intereses",
+          "body": "Si pagas solo el **mínimo**, lo que queda se financia y genera intereses todos los meses. Con una tasa alta, buena parte de cada pago son intereses y el saldo baja muy despacio. Por eso la misma deuda puede durar años más."
+        },
+        {
+          "type": "text",
+          "title": "Lo que menos cuesta",
+          "body": "Pagar el **total** antes del vencimiento no genera intereses. Si no puedes, cada peso que pagas por encima del mínimo baja el saldo que se financia. Y para comparar tarjetas, el número es el **CFT**: la simulación usa la tasa, pero el costo real se acerca más al CFT, porque suma comisiones y cargos."
+        },
+        {
+          "type": "example",
+          "title": "Ejemplo resuelto: el mismo saldo con dos tasas",
+          "steps": [
+            "Saldo: $ 100.000, pago mínimo del 10 % con un piso de $ 1.000, sin consumos nuevos y sin impuestos.",
+            "Con una TNA de ejemplo del 60 %: 55 meses y $ 83.880,36 de intereses.",
+            "Con una TNA de ejemplo del 120 %: 237 meses y $ 813.271,16 de intereses.",
+            "Pagando el total el primer mes, en los dos casos: $ 0 de intereses."
+          ]
+        },
+        {
+          "type": "practice",
+          "question": {
+            "id": "m06-rate-effect",
+            "moduleId": "module-06",
+            "type": "single",
+            "prompt": "Tienes un saldo de $ 100.000 en una tarjeta con una TNA de ejemplo del 120 %. Si pagas solo el mínimo del 10 %, ¿cuánto pagas de intereses en total, sin consumos nuevos?",
+            "options": [
+              {
+                "id": "a",
+                "text": "$ 813.271,16, en 237 meses"
+              },
+              {
+                "id": "b",
+                "text": "$ 83.880,36, en 55 meses"
+              },
+              {
+                "id": "c",
+                "text": "$ 120.000, en 12 meses"
+              }
+            ],
+            "correctOptionIds": [
+              "a"
+            ],
+            "feedback": {
+              "a": "Correcto. Con esa tasa, cada mínimo es casi todo interés: el saldo baja muy despacio y los intereses superan ocho veces la deuda.",
+              "b": "Ese es el caso con una TNA del 60 %. Con el 120 % son 237 meses y $ 813.271,16 de intereses.",
+              "c": "El mínimo no cancela la deuda en un año. Con el 120 % son 237 meses y $ 813.271,16 de intereses."
+            },
+            "sourceIds": [
+              "F-14",
+              "F-15"
+            ]
+          }
+        },
+        {
+          "type": "takeaway",
+          "body": "Para tu vida: prueba en la herramienta \"Tarjeta de crédito\" tu saldo con el mínimo y con un pago un poco mayor, y compara los intereses.",
+          "toolId": "SIM-7"
+        }
+      ],
+      "sourceIds": [
+        "T",
+        "B-04",
+        "F-14",
+        "F-15"
+      ],
+      "review": {
+        "status": "draft",
+        "batch": 6,
+        "validated": [
+          "Pago mínimo y saldo financiado con intereses (T)",
+          "TNA, TEA y CFT; el CFT destacado (B-04)",
+          "Casos F-14 (55 meses, $ 83.880,36) y F-15 (237 meses, $ 813.271,16) de docs/formulas.md, con test"
+        ],
+        "extensions": [
+          "Comparación del mismo saldo con dos tasas de ejemplo y la idea de que pagar algo más que el mínimo baja el costo"
+        ]
+      }
+    },
+    {
+      "id": "module-07-guide-3",
+      "moduleId": "module-07",
+      "title": "Los dos métodos con números",
+      "minutes": 7,
+      "blocks": [
+        {
+          "type": "hook",
+          "body": "Tres deudas, $ 20.000 extra por mes. La avalancha y la bola de nieve terminan el mismo mes. ¿Entonces da igual cuál elijas?"
+        },
+        {
+          "type": "objective",
+          "body": "Al terminar vas a poder comparar la avalancha y la bola de nieve con el tiempo, los intereses y la primera deuda saldada, y elegir con tus prioridades."
+        },
+        {
+          "type": "recall",
+          "question": {
+            "id": "g07c-recall",
+            "moduleId": "module-07",
+            "type": "reflection",
+            "prompt": "Si tuvieras tres deudas, ¿qué te motivaría más?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Saldar una pronto"
+              },
+              {
+                "id": "b",
+                "text": "Pagar menos intereses"
               },
               {
                 "id": "c",
@@ -139,124 +273,106 @@
               }
             ],
             "feedback": {
-              "a": "Le pasa a casi todo el mundo. En esta guía ves cuánto cuesta en el tiempo.",
-              "b": "Bien. En esta guía ves por qué esa decisión suma.",
-              "c": "En esta guía tienes una pregunta para reconocerlo."
+              "a": "Esa es la fuerza de la bola de nieve. En esta guía ves cuánto cuesta en intereses.",
+              "b": "Esa es la fuerza de la avalancha. En esta guía ves la diferencia en números.",
+              "c": "En esta guía tienes los números para decidir."
             },
             "sourceIds": []
           }
         },
         {
           "type": "text",
-          "title": "La riqueza real suele ser invisible",
-          "body": "Lo que se ve son **gastos**: el auto, la ropa, los viajes. La riqueza real son **activos**: ahorro, inversiones, lo que sigue ahí y puede crecer. Los inversores más pacientes suelen construir su patrimonio con disciplina, no con apariencia."
+          "title": "Qué comparar",
+          "body": "Para elegir, mira tres cosas: **cuántos meses** tardas en quedar sin deudas, **cuántos intereses** pagas en total y **cuándo saldas la primera**. La **avalancha** ataca la tasa más alta y paga menos intereses; la **bola de nieve** ataca el saldo más chico y da la primera deuda saldada antes."
         },
         {
           "type": "text",
-          "title": "Comprar para impresionar",
-          "body": "Endeudarse por estatus es, como dice el taller, **comprar lo que no necesitas para impresionar a quien no conoces**. La deuda de consumo compromete tu futuro: cada cuota es dinero que no va a tus activos."
+          "title": "Lo que no cambia",
+          "body": "En los dos métodos pagas **todos los mínimos** y pones todo el extra en una sola deuda; cuando la saldas, su pago pasa a la siguiente. Lo que no puede pasar es sumar deudas nuevas mientras sales."
         },
         {
           "type": "example",
-          "title": "Ejemplo resuelto: dos personas, el mismo sueldo",
+          "title": "Ejemplo resuelto: las deudas del taller, con supuestos de práctica",
           "steps": [
-            "Las dos cobran $ 1.000.000 por mes.",
-            "Una gasta todo y financia un auto nuevo: se ve bien, pero su patrimonio no crece.",
-            "La otra separa el 20 %, $ 200.000 por mes, apenas cobra.",
-            "En 5 años, sin contar ningún rendimiento, la segunda juntó $ 200.000 × 60 = $ 12.000.000. Por fuera, quizás no se note."
+            "Tarjeta: $ 40.000 al 150 % anual. Financiera: $ 15.000 al 110 %. Crédito bancario: $ 200.000 al 80 % (tasas de ejemplo). Mínimos de práctica: $ 4.000, $ 1.500 y $ 10.000, y $ 20.000 extra por mes.",
+            "Avalancha: 11 meses, $ 109.817,08 de intereses, primera deuda saldada en el mes 2.",
+            "Bola de nieve: 11 meses, $ 111.507,88 de intereses, primera deuda saldada en el mes 1.",
+            "La avalancha ahorra $ 1.690,80; la bola de nieve da la primera victoria un mes antes."
           ]
         },
         {
           "type": "practice",
           "question": {
-            "id": "m02-visible",
-            "moduleId": "module-02",
-            "type": "true_false_why",
-            "prompt": "Si alguien tiene un auto nuevo y viaja mucho, tiene mucho dinero.",
-            "options": [
-              {
-                "id": "true",
-                "text": "Verdadero"
-              },
-              {
-                "id": "false",
-                "text": "Falso"
-              }
-            ],
-            "correctOptionIds": [
-              "false"
-            ],
-            "why": {
-              "prompt": "¿Por qué?",
-              "options": [
-                {
-                  "id": "w1",
-                  "text": "Porque lo que se ve son gastos; el patrimonio son activos que no siempre se ven"
-                },
-                {
-                  "id": "w2",
-                  "text": "Porque los autos nuevos siempre se compran con deuda"
-                }
-              ],
-              "correct": "w1"
+            "id": "m07-compare",
+            "moduleId": "module-07",
+            "type": "numeric",
+            "prompt": "En el ejemplo, la avalancha paga $ 109.817,08 de intereses y la bola de nieve, $ 111.507,88. ¿Cuánto ahorras en intereses con la avalancha?",
+            "numeric": {
+              "answer": "1690.80",
+              "tolerance": "1.00",
+              "unit": "ARS"
             },
+            "help": "Monto en pesos, con dos decimales, por ejemplo: 1.500,00",
             "feedback": {
-              "correct": "Correcto. Un auto o un viaje muestran cuánto se gastó, no cuánto se tiene. La riqueza real suele ser invisible.",
-              "incorrect": "Es falso: un auto o un viaje muestran cuánto se gastó, no cuánto se tiene. El patrimonio son activos, que no siempre se ven."
+              "correct": "Correcto. $ 111.507,88 − $ 109.817,08 = $ 1.690,80. En este caso la diferencia es chica: la motivación también cuenta.",
+              "incorrect": "Resta los intereses: $ 111.507,88 − $ 109.817,08 = $ 1.690,80."
             },
             "sourceIds": [
-              "A-10",
-              "A-11",
-              "A-12"
+              "A-29",
+              "A-30",
+              "F-16",
+              "F-17"
             ]
           }
         },
         {
           "type": "takeaway",
-          "body": "Para tu vida: antes de tu próxima compra grande, pregúntate si la harías aunque nadie la viera. Si la respuesta es no, aplica la regla de las 48 horas."
+          "body": "Para tu vida: carga tus deudas en la herramienta \"Salir de deudas\" y mira los dos métodos lado a lado antes de elegir.",
+          "toolId": "SIM-9"
         }
       ],
       "sourceIds": [
-        "A-10",
-        "A-11",
-        "A-12",
-        "A-13"
+        "A-24",
+        "A-28",
+        "A-29",
+        "A-30",
+        "F-16",
+        "F-17"
       ],
       "review": {
         "status": "draft",
-        "batch": 5,
+        "batch": 6,
         "validated": [
-          "Riqueza real frente a apariencia; la riqueza suele ser invisible, son activos y no objetos de consumo (A-10 a A-12)",
-          "\"Comprar lo que no necesitas para impresionar a quien no conoces\" (A-12)",
-          "La deuda de consumo compromete tu futuro (A-13)"
+          "Bola de nieve y avalancha, y cuándo usar cada una (A-24, A-28, A-30)",
+          "Deudas y tasas de ejemplo de A-29"
         ],
         "extensions": [
-          "Se quitan las referencias a influencers y nombres propios del material, como pide la spec (Anexo A)",
-          "Ejemplo de dos personas con el mismo sueldo: $ 200.000 × 60 = $ 12.000.000 sin rendimiento, calculado a mano"
+          "Los mínimos ($ 4.000, $ 1.500 y $ 10.000) y los $ 20.000 extra no están en A-29: son los supuestos de práctica de la misión \"Sal de tus deudas\" (docs/formulas.md, sección 8), y la guía los rotula así",
+          "Resultados de la simulación con test: 11 meses, $ 109.817,08 y $ 111.507,88, diferencia de $ 1.690,80"
         ]
       }
     },
     {
-      "id": "module-03-guide-3",
-      "moduleId": "module-03",
-      "title": "Los gastos que no son de todos los meses",
+      "id": "module-08-guide-3",
+      "moduleId": "module-08",
+      "title": "Cambia el escenario, cambia la respuesta",
       "minutes": 6,
       "blocks": [
         {
           "type": "hook",
-          "body": "El presupuesto cerraba todos los meses, hasta que llegó el seguro anual del auto. No fue un imprevisto: era un gasto que no estaba en el plan."
+          "body": "La misma heladera, las mismas 12 cuotas, el mismo descuento por contado. Con una inflación conviene una cosa; con otra, la contraria."
         },
         {
           "type": "objective",
-          "body": "Al terminar vas a poder calcular cuánto separar por mes para tus gastos anuales y sumarlos a tu presupuesto."
+          "body": "Al terminar vas a poder comparar cuotas y contado en distintos escenarios de inflación y explicar por qué importa cuándo se paga la primera cuota."
         },
         {
           "type": "recall",
           "question": {
-            "id": "g03c-recall",
-            "moduleId": "module-03",
+            "id": "g08c-recall",
+            "moduleId": "module-08",
             "type": "reflection",
-            "prompt": "¿Tu presupuesto incluye gastos que pagas una o dos veces por año?",
+            "prompt": "Cuando eliges entre cuotas y contado, ¿piensas en la inflación?",
             "options": [
               {
                 "id": "a",
@@ -268,213 +384,89 @@
               }
             ],
             "feedback": {
-              "a": "Bien. En esta guía ves cómo repartirlos mes a mes.",
-              "b": "Es lo más común. En esta guía ves cómo sumarlos sin sustos."
+              "a": "Bien. En esta guía ves cómo cambia la respuesta según el escenario.",
+              "b": "Es muy común. En esta guía ves por qué conviene mirarla."
             },
             "sourceIds": []
           }
         },
         {
           "type": "text",
-          "title": "Gastos anuales",
-          "body": "Algunos gastos llegan una o pocas veces por año: un seguro, un impuesto, la matrícula de un curso, los regalos de fin de año. Si no están en el presupuesto, parecen imprevistos y terminan en la tarjeta. No son **emergencias**: son gastos que se pueden planificar."
+          "title": "No hay una respuesta fija",
+          "body": "El **valor de hoy** de las cuotas depende de la inflación que esperas: con más inflación, las cuotas futuras pesan menos. Por eso la misma compra puede convenir en cuotas en un escenario y al contado en otro. Son **escenarios**, no predicciones."
         },
         {
           "type": "text",
-          "title": "Repartirlos en doce",
-          "body": "Suma lo que pagas en el año por esos conceptos y divídelo por **12**: ese monto lo separas cada mes en un **apartado**. Cuando llega el gasto, el dinero ya está. Si cobras aguinaldo, puedes usar una parte, pero no cuentes con él para tus gastos de todos los meses."
+          "title": "Cuándo se paga la primera cuota",
+          "body": "Si la **primera cuota se paga hoy**, pesa igual que el contado y el valor de hoy de las cuotas sube. Lee las condiciones: ese detalle puede dar vuelta la comparación. Y mira el **CFT**: que de verdad sean sin interés."
         },
         {
           "type": "example",
-          "title": "Ejemplo resuelto: tres gastos del año",
+          "title": "Ejemplo resuelto: $ 120.000 en 12 cuotas o $ 102.000 al contado",
           "steps": [
-            "Seguro anual: $ 360.000. Regalos de fin de año: $ 180.000. Matrícula de un curso: $ 120.000.",
-            "Total del año: $ 660.000.",
-            "Por mes: $ 660.000 ÷ 12 = $ 55.000, en un apartado para gastos anuales.",
-            "Ese monto entra en tu presupuesto como un gasto fijo más."
+            "Con 3 % mensual, las cuotas valen hoy $ 99.540,04: convienen las cuotas.",
+            "Con 1,5 % mensual, valen $ 109.075,05: conviene el contado.",
+            "Con 6 % mensual, valen $ 83.838,44: convienen todavía más las cuotas.",
+            "Con 3 % mensual y la primera cuota hoy, valen $ 102.526,24: el contado queda apenas más barato."
           ]
         },
         {
           "type": "practice",
           "question": {
-            "id": "m03-annual",
-            "moduleId": "module-03",
-            "type": "numeric",
-            "prompt": "Pagas un seguro de $ 360.000 por año y gastas $ 240.000 en regalos de fin de año. ¿Cuánto separas por mes para cubrir los dos?",
-            "numeric": {
-              "answer": "50000",
-              "tolerance": "1.00",
-              "unit": "ARS"
-            },
-            "help": "Monto en pesos, por ejemplo: 40.000",
-            "feedback": {
-              "correct": "Correcto. ($ 360.000 + $ 240.000) ÷ 12 = $ 50.000 por mes.",
-              "incorrect": "Suma los gastos del año y divide por 12: ($ 360.000 + $ 240.000) ÷ 12 = $ 50.000 por mes."
-            },
-            "sourceIds": [
-              "A-32"
-            ]
-          }
-        },
-        {
-          "type": "takeaway",
-          "body": "Para tu vida: anota los gastos que pagas una o dos veces por año, divídelos por 12 y crea un apartado con ese monto. Puedes probarlo en la herramienta \"Presupuesto mensual\".",
-          "toolId": "SIM-1"
-        }
-      ],
-      "sourceIds": [
-        "A-32",
-        "A-34"
-      ],
-      "review": {
-        "status": "draft",
-        "batch": 5,
-        "validated": [
-          "Presupuesto con 50/30/20 como punto de partida y el ahorro separado (A-32)",
-          "Anotar todo para ver lo que no se ve (A-34)"
-        ],
-        "extensions": [
-          "Gastos anuales repartidos en doce, en un apartado, y el aguinaldo como ayuda y no como ingreso mensual",
-          "Ejemplo ($ 660.000 ÷ 12 = $ 55.000) y práctica ($ 600.000 ÷ 12 = $ 50.000) con números redondos, calculados a mano"
-        ]
-      }
-    },
-    {
-      "id": "module-04-guide-3",
-      "moduleId": "module-04",
-      "title": "Qué protección tiene tu fondo",
-      "minutes": 7,
-      "blocks": [
-        {
-          "type": "hook",
-          "body": "Tu fondo de emergencia está en una billetera que \"rinde\". ¿Qué pasa con ese dinero si algo sale mal? Depende de qué tipo de cuenta o producto es."
-        },
-        {
-          "type": "objective",
-          "body": "Al terminar vas a poder reconocer qué opciones para tu fondo tienen la garantía de los depósitos y cuáles no, y elegir según liquidez y riesgo."
-        },
-        {
-          "type": "recall",
-          "question": {
-            "id": "g04c-recall",
-            "moduleId": "module-04",
-            "type": "reflection",
-            "prompt": "¿Sabes si el dinero de tu billetera tiene la garantía de los depósitos?",
+            "id": "m08-scenarios-compare",
+            "moduleId": "module-08",
+            "type": "single",
+            "prompt": "Precio: $ 120.000 en 12 cuotas de $ 10.000, o $ 102.000 al contado. Si esperas una inflación del 1,5 % mensual, ¿qué conviene en ese escenario?",
             "options": [
               {
                 "id": "a",
-                "text": "Sí"
+                "text": "El contado: las cuotas valen hoy $ 109.075,05"
               },
               {
                 "id": "b",
-                "text": "No"
+                "text": "Las cuotas: siempre convienen si son sin interés"
+              },
+              {
+                "id": "c",
+                "text": "Da igual: el precio es el mismo"
               }
             ],
+            "correctOptionIds": [
+              "a"
+            ],
             "feedback": {
-              "a": "Bien. En esta guía lo comparas con otras opciones.",
-              "b": "Es una duda muy común. En esta guía ves cómo saberlo."
-            },
-            "sourceIds": []
-          }
-        },
-        {
-          "type": "text",
-          "title": "La garantía de los depósitos",
-          "body": "Los **depósitos en bancos**, como una caja de ahorros o un plazo fijo, tienen la **garantía de los depósitos** hasta **$ 50.000.000 por persona y por entidad**, desde el 01/04/2026. Quedan afuera, entre otros, los depósitos con tasas superiores a las de referencia del BCRA."
-        },
-        {
-          "type": "text",
-          "title": "Lo que no tiene garantía",
-          "body": "El dinero en una **cuenta de pago** de una billetera con CVU **no tiene** la garantía de los depósitos. Y si la cuenta \"rinde\" porque invierte en un **fondo money market**, es una inversión en un fondo común: tampoco tiene garantía y su rendimiento varía a diario. El **plazo fijo tradicional** tiene garantía, pero el dinero queda inmovilizado al menos 30 días: para una emergencia, la **liquidez** importa."
-        },
-        {
-          "type": "example",
-          "title": "Ejemplo resuelto: tres lugares para el mismo fondo",
-          "steps": [
-            "Caja de ahorros en un banco: dinero disponible y con garantía, hasta el tope.",
-            "Cuenta remunerada de una billetera que invierte en un fondo money market: rescate rápido, sin garantía y con rendimiento variable.",
-            "Plazo fijo tradicional: con garantía, pero no lo puedes usar hasta que vence.",
-            "No hay una opción perfecta: compara garantía, liquidez y riesgo, y lee los términos de cada producto."
-          ]
-        },
-        {
-          "type": "practice",
-          "question": {
-            "id": "m04-guarantee",
-            "moduleId": "module-04",
-            "type": "categorize",
-            "prompt": "Clasifica cada opción según si tiene la garantía de los depósitos.",
-            "categorize": {
-              "categories": [
-                {
-                  "id": "yes",
-                  "label": "Tiene garantía (hasta el tope)"
-                },
-                {
-                  "id": "no",
-                  "label": "No tiene garantía"
-                }
-              ],
-              "items": [
-                {
-                  "id": "i1",
-                  "text": "Caja de ahorros en un banco",
-                  "categoryId": "yes"
-                },
-                {
-                  "id": "i2",
-                  "text": "Plazo fijo tradicional en un banco",
-                  "categoryId": "yes"
-                },
-                {
-                  "id": "i3",
-                  "text": "Saldo en la cuenta de pago de una billetera con CVU",
-                  "categoryId": "no"
-                },
-                {
-                  "id": "i4",
-                  "text": "Cuotapartes de un fondo money market",
-                  "categoryId": "no"
-                }
-              ]
-            },
-            "feedback": {
-              "correct": "Correcto. Los depósitos en bancos tienen garantía hasta $ 50.000.000 por persona y entidad; las cuentas de pago y los fondos money market no.",
-              "incorrect": "La garantía cubre depósitos en bancos, como una caja de ahorros o un plazo fijo, hasta $ 50.000.000. El saldo de una cuenta de pago y un fondo money market no la tienen."
+              "a": "Correcto. Con inflación baja, las cuotas futuras pesan casi como el dinero de hoy: $ 109.075,05 es más que los $ 102.000 del contado.",
+              "b": "No siempre: depende del escenario. Con 1,5 % mensual las cuotas valen hoy $ 109.075,05, más que el contado de $ 102.000.",
+              "c": "El precio en cuotas es $ 120.000 y el contado, $ 102.000. Con 1,5 % mensual, las cuotas valen hoy $ 109.075,05: conviene el contado."
             },
             "sourceIds": [
-              "B-01",
-              "B-12",
-              "B-14"
+              "F-10",
+              "F-11"
             ]
           }
         },
         {
           "type": "takeaway",
-          "body": "Para tu vida: busca en los términos o en la leyenda legal de tu billetera si tu dinero está en una cuenta bancaria, en una cuenta de pago o en un fondo. Compara opciones en la herramienta \"¿Dónde guardo mi fondo de emergencia?\".",
-          "toolId": "SIM-12"
+          "body": "Para tu vida: en la herramienta \"Cuotas sin interés o contado\", prueba tu próxima compra con los tres escenarios de inflación.",
+          "toolId": "SIM-6"
         }
       ],
       "sourceIds": [
-        "A-36",
-        "B-01",
-        "B-02",
-        "B-12",
-        "B-14",
-        "B-26"
+        "B-04",
+        "F-10",
+        "F-11",
+        "F-12",
+        "F-13"
       ],
       "review": {
         "status": "draft",
-        "batch": 5,
+        "batch": 6,
         "validated": [
-          "Dónde guardar el fondo: liquidez y bajo riesgo, cuenta remunerada o fondo money market (A-36)",
-          "Garantía de los depósitos hasta $ 50.000.000 por persona y entidad desde el 01/04/2026, con exclusiones (B-01)",
-          "Plazo fijo tradicional con mínimo de 30 días (B-02)",
-          "Las cuentas de pago no tienen garantía (B-12); un money market es un FCI, sin garantía y con rendimiento variable (B-14, B-26)"
+          "Casos F-10 a F-13 de docs/formulas.md, con test ($ 99.540,04; $ 109.075,05; $ 83.838,44; $ 102.526,24)",
+          "Mirar el CFT para confirmar que sean sin interés (B-04)"
         ],
         "extensions": [
-          "Comparación de tres lugares para el fondo según garantía, liquidez y riesgo",
-          "Práctica de clasificar opciones por garantía, sin nombrar entidades"
+          "Lectura de los casos como escenarios y la importancia de cuándo se paga la primera cuota"
         ]
       }
     }

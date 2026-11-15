@@ -29,9 +29,11 @@
 
 **Tanda 4 (aprobada por Lourdes el 15/11/2026 y publicada):** guías 2 de los módulos 12 a 15, "Empezar antes pesa más", "Tu perfil de inversor", "Diversificar sin adivinar" y "Lo que hay que saber antes de comprar un CEDEAR". Documento: [content-review/tanda-4.md](content-review/tanda-4.md).
 
-**Tanda 5 (borrador, esperando la revisión de Lourdes):** guías 3 de los módulos 1 a 4, "Controlar tus descuentos", "Lo que se ve y lo que se tiene", "Los gastos que no son de todos los meses" y "Qué protección tiene tu fondo". Documento: [content-review/tanda-5.md](content-review/tanda-5.md).
+**Tanda 5 (aprobada por Lourdes el 15/11/2026 y publicada):** guías 3 de los módulos 1 a 4, "Controlar tus descuentos", "Lo que se ve y lo que se tiene", "Los gastos que no son de todos los meses" y "Qué protección tiene tu fondo". Documento: [content-review/tanda-5.md](content-review/tanda-5.md).
 
-Siguen las guías 3 por tramo (tandas 6 a 8) y los módulos 16 y 18 completos (F11) con el nivel 8 (F22).
+**Tanda 6 (borrador, esperando la revisión de Lourdes):** guías 3 de los módulos 5 a 8, "Si te ofrecen refinanciar", "La tasa lo cambia todo", "Los dos métodos con números" y "Cambia el escenario, cambia la respuesta". Documento: [content-review/tanda-6.md](content-review/tanda-6.md).
+
+Siguen las guías 3 por tramo (tandas 7 y 8) y los módulos 16 y 18 completos (F11) con el nivel 8 (F22).
 
 ## Resumen
 

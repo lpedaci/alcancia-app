@@ -1,6 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router';
-import { Icon } from '@/components/ui/Icon';
+import { ListLinkRow } from '@/components/ui/ListLinkRow';
 import { moduleById } from './questions';
 import { useReminders } from './use-reminders';
 
@@ -25,21 +24,13 @@ export function DueReviews({ personId }: { personId: string }) {
             const title = moduleById(r.moduleId)?.title ?? r.moduleId;
             return (
               <li key={`${r.moduleId}-${r.round}`}>
-                <Link
+                <ListLinkRow
                   to={`/app/learn/review/${r.moduleId}`}
-                  className="flex min-h-14 items-center gap-3 rounded-lg bg-surface-container px-3 py-2 transition-colors duration-150 hover:bg-surface-container-high focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-                >
-                  <Icon name="replay" size={20} className="shrink-0 text-primary" />
-                  <span className="flex min-w-0 flex-1 flex-col">
-                    {/* The visible title is part of the link's name (label in name, WCAG 2.5.3) */}
-                    <span className="text-label-large text-on-surface">
-                      <span className="sr-only">{t('learn.review.start')}: </span>
-                      {title}
-                    </span>
-                    <span className="text-body-small text-on-surface-variant">{t('learn.review.item', { count: r.round })}</span>
-                  </span>
-                  <Icon name="chevron_right" size={20} className="shrink-0 text-on-surface-variant" />
-                </Link>
+                  icon="replay"
+                  title={title}
+                  srPrefix={t('learn.review.start')}
+                  detail={t('learn.review.item', { count: r.round })}
+                />
               </li>
             );
           })}

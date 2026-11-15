@@ -1,5 +1,7 @@
 # Tanda 5 del paso 27: guías para revisar
 
+> **Aprobada por Lourdes el undefined/undefined/15/11/2026.** Las guías pasaron a `src/data/guides.json` y se ven en la app. Las ampliaciones siguen pendientes de revisión del Lic. Kevin Giampieri.
+
 > Borradores de `src/data/guides-drafts.json`, generados con `node scripts/guides-review.mjs 5`. **No se muestran en la app** hasta que Lourdes los apruebe; las ampliaciones quedan marcadas para el Lic. Kevin Giampieri (D-276).
 
 Cómo revisar: marca en cada guía "Aprobada", "Con cambios" (y cuáles) o "No va". Lo validado viene del taller o de la presentación y no cambia datos; las ampliaciones son lo nuevo.
@@ -9,7 +11,7 @@ Cómo revisar: marca en cada guía "Aprobada", "Con cambios" (y cuáles) o "No v
 - **Id:** `module-01-guide-3` · **Fuentes:** T
 - **Validado (sin cambiar datos):** Aportes de jubilación (11 %), obra social (3 %) y Ley 19.032 (3 %), entre otros (T); Las sumas no remunerativas en general no llevan aportes jubilatorios (T); Recibo del taller: remunerativo $ 1.469.263,32, no remunerativo $ 90.000 y descuentos $ 274.304,46 (T)
 - **Ampliación, pendiente del Lic. Kevin Giampieri:** Control de los tres aportes como 17 % del remunerativo y la diferencia como otros conceptos del recibo: $ 249.774,76 y $ 24.529,70, calculados a mano; No se nombra qué conceptos son, porque dependen del convenio
-- **Decisión de Lourdes:** ☐ Aprobada · ☐ Con cambios · ☐ No va
+- **Decisión de Lourdes:** ☑ Aprobada (undefined/undefined/15/11/2026)
 
 **Situación:** Tu recibo trae varias líneas de descuentos. Casi nadie las revisa, pero en un minuto puedes saber si los números tienen sentido.
 
@@ -54,7 +56,7 @@ Si tus descuentos son mayores que ese 17 %, la diferencia corresponde a **otros 
 - **Id:** `module-02-guide-3` · **Fuentes:** A-10, A-11, A-12, A-13
 - **Validado (sin cambiar datos):** Riqueza real frente a apariencia; la riqueza suele ser invisible, son activos y no objetos de consumo (A-10 a A-12); "Comprar lo que no necesitas para impresionar a quien no conoces" (A-12); La deuda de consumo compromete tu futuro (A-13)
 - **Ampliación, pendiente del Lic. Kevin Giampieri:** Se quitan las referencias a influencers y nombres propios del material, como pide la spec (Anexo A); Ejemplo de dos personas con el mismo sueldo: $ 200.000 × 60 = $ 12.000.000 sin rendimiento, calculado a mano
-- **Decisión de Lourdes:** ☐ Aprobada · ☐ Con cambios · ☐ No va
+- **Decisión de Lourdes:** ☑ Aprobada (undefined/undefined/15/11/2026)
 
 **Situación:** Una persona estrena auto y viaja seguido. Otra vive igual que hace años. ¿Quién tiene más dinero? Lo que se ve no siempre lo dice.
 
@@ -102,7 +104,7 @@ Endeudarse por estatus es, como dice el taller, **comprar lo que no necesitas pa
 - **Id:** `module-03-guide-3` · **Fuentes:** A-32, A-34
 - **Validado (sin cambiar datos):** Presupuesto con 50/30/20 como punto de partida y el ahorro separado (A-32); Anotar todo para ver lo que no se ve (A-34)
 - **Ampliación, pendiente del Lic. Kevin Giampieri:** Gastos anuales repartidos en doce, en un apartado, y el aguinaldo como ayuda y no como ingreso mensual; Ejemplo ($ 660.000 ÷ 12 = $ 55.000) y práctica ($ 600.000 ÷ 12 = $ 50.000) con números redondos, calculados a mano
-- **Decisión de Lourdes:** ☐ Aprobada · ☐ Con cambios · ☐ No va
+- **Decisión de Lourdes:** ☑ Aprobada (undefined/undefined/15/11/2026)
 
 **Situación:** El presupuesto cerraba todos los meses, hasta que llegó el seguro anual del auto. No fue un imprevisto: era un gasto que no estaba en el plan.
 
@@ -147,7 +149,7 @@ Suma lo que pagas en el año por esos conceptos y divídelo por **12**: ese mont
 - **Id:** `module-04-guide-3` · **Fuentes:** A-36, B-01, B-02, B-12, B-14, B-26
 - **Validado (sin cambiar datos):** Dónde guardar el fondo: liquidez y bajo riesgo, cuenta remunerada o fondo money market (A-36); Garantía de los depósitos hasta $ 50.000.000 por persona y entidad desde el 01/04/2026, con exclusiones (B-01); Plazo fijo tradicional con mínimo de 30 días (B-02); Las cuentas de pago no tienen garantía (B-12); un money market es un FCI, sin garantía y con rendimiento variable (B-14, B-26)
 - **Ampliación, pendiente del Lic. Kevin Giampieri:** Comparación de tres lugares para el fondo según garantía, liquidez y riesgo; Práctica de clasificar opciones por garantía, sin nombrar entidades
-- **Decisión de Lourdes:** ☐ Aprobada · ☐ Con cambios · ☐ No va
+- **Decisión de Lourdes:** ☑ Aprobada (undefined/undefined/15/11/2026)
 
 **Situación:** Tu fondo de emergencia está en una billetera que "rinde". ¿Qué pasa con ese dinero si algo sale mal? Depende de qué tipo de cuenta o producto es.
 
