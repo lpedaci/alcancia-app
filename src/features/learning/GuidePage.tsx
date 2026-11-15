@@ -24,7 +24,7 @@ import { SourceList } from './SourceList';
 import { AskTutorForm } from './Tutoring';
 import { distributeTerms, introducedTerms } from '@/features/glossary/glossary';
 import { GlossaryText } from '@/features/glossary/GlossaryText';
-import { type Answer, feedbackFor, type Guide, type GuideBlock, guideById, isAnswered, isCorrect, moduleById } from './questions';
+import { type Answer, feedbackFor, type Guide, type GuideBlock, guideById, guideNumber, guidesOfModule, isAnswered, isCorrect, moduleById } from './questions';
 import { fuerteLine } from '@/features/companion/fuerte-lines';
 import { safeReturnPath } from '@/lib/use-return-state';
 
@@ -191,7 +191,9 @@ function GuideReader({ guide, start = 0, from }: { guide: Guide; start?: number;
             {from && <BackToOrigin from={from} />}
             <p className="flex flex-wrap items-center gap-x-2 text-label-large text-primary">
               <Icon name="menu_book" size={18} />
-              {t('learn.guide.kicker', { module: module?.order, minutes: guide.minutes })}
+              {guidesOfModule(guide.moduleId).length > 1
+                ? t('learn.guide.kickerOf', { module: module?.order, k: guideNumber(guide.id), total: guidesOfModule(guide.moduleId).length, minutes: guide.minutes })
+                : t('learn.guide.kicker', { module: module?.order, minutes: guide.minutes })}
             </p>
             {finished ? (
               <h1 ref={headingRef} tabIndex={-1} className="text-headline-medium text-on-surface focus:outline-none">
@@ -215,6 +217,15 @@ function GuideReader({ guide, start = 0, from }: { guide: Guide; start?: number;
               <IconTile icon="task_alt" tone="tertiary" />
               <p className="text-body-large text-on-surface">{t('learn.guide.doneBody', { title: guide.title })}</p>
               <div className="flex flex-wrap gap-3">
+                {/* The next guide of the module, to go deeper (D-276) */}
+                {(() => {
+                  const next = guidesOfModule(guide.moduleId).find((g) => guideNumber(g.id) === guideNumber(guide.id) + 1);
+                  return next ? (
+                    <Button asChild trailingIcon="arrow_forward">
+                      <Link to={`/app/learn/guides/${next.id}`}>{t('learn.guide.toNext', { title: next.title })}</Link>
+                    </Button>
+                  ) : null;
+                })()}
                 {challengeId && (
                   <Button asChild trailingIcon="arrow_forward">
                     <Link to={`/app/learn/challenges/${challengeId}`}>{t('learn.guide.toChallenge', { level: level?.order })}</Link>

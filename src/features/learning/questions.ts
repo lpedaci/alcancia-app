@@ -113,7 +113,12 @@ export const CHALLENGES = challengesJson.challenges as unknown as ChallengeDef[]
 export const MODULES = modulesJson as unknown as ModuleMeta[];
 
 export const guideById = (id: string) => GUIDES.find((g) => g.id === id);
-export const guideOfModule = (moduleId: string) => GUIDES.find((g) => g.moduleId === moduleId);
+/** The module's first guide: the one its level asks for (D-61). */
+export const guideOfModule = (moduleId: string) => GUIDES.find((g) => g.id === `${moduleId}-guide-1`) ?? GUIDES.find((g) => g.moduleId === moduleId);
+/** Every guide of a module, in order: guide 1, then the ones that go deeper (step 27, D-276). */
+export const guidesOfModule = (moduleId: string) => GUIDES.filter((g) => g.moduleId === moduleId).sort((a, b) => a.id.localeCompare(b.id));
+/** Number of a guide inside its module (1, 2 or 3). */
+export const guideNumber = (guideId: string) => Number(/-guide-(\d+)$/.exec(guideId)?.[1] ?? 1);
 export const challengeById = (id: string) => CHALLENGES.find((c) => c.id === id);
 export const moduleById = (id: string) => MODULES.find((m) => m.id === id);
 

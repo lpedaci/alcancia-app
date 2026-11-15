@@ -14,7 +14,7 @@
 
 ## Paso 27 · Tanda 1: guías 2 de los módulos 1 a 4 (D-276)
 
-Borradores en `src/data/guides-drafts.json`, **no visibles en la app** hasta la aprobación de Lourdes. Documento para revisar: [content-review/tanda-1.md](content-review/tanda-1.md) (se genera con `node scripts/guides-review.mjs 1`).
+**Aprobada por Lourdes el 15/11/2026 y publicada:** las cuatro guías están en `src/data/guides.json`. En Aprender aparecen debajo de la guía 1 de su módulo como "guía 2, para profundizar", y al terminar la guía 1 se ofrece seguir con la 2; el nivel sigue pidiendo solo la guía 1. Registro de la revisión: [content-review/tanda-1.md](content-review/tanda-1.md). Las ampliaciones siguen pendientes de revisión del Lic. Kevin Giampieri.
 
 | Módulo | Guía 2 | Validado | Ampliación, pendiente del Lic. Kevin Giampieri |
 | --- | --- | --- | --- |

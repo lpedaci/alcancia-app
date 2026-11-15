@@ -11,6 +11,11 @@ const read = (p) => JSON.parse(readFileSync(join(root, p), 'utf8'));
 const { guides } = read('src/data/guides-drafts.json');
 const modules = read('src/data/modules.json');
 const list = guides.filter((g) => g.review?.batch === batch);
+if (list.length === 0) {
+  // An approved batch already left the drafts: its review document stays as the record.
+  console.log(`Batch ${batch} has no drafts (already approved?): docs/content-review/tanda-${batch}.md is kept as is.`);
+  process.exit(0);
+}
 
 const question = (q) => {
   const lines = [`**${q.prompt}**`, ''];

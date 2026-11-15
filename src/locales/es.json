@@ -1383,7 +1383,9 @@
       "openTool": "Abrir la herramienta \"{{name}}\"",
       "backTo": "Volver a {{section}}",
       "previousScreen": "la pantalla anterior",
-      "exit": "Salir y seguir después"
+      "exit": "Salir y seguir después",
+      "kickerOf": "Guía {{k}} de {{total}} · módulo {{module}} · {{minutes}} min",
+      "toNext": "Seguir con «{{title}}»"
     },
     "challenge": {
       "locked": "{{title}} está bloqueado",
@@ -1477,7 +1479,8 @@
       "badgeHow": "Se obtiene con tu parte de este módulo en el desafío del nivel {{level}}.",
       "badgeTry": "Ir al desafío del nivel {{level}}",
       "badgesAll": "Ver todas las insignias ({{count}})",
-      "badgesLess": "Ver menos"
+      "badgesLess": "Ver menos",
+      "guideMetaDeeper": "Módulo {{n}} · guía {{k}}, para profundizar · {{minutes}} min"
     },
     "sources": {
       "title": "Fuentes",

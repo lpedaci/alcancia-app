@@ -80,3 +80,4 @@
 | 15/11/2026 | 26 · Meta colectiva y aprendizaje social | Meta colectiva por cohorte medida con misiones o desafíos, agregada y sin rankings (tutor en T2, participante en Aprender); espacio de la cohorte con publicaciones sin montos ni datos personales y moderación del tutor en "Comunidad" (T6) (D-274) | Lourdes revisa |
 | 15/11/2026 | Ajuste de Lourdes | Aviso de privacidad: lo que nunca se ve en rojo y lo que sí se ve en verde (D-275) | Hecho |
 | 15/11/2026 | 27 · Contenido, tanda 1 | Guías 2 de los módulos 1 a 4 en borrador (`guides-drafts.json`, fuera de la app), validadas con tests, y documento de revisión `docs/content-review/tanda-1.md` (D-276) | Esperando la revisión de Lourdes |
+| 15/11/2026 | 27 · Contenido, tanda 1 aprobada | Las guías 2 de los módulos 1 a 4 pasan a la app como guías para profundizar; la guía 1 ofrece seguir con la 2 y Aprender las lista debajo de su módulo (D-277) | Hecho |

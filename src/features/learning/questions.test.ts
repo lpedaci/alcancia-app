@@ -64,7 +64,9 @@ function rightAnswer(q: LearningQuestion): Answer {
 describe('content of levels 1 to 7 (D-61)', () => {
   it('has one guide for each phase A module of levels 1 to 7, with the Gagné sequence', () => {
     const modules = levels.filter((l) => ['level-1', 'level-2', 'level-3', 'level-4', 'level-5', 'level-6', 'level-7'].includes(l.id)).flatMap((l) => l.guideModuleIds);
-    expect(GUIDES.map((g) => g.moduleId).sort()).toEqual([...modules].sort());
+    // Guide 1 of each module is the one its level asks for; guides 2 and 3 go deeper (D-276)
+    expect(GUIDES.filter((g) => g.id.endsWith('-guide-1')).map((g) => g.moduleId).sort()).toEqual([...modules].sort());
+    expect(GUIDES.every((g) => modules.includes(g.moduleId))).toBe(true);
     for (const guide of GUIDES) {
       const types = guide.blocks.map((b) => b.type);
       expect(types[0]).toBe('hook');

@@ -1,5 +1,7 @@
 # Tanda 1 del paso 27: guías para revisar
 
+> **Aprobada por Lourdes el 15/11/2026.** Las cuatro guías pasaron a `src/data/guides.json` y se ven en la app. Única corrección al publicar: "Como se dice en el taller" pasa a "Como se dice en el taller" (regla de textos de la app).
+
 > Borradores de `src/data/guides-drafts.json`, generados con `node scripts/guides-review.mjs 1`. **No se muestran en la app** hasta que Lourdes los apruebe; las ampliaciones quedan marcadas para el Lic. Kevin Giampieri (D-276).
 
 Cómo revisar: marca en cada guía "Aprobada", "Con cambios" (y cuáles) o "No va". Lo validado viene del taller o de la presentación y no cambia datos; las ampliaciones son lo nuevo.
@@ -9,7 +11,7 @@ Cómo revisar: marca en cada guía "Aprobada", "Con cambios" (y cuáles) o "No v
 - **Id:** `module-01-guide-2` · **Fuentes:** T, LCT
 - **Validado (sin cambiar datos):** Aportes, contribuciones, no remunerativas y costo laboral: recibo del taller (T); las contribuciones salen de restar el bruto al costo laboral del mismo recibo
 - **Ampliación, pendiente del Lic. Kevin Giampieri:** El aguinaldo: Ley 20.744, arts. 121 y 122 (InfoLEG, verificado el 15/11/2026); Ejemplo y práctica de la cuota del aguinaldo, con números redondos; Los aportes también se descuentan del aguinaldo
-- **Decisión de Lourdes:** ☐ Aprobada · ☐ Con cambios · ☐ No va
+- **Decisión de Lourdes:** ☑ Aprobada (15/11/2026)
 
 **Situación:** En diciembre tu recibo trae un concepto que no estaba los otros meses: el aguinaldo. Y todos los meses hay líneas que nadie te explicó.
 
@@ -58,7 +60,7 @@ El **aguinaldo**, o **sueldo anual complementario**, se paga en dos cuotas: la p
 - **Id:** `module-02-guide-2` · **Fuentes:** A-06, A-08, A-15, A-16, A-19
 - **Validado (sin cambiar datos):** Costo de oportunidad y el café de $ 5.000 (A-19); Inflación del estilo de vida y minimalismo (A-15, A-16); Tabú del dinero, administración y disciplina (A-06, A-08)
 - **Ampliación, pendiente del Lic. Kevin Giampieri:** Ejemplo del aumento con plan (la mitad al ahorro), con números redondos: adaptación didáctica, sin datos nuevos
-- **Decisión de Lourdes:** ☐ Aprobada · ☐ Con cambios · ☐ No va
+- **Decisión de Lourdes:** ☑ Aprobada (15/11/2026)
 
 **Situación:** Te aumentaron el sueldo y, a los tres meses, no te sobra más que antes. No compraste nada grande: tu estilo de vida subió con el aumento.
 
@@ -74,7 +76,7 @@ El **aguinaldo**, o **sueldo anual complementario**, se paga en dos cuotas: la p
 
 ### Costo de oportunidad
 
-Cada peso que gastas en algo que dura poco deja de crecer con el **interés compuesto**. Como dice el material del taller: no es solo un café de $ 5.000, es ese capital invertido a 30 años.
+Cada peso que gastas en algo que dura poco deja de crecer con el **interés compuesto**. Como se dice en el taller: no es solo un café de $ 5.000, es ese capital invertido a 30 años.
 
 ### La inflación del estilo de vida
 
@@ -110,7 +112,7 @@ En muchas casas, el dinero es un tema del que no se habla. Las finanzas personal
 - **Id:** `module-03-guide-2` · **Fuentes:** T, A-15, A-34
 - **Validado (sin cambiar datos):** Gastos hormiga, suscripciones sin uso y anotar todo un mes (A-34, A-15); Gastos fijos frente a variables (billetera de práctica, T)
 - **Ampliación, pendiente del Lic. Kevin Giampieri:** Orden para ajustar un presupuesto en rojo (deseos, después fijos) y "el ahorro va primero": criterio didáctico; Ejemplo del mes en rojo con números redondos
-- **Decisión de Lourdes:** ☐ Aprobada · ☐ Con cambios · ☐ No va
+- **Decisión de Lourdes:** ☑ Aprobada (15/11/2026)
 
 **Situación:** Armaste tu presupuesto y a fin de mes no cerró. Antes de recortar a ciegas, conviene saber qué gastos se pueden mover y cuáles no.
 
@@ -160,7 +162,7 @@ Primero, los deseos: reduce lo variable que menos valoras. Después, revisa los 
 - **Id:** `module-04-guide-2` · **Fuentes:** A-35, A-36, B-12, B-14, B-26
 - **Validado (sin cambiar datos):** De 3 a 6 meses, solo para emergencias reales (A-35); Liquidez en 24 horas y bajo riesgo: cuenta remunerada o fondo money market (A-36)
 - **Ampliación, pendiente del Lic. Kevin Giampieri:** Empezar por un mes y aportar el día de cobro: criterio didáctico; Fondo money market sin garantía de los depósitos y con rendimiento que varía (B-12, B-14, B-26); Ejemplo de cuándo llegas, con el aguinaldo, con números redondos
-- **Decisión de Lourdes:** ☐ Aprobada · ☐ Con cambios · ☐ No va
+- **Decisión de Lourdes:** ☑ Aprobada (15/11/2026)
 
 **Situación:** Un fondo de 3 meses de gastos parece imposible. Nadie lo arma de una vez: se arma con aportes chicos y constantes.
 

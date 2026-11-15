@@ -109,8 +109,9 @@ export function scopeToOrg(data: SharedData, orgId: string): OrgData {
     weeklyReports: mine(data.weeklyReports),
     followUps: mine(data.followUps),
     tutorQuestions: mine(data.tutorQuestions),
-    collectiveGoals: data.collectiveGoals.filter((g) => cohortIds.has(g.cohortId)),
-    cohortPosts: data.cohortPosts.filter((p) => cohortIds.has(p.cohortId)),
+    // `?? []`: a browser with demo data saved before step 26 has neither list
+    collectiveGoals: (data.collectiveGoals ?? []).filter((g) => cohortIds.has(g.cohortId)),
+    cohortPosts: (data.cohortPosts ?? []).filter((p) => cohortIds.has(p.cohortId)),
     accessRequests: data.accessRequests,
     consents: mine(data.consents),
   };

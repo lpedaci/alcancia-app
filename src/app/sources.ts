@@ -13,6 +13,7 @@ export const OFFICIAL_SOURCES = [
   { id: 'bcra-tasas', name: 'BCRA, texto ordenado "Tasas de interés en las operaciones de crédito"', url: 'https://www.bcra.gob.ar/archivos/Pdfs/Texord/t-tasint.pdf' },
   { id: 'gob-usuarios-financieros', name: 'argentina.gob.ar: costo financiero total y Central de Deudores', url: 'https://www.argentina.gob.ar/node/371108' },
   { id: 'ley-25065', name: 'Ley 25.065 de tarjetas de crédito', url: 'https://www.argentina.gob.ar/normativa/nacional/ley-25065-1998-55556/texto' },
+  { id: 'ley-20744', name: 'Ley 20.744 de Contrato de Trabajo, artículos 121 y 122: sueldo anual complementario', url: 'https://www.argentina.gob.ar/normativa/nacional/ley-20744-25552/actualizacion', verifiedAt: '2026-11-15' },
   { id: 'bcra-a6885', name: 'BCRA, Comunicación "A" 6885: proveedores de servicios de pago', url: 'https://www.bcra.gob.ar/archivos/Pdfs/comytexord/A6885.pdf' },
   { id: 'bcra-transferencias', name: 'BCRA, Transferencias 3.0 y QR interoperable', url: 'https://www.bcra.gob.ar/transferencias-3-0/' },
   { id: 'bcra-pagos-minoristas', name: 'BCRA, Informe de Pagos Minoristas (septiembre de 2026)', url: 'https://www.bcra.gob.ar/publicaciones/informe-de-pagos-minoristas-septiembre-de-2026/' },

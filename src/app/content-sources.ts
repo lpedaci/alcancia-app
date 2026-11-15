@@ -46,6 +46,8 @@ const OFFICIAL: Record<string, string | { name: string }> = {
   'B-35': 'byma-horarios',
   'B-36': 'byma-cedears',
   'B-40': 'indec',
+  // Step 27 (D-276, Q-21): the aguinaldo, outside Annex B
+  LCT: 'ley-20744',
 };
 
 export interface ContentSource {
@@ -80,7 +82,7 @@ export function describeSources(codes: string[]): ContentSource[] {
     });
   }
   const seen = new Set<string>();
-  for (const code of unique.filter((c) => c.startsWith('B-'))) {
+  for (const code of unique.filter((c) => c.startsWith('B-') || c === 'LCT')) {
     const entry = OFFICIAL[code];
     if (!entry) continue;
     if (typeof entry === 'string') {

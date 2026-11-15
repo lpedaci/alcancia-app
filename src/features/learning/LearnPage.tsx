@@ -14,7 +14,7 @@ import { duration, easing, useShouldReduceMotion } from '@/lib/motion';
 import { cn } from '@/lib/utils';
 import { useDataStore, useProgram } from '@/store/data-store';
 import { useCurrentUser } from '@/store/session-store';
-import { challengeById, guideOfModule, MODULES, moduleById } from './questions';
+import { challengeById, guideNumber, guideOfModule, guidesOfModule, MODULES, moduleById } from './questions';
 import { MyQuestions, WeeklyChallenges } from './Tutoring';
 import { MasteryButton } from '@/features/levels/MasteryButton';
 import { fuerteLine } from '@/features/companion/fuerte-lines';
@@ -327,39 +327,45 @@ function LevelDetail({
       {level.guideModuleIds.length > 0 && (
         <div className="flex flex-col gap-1.5">
           <p className="pb-1 text-title-small text-on-surface">{t('learn.map.guides')}</p>
-          {level.guideModuleIds.map((moduleId) => {
-            const guide = guideOfModule(moduleId);
+          {level.guideModuleIds.flatMap((moduleId) => {
             const module = moduleById(moduleId);
-            if (!guide)
-              return (
+            const guides = guidesOfModule(moduleId);
+            if (guides.length === 0)
+              return [
                 <p key={moduleId} className="flex items-center gap-2 px-1 py-2 text-body-medium text-on-surface-variant sm:gap-3 sm:px-3">
                   <Icon name="schedule" size={20} />
                   {t('learn.map.guideSoon', { n: module?.order, title: module?.title })}
-                </p>
-              );
-            const done = guideDone(guide.id);
-            const content = (
-              <>
-                <Icon name={done ? 'check_circle' : 'menu_book'} size={20} filled={done} className={done ? 'text-success' : 'text-primary'} />
-                <span className="min-w-0 flex-1">
-                  <span className="block text-body-medium text-on-surface">{guide.title}</span>
-                  <span className="block text-body-small text-on-surface-variant">
-                    {t('learn.map.guideMeta', { n: module?.order, minutes: guide.minutes })}
-                    {done && ` · ${t('learn.map.read')}`}
+                </p>,
+              ];
+            // Guide 1 is the one the level asks for; guides 2 and 3 go deeper (D-276)
+            return guides.map((guide) => {
+              const done = guideDone(guide.id);
+              const deeper = guideNumber(guide.id) > 1;
+              const content = (
+                <>
+                  <Icon name={done ? 'check_circle' : 'menu_book'} size={20} filled={done} className={done ? 'text-success' : 'text-primary'} />
+                  <span className="min-w-0 flex-1">
+                    <span className="block text-body-medium text-on-surface">{guide.title}</span>
+                    <span className="block text-body-small text-on-surface-variant">
+                      {deeper
+                        ? t('learn.map.guideMetaDeeper', { n: module?.order, k: guideNumber(guide.id), minutes: guide.minutes })
+                        : t('learn.map.guideMeta', { n: module?.order, minutes: guide.minutes })}
+                      {done && ` · ${t('learn.map.read')}`}
+                    </span>
                   </span>
-                </span>
-              </>
-            );
-            return locked ? (
-              <p key={moduleId} className="flex items-center gap-2 px-1 py-2 opacity-80 sm:gap-3 sm:px-3">
-                {content}
-              </p>
-            ) : (
-              <Link key={moduleId} to={`/app/learn/guides/${guide.id}`} className={row}>
-                {content}
-                <Icon name="chevron_right" size={20} className="text-on-surface-variant" />
-              </Link>
-            );
+                </>
+              );
+              return locked ? (
+                <p key={guide.id} className={cn('flex items-center gap-2 px-1 py-2 opacity-80 sm:gap-3 sm:px-3', deeper && 'pl-6 sm:pl-9')}>
+                  {content}
+                </p>
+              ) : (
+                <Link key={guide.id} to={`/app/learn/guides/${guide.id}`} className={cn(row, deeper && 'pl-6 sm:pl-9')}>
+                  {content}
+                  <Icon name="chevron_right" size={20} className="text-on-surface-variant" />
+                </Link>
+              );
+            });
           })}
         </div>
       )}
