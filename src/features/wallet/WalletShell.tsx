@@ -11,6 +11,9 @@ import { Tooltip } from '@/components/ui/Tooltip';
 import { FuerteFab } from '@/features/companion/FuerteFab';
 import { LearningCardHost } from '@/features/learning-cards/LearningCardHost';
 import { InboxMenu } from './InboxMenu';
+import { HorneroMark } from '@/features/partner/HorneroMark';
+import { FictitiousBrandChip } from '@/features/partner/FictitiousBrandChip';
+import { HORNERO_HOME, usePartnerMode } from '@/features/partner/partner-mode';
 import type { FuerteState } from '@/features/companion/Fuerte';
 import { completedLights } from '@/features/levels/engine';
 import { LEVEL_ROUTE } from '@/features/levels/UnlockCard';
@@ -261,6 +264,7 @@ export function WalletShell({ section, children, fuerte }: { section: string; ch
     );
   };
 
+  const partner = usePartnerMode();
   const walletDestinations = DESTINATIONS.filter((d) => d.id !== 'learn');
   const learn = DESTINATIONS.find((d) => d.id === 'learn')!;
 
@@ -356,10 +360,26 @@ export function WalletShell({ section, children, fuerte }: { section: string; ch
           {/* Top bar: on phones the logo and the section; from tablets, a floating bar with the section title */}
           {/* From tablets, the header covers the gap above the floating bar so content never shows behind it */}
           <header data-wallet-header className="sticky top-0 z-30 print:!hidden border-b border-outline-variant bg-surface-container-lowest large:-mt-3 large:border-0 large:bg-surface large:pt-3">
+            {/* Integrated mode (D-75): Hornero's bar takes the place of Alcancía's brand, with the
+                fictitious-brand label always in sight (D-87) and the way back to the partner app. */}
+            {partner === 'hornero' && (
+              <div data-partner-bar className="flex flex-wrap items-center gap-x-3 gap-y-1 border-b border-outline-variant bg-partner-hornero-container px-(--space-gutter) py-2 text-partner-on-hornero-container medium:px-6 large:mb-3 large:rounded-xl large:border">
+                <Link to={HORNERO_HOME} className="inline-flex min-h-10 items-center gap-2 rounded-sm text-title-small">
+                  <span aria-hidden className="inline-flex size-8 items-center justify-center rounded-md bg-partner-hornero text-on-primary">
+                    <HorneroMark size={20} />
+                  </span>
+                  <span>{t('partner.hornero.back')}</span>
+                </Link>
+                <FictitiousBrandChip />
+                <span className="hidden text-label-medium sm:inline">{t('partner.hornero.inside')}</span>
+              </div>
+            )}
             <div className="flex min-h-16 items-center gap-1 px-(--space-gutter) py-2 sm:gap-2 medium:px-6 large:gap-2 large:rounded-xl large:border large:border-outline-variant large:bg-surface-container-lowest large:px-4">
-              <Link to="/app" className="inline-flex shrink-0 rounded-sm large:hidden">
-                <Logo compact />
-              </Link>
+              {partner !== 'hornero' && (
+                <Link to="/app" className="inline-flex shrink-0 rounded-sm large:hidden">
+                  <Logo compact />
+                </Link>
+              )}
               {/* Fixed notice (5.3, D-69, D-169): always in sight inside the sticky top bar, on the same row
                   as the logo. Phones: a compact chip; from 840 px the full text; desktop, the dark pill.
                   "dinero ficticio" is never removed. */}

@@ -1,10 +1,10 @@
 {
   "note": "Fictitious payees and merchants of the practice wallet (5.3, 1.1.1): no real person, wallet, bank or brand. Entities are invented names; accounts never show a valid CBU or CVU.",
   "payees": [
-    { "alias": "sofia.ramos.practica", "holder": "Sofía Ramos", "entity": "Billetera de Ejemplo", "accountType": "CVU" },
+    { "alias": "sofia.ramos.practica", "holder": "Sofía Ramos", "entity": "Billetera Hornero (ficticia)", "accountType": "CVU" },
     { "alias": "sofia.ramirez.practica", "holder": "Sofía Ramírez", "entity": "Banco Ficticio del Sur", "accountType": "CBU" },
     { "alias": "tomas.diaz.practica", "holder": "Tomás Díaz", "entity": "Banco Ficticio del Sur", "accountType": "CBU" },
-    { "alias": "valeria.sosa.practica", "holder": "Valeria Sosa", "entity": "Billetera de Ejemplo", "accountType": "CVU" },
+    { "alias": "valeria.sosa.practica", "holder": "Valeria Sosa", "entity": "Billetera Hornero (ficticia)", "accountType": "CVU" },
     { "alias": "inmobiliaria.ejemplo", "holder": "Inmobiliaria Ejemplo S.R.L.", "entity": "Banco Ficticio del Sur", "accountType": "CBU" }
   ],
   "merchants": [

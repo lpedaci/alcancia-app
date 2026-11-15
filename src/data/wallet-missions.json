@@ -272,7 +272,7 @@
           "options": [
             {
               "id": "right",
-              "text": "sofia.ramos.practica · titular Sofía Ramos · Billetera de Ejemplo (CVU) · $ 12.000",
+              "text": "sofia.ramos.practica · titular Sofía Ramos · Billetera Hornero, ficticia (CVU) · $ 12.000",
               "action": "transfer",
               "value": "12000.00",
               "target": "Sofía Ramos · alias sofia.ramos.practica",

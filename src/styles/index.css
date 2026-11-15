@@ -53,6 +53,11 @@
   --color-role-sponsor: var(--role-sponsor);
   --color-role-sponsor-container: var(--role-sponsor-container);
 
+  /* Hornero, fictitious partner (D-86): its chrome only. */
+  --color-partner-hornero: var(--partner-hornero);
+  --color-partner-hornero-container: var(--partner-hornero-container);
+  --color-partner-on-hornero-container: var(--partner-on-hornero-container);
+
   /* Fuerte only (D-52): used by the character illustration, nowhere else. */
   --color-fuerte-body: var(--fuerte-body);
   --color-fuerte-light: var(--fuerte-light);

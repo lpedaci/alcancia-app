@@ -15,6 +15,8 @@ export interface CheckedPage {
   noConsent?: boolean;
   /** A sign-in waiting for the second step (to check G3). */
   pendingMfa?: 'p-paula' | 'p-ricardo';
+  /** Integrated mode inside a fictitious partner app (D-75, D-242). */
+  partner?: 'hornero';
 }
 
 export const PAGES: CheckedPage[] = [
@@ -85,6 +87,8 @@ export const PAGES: CheckedPage[] = [
   { id: 'o3-import', path: '/#/admin/people/import', as: 'p-paula' },
   { id: 'o4-program', path: '/#/admin/program', as: 'p-paula' },
   { id: 'd1-sponsor', path: '/#/sponsor', as: 'p-ricardo' },
+  { id: 'x1-hornero', path: '/#/app/hornero', as: 'p-mariana' },
+  { id: 'x1-hornero-wallet', path: '/#/app', as: 'p-mariana', partner: 'hornero' },
   { id: 'g7-forbidden', path: '/#/admin', as: 'p-mariana' },
   { id: 'g7-not-found', path: '/#/no-existe' },
   { id: 'g8-design-system', path: '/#/design-system' },
@@ -117,13 +121,14 @@ export async function prepareSession(page: Page, target: CheckedPage) {
     : null;
   const consents = target.as && !target.noConsent ? [{ personId: target.as, version: '1.0', acceptedAt: now }] : [];
   await page.addInitScript(
-    ({ session, pending, consents }) => {
+    ({ session, pending, consents, partner }) => {
       localStorage.setItem(
         'alcancia-session',
         JSON.stringify({ state: { session, pending, returnTo: null, authAttempts: {}, demoUnlockAll: false }, version: 1 }),
       );
       localStorage.setItem('alcancia-data', JSON.stringify({ state: { consents }, version: 1 }));
+      if (partner) sessionStorage.setItem('alcancia-partner', partner);
     },
-    { session, pending, consents },
+    { session, pending, consents, partner: target.partner ?? null },
   );
 }

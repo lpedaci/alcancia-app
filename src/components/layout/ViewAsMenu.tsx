@@ -16,6 +16,8 @@ import { toast } from '@/components/ui/toast-store';
 import { DEMO_PERSON_IDS, findPerson, switchPerson } from '@/features/auth/auth-service';
 import { can } from '@/lib/permissions';
 import { useCurrentUser, useSessionStore } from '@/store/session-store';
+import { DropdownMenuItem } from '@/components/ui/DropdownMenu';
+import { HORNERO_HOME } from '@/features/partner/partner-mode';
 
 /**
  * "Ver como" (CLAUDE.md principles, F0 and 5.0): always visible in the top bar. Lists the five demo
@@ -67,6 +69,11 @@ export function ViewAsMenu() {
         >
           {t('demo.unlockAll')}
         </DropdownMenuCheckboxItem>
+        {user.role === 'participant' && (
+          <DropdownMenuItem icon="open_in_new" description={t('demo.partnerHorneroHelp')} onSelect={() => navigate(HORNERO_HOME)}>
+            {t('demo.partnerHornero')}
+          </DropdownMenuItem>
+        )}
       </DropdownMenuContent>
     </DropdownMenu>
   );

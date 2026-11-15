@@ -44,6 +44,10 @@
   --ref-violet-90: #ede3f8;
   --ref-olive-40: #5d6b2f;
   --ref-olive-90: #e7ecd6;
+  /* Hornero, the fictitious partner of the integrated mode (D-75, D-86): its own plum, unlike any real wallet. */
+  --ref-plum-40: #7b2d55;
+  --ref-plum-90: #f8e1ec;
+  --ref-plum-10: #3b0f28;
   /* Cool neutrals */
   --ref-neutral-100: #ffffff;
   --ref-neutral-96: #f1f3f5;
@@ -121,6 +125,11 @@
   --role-participant-container: var(--ref-violet-90);
   --role-sponsor: var(--ref-olive-40);
   --role-sponsor-container: var(--ref-olive-90);
+
+  /* Partner brand of the integrated mode (D-75, D-86): only on Hornero's own chrome, never inside Alcancía. */
+  --partner-hornero: var(--ref-plum-40);
+  --partner-hornero-container: var(--ref-plum-90);
+  --partner-on-hornero-container: var(--ref-plum-10);
 
   /* Fuerte (D-52): only for the character and its lights. Never on buttons, backgrounds, charts or states. */
   --fuerte-body: var(--ref-fuerte-orange);

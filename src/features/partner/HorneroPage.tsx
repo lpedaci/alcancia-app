@@ -1,0 +1,148 @@
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router';
+import { MoneyText } from '@/components/money/MoneyText';
+import { SkipLink } from '@/components/layout/InPageLink';
+import { Button } from '@/components/ui/Button';
+import { Icon, type IconName } from '@/components/ui/Icon';
+import { findPerson } from '@/features/auth/auth-service';
+import { formatMoney, formatNumber } from '@/lib/money';
+import { useCurrentUser } from '@/store/session-store';
+import { useWallet } from '@/store/wallet-store';
+import { FictitiousBrandChip } from './FictitiousBrandChip';
+import { HorneroMark } from './HorneroMark';
+import { nestSummary } from './nest';
+import { enterPartnerMode, exitPartnerMode } from './partner-mode';
+
+/** "2.0" → "2", "2.5" → "2,5": months without a useless decimal. */
+const monthsText = (months: string) => formatNumber(months, 1).replace(/,0$/, '');
+
+function NestLine({ icon, done, children }: { icon: IconName; done: boolean; children: React.ReactNode }) {
+  return (
+    <li className="flex items-start gap-3">
+      <span
+        aria-hidden
+        className={
+          done
+            ? 'flex size-10 shrink-0 items-center justify-center rounded-full bg-partner-hornero text-on-primary'
+            : 'flex size-10 shrink-0 items-center justify-center rounded-full bg-surface-container text-on-surface-variant'
+        }
+      >
+        <Icon name={icon} size={20} />
+      </span>
+      <p className={done ? 'pt-2 text-body-large text-on-surface' : 'pt-2 text-body-medium text-on-surface-variant'}>{children}</p>
+    </li>
+  );
+}
+
+/**
+ * Integrated mode demo (D-75, 5.5): the home of Hornero, a fictitious wallet (D-84), with its own
+ * brand built from tokens (D-86) and the "Marca ficticia de demostración" label always in sight
+ * (D-87). The brand microcopy of the nest (D-85) lives only here and in the integrated bar.
+ * "Abrir Alcancía" opens the person's wallet inside Hornero, with no second sign-in.
+ */
+export function HorneroPage() {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+  const user = useCurrentUser();
+  const personId = user?.personId ?? '';
+  const [wallet] = useWallet(personId);
+  const nest = nestSummary(wallet);
+  const firstName = findPerson(personId)?.name.split(' ')[0] ?? '';
+
+  const open = () => {
+    enterPartnerMode('hornero');
+    navigate('/app');
+  };
+  const leave = () => {
+    exitPartnerMode();
+    navigate('/app');
+  };
+
+  return (
+    <div className="min-h-dvh bg-surface" data-partner="hornero">
+      <SkipLink />
+      <header className="sticky top-0 z-30 border-b border-outline-variant bg-surface-container-lowest">
+        <div className="mx-auto flex max-w-[90rem] flex-wrap items-center gap-x-3 gap-y-2 px-(--space-gutter) py-3 medium:px-6">
+          <span className="inline-flex items-center gap-2 text-title-medium text-on-surface">
+            <span aria-hidden className="inline-flex size-9 items-center justify-center rounded-lg bg-partner-hornero text-on-primary">
+              <HorneroMark size={24} />
+            </span>
+            {t('partner.hornero.name')}
+          </span>
+          <FictitiousBrandChip />
+          <span className="flex-1" />
+          <Button variant="text" size="xs" leadingIcon="logout" onClick={leave}>
+            {t('partner.hornero.leave')}
+          </Button>
+        </div>
+      </header>
+
+      <main id="main-content" tabIndex={-1} className="mx-auto flex max-w-[72rem] flex-col gap-6 px-(--space-gutter) pt-6 pb-16 focus:outline-none medium:px-6">
+        <div className="flex flex-col gap-2">
+          <p className="text-label-large text-on-surface-variant">{t('partner.hornero.practice')}</p>
+          <h1 className="text-headline-medium text-partner-hornero">{t('partner.hornero.greeting', { name: firstName })}</h1>
+          <p className="max-w-[65ch] text-body-large text-on-surface-variant">{t('partner.hornero.intro')}</p>
+        </div>
+
+        <div className="grid gap-(--space-bento-gap) medium:grid-cols-2">
+          {/* Saving layer: the nest is built little by little */}
+          <section aria-labelledby="nest-saving" className="flex min-w-0 flex-col gap-4 rounded-xl border border-outline-variant bg-surface-container-lowest p-(--space-card-padding)">
+            <h2 id="nest-saving" className="text-title-large text-on-surface">
+              {t('partner.hornero.savingTitle')}
+            </h2>
+            <div className="flex flex-col gap-1 rounded-lg bg-partner-hornero-container p-4 text-partner-on-hornero-container">
+              <p className="text-label-large">{t('partner.hornero.savingLabel')}</p>
+              <MoneyText value={nest.total} className="text-headline-small sm:text-display-small" />
+            </div>
+            <ul className="flex flex-col gap-3">
+              <NestLine icon="trending_up" done={nest.grewThisMonth.gt(0)}>
+                {nest.grewThisMonth.gt(0)
+                  ? t('partner.hornero.grew', { amount: formatMoney(nest.grewThisMonth) })
+                  : t('partner.hornero.grewNone')}
+              </NestLine>
+              {nest.lastAddition && (
+                <NestLine icon="savings" done>
+                  {t('partner.hornero.added', { amount: formatMoney(nest.lastAddition) })}
+                </NestLine>
+              )}
+            </ul>
+          </section>
+
+          {/* Solidity layer: the nest holds (emergency fund, security, scams) */}
+          <section aria-labelledby="nest-solid" className="flex min-w-0 flex-col gap-4 rounded-xl border border-outline-variant bg-surface-container-lowest p-(--space-card-padding)">
+            <h2 id="nest-solid" className="text-title-large text-on-surface">
+              {t('partner.hornero.solidityTitle')}
+            </h2>
+            <ul className="flex flex-col gap-3">
+              <NestLine icon="shield" done={Boolean(nest.monthsCovered && Number(nest.monthsCovered) > 0)}>
+                {nest.monthsCovered && Number(nest.monthsCovered) > 0
+                  ? t('partner.hornero.holds', { count: Number(nest.monthsCovered), months: monthsText(nest.monthsCovered) })
+                  : t('partner.hornero.holdsNone')}
+              </NestLine>
+              <NestLine icon="verified_user" done={nest.resisted}>
+                {nest.resisted ? t('partner.hornero.resisted') : t('partner.hornero.resistedNone')}
+              </NestLine>
+            </ul>
+          </section>
+        </div>
+
+        <section aria-labelledby="nest-learn" className="flex flex-col gap-4 rounded-xl border border-outline-variant bg-surface-container-lowest p-(--space-card-padding) medium:flex-row medium:items-center">
+          <div className="flex min-w-0 flex-1 flex-col gap-1">
+            <h2 id="nest-learn" className="text-title-large text-on-surface">
+              {t('partner.hornero.learnTitle')}
+            </h2>
+            <p className="text-body-medium text-on-surface-variant">{t('partner.hornero.learnBody')}</p>
+          </div>
+          <Button size="m" leadingIcon="savings" onClick={open} className="shrink-0">
+            {t('partner.hornero.open')}
+          </Button>
+        </section>
+
+        <p className="flex items-start gap-2 text-body-small text-on-surface-variant">
+          <Icon name="lock" size={16} className="mt-0.5 shrink-0" />
+          {t('partner.hornero.privacy')}
+        </p>
+      </main>
+    </div>
+  );
+}

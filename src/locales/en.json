@@ -14,13 +14,14 @@
       "solution": "The solution",
       "roles": "Journeys",
       "simulator": "Simulator",
-      "faq": "Questions"
+      "faq": "Questions",
+      "contexts": "Contexts"
     },
     "hero": {
       "titleStart": "The wallet where your team",
       "titleKey": "learns finance",
       "titleEnd": "by using it",
-      "body": "A personal finance simulator shaped like a digital wallet: each person gets a practice salary, pays, budgets, saves and invests with fictitious money, and learns at the right moment. The company sees learning progress, never the amounts.",
+      "body": "A personal finance simulator shaped like a digital wallet: each person gets a practice salary, pays, budgets, saves and invests with fictitious money, and learns at the right moment. An organization, a school or a finance app can offer it; they see learning progress, never the amounts.",
       "caseStudy": "Read the case study"
     },
     "pieces": {
@@ -65,22 +66,22 @@
         "route": {
           "titleStart": "A path that",
           "titleKey": "unlocks",
-          "body": "\"Get to know you\" detects what you already know and proposes the path through seven levels, from the account to Invest.",
+          "body": "\"Get to know you\" detects what you already know and proposes the path through seven levels, from the account to Invest. Every screen explains \"Why it matters\" and leads to the exact part of the guide.",
           "chip": "Next unlock: Invest",
           "items": [
             "Diagnostic across five dimensions",
             "\"I know this\" to skip what you master",
-            "5-minute guides with practice",
+            "Just-in-time cards, even without a mission",
             "Locked sections show what is missing"
           ]
         },
         "practice": {
           "titleStart": "Practice with",
           "titleKey": "scenarios",
-          "body": "Tools and missions with fictitious money: every mistake ends in an explanation, never in blame.",
+          "body": "Missions are played in your own wallet: a loan leaves installments, paying the minimum adds interest and falling for a scam takes money away. Everything is reversed with actions inside the simulation, and every mistake ends in an explanation.",
           "chip": "Example values, not current rates",
           "items": [
-            "Nine kinds of challenges, no dragging needed",
+            "Nine kinds of challenges, with decision cases",
             "Twelve tools with visible assumptions",
             "Pockets and goals adjusted for inflation",
             "Thirteen missions of 2 to 6 minutes"
@@ -151,7 +152,7 @@
       "paula": {
         "chip": "L&D and Benefits admin",
         "does": "Sets up the program, uploads people and tracks adoption.",
-        "explore": "Dashboard with a privacy threshold, CSV upload and settings."
+        "explore": "Panel with a privacy threshold, editable people and cohorts, CSV import and settings."
       },
       "ricardo": {
         "chip": "Sponsor",
@@ -192,20 +193,22 @@
       "title": "Frequently asked questions",
       "q1": "Is this financial advice?",
       "a1": "No. It is educational content: it teaches concepts and lets you practice with scenarios. It never recommends specific products, institutions or investments.",
-      "q2": "What does the company see about each person?",
-      "a2": "Their learning progress: guides, challenges and completed levels. Never amounts, balances, habit answers or why a level is still locked.",
+      "q2": "What does whoever offers Alcancía see about each person?",
+      "a2": "The organization, the school or the partner see learning progress: guides, challenges and completed levels. Never amounts, balances, habit answers or why a level is still locked.",
       "q3": "Are the values real?",
-      "a3": "No. Scenarios use example values labeled as such, with links to official sources to check the current ones.",
+      "a3": "Not yet. Today scenarios use example values labeled as such, with links to official sources. Real rates, UVA, inflation and exchange rate, with date and source, are planned; the money will stay fictitious and stock and CEDEAR prices will stay as examples.",
       "q4": "Who is Fuerte?",
       "a4": "The wallet companion: it warns before an avoidable mistake, explains after one and celebrates progress. It can be muted.",
       "q5": "Is this a real product?",
-      "a5": "It is a portfolio prototype with fictitious data and no backend: everything you enter stays in your browser."
+      "a5": "It is a portfolio prototype with fictitious data and no backend: everything you enter stays in your browser.",
+      "q6": "What is Hornero?",
+      "a6": "A fictitious wallet made to show Alcancía integrated in another app. It is a demo brand: it does not exist and does not imitate any real wallet."
     },
     "final": {
       "title": "Choose a person and explore the wallet"
     },
     "footer": {
-      "tagline": "Personal finance simulator for work teams.",
+      "tagline": "Personal finance simulator for teams, classrooms and products.",
       "explore": "Explore",
       "project": "The project",
       "demo": "The demo",
@@ -291,6 +294,33 @@
       "unlockTitle": "Invest",
       "unlockProgress": "Emergency fund",
       "unlockValue": "2 of 3 months"
+    },
+    "contexts": {
+      "eyebrow": "Three contexts, the same wallet",
+      "title": "For teams, classrooms and products",
+      "intro": "The wallet, the levels, the missions and privacy stay the same. What changes is who offers it, how people sign in and which panels exist.",
+      "status": {
+        "live": "In the demo",
+        "preview": "Preview",
+        "soon": "Coming soon"
+      },
+      "org": {
+        "label": "Organization",
+        "name": "Andina Servicios S.A. (fictitious)",
+        "body": "A company offers Alcancía to its people as a benefit and as training, with tutoring, an L&D panel and an impact report.",
+        "cta": "See the journeys"
+      },
+      "product": {
+        "label": "Existing product",
+        "name": "Hornero",
+        "body": "A wallet integrates Alcancía for its users: it opens inside its app with no second sign-in, and the partner only gets progress notices, never amounts.",
+        "cta": "View inside Hornero"
+      },
+      "edu": {
+        "label": "Educational institution",
+        "name": "Instituto Superior Ceibo (fictitious)",
+        "body": "Higher and vocational education, only with people over 18. An example scholarship or first income takes the place of the practice salary."
+      }
     }
   },
   "notFound": {

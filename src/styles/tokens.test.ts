@@ -112,6 +112,12 @@ describe('color tokens: WCAG 2.2 AA contrast', () => {
     }
   });
 
+  it('the Hornero partner brand keeps text contrast (D-86)', () => {
+    expect(contrast(token('md-sys-color-surface-container-lowest'), token('partner-hornero'))).toBeGreaterThanOrEqual(TEXT);
+    expect(contrast(token('partner-on-hornero-container'), token('partner-hornero-container'))).toBeGreaterThanOrEqual(TEXT);
+    expect(contrast(token('partner-hornero'), token('partner-hornero-container'))).toBeGreaterThanOrEqual(NON_TEXT);
+  });
+
   it('role colors reach 3:1 on their container and text contrast on white', () => {
     for (const role of ['org-admin', 'tutor', 'participant', 'sponsor']) {
       expect(contrast(token(`role-${role}`), token(`role-${role}-container`))).toBeGreaterThanOrEqual(NON_TEXT);

@@ -42,6 +42,7 @@ const InvestPage = lazyPage(() => import('@/features/invest/InvestPage'), 'Inves
 const InstrumentPage = lazyPage(() => import('@/features/invest/InvestPage'), 'InstrumentPage');
 const ToolsPage = lazyPage(() => import('@/features/simulators/ToolsPages'), 'ToolsPage');
 const SimToolPage = lazyPage(() => import('@/features/simulators/ToolsPages'), 'SimToolPage');
+const HorneroPage = lazyPage(() => import('@/features/partner/HorneroPage'), 'HorneroPage');
 
 // The internal style guide (CLAUDE.md 2.8) exists only in development: it is never bundled in production.
 const OgImagePage = import.meta.env.DEV ? lazyPage(() => import('@/features/og-image/OgImagePage'), 'OgImagePage') : null;
@@ -89,6 +90,8 @@ export function AppRoutes() {
           <Route path="/app/missions/:missionId" element={<MissionPage />} />
           <Route path="/app/welcome" element={<WelcomePage />} />
           <Route path="/app/profile" element={<ProfilePage />} />
+          {/* Integrated mode (D-75): the home of Hornero, a fictitious partner app (D-84) */}
+          <Route path="/app/hornero" element={<HorneroPage />} />
           <Route path="/tutor" element={<TutorHomePage />} />
           <Route path="/tutor/cohorts/:id" element={<CohortPage />} />
           <Route path="/tutor/cohorts/:id/challenge" element={<AssignChallengePage />} />

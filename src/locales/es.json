@@ -14,13 +14,14 @@
       "solution": "La solución",
       "roles": "Recorridos",
       "simulator": "Simulador",
-      "faq": "Preguntas"
+      "faq": "Preguntas",
+      "contexts": "Contextos"
     },
     "hero": {
       "titleStart": "La billetera donde tu equipo",
       "titleKey": "aprende finanzas",
       "titleEnd": "usándola",
-      "body": "Un simulador de finanzas personales con forma de billetera virtual: cada persona cobra un sueldo de práctica, paga, presupuesta, ahorra e invierte con dinero ficticio, y aprende en el momento justo. La empresa ve el avance de aprendizaje, nunca los montos.",
+      "body": "Un simulador de finanzas personales con forma de billetera virtual: cada persona cobra un sueldo de práctica, paga, presupuesta, ahorra e invierte con dinero ficticio, y aprende en el momento justo. Lo puede ofrecer una organización, una institución o una app financiera, que ve el avance de aprendizaje y nunca los montos.",
       "caseStudy": "Ver el case study"
     },
     "pieces": {
@@ -65,22 +66,22 @@
         "route": {
           "titleStart": "Una ruta que se",
           "titleKey": "desbloquea",
-          "body": "\"Conocerte\" detecta lo que ya sabes y propone el camino por siete niveles, de la cuenta a Invertir.",
+          "body": "\"Conocerte\" detecta lo que ya sabes y propone el camino por siete niveles, de la cuenta a Invertir. Cada pantalla explica \"¿Por qué importa?\" y lleva a la parte justa de la guía.",
           "chip": "Próximo desbloqueo: Invertir",
           "items": [
             "Diagnóstico por cinco dimensiones",
             "\"Ya sé esto\" para saltar lo que dominas",
-            "Guías de 5 minutos con práctica",
+            "Tarjetas en el momento justo, también sin misión",
             "Lo bloqueado se ve, con lo que falta"
           ]
         },
         "practice": {
           "titleStart": "Practicar con",
           "titleKey": "escenarios",
-          "body": "Herramientas y misiones con dinero ficticio: cada error termina en una explicación, nunca en un reproche.",
+          "body": "Las misiones se juegan en tu propia billetera: un préstamo deja cuotas, pagar el mínimo genera intereses y caer en una estafa descuenta dinero. Todo se revierte con acciones dentro de la simulación, y cada error termina en una explicación.",
           "chip": "Valores de ejemplo, no tasas actuales",
           "items": [
-            "Desafíos de nueve tipos, sin arrastrar",
+            "Desafíos de nueve tipos, con casos con decisiones",
             "Doce herramientas con supuestos visibles",
             "Apartados y metas ajustados por inflación",
             "Trece misiones de 2 a 6 minutos"
@@ -151,7 +152,7 @@
       "paula": {
         "chip": "Admin de L&D y Beneficios",
         "does": "Configura el programa, carga personas y sigue la adopción.",
-        "explore": "Panel con umbral de privacidad, carga por CSV y configuración."
+        "explore": "Panel con umbral de privacidad, personas y cohortes editables, carga por CSV y configuración."
       },
       "ricardo": {
         "chip": "Decisor",
@@ -192,20 +193,22 @@
       "title": "Preguntas frecuentes",
       "q1": "¿Es asesoramiento financiero?",
       "a1": "No. Es contenido educativo: enseña conceptos y deja practicar con escenarios. Nunca recomienda productos, entidades ni inversiones concretas.",
-      "q2": "¿Qué ve la empresa de cada persona?",
-      "a2": "Su avance de aprendizaje: guías, desafíos y niveles completados. Nunca los montos, los saldos, las respuestas sobre hábitos ni por qué un nivel sigue bloqueado.",
+      "q2": "¿Qué ve quien ofrece Alcancía de cada persona?",
+      "a2": "La organización, la institución o el socio ven el avance de aprendizaje: guías, desafíos y niveles completados. Nunca los montos, los saldos, las respuestas sobre hábitos ni por qué un nivel sigue bloqueado.",
       "q3": "¿Los valores son reales?",
-      "a3": "No. Los escenarios usan valores de ejemplo rotulados como tales, con enlaces a las fuentes oficiales para consultar los vigentes.",
+      "a3": "Todavía no. Hoy los escenarios usan valores de ejemplo rotulados como tales, con enlaces a las fuentes oficiales. Está previsto sumar tasas, UVA, inflación y tipo de cambio reales, con fecha y fuente; el dinero va a seguir siendo ficticio y los precios de acciones y CEDEARs, de ejemplo.",
       "q4": "¿Quién es Fuerte?",
       "a4": "El compañero de la billetera: avisa antes de un error evitable, explica después de uno y celebra los avances. Se puede silenciar.",
       "q5": "¿Es un producto real?",
-      "a5": "Es un prototipo de portfolio con datos ficticios y sin backend: todo lo que cargas queda en tu navegador."
+      "a5": "Es un prototipo de portfolio con datos ficticios y sin backend: todo lo que cargas queda en tu navegador.",
+      "q6": "¿Qué es Hornero?",
+      "a6": "Una billetera ficticia creada para mostrar Alcancía integrada en otra app. Es una marca de demostración: no existe y no imita a ninguna billetera real."
     },
     "final": {
       "title": "Elige una persona y recorre la billetera"
     },
     "footer": {
-      "tagline": "Simulador de finanzas personales para equipos de trabajo.",
+      "tagline": "Simulador de finanzas personales para equipos, aulas y productos.",
       "explore": "Explorar",
       "project": "El proyecto",
       "demo": "La demo",
@@ -291,6 +294,33 @@
       "unlockTitle": "Invertir",
       "unlockProgress": "Fondo de emergencia",
       "unlockValue": "2 de 3 meses"
+    },
+    "contexts": {
+      "eyebrow": "Tres contextos, la misma billetera",
+      "title": "Para equipos, aulas y productos",
+      "intro": "La billetera, los niveles, las misiones y la privacidad son los mismos. Cambian quién la ofrece, cómo se entra y qué paneles existen.",
+      "status": {
+        "live": "En la demo",
+        "preview": "Vista previa",
+        "soon": "Próximamente"
+      },
+      "org": {
+        "label": "Organización",
+        "name": "Andina Servicios S.A. (ficticia)",
+        "body": "Una empresa ofrece Alcancía a su gente como beneficio y capacitación, con tutoría, panel de L&D y reporte de impacto.",
+        "cta": "Ver los recorridos"
+      },
+      "product": {
+        "label": "Producto existente",
+        "name": "Hornero",
+        "body": "Una billetera integra Alcancía para sus usuarios: se abre dentro de su app, sin otro inicio de sesión, y el socio solo recibe avisos de avance, nunca montos.",
+        "cta": "Ver dentro de Hornero"
+      },
+      "edu": {
+        "label": "Institución educativa",
+        "name": "Instituto Superior Ceibo (ficticio)",
+        "body": "Nivel superior y formación profesional, solo con personas mayores de 18 años. Una beca o un primer ingreso de ejemplo ocupa el lugar del sueldo de práctica."
+      }
     }
   },
   "notFound": {
@@ -993,7 +1023,9 @@
     "resetBody": "Vuelven los datos de ejemplo de todas las personas y se cierra la sesión. Lo que hiciste en esta demo se borra de este navegador.",
     "signOut": "Cerrar sesión",
     "help": "Ayuda",
-    "notifications": "Notificaciones"
+    "notifications": "Notificaciones",
+    "partnerHornero": "Ver dentro de Hornero",
+    "partnerHorneroHelp": "Modo integrado con un socio ficticio"
   },
   "staff": {
     "hello": "Hola,",
@@ -3980,5 +4012,32 @@
     "understood": "Entendido",
     "why": "¿Por qué importa?",
     "toGuide": "Ver en la guía"
+  },
+  "partner": {
+    "hornero": {
+      "name": "Hornero",
+      "fictitiousBrand": "Marca ficticia de demostración",
+      "practice": "Simulador de finanzas personales · dinero ficticio",
+      "greeting": "Hola, {{name}}",
+      "intro": "Así se vería Alcancía dentro de la app de un socio. Hornero es una billetera ficticia creada para esta demo: no existe y no imita a ninguna app real.",
+      "savingTitle": "Tu nido crece",
+      "savingLabel": "Guardado en tu nido",
+      "grew": "Tu nido creció {{amount}} este mes",
+      "grewNone": "El nido se construye de a poco: este mes todavía no sumaste.",
+      "added": "Sumaste {{amount}} a tu nido",
+      "solidityTitle": "Un nido que aguanta",
+      "holds_one": "Tu nido aguanta {{months}} mes de gastos",
+      "holds_other": "Tu nido aguanta {{months}} meses de gastos",
+      "holdsNone": "Cuando armes tu fondo de emergencia, vas a ver cuántos meses de gastos aguanta tu nido.",
+      "resisted": "Tu nido resistió: no transferiste a un desconocido",
+      "resistedNone": "Si te llega un mensaje sospechoso, repórtalo: así tu nido resiste.",
+      "learnTitle": "Aprende finanzas usando tu billetera",
+      "learnBody": "Alcancía vive dentro de Hornero: practicas con dinero ficticio y aprendes en el momento justo, sin otro inicio de sesión.",
+      "open": "Abrir Alcancía",
+      "privacy": "Hornero solo recibe avisos de tu avance, como una misión completada o un nivel desbloqueado. Nunca recibe tus montos, tus movimientos ni tus metas.",
+      "leave": "Salir del modo integrado",
+      "back": "Volver a Hornero",
+      "inside": "Alcancía dentro de Hornero"
+    }
   }
 }

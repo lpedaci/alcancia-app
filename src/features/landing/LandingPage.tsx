@@ -22,6 +22,10 @@ import type { Role } from '@/types/domain';
 import { AppPhone, AppTopBar, BottomNav, type PhoneScreen, PhoneFrame, StatusBar } from './PhoneMockup';
 import { PieceGoal, PieceKpi, PieceLevelMap, PieceSimResult, SceneBudget, SceneCard, SceneInflation } from './ProductPieces';
 import { ResetDemoButton } from './ResetDemoButton';
+import { FictitiousBrandChip } from '@/features/partner/FictitiousBrandChip';
+import { HorneroMark } from '@/features/partner/HorneroMark';
+import { HORNERO_HOME } from '@/features/partner/partner-mode';
+import { useSessionStore } from '@/store/session-store';
 import { CountUp, Reveal } from './Reveal';
 
 /**
@@ -36,6 +40,7 @@ import { CountUp, Reveal } from './Reveal';
 const NAV = [
   ['problema', 'nav.problem'],
   ['solucion', 'nav.solution'],
+  ['contextos', 'nav.contexts'],
   ['recorridos', 'nav.roles'],
   ['simulador', 'nav.simulator'],
   ['preguntas', 'nav.faq'],
@@ -295,6 +300,27 @@ export function LandingPage() {
           </Reveal>
         </Section>
 
+        {/* 5b · Three contexts, the same wallet (D-74, D-75, D-83, D-84), each with its honest status */}
+        <Section id="contextos">
+          <SectionTitle id="contextos" eyebrow={t('landing.contexts.eyebrow')} title={t('landing.contexts.title')} intro={t('landing.contexts.intro')} />
+          <ul className="grid grid-cols-1 gap-(--space-bento-gap) md:grid-cols-2 large:grid-cols-3">
+            <ContextCard index={0} icon="apartment" contextKey="org" status="live">
+              <Button asChild variant="tonal" className="mt-auto self-start" trailingIcon="arrow_downward">
+                <InPageLink to="recorridos">{t('landing.contexts.org.cta')}</InPageLink>
+              </Button>
+            </ContextCard>
+            <ContextCard index={1} mark={<HorneroMark size={24} />} contextKey="product" status="preview" badge={<FictitiousBrandChip />}>
+              <Button asChild variant="tonal" className="mt-auto self-start" trailingIcon="arrow_forward">
+                {/* Signs in as Mariana and lands on Hornero's home, with no second sign-in inside it */}
+                <Link to="/login?demo=mariana" onClick={() => useSessionStore.getState().setReturnTo(HORNERO_HOME)}>
+                  {t('landing.contexts.product.cta')}
+                </Link>
+              </Button>
+            </ContextCard>
+            <ContextCard index={2} icon="school" contextKey="edu" status="soon" className="md:col-span-2 large:col-span-1" />
+          </ul>
+        </Section>
+
         {/* 6 · One journey per role */}
         <Section id="recorridos" tone="surface">
           <SectionTitle id="recorridos" eyebrow={t('landing.roles.eyebrow')} title={t('landing.roles.title')} intro={t('landing.roles.intro')} />
@@ -361,7 +387,7 @@ export function LandingPage() {
           <Reveal className="mx-auto flex w-full max-w-3xl flex-col gap-4">
             <h3 className="text-center text-title-large text-on-surface">{t('landing.faq.title')}</h3>
             <div className="flex flex-col divide-y divide-outline-variant rounded-xl border border-outline-variant bg-surface-container-lowest">
-              {[1, 2, 3, 4, 5].map((n) => (
+              {[1, 2, 3, 4, 5, 6].map((n) => (
                 <details key={n} className="group">
                   <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 px-(--space-card-padding) py-3 text-title-small text-on-surface">
                     {t(`landing.faq.q${n}`)}
@@ -489,6 +515,66 @@ export function LandingPage() {
 const SCREEN_ORDER: PhoneScreen[] = ['home', 'levels', 'tool'];
 /** Time on each screen: long enough to read it (about 30 words each). */
 export const SCREEN_MS = 6000;
+
+const CONTEXT_STATUS = {
+  live: { icon: 'check_circle', className: 'bg-success-container text-on-success-container' },
+  preview: { icon: 'visibility', className: 'bg-info-container text-on-info-container' },
+  soon: { icon: 'schedule', className: 'bg-surface-container text-on-surface-variant' },
+} as const;
+
+/** One context of use (5.5): who offers the wallet, with a status chip that says what the demo has today. */
+function ContextCard({
+  index,
+  icon,
+  mark,
+  contextKey,
+  status,
+  badge,
+  className,
+  children,
+}: {
+  index: number;
+  icon?: 'apartment' | 'school';
+  mark?: ReactNode;
+  contextKey: 'org' | 'product' | 'edu';
+  status: keyof typeof CONTEXT_STATUS;
+  badge?: ReactNode;
+  className?: string;
+  children?: ReactNode;
+}) {
+  const { t } = useTranslation();
+  const s = CONTEXT_STATUS[status];
+  return (
+    <Reveal
+      as="li"
+      delay={index * STAGGER}
+      className={cn('flex min-w-0 flex-col gap-3 rounded-xl border border-outline-variant bg-surface-container-lowest p-(--space-card-padding)', className)}
+    >
+      <div className="flex flex-wrap items-start justify-between gap-2">
+        <span
+          aria-hidden
+          className={cn(
+            'inline-flex size-12 items-center justify-center rounded-lg',
+            mark ? 'bg-partner-hornero text-on-primary' : 'bg-primary-container text-on-primary-container',
+          )}
+        >
+          {mark ?? (icon && <Icon name={icon} size={24} />)}
+        </span>
+        <span className={cn('inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-label-medium', s.className)}>
+          <Icon name={s.icon} size={16} />
+          {t(`landing.contexts.status.${status}`)}
+        </span>
+      </div>
+      <div className="flex flex-col gap-1">
+        <p className="text-label-large text-on-surface-variant">{t(`landing.contexts.${contextKey}.label`)}</p>
+        <h3 className="text-title-medium text-on-surface">{t(`landing.contexts.${contextKey}.name`)}</h3>
+        {badge && <div className="mt-1">{badge}</div>}
+      </div>
+      <p className="text-body-medium text-on-surface-variant">{t(`landing.contexts.${contextKey}.body`)}</p>
+      {children}
+    </Reveal>
+  );
+}
 
 function HeroPhone() {
   const { t } = useTranslation();
