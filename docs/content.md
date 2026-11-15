@@ -25,7 +25,9 @@
 
 **Tanda 2 (aprobada por Lourdes el 15/11/2026 y publicada):** guías 2 de los módulos 5 a 8, "Antes de endeudarte", "Leer tu resumen", "La bola de nieve, paso a paso" y "Las cuotas se suman". Documento: [content-review/tanda-2.md](content-review/tanda-2.md).
 
-Siguen las tandas 3 (módulos 9 a 11 y 17), 4 (módulos 12 a 15), 5 (guías 3 de todos) y los módulos 16 y 18 completos (F11) con el nivel 8 (F22).
+**Tanda 3 (borrador, esperando la revisión de Lourdes):** guías 2 de los módulos 9, 10, 11 y 17, "Tu sueldo frente a los precios", "La TEA y el interés sobre el interés", "El plazo fijo UVA, paso a paso" y "Verificar antes de confiar". Documento: [content-review/tanda-3.md](content-review/tanda-3.md).
+
+Siguen las tandas 4 (módulos 12 a 15), 5 (guías 3 de todos) y los módulos 16 y 18 completos (F11) con el nivel 8 (F22).
 
 ## Resumen
 

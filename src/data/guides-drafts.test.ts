@@ -64,7 +64,7 @@ describe('guide drafts (step 27)', () => {
     for (const g of list) {
       expect(g.review.status).toBe('draft');
       expect(g.review.validated.length + g.review.extensions.length).toBeGreaterThan(0);
-      expect(g.sourceIds.every((s) => /^(T|LCT|A-\d{2}|B-\d{2})$/.test(s))).toBe(true);
+      expect(g.sourceIds.every((s) => /^(T|LCT|A-\d{2}|B-\d{2}|F-\d{2})$/.test(s))).toBe(true);
     }
   });
 
