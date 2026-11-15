@@ -42,6 +42,8 @@ export function QuestionView({
         <RadioGroup
           name={name}
           legend={question.prompt}
+          legendClassName="mb-3 text-title-large"
+          variant="cards"
           disabled={disabled}
           options={question.options.map((o) => ({ value: o.id, label: o.text }))}
           value={(value as string) ?? ''}
@@ -52,7 +54,7 @@ export function QuestionView({
       const chosen = new Set((value as string[]) ?? []);
       return (
         <fieldset className="flex flex-col gap-1" disabled={disabled}>
-          <legend className="mb-1 text-title-small text-on-surface">{question.prompt}</legend>
+          <legend className="mb-3 text-title-large text-on-surface">{question.prompt}</legend>
           <p className="mb-1 text-body-small text-on-surface-variant">{t('learn.q.chooseAll')}</p>
           {question.options.map((o) => (
             <Checkbox
@@ -78,6 +80,8 @@ export function QuestionView({
           <RadioGroup
             name={name}
             legend={question.prompt}
+            legendClassName="mb-3 text-title-large"
+            variant="cards"
             disabled={disabled}
             options={question.options.map((o) => ({ value: o.id, label: o.text }))}
             value={answer.value ?? ''}
@@ -88,6 +92,8 @@ export function QuestionView({
             <RadioGroup
               name={`${name}-why`}
               legend={question.why.prompt}
+              legendClassName="mb-3 text-title-medium"
+              variant="cards"
               disabled={disabled}
               options={question.why.options.map((o) => ({ value: o.id, label: o.text }))}
               value={answer.why ?? ''}
@@ -117,7 +123,7 @@ export function QuestionView({
       };
       return (
         <fieldset className="flex flex-col gap-2" disabled={disabled}>
-          <legend className="mb-1 text-title-small text-on-surface">{question.prompt}</legend>
+          <legend className="mb-3 text-title-large text-on-surface">{question.prompt}</legend>
           <p className="mb-1 text-body-small text-on-surface-variant">{t('learn.q.orderHelp')}</p>
           <ol className="flex flex-col gap-2">
             {order.map((id, index) => {
@@ -147,7 +153,7 @@ export function QuestionView({
       const answer = (value as Record<string, string>) ?? {};
       return (
         <fieldset className="flex flex-col gap-3" disabled={disabled}>
-          <legend className="mb-1 text-title-small text-on-surface">{question.prompt}</legend>
+          <legend className="mb-3 text-title-large text-on-surface">{question.prompt}</legend>
           {question.matching.left.map((l) => (
             <Select
               key={l.id}
@@ -165,7 +171,7 @@ export function QuestionView({
       const answer = (value as Record<string, string>) ?? {};
       return (
         <fieldset className="flex flex-col gap-3" disabled={disabled}>
-          <legend className="mb-1 text-title-small text-on-surface">{question.prompt}</legend>
+          <legend className="mb-3 text-title-large text-on-surface">{question.prompt}</legend>
           <div className="grid grid-cols-[minmax(0,1fr)] gap-3 sm:grid-cols-2">
             {question.categorize.items.map((i) => (
               <Select
@@ -188,7 +194,7 @@ export function QuestionView({
 export function CheckButton({ onClick, disabled }: { onClick: () => void; disabled?: boolean }) {
   const { t } = useTranslation();
   return (
-    <Button variant="tonal" className="self-start" leadingIcon="check" onClick={onClick} disabled={disabled}>
+    <Button variant="tonal" className="self-end" leadingIcon="check" onClick={onClick} disabled={disabled}>
       {t('learn.q.check')}
     </Button>
   );

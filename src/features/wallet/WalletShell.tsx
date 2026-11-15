@@ -265,6 +265,7 @@ export function WalletShell({ section, children, fuerte }: { section: string; ch
   };
 
   const partner = usePartnerMode();
+  const horneroLabel = partner === 'hornero' ? t('partner.hornero.back') : t('demo.partnerHornero');
   const walletDestinations = DESTINATIONS.filter((d) => d.id !== 'learn');
   const learn = DESTINATIONS.find((d) => d.id === 'learn')!;
 
@@ -298,46 +299,45 @@ export function WalletShell({ section, children, fuerte }: { section: string; ch
               <Logo compact={!expanded} />
             </Link>
           </div>
-          <div id="wallet-nav-items" className="flex min-h-0 flex-1 flex-col gap-2 overflow-y-auto px-3 py-4">
-            {expanded && <p className="px-4 pb-1 text-label-medium text-on-surface-variant">{t('wallet.nav.groupWallet')}</p>}
+          <div id="wallet-nav-items" className="flex min-h-0 flex-1 flex-col gap-2 overflow-y-auto px-3 py-3">
+            {expanded && <p className="px-4 pb-1 text-label-medium text-on-surface-variant [@media(max-height:50rem)]:sr-only">{t('wallet.nav.groupWallet')}</p>}
             <ul className="flex flex-col gap-1">{walletDestinations.map(renderItem)}</ul>
             <div className="mx-2 my-2 h-px bg-outline-variant" />
-            {expanded && <p className="px-4 pb-1 text-label-medium text-on-surface-variant">{t('wallet.nav.groupLearn')}</p>}
+            {expanded && <p className="px-4 pb-1 text-label-medium text-on-surface-variant [@media(max-height:50rem)]:sr-only">{t('wallet.nav.groupLearn')}</p>}
             <ul className="flex flex-col gap-1">{renderItem(learn)}</ul>
 
-            {/* Integrated mode (D-244): Hornero is one more group of the menu, with the way back to the partner app */}
-            {partner === 'hornero' && (
-              <>
-                <div className="mx-2 my-2 h-px bg-outline-variant" />
-                {expanded && <p className="px-4 pb-1 text-label-medium text-on-surface-variant">{t('partner.hornero.name')}</p>}
-                <ul className="flex flex-col gap-1">
-                  <li className={cn(!expanded && 'flex justify-center')}>
-                    <Tooltip content={t('partner.hornero.back')} side="right">
-                      <Link
-                        to={HORNERO_HOME}
-                        data-partner-nav
-                        className={cn(
-                          'flex items-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface',
-                          expanded ? 'h-12 gap-3 rounded-full pr-3 pl-4 text-label-large' : 'h-12 w-14 justify-center rounded-full',
-                        )}
-                      >
-                        <span aria-hidden className="inline-flex size-7 shrink-0 items-center justify-center rounded-md bg-partner-hornero text-on-primary">
-                          <HorneroMark size={18} />
-                        </span>
-                        <span className={cn(expanded ? 'min-w-0 flex-1 truncate' : 'sr-only')}>{t('partner.hornero.back')}</span>
-                      </Link>
-                    </Tooltip>
-                  </li>
-                </ul>
-              </>
-            )}
 
+            {/* Hornero (D-249, D-253): always in the menu, right above "Tu avance". In Alcancía's own mode it opens the
+                integrated-mode demo; inside it, it goes back to Hornero's home */}
+            {(
+
+              <div className={cn('mt-auto', !expanded && 'flex justify-center')}>
+                <Tooltip content={horneroLabel} side="right">
+                  <Link
+                    to={HORNERO_HOME}
+                    data-partner-nav
+                    className={cn(
+                      'flex items-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface',
+                      expanded ? 'h-12 gap-3 rounded-full pr-3 pl-3' : 'h-12 w-14 justify-center rounded-full',
+                    )}
+                  >
+                    <span aria-hidden className="inline-flex size-7 shrink-0 items-center justify-center rounded-md bg-partner-hornero text-on-partner-hornero">
+                      <HorneroMark size={18} />
+                    </span>
+                    <span className={cn(expanded ? 'flex min-w-0 flex-1 flex-col' : 'sr-only')}>
+                      <span className="truncate text-label-large">{horneroLabel}</span>
+                      {expanded && <span className="truncate text-label-small text-on-surface-variant">{t('partner.hornero.fictitiousBrand')}</span>}
+                    </span>
+                  </Link>
+                </Tooltip>
+              </div>
+            )}
             {expanded && (
               // Progress card (one link): the levels completed as 7 segments, one per light of Fuerte,
               // and the next unlock with how many of its conditions are met.
               <Link
                 to={next ? (LEVEL_ROUTE[next.level.id] ?? '/app/learn') : '/app/learn'}
-                className="group mt-auto flex flex-col gap-3 rounded-lg bg-surface-container p-3 hover:bg-surface-container-high"
+                className="group flex flex-col gap-2 rounded-lg bg-surface-container p-3 hover:bg-surface-container-high"
               >
                 <span className="flex items-baseline justify-between gap-2">
                   <span className="text-label-medium text-on-surface-variant">{t('wallet.levelCard.title')}</span>
@@ -349,7 +349,7 @@ export function WalletShell({ section, children, fuerte }: { section: string; ch
                   ))}
                 </span>
                 {next ? (
-                  <span className="flex items-center gap-2 border-t border-outline-variant pt-3">
+                  <span className="flex items-center gap-2 border-t border-outline-variant pt-2">
                     <span className="flex size-8 shrink-0 items-center justify-center rounded-md bg-surface-container-lowest text-on-surface-variant">
                       <Icon name="lock" size={16} />
                     </span>
@@ -368,6 +368,7 @@ export function WalletShell({ section, children, fuerte }: { section: string; ch
                 )}
               </Link>
             )}
+
           </div>
           {/* Fold control at the bottom of the panel, away from the brand. It pins the menu open or folded */}
           <div className={cn('flex shrink-0 border-t border-outline-variant p-2', expanded ? 'justify-end' : 'justify-center')}>
@@ -387,22 +388,17 @@ export function WalletShell({ section, children, fuerte }: { section: string; ch
           {/* Top bar: on phones the logo and the section; from tablets, a floating bar with the section title */}
           {/* From tablets, the header covers the gap above the floating bar so content never shows behind it */}
           <header data-wallet-header className="sticky top-0 z-30 print:!hidden border-b border-outline-variant bg-surface-container-lowest large:-mt-3 large:border-0 large:bg-surface large:pt-3">
-            {/* Integrated mode (D-75): below 1200 px Hornero's strip takes the place of Alcancía's brand, with
-                the fictitious-brand label always in sight (D-87); from 1200 px it lives in the side menu (D-244). */}
-            {partner === 'hornero' && (
-              <div data-partner-bar className="flex flex-wrap items-center gap-x-3 gap-y-1 border-b border-outline-variant bg-partner-hornero-container px-(--space-gutter) py-2 text-partner-on-hornero-container medium:px-6 large:hidden">
-                <Link to={HORNERO_HOME} className="inline-flex min-h-10 items-center gap-2 rounded-sm text-title-small">
-                  <span aria-hidden className="inline-flex size-8 items-center justify-center rounded-md bg-partner-hornero text-on-primary">
+            <div className="flex min-h-16 items-center gap-1 px-(--space-gutter) py-2 sm:gap-2 medium:px-6 large:gap-2 large:rounded-xl large:border large:border-outline-variant large:bg-surface-container-lowest large:px-4">
+              {/* Integrated mode below 1200 px (D-249): Hornero's mark takes the brand slot and leads back to Hornero;
+                  its name and the fictitious-brand label are in the user menu */}
+              {partner === 'hornero' ? (
+                <Link to={HORNERO_HOME} data-partner-bar className="inline-flex shrink-0 rounded-sm large:hidden">
+                  <span aria-hidden className="inline-flex size-8 items-center justify-center rounded-sm bg-partner-hornero text-on-partner-hornero">
                     <HorneroMark size={20} />
                   </span>
-                  <span>{t('partner.hornero.back')}</span>
+                  <span className="sr-only">{t('partner.hornero.back')}</span>
                 </Link>
-                <FictitiousBrandChip />
-                <span className="hidden text-label-medium sm:inline">{t('partner.hornero.inside')}</span>
-              </div>
-            )}
-            <div className="flex min-h-16 items-center gap-1 px-(--space-gutter) py-2 sm:gap-2 medium:px-6 large:gap-2 large:rounded-xl large:border large:border-outline-variant large:bg-surface-container-lowest large:px-4">
-              {partner !== 'hornero' && (
+              ) : (
                 <Link to="/app" className="inline-flex shrink-0 rounded-sm large:hidden">
                   <Logo compact />
                 </Link>
@@ -413,8 +409,9 @@ export function WalletShell({ section, children, fuerte }: { section: string; ch
               <p className="inline-flex shrink-0 items-center gap-1 rounded-full border border-outline-variant bg-surface-container px-2.5 py-1 text-label-medium whitespace-nowrap text-on-surface-variant large:shrink-0 large:gap-1.5 large:border-0 large:bg-inverse-surface large:px-3 large:text-inverse-on-surface">
                 {/* At 320 px the icon gives way, so the text always fits whole */}
                 <Icon name="info" size={16} className="hidden shrink-0 min-[22.5rem]:block" />
-                <span className="expanded:hidden">{t('wallet.practiceBannerShort')}</span>
-                <span className="hidden expanded:inline">{t('wallet.practiceBanner')}</span>
+                {/* With Hornero's label beside it, the short text stays until 1280 px so "Ver como" keeps its room */}
+                <span className={partner === 'hornero' ? 'xl:hidden' : 'expanded:hidden'}>{t('wallet.practiceBannerShort')}</span>
+                <span className={partner === 'hornero' ? 'hidden xl:inline' : 'hidden expanded:inline'}>{t('wallet.practiceBanner')}</span>
               </p>
               {partner === 'hornero' && <FictitiousBrandChip className="hidden large:inline-flex" />}
               <span className="flex-1" />

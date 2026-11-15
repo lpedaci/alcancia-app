@@ -51,7 +51,7 @@ What sets it apart: **simulated time** (advance a day, a week or a month to see 
 Learning starts from action. The person does something in the wallet, gets a short explanation right when they need it, can jump to the exact part of the guide that explains it, and returns to the same screen without losing anything. Then they practice it in a mission with consequences and prove it in the level challenge, which unlocks the next section.
 
 ```mermaid
-flowchart TB
+flowchart LR
   accTitle: Alcancía learning cycle
   accDescr: An action in the wallet triggers a just-in-time card. From the card, the person goes to the exact part of the guide and returns to the original screen. Then come the mission with consequences, the level challenge and the unlock of the next section, which brings new actions.
   A[Action in the wallet] --> B[Just-in-time card]

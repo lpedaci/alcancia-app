@@ -18,6 +18,10 @@ interface RadioGroupProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 't
   value?: string;
   /** Layout of the options, for example two columns where there is room. Default: one column. */
   optionsClassName?: string;
+  /** `cards`: each option is a bordered tile, the chosen one in primary-container (missions, D-250). */
+  variant?: 'list' | 'cards';
+  /** The question as the main content of a step: the legend in title-large (D-250). */
+  legendClassName?: string;
 }
 
 /**
@@ -25,7 +29,7 @@ interface RadioGroupProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 't
  * work for every assistive technology. Compatible with React Hook Form `register`.
  */
 export const RadioGroup = forwardRef<HTMLInputElement, RadioGroupProps>(function RadioGroup(
-  { legend, options, helperText, error, required, className, value, optionsClassName, ...inputProps },
+  { legend, options, helperText, error, required, className, value, optionsClassName, variant = 'list', legendClassName, ...inputProps },
   ref,
 ) {
   const { t } = useTranslation();
@@ -39,19 +43,24 @@ export const RadioGroup = forwardRef<HTMLInputElement, RadioGroupProps>(function
       aria-describedby={helperText || error ? supportId : undefined}
       aria-invalid={invalid || undefined}
     >
-      <legend className="mb-1 text-label-medium text-on-surface">
+      <legend className={cn('mb-1 text-label-medium text-on-surface', legendClassName)}>
         {legend}
         {/* Required in the error red (D-239): the text says it, the color only reinforces it */}
-        {required && <span className="text-error"> ({t('ui.required')})</span>}
+        {required && <span className="text-label-medium text-error"> ({t('ui.required')})</span>}
       </legend>
-      <div className={cn('flex flex-col', optionsClassName)}>
+      <div className={cn('flex flex-col', variant === 'cards' && 'gap-2', optionsClassName)}>
         {options.map((option) => {
           const id = `${groupId}-${option.value}`;
           return (
             <label
               key={option.value}
               htmlFor={id}
-              className="flex min-h-12 cursor-pointer items-start gap-3 rounded-sm px-1 py-2 hover:bg-surface-container md:min-h-0 md:py-1.5"
+              className={cn(
+                'flex min-h-12 cursor-pointer items-start gap-3',
+                variant === 'cards'
+                  ? 'rounded-lg border border-outline-variant bg-surface-container-lowest px-4 py-3 hover:bg-surface-container has-[:checked]:border-primary has-[:checked]:bg-primary-container has-[:disabled]:cursor-default'
+                  : 'rounded-sm px-1 py-2 hover:bg-surface-container md:min-h-0 md:py-1.5',
+              )}
             >
               <input
                 ref={ref}
@@ -63,7 +72,7 @@ export const RadioGroup = forwardRef<HTMLInputElement, RadioGroupProps>(function
                 {...inputProps}
               />
               <span className="flex min-w-0 flex-col">
-                <span className="text-body-medium text-on-surface">{option.label}</span>
+                <span className={cn('text-on-surface', variant === 'cards' ? 'text-body-large' : 'text-body-medium')}>{option.label}</span>
                 {option.description && (
                   <span className="text-body-small text-on-surface-variant">{option.description}</span>
                 )}

@@ -17,6 +17,7 @@ La arquitectura del sitio (índice lateral desde 1200 px, hoja de secciones en c
 | | [Movimiento](#movimiento) | Curvas dibujadas, duraciones y usos |
 | Componentes | [Componentes](#componentes) | Botones, campos, estados y chips, KPIs, avisos, progreso y fuentes |
 | | [Fuerte](#fuerte) | Siete estados y reglas de comportamiento |
+| | [Hornero](#hornero) | La marca del socio ficticio: paleta del hábitat, ícono, íconos y reglas |
 | Patrones | [Patrones](#patrones) | Doce patrones con el número de su decisión |
 | | [Cómo mostramos el dinero](#cómo-mostramos-el-dinero) | Formato, montos largos, crédito, campos con máscara y reglas |
 | | [Seguridad y privacidad](#seguridad-y-privacidad) | Tres capas, privacidad diseñada y qué ve cada rol |
@@ -60,6 +61,7 @@ Cada nivel solo usa el anterior. Controles automáticos: `tokens.test.ts` (contr
 - **Colores por rol** (identifican personas, nunca estados): admin `#3D4FA8`, tutor `#00796B`, participante `#7A4FB0`, decisor `#5D6B2F`. Las cinco personas de la demo tienen foto con anillo de ese color.
 - **Series de gráficos**, en este orden: primary, tertiary, índigo claro, verde azulado claro y gris, con relleno plano de baja opacidad.
 - **Excepción (D-52):** el naranja de Fuerte (`--fuerte-body`, `--fuerte-light`, `--fuerte-shade`) solo en el personaje y sus luces.
+- **Marca del socio (D-248):** los colores de Hornero (`--partner-hornero*`) solo en las piezas de Hornero del modo integrado.
 
 ## Tipografía
 
@@ -86,6 +88,35 @@ Muestras vivas en el sitio: botones (Filled, tonal, outlined, text, danger, desh
 ## Fuerte
 
 Siete estados (neutral, saludo, pensativo, atención, celebración, dormido y apenado, D-225) con siete luces, una por nivel completado. Habla en los momentos clave, nunca interrumpe dos veces la misma acción, no juzga ni recomienda, se puede silenciar y su mensaje se anuncia como texto (5.0.1, D-51, D-134).
+
+## Hornero
+
+La billetera ficticia que muestra Alcancía integrada en otra app (D-75, D-84). Marca propia hecha con tokens, que nunca se parece a una app real (D-86).
+
+**Paleta "Atardecer" (D-248).** El hornero vive en pastizales abiertos, bordes de monte y parques; la paleta toma el cielo de la pampa al caer el sol. Se distingue del color de Atención (`#8A5300`), del naranja de Fuerte, del rojo de Error y de los colores de Alcancía y de las billeteras reales.
+
+| Token | Nombre | Valor | Uso | Contraste |
+| --- | --- | --- | --- | --- |
+| `--partner-hornero` | Atardecer | `#7A2E3B` | Marca, ícono y títulos | 9,2:1 sobre blanco; 7,4:1 sobre el contenedor |
+| `--partner-hornero-accent` | Arrebol | `#B05A66` | Íconos de la capa de solidez | 4,7:1 sobre blanco |
+| `--partner-hornero-container` | Resplandor | `#F7E1E4` | Contenedores chicos, franja en celular | Solo contenedores |
+| `--partner-on-hornero-container` | Anochecer | `#3A1018` | Texto sobre el resplandor | 13,3:1 |
+
+**Ícono.** La casita del hornero de perfil, redondeada, con la entrada en arco y apoyada en una rama (`HorneroMark`). Dibujado desde cero en SVG, monocromo (`currentColor`), legible desde 16 px.
+
+**Íconos por capa del concepto (D-85).**
+
+| Ícono | Texto | Capa |
+| --- | --- | --- |
+| `HorneroMark` | Volver a Hornero | Marca |
+| `info` | Marca ficticia de demostración | Etiqueta |
+| `trending_up` | Tu nido creció $ X este mes | Ahorro |
+| `savings` | Sumaste $ X a tu nido | Ahorro |
+| `shield` | Tu nido aguanta X meses de gastos | Solidez |
+| `verified_user` | Tu nido resistió: no transferiste a un desconocido | Solidez |
+| `logout` | Salir del modo integrado | Interfaz |
+
+**Reglas.** La etiqueta "Marca ficticia de demostración" está siempre a la vista en el modo integrado y un aviso lo dice al abrir Hornero (D-87, D-246). El microcopy del nido va solo en el modo integrado. Nunca la palabra "barro". Los colores de Hornero nunca van en botones, estados ni gráficos de Alcancía.
 
 ## Patrones
 

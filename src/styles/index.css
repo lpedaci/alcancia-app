@@ -27,6 +27,7 @@
   --color-on-tertiary: var(--md-sys-color-on-tertiary);
   --color-tertiary-container: var(--md-sys-color-tertiary-container);
   --color-on-tertiary-container: var(--md-sys-color-on-tertiary-container);
+  --color-tertiary-surface: var(--md-sys-color-tertiary-surface);
   --color-error: var(--md-sys-color-error);
   --color-on-error: var(--md-sys-color-on-error);
   --color-error-container: var(--md-sys-color-error-container);
@@ -55,7 +56,8 @@
 
   /* Hornero, fictitious partner (D-86): its chrome only. */
   --color-partner-hornero: var(--partner-hornero);
-  --color-partner-hornero-nest: var(--partner-hornero-nest);
+  --color-on-partner-hornero: var(--partner-on-hornero);
+  --color-partner-hornero-accent: var(--partner-hornero-accent);
   --color-partner-hornero-container: var(--partner-hornero-container);
   --color-partner-on-hornero-container: var(--partner-on-hornero-container);
 

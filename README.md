@@ -63,7 +63,7 @@ Qué la diferencia de un curso o de una calculadora: el **tiempo se simula** (av
 El aprendizaje nace de la acción. La persona hace algo en la billetera, recibe una explicación corta justo cuando la necesita, puede ir a la parte exacta de la guía que lo explica y vuelve a la misma pantalla sin perder lo que estaba haciendo. Después lo practica en una misión con consecuencias y lo demuestra en el desafío del nivel, que abre la sección siguiente.
 
 ```mermaid
-flowchart TB
+flowchart LR
   accTitle: Ciclo de aprendizaje de Alcancía
   accDescr: Una acción en la billetera dispara una tarjeta en el momento justo. Desde la tarjeta se va a la parte exacta de la guía y se vuelve a la pantalla de origen. Después vienen la misión con consecuencias, el desafío del nivel y el desbloqueo de la sección siguiente, que trae nuevas acciones.
   A[Acción en la billetera] --> B[Tarjeta en el momento justo]

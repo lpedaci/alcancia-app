@@ -732,7 +732,11 @@
         "generic": "Este paso no se pudo hacer con tu billetera como está. Revisa tu saldo y vuelve a intentarlo."
       },
       "scenarioOwn": "Parte de tu cartera real: tus CEDEARs y el efectivo de tu cuenta comitente, con la serie de precios de ejemplo desde hoy. Tu billetera no cambia; queda registrada la decisión que tomes frente a la caída.",
-      "scenarioExample": "Todavía no tienes CEDEARs, así que usamos una cartera de ejemplo. Tu billetera no cambia; queda registrada la decisión que tomes frente a la caída."
+      "scenarioExample": "Todavía no tienes CEDEARs, así que usamos una cartera de ejemplo. Tu billetera no cambia; queda registrada la decisión que tomes frente a la caída.",
+      "objectiveLead": "Al terminar vas a poder",
+      "cardKicker": "Para saber",
+      "eventKicker": "Algo pasó en tu billetera",
+      "reflectTitle": "Tómate un momento"
     },
     "practiceBannerShort": "Dinero ficticio",
     "printBanner": "Alcancía · Simulador de finanzas personales · dinero ficticio · Contenido educativo, no es asesoramiento financiero",
@@ -3286,6 +3290,11 @@
         "eyebrow": "Créditos",
         "title": "Lo que no hicimos nosotros",
         "intro": "Recursos de terceros, contenido validado y licencias."
+      },
+      "hornero": {
+        "eyebrow": "Hornero",
+        "title": "La marca del socio ficticio",
+        "intro": "Hornero es la billetera ficticia que muestra Alcancía integrada en otra app (D-75, D-84). Tiene marca propia hecha con tokens, no refiere a una marca real y siempre se rotula como marca de demostración."
       }
     },
     "principles": [
@@ -3995,6 +4004,102 @@
       "md": "Sistema de diseño en Markdown",
       "repo": "Repositorio en GitHub",
       "docs": "Documentación"
+    },
+    "hornero": {
+      "paletteTitle": "Paleta \"Atardecer\"",
+      "paletteIntro": "El hornero vive en pastizales abiertos, bordes de monte y parques. La paleta toma el cielo de la pampa al caer el sol: se distingue del color de Atención, del naranja de Fuerte, del rojo de Error y de los colores de Alcancía y de las billeteras reales (D-248).",
+      "swatches": [
+        {
+          "token": "partner-hornero",
+          "name": "Atardecer",
+          "hex": "#7A2E3B",
+          "use": "Marca, ícono y títulos.",
+          "pills": [
+            "9,2:1 sobre blanco · AAA",
+            "7,4:1 sobre el contenedor · AAA"
+          ]
+        },
+        {
+          "token": "partner-hornero-accent",
+          "name": "Arrebol",
+          "hex": "#B05A66",
+          "use": "Íconos de la capa de solidez.",
+          "pills": [
+            "4,7:1 sobre blanco · AA"
+          ]
+        },
+        {
+          "token": "partner-hornero-container",
+          "name": "Resplandor",
+          "hex": "#F7E1E4",
+          "use": "Contenedores chicos y la franja en celular.",
+          "pills": [
+            "Solo contenedores"
+          ]
+        },
+        {
+          "token": "partner-on-hornero-container",
+          "name": "Anochecer",
+          "hex": "#3A1018",
+          "use": "Texto sobre el resplandor.",
+          "pills": [
+            "13,3:1 · AAA"
+          ]
+        }
+      ],
+      "markTitle": "Ícono",
+      "markIntro": "La casita del hornero de perfil, redondeada, con la entrada en arco y apoyada en una rama. Dibujada desde cero en SVG, monocromo, legible desde 16 px.",
+      "sizes": "Tamaños",
+      "onTile": "Sobre el color de marca",
+      "onLight": "Sobre fondo claro",
+      "iconsTitle": "Íconos de Hornero",
+      "iconsIntro": "El ícono de marca y los íconos de Material Symbols que usa cada capa del concepto.",
+      "icons": [
+        [
+          "mark",
+          "Volver a Hornero",
+          "Marca"
+        ],
+        [
+          "info",
+          "Marca ficticia de demostración",
+          "Etiqueta"
+        ],
+        [
+          "trending_up",
+          "Tu nido creció $ X este mes",
+          "Ahorro"
+        ],
+        [
+          "savings",
+          "Sumaste $ X a tu nido",
+          "Ahorro"
+        ],
+        [
+          "shield",
+          "Tu nido aguanta X meses de gastos",
+          "Solidez"
+        ],
+        [
+          "verified_user",
+          "Tu nido resistió: no transferiste a un desconocido",
+          "Solidez"
+        ],
+        [
+          "logout",
+          "Salir del modo integrado",
+          "Interfaz"
+        ]
+      ],
+      "rulesTitle": "Reglas de la marca",
+      "rules": [
+        "La etiqueta \"Marca ficticia de demostración\" aparece en la página de Hornero, en el aviso al abrirla y junto a \"Volver a Hornero\" en el menú (D-87, D-246, D-249).",
+        "No refiere a una marca real: ni colores, ni logos, ni nombres de funciones (D-86).",
+        "El microcopy del nido va solo en el modo integrado; el modo propio de Alcancía mantiene su tono (D-85).",
+        "Dos capas de concepto: ahorro (el nido crece de a poco) y solidez (el nido aguanta). Nunca la palabra \"barro\".",
+        "Los colores de Hornero viven solo en sus piezas: nunca en botones, estados ni gráficos de Alcancía."
+      ],
+      "chip": "Etiqueta fija"
     }
   },
   "layout": {
@@ -4037,7 +4142,8 @@
       "privacy": "Hornero solo recibe avisos de tu avance, como una misión completada o un nivel desbloqueado. Nunca recibe tus montos, tus movimientos ni tus metas.",
       "leave": "Salir del modo integrado",
       "back": "Volver a Hornero",
-      "inside": "Alcancía dentro de Hornero"
+      "inside": "Alcancía dentro de Hornero",
+      "notice": "Hornero es una marca ficticia de demostración: no existe y no imita a ninguna billetera real."
     }
   }
 }

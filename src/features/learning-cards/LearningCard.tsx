@@ -47,7 +47,7 @@ export function LearningCardContent({
   return (
     <div className="flex min-w-0 flex-col gap-3">
       {heading}
-      <p className="max-w-prose text-body-large text-on-surface">{body}</p>
+      <p className="text-body-large text-on-surface">{body}</p>
       {question && (
         <div className="flex flex-col gap-2">
           <p id={groupId} className="text-title-small text-on-surface">

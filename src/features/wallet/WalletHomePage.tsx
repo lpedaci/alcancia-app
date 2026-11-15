@@ -155,7 +155,6 @@ export function WalletHomePage() {
                 ...(next ? [{ icon: 'lock' as const, label: t('wallet.home.chipNext', { section: nextSection }) }] : []),
               ]}
             />
-            {whyKey && <WhyMatters screen={whyKey} />}
           </div>
           <div className="flex flex-col gap-1.5">
             <p id="time-label" className="text-label-medium">{t('wallet.home.time.label')}</p>
@@ -182,6 +181,12 @@ export function WalletHomePage() {
               {announcement}
             </p>
           </div>
+          {/* "¿Por qué importa?" in its own full-width row (D-252): opening it never pushes the time controls */}
+          {whyKey && (
+            <div className="min-w-0 expanded:basis-full">
+              <WhyMatters screen={whyKey} />
+            </div>
+          )}
         </section>
 
         {wallet.pendingDebit && (

@@ -6,7 +6,7 @@ import { MoneyInput } from '@/components/money/MoneyInput';
 import { MoneyText } from '@/components/money/MoneyText';
 import { Button } from '@/components/ui/Button';
 import { SourceList } from '@/features/learning/SourceList';
-import { Icon } from '@/components/ui/Icon';
+import { Icon, type IconName } from '@/components/ui/Icon';
 import { IconTile } from '@/components/ui/IconTile';
 import { InlineAlert } from '@/components/ui/InlineAlert';
 import { RadioGroup } from '@/components/ui/RadioGroup';
@@ -121,7 +121,7 @@ function MissionRunner({ def }: { def: MissionDef & { steps: MissionStep[] } }) 
   if (!run) {
     return (
       <WalletShell section={t('wallet.nav.learn')} fuerte={{ state: 'greeting', message: fuerteDefault }}>
-        <div className="flex max-w-3xl flex-col gap-6">
+        <div className="flex flex-col gap-6">
           <MissionHeader def={def} />
           <section aria-labelledby="mission-plan" className="flex flex-col gap-4 rounded-xl border border-outline-variant bg-surface-container-lowest p-(--space-card-padding)">
             <h2 id="mission-plan" className="text-title-large text-on-surface">
@@ -139,7 +139,7 @@ function MissionRunner({ def }: { def: MissionDef & { steps: MissionStep[] } }) 
               {def.practiceOnly ? t('wallet.mission.practiceOnlyNote') : done ? t('wallet.mission.replayNote') : t('wallet.mission.ownNote')}
             </p>
             {done && <InlineAlert tone="success">{t('wallet.mission.alreadyDone')}</InlineAlert>}
-            <Button className="self-start" leadingIcon={done ? 'replay' : 'play_arrow'} onClick={begin}>
+            <Button className="self-end" leadingIcon={done ? 'replay' : 'play_arrow'} onClick={begin}>
               {done ? t('wallet.mission.replay') : t('wallet.mission.start')}
             </Button>
           </section>
@@ -184,24 +184,31 @@ function MissionRunner({ def }: { def: MissionDef & { steps: MissionStep[] } }) 
 
   return (
     <WalletShell section={t('wallet.nav.learn')} fuerte={{ state: run.finished ? 'celebration' : step.kind === 'single' ? 'thinking' : 'neutral', message: fuerteMessage }}>
-      <div className="flex max-w-3xl flex-col gap-6">
+      {/* Mission layout (D-250): the mission on top at full width; below, the step leads and a side column
+          keeps the progress, the wallet and the practice notice in sight (one column below 1200 px). */}
+      <div className="flex flex-col gap-6">
         <MissionHeader def={def} compact />
-        <ProgressBar
-          value={Math.round(((run.finished ? total : run.step) / total) * 100)}
-          label={t('wallet.mission.progress')}
-          valueText={t('wallet.mission.stepOf', { step: Math.min(run.step + 1, total), total })}
-        />
+        <div className="grid grid-cols-[minmax(0,1fr)] items-start gap-(--space-bento-gap) large:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
+          <aside aria-label={t('wallet.mission.progress')} className="flex min-w-0 flex-col gap-4 large:sticky large:top-24 large:order-2">
+            <div className="flex flex-col gap-3 rounded-xl border border-outline-variant bg-surface-container-lowest p-(--space-card-padding)">
+              <p className="text-label-large text-on-surface">{t('wallet.mission.progress')}</p>
+              <ProgressBar
+                value={Math.round(((run.finished ? total : run.step) / total) * 100)}
+                label={t('wallet.mission.progress')}
+                valueText={t('wallet.mission.stepOf', { step: Math.min(run.step + 1, total), total })}
+              />
+              {/* Only when the mission moves money: a mission about messages has nothing to show here */}
+              {(isOwnRun(run) || run.wallet.movements.length > 0) && <PracticeWallet run={run} fresh={!isOwnRun(run)} />}
+            </div>
+            {/* D-208: a practice copy is labelled during the whole mission */}
+            {!isOwnRun(run) && (
+              <InlineAlert tone="info" title={t('wallet.mission.practiceBannerTitle')}>
+                {run.portfolio === 'own' ? t('wallet.mission.scenarioOwn') : run.portfolio === 'example' ? t('wallet.mission.scenarioExample') : t('wallet.mission.practiceBanner')}
+              </InlineAlert>
+            )}
+          </aside>
 
-        {/* D-208: a practice copy is labelled during the whole mission */}
-        {!isOwnRun(run) && (
-          <InlineAlert tone="info" title={t('wallet.mission.practiceBannerTitle')}>
-            {run.portfolio === 'own' ? t('wallet.mission.scenarioOwn') : run.portfolio === 'example' ? t('wallet.mission.scenarioExample') : t('wallet.mission.practiceBanner')}
-          </InlineAlert>
-        )}
-        {/* Only when the mission moves money: a mission about messages has nothing to show here */}
-        {(isOwnRun(run) || run.wallet.movements.length > 0) && <PracticeWallet run={run} fresh={!isOwnRun(run)} />}
-
-        <section aria-labelledby="step-title" className="flex flex-col gap-4 rounded-xl border border-outline-variant bg-surface-container-lowest p-(--space-card-padding)">
+        <section aria-labelledby="step-title" className="flex min-w-0 flex-col gap-4 rounded-xl border border-outline-variant bg-surface-container-lowest p-(--space-card-padding) large:order-1">
           <StepBody
             key={run.step}
             def={def}
@@ -214,28 +221,30 @@ function MissionRunner({ def }: { def: MissionDef & { steps: MissionStep[] } }) 
           />
 
           {/* Feedback is announced (2.10); a wrong answer is information, never an error (2.2.1, 11). */}
-          <div aria-live="polite">{feedback && <InlineAlert tone={feedback.tone}>{feedback.text}</InlineAlert>}</div>
+          <div aria-live="polite">{feedback && <InlineAlert tone={feedback.tone} title={feedback.reflect ? t('wallet.mission.reflectTitle') : undefined}>{feedback.text}</InlineAlert>}</div>
 
+          {/* Step navigation (D-250): leaving on the left; going back and forward together on the right, forward last */}
           <div className="flex flex-wrap items-center gap-3 border-t border-outline-variant pt-4">
-            {step.kind !== 'summary' && (
-              <Button onClick={goNext} disabled={!canContinue(def, run)} trailingIcon="arrow_forward">
-                {t('wallet.mission.next')}
-              </Button>
-            )}
+            <Button asChild variant="text" leadingIcon="logout">
+              <Link to="/app">{run.finished ? t('wallet.placeholder.backHome') : t('wallet.mission.exit')}</Link>
+            </Button>
+            <span className="flex-1" />
             {run.step > 0 && !run.finished && (
               <Button variant="text" leadingIcon="arrow_back" onClick={goBack}>
                 {t('wallet.mission.back')}
               </Button>
             )}
-            <span className="flex-1" />
-            <Button asChild variant="text" leadingIcon="logout">
-              <Link to="/app">{run.finished ? t('wallet.placeholder.backHome') : t('wallet.mission.exit')}</Link>
-            </Button>
+            {step.kind !== 'summary' && (
+              <Button onClick={goNext} disabled={!canContinue(def, run)} trailingIcon="arrow_forward">
+                {t('wallet.mission.next')}
+              </Button>
+            )}
           </div>
           {!result?.done && step.kind !== 'summary' && step.kind !== 'card' && (
-            <p className="text-body-small text-on-surface-variant">{t('wallet.mission.nextHint')}</p>
+            <p className="text-body-small text-on-surface-variant large:text-right">{t('wallet.mission.nextHint')}</p>
           )}
         </section>
+        </div>
       </div>
     </WalletShell>
   );
@@ -250,13 +259,18 @@ function MissionHeader({ def, compact = false }: { def: MissionDef; compact?: bo
         {t('wallet.mission.kicker', { minutes: def.minutes })}
       </p>
       {compact ? (
-        <p className="text-title-large text-on-surface">{def.title}</p>
+        <p className="text-headline-small text-on-surface">{def.title}</p>
       ) : (
         <h1 className="text-headline-medium text-on-surface">{def.title}</h1>
       )}
-      <p className="text-body-large text-on-surface-variant">
-        <span className="font-medium text-on-surface">{t('wallet.mission.objective')}</span> {def.objective}
-      </p>
+      {/* The objective as Gagné's second event (F3): "Al terminar vas a poder…", set apart with its icon (D-250) */}
+      <div className="mt-2 flex items-start gap-3 rounded-lg bg-tertiary-container/40 px-4 py-3">
+        <IconTile icon="target" tone="tertiary" size="sm" />
+        <p className="min-w-0 text-body-large text-on-surface">
+          <span className="block text-label-large text-on-tertiary-container">{t('wallet.mission.objectiveLead')}</span>
+          {def.objective.charAt(0).toLowerCase() + def.objective.slice(1)}
+        </p>
+      </div>
     </header>
   );
 }
@@ -266,26 +280,30 @@ function PracticeWallet({ run, fresh }: { run: MissionRun; fresh: boolean }) {
   const { t } = useTranslation();
   const pockets = pocketsTotal(run.wallet);
   return (
-    <div className="flex flex-wrap items-center gap-x-6 gap-y-2 rounded-lg bg-surface-container px-4 py-3" aria-live="polite">
+    <div className="flex flex-col gap-2 border-t border-outline-variant pt-3" aria-live="polite">
       <span className="flex items-center gap-2 text-label-medium text-on-surface-variant">
         <Icon name="account_balance_wallet" size={18} className="text-primary" />
         {fresh ? t('wallet.mission.freshWallet') : t('wallet.mission.yourWallet')}
       </span>
-      <span className="text-body-medium text-on-surface">
-        {t('wallet.mission.balance')} <MoneyText value={run.wallet.balance} className="text-title-small tabular-nums" />
-      </span>
-      {pockets.gt(0) && (
-        <span className="text-body-medium text-on-surface">
-          {t('wallet.mission.pockets')} <MoneyText value={pockets.toFixed(2)} className="text-title-small tabular-nums" />
-        </span>
-      )}
+      <dl className="flex flex-col gap-1">
+        <div className="flex flex-wrap items-baseline justify-between gap-x-3">
+          <dt className="text-body-medium text-on-surface-variant">{t('wallet.mission.balance').replace(/:$/, '')}</dt>
+          <dd><MoneyText value={run.wallet.balance} className="text-title-small tabular-nums" /></dd>
+        </div>
+        {pockets.gt(0) && (
+          <div className="flex flex-wrap items-baseline justify-between gap-x-3">
+            <dt className="text-body-medium text-on-surface-variant">{t('wallet.mission.pockets').replace(/:$/, '')}</dt>
+            <dd><MoneyText value={pockets.toFixed(2)} className="text-title-small tabular-nums" /></dd>
+          </div>
+        )}
+      </dl>
     </div>
   );
 }
 
 function Sources({ ids }: { ids?: string[] }) {
   if (!ids?.length) return null;
-  return <SourceList codes={ids} legal={false} />;
+  return <SourceList codes={ids} legal={false} variant="footer" />;
 }
 
 function StepBody({
@@ -311,8 +329,10 @@ function StepBody({
   const [amount, setAmount] = useState('');
   const [tried, setTried] = useState(false);
   const [classified, setClassified] = useState<Record<string, string>>({});
-  const title = (text: string) => (
-    <h1 id="step-title" ref={headingRef} tabIndex={-1} className="text-headline-medium text-on-surface focus:outline-none">
+  /** Question-like steps (D-250): the kind of step as a small heading with its icon; the question itself leads. */
+  const kicker = (icon: IconName, text: string) => (
+    <h1 id="step-title" ref={headingRef} tabIndex={-1} className="flex items-center gap-2 text-label-large text-primary focus:outline-none">
+      <Icon name={icon} size={18} />
       {text}
     </h1>
   );
@@ -322,13 +342,25 @@ function StepBody({
     case 'event':
       return (
         <>
-          <IconTile icon={step.kind === 'event' ? 'notifications' : 'lightbulb'} tone={step.kind === 'event' ? 'warning' : 'tertiary'} />
+          {/* Same layout as the question steps (D-250): the kind of step as a small label, the title, the text,
+              the action on the right and the sources at the foot */}
+          <p className="flex items-center gap-2 text-label-large text-primary">
+            <Icon name={step.kind === 'event' ? 'notifications' : 'lightbulb'} size={18} />
+            {step.kind === 'event' ? t('wallet.mission.eventKicker') : t('wallet.mission.cardKicker')}
+          </p>
           {/* The same card content as the free mode (D-76): missions and free mode share component and record */}
-          <LearningCardContent heading={title(step.title)} body={fillText(step.body, run)} sourceIds={step.sourceIds} />
+          <LearningCardContent
+            heading={
+              <h1 id="step-title" ref={headingRef} tabIndex={-1} className="text-title-large text-on-surface focus:outline-none">
+                {step.title}
+              </h1>
+            }
+            body={fillText(step.body, run)}
+          />
           {step.kind === 'card' && !result?.done && (
             <Button
               variant="tonal"
-              className="self-start"
+              className="self-end"
               leadingIcon="check"
               onClick={() => {
                 const personId = run.wallet.personId;
@@ -339,15 +371,16 @@ function StepBody({
               {t('wallet.mission.understood')}
             </Button>
           )}
+          <Sources ids={step.sourceIds} />
         </>
       );
     case 'action':
       return (
         <>
-          {title(t('wallet.mission.actionTitle'))}
-          <p className="max-w-prose text-body-large text-on-surface">{fillText(step.instruction, run)}</p>
+          {kicker('touch_app', t('wallet.mission.actionTitle'))}
+          <p className="text-title-large text-on-surface">{fillText(step.instruction, run)}</p>
           {!result?.done && (
-            <Button className="self-start" leadingIcon="touch_app" onClick={() => onAnswer()}>
+            <Button className="self-end" leadingIcon="touch_app" onClick={() => onAnswer()}>
               {step.button}
             </Button>
           )}
@@ -364,11 +397,13 @@ function StepBody({
       };
       return (
         <form noValidate onSubmit={submit} className="flex flex-col gap-4">
-          {step.kind === 'single' && step.title ? title(step.title) : title(step.kind === 'single' ? t('wallet.mission.questionTitle') : t('wallet.mission.decisionTitle'))}
-          {step.kind === 'single' && step.body && <p className="max-w-prose text-body-large text-on-surface">{fillText(step.body, run)}</p>}
+          {kicker(step.kind === 'single' ? 'help' : 'route', step.kind === 'single' && step.title ? step.title : step.kind === 'single' ? t('wallet.mission.questionTitle') : t('wallet.mission.decisionTitle'))}
+          {step.kind === 'single' && step.body && <p className="text-body-large text-on-surface-variant">{fillText(step.body, run)}</p>}
           <RadioGroup
             name={`${def.id}-${step.id}`}
             legend={fillText(step.prompt, run)}
+            legendClassName="mb-3 text-title-large"
+            variant="cards"
             required
             disabled={locked}
             error={tried && !choice ? t('wallet.mission.choose') : undefined}
@@ -376,13 +411,13 @@ function StepBody({
             value={choice}
             onChange={(e) => setChoice(e.target.value)}
           />
-          <Sources ids={step.sourceIds} />
-          {step.kind === 'decision' && locked && <p className="max-w-prose text-body-medium text-on-surface-variant">{t('wallet.mission.decisionFinal')}</p>}
+          {step.kind === 'decision' && locked && <p className="text-body-medium text-on-surface-variant">{t('wallet.mission.decisionFinal')}</p>}
           {!locked && (
-            <Button type="submit" variant={result?.done ? 'outlined' : 'filled'} className="self-start" leadingIcon="check">
+            <Button type="submit" variant={result?.done ? 'outlined' : 'filled'} className="self-end" leadingIcon="check">
               {step.kind === 'decision' && result?.done ? t('wallet.mission.change') : t('wallet.mission.answer')}
             </Button>
           )}
+          <Sources ids={step.sourceIds} />
         </form>
       );
     }
@@ -394,7 +429,7 @@ function StepBody({
       };
       return (
         <form noValidate onSubmit={submit} className="flex flex-col gap-4">
-          {title(t('wallet.mission.calcTitle'))}
+          {kicker('calculate', t('wallet.mission.calcTitle'))}
           <MoneyInput
             label={fillText(step.prompt, run)}
             helperText={step.help}
@@ -404,12 +439,12 @@ function StepBody({
             onChange={(e) => setAmount(e.target.value)}
             error={tried && !amount.trim() ? t('wallet.mission.amountMissing') : undefined}
           />
-          <Sources ids={step.sourceIds} />
           {!result?.correct && (
-            <Button type="submit" className="self-start" leadingIcon="calculate">
+            <Button type="submit" className="self-end" leadingIcon="calculate">
               {t('wallet.mission.check')}
             </Button>
           )}
+          <Sources ids={step.sourceIds} />
         </form>
       );
     }
@@ -432,9 +467,9 @@ function StepBody({
       };
       return (
         <form noValidate onSubmit={submit} className="flex flex-col gap-4">
-          {title(t('wallet.mission.classifyTitle'))}
+          {kicker('checklist', t('wallet.mission.classifyTitle'))}
           <fieldset className="flex flex-col gap-3" disabled={result?.correct}>
-            <legend className="mb-1 text-title-small text-on-surface">{fillText(step.prompt, run)}</legend>
+            <legend className="mb-3 text-title-large text-on-surface">{fillText(step.prompt, run)}</legend>
             {step.items.map((item) => (
               <Select
                 key={item.id}
@@ -447,12 +482,12 @@ function StepBody({
               />
             ))}
           </fieldset>
-          <Sources ids={step.sourceIds} />
           {!result?.correct && (
-            <Button type="submit" className="self-start" leadingIcon="check">
+            <Button type="submit" className="self-end" leadingIcon="check">
               {t('wallet.mission.answer')}
             </Button>
           )}
+          <Sources ids={step.sourceIds} />
         </form>
       );
     }
@@ -461,7 +496,7 @@ function StepBody({
       const allMet = status.every((s) => s.met);
       return (
         <>
-          {title(run.finished ? t('wallet.mission.doneTitle') : t('wallet.mission.summaryTitle'))}
+          {kicker(run.finished ? 'task_alt' : 'fact_check', run.finished ? t('wallet.mission.doneTitle') : t('wallet.mission.summaryTitle'))}
           <ul className="flex flex-col gap-2" aria-label={t('wallet.mission.criteria')}>
             {status.map(({ criterion, met }) => (
               <li key={criterion.id} className="flex items-start gap-2 text-body-large text-on-surface">
@@ -476,12 +511,12 @@ function StepBody({
           {run.finished ? (
             <>
               <p className="text-body-large text-on-surface">{t('wallet.mission.doneBody')}</p>
-              <Button variant="outlined" className="self-start" leadingIcon="replay" onClick={onReplay}>
+              <Button variant="outlined" className="self-end" leadingIcon="replay" onClick={onReplay}>
                 {t('wallet.mission.replay')}
               </Button>
             </>
           ) : allMet ? (
-            <Button className="self-start" leadingIcon="task_alt" onClick={onComplete}>
+            <Button className="self-end" leadingIcon="task_alt" onClick={onComplete}>
               {t('wallet.mission.complete')}
             </Button>
           ) : (

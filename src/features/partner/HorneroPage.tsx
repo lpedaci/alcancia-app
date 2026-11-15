@@ -1,4 +1,6 @@
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { toast } from '@/components/ui/toast-store';
 import { useNavigate } from 'react-router';
 import { MoneyText } from '@/components/money/MoneyText';
 import { SkipLink } from '@/components/layout/InPageLink';
@@ -13,17 +15,19 @@ import { HorneroMark } from './HorneroMark';
 import { nestSummary } from './nest';
 import { enterPartnerMode, exitPartnerMode } from './partner-mode';
 
+const NOTICE_KEY = 'alcancia-hornero-notice';
+
 /** "2.0" → "2", "2.5" → "2,5": months without a useless decimal. */
 const monthsText = (months: string) => formatNumber(months, 1).replace(/,0$/, '');
 
-function NestLine({ icon, done, tone = 'rufous', children }: { icon: IconName; done: boolean; tone?: 'rufous' | 'nest'; children: React.ReactNode }) {
+function NestLine({ icon, done, tone = 'brand', children }: { icon: IconName; done: boolean; tone?: 'brand' | 'accent'; children: React.ReactNode }) {
   return (
     <li className="flex items-start gap-3">
       <span
         aria-hidden
         className={
           done
-            ? `flex size-10 shrink-0 items-center justify-center rounded-full text-on-primary ${tone === 'nest' ? 'bg-partner-hornero-nest' : 'bg-partner-hornero'}`
+            ? `flex size-10 shrink-0 items-center justify-center rounded-full text-on-partner-hornero ${tone === 'accent' ? 'bg-partner-hornero-accent' : 'bg-partner-hornero'}`
             : 'flex size-10 shrink-0 items-center justify-center rounded-full bg-surface-container text-on-surface-variant'
         }
       >
@@ -49,6 +53,17 @@ export function HorneroPage() {
   const nest = nestSummary(wallet);
   const firstName = findPerson(personId)?.name.split(' ')[0] ?? '';
 
+  // On opening Hornero, a notice says it is a fictitious demo brand (D-246); once per tab.
+  useEffect(() => {
+    try {
+      if (sessionStorage.getItem(NOTICE_KEY)) return;
+      sessionStorage.setItem(NOTICE_KEY, '1');
+    } catch {
+      // Without storage the notice shows on each visit, which is fine.
+    }
+    toast.info(t('partner.hornero.notice'));
+  }, [t]);
+
   const open = () => {
     enterPartnerMode('hornero');
     navigate('/app');
@@ -64,7 +79,7 @@ export function HorneroPage() {
       <header className="sticky top-0 z-30 border-b border-outline-variant bg-surface-container-lowest">
         <div className="mx-auto flex max-w-[90rem] flex-wrap items-center gap-x-3 gap-y-2 px-(--space-gutter) py-3 medium:px-6">
           <span className="inline-flex items-center gap-2 text-title-medium text-on-surface">
-            <span aria-hidden className="inline-flex size-9 items-center justify-center rounded-lg bg-partner-hornero text-on-primary">
+            <span aria-hidden className="inline-flex size-9 items-center justify-center rounded-lg bg-partner-hornero text-on-partner-hornero">
               <HorneroMark size={24} />
             </span>
             {t('partner.hornero.name')}
@@ -114,12 +129,12 @@ export function HorneroPage() {
               {t('partner.hornero.solidityTitle')}
             </h2>
             <ul className="flex flex-col gap-3">
-              <NestLine icon="shield" tone="nest" done={Boolean(nest.monthsCovered && Number(nest.monthsCovered) > 0)}>
+              <NestLine icon="shield" tone="accent" done={Boolean(nest.monthsCovered && Number(nest.monthsCovered) > 0)}>
                 {nest.monthsCovered && Number(nest.monthsCovered) > 0
                   ? t('partner.hornero.holds', { count: Number(nest.monthsCovered), months: monthsText(nest.monthsCovered) })
                   : t('partner.hornero.holdsNone')}
               </NestLine>
-              <NestLine icon="verified_user" tone="nest" done={nest.resisted}>
+              <NestLine icon="verified_user" tone="accent" done={nest.resisted}>
                 {nest.resisted ? t('partner.hornero.resisted') : t('partner.hornero.resistedNone')}
               </NestLine>
             </ul>

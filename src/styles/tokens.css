@@ -24,6 +24,7 @@
   /* Teal (tertiary) */
   --ref-teal-40: #00796b;
   --ref-teal-90: #cdede8;
+  --ref-teal-97: #eef8f6;
   --ref-teal-10: #00332d;
   --ref-teal-50: #3b8c80;
   /* Status hues */
@@ -44,12 +45,12 @@
   --ref-violet-90: #ede3f8;
   --ref-olive-40: #5d6b2f;
   --ref-olive-90: #e7ecd6;
-  /* Hornero, the fictitious partner of the integrated mode (D-75, D-86, D-244): colors of the bird and
-     its nest. Rufous back, ochre nest, buff breast and dark umber. Only on Hornero's own chrome. */
-  --ref-hornero-rufous: #8b4a23;
-  --ref-hornero-nest: #a0703f;
-  --ref-hornero-buff: #f3e6d6;
-  --ref-hornero-umber: #3a2210;
+  /* Hornero, the fictitious partner of the integrated mode (D-75, D-86, D-248): "Atardecer", the pampas
+     sky at sunset over the hornero's habitat. Only on Hornero's own chrome. */
+  --ref-hornero-dusk: #7a2e3b;
+  --ref-hornero-afterglow: #b05a66;
+  --ref-hornero-glow: #f7e1e4;
+  --ref-hornero-night: #3a1018;
   /* Cool neutrals */
   --ref-neutral-100: #ffffff;
   --ref-neutral-96: #f1f3f5;
@@ -83,6 +84,8 @@
   --md-sys-color-on-tertiary: var(--ref-neutral-100);
   --md-sys-color-tertiary-container: var(--ref-teal-90);
   --md-sys-color-on-tertiary-container: var(--ref-teal-10);
+  /* A lighter tertiary surface for "¿Por qué importa?" (D-252): it sits on colored cards without competing */
+  --md-sys-color-tertiary-surface: var(--ref-teal-97);
 
   --md-sys-color-error: var(--ref-red-40);
   --md-sys-color-on-error: var(--ref-neutral-100);
@@ -129,10 +132,11 @@
   --role-sponsor-container: var(--ref-olive-90);
 
   /* Partner brand of the integrated mode (D-75, D-86): only on Hornero's own chrome, never inside Alcancía. */
-  --partner-hornero: var(--ref-hornero-rufous);
-  --partner-hornero-nest: var(--ref-hornero-nest);
-  --partner-hornero-container: var(--ref-hornero-buff);
-  --partner-on-hornero-container: var(--ref-hornero-umber);
+  --partner-hornero: var(--ref-hornero-dusk);
+  --partner-on-hornero: var(--ref-neutral-100);
+  --partner-hornero-accent: var(--ref-hornero-afterglow);
+  --partner-hornero-container: var(--ref-hornero-glow);
+  --partner-on-hornero-container: var(--ref-hornero-night);
 
   /* Fuerte (D-52): only for the character and its lights. Never on buttons, backgrounds, charts or states. */
   --fuerte-body: var(--ref-fuerte-orange);
@@ -225,6 +229,7 @@
   --md-sys-color-on-tertiary: #003731;
   --md-sys-color-tertiary-container: #005048;
   --md-sys-color-on-tertiary-container: #cdede8;
+  --md-sys-color-tertiary-surface: #0b2e2a;
 
   --md-sys-color-error: #ffb4ab;
   --md-sys-color-on-error: #690005;

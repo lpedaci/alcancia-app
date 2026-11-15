@@ -443,5 +443,10 @@
   "wallet": {
     "practiceBanner": "Personal finance simulator · play money",
     "practiceBannerShort": "Play money"
+  },
+  "partner": {
+    "hornero": {
+      "notice": "Hornero is a fictitious demo brand: it does not exist and does not imitate any real wallet."
+    }
   }
 }

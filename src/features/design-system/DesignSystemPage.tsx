@@ -13,13 +13,13 @@ import { IconButton } from '@/components/ui/IconButton';
 import { cn } from '@/lib/utils';
 import { ColorSection, IconsSection, MotionSection, SpaceSection, TYPE_ROLES, TypeSection } from './DsFoundations';
 import { TokenTiersFigure } from './DsFigures';
-import { ComponentsSection, FuerteSection, MoneySection, SecuritySection } from './DsSections';
+import { ComponentsSection, FuerteSection, HorneroSection, MoneySection, SecuritySection } from './DsSections';
 
-type SectionId = 'principles' | 'tokens' | 'color' | 'type' | 'space' | 'icons' | 'motion' | 'components' | 'fuerte' | 'patterns' | 'money' | 'security' | 'a11y' | 'voice' | 'credits';
+type SectionId = 'principles' | 'tokens' | 'color' | 'type' | 'space' | 'icons' | 'motion' | 'components' | 'fuerte' | 'hornero' | 'patterns' | 'money' | 'security' | 'a11y' | 'voice' | 'credits';
 
 const GROUPS: { key: 'foundations' | 'components' | 'patterns' | 'guidelines'; ids: SectionId[] }[] = [
   { key: 'foundations', ids: ['principles', 'tokens', 'color', 'type', 'space', 'icons', 'motion'] },
-  { key: 'components', ids: ['components', 'fuerte'] },
+  { key: 'components', ids: ['components', 'fuerte', 'hornero'] },
   { key: 'patterns', ids: ['patterns', 'money', 'security'] },
   { key: 'guidelines', ids: ['a11y', 'voice', 'credits'] },
 ];
@@ -35,7 +35,7 @@ function DsSection({ id, children }: { id: SectionId; children: ReactNode }) {
         <h2 id={`ds-${id}-title`} className="text-headline-small text-pretty text-on-surface">
           {t(`designSystem.sections.${id}.title`)}
         </h2>
-        <p className="max-w-[72ch] text-body-large text-pretty text-on-surface-variant">{t(`designSystem.sections.${id}.intro`)}</p>
+        <p className="text-body-large text-pretty text-on-surface-variant">{t(`designSystem.sections.${id}.intro`)}</p>
       </div>
       {children}
     </section>
@@ -278,7 +278,7 @@ export function DesignSystemPage() {
           <section className="flex flex-col items-center gap-6 py-14 text-center large:py-20">
             <p className="text-label-large text-balance text-primary">{t('designSystem.hero.eyebrow')}</p>
             <h1 className="max-w-4xl text-headline-medium text-balance text-on-surface sm:text-display-small">{highlight(t('designSystem.hero.title'), t('designSystem.hero.highlight'))}</h1>
-            <p className="max-w-[72ch] text-body-large text-pretty text-on-surface-variant">{t('designSystem.hero.intro')}</p>
+            <p className="text-body-large text-pretty text-on-surface-variant">{t('designSystem.hero.intro')}</p>
             <ul data-stagger className="grid w-full max-w-3xl grid-cols-2 gap-x-6 gap-y-8 pt-4 sm:grid-cols-4">
               {stats.map(([n, label], i) => (
                 <li key={label} className="flex flex-col items-center gap-1">
@@ -337,6 +337,9 @@ export function DesignSystemPage() {
               </DsSection>
               <DsSection id="fuerte">
                 <FuerteSection />
+              </DsSection>
+              <DsSection id="hornero">
+                <HorneroSection />
               </DsSection>
               <DsSection id="patterns">
                 <ul className="grid grid-cols-[minmax(0,1fr)] gap-(--space-bento-gap) md:grid-cols-2 xl:grid-cols-3">

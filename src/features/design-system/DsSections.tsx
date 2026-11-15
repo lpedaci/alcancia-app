@@ -18,6 +18,8 @@ import { SegmentedProgress } from '@/components/ui/SegmentedProgress';
 import { StatusPill } from '@/components/ui/StatusPill';
 import { TextField } from '@/components/ui/TextField';
 import { Fuerte, FUERTE_STATES } from '@/features/companion/Fuerte';
+import { FictitiousBrandChip } from '@/features/partner/FictitiousBrandChip';
+import { HorneroMark } from '@/features/partner/HorneroMark';
 import { SourceList } from '@/features/learning/SourceList';
 import { formatMoney, formatPercent } from '@/lib/money';
 import { cn } from '@/lib/utils';
@@ -223,6 +225,115 @@ export function FuerteSection() {
           <Icon name="chat" size={20} className="mt-0.5 shrink-0 text-primary" />
           <p className="text-body-large text-on-surface">{t('designSystem.fuerte.quote')}</p>
         </blockquote>
+        <ul className="flex flex-col gap-3">
+          {rules.map((r) => (
+            <li key={r} className="flex items-start gap-2 text-body-medium text-on-surface">
+              <Icon name="check_circle" size={20} className="shrink-0 text-success" />
+              {r}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+interface HorneroSwatch {
+  token: string;
+  name: string;
+  hex: string;
+  use: string;
+  pills: string[];
+}
+
+/** Hornero, the fictitious partner brand (D-84 to D-87, D-246, D-247): palette, mark, icons and rules. */
+export function HorneroSection() {
+  const { t } = useTranslation();
+  const h = (k: string) => t(`designSystem.hornero.${k}`);
+  const swatches = t('designSystem.hornero.swatches', { returnObjects: true }) as HorneroSwatch[];
+  const icons = t('designSystem.hornero.icons', { returnObjects: true }) as [string, string, string][];
+  const rules = t('designSystem.hornero.rules', { returnObjects: true }) as string[];
+  return (
+    <div className="flex flex-col gap-(--space-bento-gap)">
+      <div className={panel}>
+        <h3 className="text-title-large text-on-surface">{h('paletteTitle')}</h3>
+        <p className="text-body-medium text-on-surface-variant">{h('paletteIntro')}</p>
+        <ul className="grid grid-cols-[minmax(0,1fr)] gap-3 sm:grid-cols-2 xl:grid-cols-4">
+          {swatches.map((sw) => (
+            <li key={sw.token} className="flex min-w-0 flex-col overflow-hidden rounded-lg border border-outline-variant">
+              <div className="flex h-20 items-end p-3" style={{ background: `var(--${sw.token})` }}>
+                <span className="rounded-full bg-surface-container-lowest px-2 py-0.5 text-label-medium text-on-surface uppercase tabular-nums">{sw.hex}</span>
+              </div>
+              <div className="flex flex-col gap-1.5 p-3">
+                <p className="text-title-small text-on-surface">{sw.name}</p>
+                <p className="text-body-small text-on-surface-variant">{sw.use}</p>
+                <div className="flex flex-wrap gap-1.5">
+                  {sw.pills.map((pill) => (
+                    <span key={pill} className="inline-flex min-h-6 items-center rounded-full bg-surface-container px-2 py-0.5 text-label-medium text-on-surface-variant tabular-nums">
+                      {pill}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="grid grid-cols-[minmax(0,1fr)] gap-(--space-bento-gap) xl:grid-cols-2">
+        <div className={panel}>
+          <h3 className="text-title-large text-on-surface">{h('markTitle')}</h3>
+          <p className="text-body-medium text-on-surface-variant">{h('markIntro')}</p>
+          <p className="text-label-large text-on-surface">{h('sizes')}</p>
+          <ul className="flex flex-wrap items-end gap-4 rounded-lg bg-surface p-4 text-partner-hornero">
+            {[16, 20, 24, 32, 48].map((size) => (
+              <li key={size} className="flex flex-col items-center gap-1">
+                <HorneroMark size={size} />
+                <span className="text-label-small text-on-surface-variant tabular-nums">{size} px</span>
+              </li>
+            ))}
+          </ul>
+          <div className="grid grid-cols-2 gap-3">
+            <div className="flex flex-col items-center gap-2 rounded-lg bg-partner-hornero p-4 text-on-partner-hornero">
+              <HorneroMark size={40} />
+              <span className="text-label-medium">{h('onTile')}</span>
+            </div>
+            <div className="flex flex-col items-center gap-2 rounded-lg bg-partner-hornero-container p-4 text-partner-on-hornero-container">
+              <HorneroMark size={40} />
+              <span className="text-label-medium">{h('onLight')}</span>
+            </div>
+          </div>
+          <p className="text-label-large text-on-surface">{h('chip')}</p>
+          <div>
+            <FictitiousBrandChip />
+          </div>
+        </div>
+
+        <div className={panel}>
+          <h3 className="text-title-large text-on-surface">{h('iconsTitle')}</h3>
+          <p className="text-body-medium text-on-surface-variant">{h('iconsIntro')}</p>
+          <ul className="flex flex-col">
+            {icons.map(([name, text, layer]) => (
+              <li key={name} className="flex items-center gap-3 border-b border-outline-variant py-2.5 last:border-b-0">
+                <span
+                  aria-hidden
+                  className={cn(
+                    'inline-flex size-10 shrink-0 items-center justify-center rounded-full text-on-partner-hornero',
+                    layer === 'Solidez' ? 'bg-partner-hornero-accent' : 'bg-partner-hornero',
+                  )}
+                >
+                  {name === 'mark' ? <HorneroMark size={22} /> : <Icon name={name as IconName} size={20} />}
+                </span>
+                <span className="min-w-0 flex-1 text-body-medium text-on-surface">{text}</span>
+                <span className="shrink-0 rounded-full bg-surface-container px-2 py-0.5 text-label-medium text-on-surface-variant">{layer}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <div className={panel}>
+        <h3 className="text-title-large text-on-surface">{h('rulesTitle')}</h3>
         <ul className="flex flex-col gap-3">
           {rules.map((r) => (
             <li key={r} className="flex items-start gap-2 text-body-medium text-on-surface">

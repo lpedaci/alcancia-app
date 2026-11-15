@@ -13,6 +13,7 @@ import {
 } from '@/components/ui/DropdownMenu';
 import { findPerson, resetDemo, signOut } from '@/features/auth/auth-service';
 import { can } from '@/lib/permissions';
+import { HORNERO_HOME, usePartnerMode } from '@/features/partner/partner-mode';
 import { useCurrentUser } from '@/store/session-store';
 
 /**
@@ -23,9 +24,11 @@ export function UserMenu() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const user = useCurrentUser();
+  const partner = usePartnerMode();
   const [confirmReset, setConfirmReset] = useState(false);
   const person = user ? findPerson(user.personId) : undefined;
   if (!user || !person) return null;
+
 
   return (
     <>
@@ -41,6 +44,12 @@ export function UserMenu() {
             <span className="block text-body-small break-all text-on-surface-variant">{person.email}</span>
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
+          {/* Integrated mode (D-249): the way back to Hornero, with its fictitious-brand label */}
+          {user.role === 'participant' && (
+            <DropdownMenuItem icon={partner === 'hornero' ? 'arrow_back' : 'open_in_new'} description={t('partner.hornero.fictitiousBrand')} onSelect={() => navigate(HORNERO_HOME)}>
+              {partner === 'hornero' ? t('partner.hornero.back') : t('demo.partnerHornero')}
+            </DropdownMenuItem>
+          )}
           {user.role === 'participant' && (
             <DropdownMenuItem icon="person" onSelect={() => navigate('/app/profile')}>
               {t('demo.profile')}

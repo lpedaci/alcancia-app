@@ -78,13 +78,18 @@ describe('mission 1 "Tu primer cobro" (5.3, D-53, D-54, D-55)', () => {
   it('20 % of $ 1.284.958,86 is $ 256.991,77, with a tolerance of $ 1 (hand calculation)', () => {
     let run = play(mission1, start()).run;
     run = play(mission1, run, 'net').run;
+    // D-251: the first wrong try invites to think, with the method and without the result
     const wrong = answerStep(mission1, run, '250.000');
-    expect(wrong.feedback?.tone).toBe('info');
-    expect(wrong.feedback?.text).toContain('256.991,77');
-    const right = answerStep(mission1, wrong.run, '256.992');
+    expect(wrong.feedback).toMatchObject({ tone: 'info', reflect: true });
+    expect(wrong.feedback?.text).not.toContain('256.991,77');
+    expect(wrong.feedback?.text).toContain('multiplica el neto por 0,2');
+    // the second wrong try shows the worked result
+    const again = answerStep(mission1, wrong.run, '240.000');
+    expect(again.feedback?.text).toContain('256.991,77');
+    const right = answerStep(mission1, again.run, '256.992');
     expect(right.feedback?.tone).toBe('success');
     expect(right.run.wallet.pockets.find((p) => p.id === POCKET_SAVINGS)?.amount).toBe('256992.00');
-    expect(right.run.results.save).toMatchObject({ correct: true, attempts: 2 });
+    expect(right.run.results.save).toMatchObject({ correct: true, attempts: 3 });
   });
 
   it('charges the surprise subscription of $ 4.990 and lets the person cancel it or change her mind', () => {
@@ -195,7 +200,8 @@ describe('mission 7 "Mes completo" (step 7.3)', () => {
     let run = startMission(def, buildMariana(), { replay: true });
     run = play(def, run).run; // card
     const low = answerStep(def, run, '64.247,94'); // 5 %: not enough
-    expect(low.feedback?.text).toContain('128.495,89'); // $ 1.284.958,86 × 0,1
+    expect(low.feedback?.reflect).toBe(true); // D-251: first a nudge, without the result
+    expect(answerStep(def, low.run, '64.247,94').feedback?.text).toContain('128.495,89'); // $ 1.284.958,86 × 0,1
     run = play(def, low.run, '128.495,89').run;
     run = play(def, run).run; // phone raised to $ 22.000
     expect(run.wallet.expenses.phone).toBe('22000.00');
@@ -214,7 +220,8 @@ describe('mission "Crea tu fondo de emergencia" (step 7.4)', () => {
   it('3 months of $ 650.000 make a goal of $ 1.950.000, and the first contribution funds it (hand calculation)', () => {
     let run = play(def, startMission(def, buildMariana(), { replay: true })).run;
     const wrong = answerStep(def, run, '650.000');
-    expect(wrong.feedback?.text).toContain('1.950.000');
+    expect(wrong.feedback?.reflect).toBe(true);
+    expect(answerStep(def, wrong.run, '650.000').feedback?.text).toContain('1.950.000');
     run = play(def, wrong.run, '1.950.000').run;
     expect(run.wallet.pockets.find((p) => p.isEmergencyFund)).toMatchObject({ goal: '1950000.00', amount: '0.00' });
     run = play(def, run, 'p20').run;
@@ -236,7 +243,8 @@ describe('mission "El préstamo tentador" (step 8.3)', () => {
     run = play(def, cft.run).run;
     run = play(def, run).run;
     const wrong = answerStep(def, run, '41.737,16');
-    expect(plain(wrong.feedback?.text)).toContain('$ 1.001.691,84');
+    expect(wrong.feedback?.reflect).toBe(true);
+    expect(plain(answerStep(def, wrong.run, '41.737,16').feedback?.text)).toContain('$ 1.001.691,84');
     const right = answerStep(def, wrong.run, '1.001.691,84');
     expect(plain(right.feedback?.text)).toContain('$ 431.691,84');
     run = nextStep(def, right.run);

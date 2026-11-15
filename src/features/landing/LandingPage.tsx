@@ -555,7 +555,7 @@ function ContextCard({
           aria-hidden
           className={cn(
             'inline-flex size-12 items-center justify-center rounded-lg',
-            mark ? 'bg-partner-hornero text-on-primary' : 'bg-primary-container text-on-primary-container',
+            mark ? 'bg-partner-hornero text-on-partner-hornero' : 'bg-primary-container text-on-primary-container',
           )}
         >
           {mark ?? (icon && <Icon name={icon} size={24} />)}

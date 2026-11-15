@@ -195,6 +195,8 @@ export const isOwnRun = (run: MissionRun) => run.mode === 'own';
 export interface Feedback {
   tone: 'success' | 'info';
   text: string;
+  /** A nudge to think before seeing the result (D-251). */
+  reflect?: boolean;
 }
 
 /** The example CEDEAR of the practice brokerage account (SIM-14). */
@@ -207,6 +209,16 @@ const percentOfSalary = (wallet: WalletState, fraction: string) => roundCents(D(
  * run's scenario (`{{loanPrincipal}}`, `{{installment}}`, `{{commission}}`, `{{loanReceived}}`,
  * `{{loanTotal}}`, `{{loanExtra}}`, `{{tna}}`, `{{cft}}`) with formatted amounts.
  */
+/**
+ * First wrong try of a calculation (D-251): only the method of the hint, the part before its first colon,
+ * so the person thinks it through before seeing the result.
+ */
+export function thinkAgain(hint: string): string {
+  const colon = hint.indexOf(':');
+  const method = (colon > 0 ? hint.slice(0, colon) : hint).trim().replace(/\.$/, '');
+  return `Todavía no. Piénsalo de nuevo: ${method.charAt(0).toLowerCase()}${method.slice(1)}. Haz la cuenta y vuelve a intentarlo; si no sale, en el próximo intento te mostramos el resultado.`;
+}
+
 export function fillText(text: string, run: MissionRun, extra: { expected?: string; amount?: string } = {}): string {
   let filled = text;
   if (filled.includes('{{')) {
@@ -487,9 +499,13 @@ function answerUnsafe(def: MissionDef, run: MissionRun, input?: string): { run: 
           { verb: 'answered', object: `${def.id}/${step.id}`, result: { success: correct, response: amount } },
           wallet,
         ),
+        // A wrong amount first invites to think (D-251): the method without the result, and another try.
+        // The worked result arrives only from the second wrong try, so the demo shows it asks to reflect.
         feedback: correct
           ? { tone: 'success', text: fillText(step.feedback, run, { amount }) }
-          : { tone: 'info', text: fillText(step.hint, run, { expected }) },
+          : previous.attempts === 0
+            ? { tone: 'info', text: thinkAgain(fillText(step.hint, run, { expected })), reflect: true }
+            : { tone: 'info', text: fillText(step.hint, run, { expected }) },
       };
     }
     case 'classify': {
