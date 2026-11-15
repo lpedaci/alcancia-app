@@ -125,30 +125,13 @@ export function WalletHomePage() {
       fuerte={{ state: 'greeting', message: fuerteMessage, why: whyKey ? whyText(whyKey) : undefined, action: missionAction }}
     >
       <div className="flex flex-col gap-(--space-bento-gap)">
-        {/* Active mission: one compact card above the content, at every size (5.3) */}
-        {activeMission && (
-          <Link
-            to={`/app/missions/${activeMission.id}`}
-            className="flex items-center gap-3 rounded-xl border border-primary bg-surface-container-lowest p-4 hover:bg-surface-container"
-          >
-            <IconTile icon="flag" size="sm" className="self-start" />
-            {/* The objective wraps up to two lines instead of being cut (2.7) */}
-            <span className="flex min-w-0 flex-1 flex-col gap-0.5">
-              <span className="text-label-medium text-primary">{activeMissionFromEarlier ? t('wallet.home.mission.kickerEarlier', { level: activeMissionLevel, minutes: activeMission.minutes }) : t('wallet.home.mission.kickerMinutes', { minutes: activeMission.minutes })}</span>
-              <span className="text-title-medium text-pretty text-on-surface">{activeMission.title}</span>
-              <span className="hidden text-body-small text-pretty text-on-surface-variant md:line-clamp-2">{activeMission.objective}</span>
-            </span>
-            <span className="hidden shrink-0 text-label-large text-primary expanded:inline">{t('wallet.home.mission.start')}</span>
-            <Icon name="arrow_forward" className="shrink-0 text-primary" />
-          </Link>
-        )}
-
-        {/* Greeting (2.2.1, pattern 2; D-287, D-288). Phones and tablets: on the page, with no card, as
-            wallets do; from 840 px, the tinted card. One date line, the name, the level, and two quiet
-            controls: "Avanzar el tiempo" opens a menu and "¿Por qué importa?" opens a dialog. */}
-        <section aria-labelledby="home-title" className="flex flex-col gap-3 px-1 text-on-surface expanded:flex-row expanded:items-end expanded:justify-between expanded:gap-4 expanded:rounded-xl expanded:bg-primary-container expanded:p-(--space-card-padding) expanded:text-on-primary-container">
+        {/* Greeting (2.2.1, pattern 2; D-287 to D-289): the page header, first and with no card at every
+            size, as wallets and the Avenra reference do. One date line, the name, the level, and two
+            quiet controls on the right: "Avanzar el tiempo" opens a menu and "¿Por qué importa?" a dialog.
+            The active mission comes right after, as the first card. */}
+        <section aria-labelledby="home-title" className="flex flex-col gap-3 px-1 text-on-surface expanded:flex-row expanded:items-end expanded:justify-between expanded:gap-4">
           <div className="flex min-w-0 flex-col gap-1.5">
-            <p className="text-label-medium text-on-surface-variant tabular-nums expanded:text-on-primary-container">
+            <p className="text-label-medium text-on-surface-variant tabular-nums">
               <time dateTime={walletDate(wallet.day)}>{formatDate(walletDate(wallet.day))}</time> · {t('wallet.home.dayChip', { day: wallet.day })}
             </p>
             <h1 id="home-title" className="text-headline-small expanded:text-headline-medium">
@@ -159,7 +142,7 @@ export function WalletHomePage() {
                 <Icon name="route" size={16} />
                 {t('wallet.home.chipLevel', { level: current.level.order, section: currentSection })}
                 {next && (
-                  <span className="hidden items-center gap-1.5 text-on-primary-container expanded:inline-flex">
+                  <span className="hidden items-center gap-1.5 text-on-surface-variant expanded:inline-flex">
                     <span aria-hidden>·</span>
                     <Icon name="lock" size={16} />
                     {t('wallet.home.chipNext', { section: nextSection })}
@@ -199,6 +182,24 @@ export function WalletHomePage() {
             </p>
           </div>
         </section>
+
+        {/* Active mission: one compact card above the content, at every size (5.3) */}
+        {activeMission && (
+          <Link
+            to={`/app/missions/${activeMission.id}`}
+            className="flex items-center gap-3 rounded-xl border border-primary bg-surface-container-lowest p-4 hover:bg-surface-container"
+          >
+            <IconTile icon="flag" size="sm" className="self-start" />
+            {/* The objective wraps up to two lines instead of being cut (2.7) */}
+            <span className="flex min-w-0 flex-1 flex-col gap-0.5">
+              <span className="text-label-medium text-primary">{activeMissionFromEarlier ? t('wallet.home.mission.kickerEarlier', { level: activeMissionLevel, minutes: activeMission.minutes }) : t('wallet.home.mission.kickerMinutes', { minutes: activeMission.minutes })}</span>
+              <span className="text-title-medium text-pretty text-on-surface">{activeMission.title}</span>
+              <span className="hidden text-body-small text-pretty text-on-surface-variant md:line-clamp-2">{activeMission.objective}</span>
+            </span>
+            <span className="hidden shrink-0 text-label-large text-primary expanded:inline">{t('wallet.home.mission.start')}</span>
+            <Icon name="arrow_forward" className="shrink-0 text-primary" />
+          </Link>
+        )}
 
         {wallet.pendingDebit && (
           <InlineAlert tone="warning" live="alert">

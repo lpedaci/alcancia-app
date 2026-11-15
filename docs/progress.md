@@ -92,3 +92,4 @@
 | 15/11/2026 | Ajuste de Lourdes | Foto de perfil de Joaquín Paredes (D-284) | Hecho |
 | 15/11/2026 | Ajuste de Lourdes | Landing: "La solución" como bento compacto, con "Aprende en cualquier lugar" como tarjeta ancha; se quita el carrusel (D-285) | Hecho |
 | 15/11/2026 | Ajuste de Lourdes | Inicio: desplegable de todos los movimientos (D-286), inicio liviano en celular y tablet (D-287), "Avanzar el tiempo" con menú y "¿Por qué importa?" como botón de atención con diálogo (D-288) | Hecho |
+| 15/11/2026 | Ajuste de Lourdes | Inicio: el saludo como encabezado sin tarjeta, arriba de la misión activa (D-289) | Hecho |
