@@ -12,9 +12,13 @@ export type MoneyString = string;
 /** ISO date (AAAA-MM-DD) or date-time. */
 export type IsoDate = string;
 
+/** Context of use (5.5, D-74): it changes the vocabulary, the visible roles and the landing. */
+export type OrganizationKind = 'employer' | 'education' | 'product';
+
 export interface Organization {
   id: string;
   name: string;
+  kind: OrganizationKind;
   logoUrl?: string;
   /** Minimum 5 (F1). */
   privacyThreshold: number;
@@ -58,13 +62,17 @@ export interface Person {
   activatedAt?: IsoDate;
 }
 
-export type Area = 'operations' | 'administration' | 'technology' | 'commercial';
+export type Area =
+  | 'operations' | 'administration' | 'technology' | 'commercial'
+  | 'logistics' | 'business_admin' | 'accounting'
+  | 'new_users' | 'regular_users';
 
 export interface Cohort {
   id: string;
   orgId: string;
   name: string;
-  tutorId: string;
+  /** Absent in the product context: its users learn on their own with Fuerte (5.5). */
+  tutorId?: string;
   area: Area;
   moduleIds: string[];
   startDate: IsoDate;

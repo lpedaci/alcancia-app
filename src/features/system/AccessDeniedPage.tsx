@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/Button';
 import { homePath } from '@/lib/permissions';
 import { useCurrentUser } from '@/store/session-store';
 import { SystemMessage } from './SystemMessage';
+import { ctx, useOrgKind } from '@/lib/org-context';
 
 /**
  * G7 · Acceso no permitido (roles.md 3.4): a route of another role. Serious and without blame
@@ -13,13 +14,14 @@ export function AccessDeniedPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const user = useCurrentUser();
+  const kind = useOrgKind();
   return (
     <SystemMessage
       icon="lock"
       fuerte="attention"
       code={t('forbidden.code')}
       title={t('forbidden.title')}
-      body={t('forbidden.body')}
+      body={t('forbidden.body', { context: ctx(kind) })}
       suggestionsTitle={t('forbidden.suggestionsTitle')}
       suggestions={[
         { to: '/', icon: 'home', label: t('forbidden.landing') },

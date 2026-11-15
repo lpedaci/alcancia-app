@@ -19,6 +19,8 @@ import { AuthLayout } from './AuthLayout';
 import { LoginShowcase } from './LoginShowcase';
 import { SsoButton } from './SsoButton';
 import { clearReturnState } from '@/lib/use-return-state';
+import { ctx } from '@/lib/org-context';
+import { DEFAULT_ORG_ID, organizationOf, useDataStore } from '@/store/data-store';
 
 const schema = z.object({ email: emailField, password: requiredText });
 type LoginValues = z.infer<typeof schema>;
@@ -41,6 +43,7 @@ export function LoginPage() {
 
   const preselectedId = personIdForDemoKey(params.get('demo'));
   const preselected = preselectedId ? findPerson(preselectedId) : undefined;
+  const loginKind = useDataStore((s) => organizationOf(s, preselected?.orgId ?? DEFAULT_ORG_ID).kind);
 
   // Choosing another journey on the landing with a session open signs in again as that person.
   const otherJourney = Boolean(session && preselected && preselected.id !== session.personId);
@@ -103,10 +106,10 @@ export function LoginPage() {
   const logoutMessage = lastLogout && lastLogout !== 'switch' ? t(`auth.login.logout.${lastLogout}`) : null;
 
   return (
-    <AuthLayout showcase={<LoginShowcase />}>
+    <AuthLayout showcase={<LoginShowcase kind={loginKind} />}>
       <header className="flex flex-col gap-1">
         <h1 className="text-headline-medium text-on-surface">{t('auth.login.title')}</h1>
-        <p className="text-body-large text-on-surface-variant">{t('auth.login.subtitle')}</p>
+        <p className="text-body-large text-on-surface-variant">{t('auth.login.subtitle', { context: ctx(loginKind) })}</p>
       </header>
 
       {logoutMessage && (

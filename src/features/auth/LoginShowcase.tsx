@@ -3,6 +3,8 @@ import { Icon } from '@/components/ui/Icon';
 import { ProgressBar } from '@/components/ui/ProgressBar';
 import { AppPhone } from '@/features/landing/PhoneMockup';
 import { PieceSimResult } from '@/features/landing/ProductPieces';
+import { ctx } from '@/lib/org-context';
+import type { OrganizationKind } from '@/types/domain';
 
 /**
  * Right panel of G1 from 1024 px (D-257): the same story as the landing hero. A short value sentence
@@ -10,17 +12,18 @@ import { PieceSimResult } from '@/features/landing/ProductPieces';
  * of the panel with two real pieces beside it. Flat primary container, never a gradient. Decorative:
  * the same message is in the text.
  */
-export function LoginShowcase() {
+export function LoginShowcase({ kind = 'employer' }: { kind?: OrganizationKind }) {
   const { t } = useTranslation();
+  const context = ctx(kind);
   return (
     <div className="flex h-full min-h-0 flex-col gap-6 text-on-primary-container">
       {/* The text takes the panel's width, so it uses fewer lines and the phone sits higher */}
       <div className="flex flex-col gap-3">
-        <p className="w-fit rounded-full bg-surface-container-lowest px-3 py-1 text-label-large text-primary">{t('auth.showcase.eyebrow')}</p>
+        <p className="w-fit rounded-full bg-surface-container-lowest px-3 py-1 text-label-large text-primary">{t('auth.showcase.eyebrow', { context })}</p>
         <p className="text-headline-medium text-balance xl:text-display-small">
           {t('auth.showcase.titleStart')} <span className="text-primary">{t('auth.showcase.titleKey')}</span> {t('auth.showcase.titleEnd')}
         </p>
-        <p className="text-body-large">{t('auth.showcase.body')}</p>
+        <p className="text-body-large">{t('auth.showcase.body', { context })}</p>
       </div>
       {/* The phone rises from the bottom edge of the panel, cropped like a product shot */}
       <div aria-hidden className="relative flex min-h-0 flex-1 justify-center">

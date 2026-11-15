@@ -1,4 +1,4 @@
-import type { Cohort, Person } from '@/types/domain';
+import type { Cohort, OrganizationKind, Person } from '@/types/domain';
 
 /**
  * O3, bulk upload by CSV (CLAUDE.md F8, D-195): reads a simple CSV (comma or semicolon, quotes
@@ -25,6 +25,29 @@ export const CSV_EXAMPLE = [
   'Martín Sosa,martin.sosa@andina.demo,Comercial,Ejecutivo de cuentas',
   'Martina Sosa,martin.sosa@andina.demo,Comercial,Ejecutiva de cuentas',
 ].join('\n');
+
+/** The example of each context (5.5): the same mix of valid rows and errors, with its own cohorts. */
+export const CSV_EXAMPLES: Record<OrganizationKind, string> = {
+  employer: CSV_EXAMPLE,
+  education: [
+    'nombre,correo,cohorte,puesto',
+    'Camila Ortiz,camila.ortiz@ceibo.demo,Tecnicatura en Logística,Estudiante de 1.er año',
+    'Bruno Paz,bruno.paz@ceibo,Tecnicatura en Administración,Estudiante de 2.º año',
+    'Rocío Luna,rocio.luna@ceibo.demo,Profesorado,Estudiante',
+    ',ana.vera@ceibo.demo,Formación profesional,Auxiliar contable',
+    'Javier Ríos,javier.rios@ceibo.demo,Formación profesional,Auxiliar contable',
+    'Javiera Ríos,javier.rios@ceibo.demo,Formación profesional,Auxiliar contable',
+  ].join('\n'),
+  product: [
+    'nombre,correo,cohorte,puesto',
+    'Camila Ortiz,camila.ortiz@hornero.demo,Usuarios nuevos,Usuaria de Hornero',
+    'Bruno Paz,bruno.paz@hornero,Usuarios nuevos,Usuario de Hornero',
+    'Rocío Luna,rocio.luna@hornero.demo,Usuarios premium,Usuaria de Hornero',
+    ',ana.vera@hornero.demo,Usuarios con más de 6 meses,Usuaria de Hornero',
+    'Javier Ríos,javier.rios@hornero.demo,Usuarios con más de 6 meses,Usuario de Hornero',
+    'Javiera Ríos,javier.rios@hornero.demo,Usuarios con más de 6 meses,Usuaria de Hornero',
+  ].join('\n'),
+};
 
 /** Splits one line, respecting quotes ("a, b" stays one cell). */
 function splitLine(line: string, separator: string): string[] {

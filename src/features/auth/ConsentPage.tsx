@@ -15,6 +15,7 @@ import { useDataStore } from "@/store/data-store";
 import { useCurrentUser } from "@/store/session-store";
 import { acceptPrivacyNotice, afterConsentPath, signOut } from "./auth-service";
 import { AuthLayout } from "./AuthLayout";
+import { ctx, useOrgKind } from '@/lib/org-context';
 
 interface NoticeStep {
   title: string;
@@ -33,6 +34,7 @@ export function ConsentPage() {
   const navigate = useNavigate();
   const user = useCurrentUser();
   const consents = useDataStore((s) => s.consents);
+  const kind = useOrgKind();
   const reduce = useShouldReduceMotion();
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(1);
@@ -50,8 +52,11 @@ export function ConsentPage() {
   }
 
   const audience = can(user, "wallet.use") ? "participant" : "staff";
+  // The participant reads who sees what in her context (5.5): her company, her institution or Hornero.
+  const context = audience === "participant" ? ctx(kind) : undefined;
   const steps = t(`consent.steps.${audience}`, {
     returnObjects: true,
+    context,
   }) as NoticeStep[];
   const step = steps[index]!;
   const last = index === steps.length - 1;
@@ -113,7 +118,7 @@ export function ConsentPage() {
           {t("consent.title")}
         </h1>
         <p className="text-body-large text-on-surface">
-          {t(`consent.summary.${audience}`)}
+          {t(`consent.summary.${audience}`, { context })}
         </p>
       </div>
 

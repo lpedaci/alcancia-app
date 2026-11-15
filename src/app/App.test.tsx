@@ -39,7 +39,7 @@ describe('G0 landing (F0)', () => {
   it('computes the figures from the demo data', () => {
     renderAt('/');
     const figures = screen.getByRole('region', { name: es.landing.figures.title });
-    expect(within(figures).getByText(es.landing.figures.people).nextElementSibling).toHaveTextContent('80');
+    expect(within(figures).getByText(es.landing.figures.people).nextElementSibling).toHaveTextContent('196');
     expect(within(figures).getByText(es.landing.figures.missions).nextElementSibling).toHaveTextContent('13');
     expect(within(figures).getByText(es.landing.figures.tools).nextElementSibling).toHaveTextContent('12');
   });

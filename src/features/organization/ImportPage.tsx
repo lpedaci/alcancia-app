@@ -11,9 +11,9 @@ import { TextArea } from '@/components/ui/TextArea';
 import { TextField } from '@/components/ui/TextField';
 import { toast } from '@/components/ui/toast-store';
 import { cn } from '@/lib/utils';
-import { useDataStore } from '@/store/data-store';
+import { useDataStore, useOrgData } from '@/store/data-store';
 import { AdminShell } from './AdminShell';
-import { CSV_EXAMPLE, type CsvRow, parseCsv, type RowError, toPeople, validateRows } from './csv-import';
+import { CSV_EXAMPLES, type CsvRow, parseCsv, type RowError, toPeople, validateRows } from './csv-import';
 
 /**
  * O3, bulk upload by CSV (CLAUDE.md F8, D-196): three steps on one page. 1) paste or upload the
@@ -34,9 +34,8 @@ const FIELD_OF: Record<RowError, keyof CsvRow> = {
 export function ImportPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const people = useDataStore((s) => s.people);
-  const cohorts = useDataStore((s) => s.cohorts);
-  const orgId = useDataStore((s) => s.organization.id);
+  const { people, cohorts, organization } = useOrgData();
+  const orgId = organization.id;
   const addPeople = useDataStore((s) => s.addPeople);
   const [text, setText] = useState('');
   const [rows, setRows] = useState<CsvRow[] | null>(null);
@@ -111,7 +110,7 @@ export function ImportPage() {
               <li>{t('org.import.format2')}</li>
               <li>{t('org.import.format3')}</li>
             </ul>
-            <Button variant="text" size="xs" leadingIcon="description" className="self-start" onClick={() => setText(CSV_EXAMPLE)}>
+            <Button variant="text" size="xs" leadingIcon="description" className="self-start" onClick={() => setText(CSV_EXAMPLES[organization.kind])}>
               {t('org.import.useExample')}
             </Button>
           </div>

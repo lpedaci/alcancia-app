@@ -13,7 +13,9 @@ import { useDataStore } from '@/store/data-store';
 import { clearLocal } from '@/store/local-store';
 import { clearWallet } from '@/store/wallet-store';
 import { type LogoutReason, useSessionStore } from '@/store/session-store';
-import type { AccessRequest, AccessRequestReason, AuthMethod, Person, Role, Session } from '@/types/domain';
+import type { AccessRequest, AccessRequestReason, AuthMethod, OrganizationKind, Person, Role, Session } from '@/types/domain';
+import { HORNERO_HOME } from '@/features/partner/partner-mode';
+import { organizationOf } from '@/store/data-store';
 import { clearReturnState } from '@/lib/use-return-state';
 
 export const DEMO_PASSWORD = 'Demo.2026!';
@@ -23,8 +25,9 @@ export const DEMO_MFA_CODE = '246810';
 export const MFA_REQUIRED_ROLES: Role[] = ['ld_admin', 'sponsor'];
 
 /**
- * The five demo people (CLAUDE.md 4.2), in the order of "Ver como". Mariana and Diego open in their
- * demo states (level 6 and level 2, CLAUDE.md 7): choosing them is how the example states load.
+ * The demo people of the three contexts (CLAUDE.md 4.2 and 5.5), in the order of "Ver como". Mariana
+ * and Diego open in their demo states (level 6 and level 2, CLAUDE.md 7): choosing them is how the
+ * example states load. Lucía and Joaquín start their account in the demo itself.
  */
 export const DEMO_KEYS = {
   mariana: 'p-mariana',
@@ -32,9 +35,26 @@ export const DEMO_KEYS = {
   kevin: 'p-kevin',
   paula: 'p-paula',
   ricardo: 'p-ricardo',
+  lucia: 'p-lucia',
+  martin: 'p-martin',
+  silvia: 'p-silvia',
+  hector: 'p-hector',
+  joaquin: 'p-joaquin',
+  sofia: 'p-sofia',
+  nicolas: 'p-nicolas',
 } as const;
 export type DemoKey = keyof typeof DEMO_KEYS;
 export const DEMO_PERSON_IDS: string[] = Object.values(DEMO_KEYS);
+
+/** "Ver como" goes context first, then person (5.5): the demo people of each context. */
+export const DEMO_CONTEXTS: { kind: OrganizationKind; personIds: string[] }[] = [
+  { kind: 'employer', personIds: ['p-mariana', 'p-diego', 'p-kevin', 'p-paula', 'p-ricardo'] },
+  { kind: 'education', personIds: ['p-lucia', 'p-martin', 'p-silvia', 'p-hector'] },
+  { kind: 'product', personIds: ['p-joaquin', 'p-sofia', 'p-nicolas'] },
+];
+
+export const demoKeyOf = (personId: string): DemoKey | undefined =>
+  (Object.keys(DEMO_KEYS) as DemoKey[]).find((k) => DEMO_KEYS[k] === personId);
 
 export function personIdForDemoKey(key: string | null): string | undefined {
   return key && key in DEMO_KEYS ? DEMO_KEYS[key as DemoKey] : undefined;
@@ -125,6 +145,15 @@ export function hasConsent(personId: string): boolean {
   return data().consents.some((c) => c.personId === personId && c.version === PRIVACY_NOTICE_VERSION);
 }
 
+/**
+ * Home of a person: a Hornero user starts inside Hornero's app, where Alcancía lives for them
+ * (5.5, D-75); everybody else, in the home of their role.
+ */
+function homeOf(person: Person, session: Session | null): string {
+  const kind = organizationOf(data(), person.orgId).kind;
+  return kind === 'product' && person.role === 'participant' ? HORNERO_HOME : homePath(session);
+}
+
 /** Opens the session and returns where to go: the notice first (G5), then the requested route or home. */
 function openSession(person: Person, method: AuthMethod, via: Session['via']): string {
   const now = new Date().toISOString();
@@ -133,7 +162,7 @@ function openSession(person: Person, method: AuthMethod, via: Session['via']): s
   if (!hasConsent(person.id)) return '/consent';
   const returnTo = session().returnTo;
   session().setReturnTo(null);
-  return returnTo ?? homePath(next);
+  return returnTo ?? homeOf(person, next);
 }
 
 /** After accepting the notice: the route requested before signing in, or home. */
@@ -141,7 +170,9 @@ export function afterConsentPath(): string {
   const current = session().session;
   const returnTo = session().returnTo;
   session().setReturnTo(null);
-  return returnTo && returnTo !== '/consent' ? returnTo : homePath(current);
+  const person = current && findPerson(current.personId);
+  if (returnTo && returnTo !== '/consent') return returnTo;
+  return person ? homeOf(person, current) : homePath(current);
 }
 
 export function acceptPrivacyNotice(personId: string) {

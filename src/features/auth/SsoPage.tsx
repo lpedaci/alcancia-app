@@ -4,7 +4,10 @@ import { Link, useNavigate, useSearchParams } from 'react-router';
 import { Button } from '@/components/ui/Button';
 import { Icon } from '@/components/ui/Icon';
 import { Avatar } from '@/components/ui/Avatar';
-import { DEMO_PERSON_IDS, findPerson, type SignInStep, signInWithSso } from './auth-service';
+import { DEMO_CONTEXTS, DEMO_PERSON_IDS, findPerson, type SignInStep, signInWithSso } from './auth-service';
+
+/** Without a preselected journey, the picker shows the work accounts of Andina ("Usa tu cuenta de trabajo"). */
+const PICKER_IDS = DEMO_CONTEXTS[0]!.personIds;
 import { cn } from '@/lib/utils';
 import { AuthLayout } from './AuthLayout';
 import { SsoSimulation } from './SsoSimulation';
@@ -25,7 +28,7 @@ export function SsoPage() {
   const accountParam = params.get('account') ?? '';
   const preselected = DEMO_PERSON_IDS.includes(accountParam) ? findPerson(accountParam) : undefined;
   const demo = params.get('demo') === '1' && Boolean(preselected);
-  const [accountId, setAccountId] = useState(preselected?.id ?? DEMO_PERSON_IDS[0]!);
+  const [accountId, setAccountId] = useState(preselected?.id ?? PICKER_IDS[0]!);
 
   const go = (result: SignInStep) => {
     if (result.status === 'locked') navigate('/login', { replace: true, state: { locked: true } });
@@ -65,7 +68,7 @@ export function SsoPage() {
           <fieldset className="flex min-w-0 flex-col gap-2" aria-describedby="sso-account-help">
             <legend className="mb-2 text-label-large text-on-surface">{t('auth.sso.accountLegend')}</legend>
             <div className="grid grid-fill-3 gap-2">
-              {DEMO_PERSON_IDS.map((personId) => {
+              {PICKER_IDS.map((personId) => {
                 const person = findPerson(personId);
                 if (!person) return null;
                 const checked = accountId === personId;

@@ -15,7 +15,7 @@ import { TextField } from '@/components/ui/TextField';
 import { toast } from '@/components/ui/toast-store';
 import MODULES from '@/data/modules.json';
 import { cn } from '@/lib/utils';
-import { useDataStore } from '@/store/data-store';
+import { useDataStore, useOrgData } from '@/store/data-store';
 import type { Program } from '@/types/domain';
 import { AdminShell } from './AdminShell';
 
@@ -52,9 +52,8 @@ interface Form {
 
 export function ProgramPage() {
   const { t } = useTranslation();
-  const program = useDataStore((s) => s.program);
-  const threshold = useDataStore((s) => s.organization.privacyThreshold);
-  const cohorts = useDataStore((s) => s.cohorts);
+  const { program, organization, cohorts } = useOrgData();
+  const threshold = organization.privacyThreshold;
   const updateProgram = useDataStore((s) => s.updateProgram);
   const setCohortDueDates = useDataStore((s) => s.setCohortDueDates);
   const initial = (): Form => ({

@@ -17,10 +17,11 @@ import { TextField } from '@/components/ui/TextField';
 import { toast } from '@/components/ui/toast-store';
 import { formatDate } from '@/lib/dates';
 import { cn } from '@/lib/utils';
-import { useDataStore } from '@/store/data-store';
-import type { Area, Cohort, Person } from '@/types/domain';
+import { useDataStore, useOrgData } from '@/store/data-store';
+import type { Area, Cohort, Person, OrganizationKind } from '@/types/domain';
 import { AdminShell } from './AdminShell';
 import { toPeople, validateRows } from './csv-import';
+import { ctx } from '@/lib/org-context';
 
 /**
  * O2, people and cohorts (CLAUDE.md F8, D-195): the list of participants with filters by cohort,
@@ -36,8 +37,7 @@ const STATUS_ICON = { active: 'check_circle', invited: 'mail', inactive: 'pause'
 
 export function PeoplePage() {
   const { t } = useTranslation();
-  const people = useDataStore((s) => s.people);
-  const cohorts = useDataStore((s) => s.cohorts);
+  const { people, cohorts } = useOrgData();
   // Filters live in the URL (D-238), so a link like "Ver personas" opens the list already filtered
   const [params, setParams] = useSearchParams();
   const statusParam = params.get('status');
@@ -153,7 +153,7 @@ export function PeoplePage() {
                   label={t('tutor.home.cohortData')}
                   items={[
                     { icon: 'person', label: t('tutor.home.people', { count: size }) },
-                    { icon: 'school', label: t('org.cohorts.tutor', { name: tutor?.name ?? '' }) },
+                    { icon: 'school', label: tutor ? t('org.cohorts.tutor', { name: tutor.name }) : t('org.cohorts.noTutor') },
                     ...(c.dueDate ? [{ icon: 'event_available' as const, label: t('tutor.home.due', { date: formatDate(c.dueDate) }), dateTime: c.dueDate }] : []),
                   ]}
                 />
@@ -319,9 +319,8 @@ export function PeoplePage() {
 
 function AddPersonDialog({ onClose }: { onClose: () => void }) {
   const { t } = useTranslation();
-  const people = useDataStore((s) => s.people);
-  const cohorts = useDataStore((s) => s.cohorts);
-  const orgId = useDataStore((s) => s.organization.id);
+  const { people, cohorts, organization } = useOrgData();
+  const orgId = organization.id;
   const addPeople = useDataStore((s) => s.addPeople);
   const [row, setRow] = useState({ name: '', email: '', cohort: cohorts[0]?.id ?? '', job: '' });
   const [tried, setTried] = useState(false);
@@ -388,18 +387,22 @@ function AddPersonDialog({ onClose }: { onClose: () => void }) {
   );
 }
 
-const AREAS: Area[] = ['operations', 'administration', 'technology', 'commercial'];
+/** Areas of each context (5.5): company areas, degrees, or user segments. */
+const AREAS: Record<OrganizationKind, Area[]> = {
+  employer: ['operations', 'administration', 'technology', 'commercial'],
+  education: ['logistics', 'business_admin', 'accounting'],
+  product: ['new_users', 'regular_users'],
+};
 
 function CreateCohortDialog({ onClose }: { onClose: () => void }) {
   const { t } = useTranslation();
-  const people = useDataStore((s) => s.people);
-  const program = useDataStore((s) => s.program);
-  const orgId = useDataStore((s) => s.organization.id);
-  const cohorts = useDataStore((s) => s.cohorts);
+  const { people, program, organization, cohorts } = useOrgData();
+  const orgId = organization.id;
   const addCohort = useDataStore((s) => s.addCohort);
   const tutors = people.filter((p) => p.role === 'tutor');
+  const kind = organization.kind;
   const [name, setName] = useState('');
-  const [area, setArea] = useState<Area>('operations');
+  const [area, setArea] = useState<Area>(AREAS[kind][0]!);
   const [tutorId, setTutorId] = useState(tutors[0]?.id ?? '');
   const [due, setDue] = useState('');
   const [tried, setTried] = useState(false);
@@ -417,7 +420,7 @@ function CreateCohortDialog({ onClose }: { onClose: () => void }) {
         .replace(/[^a-z0-9]+/g, '-')}-${cohorts.length + 1}`,
       orgId,
       name: name.trim(),
-      tutorId,
+      ...(tutorId ? { tutorId } : {}),
       area,
       moduleIds: program.moduleIds,
       startDate: DEMO_TODAY,
@@ -448,11 +451,12 @@ function CreateCohortDialog({ onClose }: { onClose: () => void }) {
           <TextField label={t('org.cohorts.name')} helperText={t('org.cohorts.nameHelp')} value={name} onChange={(e) => setName(e.target.value)} error={nameError} autoComplete="off" />
           <Select
             label={t('org.cohorts.area')}
-            helperText={t('org.cohorts.areaHelp')}
+            helperText={t('org.cohorts.areaHelp', { context: ctx(kind) })}
             value={area}
             onChange={(e) => setArea(e.target.value as Area)}
-            options={AREAS.map((a) => ({ value: a, label: t(`org.areas.${a}`) }))}
+            options={AREAS[kind].map((a) => ({ value: a, label: t(`org.areas.${a}`) }))}
           />
+          {tutors.length > 0 && (
           <Select
             label={t('org.cohorts.tutorLabel')}
             helperText={t('org.cohorts.tutorHelp')}
@@ -460,6 +464,7 @@ function CreateCohortDialog({ onClose }: { onClose: () => void }) {
             onChange={(e) => setTutorId(e.target.value)}
             options={tutors.map((p) => ({ value: p.id, label: p.name }))}
           />
+          )}
           <TextField
             type="date"
             label={t('org.cohorts.due')}
@@ -524,8 +529,7 @@ function PersonMenu({
 
 function EditPersonDialog({ person, onClose }: { person: Person; onClose: () => void }) {
   const { t } = useTranslation();
-  const people = useDataStore((s) => s.people);
-  const cohorts = useDataStore((s) => s.cohorts);
+  const { people, cohorts } = useOrgData();
   const updatePerson = useDataStore((s) => s.updatePerson);
   const [row, setRow] = useState({ name: person.name, email: person.email, cohort: person.cohortIds[0] ?? cohorts[0]?.id ?? '', job: person.jobOrProgram });
   const [tried, setTried] = useState(false);
@@ -574,8 +578,7 @@ function EditPersonDialog({ person, onClose }: { person: Person; onClose: () => 
 
 function EditCohortDialog({ cohort, onClose }: { cohort: Cohort; onClose: () => void }) {
   const { t } = useTranslation();
-  const people = useDataStore((s) => s.people);
-  const program = useDataStore((s) => s.program);
+  const { people, program } = useOrgData();
   const updateCohort = useDataStore((s) => s.updateCohort);
   const tutors = people.filter((p) => p.role === 'tutor');
   const [name, setName] = useState(cohort.name);
@@ -587,7 +590,7 @@ function EditCohortDialog({ cohort, onClose }: { cohort: Cohort; onClose: () => 
   const save = () => {
     setTried(true);
     if (name.trim().length < 3 || (program.mode === 'assigned' && (!due || due < DEMO_TODAY))) return;
-    updateCohort(cohort.id, { name: name.trim(), tutorId, dueDate: due || undefined });
+    updateCohort(cohort.id, { name: name.trim(), ...(tutorId ? { tutorId } : {}), dueDate: due || undefined });
     toast.success(t('org.cohorts.edited'));
     onClose();
   };
@@ -611,7 +614,9 @@ function EditCohortDialog({ cohort, onClose }: { cohort: Cohort; onClose: () => 
       >
         <div className="flex flex-col gap-4">
           <TextField label={t('org.cohorts.name')} helperText={t('org.cohorts.nameHelp')} value={name} onChange={(e) => setName(e.target.value)} error={nameError} autoComplete="off" />
-          <Select label={t('org.cohorts.tutorLabel')} helperText={t('org.cohorts.tutorHelp')} value={tutorId} onChange={(e) => setTutorId(e.target.value)} options={tutors.map((p) => ({ value: p.id, label: p.name }))} />
+          {tutors.length > 0 && (
+            <Select label={t('org.cohorts.tutorLabel')} helperText={t('org.cohorts.tutorHelp')} value={tutorId ?? ''} onChange={(e) => setTutorId(e.target.value)} options={tutors.map((p) => ({ value: p.id, label: p.name }))} />
+          )}
           <TextField
             type="date"
             label={t('org.cohorts.due')}

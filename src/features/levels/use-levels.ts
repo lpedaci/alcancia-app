@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from 'react';
 import levelsJson from '@/data/levels.json';
 import missionsJson from '@/data/wallet-missions.json';
-import { useDataStore } from '@/store/data-store';
+import { useDataStore, orgIdOfPerson, programOf } from '@/store/data-store';
 import { readLocal, writeLocal } from '@/store/local-store';
 import { useSessionStore } from '@/store/session-store';
 import { useWallet } from '@/store/wallet-store';
@@ -39,7 +39,7 @@ export const AREA_LEVEL: Record<string, string> = {
  */
 export function useLevels(personId: string) {
   const people = useDataStore((s) => s.people);
-  const program = useDataStore((s) => s.program);
+  const program = useDataStore((s) => programOf(s, orgIdOfPerson(s, personId)));
   const diagnostics = useDataStore((s) => s.diagnostics);
   const guideProgress = useDataStore((s) => s.guideProgress);
   const challengeAttempts = useDataStore((s) => s.challengeAttempts);

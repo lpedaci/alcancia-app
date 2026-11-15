@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import { seedData } from '@/store/data-store';
+import { seedOrgData } from '@/store/data-store';
 import { impactRows, toCsv } from '@/features/sponsor/impact-export';
 import { adoption, adoptionByCohort, behavior, learning, orgAlerts, participantsOf, reaction } from './org-data';
 
-const data = seedData();
+const data = seedOrgData();
 const label = (key: string, values?: Record<string, unknown>) => (values ? `${key}:${JSON.stringify(values)}` : key);
 
 describe('organization metrics (O1, D1, F7)', () => {

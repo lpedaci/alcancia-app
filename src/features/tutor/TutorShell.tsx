@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { StaffShell } from '@/components/layout/StaffShell';
-import { useDataStore } from '@/store/data-store';
+import { useOrgData } from '@/store/data-store';
 import { useCurrentUser } from '@/store/session-store';
 
 /**
@@ -11,8 +11,7 @@ import { useCurrentUser } from '@/store/session-store';
 export function TutorShell({ children }: { children: ReactNode }) {
   const { t } = useTranslation();
   const user = useCurrentUser();
-  const cohorts = useDataStore((s) => s.cohorts);
-  const questions = useDataStore((s) => s.tutorQuestions);
+  const { cohorts, tutorQuestions: questions } = useOrgData();
   const mine = new Set(cohorts.filter((c) => c.tutorId === user?.personId).map((c) => c.id));
   const unanswered = questions.filter((q) => !q.answer && mine.has(q.cohortId)).length;
 

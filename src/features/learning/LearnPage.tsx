@@ -12,7 +12,7 @@ import { WalletShell } from '@/features/wallet/WalletShell';
 import { NBSP } from '@/lib/money';
 import { duration, easing, useShouldReduceMotion } from '@/lib/motion';
 import { cn } from '@/lib/utils';
-import { useDataStore } from '@/store/data-store';
+import { useDataStore, useProgram } from '@/store/data-store';
 import { useCurrentUser } from '@/store/session-store';
 import { challengeById, guideOfModule, MODULES, moduleById } from './questions';
 import { MyQuestions, WeeklyChallenges } from './Tutoring';
@@ -46,7 +46,7 @@ export function LearnPage() {
   const guideProgress = allGuides.filter((g) => g.personId === personId);
   const attempts = allAttempts.filter((a) => a.personId === personId);
   const missionCompletions = allMissions.filter((m) => m.personId === personId);
-  const passing = useDataStore((s) => s.program.passingScore);
+  const passing = useProgram().passingScore;
   const reduce = useShouldReduceMotion();
   const [open, setOpen] = useState<Set<string>>(() => new Set(current ? [current.level.id] : []));
 

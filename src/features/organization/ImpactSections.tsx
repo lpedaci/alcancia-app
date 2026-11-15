@@ -8,6 +8,7 @@ import { StatusPill } from '@/components/ui/StatusPill';
 import { formatNumber, formatPercent } from '@/lib/money';
 import { cn } from '@/lib/utils';
 import { behavior, challengeResults, learning, type OrgMetricsData, reaction, weeklyDone } from './org-data';
+import { ctx, useOrgKind } from '@/lib/org-context';
 
 /**
  * Impact sections shared by the admin's panel (O1) and the sponsor's report (D1), D-195: Kirkpatrick
@@ -187,6 +188,8 @@ export function BehaviorSection({ data }: { data: OrgMetricsData }) {
   const { t } = useTranslation();
   const b = behavior(data);
   const w = weeklyDone(data);
+  // Weekly challenges come from a tutor: the product context has none (5.5).
+  const hasTutoring = data.organization.kind !== 'product';
   return (
     <section aria-labelledby="k3" className={card}>
       <Header level={3} icon="task_alt" id="k3" />
@@ -206,20 +209,23 @@ export function BehaviorSection({ data }: { data: OrgMetricsData }) {
           ))}
         </>
       )}
-      <div className="flex flex-wrap items-baseline justify-between gap-2 border-t border-outline-variant pt-4">
-        <span className="text-label-large text-on-surface">{t('org.k.l3.weekly')}</span>
-        <span className="text-title-medium text-on-surface tabular-nums">{w.status === 'ok' ? formatPercent(w.value, { decimals: 0 }) : t('org.insufficientShort')}</span>
-      </div>
+      {hasTutoring && (
+        <div className="flex flex-wrap items-baseline justify-between gap-2 border-t border-outline-variant pt-4">
+          <span className="text-label-large text-on-surface">{t('org.k.l3.weekly')}</span>
+          <span className="text-title-medium text-on-surface tabular-nums">{w.status === 'ok' ? formatPercent(w.value, { decimals: 0 }) : t('org.insufficientShort')}</span>
+        </div>
+      )}
     </section>
   );
 }
 
 export function ResultsSection() {
   const { t } = useTranslation();
+  const kind = useOrgKind();
   return (
     <section aria-labelledby="k4" className={cn(card, 'bg-surface-container')}>
       <Header level={4} icon="monitoring" id="k4" />
-      <p className="text-body-medium text-on-surface-variant">{t('org.k.l4.body')}</p>
+      <p className="text-body-medium text-on-surface-variant">{t('org.k.l4.body', { context: ctx(kind) })}</p>
       <StatusPill tone="neutral" icon="schedule" label={t('org.k.l4.future')} className="self-start" />
     </section>
   );

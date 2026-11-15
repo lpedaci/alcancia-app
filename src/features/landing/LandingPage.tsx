@@ -24,9 +24,10 @@ import { PieceGoal, PieceKpi, PieceLevelMap, PieceSimResult, SceneBudget, SceneC
 import { ResetDemoButton } from './ResetDemoButton';
 import { FictitiousBrandChip } from '@/features/partner/FictitiousBrandChip';
 import { HorneroMark } from '@/features/partner/HorneroMark';
-import { HORNERO_HOME } from '@/features/partner/partner-mode';
-import { useSessionStore } from '@/store/session-store';
 import { CountUp, Reveal } from './Reveal';
+import { SegmentedButton } from '@/components/ui/SegmentedButton';
+import { ctx } from '@/lib/org-context';
+import type { OrganizationKind } from '@/types/domain';
 
 /**
  * G0 · Landing (CLAUDE.md F0, 1.3), redesigned from the Payora and Finotive references
@@ -46,13 +47,35 @@ const NAV = [
   ['preguntas', 'nav.faq'],
 ] as const;
 
-const ROLES: { id: string; name: string; role: Role }[] = [
-  { id: 'mariana', name: 'Mariana López', role: 'participant' },
-  { id: 'diego', name: 'Diego Suárez', role: 'participant' },
-  { id: 'kevin', name: 'Kevin Giovanni', role: 'tutor' },
-  { id: 'paula', name: 'Paula Gómez', role: 'ld_admin' },
-  { id: 'ricardo', name: 'Ricardo Benítez', role: 'sponsor' },
-];
+/** Demo journeys of each context (5.5): first the context, then the person. */
+const ROLES: Record<OrganizationKind, { id: string; name: string; role: Role }[]> = {
+  employer: [
+    { id: 'mariana', name: 'Mariana López', role: 'participant' },
+    { id: 'diego', name: 'Diego Suárez', role: 'participant' },
+    { id: 'kevin', name: 'Kevin Giovanni', role: 'tutor' },
+    { id: 'paula', name: 'Paula Gómez', role: 'ld_admin' },
+    { id: 'ricardo', name: 'Ricardo Benítez', role: 'sponsor' },
+  ],
+  education: [
+    { id: 'lucia', name: 'Lucía Ferreyra', role: 'participant' },
+    { id: 'martin', name: 'Martín Quiroga', role: 'tutor' },
+    { id: 'silvia', name: 'Silvia Herrera', role: 'ld_admin' },
+    { id: 'hector', name: 'Héctor Ramos', role: 'sponsor' },
+  ],
+  product: [
+    { id: 'joaquin', name: 'Joaquín Paredes', role: 'participant' },
+    { id: 'sofia', name: 'Sofía Cabral', role: 'ld_admin' },
+    { id: 'nicolas', name: 'Nicolás Vidal', role: 'sponsor' },
+  ],
+};
+const CONTEXTS: OrganizationKind[] = ['employer', 'education', 'product'];
+
+/** Columns of each card on the 6-column grid, with no holes (2.4). */
+function roleSpan(kind: OrganizationKind, index: number): string {
+  if (kind === 'employer') return cn(index < 2 ? 'large:col-span-3' : 'large:col-span-2', index === 4 && 'md:col-span-2');
+  if (kind === 'education') return 'large:col-span-3';
+  return cn('large:col-span-2', index === 2 && 'md:col-span-2');
+}
 
 const STAGGER = 0.05;
 const container = 'mx-auto w-full max-w-[75rem] px-(--space-gutter)';
@@ -109,6 +132,8 @@ const footerLink = 'w-fit text-body-medium text-on-surface-variant underline-off
 export function LandingPage() {
   const { t } = useTranslation();
   const participants = seed.people.filter((p) => p.role === 'participant').length;
+  // "Un recorrido para cada rol" shows one context at a time; the context cards choose it too.
+  const [roleContext, setRoleContext] = useState<OrganizationKind>('employer');
   const phaseA = levels.filter((l) => l.phase === 'A');
   const missions = new Set(phaseA.flatMap((l) => l.missionIds)).size;
   const tools = new Set(phaseA.flatMap((l) => l.toolSimIds)).size;
@@ -306,36 +331,44 @@ export function LandingPage() {
           <ul className="grid grid-cols-1 gap-(--space-bento-gap) md:grid-cols-2 large:grid-cols-3">
             <ContextCard index={0} icon="apartment" contextKey="org" status="live">
               <Button asChild variant="tonal" className="mt-auto self-start" trailingIcon="arrow_downward">
-                <InPageLink to="recorridos">{t('landing.contexts.org.cta')}</InPageLink>
+                <InPageLink to="recorridos" onClick={() => setRoleContext('employer')}>{t('landing.contexts.org.cta')}</InPageLink>
               </Button>
             </ContextCard>
-            <ContextCard index={1} mark={<HorneroMark size={24} />} contextKey="product" status="preview" badge={<FictitiousBrandChip />}>
-              <Button asChild variant="tonal" className="mt-auto self-start" trailingIcon="arrow_forward">
-                {/* Signs in as Mariana and lands on Hornero's home, with no second sign-in inside it */}
-                <Link to="/login?demo=mariana" onClick={() => useSessionStore.getState().setReturnTo(HORNERO_HOME)}>
-                  {t('landing.contexts.product.cta')}
-                </Link>
+            <ContextCard index={1} icon="school" contextKey="edu" status="live">
+              <Button asChild variant="tonal" className="mt-auto self-start" trailingIcon="arrow_downward">
+                <InPageLink to="recorridos" onClick={() => setRoleContext('education')}>{t('landing.contexts.edu.cta')}</InPageLink>
               </Button>
             </ContextCard>
-            <ContextCard index={2} icon="school" contextKey="edu" status="soon" className="md:col-span-2 large:col-span-1" />
+            <ContextCard index={2} mark={<HorneroMark size={24} />} contextKey="product" status="live" badge={<FictitiousBrandChip />} className="md:col-span-2 large:col-span-1">
+              <Button asChild variant="tonal" className="mt-auto self-start" trailingIcon="arrow_downward">
+                <InPageLink to="recorridos" onClick={() => setRoleContext('product')}>{t('landing.contexts.product.cta')}</InPageLink>
+              </Button>
+            </ContextCard>
           </ul>
         </Section>
 
         {/* 6 · One journey per role */}
         <Section id="recorridos" tone="surface">
-          <SectionTitle id="recorridos" eyebrow={t('landing.roles.eyebrow')} title={t('landing.roles.title')} intro={t('landing.roles.intro')} />
-          {/* No holes (2.4): the two participants share the first row and the other three roles the
-              second on desktop; on tablets the last card takes the full row. */}
-          <ul className="grid grid-cols-1 gap-(--space-bento-gap) md:grid-cols-2 large:grid-cols-6">
-            {ROLES.map((r, index) => (
+          <SectionTitle id="recorridos" eyebrow={t('landing.roles.eyebrow')} title={t('landing.roles.title')} intro={t('landing.roles.intro', { context: ctx(roleContext) })} />
+          {/* Context first, then the person (5.5): the same selector as "Ver como" */}
+          <SegmentedButton
+            label={t('landing.roles.contextLabel')}
+            value={roleContext}
+            onValueChange={(v) => v && setRoleContext(v as OrganizationKind)}
+            options={CONTEXTS.map((k) => ({ value: k, label: t(`contexts.${k}`) }))}
+            className="mb-6 w-full md:w-auto"
+          />
+          {/* No holes (2.4): Andina, two participants on the first row and three roles on the second;
+              Ceibo, two by two; Hornero, three in a row. On tablets an odd last card takes the full row. */}
+          <ul key={roleContext} className="grid grid-cols-1 gap-(--space-bento-gap) md:grid-cols-2 large:grid-cols-6">
+            {ROLES[roleContext].map((r, index) => (
               <Reveal
                 as="li"
                 key={r.id}
                 delay={index * STAGGER}
                 className={cn(
                   'flex min-w-0 flex-col gap-3 overflow-hidden rounded-xl border border-outline-variant bg-surface-container-lowest p-(--space-card-padding) pt-0',
-                  index < 2 ? 'large:col-span-3' : 'large:col-span-2',
-                  index === ROLES.length - 1 && 'md:col-span-2 large:col-span-2',
+                  roleSpan(roleContext, index),
                 )}
               >
                 {/* Role color identifies the person (2.1.1), as a flat bar on top */}
@@ -352,7 +385,9 @@ export function LandingPage() {
                 <p className="text-body-medium text-on-surface">{t(`landing.roles.${r.id}.does`)}</p>
                 <p className="text-body-small text-on-surface-variant">{t(`landing.roles.${r.id}.explore`)}</p>
                 <Button asChild variant="tonal" className="mt-auto self-start" trailingIcon="arrow_forward">
-                  <Link to={`/login?demo=${r.id}`}>{t('landing.roles.cta', { name: r.name.split(' ')[0] })}</Link>
+                  <Link to={`/login?demo=${r.id}`}>
+                    {t(roleContext === 'product' && r.role === 'participant' ? 'landing.roles.ctaProduct' : 'landing.roles.cta', { name: r.name.split(' ')[0] })}
+                  </Link>
                 </Button>
               </Reveal>
             ))}

@@ -41,6 +41,7 @@ import {
 } from "./conocerte";
 import { MasteryButton } from "@/features/levels/MasteryButton";
 import { fuerteLine } from '@/features/companion/fuerte-lines';
+import { ctx, useOrgKind } from '@/lib/org-context';
 
 /**
  * P2, "Abrir tu cuenta" (level 0, flows.md 2.1): a guided welcome with Fuerte, the simulated sign-up
@@ -59,6 +60,7 @@ export function WelcomePage() {
   const person = findPerson(personId);
   const diagnostics = useDataStore((s) => s.diagnostics);
   const saveDiagnostic = useDataStore((s) => s.saveDiagnostic);
+  const orgKind = useOrgKind();
   const mine = diagnostics.filter((d) => d.personId === personId);
   const initial = mine.find((d) => d.kind === "initial");
   const latest = mine.find((d) => d.kind === "final") ?? initial;
@@ -187,7 +189,7 @@ export function WelcomePage() {
               })}
             </h1>
             <p className="text-body-large text-on-surface">
-              {t(`welcome.intro.${INTRO_SLIDES[slide]}.body`)}
+              {t(`welcome.intro.${INTRO_SLIDES[slide]}.body`, { context: ctx(orgKind) })}
             </p>
             <div className="flex flex-wrap gap-3">
               <Button

@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import { seedData } from '@/store/data-store';
+import { seedOrgData } from '@/store/data-store';
 import { alerts, cohortsOf, heatmap, itemStats, kpis, learningByLevel, membersOf } from './tutor-data';
 
 /** Tutor's panel (F6, F7, D-58, D-193): computed from the data, with the privacy threshold. */
-const data = seedData();
+const data = seedOrgData();
 const mine = cohortsOf(data, 'p-kevin');
 const commercial = data.cohorts.find((c) => c.id === 'cohort-commercial')!;
 

@@ -8,17 +8,21 @@ import modules from './modules.json';
 import scenarios from './scenarios.json';
 import seed from './seed.json';
 
-const participants = seed.people.filter((p) => p.role === 'participant');
+// Andina is the main demo organization (4.1); the other two contexts are checked below (5.5).
+const andinaPeople = seed.people.filter((p) => p.orgId === 'org-andina');
+const andinaCohorts = seed.cohorts.filter((c) => c.orgId === 'org-andina');
+const participants = andinaPeople.filter((p) => p.role === 'participant');
+const andinaProgram = seed.programs.find((p) => p.orgId === 'org-andina')!;
 
 describe('seed data (CLAUDE.md 7)', () => {
   it('has about 80 participants in 4 cohorts, one per area', () => {
     expect(participants).toHaveLength(80);
-    expect(seed.cohorts).toHaveLength(4);
-    expect(new Set(seed.cohorts.map((c) => c.area)).size).toBe(4);
+    expect(andinaCohorts).toHaveLength(4);
+    expect(new Set(andinaCohorts.map((c) => c.area)).size).toBe(4);
   });
 
   it('has at least one cohort below the privacy threshold', () => {
-    const sizes = seed.cohorts.map((c) => participants.filter((p) => p.cohortIds.includes(c.id)).length);
+    const sizes = andinaCohorts.map((c) => participants.filter((p) => p.cohortIds.includes(c.id)).length);
     expect(sizes.some((n) => n < PRIVACY_THRESHOLD_MIN)).toBe(true);
   });
 
@@ -31,8 +35,9 @@ describe('seed data (CLAUDE.md 7)', () => {
     expect(mobileShare('operations')).toBeGreaterThan(mobileShare('technology'));
   });
 
-  it('uses fictitious .demo emails only', () => {
-    expect(seed.people.every((p) => p.email.endsWith('@andina.demo'))).toBe(true);
+  it('uses fictitious .demo emails only, with the domain of each organization', () => {
+    const domain: Record<string, string> = { 'org-andina': '@andina.demo', 'org-ceibo': '@ceibo.demo', 'org-hornero': '@hornero.demo' };
+    expect(seed.people.every((p) => p.email.endsWith(domain[p.orgId]!))).toBe(true);
   });
 
   it('has the four demo roles with their personas', () => {
@@ -45,8 +50,8 @@ describe('seed data (CLAUDE.md 7)', () => {
   });
 
   it('dates are coherent with the demo date and the program start (D-60)', () => {
-    expect(seed.program.name).toBe('Bienestar financiero 2026');
-    expect(seed.program.startDate).toBe('2026-08-03');
+    expect(andinaProgram.name).toBe('Bienestar financiero 2026');
+    expect(andinaProgram.startDate).toBe('2026-08-03');
     const dates = [
       ...seed.guideProgress.map((g) => g.completedAt),
       ...seed.challengeAttempts.map((a) => a.finishedAt.slice(0, 10)),
@@ -70,6 +75,57 @@ describe('seed data (CLAUDE.md 7)', () => {
     const open = seed.weeklyChallenges.filter((w) => w.cohortId === 'cohort-operations' && w.dueDate > DEMO_TODAY);
     expect(open.length).toBeGreaterThan(0);
     expect(seed.weeklyReports.some((r) => r.personId === 'p-mariana' && open.some((w) => w.id === r.challengeId))).toBe(false);
+  });
+});
+
+describe('three contexts of use (5.5, D-74, D-83, D-84)', () => {
+  const byOrg = (orgId: string) => seed.people.filter((p) => p.orgId === orgId);
+
+  it('has one organization per context, each with its program and the threshold of 5', () => {
+    expect(seed.organizations.map((o) => [o.id, o.name, o.kind])).toEqual([
+      ['org-andina', 'Andina Servicios S.A.', 'employer'],
+      ['org-ceibo', 'Instituto Superior Ceibo', 'education'],
+      ['org-hornero', 'Hornero', 'product'],
+    ]);
+    expect(seed.organizations.every((o) => o.privacyThreshold >= PRIVACY_THRESHOLD_MIN)).toBe(true);
+    for (const o of seed.organizations) expect(seed.programs.filter((p) => p.orgId === o.id)).toHaveLength(1);
+  });
+
+  it('every record belongs to people and cohorts of one organization only', () => {
+    const orgOf = new Map(seed.people.map((p) => [p.id, p.orgId]));
+    const cohortOrg = new Map(seed.cohorts.map((c) => [c.id, c.orgId]));
+    for (const p of seed.people) for (const c of p.cohortIds) expect(cohortOrg.get(c)).toBe(p.orgId);
+    for (const q of seed.tutorQuestions) expect(cohortOrg.get(q.cohortId)).toBe(orgOf.get(q.personId));
+    for (const r of seed.weeklyReports) {
+      const challenge = seed.weeklyChallenges.find((w) => w.id === r.challengeId)!;
+      expect(cohortOrg.get(challenge.cohortId)).toBe(orgOf.get(r.personId));
+    }
+  });
+
+  it('Ceibo: students, a tutor, the academic coordination and the direction; adults only (D-83)', () => {
+    const people = byOrg('org-ceibo');
+    expect(people.find((p) => p.id === 'p-lucia')).toMatchObject({ role: 'participant', name: 'Lucía Ferreyra', status: 'active' });
+    expect(people.find((p) => p.id === 'p-martin')?.role).toBe('tutor');
+    expect(people.find((p) => p.id === 'p-silvia')).toMatchObject({ role: 'ld_admin', jobOrProgram: 'Coordinadora académica' });
+    expect(people.find((p) => p.id === 'p-hector')?.role).toBe('sponsor');
+    // Higher education and vocational training only: no school years, no minors.
+    expect(JSON.stringify(people) + JSON.stringify(seed.cohorts.filter((c) => c.orgId === 'org-ceibo'))).not.toMatch(/secundari|colegio|menor|escuela/i);
+    expect(people.filter((p) => p.role === 'participant').every((p) => /Tecnicatura|Auxiliar contable/.test(p.jobOrProgram))).toBe(true);
+  });
+
+  it('Hornero: users and the product team, with no tutor and no cohort tutoring (5.5)', () => {
+    const people = byOrg('org-hornero');
+    expect(people.some((p) => p.role === 'tutor')).toBe(false);
+    expect(seed.cohorts.filter((c) => c.orgId === 'org-hornero').every((c) => !('tutorId' in c))).toBe(true);
+    expect(seed.weeklyChallenges.some((w) => w.cohortId.startsWith('segment-hornero'))).toBe(false);
+    expect(people.find((p) => p.id === 'p-joaquin')).toMatchObject({ role: 'participant', status: 'active' });
+  });
+
+  it('the demo people of the new contexts start their account in the demo: no learning data yet', () => {
+    for (const id of ['p-lucia', 'p-joaquin']) {
+      expect(seed.diagnostics.some((d) => d.personId === id)).toBe(false);
+      expect(seed.levelLearning.some((l) => l.personId === id)).toBe(false);
+    }
   });
 });
 

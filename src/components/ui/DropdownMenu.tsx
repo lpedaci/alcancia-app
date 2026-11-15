@@ -103,14 +103,17 @@ export function DropdownMenuRadioItem({
   icon,
   children,
   description,
+  keepOpen,
 }: {
   value: string;
   icon?: IconName;
   children: ReactNode;
   description?: string;
+  /** Keeps the menu open after choosing (a first step, like the context in "Ver como"). */
+  keepOpen?: boolean;
 }) {
   return (
-    <Menu.RadioItem value={value} className={cn(itemClass, 'data-[state=checked]:text-primary')}>
+    <Menu.RadioItem value={value} onSelect={keepOpen ? (e) => e.preventDefault() : undefined} className={cn(itemClass, 'data-[state=checked]:text-primary')}>
       {icon && <Icon name={icon} size={20} className="text-on-surface-variant" />}
       <span className="flex min-w-0 flex-1 flex-col py-1">
         <span className="truncate">{children}</span>

@@ -113,7 +113,7 @@ There are nine assessment types, each with feedback per option, including a **ca
 
 ## Three contexts and the integrated mode
 
-The same wallet works for **teams, classrooms and products**: an organization offers it to its people (Andina Servicios S.A. in the demo), a higher-education institution to its students aged 18 or over (Instituto Superior Ceibo, coming soon), or a finance app integrates it for its users. The wallet, levels, missions and privacy stay the same.
+The same wallet works for **teams, classrooms and products**: an organization offers it to its people (Andina Servicios S.A. in the demo), a higher-education institution to its students aged 18 or over (Instituto Superior Ceibo), or a finance app integrates it for its users (Hornero). The wallet, levels, missions and privacy stay the same; role names, how people come in and which panels exist change. In the demo, "View as" asks for the context first and then the person, and each panel only sees its own organization's data.
 
 The **integrated mode** is shown with **Hornero**, a fictitious wallet made for the demo, with its own brand and the label "Fictitious demo brand" (it does not refer to any real brand). Hornero shows the person's savings through its brand idea: a nest that grows little by little and a nest that holds. Alcancía opens inside it with no second sign-in, and Hornero stays in the menu to go back. The partner only gets progress notices, never amounts.
 

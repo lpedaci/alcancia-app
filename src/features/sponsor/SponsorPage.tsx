@@ -12,9 +12,10 @@ import { adoption, behavior, learning, reaction } from '@/features/organization/
 import { formatDate } from '@/lib/dates';
 import { formatNumber, formatPercent } from '@/lib/money';
 import { cn } from '@/lib/utils';
-import { useDataStore } from '@/store/data-store';
+import { useOrgData } from '@/store/data-store';
 import { useCurrentUser } from '@/store/session-store';
 import { impactRows, toCsv } from './impact-export';
+import { ctx, useOrgKind } from '@/lib/org-context';
 
 /**
  * D1, the sponsor's impact report (CLAUDE.md F7, D-198): a read-only summary of the admin's panel
@@ -23,8 +24,9 @@ import { impactRows, toCsv } from './impact-export';
  */
 export function SponsorPage() {
   const { t } = useTranslation();
+  const kind = useOrgKind();
   const user = useCurrentUser();
-  const data = useDataStore();
+  const data = useOrgData();
   const person = user ? findPerson(user.personId) : undefined;
   if (!person) return null;
   const a = adoption(data);
@@ -64,7 +66,7 @@ export function SponsorPage() {
             {t('staff.hello')} <span className="text-primary">{person.name.split(' ')[0]}</span>
           </h1>
           <p className="flex flex-wrap items-center gap-2">
-            <span className={cn('inline-flex items-center rounded-full px-3 py-1 text-label-medium', ROLE_ACCENT.sponsor.chip)}>{t('roles.sponsor')}</span>
+            <span className={cn('inline-flex items-center rounded-full px-3 py-1 text-label-medium', ROLE_ACCENT.sponsor.chip)}>{t('roles.sponsor', { context: ctx(kind) })}</span>
             <span className="text-body-medium text-on-surface-variant">{t('sponsor.subtitle')}</span>
           </p>
         </div>
@@ -78,7 +80,7 @@ export function SponsorPage() {
         </div>
       </header>
 
-      <p className="text-body-large text-on-surface">{t('sponsor.intro')}</p>
+      <p className="text-body-large text-on-surface">{t('sponsor.intro', { context: ctx(kind) })}</p>
 
       <BentoGrid>
         <KpiRow minCardWidth="9rem">

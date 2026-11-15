@@ -158,7 +158,46 @@
         "chip": "Sponsor",
         "does": "Reads the program impact in aggregated data.",
         "explore": "Report with reaction, learning and behavior (Kirkpatrick 1 to 3)."
-      }
+      },
+      "intro_education": "Each journey signs in with a fictitious institutional account of Instituto Superior Ceibo, with people aged 18 or older.",
+      "intro_product": "Users come in from Hornero's app, with no second sign-in. The product team sees aggregated figures only.",
+      "contextLabel": "Choose the context",
+      "lucia": {
+        "chip": "Student",
+        "does": "Studies Logistics and opens her practice account on her phone.",
+        "explore": "Account opening, \"Get to know you\" and the first level, as someone just starting."
+      },
+      "martin": {
+        "chip": "Tutoring",
+        "does": "Supports the three cohorts of the institute.",
+        "explore": "Learning progress by cohort, weekly challenges and questions, with no amounts."
+      },
+      "silvia": {
+        "chip": "Academic coordination",
+        "does": "Sets up the program, loads students and builds cohorts by degree.",
+        "explore": "Adoption panel with the privacy threshold, people, CSV upload and settings."
+      },
+      "hector": {
+        "chip": "Direction",
+        "does": "Sees the impact of the program across the institution.",
+        "explore": "Aggregated report with Kirkpatrick levels 1 to 3."
+      },
+      "joaquin": {
+        "chip": "Hornero user",
+        "does": "Uses Hornero and learns with Alcancía inside the app, with no tutoring.",
+        "explore": "The integrated mode: Hornero opens Alcancía with no second sign-in."
+      },
+      "sofia": {
+        "chip": "Product team",
+        "does": "Leads Hornero's product and follows Alcancía's adoption.",
+        "explore": "Adoption panel by user segment, always aggregated."
+      },
+      "nicolas": {
+        "chip": "Product team · impact",
+        "does": "Analyzes how much users learn and what they apply.",
+        "explore": "Aggregated impact report, with no data about any person."
+      },
+      "ctaProduct": "Open Hornero as {{name}}"
     },
     "simulator": {
       "eyebrow": "Try a simulator without signing in",
@@ -170,8 +209,8 @@
       "levels": "wallet levels",
       "missions": "practice missions",
       "tools": "tools",
-      "people": "people in the demo company",
-      "intro": "Computed from the fictitious data of Andina Servicios S.A."
+      "people": "participants across the three demo contexts",
+      "intro": "Calculated from the fictitious data of the three demo contexts."
     },
     "steps": {
       "eyebrow": "Explore the demo in three steps",
@@ -298,7 +337,7 @@
     "contexts": {
       "eyebrow": "Three contexts, the same wallet",
       "title": "For teams, classrooms and products",
-      "intro": "The wallet, the levels, the missions and privacy stay the same. What changes is who offers it, how people sign in and which panels exist.",
+      "intro": "The wallet, levels, missions and privacy are the same. What changes is who offers it, how people come in, what the roles are called and which panels exist.",
       "status": {
         "live": "In the demo",
         "preview": "Preview",
@@ -308,18 +347,19 @@
         "label": "Organization",
         "name": "Andina Servicios S.A. (fictitious)",
         "body": "A company offers Alcancía to its people as a benefit and as training, with tutoring, an L&D panel and an impact report.",
-        "cta": "See the journeys"
+        "cta": "See its journeys"
       },
       "product": {
         "label": "Existing product",
         "name": "Hornero",
-        "body": "A wallet integrates Alcancía for its users: it opens inside its app with no second sign-in, and the partner only gets progress notices, never amounts.",
-        "cta": "View inside Hornero"
+        "body": "A wallet builds Alcancía in for its users: it opens inside its app, with no other sign-in or tutoring, and the product team sees aggregated figures only, never amounts.",
+        "cta": "See its journeys"
       },
       "edu": {
         "label": "Educational institution",
         "name": "Instituto Superior Ceibo (fictitious)",
-        "body": "Higher and vocational education, only with people over 18. An example scholarship or first income takes the place of the practice salary."
+        "body": "Higher education and vocational training, only with people aged 18 or older: students, tutoring, academic coordination and direction, with the same privacy.",
+        "cta": "See its journeys"
       }
     }
   },
@@ -478,5 +518,16 @@
       "inflation-yearly": "Inflation, last 12 months"
     },
     "investIntro": "Stock and CEDEAR prices in Invest are examples: BYMA requires a license to show them. The exchange rate is real."
+  },
+  "contexts": {
+    "label": "Context",
+    "employer": "Organization",
+    "education": "Educational institution",
+    "product": "Existing product",
+    "orgs": {
+      "employer": "Andina Servicios S.A.",
+      "education": "Instituto Superior Ceibo",
+      "product": "Hornero"
+    }
   }
 }

@@ -17,6 +17,7 @@ import { useCurrentUser } from '@/store/session-store';
 import { TutorShell } from './TutorShell';
 import { pct, useTutorData } from './tutor-ui';
 import { alerts, type AlertKind, cohortsOf, kpis, membersOf, moduleOrder, moduleTitle } from './tutor-data';
+import { ctx, useOrgKind } from '@/lib/org-context';
 
 /**
  * T1, the tutor's home (CLAUDE.md F6, D-193): greeting with context, KPIs of her cohorts
@@ -29,6 +30,7 @@ const ALERT_ICON: Record<AlertKind, IconName> = { not_started: 'pending', due_so
 
 export function TutorHomePage() {
   const { t } = useTranslation();
+  const kind = useOrgKind();
   const user = useCurrentUser();
   const data = useTutorData();
   const person = user ? findPerson(user.personId) : undefined;
@@ -45,7 +47,7 @@ export function TutorHomePage() {
           label={t('staff.context')}
           items={[
             { icon: 'calendar_month', label: formatDate(DEMO_TODAY), dateTime: DEMO_TODAY },
-            { icon: 'school', label: t('staff.programName') },
+            { icon: 'school', label: data.program.name },
             { icon: 'groups', label: t('tutor.home.cohortsChip', { count: cohorts.length }) },
           ]}
         />
@@ -53,7 +55,7 @@ export function TutorHomePage() {
           {t('staff.hello')} <span className="text-primary">{person.name.split(' ')[0]}</span>
         </h1>
         <p className="flex flex-wrap items-center gap-2">
-          <span className={cn('inline-flex items-center rounded-full px-3 py-1 text-label-medium', ROLE_ACCENT.tutor.chip)}>{t('roles.tutor')}</span>
+          <span className={cn('inline-flex items-center rounded-full px-3 py-1 text-label-medium', ROLE_ACCENT.tutor.chip)}>{t('roles.tutor', { context: ctx(kind) })}</span>
           <span className="text-body-medium text-on-surface-variant">{t('tutor.home.subtitle', { count: k.people })}</span>
         </p>
       </header>

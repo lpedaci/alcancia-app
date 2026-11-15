@@ -14,11 +14,12 @@ import { findPerson } from '@/features/auth/auth-service';
 import { formatDate } from '@/lib/dates';
 import { formatPercent } from '@/lib/money';
 import { cn } from '@/lib/utils';
-import { useDataStore } from '@/store/data-store';
+import { useOrgData } from '@/store/data-store';
 import { useCurrentUser } from '@/store/session-store';
 import { AdminShell } from './AdminShell';
 import { BehaviorSection, LearningSection, ReactionSection, ResultsSection } from './ImpactSections';
 import { adoption, adoptionByCohort, type OrgAlertKind, orgAlerts, weeklyActivity } from './org-data';
+import { ctx, useOrgKind } from '@/lib/org-context';
 
 /**
  * O1, the program's tracking panel (CLAUDE.md F7, D-195): adoption (invited, active, Conocerte done,
@@ -35,8 +36,9 @@ const ALERT_ICON: Record<OrgAlertKind, IconName> = {
 
 export function AdminHomePage() {
   const { t } = useTranslation();
+  const kind = useOrgKind();
   const user = useCurrentUser();
-  const data = useDataStore();
+  const data = useOrgData();
   const person = user ? findPerson(user.personId) : undefined;
   if (!person) return null;
   const a = adoption(data);
@@ -66,7 +68,7 @@ export function AdminHomePage() {
           {t('staff.hello')} <span className="text-primary">{person.name.split(' ')[0]}</span>
         </h1>
         <p className="flex flex-wrap items-center gap-2">
-          <span className={cn('inline-flex items-center rounded-full px-3 py-1 text-label-medium', ROLE_ACCENT.ld_admin.chip)}>{t('roles.ld_admin')}</span>
+          <span className={cn('inline-flex items-center rounded-full px-3 py-1 text-label-medium', ROLE_ACCENT.ld_admin.chip)}>{t('roles.ld_admin', { context: ctx(kind) })}</span>
           <span className="text-body-medium text-on-surface-variant">
             {t('org.home.subtitle', {
               mode: t(`org.program.modes.${data.program.mode}`),

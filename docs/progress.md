@@ -73,3 +73,4 @@
 | 15/11/2026 | Ajuste de Lourdes | "Volver" en los desafíos y en el test de perfil de inversor (D-265) | Lourdes revisa |
 | 15/11/2026 | Ajuste de Lourdes | Guías y desafíos con la navegación de pasos del sistema de diseño; la guía recuerda la parte (D-266) | Lourdes revisa |
 | 15/11/2026 | Ajuste de Lourdes | Bajadas de página a todo el ancho (D-267) | Lourdes revisa |
+| 15/11/2026 | 23 · Contextos de uso | Tres organizaciones en el seed (Andina, Instituto Superior Ceibo con personas de 18 años o más, Hornero sin tutoría), cada pantalla con los datos de su organización, vocabulario y roles por contexto, "Ver como" con el contexto primero, selector de contexto en la landing y el usuario de Hornero entrando por la app del socio (D-268, D-269) | Lourdes revisa |

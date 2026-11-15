@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import levelsJson from '@/data/levels.json';
 import { buildDiego, buildMariana } from '@/features/wallet/engine/demo';
-import { seedData } from '@/store/data-store';
+import { seedOrgData } from '@/store/data-store';
 import type { LocalData } from '@/store/local-store';
 import type { LevelDef } from '@/types/domain';
 import { buildLevelContext } from './context';
@@ -12,7 +12,7 @@ const emptyLocal = (): LocalData => ({ scenarios: [], goals: [], habitAnswers: {
 
 function contextOf(personId: 'p-mariana' | 'p-diego', overrides: Partial<LevelContext> = {}, local = emptyLocal()) {
   const wallet = personId === 'p-mariana' ? buildMariana() : buildDiego();
-  return { ...buildLevelContext({ personId, data: seedData(), wallet, local, demoUnlockAll: false }), ...overrides };
+  return { ...buildLevelContext({ personId, data: seedOrgData(), wallet, local, demoUnlockAll: false }), ...overrides };
 }
 
 const statusOf = (ctx: LevelContext) => Object.fromEntries(evaluateLevels(levels, ctx).map((s) => [s.level.id, s.status]));

@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import { seedData } from '@/store/data-store';
+import { seedOrgData } from '@/store/data-store';
 import { CSV_EXAMPLE, findCohort, parseCsv, toPeople, validateRows } from './csv-import';
 
-const data = seedData();
+const data = seedOrgData();
 
 describe('CSV import (O3, F8)', () => {
   it('reads commas or semicolons, quotes and an optional header', () => {

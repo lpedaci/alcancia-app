@@ -151,7 +151,7 @@ Cada enlace entra a la demo con esa persona. El acceso con SSO y verificación e
 
 ## Tres contextos y el modo integrado
 
-La misma billetera sirve para **equipos, aulas y productos**: una organización la ofrece a su gente (Andina Servicios S.A., en la demo), una institución de nivel superior a sus estudiantes de 18 años o más (Instituto Superior Ceibo, próximamente) o una app financiera la integra para sus usuarios. La billetera, los niveles, las misiones y la privacidad no cambian.
+La misma billetera sirve para **equipos, aulas y productos**: una organización la ofrece a su gente (Andina Servicios S.A., en la demo), una institución de nivel superior a sus estudiantes de 18 años o más (Instituto Superior Ceibo) o una app financiera la integra para sus usuarios (Hornero). La billetera, los niveles, las misiones y la privacidad no cambian; cambian los nombres de los roles, cómo se entra y qué paneles existen. En la demo, "Ver como" pide primero el contexto y después la persona, y cada panel ve solo los datos de su organización.
 
 El **modo integrado** se ve con **Hornero**, una billetera ficticia creada para la demo, con marca propia y la etiqueta "Marca ficticia de demostración" (no refiere a ninguna marca real). Hornero muestra el ahorro de la persona con su concepto de marca: el nido que crece de a poco ("Tu nido creció $ X este mes") y el nido que aguanta ("Tu nido aguanta X meses de gastos"). Desde ahí se abre Alcancía, sin otro inicio de sesión, y Hornero queda en el menú para volver; en el modo propio de Alcancía, el mismo ítem dice "Ver dentro de Hornero". El socio solo recibe avisos de avance, nunca montos.
 
@@ -166,7 +166,7 @@ El **modo integrado** se ve con **Hornero**, una billetera ficticia creada para 
   </tr>
 </table>
 
-Pruébalo: <a href="https://lpedaci.github.io/alcancia-app/#/">desde la landing</a>, en la sección "Para equipos, aulas y productos", con "Ver dentro de Hornero".
+Pruébalo: <a href="https://lpedaci.github.io/alcancia-app/#/">desde la landing</a>, en "Un recorrido para cada rol", eligiendo el contexto: Andina, Ceibo (Lucía, estudiante; Martín, tutor; Silvia, coordinación académica; Héctor, dirección) o Hornero (Joaquín, usuario; Sofía y Nicolás, equipo de producto).
 
 ## Diseño UX/UI
 
@@ -404,8 +404,8 @@ La CI corre lint, tipos, tests unitarios, `npm audit` y las pruebas de producci�
 ## Estado y hoja de ruta
 
 - **Fase A, completa:** acceso simulado, la billetera con sus 8 niveles (0 a 7), 13 misiones, 16 módulos con su guía, 12 herramientas, la cuenta comitente de práctica y los paneles del tutor, el admin y el decisor.
-- **Ajuste de fase A, en curso:** tarjetas en el momento justo también en el modo libre, la guía que nace de la acción, consecuencias en la billetera, casos con decisiones en los desafíos y la investigación de valores reales del mercado.
-- **Fase B, próxima:** valores reales con fecha y fuente (tasas, UVA, CER, tipo de cambio, inflación), los tres contextos de uso, el modo integrado en un producto, repaso espaciado y recordatorios, meta colectiva por cohorte, las guías 2 y 3 de cada módulo, cripto, el escape room "Tu primer sueldo", certificados y el inglés completo.
+- **Ajuste de fase A, completo:** tarjetas en el momento justo también en el modo libre, la guía que nace de la acción, consecuencias en la billetera, casos con decisiones en los desafíos y la investigación de valores reales del mercado.
+- **Fase B, en curso:** hechos los valores reales con fecha y fuente del BCRA y el INDEC (paso 22) y los tres contextos de uso (paso 23). Siguen el registro de eventos del modo integrado, repaso espaciado y recordatorios, meta colectiva por cohorte, las guías 2 y 3 de cada módulo, cripto, el escape room "Tu primer sueldo", certificados y el inglés completo.
 - **Una posible fase C:** un backend con SSO real, roles en el servidor y datos cifrados, si el prototipo pasa a piloto. Sin fecha.
 
 ## Documentación

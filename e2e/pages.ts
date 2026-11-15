@@ -10,7 +10,7 @@ export interface CheckedPage {
   /** Hash route. */
   path: string;
   /** Demo person signed in before loading the page (simulated session, step 5). */
-  as?: 'p-mariana' | 'p-diego' | 'p-kevin' | 'p-paula' | 'p-ricardo';
+  as?: keyof typeof ROLES;
   /** Sign in without the accepted privacy notice (to check G5). */
   noConsent?: boolean;
   /** A sign-in waiting for the second step (to check G3). */
@@ -89,6 +89,16 @@ export const PAGES: CheckedPage[] = [
   { id: 'd1-sponsor', path: '/#/sponsor', as: 'p-ricardo' },
   { id: 'x1-hornero', path: '/#/app/hornero', as: 'p-mariana' },
   { id: 'x1-hornero-wallet', path: '/#/app', as: 'p-mariana', partner: 'hornero' },
+  // Contexts of use (5.5, step 23): Instituto Superior Ceibo and Hornero
+  { id: 'c1-ceibo-welcome-lucia', path: '/#/app/welcome', as: 'p-lucia' },
+  { id: 'c1-ceibo-tutor', path: '/#/tutor', as: 'p-martin' },
+  { id: 'c1-ceibo-admin', path: '/#/admin', as: 'p-silvia' },
+  { id: 'c1-ceibo-people', path: '/#/admin/people', as: 'p-silvia' },
+  { id: 'c1-ceibo-sponsor', path: '/#/sponsor', as: 'p-hector' },
+  { id: 'c2-hornero-joaquin', path: '/#/app/hornero', as: 'p-joaquin' },
+  { id: 'c2-hornero-admin', path: '/#/admin', as: 'p-sofia' },
+  { id: 'c2-hornero-people', path: '/#/admin/people', as: 'p-sofia' },
+  { id: 'c2-hornero-sponsor', path: '/#/sponsor', as: 'p-nicolas' },
   { id: 'g7-forbidden', path: '/#/admin', as: 'p-mariana' },
   { id: 'g7-not-found', path: '/#/no-existe' },
   { id: 'g8-design-system', path: '/#/design-system' },
@@ -104,6 +114,13 @@ const ROLES = {
   'p-kevin': 'tutor',
   'p-paula': 'ld_admin',
   'p-ricardo': 'sponsor',
+  'p-lucia': 'participant',
+  'p-martin': 'tutor',
+  'p-silvia': 'ld_admin',
+  'p-hector': 'sponsor',
+  'p-joaquin': 'participant',
+  'p-sofia': 'ld_admin',
+  'p-nicolas': 'sponsor',
 } as const;
 
 /**
@@ -126,7 +143,7 @@ export async function prepareSession(page: Page, target: CheckedPage) {
         'alcancia-session',
         JSON.stringify({ state: { session, pending, returnTo: null, authAttempts: {}, demoUnlockAll: false }, version: 1 }),
       );
-      localStorage.setItem('alcancia-data', JSON.stringify({ state: { consents }, version: 1 }));
+      localStorage.setItem('alcancia-data', JSON.stringify({ state: { consents }, version: 2 }));
       if (partner) sessionStorage.setItem('alcancia-partner', partner);
     },
     { session, pending, consents, partner: target.partner ?? null },

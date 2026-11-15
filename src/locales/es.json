@@ -158,7 +158,46 @@
         "chip": "Decisor",
         "does": "Lee el impacto del programa en datos agregados.",
         "explore": "Reporte con reacción, aprendizaje y conducta (Kirkpatrick 1 a 3)."
-      }
+      },
+      "intro_education": "Cada recorrido entra con una cuenta institucional ficticia del Instituto Superior Ceibo, con personas de 18 años o más.",
+      "intro_product": "Los usuarios entran desde la app de Hornero, sin un segundo inicio de sesión. El equipo de producto ve solo cifras agregadas.",
+      "contextLabel": "Elegir el contexto",
+      "lucia": {
+        "chip": "Estudiante",
+        "does": "Estudia la Tecnicatura en Logística y abre su cuenta de práctica desde el celular.",
+        "explore": "Apertura de la cuenta, \"Conocerte\" y el primer nivel, como alguien que recién empieza."
+      },
+      "martin": {
+        "chip": "Tutoría",
+        "does": "Acompaña a las tres cohortes del instituto.",
+        "explore": "Avance de aprendizaje por cohorte, desafíos semanales y consultas, sin montos."
+      },
+      "silvia": {
+        "chip": "Coordinación académica",
+        "does": "Configura el programa, carga estudiantes y arma las cohortes por carrera.",
+        "explore": "Panel de adopción con umbral de privacidad, personas, carga por CSV y configuración."
+      },
+      "hector": {
+        "chip": "Dirección",
+        "does": "Ve el impacto del programa en toda la institución.",
+        "explore": "Reporte agregado con los niveles 1 a 3 de Kirkpatrick."
+      },
+      "joaquin": {
+        "chip": "Usuario de Hornero",
+        "does": "Usa Hornero y aprende con Alcancía dentro de la app, sin tutoría.",
+        "explore": "El modo integrado: Hornero abre Alcancía sin un segundo inicio de sesión."
+      },
+      "sofia": {
+        "chip": "Equipo de producto",
+        "does": "Lidera el producto de Hornero y sigue la adopción de Alcancía.",
+        "explore": "Panel de adopción por segmento de usuarios, siempre agregado."
+      },
+      "nicolas": {
+        "chip": "Equipo de producto · impacto",
+        "does": "Analiza cuánto aprenden los usuarios y qué aplican.",
+        "explore": "Reporte de impacto agregado, sin datos de ninguna persona."
+      },
+      "ctaProduct": "Abrir Hornero como {{name}}"
     },
     "simulator": {
       "eyebrow": "Prueba un simulador sin iniciar sesión",
@@ -170,8 +209,8 @@
       "levels": "niveles de la billetera",
       "missions": "misiones prácticas",
       "tools": "herramientas",
-      "people": "personas en la empresa de demo",
-      "intro": "Calculadas desde los datos ficticios de Andina Servicios S.A."
+      "people": "personas participantes en los tres contextos de demo",
+      "intro": "Calculadas desde los datos ficticios de los tres contextos de demo."
     },
     "steps": {
       "eyebrow": "Recorre la demo en tres pasos",
@@ -298,7 +337,7 @@
     "contexts": {
       "eyebrow": "Tres contextos, la misma billetera",
       "title": "Para equipos, aulas y productos",
-      "intro": "La billetera, los niveles, las misiones y la privacidad son los mismos. Cambian quién la ofrece, cómo se entra y qué paneles existen.",
+      "intro": "La billetera, los niveles, las misiones y la privacidad son los mismos. Cambian quién la ofrece, cómo se entra, cómo se llaman los roles y qué paneles existen.",
       "status": {
         "live": "En la demo",
         "preview": "Vista previa",
@@ -308,18 +347,19 @@
         "label": "Organización",
         "name": "Andina Servicios S.A. (ficticia)",
         "body": "Una empresa ofrece Alcancía a su gente como beneficio y capacitación, con tutoría, panel de L&D y reporte de impacto.",
-        "cta": "Ver los recorridos"
+        "cta": "Ver sus recorridos"
       },
       "product": {
         "label": "Producto existente",
         "name": "Hornero",
-        "body": "Una billetera integra Alcancía para sus usuarios: se abre dentro de su app, sin otro inicio de sesión, y el socio solo recibe avisos de avance, nunca montos.",
-        "cta": "Ver dentro de Hornero"
+        "body": "Una billetera integra Alcancía para sus usuarios: se abre dentro de su app, sin otro inicio de sesión ni tutoría, y el equipo de producto solo ve cifras agregadas, nunca montos.",
+        "cta": "Ver sus recorridos"
       },
       "edu": {
         "label": "Institución educativa",
         "name": "Instituto Superior Ceibo (ficticio)",
-        "body": "Nivel superior y formación profesional, solo con personas mayores de 18 años. Una beca o un primer ingreso de ejemplo ocupa el lugar del sueldo de práctica."
+        "body": "Nivel superior y formación profesional, solo con personas mayores de 18 años: estudiantes, tutoría, coordinación académica y dirección, con la misma privacidad.",
+        "cta": "Ver sus recorridos"
       }
     }
   },
@@ -813,7 +853,13 @@
     "participant": "Participante",
     "tutor": "Tutoría",
     "ld_admin": "Admin de L&D y Beneficios",
-    "sponsor": "Decisor"
+    "sponsor": "Decisor",
+    "participant_education": "Estudiante",
+    "ld_admin_education": "Coordinación académica",
+    "sponsor_education": "Dirección",
+    "participant_product": "Usuario de Hornero",
+    "ld_admin_product": "Equipo de producto",
+    "sponsor_product": "Equipo de producto · impacto"
   },
   "auth": {
     "login": {
@@ -841,14 +887,20 @@
         "expired": "Tu sesión se cerró por inactividad. Vuelve a iniciar sesión para continuar.",
         "reset": "Restableciste la demo: volvieron los datos de ejemplo."
       },
-      "demoNotice": "Demo con datos ficticios. Los correos de las personas de demo terminan en @andina.demo y su contraseña es {{password}}"
+      "demoNotice": "Demo con datos ficticios. Los correos de las personas de demo terminan en @andina.demo y su contraseña es {{password}}",
+      "subtitle_education": "Usa tu cuenta institucional de Ceibo.",
+      "subtitle_product": "Usa tu cuenta del equipo de Hornero."
     },
     "showcase": {
       "eyebrow": "Bienestar financiero 2026",
       "body": "Dinero ficticio, decisiones reales. Tu empresa ve tu avance, nunca tus montos.",
       "titleStart": "La billetera donde",
       "titleKey": "se aprende finanzas",
-      "titleEnd": "usándola"
+      "titleEnd": "usándola",
+      "body_education": "Dinero ficticio, decisiones reales. Tu institución ve tu avance, nunca tus montos.",
+      "eyebrow_education": "Finanzas personales para empezar 2026",
+      "eyebrow_product": "Alcancía en Hornero",
+      "body_product": "Dinero ficticio, decisiones reales. Hornero solo ve cifras agregadas, nunca tus montos."
     },
     "methods": {
       "sso_microsoft": "Microsoft",
@@ -926,7 +978,9 @@
     "title": "Tu privacidad en Alcancía",
     "summary": {
       "participant": "Tu empresa ve tu avance en los módulos, nunca tus montos ni tus respuestas sobre hábitos.",
-      "staff": "Ves avance de aprendizaje, nunca el dinero de práctica ni los hábitos de nadie."
+      "staff": "Ves avance de aprendizaje, nunca el dinero de práctica ni los hábitos de nadie.",
+      "participant_education": "Tu institución ve tu avance en los módulos, nunca tus montos ni tus respuestas sobre hábitos.",
+      "participant_product": "Hornero ve solo cifras agregadas de aprendizaje, nunca tu avance personal, tus montos ni tus respuestas sobre hábitos."
     },
     "step": "Paso {{n}} de {{total}}",
     "version": "Aviso versión {{version}}",
@@ -978,6 +1032,64 @@
             "Si una sección de la billetera está bloqueada o desbloqueada para una persona."
           ]
         }
+      ],
+      "participant_education": [
+        {
+          "title": "Lo que ve tu institución",
+          "icon": "visibility",
+          "items": [
+            "Tu avance en los módulos: guías leídas, desafíos de nivel y misiones completadas.",
+            "Tus respuestas a las preguntas de conocimiento de \"Conocerte\", para medir cuánto aprendiste.",
+            "Si cumpliste un desafío semanal de tu tutor o tutora. Tu reflexión, no."
+          ]
+        },
+        {
+          "title": "Lo que nunca ve",
+          "icon": "visibility_off",
+          "items": [
+            "Tus montos: saldo, movimientos, apartados, metas y lo que cargues en las herramientas.",
+            "Tus respuestas sobre hábitos de \"Conocerte\".",
+            "Qué secciones de tu billetera están bloqueadas o desbloqueadas."
+          ]
+        },
+        {
+          "title": "Dónde quedan tus datos",
+          "icon": "lock",
+          "items": [
+            "Tu dinero de práctica y tus respuestas sobre hábitos quedan solo en este navegador.",
+            "Los reportes muestran grupos de 5 personas o más, para no identificar a nadie.",
+            "Puedes empezar de cero cuando quieras desde tu perfil."
+          ]
+        }
+      ],
+      "participant_product": [
+        {
+          "title": "Lo que ve Hornero",
+          "icon": "visibility",
+          "items": [
+            "Cifras agregadas de grupos de 5 personas o más: cuántas personas leen guías, aprueban desafíos y completan misiones.",
+            "Eventos de aprendizaje sin datos económicos, como \"misión completada\" o \"nivel desbloqueado\".",
+            "Nada individual: no hay tutoría ni nadie que vea tu avance personal."
+          ]
+        },
+        {
+          "title": "Lo que nunca ve",
+          "icon": "visibility_off",
+          "items": [
+            "Tus montos: saldo, movimientos, apartados, metas y lo que cargues en las herramientas.",
+            "Tus respuestas sobre hábitos de \"Conocerte\".",
+            "Qué secciones de tu billetera están bloqueadas o desbloqueadas."
+          ]
+        },
+        {
+          "title": "Dónde quedan tus datos",
+          "icon": "lock",
+          "items": [
+            "Tu dinero de práctica y tus respuestas sobre hábitos quedan solo en este navegador.",
+            "Los reportes muestran grupos de 5 personas o más, para no identificar a nadie.",
+            "Puedes empezar de cero cuando quieras desde tu perfil."
+          ]
+        }
       ]
     },
     "check": "Leí el aviso y acepto usar Alcancía con estas condiciones.",
@@ -1004,7 +1116,9 @@
     "back": "Volver a la página anterior",
     "suggestionsTitle": "También puedes ir a",
     "help": "Escribir a la mesa de ayuda",
-    "landing": "Inicio de Alcancía"
+    "landing": "Inicio de Alcancía",
+    "body_education": "Esta sección no está disponible para tu rol. Si crees que deberías verla, consulta con la mesa de ayuda del Instituto Superior Ceibo.",
+    "body_product": "Esta sección no está disponible para tu rol. Si crees que deberías verla, consulta con el equipo de producto de Hornero."
   },
   "errorPage": {
     "title": "Algo no funcionó",
@@ -1025,7 +1139,14 @@
       "p-diego": "Participante · celular · nivel 2",
       "p-kevin": "Tutor de bienestar financiero",
       "p-paula": "Admin de L&D y Beneficios",
-      "p-ricardo": "Decisor"
+      "p-ricardo": "Decisor",
+      "p-lucia": "Estudiante · celular · cuenta nueva",
+      "p-martin": "Tutor de finanzas personales",
+      "p-silvia": "Coordinación académica",
+      "p-hector": "Dirección",
+      "p-joaquin": "Usuario · entra desde la app de Hornero",
+      "p-sofia": "Equipo de producto · adopción",
+      "p-nicolas": "Equipo de producto · impacto"
     },
     "unlockAll": "Ver todo desbloqueado",
     "unlockAllHelp": "En la billetera, para recorrer todas las secciones",
@@ -1039,7 +1160,9 @@
     "help": "Ayuda",
     "notifications": "Notificaciones",
     "partnerHornero": "Ver dentro de Hornero",
-    "partnerHorneroHelp": "Modo integrado con un socio ficticio"
+    "partnerHorneroHelp": "Modo integrado con un socio ficticio",
+    "contextLabel": "Contexto de uso",
+    "contextHelp": "Primero el contexto, después la persona"
   },
   "staff": {
     "hello": "Hola,",
@@ -1063,7 +1186,9 @@
       },
       "privacy": {
         "title": "Tus datos son tuyos",
-        "body": "Tu empresa ve tu avance en los módulos, nunca tus montos ni tus respuestas sobre hábitos. Lo que cargas en la billetera queda en este navegador."
+        "body": "Tu empresa ve tu avance en los módulos, nunca tus montos ni tus respuestas sobre hábitos. Lo que cargas en la billetera queda en este navegador.",
+        "body_education": "Tu institución ve tu avance en los módulos, nunca tus montos ni tus respuestas sobre hábitos. Lo que cargas en la billetera queda en este navegador.",
+        "body_product": "Hornero ve solo cifras agregadas de aprendizaje, nunca tu avance personal, tus montos ni tus respuestas sobre hábitos. Lo que cargas en la billetera queda en este navegador."
       }
     },
     "account": {
@@ -1074,7 +1199,9 @@
       "cvu": "CVU de ejemplo",
       "employer": "Empleador",
       "noRealData": "Nunca te pedimos DNI, CUIT, CBU, tarjetas ni contraseñas reales: todo es ficticio.",
-      "open": "Abrir mi cuenta y seguir"
+      "open": "Abrir mi cuenta y seguir",
+      "employer_education": "Institución",
+      "employer_product": "Ofrecida por"
     },
     "quiz": {
       "progress": "Avance de Conocerte",
@@ -2954,13 +3081,21 @@
       "editTitle": "Editar la cohorte {{name}}",
       "editIntro": "Cambia su nombre, su tutoría o su plazo.",
       "editSubmit": "Guardar cambios",
-      "edited": "Cohorte guardada"
+      "edited": "Cohorte guardada",
+      "areaHelp_education": "La carrera o el trayecto al que pertenece la cohorte",
+      "areaHelp_product": "El segmento de usuarios al que pertenece la cohorte",
+      "noTutor": "Sin tutoría: los usuarios aprenden con Fuerte"
     },
     "areas": {
       "operations": "Operaciones",
       "administration": "Administración",
       "technology": "Tecnología",
-      "commercial": "Comercial"
+      "commercial": "Comercial",
+      "logistics": "Tecnicatura en Logística",
+      "business_admin": "Tecnicatura en Administración",
+      "accounting": "Formación profesional",
+      "new_users": "Usuarios nuevos",
+      "regular_users": "Usuarios frecuentes"
     },
     "k": {
       "title": "Impacto del programa",
@@ -3002,7 +3137,9 @@
       "l4": {
         "title": "Resultados",
         "body": "El bienestar financiero reportado o la rotación se medirían con datos propios de la empresa. La demo no inventa datos de negocio.",
-        "future": "Línea futura"
+        "future": "Línea futura",
+        "body_education": "La permanencia o el bienestar financiero reportado se medirían con datos propios de la institución. La demo no inventa datos institucionales.",
+        "body_product": "La retención o el uso de la app se medirían con datos propios de Hornero. La demo no inventa datos de negocio."
       }
     },
     "people": {
@@ -3210,7 +3347,9 @@
       "satisfaction": "Satisfacción promedio (1 a 5)",
       "challenge": "Desafío del nivel {{n}}: aprobaron"
     },
-    "privacy": "Solo cifras agregadas, calculadas desde los datos. Ningún grupo de menos de {{threshold}} personas se muestra."
+    "privacy": "Solo cifras agregadas, calculadas desde los datos. Ningún grupo de menos de {{threshold}} personas se muestra.",
+    "intro_education": "Cómo avanza el programa en toda la institución: cuántas personas participan, cómo lo valoran, cuánto aprenden y qué aplican. Son cifras agregadas: no hay datos de ninguna persona.",
+    "intro_product": "Cómo aprenden los usuarios de Hornero con Alcancía: cuántas personas participan, cómo lo valoran, cuánto aprenden y qué aplican. Son cifras agregadas: no hay datos de ninguna persona."
   },
   "designSystem": {
     "docTitle": "Sistema de diseño",
@@ -4201,5 +4340,16 @@
       "inflation-yearly": "Inflación de los últimos 12 meses"
     },
     "investIntro": "Los precios de acciones y CEDEARs de Invertir son de ejemplo: BYMA pide una licencia para mostrarlos. El tipo de cambio sí es real."
+  },
+  "contexts": {
+    "label": "Contexto",
+    "employer": "Organización",
+    "education": "Institución educativa",
+    "product": "Producto existente",
+    "orgs": {
+      "employer": "Andina Servicios S.A.",
+      "education": "Instituto Superior Ceibo",
+      "product": "Hornero"
+    }
   }
 }

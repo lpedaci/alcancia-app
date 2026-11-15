@@ -129,6 +129,10 @@ Menú lateral (escritorio y tablet) con el mismo componente y estilo del sistema
 
 Landing, acceso (G1 a G5), "Abrir tu cuenta" (P2) y el recorrido de una misión o desafío en celular, donde la tarea ocupa la pantalla con "Salir" visible y confirmación si hay cambios sin guardar.
 
+### 5.x "Ver como" y la landing por contexto (paso 23)
+
+"Ver como" ordena la demo en dos pasos: **primero el contexto** (Organización · Andina, Institución educativa · Ceibo, Producto existente · Hornero), que deja el menú abierto, y **después la persona** de ese contexto. La sección "Un recorrido para cada rol" de la landing usa el mismo orden, con un botón segmentado de contexto arriba de las tarjetas; las tarjetas de "Tres contextos, la misma billetera" eligen el contexto y bajan a los recorridos.
+
 ## 6. Sistema de búsqueda
 
 - **Fase A:** sin búsqueda global. El volumen (16 guías, 12 herramientas) se recorre bien por navegación y la búsqueda agrega complejidad sin valor. Hay **filtros** donde hay listas largas: personas (O2), cohortes (T2) y herramientas (P13, por sección).

@@ -196,6 +196,19 @@ Lectura rápida, de arriba hacia abajo: conclusión, tres números y una explica
 
 ---
 
+## 6. Personas de los contextos educativo y de producto (paso 23)
+
+> Hipótesis sin validar, con la misma regla que las anteriores: no hay datos inventados sobre ellas, solo el rol que cumplen en la demo.
+
+| Persona | Contexto | Rol | Supuesto principal | Cómo validarlo |
+| --- | --- | --- | --- | --- |
+| Lucía Ferreyra | Instituto Superior Ceibo | Estudiante de la Tecnicatura en Logística, 1.er año, 18 años o más, desde el celular | Organiza una beca o un primer ingreso, no un sueldo | Entrevistas con estudiantes de tecnicaturas y formación profesional |
+| Martín Quiroga | Instituto Superior Ceibo | Tutor de finanzas personales de tres cohortes | Acompaña como un docente de taller, con encuentros semanales | Entrevista con tutores o coordinadores de trayectos de formación |
+| Silvia Herrera | Instituto Superior Ceibo | Coordinadora académica | Configura el programa por carrera y fija plazos por cuatrimestre | Entrevista con coordinación académica |
+| Héctor Ramos | Instituto Superior Ceibo | Director de estudios | Le interesa el aprendizaje agregado y la permanencia | Entrevista con dirección |
+| Joaquín Paredes | Hornero | Usuario de la billetera, desde el celular | Aprende en ratos cortos dentro de la app que ya usa, sin tutoría | Prueba de concepto con usuarios de una billetera |
+| Sofía Cabral y Nicolás Vidal | Hornero | Equipo de producto | Miden adopción e impacto sin ver datos de ninguna persona | Entrevista con equipos de producto de fintech |
+
 ## Plan de validación
 
 | Etapa | Método | Qué valida | Con quién |

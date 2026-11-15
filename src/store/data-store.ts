@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import seed from '@/data/seed.json';
@@ -20,11 +21,13 @@ import type {
   WeeklyChallenge,
   WeeklyChallengeReport,
 } from '@/types/domain';
+import { useSessionStore } from '@/store/session-store';
 
 /**
- * Shared demo data of the organization (CLAUDE.md 7): what a backend would hold. LEARNING data
- * only: wallet data, Conocerte habits, reflections and level lock states live in each
- * participant's local store (`local-store.ts`) and never here (D-58, D-62).
+ * One organization's demo data (CLAUDE.md 7): what a backend would hold for one tenant. LEARNING
+ * data only: wallet data, Conocerte habits, reflections and level lock states live in each
+ * participant's local store (`local-store.ts`) and never here (D-58, D-62). Panels and pure
+ * functions work on this shape, already scoped to the viewer's organization (`useOrgData`).
  */
 export interface OrgData {
   organization: Organization;
@@ -49,15 +52,66 @@ export interface OrgData {
   consents: ConsentRecord[];
 }
 
-export function seedData(): OrgData {
+/**
+ * The data of the three contexts of use together (5.5, D-74), as a multi-tenant backend would keep
+ * it: every record belongs to one organization through its person or its cohort. Nothing crosses
+ * from one organization to another: every screen reads it through `scopeToOrg`.
+ */
+export interface SharedData extends Omit<OrgData, 'organization' | 'program'> {
+  organizations: Organization[];
+  programs: Program[];
+}
+
+/** The organization of the main demo (4.1): the fallback when nobody is signed in. */
+export const DEFAULT_ORG_ID = 'org-andina';
+
+export function seedData(): SharedData {
   // A deep copy, so a reset never shares references with the imported JSON.
-  const copy = structuredClone(seed) as unknown as OrgData & { generatedFor?: string; note?: string };
+  const copy = structuredClone(seed) as unknown as SharedData & { generatedFor?: string; note?: string };
   delete copy.generatedFor;
   delete copy.note;
   return { ...copy, accessRequests: [], consents: [] };
 }
 
-interface DataState extends OrgData {
+export const organizationOf = (data: Pick<SharedData, 'organizations'>, orgId: string): Organization =>
+  data.organizations.find((o) => o.id === orgId) ?? data.organizations[0]!;
+export const programOf = (data: Pick<SharedData, 'programs'>, orgId: string): Program =>
+  data.programs.find((p) => p.orgId === orgId) ?? data.programs[0]!;
+export const orgIdOfPerson = (data: Pick<SharedData, 'people'>, personId: string | undefined): string =>
+  data.people.find((p) => p.id === personId)?.orgId ?? DEFAULT_ORG_ID;
+
+/** One organization's slice of the shared data: its people, its cohorts and their records. */
+export function scopeToOrg(data: SharedData, orgId: string): OrgData {
+  const people = data.people.filter((p) => p.orgId === orgId);
+  const ids = new Set(people.map((p) => p.id));
+  const cohorts = data.cohorts.filter((c) => c.orgId === orgId);
+  const cohortIds = new Set(cohorts.map((c) => c.id));
+  const mine = <T extends { personId: string }>(list: T[]) => list.filter((x) => ids.has(x.personId));
+  return {
+    organization: organizationOf(data, orgId),
+    program: programOf(data, orgId),
+    cohorts,
+    people,
+    diagnostics: mine(data.diagnostics),
+    guideProgress: mine(data.guideProgress),
+    challengeAttempts: mine(data.challengeAttempts),
+    itemResponses: mine(data.itemResponses),
+    levelLearning: mine(data.levelLearning),
+    unlockRecords: data.unlockRecords.filter((r) => (r.target.kind === 'person' ? ids.has(r.target.personId) : cohortIds.has(r.target.cohortId))),
+    missionCompletions: mine(data.missionCompletions),
+    weeklyChallenges: data.weeklyChallenges.filter((w) => cohortIds.has(w.cohortId)),
+    weeklyReports: mine(data.weeklyReports),
+    followUps: mine(data.followUps),
+    tutorQuestions: mine(data.tutorQuestions),
+    accessRequests: data.accessRequests,
+    consents: mine(data.consents),
+  };
+}
+
+/** Seed data of one organization, for tests and pure functions (Andina by default). */
+export const seedOrgData = (orgId = DEFAULT_ORG_ID): OrgData => scopeToOrg(seedData(), orgId);
+
+interface DataState extends SharedData {
   /** "Restablecer demo" (CLAUDE.md 7): back to the seed. */
   resetData: () => void;
   addAccessRequest: (request: AccessRequest) => void;
@@ -151,7 +205,12 @@ export const useDataStore = create<DataState>()(
         })),
       addUnlockRecord: (record) => set((state) => ({ unlockRecords: [...state.unlockRecords, record] })),
       updateProgram: (program, privacyThreshold) =>
-        set((state) => ({ program, organization: { ...state.organization, privacyThreshold: Math.max(5, Math.floor(privacyThreshold)) } })),
+        set((state) => ({
+          programs: state.programs.map((p) => (p.id === program.id ? program : p)),
+          organizations: state.organizations.map((o) =>
+            o.id === program.orgId ? { ...o, privacyThreshold: Math.max(5, Math.floor(privacyThreshold)) } : o,
+          ),
+        })),
       addPeople: (people) => set((state) => ({ people: [...state.people, ...people] })),
       updatePerson: (personId, patch) => set((state) => ({ people: state.people.map((p) => (p.id === personId ? { ...p, ...patch } : p)) })),
       removePerson: (personId) =>
@@ -192,10 +251,41 @@ export const useDataStore = create<DataState>()(
     }),
     {
       name: DATA_STORAGE_KEY,
-      version: 1,
+      // Version 2 (step 23, D-268): three organizations. Older demo data goes back to the seed,
+      // keeping only the accepted privacy notices and the help desk requests.
+      version: 2,
       storage: createJSONStorage(() => localStorage),
+      migrate: (persisted, version) => {
+        const old = (persisted ?? {}) as Partial<SharedData>;
+        if (version >= 2) return persisted as DataState;
+        return { ...seedData(), consents: old.consents ?? [], accessRequests: old.accessRequests ?? [] } as unknown as DataState;
+      },
     },
   ),
 );
 
 export const personById = (people: Person[], id: string) => people.find((p) => p.id === id);
+
+/** The organization of the signed-in person (Andina when nobody is signed in). */
+export function useOrgId(): string {
+  const personId = useSessionStore((s) => s.session?.personId);
+  return useDataStore((s) => orgIdOfPerson(s, personId));
+}
+
+export function useOrganization(): Organization {
+  const orgId = useOrgId();
+  return useDataStore((s) => organizationOf(s, orgId));
+}
+
+export function useProgram(): Program {
+  const orgId = useOrgId();
+  return useDataStore((s) => programOf(s, orgId));
+}
+
+/** The viewer's organization only (5.5): no screen sees another organization's people or records. */
+export function useOrgData(): OrgData {
+  const orgId = useOrgId();
+  const state = useDataStore();
+  return useMemo(() => scopeToOrg(state, orgId), [state, orgId]);
+}
+

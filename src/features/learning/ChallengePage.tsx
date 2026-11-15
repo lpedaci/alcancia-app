@@ -14,7 +14,7 @@ import { NotFoundPage } from '@/features/system/NotFoundPage';
 import { WalletShell } from '@/features/wallet/WalletShell';
 import { NBSP } from '@/lib/money';
 import { cn } from '@/lib/utils';
-import { useDataStore } from '@/store/data-store';
+import { useDataStore, useProgram } from '@/store/data-store';
 import { useCurrentUser } from '@/store/session-store';
 import { QuestionView } from './QuestionView';
 import {
@@ -53,8 +53,9 @@ function ChallengeRunner({ challenge }: { challenge: ChallengeDef }) {
   const user = useCurrentUser();
   const personId = user?.personId ?? '';
   const { statuses, isOpen } = useLevels(personId);
-  const maxAttempts = useDataStore((s) => s.program.maxAttempts);
-  const passing = useDataStore((s) => s.program.passingScore ?? challenge.passingScore);
+  const program = useProgram();
+  const maxAttempts = program.maxAttempts;
+  const passing = program.passingScore ?? challenge.passingScore;
   const allAttempts = useDataStore((s) => s.challengeAttempts);
   const attempts = allAttempts.filter((a) => a.personId === personId && a.challengeId === challenge.id);
   const addAttempt = useDataStore((s) => s.addChallengeAttempt);
