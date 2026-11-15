@@ -99,3 +99,4 @@
 | 15/11/2026 | Ajuste de Lourdes | Condición de movimientos enlazada (D-296), tablas como tarjetas en celular y tablet (D-297) y desafíos de nivel con barra apilada (D-298) | Hecho |
 | 15/11/2026 | Ajuste de Lourdes | Chips de contexto debajo del título y en una fila (D-299); tablas como tarjetas en Presupuesto, Conocerte y herramientas | Hecho |
 | 15/11/2026 | Ajuste de Lourdes | Celular del hero con cinco pantallas: cuenta, misión, tarjeta de aprendizaje, apartados y niveles (D-300) | Hecho |
+| 15/11/2026 | 27 · Contenido, tanda 4 | Guías 2 de los módulos 12, 13, 14 y 15 en borrador, validadas con tests y con los números calculados a mano, y documento `docs/content-review/tanda-4.md` | Esperando la revisión de Lourdes |
