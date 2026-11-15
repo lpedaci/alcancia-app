@@ -290,8 +290,8 @@ export function GenericSimulator({ def, preset, labelledBy }: { def: SimDef; pre
                 </div>
               )}
               {showTable || !output.chart ? (
-                <TableContainer label={output.chart?.title ?? t('sims.common.table')}>
-                  <Table>
+                <TableContainer label={output.chart?.title ?? t('sims.common.table')} stack>
+                  <Table stack>
                     <TableHead>
                       <TableRow>
                         {output.table.columns.map((c, i) => (

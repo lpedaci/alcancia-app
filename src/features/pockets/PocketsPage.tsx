@@ -128,6 +128,7 @@ function Pockets() {
           </div>
           <p className="text-body-large text-on-surface-variant">{t('pockets.intro')}</p>
           <MetaChips
+            compact
             label={t('pockets.context')}
             items={[
               {

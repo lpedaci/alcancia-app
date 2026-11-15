@@ -52,7 +52,11 @@ export function AdminHomePage() {
   return (
     <AdminShell>
       <header className="flex flex-col gap-2">
+        <h1 className="text-headline-medium text-on-surface">
+          {t('staff.hello')} <span className="text-primary">{person.name.split(' ')[0]}</span>
+        </h1>
         <MetaChips
+          compact
           label={t('staff.context')}
           items={[
             {
@@ -64,9 +68,6 @@ export function AdminHomePage() {
             { icon: 'apartment', label: data.organization.name },
           ]}
         />
-        <h1 className="text-headline-medium text-on-surface">
-          {t('staff.hello')} <span className="text-primary">{person.name.split(' ')[0]}</span>
-        </h1>
         <p className="flex flex-wrap items-center gap-2">
           <span className={cn('inline-flex items-center rounded-full px-3 py-1 text-label-medium', ROLE_ACCENT.ld_admin.chip)}>{t('roles.ld_admin', { context: ctx(kind) })}</span>
           <span className="text-body-medium text-on-surface-variant">

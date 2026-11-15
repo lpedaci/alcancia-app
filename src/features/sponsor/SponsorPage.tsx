@@ -49,8 +49,12 @@ export function SponsorPage() {
   return (
     <StaffShell home="/sponsor">
       <header className="flex flex-wrap items-end justify-between gap-4">
-        <div className="flex flex-col gap-2">
+        <div className="flex min-w-0 max-w-full flex-col gap-2">
+          <h1 className="text-headline-medium text-on-surface">
+            {t('staff.hello')} <span className="text-primary">{person.name.split(' ')[0]}</span>
+          </h1>
           <MetaChips
+            compact
             label={t('staff.context')}
             items={[
               {
@@ -62,9 +66,6 @@ export function SponsorPage() {
               { icon: 'apartment', label: data.organization.name },
             ]}
           />
-          <h1 className="text-headline-medium text-on-surface">
-            {t('staff.hello')} <span className="text-primary">{person.name.split(' ')[0]}</span>
-          </h1>
           <p className="flex flex-wrap items-center gap-2">
             <span className={cn('inline-flex items-center rounded-full px-3 py-1 text-label-medium', ROLE_ACCENT.sponsor.chip)}>{t('roles.sponsor', { context: ctx(kind) })}</span>
             <span className="text-body-medium text-on-surface-variant">{t('sponsor.subtitle')}</span>

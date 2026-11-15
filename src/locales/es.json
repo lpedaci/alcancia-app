@@ -3899,7 +3899,7 @@
       "rate": "Inflación mensual",
       "rateHelp": "Porcentaje, por ejemplo: 3",
       "chips": "Estados y chips",
-      "chipsNote": "Cada estado lleva ícono y texto. Los metadatos van en chips neutros; los filtros, en botones segmentados.",
+      "chipsNote": "Cada estado lleva ícono y texto. Los metadatos van en chips neutros; los filtros, en botones segmentados. D-299: en el encabezado de una pantalla van debajo del título (`compact`): en celular y tablet, los dos principales en una sola fila; si no entran, el segundo se acorta con puntos suspensivos. Desde 840 px, todos.",
       "statuses": {
         "done": "Completada",
         "progress": "En curso",
@@ -3967,7 +3967,15 @@
       "showMoreNote": "D-291: los botones de texto que cierran una lista (ver más, ver todos, simular) van a la derecha, con la flecha que indica si abre o cierra. Volver y salir quedan a la izquierda.",
       "showMoreA": "Almacén Don Ramiro",
       "showMoreB": "Transporte · Tarjeta de viaje de ejemplo",
-      "showMoreButton": "Ver todos los movimientos (12)"
+      "showMoreButton": "Ver todos los movimientos (12)",
+      "stackTable": "Tabla como tarjetas",
+      "stackTableNote": "D-297: con `stack`, bajo 42 rem de contenedor cada fila es una tarjeta: la primera celda como título y \"columna: valor\" en las demás. Nada se desplaza de costado. Las matrices (mapa de calor) quedan como tabla.",
+      "stackCohort": "Cohorte",
+      "stackPeople": "Personas",
+      "stackActive": "Activas",
+      "stackRowA": "Operaciones · Centro de distribución y oficina",
+      "stackRowB": "Administración",
+      "stackInsufficient": "Datos insuficientes"
     },
     "fuerte": {
       "states": {
@@ -4117,6 +4125,11 @@
         "D-298",
         "Resultados por nivel",
         "Barra apilada de primer intento sobre total, con leyenda y los porcentajes en texto."
+      ],
+      [
+        "D-299",
+        "Chips de contexto debajo del título",
+        "En celular y tablet, los dos principales en una fila, nunca en dos líneas; desde 840 px, todos."
       ]
     ],
     "money": {

@@ -117,10 +117,11 @@ function Budget() {
           </div>
           <p className="text-body-large text-on-surface-variant">{t('budget.intro')}</p>
           <MetaChips
+            compact
             label={t('budget.context')}
             items={[
               { icon: 'calendar_month', label: t('budget.monthRange', { from: formatDate(walletDate(firstDay)), to: formatDate(walletDate(firstDay + DAYS_IN_MONTH - 1)) }) },
-              { icon: 'today', label: t('wallet.home.dayChip', { day: wallet.day }) },
+              { icon: 'today', label: t('wallet.home.dayChip', { day: wallet.day }), className: 'hidden expanded:inline-flex' },
             ]}
           />
         </header>
@@ -162,8 +163,8 @@ function Budget() {
                 {conclusion}
               </p>
               {asTable ? (
-                <TableContainer label={t('budget.split.title')}>
-                  <Table>
+                <TableContainer label={t('budget.split.title')} stack>
+                  <Table stack>
                     <TableHead>
                       <TableRow>
                         <TableHeaderCell>{t('budget.split.category')}</TableHeaderCell>

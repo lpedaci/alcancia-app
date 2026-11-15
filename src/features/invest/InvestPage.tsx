@@ -140,6 +140,7 @@ function Invest() {
           </div>
           <p className="text-body-large text-on-surface-variant">{t('invest.intro')}</p>
           <MetaChips
+            compact
             label={t('invest.context')}
             items={[
               { icon: 'calendar_month', label: formatDate(walletDate(wallet.day)), dateTime: walletDate(wallet.day) },

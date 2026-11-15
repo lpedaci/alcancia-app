@@ -142,6 +142,7 @@ function Credit() {
           </div>
           <p className="text-body-large text-on-surface-variant">{t('credit.intro')}</p>
           <MetaChips
+            compact
             label={t('credit.context')}
             items={[
               { icon: 'calendar_month', label: formatDate(walletDate(wallet.day)), dateTime: walletDate(wallet.day) },

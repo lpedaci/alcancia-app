@@ -97,3 +97,4 @@
 | 15/11/2026 | Ajuste de Lourdes | "¿Por qué importa?" a la derecha del título (D-292), atajos de Pagar en fila y auditoría de todas las personas (D-293), condiciones como filas clickeables (D-294) y sistema de diseño actualizado con estos patrones | Hecho |
 | 15/11/2026 | Ajuste de Lourdes | Control segmentado suave en toda la app (D-295) | Hecho |
 | 15/11/2026 | Ajuste de Lourdes | Condición de movimientos enlazada (D-296), tablas como tarjetas en celular y tablet (D-297) y desafíos de nivel con barra apilada (D-298) | Hecho |
+| 15/11/2026 | Ajuste de Lourdes | Chips de contexto debajo del título y en una fila (D-299); tablas como tarjetas en Presupuesto, Conocerte y herramientas | Hecho |

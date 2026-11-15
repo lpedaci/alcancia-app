@@ -112,6 +112,7 @@ function Yield() {
           </div>
           <p className="text-body-large text-on-surface-variant">{t('yield.intro')}</p>
           <MetaChips
+            compact
             label={t('yield.context')}
             items={[
               { icon: 'calendar_month', label: formatDate(walletDate(wallet.day)), dateTime: walletDate(wallet.day) },

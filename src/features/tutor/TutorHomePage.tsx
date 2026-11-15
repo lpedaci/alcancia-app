@@ -43,7 +43,11 @@ export function TutorHomePage() {
   return (
     <TutorShell>
       <header className="flex flex-col gap-2">
+        <h1 className="text-headline-medium text-on-surface">
+          {t('staff.hello')} <span className="text-primary">{person.name.split(' ')[0]}</span>
+        </h1>
         <MetaChips
+          compact
           label={t('staff.context')}
           items={[
             { icon: 'calendar_month', label: formatDate(DEMO_TODAY), dateTime: DEMO_TODAY },
@@ -51,9 +55,6 @@ export function TutorHomePage() {
             { icon: 'groups', label: t('tutor.home.cohortsChip', { count: cohorts.length }) },
           ]}
         />
-        <h1 className="text-headline-medium text-on-surface">
-          {t('staff.hello')} <span className="text-primary">{person.name.split(' ')[0]}</span>
-        </h1>
         <p className="flex flex-wrap items-center gap-2">
           <span className={cn('inline-flex items-center rounded-full px-3 py-1 text-label-medium', ROLE_ACCENT.tutor.chip)}>{t('roles.tutor', { context: ctx(kind) })}</span>
           <span className="text-body-medium text-on-surface-variant">{t('tutor.home.subtitle', { count: k.people })}</span>

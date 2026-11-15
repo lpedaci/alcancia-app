@@ -414,8 +414,8 @@ function Scores({ scores }: { scores: Record<Dimension, number> }) {
         })}
       </p>
       {asTable ? (
-        <TableContainer label={t("welcome.result.scoresTitle")}>
-          <Table>
+        <TableContainer label={t("welcome.result.scoresTitle")} stack>
+          <Table stack>
             <TableHead>
               <TableRow>
                 <TableHeaderCell>

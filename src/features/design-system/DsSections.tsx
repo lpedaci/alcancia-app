@@ -16,6 +16,7 @@ import { ProgressBar } from '@/components/ui/ProgressBar';
 import { SegmentedButton } from '@/components/ui/SegmentedButton';
 import { SegmentedProgress } from '@/components/ui/SegmentedProgress';
 import { StatusPill } from '@/components/ui/StatusPill';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableHeaderCell, TableRow } from '@/components/ui/Table';
 import { TextField } from '@/components/ui/TextField';
 import { Fuerte, FUERTE_STATES } from '@/features/companion/Fuerte';
 import { FuerteBadge, FuerteSpeech, fuerteMood, NoticeRowContent, UpToDate } from '@/features/companion/FuerteParts';
@@ -232,6 +233,35 @@ export function ComponentsSection() {
             </li>
           ))}
         </ul>
+      </Specimen>
+      <Specimen title={c('stackTable')} note={c('stackTableNote')}>
+        {/* A narrow box, like a phone: the same table turns into cards by its container width */}
+        <div className="mx-auto max-w-xs">
+          <TableContainer label={c('stackTable')} stack>
+            <Table stack>
+              <TableHead>
+                <TableRow>
+                  <TableHeaderCell>{c('stackCohort')}</TableHeaderCell>
+                  <TableHeaderCell className="text-right">{c('stackPeople')}</TableHeaderCell>
+                  <TableHeaderCell className="text-right">{c('stackActive')}</TableHeaderCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                <TableRow>
+                  <TableHeaderCell scope="row" className="text-on-surface">{c('stackRowA')}</TableHeaderCell>
+                  <TableCell className="text-right tabular-nums">32</TableCell>
+                  <TableCell className="text-right tabular-nums">{formatPercent(0.66, { decimals: 0 })}</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableHeaderCell scope="row" className="text-on-surface">{c('stackRowB')}</TableHeaderCell>
+                  <TableCell colSpan={2} className="text-right">
+                    <StatusPill tone="neutral" icon="visibility_off" label={c('stackInsufficient')} />
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </div>
       </Specimen>
       <Specimen title={c('showMore')} note={c('showMoreNote')}>
         <div className="flex flex-col">

@@ -62,6 +62,7 @@ export function CohortPage() {
         </Link>
         <h1 className="text-headline-medium text-on-surface">{cohort.name}</h1>
         <MetaChips
+          compact
           label={t('tutor.home.cohortData')}
           items={[
             { icon: 'person', label: t('tutor.home.people', { count: members.length }) },
