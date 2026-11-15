@@ -13,8 +13,9 @@ import { PieceSimResult } from '@/features/landing/ProductPieces';
 export function LoginShowcase() {
   const { t } = useTranslation();
   return (
-    <div className="flex h-full min-h-0 flex-col gap-8 text-on-primary-container">
-      <div className="flex max-w-xl flex-col gap-3">
+    <div className="flex h-full min-h-0 flex-col gap-6 text-on-primary-container">
+      {/* The text takes the panel's width, so it uses fewer lines and the phone sits higher */}
+      <div className="flex flex-col gap-3">
         <p className="w-fit rounded-full bg-surface-container-lowest px-3 py-1 text-label-large text-primary">{t('auth.showcase.eyebrow')}</p>
         <p className="text-headline-medium text-balance xl:text-display-small">
           {t('auth.showcase.titleStart')} <span className="text-primary">{t('auth.showcase.titleKey')}</span> {t('auth.showcase.titleEnd')}
@@ -22,12 +23,13 @@ export function LoginShowcase() {
         <p className="text-body-large">{t('auth.showcase.body')}</p>
       </div>
       {/* The phone rises from the bottom edge of the panel, cropped like a product shot */}
-      <div aria-hidden className="relative -mb-12 flex flex-1 items-end justify-center">
-        <div className="relative w-80 translate-y-24">
+      <div aria-hidden className="relative flex min-h-0 flex-1 justify-center">
+        {/* The phone starts right under the text and dissolves at the bottom edge of the panel (D-262) */}
+        <div className="fade-out-bottom relative w-80">
           <AppPhone screen="home" />
         </div>
-        <PieceSimResult className="absolute top-6 left-0 hidden w-52 xl:flex" />
-        <div className="absolute right-0 bottom-28 hidden w-52 flex-col gap-2 rounded-xl border border-outline-variant bg-surface-container-lowest p-4 text-on-surface xl:flex">
+        <PieceSimResult className="absolute top-10 left-0 hidden w-52 xl:flex" />
+        <div className="absolute top-72 right-0 hidden w-52 flex-col gap-2 rounded-xl border border-outline-variant bg-surface-container-lowest p-4 text-on-surface xl:flex">
           <p className="text-label-medium text-on-surface-variant">{t('landing.floating.unlockLabel')}</p>
           <p className="flex items-center gap-1.5 text-title-small">
             <Icon name="lock" size={18} /> {t('landing.floating.unlockTitle')}

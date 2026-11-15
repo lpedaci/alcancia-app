@@ -22,12 +22,13 @@ export function AuthLayout({ children, aside, showcase, wide }: AuthLayoutProps)
   if (!showcase) return <PlainLayout aside={aside} wide={wide}>{children}</PlainLayout>;
 
   return (
-    <div className="grid min-h-dvh grid-cols-1 bg-surface-container-lowest lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:p-3">
+    // Same 1440 px frame as the app (D-240, D-262); from 1024 px it fits the window, so the page never scrolls
+    <div className="mx-auto grid min-h-dvh max-w-[90rem] grid-cols-1 bg-surface-container-lowest lg:h-dvh lg:min-h-0 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:p-3">
       <SkipLink />
       <main
         id="main-content"
         tabIndex={-1}
-        className="flex min-w-0 flex-col items-center px-(--space-gutter) py-8 focus:outline-none md:justify-center lg:py-10 [@media(max-height:50rem)]:py-6"
+        className="flex min-w-0 flex-col items-center px-(--space-gutter) py-8 focus:outline-none md:justify-center lg:overflow-y-auto lg:py-10 [@media(max-height:50rem)]:py-6"
       >
         <div className="flex w-full max-w-md min-w-0 flex-col gap-8 [@media(max-height:50rem)]:gap-6">
           {/* The logo goes back to the landing (G0). */}
@@ -37,7 +38,7 @@ export function AuthLayout({ children, aside, showcase, wide }: AuthLayoutProps)
           {children}
         </div>
       </main>
-      <aside className="hidden min-w-0 overflow-hidden rounded-xl bg-primary-container px-10 pt-12 lg:flex lg:flex-col xl:px-14">
+      <aside className="hidden min-h-0 min-w-0 overflow-hidden rounded-xl bg-primary-container px-10 pt-10 lg:flex lg:flex-col xl:px-14">
         {showcase}
       </aside>
     </div>

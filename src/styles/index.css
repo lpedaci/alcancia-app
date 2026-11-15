@@ -186,6 +186,8 @@
     }
   }
   html {
+    /* The 1440 px frame keeps its place between short and long pages: the scrollbar's room is always kept (D-261) */
+    scrollbar-gutter: stable;
     color-scheme: light;
     -webkit-text-size-adjust: 100%;
     scroll-padding-top: calc(var(--header-height) + 1rem); /* WCAG 2.4.11: focus not obscured by sticky header */
@@ -287,4 +289,10 @@
   &::-webkit-scrollbar {
     display: none;
   }
+}
+
+/* Product shot fade (D-262): a transparency mask that dissolves the bottom of a device mockup into the
+   flat panel behind it. It is not a colored gradient background (2.2): no color is added. */
+@utility fade-out-bottom {
+  mask-image: linear-gradient(to bottom, black 62%, transparent 96%);
 }
