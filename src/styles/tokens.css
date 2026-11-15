@@ -150,7 +150,7 @@
   /* Spacing: 8 px vertical rhythm (2.4). Component spacing uses the 4 px Tailwind scale. */
   --space-gutter: 1rem; /* page side padding on phones */
   --space-bento-gap: 1rem;
-  --space-card-padding: 1.25rem;
+  --space-card-padding: 1rem; /* 8-point rhythm (D-240): 16 px on phones, 24 px from 768 px */
   --space-section: 2rem;
 
   /* Elevation: only two levels, only for floating elements (2.5) */
@@ -181,6 +181,7 @@
 @media (min-width: 768px) {
   :root {
     --space-gutter: 1.5rem;
+    --space-card-padding: 1.5rem;
   }
 }
 
@@ -188,7 +189,7 @@
 @media (min-width: 1200px) {
   :root {
     --space-gutter: 2rem;
-    --space-bento-gap: 1.25rem;
+    --space-bento-gap: 1.5rem; /* 24 px, on the 8-point grid (D-240) */
     --space-card-padding: 1.5rem;
   }
 }

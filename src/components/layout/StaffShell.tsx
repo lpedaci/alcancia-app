@@ -205,7 +205,7 @@ export function StaffShell({ children, nav = [], home, navLabel }: { children: R
   return (
     <div className="min-h-dvh bg-surface">
       <SkipLink />
-      <div className={cn('large:flex large:items-start large:gap-3 large:p-3', !hasNav && 'large:block')}>
+      <div className={cn('large:mx-auto large:flex large:max-w-[90rem] large:items-start large:gap-3 large:p-3', !hasNav && 'large:block')}>
         {hasNav && (
           // The slot keeps the folded width while the menu opens over the page (D-224)
           <div className={cn('sticky top-3 hidden h-[calc(100dvh-1.5rem)] shrink-0 large:block print:!hidden', pinned ? 'w-64' : 'w-20', peek ? 'z-40' : 'z-20')}>

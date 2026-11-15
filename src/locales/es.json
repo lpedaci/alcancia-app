@@ -492,7 +492,7 @@
         "kickerMinutes": "Misión activa · {{minutes}} min",
         "start": "Empezar la misión",
         "none": "No tienes misiones pendientes en las secciones abiertas.",
-        "kickerEarlier": "Te quedó del nivel {{level}} · {{minutes}} min"
+        "kickerEarlier": "Pendiente del nivel {{level}} · {{minutes}} min"
       },
       "time": {
         "label": "Avanzar el tiempo",
@@ -1374,7 +1374,7 @@
       "sent": "Consulta enviada",
       "waiting": "Esperando respuesta",
       "answered": "Respuesta de tu tutor, del {{date}}",
-      "guideTitle": "¿Te quedó una duda?",
+      "guideTitle": "¿Tienes una duda?",
       "guideIntro": "Pregúntale a tu tutor sobre este módulo. La respuesta aparece en Aprender, en Tus consultas."
     }
   },

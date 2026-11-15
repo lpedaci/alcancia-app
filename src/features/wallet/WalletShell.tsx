@@ -270,7 +270,7 @@ export function WalletShell({ section, children, fuerte }: { section: string; ch
 
       {/* Floating panels (2.2.1, pattern 5): the side menu reaches the top and holds the menu button and
           the logo; the top bar floats beside it. On phones, a plain top bar and the bottom navigation. */}
-      <div className="large:flex large:items-start large:gap-3 large:p-3">
+      <div className="large:mx-auto large:flex large:max-w-[90rem] large:items-start large:gap-3 large:p-3">
         {/* The slot keeps the folded width while the menu opens over the page (D-224) */}
         <div className={cn('sticky top-3 hidden h-[calc(100dvh-1.5rem)] shrink-0 large:block print:!hidden', pinned ? 'w-64' : 'w-20', peek ? 'z-40' : 'z-20')}>
         <nav

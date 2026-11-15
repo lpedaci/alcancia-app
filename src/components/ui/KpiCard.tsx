@@ -79,7 +79,7 @@ export function KpiCard({
         <div className="flex min-w-0 flex-col items-start gap-1.5">
           {/* The caption sits next to the number when it fits and wraps under it when not (Rumbo D-90) */}
           <div className="flex min-w-0 flex-wrap items-baseline gap-x-2 gap-y-0.5">
-            <p className="text-headline-small text-on-surface tabular-nums xl:text-display-small">{value}</p>
+            <p className="max-w-full text-headline-small break-words text-on-surface tabular-nums @[14rem]:text-display-small">{value}</p>
             {caption && <p className="min-w-0 text-body-small text-on-surface-variant">{caption}</p>}
           </div>
           {/* The pill wraps instead of truncating in narrow cards (Rumbo D-69). */}
