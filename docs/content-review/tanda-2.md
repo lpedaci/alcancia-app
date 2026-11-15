@@ -1,5 +1,7 @@
 # Tanda 2 del paso 27: guías para revisar
 
+> **Aprobada por Lourdes el 15/11/2026.** Las guías pasaron a `src/data/guides.json` y se ven en la app. Las ampliaciones siguen pendientes de revisión del Lic. Kevin Giampieri.
+
 > Borradores de `src/data/guides-drafts.json`, generados con `node scripts/guides-review.mjs 2`. **No se muestran en la app** hasta que Lourdes los apruebe; las ampliaciones quedan marcadas para el Lic. Kevin Giampieri (D-276).
 
 Cómo revisar: marca en cada guía "Aprobada", "Con cambios" (y cuáles) o "No va". Lo validado viene del taller o de la presentación y no cambia datos; las ampliaciones son lo nuevo.
@@ -9,7 +11,7 @@ Cómo revisar: marca en cada guía "Aprobada", "Con cambios" (y cuáles) o "No v
 - **Id:** `module-05-guide-2` · **Fuentes:** A-12, A-13, A-22, A-23, B-04, B-06
 - **Validado (sin cambiar datos):** La deuda de consumo compromete tu futuro (A-13); Endeudarse por estatus (A-12); Deudas antes que ahorro e inversión (A-22, A-23)
 - **Ampliación, pendiente del Lic. Kevin Giampieri:** Las tres preguntas antes de aceptar un crédito: criterio didáctico; CFT informado destacado (B-04); Central de Deudores del BCRA (B-06); Ejemplo y práctica del total pagado, con números redondos
-- **Decisión de Lourdes:** ☐ Aprobada · ☐ Con cambios · ☐ No va
+- **Decisión de Lourdes:** ☑ Aprobada (15/11/2026)
 
 **Situación:** Te ofrecen un préstamo preaprobado con una cuota que parece chica. Antes de aceptar, hay tres preguntas que te ahorran muchos problemas.
 
@@ -58,7 +60,7 @@ En la **Central de Deudores** del BCRA puedes consultar tu situación crediticia
 - **Id:** `module-06-guide-2` · **Fuentes:** T, B-04
 - **Validado (sin cambiar datos):** Pago mínimo, financiación y CFT (T, guía 1 del módulo)
 - **Ampliación, pendiente del Lic. Kevin Giampieri:** Cierre y vencimiento; pagar el total antes del vencimiento evita intereses; TNA, TEA y CFT con el CFT destacado (B-04); Interés de un período: TNA × días ÷ 365 (fórmula de la spec, docs/formulas.md), sin impuestos
-- **Decisión de Lourdes:** ☐ Aprobada · ☐ Con cambios · ☐ No va
+- **Decisión de Lourdes:** ☑ Aprobada (15/11/2026)
 
 **Situación:** El resumen de la tarjeta tiene muchos números. Solo unos pocos deciden cuánto te cuesta.
 
@@ -107,7 +109,7 @@ La entidad debe informar la **TNA**, la **TEA** y el **CFT**, con el CFT destaca
 - **Id:** `module-07-guide-2` · **Fuentes:** A-24, A-25, A-26, A-27, A-30
 - **Validado (sin cambiar datos):** Bola de nieve, pago liberado y capacidad de pago creciente (A-24 a A-27); Ejemplo de las tres deudas (A-25); Cuándo conviene cada método (A-30)
 - **Ampliación, pendiente del Lic. Kevin Giampieri:** No sumar deudas nuevas mientras se sale: criterio didáctico
-- **Decisión de Lourdes:** ☐ Aprobada · ☐ Con cambios · ☐ No va
+- **Decisión de Lourdes:** ☑ Aprobada (15/11/2026)
 
 **Situación:** Elegiste un método para salir de deudas. Ahora falta lo más difícil: sostenerlo mes a mes.
 
@@ -153,7 +155,7 @@ Mientras sales, **no sumes deudas nuevas**: cada compra financiada te devuelve a
 - **Id:** `module-08-guide-2` · **Fuentes:** A-15, B-04
 - **Validado (sin cambiar datos):** Gastos fijos y menos compromisos fijos (A-15)
 - **Ampliación, pendiente del Lic. Kevin Giampieri:** Las cuotas acumuladas como gastos fijos: criterio didáctico; Mirar el CFT si no son realmente sin interés (B-04); Ejemplo y práctica con números redondos
-- **Decisión de Lourdes:** ☐ Aprobada · ☐ Con cambios · ☐ No va
+- **Decisión de Lourdes:** ☑ Aprobada (15/11/2026)
 
 **Situación:** Una compra en cuotas parece liviana. Tres compras en cuotas, al mismo tiempo, ya son un gasto fijo más.
 
