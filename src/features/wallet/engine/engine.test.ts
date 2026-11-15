@@ -227,3 +227,12 @@ describe('pockets with a goal (section 7, step 7.4)', () => {
     expect(essentials(createWallet('p-test')).times(3).toFixed(2)).toBe('1950000.00');
   });
 });
+
+describe('scenario from today (5.6, D-264)', () => {
+  it('the person picks how inflation goes on; an unknown scenario is refused', async () => {
+    const { setScenario, scenarioOf, createWallet } = await import('./engine');
+    const w = setScenario(createWallet('p-test'), 'high');
+    expect(scenarioOf(w).monthlyInflation).toBe('0.06');
+    expect(() => setScenario(w, 'nope' as never)).toThrow();
+  });
+});

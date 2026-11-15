@@ -37,6 +37,7 @@ import { WhyMatters, whyText } from '@/features/learning-cards/WhyMatters';
 
 /** BYMADATA, BYMA's data site, as BYMA itself links it (D-79; docs/market-data.md). */
 const BYMADATA_URL = 'https://open.bymadata.com.ar/#/dashboard';
+import { RealValues } from '@/components/market/RealValues';
 import { useReturnState } from '@/lib/use-return-state';
 
 /**
@@ -214,6 +215,8 @@ function Invest() {
           <LearnSection />
           <BrokersSection />
         </div>
+        {/* The exchange rate is real; stock and CEDEAR prices stay as examples, with the link to BYMADATA (D-79, D-264) */}
+        <RealValues ids={['fx-wholesale', 'fx-retail']} intro={t('market.investIntro')} />
         <SourceList variant="footer" codes={['T', 'A-53', 'A-54', 'B-20', 'B-21', 'B-22', 'B-26', 'B-30', 'B-31', 'B-34', 'B-36', 'F-32', 'F-33', 'F-34']} legalText={t('invest.legal')} />
       </div>
     </WalletShell>

@@ -43,6 +43,7 @@ import { useCurrentUser } from '@/store/session-store';
 import { useWallet } from '@/store/wallet-store';
 import { fuerteLine } from '@/features/companion/fuerte-lines';
 import { WhyMatters, whyText } from '@/features/learning-cards/WhyMatters';
+import { RealValues } from '@/components/market/RealValues';
 import { useReturnState } from '@/lib/use-return-state';
 
 /**
@@ -249,6 +250,8 @@ function Credit() {
             </Button>
           </div>
         </section>
+        {/* Today's real loan rate and inflation, to compare with the offers of the practice (D-264) */}
+        <RealValues ids={['personal-loans', 'inflation-monthly', 'inflation-yearly']} />
         <SourceList variant="footer" codes={['T', 'A-23', 'A-28', 'A-29', 'B-04', 'B-05', 'B-06', 'F-10', 'F-14', 'F-29', 'F-30', 'F-31']} legalText={t('credit.legal')} />
       </div>
 

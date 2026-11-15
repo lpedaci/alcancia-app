@@ -144,6 +144,11 @@ La billetera ficticia que muestra Alcancía integrada en otra app (D-75, D-84). 
 - **Mapa de niveles en celular y tablet (D-254):** filas compactas; el nivel completado se marca con el check del nodo y su píldora queda para lectores de pantalla hasta que la fila es ancha; el desplegable queda en la misma fila del título.
 - **Hornero en el menú (D-249, D-253):** "Ver dentro de Hornero" o "Volver a Hornero", con la etiqueta de marca ficticia, arriba de "Tu avance"; en celular y tablet, en el menú de la persona.
 
+### Valores reales (D-264)
+
+- **Tarjeta "Valores reales de hoy" (`RealValues`):** cada valor real en una celda con su nombre, la cifra en `title-large` y "Valor al DD/MM/AAAA · Fuente: …"; si no se pudo actualizar, lo dice. Abajo, el recordatorio de que lo que viene es un escenario y el aviso legal, y los enlaces a las fuentes oficiales. Sin snapshot, un aviso en `info` y la pantalla sigue con los escenarios de ejemplo.
+- **"Usar el último dato real" (`UseRealValue`):** botón de texto debajo de un campo de porcentaje de una herramienta, con la fecha y la fuente; completa el campo y el valor sigue editable.
+
 ## Cómo mostramos el dinero
 
 - Pesos `$ 1.234.567,89` y moneda extranjera con código `USD 1.200`, con espacio de no separación entre el signo y el número (D-68).

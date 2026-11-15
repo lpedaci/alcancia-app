@@ -1,6 +1,7 @@
 import type { TFunction } from 'i18next';
 import type { IconName } from '@/components/ui/Icon';
 import scenarios from '@/data/scenarios.json';
+import type { MarketId } from '@/lib/market';
 import { EXPENSE_DEFS } from '@/features/wallet/engine/profile';
 import type { WalletState } from '@/features/wallet/engine/types';
 import {
@@ -42,6 +43,8 @@ export interface SimField {
   min?: number;
   max?: number;
   choices?: string[];
+  /** Today's real value that can fill this field (D-264): a percent of the market snapshot. */
+  real?: MarketId;
 }
 
 export interface SimPill {
@@ -208,9 +211,9 @@ export const SIM_DEFS: SimDef[] = [
     levelId: 'level-6',
     icon: 'percent',
     fields: [
-      { id: 'tna', kind: 'percent', default: pctOf(medium.exampleRates.fixedTerm) },
+      { id: 'tna', kind: 'percent', default: pctOf(medium.exampleRates.fixedTerm), real: 'term-deposit-people' },
       { id: 'days', kind: 'int', default: '30', min: 1, max: 365 },
-      { id: 'inflation', kind: 'percent', default: pctOf(medium.monthlyInflation) },
+      { id: 'inflation', kind: 'percent', default: pctOf(medium.monthlyInflation), real: 'inflation-monthly' },
     ],
     sources: ['indec', 'bcra-tasas'],
     compute: (v, t) => {
@@ -259,9 +262,9 @@ export const SIM_DEFS: SimDef[] = [
     fields: [
       { id: 'amount', kind: 'money', default: '1000000' },
       { id: 'days', kind: 'int', default: '180', min: 30, max: 365 },
-      { id: 'tna', kind: 'percent', default: pctOf(medium.exampleRates.fixedTerm) },
-      { id: 'uvaExtra', kind: 'percent', default: pctOf(medium.exampleRates.uvaExtra) },
-      { id: 'inflation', kind: 'percent', default: pctOf(medium.monthlyInflation) },
+      { id: 'tna', kind: 'percent', default: pctOf(medium.exampleRates.fixedTerm), real: 'term-deposit-people' },
+      { id: 'uvaExtra', kind: 'percent', default: pctOf(medium.exampleRates.uvaExtra), real: 'term-deposit-uva' },
+      { id: 'inflation', kind: 'percent', default: pctOf(medium.monthlyInflation), real: 'inflation-monthly' },
     ],
     sources: ['bcra-a8407', 'indec'],
     compute: (v, t) => {
@@ -315,7 +318,7 @@ export const SIM_DEFS: SimDef[] = [
       { id: 'price', kind: 'money', default: '120000' },
       { id: 'count', kind: 'int', default: '12', min: 1, max: 36 },
       { id: 'discount', kind: 'percent', default: '15' },
-      { id: 'inflation', kind: 'percent', default: pctOf(medium.monthlyInflation) },
+      { id: 'inflation', kind: 'percent', default: pctOf(medium.monthlyInflation), real: 'inflation-monthly' },
       { id: 'first', kind: 'choice', default: 'next', choices: ['next', 'today'] },
     ],
     sources: ['indec'],
@@ -409,7 +412,7 @@ export const SIM_DEFS: SimDef[] = [
     fields: [
       { id: 'price', kind: 'money', default: '1500000' },
       { id: 'months', kind: 'int', default: '12', min: 1, max: 60 },
-      { id: 'inflation', kind: 'percent', default: pctOf(medium.monthlyInflation) },
+      { id: 'inflation', kind: 'percent', default: pctOf(medium.monthlyInflation), real: 'inflation-monthly' },
       { id: 'return', kind: 'percent', default: '0' },
     ],
     sources: ['indec'],
@@ -607,9 +610,9 @@ export const SIM_DEFS: SimDef[] = [
     fields: [
       { id: 'amount', kind: 'money', default: '3000000' },
       { id: 'days', kind: 'int', default: '30', min: 1, max: 365 },
-      { id: 'inflation', kind: 'percent', default: pctOf(medium.monthlyInflation) },
+      { id: 'inflation', kind: 'percent', default: pctOf(medium.monthlyInflation), real: 'inflation-monthly' },
       { id: 'remunerated', kind: 'percent', default: pctOf(medium.exampleRates.remunerated) },
-      { id: 'fixedTerm', kind: 'percent', default: pctOf(medium.exampleRates.fixedTerm) },
+      { id: 'fixedTerm', kind: 'percent', default: pctOf(medium.exampleRates.fixedTerm), real: 'term-deposit-people' },
       { id: 'moneyMarket', kind: 'percent', default: pctOf(medium.exampleRates.moneyMarket) },
     ],
     sources: ['bcra-a6885', 'bcra-a8407', 'gob-fci', 'indec'],

@@ -475,6 +475,15 @@ export function categorize(state: WalletState, movementId: string, category: Bud
   return next;
 }
 
+/**
+ * How inflation goes on from today (CLAUDE.md 5.6, D-264): the person picks one of the example
+ * scenarios. Rates and inflation of the practice follow it from the next day on; nothing past changes.
+ */
+export function setScenario(state: WalletState, scenarioId: WalletState['scenarioId']): WalletState {
+  if (!scenarios.some((s) => s.id === scenarioId)) throw new WalletError('unknown_scenario');
+  return { ...clone(state), scenarioId };
+}
+
 export function setYieldMode(state: WalletState, mode: YieldMode): WalletState {
   return { ...clone(state), yieldMode: mode };
 }

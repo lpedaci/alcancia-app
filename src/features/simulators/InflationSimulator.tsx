@@ -39,6 +39,7 @@ import {
   NBSP,
   parseDecimalInput,
 } from "@/lib/money";
+import { UseRealValue } from "@/components/market/RealValues";
 import { cn } from "@/lib/utils";
 
 /**
@@ -223,6 +224,14 @@ export function InflationSimulator({
                 {t("sim3.scenario.help", { scenario: scenarioLabel })}
               </p>
             </div>
+            {/* Today's real inflation as the starting point (D-264): it fills "Otro" and says where it comes from */}
+            <UseRealValue
+              id="inflation-monthly"
+              onUse={(v) => {
+                setScenario("custom");
+                setCustomText(v);
+              }}
+            />
             {scenario === "custom" && (
               <PercentInput
                 label={t("sim3.custom.label")}

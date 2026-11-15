@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 /**
- * Real market values for the starting point of the scenarios (CLAUDE.md 5.6, D-79). Step 20:
- * a local test only, not connected to the interface. Phase B runs it once a day in GitHub Actions.
+ * Real market values for the starting point of the scenarios (CLAUDE.md 5.6, D-79, D-264). The
+ * deploy workflow runs it before every build and once a day; the app reads the snapshot it writes.
  *
- * It reads the BCRA monetary statistics API v4.0 (public, no key), validates every answer with Zod
+ * It reads the BCRA monetary statistics API v4.0 (public, no key) and, for the monthly inflation, the
+ * INDEC series of datos.gob.ar too, keeping whichever is more recent. It validates every answer with Zod
  * and writes a snapshot with each value, its date and its source. If a variable fails, it keeps the
  * last valid value with its original date (marked `stale`), or leaves it out so the app falls back
  * to the example scenario and says so. The build never breaks because of a source.
@@ -19,6 +20,9 @@ import { z } from 'zod';
 
 // BCRA_API only exists to test the fallback locally (a wrong host simulates a source that fails).
 const API = process.env.BCRA_API ?? 'https://api.bcra.gob.ar/estadisticas/v4.0/monetarias';
+// INDEC's national CPI (base December 2016) in the time-series API of datos.gob.ar, as monthly change.
+const INDEC_API = process.env.INDEC_API ?? 'https://apis.datos.gob.ar/series/api/series/';
+const INDEC_CPI = '148.3_INIVELNAL_DICI_M_26';
 const OUTPUT = process.argv[2] ?? 'public/market/snapshot.json';
 const TIMEOUT_MS = 20_000;
 const ATTEMPTS = 2;
@@ -95,6 +99,30 @@ async function fetchJson(url) {
   throw lastError;
 }
 
+/** Answer of the series API: [[date, value]], the latest first with sort=desc. */
+const IndecAnswer = z.object({
+  data: z.array(z.tuple([ISO_DATE, z.number().finite()])).min(1),
+});
+
+/**
+ * The monthly inflation straight from the INDEC series. Its date is the first day of the month the
+ * index refers to; the BCRA dates the same value on the last day. For comparing, both become months.
+ */
+async function fetchIndecMonthly(v, today) {
+  const url = `${INDEC_API}?ids=${INDEC_CPI}&representation_mode=percent_change&sort=desc&limit=1&format=json`;
+  const answer = IndecAnswer.parse(await fetchJson(url));
+  const [fecha, valor] = answer.data[0];
+  const value = new Decimal(String(valor)); // already a fraction (0.022 = 2,2 %)
+  const [min, max] = RANGE.percent;
+  if (value.lt(min) || value.gt(max)) throw new Error(`out of range: ${value.toString()}`);
+  if (fecha > today) throw new Error(`future date: ${fecha}`);
+  if (daysBetween(fecha, today) > v.maxAgeDays + 31) throw new Error(`too old: ${fecha}`);
+  // Last day of that month, like the BCRA, so the interface shows one kind of date.
+  const [y, m] = fecha.split('-').map(Number);
+  const lastDay = new Date(Date.UTC(y, m, 0)).toISOString().slice(0, 10);
+  return MarketValue.parse({ id: v.id, label: v.label, value: value.toDecimalPlaces(6).toString(), unit: v.unit, date: lastDay, sourceId: 'indec-datos' });
+}
+
 async function readPrevious() {
   try {
     return Snapshot.parse(JSON.parse(await readFile(OUTPUT, 'utf8')));
@@ -129,6 +157,18 @@ async function main() {
   const missing = [];
   for (const v of VARIABLES) {
     try {
+      if (v.id === 'inflation-monthly') {
+        // Two official readings of the same INDEC figure (D-264): the most recent one wins; on the same
+        // month, the INDEC series itself.
+        const readings = (await Promise.allSettled([fetchIndecMonthly(v, today), fetchVariable(v, today)]))
+          .filter((r) => r.status === 'fulfilled')
+          .map((r) => r.value);
+        if (readings.length === 0) throw new Error('no INDEC reading answered');
+        const latest = readings.sort((a, b) => (a.date === b.date ? (a.sourceId === 'indec-datos' ? -1 : 1) : a.date < b.date ? 1 : -1))[0];
+        values.push(latest);
+        console.log(`ok     ${v.id.padEnd(18)} ${latest.sourceId} (${readings.map((r) => `${r.sourceId} ${r.date}`).join(', ')})`);
+        continue;
+      }
       values.push(await fetchVariable(v, today));
       console.log(`ok     ${v.id.padEnd(18)} variable ${v.idVariable}`);
     } catch (error) {

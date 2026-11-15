@@ -26,6 +26,7 @@ import {
   makeDeposit,
   monthOf,
   scenarioOf,
+  setScenario,
   setYieldMode,
   tnaOf,
   WalletError,
@@ -41,6 +42,9 @@ import { useCurrentUser } from '@/store/session-store';
 import { useWallet } from '@/store/wallet-store';
 import { fuerteLine } from '@/features/companion/fuerte-lines';
 import { WhyMatters, whyText } from '@/features/learning-cards/WhyMatters';
+import { RealValues, useAsOf } from '@/components/market/RealValues';
+import scenarios from '@/data/scenarios.json';
+import { useMarket } from '@/lib/market';
 import { useReturnState } from '@/lib/use-return-state';
 
 /**
@@ -81,6 +85,9 @@ function Yield() {
   const { t } = useTranslation();
   const user = useCurrentUser();
   const [wallet, setWallet] = useWallet(user?.personId ?? '');
+  const market = useMarket();
+  const asOf = useAsOf();
+  const realInflation = market.status === 'ready' ? market.byId['inflation-monthly'] : undefined;
   const scenario = scenarioOf(wallet);
   const month = Math.max(0, monthOf(wallet.day));
   const earned = yieldOfMonth(wallet, month);
@@ -106,6 +113,30 @@ function Yield() {
             ]}
           />
         </header>
+
+          {/* From today on it is a scenario (5.6, D-264): lower, the middle one or higher, with the real
+              inflation of the last month in sight as the reference */}
+          <section aria-labelledby="scenario-title" className={cn(card, '@container')}>
+            <h2 id="scenario-title" className="text-title-medium text-on-surface">{t('yield.scenarioChoice.title')}</h2>
+            <p className="text-body-medium text-on-surface-variant">{t('yield.scenarioChoice.body')}</p>
+            <SegmentedButton
+              label={t('yield.scenarioChoice.label')}
+              value={wallet.scenarioId}
+              onValueChange={(v) => {
+                if (!v || v === wallet.scenarioId) return;
+                setWallet((w) => setScenario(w, v as typeof wallet.scenarioId));
+                toast.success(t('yield.scenarioChoice.done'));
+              }}
+              options={scenarios.map((s) => ({ value: s.id, label: t('yield.scenarioChoice.option', { name: t(`yield.scenarioChoice.names.${s.id}`), value: formatPercent(s.monthlyInflation, { decimals: 1 }) }) }))}
+              className="w-full"
+            />
+            {realInflation && (
+              <p className="flex items-start gap-2 text-body-small text-on-surface-variant">
+                <Icon name="query_stats" size={16} className="mt-px shrink-0 text-info" />
+                {t('yield.scenarioChoice.real', { value: formatPercent(realInflation.value, { decimals: 1 }), asOf: asOf(realInflation) })}
+              </p>
+            )}
+          </section>
 
           {/* Where the balance yields: one standard sheet per option (1.1.1 "riesgo siempre visible") */}
           <section aria-labelledby="mode-title" className={cn(card, '@container border-primary')}>
@@ -195,6 +226,8 @@ function Yield() {
             <LearnSection />
           </div>
         </div>
+        {/* Today's real rates and inflation, with date and source; the wallet keeps its scenario (D-264) */}
+        <RealValues ids={['inflation-monthly', 'inflation-yearly', 'term-deposit-people', 'term-deposit-uva', 'badlar', 'uva', 'cer']} />
         <SourceList variant="footer" codes={['B-01', 'B-02', 'B-03', 'B-12', 'B-13', 'B-14', 'B-17', 'B-26', 'F-03', 'F-08', 'F-09']} legalText={t('yield.legal')} />
       </div>
     </WalletShell>

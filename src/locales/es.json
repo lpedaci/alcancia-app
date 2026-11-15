@@ -2458,6 +2458,19 @@
     },
     "learn": {
       "tool": "Herramienta"
+    },
+    "scenarioChoice": {
+      "title": "¿Cómo sigue la inflación desde hoy?",
+      "body": "Lo que viene es un escenario, no una predicción. Elige cómo sigue: las tasas y la inflación de tu billetera de práctica lo siguen desde mañana. Lo que ya pasó no cambia.",
+      "label": "Escenario de tu billetera",
+      "option": "{{name}} · {{value}}",
+      "names": {
+        "low": "Baja",
+        "medium": "Media",
+        "high": "Alta"
+      },
+      "real": "Como referencia, la inflación real del último mes fue {{value}} ({{asOf}}).",
+      "done": "Escenario cambiado"
     }
   },
   "invest": {
@@ -4155,5 +4168,34 @@
       "inside": "Alcancía dentro de Hornero",
       "notice": "Hornero es una marca ficticia de demostración: no existe y no imita a ninguna billetera real."
     }
+  },
+  "market": {
+    "title": "Valores reales de hoy",
+    "intro": "El dinero es ficticio, pero estos valores son reales: los publican el BCRA y el INDEC y los tomamos una vez por día. Tu billetera de práctica sigue con su escenario.",
+    "loading": "Cargando los valores reales…",
+    "unavailable": "Hoy no pudimos leer los valores reales. Seguimos con los escenarios de ejemplo; puedes consultarlos en el BCRA y el INDEC.",
+    "stale": "No pudimos actualizarlo hoy: es el último valor disponible.",
+    "asOf": "Valor al {{date}} · Fuente: {{source}}",
+    "scenarioNote": "Lo que viene después de hoy es un escenario, no una predicción. Contenido educativo: no es asesoramiento financiero ni una recomendación de inversión.",
+    "useReal": "Usar el último dato real: {{value}}",
+    "sources": {
+      "bcra-api": "BCRA",
+      "indec-via-bcra": "INDEC, publicado por el BCRA",
+      "indec-datos": "INDEC, en datos.gob.ar"
+    },
+    "labels": {
+      "term-deposit-30d": "Depósitos a 30 días (TNA)",
+      "term-deposit-people": "Plazo fijo de personas (TNA)",
+      "term-deposit-uva": "Plazo fijo UVA, tasa adicional (TNA)",
+      "badlar": "Tasa BADLAR, bancos privados (TNA)",
+      "personal-loans": "Préstamos personales (TNA)",
+      "uva": "Valor de la UVA",
+      "cer": "Coeficiente CER",
+      "fx-wholesale": "Dólar mayorista",
+      "fx-retail": "Dólar minorista (vendedor)",
+      "inflation-monthly": "Inflación del último mes",
+      "inflation-yearly": "Inflación de los últimos 12 meses"
+    },
+    "investIntro": "Los precios de acciones y CEDEARs de Invertir son de ejemplo: BYMA pide una licencia para mostrarlos. El tipo de cambio sí es real."
   }
 }

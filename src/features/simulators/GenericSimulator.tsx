@@ -14,6 +14,7 @@ import { D } from '@/lib/finance';
 import { formatCompactMoney, formatNumber, NBSP, parseDecimalInput } from '@/lib/money';
 import { cn } from '@/lib/utils';
 import type { SimChart, SimDef, SimField, SimOutput, SimValues } from './defs';
+import { UseRealValue } from '@/components/market/RealValues';
 import { useSavedScenarios } from './use-saved-scenarios';
 
 /**
@@ -162,7 +163,14 @@ export function GenericSimulator({ def, preset, labelledBy }: { def: SimDef; pre
               const help = t(k(`fields.${f.id}.help`));
               if (f.kind === 'money' || f.kind === 'usd')
                 return <MoneyInput key={f.id} id={id} label={label} helperText={help} currency={f.kind === 'usd' ? 'USD' : 'ARS'} value={texts[f.id]} onChange={(e) => set(f.id, e.target.value)} />;
-              if (f.kind === 'percent') return <PercentInput key={f.id} id={id} label={label} helperText={help} value={texts[f.id]} onChange={(e) => set(f.id, e.target.value)} />;
+              if (f.kind === 'percent')
+                return (
+                  <div key={f.id} className="flex flex-col gap-1">
+                    <PercentInput id={id} label={label} helperText={help} value={texts[f.id]} onChange={(e) => set(f.id, e.target.value)} />
+                    {/* Today's real value, with its date and source (D-264) */}
+                    {f.real && <UseRealValue id={f.real} onUse={(v) => set(f.id, v)} />}
+                  </div>
+                );
               if (f.kind === 'choice')
                 return (
                   <div key={f.id} className="flex flex-col gap-2">

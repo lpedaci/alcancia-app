@@ -30,6 +30,10 @@ export const OFFICIAL_SOURCES = [
   { id: 'cajval-cedears', name: 'Caja de Valores, CEDEARs y CEDEARs de ETF', url: 'https://cajadevalores.com.ar/Servicios/Cedears' },
   { id: 'byma-alycs', name: 'BYMA, nómina de ALyC', url: 'https://www.byma.com.ar/mercado/para-agentes-miembros/listado-de-alycs' },
   { id: 'indec', name: 'INDEC, índice de precios al consumidor', url: 'https://www.indec.gob.ar' },
+  // Real values of the daily snapshot (D-79, D-264), verified on 15/11/2026 (docs/market-data.md)
+  { id: 'bcra-api', name: 'BCRA, principales variables (API de estadísticas monetarias)', url: 'https://www.bcra.gob.ar/PublicacionesEstadisticas/Principales_variables.asp', verifiedAt: '2026-11-15' },
+  { id: 'indec-via-bcra', name: 'INDEC, IPC publicado por el BCRA en sus principales variables', url: 'https://www.bcra.gob.ar/PublicacionesEstadisticas/Principales_variables.asp', verifiedAt: '2026-11-15' },
+  { id: 'indec-datos', name: 'INDEC, IPC nacional en la API de series de tiempo de datos.gob.ar', url: 'https://datos.gob.ar/series/api/series/?ids=148.3_INIVELNAL_DICI_M_26', verifiedAt: '2026-11-15' },
 ].map((source) => ({ verifiedAt: VERIFIED, ...source })) satisfies OfficialSource[];
 
 export type OfficialSourceId = (typeof OFFICIAL_SOURCES)[number]['id'];

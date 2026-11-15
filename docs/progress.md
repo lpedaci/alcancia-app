@@ -69,3 +69,4 @@
 | 15/11/2026 | Ajustes de Lourdes | Logo de Alcancía siempre en la barra (D-258); un solo ancho de contenido en la billetera (D-259); ocultar montos, datos de la cuenta y apartados plegados en Inicio (D-260) | Lourdes revisa |
 | 15/11/2026 | Ajustes de Lourdes | Marco de la billetera estable entre pantallas cortas y largas (D-261); inicio de sesión con marco de 1440 px, sin scroll y el celular que se disuelve abajo (D-262) | Lourdes revisa |
 | 15/11/2026 | Corrección | Abrir un menú o un diálogo ya no corre la pantalla hacia un costado (D-263) | Hecho |
+| 15/11/2026 | 22 · Valores reales del mercado | Snapshot diario del BCRA y el INDEC en el build (workflow programado), tarjeta "Valores reales de hoy" en Rendir, Tarjeta y préstamos e Invertir, "Usar el último dato real" en las herramientas y elección del escenario desde hoy en Rendir (D-264); precios de acciones y CEDEARs de ejemplo con enlace a BYMADATA | Lourdes revisa |

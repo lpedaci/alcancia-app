@@ -33,23 +33,22 @@ El dinero es ficticio, pero el mundo es el real (5.6). El punto de partida de lo
 
 Otras series útiles para más adelante: 29 (expectativa de inflación a 12 meses del REM), 44 y 45 (TAMAR), 1187 y 1188 (bandas cambiarias). No se usan por ahora.
 
-## 3. Inflación: del BCRA, con el INDEC como fuente de origen
+## 3. Inflación: del INDEC, por dos caminos oficiales (D-264, reemplaza D-223)
 
-**Decisión (D-223):** la inflación se toma de la misma API del BCRA (variables 27 y 28) y se rotula "Fuente: INDEC (IPC), publicado por el BCRA".
+La inflación mensual se lee **de las dos fuentes oficiales** y gana la más reciente:
 
-**Por qué:**
-- Es la misma API, con el mismo formato y la misma validación que el resto. Una fuente menos que pueda fallar.
-- Los valores coinciden con el INDEC. Lo verifiqué contra el IPC nacional (base diciembre 2016) de la API de series de datos.gob.ar (`148.3_INIVELNAL_DICI_M_26`), cuya fuente declarada es el INDEC:
+- **INDEC en datos.gob.ar:** el IPC nacional (base diciembre 2016, serie `148.3_INIVELNAL_DICI_M_26`) como variación mensual (`representation_mode=percent_change`). Se rotula "Fuente: INDEC, en datos.gob.ar".
+- **INDEC publicado por el BCRA:** la variable 27 de la API del BCRA. Se rotula "Fuente: INDEC, publicado por el BCRA".
+
+Si las dos traen el mismo mes, gana la serie del INDEC (más decimales). La variable 28 (interanual) sigue saliendo del BCRA.
+
+**Por qué las dos:** el 15/11/2026 el BCRA ya publicaba octubre (2,2 %) y la serie de datos.gob.ar seguía en septiembre (1,93 %). Leer las dos da el dato más nuevo sin dejar de citar al INDEC.
 
 | Mes | Índice INDEC | Variación calculada | Variable 27 del BCRA |
 | --- | --- | --- | --- |
 | Agosto de 2026 | 12.276,7660 | 1,66 % | 1,7 % |
 | Septiembre de 2026 | 12.514,1508 | 1,93 % | 1,9 % |
 | Octubre de 2026 | 12.785,9321 | 2,17 % | 2,2 % |
-
-- El BCRA publica la variación redondeada a un decimal, igual que el INDEC en su informe. Para el punto de partida de un escenario alcanza.
-
-**Alternativa descartada por ahora:** leer el índice del INDEC en datos.gob.ar y calcular la variación. Da más decimales, pero suma una fuente, un formato y un cálculo. Si la variable 27 dejara de publicarse, es el reemplazo (Q-19).
 
 ## 4. Hallazgo: la UVA y el CER se publican por adelantado
 
@@ -93,12 +92,13 @@ El build nunca se rompe por una fuente: el script termina siempre con código 0.
 | Falla, y no hay snapshot anterior | La variable va a `missing` | El escenario de ejemplo de `scenarios.json`, con su rótulo "Valores de ejemplo" |
 | Responde con un dato fuera de rango, futuro o viejo | Se trata como una falla | Igual que arriba |
 
-## 7. Frecuencia y despliegue (fase B, paso 22)
+## 7. Frecuencia y despliegue (construido en el paso 22)
 
-- Una tarea programada de GitHub Actions, **una vez por día**, corre el script antes del build y publica el snapshot junto al sitio.
-- Para conservar el último valor válido entre corridas, el workflow tiene que recuperar el snapshot publicado antes de correr el script (por ejemplo, descargándolo del sitio o guardándolo como artefacto o en la caché de Actions). Se decide en el paso 22.
+- El workflow de despliegue corre **una vez por día** (`schedule`, 10:15 UTC, 07:15 en Argentina) y además en cada push a `main`.
+- Antes del build **descarga el snapshot publicado** (`https://lpedaci.github.io/alcancia-app/market/snapshot.json`). Así, si una fuente falla, el script conserva el último valor válido con su fecha original (`stale`).
+- Después corre `node scripts/fetch-market.mjs`, que escribe `public/market/snapshot.json`; Vite lo copia a `dist/market/`. El script nunca rompe el build.
 - La app lee `market/snapshot.json` del mismo origen: la CSP no cambia (`connect-src 'self'`) y el navegador nunca llama a terceros.
-- Si el BCRA bloquea por exceso de pedidos, no hay riesgo: son 11 pedidos por día. La API no documenta un límite (Q-20).
+- Son 12 pedidos por día (11 al BCRA y 1 a datos.gob.ar).
 
 ## 8. Precios de acciones y CEDEARs: quedan de ejemplo
 
@@ -109,13 +109,18 @@ BYMA exige licencia para mostrar sus precios, y no se va a gestionar (D-79). Por
 - En la ficha de cada instrumento de Invertir hay un enlace a **BYMADATA**, el sitio de datos de BYMA, para ver los precios reales: `https://open.bymadata.com.ar/#/dashboard`, el mismo enlace que publica byma.com.ar. Se abre en una pestaña nueva, con `rel="noopener noreferrer"`.
 - El 14/11/2026 ese sitio mostraba "Sitio en mantenimiento", y `www.bymadata.com.ar` no respondía. Se revisa antes de publicar la fase B (Q-17).
 
-## 9. Qué falta para la fase B
+## 9. Dónde se ven en la interfaz (paso 22)
 
-- Conectar el snapshot a Rendir, Tarjeta y préstamos, las herramientas y el punto de partida de los escenarios, con "Valor al DD/MM/AAAA · Fuente: …".
-- Dejar elegir cómo sigue el escenario después de hoy (como la última inflación real, más alta o más baja), siempre rotulado.
-- La tarea programada y cómo se conserva el último snapshot válido.
-- Agregar `bcra-api` e `indec-via-bcra` a `src/app/sources.ts` cuando la interfaz los muestre.
-- Confirmar Q-17 a Q-20.
+| Pantalla | Valores reales | Cómo se usan |
+| --- | --- | --- |
+| Rendir | Inflación mensual e interanual, plazo fijo de personas, tasa adicional del UVA, BADLAR, UVA y CER | Tarjeta "Valores reales de hoy" y, arriba, "¿Cómo sigue la inflación desde hoy?": la persona elige el escenario de su billetera (baja, media o alta) con la inflación real del último mes como referencia |
+| Tarjeta y préstamos | Préstamos personales (TNA) e inflación | Tarjeta "Valores reales de hoy", para comparar con las ofertas de práctica |
+| Invertir | Dólar mayorista y minorista | Tarjeta "Valores reales de hoy"; los precios de acciones y CEDEARs siguen de ejemplo, con el enlace a BYMADATA |
+| Herramientas (SIM-3 a SIM-6, SIM-8, SIM-12) | Inflación mensual, plazo fijo de personas, tasa adicional del UVA | "Usar el último dato real" debajo de cada campo: completa el valor y dice la fecha y la fuente; el resto sigue editable |
+
+Cada valor dice "Valor al DD/MM/AAAA · Fuente: …" y enlaza a su fuente oficial. Sin snapshot, la tarjeta lo dice y la pantalla sigue con los escenarios de ejemplo. Tests en `src/components/market/RealValues.test.tsx` y en `engine.test.ts`.
+
+**Pendiente:** BYMADATA seguía sin responder el 15/11/2026 (Q-17).
 
 ## Referencias
 

@@ -449,5 +449,34 @@
     "hornero": {
       "notice": "Hornero is a fictitious demo brand: it does not exist and does not imitate any real wallet."
     }
+  },
+  "market": {
+    "title": "Today's real values",
+    "intro": "The money is fictitious, but these values are real: the BCRA and the INDEC publish them and we read them once a day. Your practice wallet keeps its scenario.",
+    "loading": "Loading the real values…",
+    "unavailable": "We couldn't read the real values today. We keep the example scenarios; you can check them at the BCRA and the INDEC.",
+    "stale": "We couldn't update it today: it is the last value available.",
+    "asOf": "Value as of {{date}} · Source: {{source}}",
+    "scenarioNote": "What comes after today is a scenario, not a forecast. Educational content: not financial advice or an investment recommendation.",
+    "useReal": "Use the latest real value: {{value}}",
+    "sources": {
+      "bcra-api": "BCRA",
+      "indec-via-bcra": "INDEC, published by the BCRA",
+      "indec-datos": "INDEC, on datos.gob.ar"
+    },
+    "labels": {
+      "term-deposit-30d": "30-day deposits (nominal annual rate)",
+      "term-deposit-people": "Term deposits for individuals (nominal annual rate)",
+      "term-deposit-uva": "UVA term deposit, extra rate",
+      "badlar": "BADLAR rate, private banks",
+      "personal-loans": "Personal loans (nominal annual rate)",
+      "uva": "UVA value",
+      "cer": "CER coefficient",
+      "fx-wholesale": "Wholesale dollar",
+      "fx-retail": "Retail dollar (selling)",
+      "inflation-monthly": "Inflation, last month",
+      "inflation-yearly": "Inflation, last 12 months"
+    },
+    "investIntro": "Stock and CEDEAR prices in Invest are examples: BYMA requires a license to show them. The exchange rate is real."
   }
 }
