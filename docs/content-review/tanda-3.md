@@ -1,5 +1,7 @@
 # Tanda 3 del paso 27: guías para revisar
 
+> **Aprobada por Lourdes el 15/11/2026.** Las guías pasaron a `src/data/guides.json` y se ven en la app. Las ampliaciones siguen pendientes de revisión del Lic. Kevin Giampieri.
+
 > Borradores de `src/data/guides-drafts.json`, generados con `node scripts/guides-review.mjs 3`. **No se muestran en la app** hasta que Lourdes los apruebe; las ampliaciones quedan marcadas para el Lic. Kevin Giampieri (D-276).
 
 Cómo revisar: marca en cada guía "Aprobada", "Con cambios" (y cuáles) o "No va". Lo validado viene del taller o de la presentación y no cambia datos; las ampliaciones son lo nuevo.
@@ -9,7 +11,7 @@ Cómo revisar: marca en cada guía "Aprobada", "Con cambios" (y cuáles) o "No v
 - **Id:** `module-09-guide-2` · **Fuentes:** A-21, B-40, F-03
 - **Validado (sin cambiar datos):** El dinero quieto pierde poder de compra hoy, en un año y en cinco (A-21); El IPC lo publica el INDEC (B-40)
 - **Ampliación, pendiente del Lic. Kevin Giampieri:** Cambio real de un sueldo: (1 + aumento) ÷ (1 + inflación) − 1, la fórmula de tasa real de la spec (docs/formulas.md, F-03) aplicada a un aumento; Ejemplo y práctica con números redondos de ejemplo
-- **Decisión de Lourdes:** ☐ Aprobada · ☐ Con cambios · ☐ No va
+- **Decisión de Lourdes:** ☑ Aprobada (15/11/2026)
 
 **Situación:** Te aumentaron el sueldo un 20 %. Suena bien, pero en el mismo año los precios subieron un 30 %. ¿Ganaste o perdiste?
 
@@ -55,7 +57,7 @@ No se restan los porcentajes: se dividen. **Cambio real = (1 + aumento) ÷ (1 + 
 - **Id:** `module-10-guide-2` · **Fuentes:** B-04, F-01, F-02
 - **Validado (sin cambiar datos):** TEA de una TNA del 36 % a 30 días = 42,59 % (caso F-02 de docs/formulas.md, con test)
 - **Ampliación, pendiente del Lic. Kevin Giampieri:** Interés sobre interés y comparar tasas en la misma medida; TNA, TEA y CFT en los documentos de crédito (B-04)
-- **Decisión de Lourdes:** ☐ Aprobada · ☐ Con cambios · ☐ No va
+- **Decisión de Lourdes:** ☑ Aprobada (15/11/2026)
 
 **Situación:** Dos ofertas: una dice "TNA 36 %" y otra "TEA 40 %". La segunda parece más alta. ¿Lo es?
 
@@ -100,7 +102,7 @@ Para comparar dos ofertas, pásalas a la misma medida: **TEA = (1 + TNA × d ÷ 
 - **Id:** `module-11-guide-2` · **Fuentes:** B-01, B-03, F-08, F-09
 - **Validado (sin cambiar datos):** UVA ajustado por CER, no obligatorio desde 2025, condiciones de cada entidad (B-03); Fórmulas del plazo fijo tradicional y UVA (docs/formulas.md, F-08 y F-09)
 - **Ampliación, pendiente del Lic. Kevin Giampieri:** Ejemplo de 180 días con inflación baja: UVA $ 1.098.835,59 y tradicional $ 1.177.534,25 (calculado con las fórmulas F-08 y F-09); Con inflación alta suele ganar el UVA y con baja, el tradicional: lectura didáctica del escenario
-- **Decisión de Lourdes:** ☐ Aprobada · ☐ Con cambios · ☐ No va
+- **Decisión de Lourdes:** ☑ Aprobada (15/11/2026)
 
 **Situación:** El plazo fijo UVA promete "ganarle a la inflación". ¿Siempre le gana al tradicional?
 
@@ -147,7 +149,7 @@ Con **inflación alta**, el UVA suele terminar con más pesos que el tradicional
 - **Id:** `module-17-guide-2` · **Fuentes:** B-12, B-19, B-21, B-27
 - **Validado (sin cambiar datos):** nada
 - **Ampliación, pendiente del Lic. Kevin Giampieri:** Registro de PSP y listado de entidades financieras del BCRA (B-19); Registro Público de Agentes de la CNV (B-21); Registro de PSAV: la inscripción no implica aval ni garantía (B-27); Leyenda legal de las billeteras de pago (B-12)
-- **Decisión de Lourdes:** ☐ Aprobada · ☐ Con cambios · ☐ No va
+- **Decisión de Lourdes:** ☑ Aprobada (15/11/2026)
 
 **Situación:** Una app nueva te ofrece hacer rendir tu dinero y dice estar "aprobada". ¿Cómo sabes si es cierto?
 

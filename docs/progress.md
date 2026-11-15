@@ -87,3 +87,4 @@
 | 15/11/2026 | Ajuste de Lourdes | Paula Gómez pasa a ser Julieta Martorelli y Silvia Herrera, Bettyna Gonçalves, en la app, los datos, la documentación y el README (D-280) | Hecho |
 | 15/11/2026 | 27 · Contenido, tanda 2 aprobada | Las guías 2 de los módulos 5 a 8 pasan a la app como guías para profundizar; `scripts/guides-publish.mjs` publica cada tanda aprobada | Hecho |
 | 15/11/2026 | 27 · Contenido, tanda 3 | Guías 2 de los módulos 9, 10, 11 y 17 en borrador, validadas con tests, y documento `docs/content-review/tanda-3.md` | Esperando la revisión de Lourdes |
+| 15/11/2026 | 27 · Contenido, tanda 3 aprobada | Las guías 2 de los módulos 9, 10, 11 y 17 pasan a la app como guías para profundizar | Hecho |
