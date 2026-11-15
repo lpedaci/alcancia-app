@@ -14,7 +14,7 @@ export function initials(name: string): string {
 
 /**
  * One color per role, used the same way everywhere (CLAUDE.md 2.1.1 and 2.2.1, pattern 6).
- * The five demo people have a photo with a ring in their role color (D-165); everyone else
+ * The twelve demo people of the three contexts have a photo with a ring in their role color (D-165); everyone else
  * shows initials on the role container.
  */
 export const ROLE_AVATAR_TONE: Record<Role, string> = {

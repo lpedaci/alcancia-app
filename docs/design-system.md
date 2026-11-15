@@ -58,7 +58,7 @@ Cada nivel solo usa el anterior. Controles automáticos: `tokens.test.ts` (contr
 | Información | `#2457C5` | `#DCE6FB` | Avisos, supuestos, respuestas para revisar |
 
 - Los estados son solo para estados, nunca series, y siempre van con ícono y texto.
-- **Colores por rol** (identifican personas, nunca estados): admin `#3D4FA8`, tutor `#00796B`, participante `#7A4FB0`, decisor `#5D6B2F`. Las cinco personas de la demo tienen foto con anillo de ese color.
+- **Colores por rol** (identifican personas, nunca estados): admin `#3D4FA8`, tutor `#00796B`, participante `#7A4FB0`, decisor `#5D6B2F`. Las doce personas de la demo (cinco de Andina, cuatro de Ceibo y tres de Hornero) tienen foto con anillo de ese color.
 - **Series de gráficos**, en este orden: primary, tertiary, índigo claro, verde azulado claro y gris, con relleno plano de baja opacidad.
 - **Excepción (D-52):** el naranja de Fuerte (`--fuerte-body`, `--fuerte-light`, `--fuerte-shade`) solo en el personaje y sus luces.
 - **Marca del socio (D-248):** los colores de Hornero (`--partner-hornero*`) solo en las piezas de Hornero del modo integrado.

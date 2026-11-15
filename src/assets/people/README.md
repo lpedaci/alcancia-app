@@ -15,7 +15,8 @@ Fotos de stock descargadas de [Magnific](https://www.magnific.com/) con su licen
 | Héctor Ramos (Ceibo, dirección) | `719.jpg` |
 | Sofía Cabral (Hornero, equipo de producto) | `2149304146.jpg` |
 | Nicolás Vidal (Hornero, equipo de producto) | `34735.jpg` |
+| Joaquín Paredes (Hornero, usuario) | `1042.jpg` (sumada por Lourdes el 15/11/2026) |
 
-Joaquín Paredes (usuario de Hornero) sigue con sus iniciales: entre las fotos con licencia no quedaba ninguna de un hombre joven con ropa informal. Quedan sin usar `19438.jpg` y `2151098593.jpg`.
+Todas las personas de la demo tienen foto. Quedan sin usar `19438.jpg` y `2151098593.jpg`.
 
 Crédito que pide la licencia (D-71): "Designed by Magnific" con enlace a magnific.com, en el pie de la landing ("Fotos de personas: Designed by Magnific"), en el case study, en la documentación y en el sitio del sistema de diseño.

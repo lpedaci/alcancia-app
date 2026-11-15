@@ -1,5 +1,6 @@
 import diego from './diego.webp';
 import hector from './hector.webp';
+import joaquin from './joaquin.webp';
 import kevin from './kevin.webp';
 import lucia from './lucia.webp';
 import mariana from './mariana.webp';
@@ -22,12 +23,12 @@ export const PERSON_PHOTOS: Record<string, string> = {
   'p-kevin': kevin,
   'p-julieta': julieta,
   'p-ricardo': ricardo,
-  // Contexts of use (step 23): Instituto Superior Ceibo and Hornero. Joaquín keeps initials: there
-  // was no unused casual photo of a young man among the licensed ones (README.md of this folder).
+  // Contexts of use (step 23): Instituto Superior Ceibo and Hornero (README.md of this folder).
   'p-lucia': lucia,
   'p-martin': martin,
   'p-bettyna': bettyna,
   'p-hector': hector,
   'p-sofia': sofia,
   'p-nicolas': nicolas,
+  'p-joaquin': joaquin,
 };

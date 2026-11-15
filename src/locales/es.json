@@ -3721,7 +3721,7 @@
         "inverse-surface": "Tooltips y avisos"
       },
       "people": "Personas",
-      "peopleNote": "Cada rol tiene su color, que identifica personas y nunca estados. Las cinco personas de la demo llevan foto con un anillo de ese color; el resto, iniciales.",
+      "peopleNote": "Cada rol tiene su color, que identifica personas y nunca estados. Las doce personas de la demo llevan foto con un anillo de ese color; el resto, iniciales.",
       "peopleNames": {
         "ld_admin": "Admin de L&D · Julieta",
         "tutor": "Tutor · Kevin",
