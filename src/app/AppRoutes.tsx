@@ -27,6 +27,7 @@ const MissionPage = lazyPage(() => import('@/features/missions/MissionPage'), 'M
 const WelcomePage = lazyPage(() => import('@/features/onboarding/WelcomePage'), 'WelcomePage');
 const ProfilePage = lazyPage(() => import('@/features/profile/ProfilePage'), 'ProfilePage');
 const LearnPage = lazyPage(() => import('@/features/learning/LearnPage'), 'LearnPage');
+const ReviewPage = lazyPage(() => import('@/features/learning/ReviewPage'), 'ReviewPage');
 const GuidePage = lazyPage(() => import('@/features/learning/GuidePage'), 'GuidePage');
 const ChallengePage = lazyPage(() => import('@/features/learning/ChallengePage'), 'ChallengePage');
 const PayPage = lazyPage(() => import('@/features/pay/PayPage'), 'PayPage');
@@ -85,6 +86,7 @@ export function AppRoutes() {
           <Route path="/app/invest/:instrumentId" element={<InstrumentPage />} />
           <Route path="/app/learn" element={<LearnPage />} />
           <Route path="/app/learn/guides/:guideId" element={<GuidePage />} />
+          <Route path="/app/learn/review/:moduleId" element={<ReviewPage />} />
           <Route path="/app/learn/challenges/:challengeId" element={<ChallengePage />} />
           <Route path="/app/tools" element={<ToolsPage />} />
           <Route path="/app/tools/:simId" element={<SimToolPage />} />

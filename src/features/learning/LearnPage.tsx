@@ -18,6 +18,8 @@ import { challengeById, guideOfModule, MODULES, moduleById } from './questions';
 import { MyQuestions, WeeklyChallenges } from './Tutoring';
 import { MasteryButton } from '@/features/levels/MasteryButton';
 import { fuerteLine } from '@/features/companion/fuerte-lines';
+import { useOrgKind } from '@/lib/org-context';
+import { DueReviews } from './DueReviews';
 
 /**
  * P9, Aprender (5.0, 2.2.1 pattern 8): the map of levels as a timeline, one stretch per level with
@@ -47,6 +49,7 @@ export function LearnPage() {
   const attempts = allAttempts.filter((a) => a.personId === personId);
   const missionCompletions = allMissions.filter((m) => m.personId === personId);
   const passing = useProgram().passingScore;
+  const kind = useOrgKind();
   const reduce = useShouldReduceMotion();
   const [open, setOpen] = useState<Set<string>>(() => new Set(current ? [current.level.id] : []));
 
@@ -171,8 +174,10 @@ export function LearnPage() {
           </section>
 
           <div className="flex min-w-0 flex-col gap-6">
-            <WeeklyChallenges personId={personId} />
-            <MyQuestions personId={personId} />
+            <DueReviews personId={personId} />
+            {/* The product context has no tutor (5.5): no weekly challenges and no questions to a tutor */}
+            {kind !== 'product' && <WeeklyChallenges personId={personId} />}
+            {kind !== 'product' && <MyQuestions personId={personId} />}
             {/* Achievements */}
             <section aria-labelledby="badges-title" className="flex flex-col gap-6 rounded-xl border border-outline-variant bg-surface-container-lowest p-(--space-card-padding)">
               <h2 id="badges-title" className="text-title-large text-on-surface">

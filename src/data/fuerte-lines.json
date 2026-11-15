@@ -414,6 +414,13 @@
       "variants": [
         "Tu saldo está quieto. Lee las fichas y elige dónde rinde."
       ]
+    },
+    "learn.review.fuerte": {
+      "state": "thinking",
+      "variants": [
+        "Repasar un poco cada tanto vale más que leer todo de golpe.",
+        "Tres preguntas y listo. Lo que repasas, se queda."
+      ]
     }
   }
 }

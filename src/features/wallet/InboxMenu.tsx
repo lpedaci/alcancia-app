@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/Button';
 import { Icon } from '@/components/ui/Icon';
@@ -11,6 +12,10 @@ import { useWallet } from '@/store/wallet-store';
 import { fallForScam, markMessage, unreadMessages } from './engine/engine';
 import { MESSAGE_BAIT, type SUSPICIOUS_TEMPLATES } from './engine/profile';
 import type { InboxMessage } from './engine/types';
+import { Link } from 'react-router';
+import { useReminders } from '@/features/learning/use-reminders';
+import type { IconName } from '@/components/ui/Icon';
+import type { ReminderKind } from '@/lib/reminders';
 
 /**
  * The bell of the wallet (D-102, D-211): an inbox with legitimate notices and suspicious messages, one
@@ -18,11 +23,20 @@ import type { InboxMessage } from './engine/types';
  * link that leaves the app ("abrir el enlace" is simulated here); and every suspicious message, when
  * it is reported or when the person takes the bait, ends in feedback with the signals it had (B-24).
  */
+const REMINDER_ICON: Record<ReminderKind, IconName> = { review: 'replay', guide: 'menu_book', weekly: 'flag', due: 'schedule', goal: 'savings' };
+
 export function InboxMenu({ personId }: { personId: string }) {
   const { t } = useTranslation();
   const [wallet, update] = useWallet(personId);
   const messages = [...(wallet.messages ?? [])].reverse();
   const unread = unreadMessages(wallet);
+  const { reminders } = useReminders(personId);
+  const [open, setOpen] = useState(false);
+  const onOpenChange = (next: boolean) => {
+    // Closing the bell marks what was visible as read; a report or a fall is never undone.
+    if (!next && unread > 0) update((s) => (s.messages ?? []).reduce((acc, m) => (m.status === 'unread' ? markMessage(acc, m.id, 'read') : acc), s));
+    setOpen(next);
+  };
 
   const report = (m: InboxMessage) => {
     update((s) => markMessage(s, m.id, 'reported'));
@@ -35,33 +49,46 @@ export function InboxMenu({ personId }: { personId: string }) {
   };
 
   return (
-    <Popover
-      onOpenChange={(open) => {
-        // Closing the bell marks what was visible as read; a report or a fall is never undone.
-        if (!open && unread > 0) update((s) => (s.messages ?? []).reduce((acc, m) => (m.status === 'unread' ? markMessage(acc, m.id, 'read') : acc), s));
-      }}
-    >
+    <Popover open={open} onOpenChange={onOpenChange}>
       <PopoverTrigger asChild>
         <button
           type="button"
-          aria-label={unread > 0 ? t('wallet.inbox.labelUnread', { count: unread }) : t('wallet.inbox.label')}
+          aria-label={
+            unread + reminders.length > 0 ? t('wallet.inbox.labelPending', { count: unread + reminders.length }) : t('wallet.inbox.label')
+          }
           className="relative inline-flex size-10 items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
         >
           <Icon name="notifications" size={24} />
-          {unread > 0 && (
+          {unread + reminders.length > 0 && (
             <span aria-hidden className="absolute top-1 right-1 flex min-w-4 items-center justify-center rounded-full bg-error px-1 text-label-small text-on-error">
-              {unread}
+              {unread + reminders.length}
             </span>
           )}
         </button>
       </PopoverTrigger>
       <PopoverContent label={t('wallet.inbox.title')} align="end" className="w-80">
-        <div className="flex flex-col gap-3">
+        <div className="flex max-h-[70dvh] flex-col gap-3 overflow-y-auto">
+          {/* F9 (D-273): reminders of the program, in the platform */}
+          {reminders.length > 0 && (
+            <div className="flex flex-col gap-2 border-b border-outline-variant pb-3">
+              <p className="text-title-medium text-on-surface">{t('reminders.inboxTitle')}</p>
+              <ul className="flex flex-col gap-1">
+                {reminders.map((r) => (
+                  <li key={r.id}>
+                    <Link to={r.to} onClick={() => onOpenChange(false)} className="flex items-start gap-3 rounded-lg p-2 text-body-medium text-on-surface hover:bg-surface-container focus-visible:outline-2 focus-visible:outline-primary">
+                      <Icon name={REMINDER_ICON[r.kind]} size={20} className="mt-0.5 shrink-0 text-primary" />
+                      <span className="min-w-0">{t(`reminders.kinds.${r.kind}`, { ...r.params, ...(typeof r.params.date === 'string' ? { date: formatDate(r.params.date) } : {}) })}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
           <p className="text-title-medium text-on-surface">{t('wallet.inbox.title')}</p>
           {messages.length === 0 ? (
             <p className="text-body-medium text-on-surface-variant">{t('wallet.inbox.empty')}</p>
           ) : (
-            <ul className="flex max-h-96 flex-col gap-2 overflow-y-auto">
+            <ul className="flex flex-col gap-2">
               {messages.map((m) => (
                 <MessageItem key={m.id} message={m} pending={wallet.scamPending?.source === m.id} onReport={() => report(m)} onFall={() => fall(m)} />
               ))}

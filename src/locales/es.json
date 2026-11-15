@@ -846,7 +846,9 @@
       "fellReal": "En la vida real: no sigas respondiendo, cambia tu contraseña, avisa a tu billetera por su canal oficial y haz la denuncia. Reportarlo frena nuevos intentos, pero lo que ya salió no vuelve.",
       "legitNote": "Este aviso es legítimo: viene del canal oficial y no pide datos.",
       "fell": "Caíste en el mensaje de práctica. Lee las señales para reconocerlo la próxima vez.",
-      "reportAfter": "Reportar ahora para frenar otro intento"
+      "reportAfter": "Reportar ahora para frenar otro intento",
+      "labelPending_one": "Mensajes y avisos: {{count}} pendiente",
+      "labelPending_other": "Mensajes y avisos: {{count}} pendientes"
     }
   },
   "roles": {
@@ -1553,6 +1555,26 @@
       "answered": "Respuesta de tu tutor, del {{date}}",
       "guideTitle": "¿Tienes una duda?",
       "guideIntro": "Pregúntale a tu tutor sobre este módulo. La respuesta aparece en Aprender, en Tus consultas."
+    },
+    "review": {
+      "eyebrow_one": "Repaso a {{count}} día",
+      "eyebrow_other": "Repaso a {{count}} días",
+      "title": "Repaso del módulo {{n}} · {{title}}",
+      "titleShort": "Repaso",
+      "intro_one": "Pasó {{count}} día desde tu guía. Tres preguntas cortas para fijar lo que aprendiste: sin puntaje y puedes reintentar.",
+      "intro_other": "Pasaron {{count}} días desde tu guía. Tres preguntas cortas para fijar lo que aprendiste: sin puntaje y puedes reintentar.",
+      "step": "Pregunta {{n}} de {{total}}",
+      "finish": "Terminar repaso",
+      "saved": "Repaso guardado",
+      "notYet": "Este repaso se abre 7 días después de terminar la guía del módulo.",
+      "allDone": "Ya hiciste los dos repasos de este módulo, a los 7 y a los 30 días.",
+      "cardTitle": "Repasos",
+      "cardIntro": "A los 7 y a los 30 días de cada guía, tres preguntas para no olvidar lo aprendido.",
+      "empty": "No tienes repasos pendientes. Aparecen 7 días después de terminar una guía.",
+      "item_one": "A {{count}} día de la guía",
+      "item_other": "A {{count}} días de la guía",
+      "start": "Repasar",
+      "startFor": "Repasar {{title}}"
     }
   },
   "pay": {
@@ -3296,7 +3318,9 @@
       "channels": {
         "email": "Correo",
         "teams": "Microsoft Teams",
-        "slack": "Slack"
+        "slack": "Slack",
+        "campus": "Campus virtual (simulado)",
+        "app": "Notificación de la app de Hornero (simulada)"
       },
       "save": "Guardar cambios",
       "discard": "Descartar cambios",
@@ -4420,6 +4444,49 @@
       "employer": "Andina Servicios S.A.",
       "education": "Instituto Superior Ceibo",
       "product": "Hornero"
+    }
+  },
+  "reminders": {
+    "inboxTitle": "Del programa",
+    "kinds": {
+      "review": "Repaso de «{{module}}»: a {{count}} días de tu guía, tres preguntas cortas.",
+      "guide": "Te espera la guía «{{module}}».",
+      "weekly": "Desafío semanal: {{title}}. Puedes contarlo hasta el {{date}}.",
+      "due": "El programa cierra el {{date}}: quedan {{count}} días.",
+      "goal": "Llegaste a tu meta «{{name}}»."
+    },
+    "short": {
+      "guide": "Guía pendiente",
+      "weekly": "Desafío nuevo",
+      "due": "Plazo por vencer",
+      "review": "Repaso",
+      "goal": "Meta alcanzada"
+    },
+    "subjects": {
+      "guide": "Tienes una guía pendiente en Alcancía",
+      "weekly": "Nuevo desafío semanal",
+      "due": "El programa está por cerrar",
+      "review": "Es momento de repasar",
+      "goal": "Llegaste a tu meta"
+    },
+    "preview": {
+      "title": "Cómo llega cada recordatorio",
+      "intro": "Vista previa de los canales elegidos, con un recordatorio de ejemplo. Los recordatorios dicen qué aprender, nunca cuánto dinero tiene alguien.",
+      "kindLabel": "Recordatorio de ejemplo",
+      "none": "Elige al menos un canal para ver cómo llega.",
+      "channel": {
+        "email": "Correo",
+        "teams": "Mensaje en Microsoft Teams",
+        "slack": "Mensaje en Slack",
+        "campus": "Aviso en el campus virtual",
+        "app": "Notificación de la app de Hornero"
+      },
+      "from": "De: Alcancía <avisos@alcancia.demo>",
+      "sender": "Alcancía",
+      "appSender": "Hornero",
+      "hello": "Hola, Ana.",
+      "cta": "Abrir Alcancía",
+      "disclaimer": "Vista previa simulada: no se envía nada y no imita la interfaz de esas aplicaciones. Ana es una persona de ejemplo."
     }
   }
 }

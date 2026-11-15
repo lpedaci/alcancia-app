@@ -141,6 +141,20 @@ Los nueve eventos de instrucción de Gagné, Wager, Golas y Keller (2005), compr
 - **Sin límite de tiempo** (WCAG 2.2.1) y con alternativa accesible a todo arrastre.
 - **Retroalimentación** que explica por qué, nunca solo "Correcto" o "Incorrecto".
 
+## 6.y Repaso espaciado y recordatorios (F19 y F9, paso 25, D-273)
+
+**Repaso espaciado.** A los **7 y a los 30 días** de terminar la guía de un módulo, la persona tiene un repaso de **3 preguntas** de su banco (sin casos ramificados, tareas con simulador ni ordenamientos). Es formativo como la práctica de las guías: retroalimentación inmediata, reintentos ilimitados y sin puntaje. La ronda de 30 días llega después de la de 7, cada módulo muestra una sola ronda pendiente y nunca hay más de 3 repasos pendientes a la vez, para que no se acumulen. Se ven en Aprender ("Repasos") y en la campana. El resultado queda solo en el navegador de la persona.
+
+**Recordatorios.** La campana de la billetera suma "Del programa" arriba de los mensajes: guía pendiente del nivel actual, desafío semanal sin informar (hasta su fecha), plazo del programa a 14 días o menos, repasos y meta alcanzada (con el nombre de la meta, nunca su monto). En la configuración del programa, el admin elige los canales de su contexto y ve una **vista previa simulada** de cada recordatorio por canal:
+
+| Contexto | Canales |
+| --- | --- |
+| Organización (Andina) | Correo, Microsoft Teams y Slack |
+| Institución educativa (Ceibo) | Correo y campus virtual |
+| Producto (Hornero) | Notificación de la app de Hornero (sin desafíos semanales: no hay tutoría) |
+
+La vista previa es neutra: no imita la interfaz de esas aplicaciones y no envía nada.
+
 ## 6.x Registro de actividad tipo xAPI (F21, paso 24, D-272)
 
 Cada acción de aprendizaje se expresa como un enunciado **actor, verbo, objeto**, con la forma de xAPI que recibe un LRS o un LMS corporativo.

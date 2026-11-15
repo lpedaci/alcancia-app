@@ -38,7 +38,8 @@ export interface Program {
   /** Fraction, 0.7 by default. */
   passingScore: number;
   maxAttempts: number;
-  reminderChannels: ('email' | 'teams' | 'slack')[];
+  /** F9 by context (5.5): work tools, the institution's campus or the partner's app. */
+  reminderChannels: ('email' | 'teams' | 'slack' | 'campus' | 'app')[];
   /** Admin free mode: everything unlocked (5.0). */
   freeMode: boolean;
 }

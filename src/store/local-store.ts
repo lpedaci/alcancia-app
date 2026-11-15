@@ -28,6 +28,8 @@ export interface LocalData {
   learningCards?: { shown: string[]; correct: string[] };
   /** Decisions taken in a practice scenario (D-214): what the person chose, never amounts. */
   learningEvents?: { verb: 'decided'; object: string; response: string; day: number }[];
+  /** Spaced reviews done (F19, D-273): module, round (7 or 30 days) and date. Never shared. */
+  reviews?: { moduleId: string; round: 7 | 30; at: string }[];
   /** xAPI-like statements of the cards (F21): verb, card and simulated day, never amounts. */
   cardStatements?: { verb: 'experienced' | 'answered' | 'passed'; object: string; day: number }[];
 }

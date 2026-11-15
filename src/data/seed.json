@@ -99,7 +99,8 @@
    "passingScore": 0.7,
    "maxAttempts": 3,
    "reminderChannels": [
-    "email"
+    "email",
+    "campus"
    ],
    "freeMode": false
   },
@@ -132,7 +133,9 @@
    "requiredModuleIds": [],
    "passingScore": 0.7,
    "maxAttempts": 3,
-   "reminderChannels": [],
+   "reminderChannels": [
+    "app"
+   ],
    "freeMode": false
   }
  ],

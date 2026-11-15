@@ -18,6 +18,8 @@ import { cn } from '@/lib/utils';
 import { useDataStore, useOrgData } from '@/store/data-store';
 import type { Program } from '@/types/domain';
 import { AdminShell } from './AdminShell';
+import { CHANNELS_BY_KIND } from '@/lib/reminders';
+import { ReminderPreview } from './ReminderPreview';
 
 /**
  * O4, program settings (CLAUDE.md F1, D-197): name and description, voluntary or assigned with a
@@ -27,7 +29,6 @@ import { AdminShell } from './AdminShell';
  * changes asks first (useBlocker).
  */
 const card = 'flex min-w-0 flex-col gap-4 rounded-xl border border-outline-variant bg-surface-container-lowest p-(--space-card-padding)';
-const CHANNELS: Program['reminderChannels'] = ['email', 'teams', 'slack'];
 const PHASE_A = MODULES.filter((m) => m.phase === 'A');
 
 const levelNumber = (levelId: string) => Number(levelId.replace(/\D/g, ''));
@@ -54,6 +55,8 @@ export function ProgramPage() {
   const { t } = useTranslation();
   const { program, organization, cohorts } = useOrgData();
   const threshold = organization.privacyThreshold;
+  // Channels of the context (5.5, F9): work tools, the campus or the partner's app
+  const CHANNELS: Program['reminderChannels'] = [...CHANNELS_BY_KIND[organization.kind]];
   const updateProgram = useDataStore((s) => s.updateProgram);
   const setCohortDueDates = useDataStore((s) => s.setCohortDueDates);
   const initial = (): Form => ({
@@ -322,6 +325,7 @@ export function ProgramPage() {
             />
           ))}
         </fieldset>
+        <ReminderPreview channels={form.channels} kind={organization.kind} />
       </section>
 
       {/* Save bar: fixed at the bottom while there are unsaved changes, so it is always at hand (D-232) */}
