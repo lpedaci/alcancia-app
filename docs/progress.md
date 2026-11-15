@@ -64,3 +64,4 @@
 | 15/11/2026 | Ajustes de Lourdes | Hornero en el menú en todos los tamaños y sin franja (D-249); misiones, desafíos y guías con la misma anatomía de paso (D-250); en las cuentas, primero una invitación a pensar y después el resultado (D-251) | Lourdes revisa |
 | 15/11/2026 | Ajuste de Lourdes | "¿Por qué importa?" con borde verde y fondo verde claro, en su propia fila en el saludo de Inicio (D-252) | Lourdes revisa |
 | 15/11/2026 | Ajuste de Lourdes | Hornero siempre en el menú: "Ver dentro de Hornero" o "Volver a Hornero" (D-253) | Lourdes revisa |
+| 15/11/2026 | Ajuste de Lourdes y documentación | Mapa de niveles más liviano en celular y tablet (D-254); README con la sección de contextos y Hornero, la misión nueva y la imagen de "¿Por qué importa?" actualizada; sistema de diseño con los patrones de D-249 a D-254 | Lourdes revisa |

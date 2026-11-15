@@ -111,6 +111,19 @@ There are nine assessment types, each with feedback per option, including a **ca
   </tr>
 </table>
 
+## Three contexts and the integrated mode
+
+The same wallet works for **teams, classrooms and products**: an organization offers it to its people (Andina Servicios S.A. in the demo), a higher-education institution to its students aged 18 or over (Instituto Superior Ceibo, coming soon), or a finance app integrates it for its users. The wallet, levels, missions and privacy stay the same.
+
+The **integrated mode** is shown with **Hornero**, a fictitious wallet made for the demo, with its own brand and the label "Fictitious demo brand" (it does not refer to any real brand). Hornero shows the person's savings through its brand idea: a nest that grows little by little and a nest that holds. Alcancía opens inside it with no second sign-in, and Hornero stays in the menu to go back. The partner only gets progress notices, never amounts.
+
+<table>
+  <tr>
+    <td width="50%"><img src="docs/readme/hornero-home.webp" alt="Home of Hornero, a fictitious wallet with its own sunset-colored brand: the 'Fictitious demo brand' label, the 'Your nest grows' and 'A nest that holds' cards, and the 'Open Alcancía' button."></td>
+    <td width="50%"><img src="docs/readme/hornero-wallet.webp" alt="Mariana's wallet opened inside Hornero: the side menu shows 'Back to Hornero' with the fictitious-brand label, and the top bar repeats the label next to the fictitious-money notice."></td>
+  </tr>
+</table>
+
 ## Accessibility
 
 The target is **WCAG 2.2 AA**. Checked automatically on every change: no axe errors on 71 screens at 375 and 1280 px, no horizontal overflow at 6 widths (320 to 1440 px), one `h1` per screen, AA contrast for every color token pair, and "Why it matters" visible even with the companion muted. **Not verified yet:** a full screen reader walkthrough and a Lighthouse audit. Until then, the app does not claim conformance; it is the target.

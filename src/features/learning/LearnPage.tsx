@@ -92,38 +92,42 @@ export function LearnPage() {
                 return (
                   <motion.li
                     key={s.level.id}
-                    className="relative flex gap-2 pb-6 sm:gap-4"
+                    className="relative flex gap-2 pb-2 sm:gap-3 large:pb-4"
                     // Lists enter staggered, 50 ms apart (2.6); with reduced motion, opacity only
                     initial={reduce ? { opacity: 0 } : { opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: duration.long, ease: easing.emphasizedDecelerate, delay: i * 0.05 }}
                   >
                     {/* The line of the timeline, decorative */}
-                    {!last && <span aria-hidden className="absolute top-8 bottom-0 left-4 w-0.5 -translate-x-1/2 bg-outline-variant sm:top-10 sm:left-5" />}
+                    {!last && <span aria-hidden className="absolute top-9 bottom-0 left-4 w-0.5 -translate-x-1/2 bg-outline-variant large:top-11 large:left-5" />}
                     <span
                       aria-hidden
                       className={cn(
-                        'relative z-10 flex size-8 shrink-0 items-center justify-center rounded-full sm:size-10',
+                        'relative z-10 mt-1 flex size-8 shrink-0 items-center justify-center rounded-full large:size-10',
                         s.status === 'completed' && 'bg-success-container text-success',
                         s.status === 'unlocked' && 'bg-primary text-on-primary',
                         s.status === 'locked' && 'bg-surface-container text-on-surface-variant',
                       )}
                     >
-                      <Icon name={STATE_ICON[s.status]} size={20} filled={s.status === 'completed'} />
+                      <Icon name={STATE_ICON[s.status]} size={18} filled={s.status === 'completed'} />
                     </span>
                     <div
                       className={cn(
-                        '@container flex min-w-0 flex-1 flex-col gap-4 rounded-lg p-3 sm:p-4',
+                        '@container flex min-w-0 flex-1 flex-col gap-3 rounded-lg px-3 py-2 large:p-4',
                         isCurrent ? 'border border-primary bg-primary-container/40' : 'border border-transparent',
                       )}
                     >
-                      <div className="flex flex-wrap items-start gap-x-3 gap-y-2 @md:flex-nowrap">
-                        <div className="flex min-w-0 basis-full flex-wrap items-center gap-x-3 gap-y-1 @md:basis-auto @md:flex-1">
-                          <h3 className="text-title-medium text-on-surface">{t('learn.map.levelName', { n: s.level.order, name })}</h3>
+                      <div className="flex flex-wrap items-center gap-x-3 gap-y-1 @md:flex-nowrap">
+                        <div className="flex min-w-[8rem] flex-1 flex-wrap items-center gap-x-3 gap-y-1">
+                          <h3 className="text-title-small text-on-surface @2xl:text-title-medium">{t('learn.map.levelName', { n: s.level.order, name })}</h3>
                           {phaseB ? (
                             <StatusPill tone="neutral" icon="schedule" label={t('learn.map.phaseB')} />
                           ) : (
-                            <StatusPill tone={STATE_TONE[s.status]} icon={STATE_ICON[s.status]} label={isCurrent ? t('learn.map.current') : t(`learn.map.state.${s.status}`)} />
+                            // Lighter on phones and tablets (D-254): a completed level already says so with its check,
+                            // so its pill stays for screen readers until the level row is wide
+                            <span className={cn(s.status === 'completed' && !isCurrent && 'sr-only @2xl:not-sr-only')}>
+                              <StatusPill tone={STATE_TONE[s.status]} icon={STATE_ICON[s.status]} label={isCurrent ? t('learn.map.current') : t(`learn.map.state.${s.status}`)} />
+                            </span>
                           )}
                         </div>
                         {!phaseB && (

@@ -42,6 +42,7 @@ La app no tiene tema oscuro activo todavía: los tokens lo dejan preparado, pero
 - [Qué es y qué problema resuelve](#qué-es-y-qué-problema-resuelve)
 - [Cómo se aprende](#cómo-se-aprende)
 - [Recorridos por rol](#recorridos-por-rol)
+- [Tres contextos y el modo integrado](#tres-contextos-y-el-modo-integrado)
 - [Diseño UX/UI](#diseño-uxui)
 - [Accesibilidad](#accesibilidad)
 - [Privacidad por diseño](#privacidad-por-diseño)
@@ -148,6 +149,25 @@ Cada enlace entra a la demo con esa persona. El acceso con SSO y verificación e
   </tr>
 </table>
 
+## Tres contextos y el modo integrado
+
+La misma billetera sirve para **equipos, aulas y productos**: una organización la ofrece a su gente (Andina Servicios S.A., en la demo), una institución de nivel superior a sus estudiantes de 18 años o más (Instituto Superior Ceibo, próximamente) o una app financiera la integra para sus usuarios. La billetera, los niveles, las misiones y la privacidad no cambian.
+
+El **modo integrado** se ve con **Hornero**, una billetera ficticia creada para la demo, con marca propia y la etiqueta "Marca ficticia de demostración" (no refiere a ninguna marca real). Hornero muestra el ahorro de la persona con su concepto de marca: el nido que crece de a poco ("Tu nido creció $ X este mes") y el nido que aguanta ("Tu nido aguanta X meses de gastos"). Desde ahí se abre Alcancía, sin otro inicio de sesión, y Hornero queda en el menú para volver. El socio solo recibe avisos de avance, nunca montos.
+
+<table>
+  <tr>
+    <td width="50%"><img src="docs/readme/hornero-home.webp" alt="Inicio de Hornero, una billetera ficticia con marca propia en color atardecer: la etiqueta 'Marca ficticia de demostración', las tarjetas 'Tu nido crece' con lo guardado y lo que creció este mes, y 'Un nido que aguanta' con los meses de gastos que cubre el fondo de emergencia, y el botón 'Abrir Alcancía'."></td>
+    <td width="50%"><img src="docs/readme/hornero-wallet.webp" alt="La billetera de Mariana abierta dentro de Hornero: el menú lateral muestra 'Volver a Hornero' con la etiqueta de marca ficticia y la barra superior repite la etiqueta junto al cartel de dinero ficticio."></td>
+  </tr>
+  <tr>
+    <td align="center">Hornero, el socio ficticio</td>
+    <td align="center">Alcancía dentro de Hornero</td>
+  </tr>
+</table>
+
+Pruébalo: <a href="https://lpedaci.github.io/alcancia-app/#/">desde la landing</a>, en la sección "Para equipos, aulas y productos", con "Ver dentro de Hornero".
+
 ## Diseño UX/UI
 
 El sistema de diseño parte de Material Design 3 con identidad propia: tokens en cuatro niveles (referencia, sistema, tema de Tailwind y componentes con variantes), paleta fría de índigo y verde azulado, tipografía Inter con la escala de M3, profundidad por elevación tonal y sin sombras en tarjetas en reposo. El contraste AA de cada combinación de tokens se verifica con tests. Todo está documentado en la página pública del [sistema de diseño](https://lpedaci.github.io/alcancia-app/#/design-system), con componentes reales y la sección "Cómo mostramos el dinero".
@@ -156,6 +176,12 @@ Algunas piezas propias: `OptionCard` para comparar opciones antes de elegir, con
 
 <p align="center">
   <img src="docs/readme/yield-option-cards.webp" width="760" alt="Sección 'Dónde rinde tu saldo' con tres tarjetas de opción. Cada una muestra la tasa de ejemplo en grande y debajo riesgo, liquidez, moneda y protección. La cuenta remunerada está elegida: tiene fondo índigo claro, borde índigo y la píldora 'Elegida' con un check.">
+</p>
+
+### Misiones
+
+<p align="center">
+  <img src="docs/readme/mission-step.webp" width="900" alt="Paso de la misión '¿Cuenta o fondo?': arriba el objetivo 'Al terminar vas a poder elegir dónde dejar el saldo…'; a la izquierda la decisión '¿Dónde dejas tu saldo de práctica?' con dos opciones en tarjetas, el botón Responder a la derecha y las fuentes al pie; a la derecha el avance (paso 2 de 6), el saldo de la cuenta de práctica y el aviso de escenario de práctica."/>
 </p>
 
 ### Responsive
@@ -171,6 +197,8 @@ Cada pantalla se prueba en **320, 375, 768, 1024, 1280 y 1440 px**. En celular y
 - **"¿Por qué importa?" en cada pantalla de la billetera**, visible aunque Fuerte esté en silencio.
 - **Nada se pierde al ir a la guía:** el enlace lleva a la parte exacta y "Volver" recupera la pantalla, el desplazamiento y lo que estaba escrito.
 - **Errores con red:** equivocarse está permitido, deja su huella en la billetera y siempre termina en una devolución que explica qué pasó y cómo revertirlo dentro de la simulación.
+- **Primero pensar, después la respuesta:** si una cuenta sale mal, la misión muestra el método y pide otro intento; la cuenta resuelta llega recién en el segundo intento.
+- **Misiones con una sola anatomía:** el objetivo arriba ("Al terminar vas a poder…"), la pregunta como título, las opciones como tarjetas, responder a la derecha y las fuentes al pie; el avance y la billetera en una columna lateral.
 - **Lo bloqueado se ve:** cada sección cerrada dice qué falta, con progreso.
 - **Gamificación con medida:** logros por conductas sanas, sin rankings, rachas que castigan ni cuentas regresivas.
 - **Ganancias y pérdidas con signo, ícono y texto**, nunca solo verde y rojo; perder poder de compra es información, no un error.
