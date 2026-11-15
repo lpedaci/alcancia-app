@@ -186,7 +186,7 @@ export function WelcomePage() {
                 name: firstName,
               })}
             </h1>
-            <p className="max-w-prose text-body-large text-on-surface">
+            <p className="text-body-large text-on-surface">
               {t(`welcome.intro.${INTRO_SLIDES[slide]}.body`)}
             </p>
             <div className="flex flex-wrap gap-3">
@@ -227,7 +227,7 @@ export function WelcomePage() {
             >
               {t("welcome.account.title")}
             </h1>
-            <p className="max-w-prose text-body-large text-on-surface">
+            <p className="text-body-large text-on-surface">
               {t("welcome.account.body")}
             </p>
             <AccountData name={person?.name ?? ""} />

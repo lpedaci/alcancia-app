@@ -96,7 +96,7 @@ export function HorneroPage() {
         <div className="flex flex-col gap-2">
           <p className="text-label-large text-on-surface-variant">{t('partner.hornero.practice')}</p>
           <h1 className="text-headline-medium text-partner-hornero">{t('partner.hornero.greeting', { name: firstName })}</h1>
-          <p className="max-w-[65ch] text-body-large text-on-surface-variant">{t('partner.hornero.intro')}</p>
+          <p className="text-body-large text-on-surface-variant">{t('partner.hornero.intro')}</p>
         </div>
 
         <div className="grid gap-(--space-bento-gap) medium:grid-cols-2">

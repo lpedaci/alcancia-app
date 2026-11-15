@@ -78,7 +78,7 @@ export function SponsorPage() {
         </div>
       </header>
 
-      <p className="max-w-[72ch] text-body-large text-on-surface">{t('sponsor.intro')}</p>
+      <p className="text-body-large text-on-surface">{t('sponsor.intro')}</p>
 
       <BentoGrid>
         <KpiRow minCardWidth="9rem">

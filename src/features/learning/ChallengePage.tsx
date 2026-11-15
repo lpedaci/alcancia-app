@@ -198,7 +198,17 @@ function ChallengeRunner({ challenge }: { challenge: ChallengeDef }) {
                 onChange={(a) => setAnswers((prev) => ({ ...prev, [questions[index]!.id]: a }))}
                 idPrefix="challenge"
               />
+              {/* Step navigation (D-250, D-266): leave on the left; previous and next together on the right */}
               <div className="flex flex-wrap items-center gap-3 border-t border-outline-variant pt-4">
+                <Button variant="text" leadingIcon="logout" onClick={() => { setQuestions(undefined); setAnswers({}); }}>
+                  {t('learn.challenge.exit')}
+                </Button>
+                <span className="flex-1" />
+                {index > 0 && (
+                  <Button variant="text" leadingIcon="arrow_back" onClick={() => setIndex(index - 1)}>
+                    {t('learn.challenge.back')}
+                  </Button>
+                )}
                 {index < questions.length - 1 ? (
                   <Button trailingIcon="arrow_forward" disabled={!isAnswered(questions[index]!, answers[questions[index]!.id])} onClick={() => setIndex(index + 1)}>
                     {t('learn.challenge.next')}
@@ -208,13 +218,9 @@ function ChallengeRunner({ challenge }: { challenge: ChallengeDef }) {
                     {t('learn.challenge.submit')}
                   </Button>
                 )}
-                {index > 0 && (
-                  <Button variant="text" leadingIcon="arrow_back" onClick={() => setIndex(index - 1)}>
-                    {t('learn.challenge.back')}
-                  </Button>
-                )}
+
               </div>
-              <p className="text-body-small text-on-surface-variant">{t('learn.challenge.noTimer')}</p>
+              <p className="text-body-small text-on-surface-variant large:text-right">{t('learn.challenge.noTimer')}</p>
             </section>
           </>
         )}
@@ -314,11 +320,11 @@ export function BackButton() {
   const hasHistory = location.key !== 'default';
   return hasHistory ? (
     <Button variant="text" size="xs" leadingIcon="arrow_back" className="-ml-2 self-start" onClick={() => navigate(-1)}>
-      {t('learn.challenge.back')}
+      {t('learn.challenge.leave')}
     </Button>
   ) : (
     <Button asChild variant="text" size="xs" leadingIcon="arrow_back" className="-ml-2 self-start">
-      <Link to="/app/learn">{t('learn.challenge.backToLearn')}</Link>
+      <Link to="/app/learn">{t('learn.challenge.leaveToLearn')}</Link>
     </Button>
   );
 }

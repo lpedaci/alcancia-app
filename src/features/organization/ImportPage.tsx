@@ -80,7 +80,7 @@ export function ImportPage() {
           {t('org.import.back')}
         </Link>
         <h1 className="text-headline-medium text-on-surface">{t('org.import.title')}</h1>
-        <p className="max-w-[72ch] text-body-large text-on-surface-variant">{t('org.import.intro')}</p>
+        <p className="text-body-large text-on-surface-variant">{t('org.import.intro')}</p>
       </header>
 
       <section aria-labelledby="import-step1" className={cn(card, '@container')}>

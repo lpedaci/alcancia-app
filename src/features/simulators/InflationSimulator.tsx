@@ -341,7 +341,7 @@ export function InflationSimulator({
                 <p className="text-display-small text-primary @lg:text-display-medium">
                   <MoneyText value={result.purchasingPower} compactBelow="xs" />
                 </p>
-                <p className="max-w-prose text-body-large text-on-surface">
+                <p className="text-body-large text-on-surface">
                   {sentence}
                 </p>
                 <div className="flex flex-wrap gap-2">
@@ -501,7 +501,7 @@ export function InflationSimulator({
                 <h3 className="text-title-small text-on-surface">
                   {t("sim3.meaning.title")}
                 </h3>
-                <p className="mt-1 max-w-prose text-body-medium text-on-surface">
+                <p className="mt-1 text-body-medium text-on-surface">
                   {t("sim3.meaning.body")}
                 </p>
               </div>

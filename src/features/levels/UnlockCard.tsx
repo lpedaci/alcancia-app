@@ -199,7 +199,7 @@ export function UnlockCard({
             />
           )}
       </div>
-      <p className="max-w-prose text-body-medium text-on-surface-variant">
+      <p className="text-body-medium text-on-surface-variant">
         {status.level.id === "level-7"
           ? t("wallet.unlock.investBody")
           : t("wallet.unlock.body")}

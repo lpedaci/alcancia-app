@@ -43,6 +43,11 @@ export function GuidePage() {
   const part = Number(params.get('part'));
   const start = Number.isInteger(part) && part >= 1 && part <= guide.blocks.length ? part - 1 : 0;
   const from = safeReturnPath(params.get('from'));
+  // Without a part in the link, the guide opens where the person left it (D-266)
+  if (!params.get('part')) {
+    const saved = readGuidePart(guide.id);
+    if (saved > 0 && saved < guide.blocks.length) return <GuideReader key={`${guide.id}:saved:${from ?? ''}`} guide={guide} start={saved} from={from} />;
+  }
   return <GuideReader key={`${guide.id}:${start}:${from ?? ''}`} guide={guide} start={start} from={from} />;
 }
 
@@ -161,6 +166,7 @@ function GuideReader({ guide, start = 0, from }: { guide: Guide; start?: number;
   const last = index === total - 1;
 
   const finish = () => {
+    saveGuidePart(guide.id, 0);
     markGuideDone(personId, guide.moduleId, guide.id, DEMO_TODAY, satisfaction ? (Number(satisfaction) as GuideProgress['satisfaction']) : undefined);
     setFinished(true);
   };
@@ -171,6 +177,7 @@ function GuideReader({ guide, start = 0, from }: { guide: Guide; start?: number;
     setDirection(to > index ? 1 : -1);
     setIndex(to);
     setVisited((v) => Math.max(v, to));
+    saveGuidePart(guide.id, to);
   };
   const objective = guide.blocks.find((b) => b.type === 'objective');
   const slide = reduce ? 0 : 32;
@@ -260,7 +267,17 @@ function GuideReader({ guide, start = 0, from }: { guide: Guide; start?: number;
                   )}
                 </motion.div>
               </AnimatePresence>
+              {/* Step navigation (D-250, D-266): leave on the left; previous and next together on the right */}
               <div className="flex flex-wrap items-center gap-3 border-t border-outline-variant pt-5">
+                <Button asChild variant="text" leadingIcon="logout">
+                  <Link to={from ?? '/app/learn'}>{t('learn.guide.exit')}</Link>
+                </Button>
+                <span className="flex-1" />
+                {index > 0 && (
+                  <Button variant="text" leadingIcon="arrow_back" onClick={() => go(index - 1)}>
+                    {t('learn.guide.back')}
+                  </Button>
+                )}
                 {last ? (
                   <Button leadingIcon="task_alt" onClick={finish}>
                     {alreadyDone ? t('learn.guide.finishAgain') : t('learn.guide.finish')}
@@ -270,12 +287,8 @@ function GuideReader({ guide, start = 0, from }: { guide: Guide; start?: number;
                     {t('learn.guide.next')}
                   </Button>
                 )}
-                {index > 0 && (
-                  <Button variant="text" leadingIcon="arrow_back" onClick={() => go(index - 1)}>
-                    {t('learn.guide.back')}
-                  </Button>
-                )}
-                {!canGo && <p className="basis-full text-body-small text-on-surface-variant">{t('learn.guide.answerFirst')}</p>}
+
+                {!canGo && <p className="basis-full text-body-small text-on-surface-variant large:text-right">{t('learn.guide.answerFirst')}</p>}
               </div>
             </section>
           )}
@@ -481,4 +494,23 @@ function AskAboutGuide({ personId, moduleId }: { personId: string; moduleId: str
       )}
     </div>
   );
+}
+
+/** The part where the person left a guide, in this browser (D-266); 0 = from the start. */
+const GUIDE_PART_KEY = 'alcancia-guide-part:';
+function readGuidePart(guideId: string): number {
+  try {
+    const n = Number(localStorage.getItem(GUIDE_PART_KEY + guideId));
+    return Number.isInteger(n) && n > 0 ? n : 0;
+  } catch {
+    return 0;
+  }
+}
+function saveGuidePart(guideId: string, part: number) {
+  try {
+    if (part > 0) localStorage.setItem(GUIDE_PART_KEY + guideId, String(part));
+    else localStorage.removeItem(GUIDE_PART_KEY + guideId);
+  } catch {
+    // Without storage the guide starts from the beginning next time.
+  }
 }

@@ -122,7 +122,7 @@ export function ProgramPage() {
       <header className="flex flex-wrap items-end justify-between gap-4">
         <div className="flex flex-col gap-2">
           <h1 className="text-headline-medium text-on-surface">{t('org.program.title')}</h1>
-          <p className="max-w-[72ch] text-body-large text-on-surface-variant">{t('org.program.intro')}</p>
+          <p className="text-body-large text-on-surface-variant">{t('org.program.intro')}</p>
         </div>
         {dirty && <StatusPill tone="warning" icon="edit" label={t('org.program.unsaved')} />}
       </header>

@@ -37,7 +37,7 @@ export function InflationToolPage() {
         <h1 id="p13-sim3-title" className="text-headline-medium text-on-surface">
           {t('sim3.title')}
         </h1>
-        <p className="max-w-prose text-body-large text-on-surface-variant">{t('sim3.intro')}</p>
+        <p className="text-body-large text-on-surface-variant">{t('sim3.intro')}</p>
         <InflationSimulator
           labelledBy="p13-sim3-title"
           idPrefix="p13-sim3"

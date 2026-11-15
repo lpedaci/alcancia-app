@@ -71,3 +71,5 @@
 | 15/11/2026 | Corrección | Abrir un menú o un diálogo ya no corre la pantalla hacia un costado (D-263) | Hecho |
 | 15/11/2026 | 22 · Valores reales del mercado | Snapshot diario del BCRA y el INDEC en el build (workflow programado), tarjeta "Valores reales de hoy" en Rendir, Tarjeta y préstamos e Invertir, "Usar el último dato real" en las herramientas y elección del escenario desde hoy en Rendir (D-264); precios de acciones y CEDEARs de ejemplo con enlace a BYMADATA | Lourdes revisa |
 | 15/11/2026 | Ajuste de Lourdes | "Volver" en los desafíos y en el test de perfil de inversor (D-265) | Lourdes revisa |
+| 15/11/2026 | Ajuste de Lourdes | Guías y desafíos con la navegación de pasos del sistema de diseño; la guía recuerda la parte (D-266) | Lourdes revisa |
+| 15/11/2026 | Ajuste de Lourdes | Bajadas de página a todo el ancho (D-267) | Lourdes revisa |

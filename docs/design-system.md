@@ -137,7 +137,7 @@ La billetera ficticia que muestra Alcancía integrada en otra app (D-75, D-84). 
 
 ### Patrones del 15/11/2026
 
-- **Paso de una misión, desafío o guía (D-250):** el tipo de paso como etiqueta chica con ícono (Pregunta, Tú decides, Calcula, Clasifica, Para saber), la pregunta como título en `title-large`, las opciones como tarjetas (`RadioGroup variant="cards"`, la elegida en primary-container con borde primary), la acción a la derecha y las fuentes al pie como chips. Navegación de pasos: salir a la izquierda; "Anterior" y "Continuar" juntos a la derecha.
+- **Paso de una misión, desafío o guía (D-250):** el tipo de paso como etiqueta chica con ícono (Pregunta, Tú decides, Calcula, Clasifica, Para saber), la pregunta como título en `title-large`, las opciones como tarjetas (`RadioGroup variant="cards"`, la elegida en primary-container con borde primary), la acción a la derecha y las fuentes al pie como chips. Navegación de pasos, igual en misiones, guías y desafíos (D-266): salir a la izquierda; "Anterior" y "Continuar" juntos a la derecha, con "Continuar" al final.
 - **Objetivo de la misión (D-250):** bloque con ícono de diana y "Al terminar vas a poder…", arriba del paso.
 - **Pista en dos tiempos (D-251):** el primer error de una cuenta muestra "Tómate un momento" con el método y sin el resultado; el segundo, la cuenta resuelta.
 - **"¿Por qué importa?" (D-252):** borde `tertiary` y fondo `tertiary-surface` (`#EEF8F6`), texto en `on-surface`; en un saludo o una tarjeta de color va en su propia fila a todo el ancho.

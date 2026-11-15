@@ -1253,7 +1253,8 @@
       "goTo": ", volver a esta parte",
       "openTool": "Abrir la herramienta \"{{name}}\"",
       "backTo": "Volver a {{section}}",
-      "previousScreen": "la pantalla anterior"
+      "previousScreen": "la pantalla anterior",
+      "exit": "Salir y seguir después"
     },
     "challenge": {
       "locked": "{{title}} está bloqueado",
@@ -1281,7 +1282,7 @@
       "of": "Pregunta {{n}} de {{total}}",
       "question": "Pregunta {{n}}",
       "next": "Siguiente",
-      "back": "Volver",
+      "back": "Anterior",
       "submit": "Entregar el desafío",
       "noTimer": "Las explicaciones aparecen al final. Puedes volver a las preguntas anteriores.",
       "resultPassed": "Desafío aprobado",
@@ -1296,7 +1297,9 @@
       "review": "Las respuestas, explicadas",
       "retryBody_one": "Se aprueba con {{score}}. Te queda 1 intento y cuenta el mejor.",
       "retryBody_other": "Se aprueba con {{score}}. Te quedan {{count}} intentos y cuenta el mejor.",
-      "backToLearn": "Volver a Aprender"
+      "leave": "Volver",
+      "leaveToLearn": "Volver a Aprender",
+      "exit": "Salir del desafío"
     },
     "map": {
       "title": "Aprender",
