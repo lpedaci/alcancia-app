@@ -14,15 +14,19 @@ export function Reveal({
   delay = 0,
   as = 'div',
   className,
+  id,
 }: {
   children: ReactNode;
   delay?: number;
   as?: keyof typeof TAGS;
   className?: string;
+  /** For an in-page anchor on the revealed element. */
+  id?: string;
 }) {
   const Tag = TAGS[as];
   return (
     <Tag
+      id={id}
       className={className}
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}

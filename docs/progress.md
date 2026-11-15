@@ -90,3 +90,4 @@
 | 15/11/2026 | 27 · Contenido, tanda 3 aprobada | Las guías 2 de los módulos 9, 10, 11 y 17 pasan a la app como guías para profundizar | Hecho |
 | 15/11/2026 | Ajuste de Lourdes | Landing: "La solución" como carrusel con pestañas (D-281), textos sin palabras solas y "Mis ahorros valen cada vez menos" (D-282), celular de "Aprende en cualquier lugar" más compacto (D-283) | Hecho |
 | 15/11/2026 | Ajuste de Lourdes | Foto de perfil de Joaquín Paredes (D-284) | Hecho |
+| 15/11/2026 | Ajuste de Lourdes | Landing: "La solución" como bento compacto, con "Aprende en cualquier lugar" como tarjeta ancha; se quita el carrusel (D-285) | Hecho |

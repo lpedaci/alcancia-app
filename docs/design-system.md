@@ -157,7 +157,7 @@ La billetera ficticia que muestra Alcancía integrada en otra app (D-75, D-84). 
 - Montos largos: si no entran, notación abreviada (`$ 12,3 M`) con el valor completo accesible.
 - Crédito: el CFT primero, junto a lo que se recibe y lo que se paga en total; "Tasa alta" en warning (D-178).
 - Datos clave con tono, metadatos en chips y consecuencias en avisos de color (D-183).
-- **Carrusel con pestañas (D-281):** solo para mostrar varias piezas equivalentes en poco espacio. Pestañas visibles, una diapositiva por vez con la misma altura, avance automático que se pausa con el cursor o el foco, se detiene al elegir una pestaña y da una sola vuelta; con "reducir animaciones", sin avance automático; pausa visible en celular y tablet.
+- **Bento de funciones en la landing (D-285):** tarjetas de distinto ancho, cada una con título (palabra clave en primary), una línea de texto y una pieza real del producto; sin listas numeradas ni carruseles.
 - **Sin palabras solas al final (D-282):** `text-wrap: pretty` en los textos y `text-balance` en títulos cortos y tarjetas centradas.
 - **Columnas parejas (D-278):** en un panel de dos columnas, si la lateral queda mucho más larga que la principal, las tarjetas que no dependen del contexto inmediato (por ejemplo, Logros en Aprender) pasan debajo de la principal, para que las dos terminen a una altura parecida y la página pida menos scroll. El orden del DOM es el mismo en todos los anchos.
 - **Filas de lista con una sola acción (D-279):** toda la fila es el enlace, con ícono inicial, título, texto de apoyo y `chevron_right` al final; sin un botón dentro de la fila. Alto mínimo de 56 px.

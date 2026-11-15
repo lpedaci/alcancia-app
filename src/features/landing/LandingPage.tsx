@@ -20,13 +20,12 @@ import { useMediaQuery } from '@/lib/use-media-query';
 import { cn } from '@/lib/utils';
 import type { Role } from '@/types/domain';
 import { AppPhone, AppTopBar, BottomNav, type PhoneScreen, PhoneFrame, StatusBar } from './PhoneMockup';
-import { PieceGoal, PieceKpi, PieceLevelMap, PieceSimResult, SceneBudget, SceneCard, SceneInflation } from './ProductPieces';
+import { PieceKpi, PieceLevelMap, PieceSimResult, SceneBudget, SceneCard, SceneInflation } from './ProductPieces';
 import { ResetDemoButton } from './ResetDemoButton';
 import { FictitiousBrandChip } from '@/features/partner/FictitiousBrandChip';
 import { HorneroMark } from '@/features/partner/HorneroMark';
 import { CountUp, Reveal } from './Reveal';
 import { SegmentedButton } from '@/components/ui/SegmentedButton';
-import { SolutionCarousel } from './SolutionCarousel';
 import { ctx } from '@/lib/org-context';
 import type { OrganizationKind } from '@/types/domain';
 
@@ -253,19 +252,13 @@ export function LandingPage() {
           </ul>
         </Section>
 
-        {/* 4 · The solution: a carousel with tabs, one feature at a time (D-281) */}
+        {/* 4 · The solution as a compact bento (D-285): four cards with a real piece of the product and
+            one line each; "Aprende en cualquier lugar" is the wide card with the phone cropped at its edge */}
         <Section id="solucion">
           <SectionTitle id="solucion" eyebrow={t('landing.solution.eyebrow')} title={t('landing.solution.title')} intro={t('landing.solution.intro')} />
-          <Reveal className="-mb-6 md:-mb-8">
-            <SolutionCarousel
-              label={t('landing.solution.carousel.label')}
-              slides={[
-                {
-                  key: 'route',
-                  tab: t('landing.solution.rows.route.tab'),
-                  content: (
-            <FeatureRow rowKey="route">
-              <div className="flex flex-col gap-4 rounded-lg border border-outline-variant bg-surface-container-lowest p-5 sm:flex-row sm:items-end sm:justify-between">
+          <ul className="grid grid-cols-1 gap-(--space-bento-gap) md:grid-cols-2 large:grid-cols-6">
+            <BentoFeature index={0} rowKey="route" className="md:col-span-2 large:col-span-4">
+              <div className="flex flex-col gap-4 rounded-lg border border-outline-variant bg-surface-container-lowest p-4 sm:flex-row sm:items-end sm:justify-between">
                 <PieceLevelMap />
                 <div className="flex min-w-0 flex-col gap-2 rounded-lg bg-surface p-3 sm:w-56">
                   <p className="flex items-center gap-1.5 text-label-large text-on-surface">
@@ -277,77 +270,55 @@ export function LandingPage() {
                   </p>
                 </div>
               </div>
-            </FeatureRow>
-                  ),
-                },
-                {
-                  key: 'practice',
-                  tab: t('landing.solution.rows.practice.tab'),
-                  content: (
-            <FeatureRow rowKey="practice" reverse>
-              <div className="grid gap-3 sm:grid-cols-2">
-                <PieceSimResult />
-                <PieceGoal />
+            </BentoFeature>
+            <BentoFeature index={1} rowKey="practice" className="large:col-span-2">
+              <PieceSimResult />
+            </BentoFeature>
+            <BentoFeature index={2} rowKey="tracking" className="large:col-span-2">
+              <div className="flex flex-col gap-3">
+              <PieceKpi />
+              <div className="flex flex-col gap-2 rounded-xl border border-outline-variant bg-surface-container-lowest p-4">
+                <span className="flex size-9 items-center justify-center rounded-lg bg-info-container text-on-info-container">
+                  <Icon name="shield" size={20} />
+                </span>
+                <p className="text-label-medium text-on-surface-variant">{t('landing.solution.rows.tracking.privacyLabel')}</p>
+                <p className="text-body-medium text-on-surface">{t('landing.solution.rows.tracking.privacyBody')}</p>
               </div>
-            </FeatureRow>
-                  ),
-                },
-                {
-                  key: 'tracking',
-                  tab: t('landing.solution.rows.tracking.tab'),
-                  content: (
-            <FeatureRow rowKey="tracking">
-              <div className="grid gap-3 sm:grid-cols-2">
-                <PieceKpi />
-                <div className="flex flex-col gap-2 rounded-xl border border-outline-variant bg-surface-container-lowest p-4">
-                  <span className="flex size-9 items-center justify-center rounded-lg bg-info-container text-on-info-container">
-                    <Icon name="shield" size={20} />
-                  </span>
-                  <p className="text-label-medium text-on-surface-variant">{t('landing.solution.rows.tracking.privacyLabel')}</p>
-                  <p className="text-body-medium text-on-surface">{t('landing.solution.rows.tracking.privacyBody')}</p>
-                </div>
               </div>
-            </FeatureRow>
-                  ),
-                },
-              ]}
-            />
-          </Reveal>
-
-          {/* 5 · Learn anywhere: the same guide on a computer and on a real-size phone */}
-          <Reveal>
-            <section id="cualquier-lugar" aria-labelledby="cualquier-lugar-title" className="grid scroll-mt-20 grid-cols-[minmax(0,1fr)] items-center gap-10 rounded-xl bg-surface-container p-5 md:p-10 lg:grid-cols-2 lg:gap-14">
-              <div className="flex min-w-0 flex-col items-start gap-4">
-                <p className="rounded-full border border-primary px-3 py-1 text-label-medium text-primary">{t('landing.anywhere.eyebrow')}</p>
-                <h2 id="cualquier-lugar-title" className="text-title-large text-balance text-on-surface md:text-headline-small">
-                  {t('landing.anywhere.title')}
-                </h2>
-                <p className="text-body-large text-on-surface-variant">{t('landing.anywhere.intro')}</p>
-                <ul className="flex flex-col gap-2.5 pt-2">
+            </BentoFeature>
+            {/* Learn anywhere: the same guide on a phone, cropped at the bottom edge like a product shot */}
+            <Reveal
+              as="li"
+              delay={3 * STAGGER}
+              id="cualquier-lugar"
+              className="grid min-w-0 scroll-mt-20 grid-cols-[minmax(0,1fr)] gap-6 overflow-hidden rounded-xl bg-surface-container p-5 pb-0 md:col-span-2 md:grid-cols-[minmax(0,1fr)_18rem] md:p-8 md:pb-0 large:col-span-4"
+            >
+              <div className="flex min-w-0 flex-col gap-3 md:pb-8">
+                <p className="w-fit rounded-full border border-primary px-3 py-1 text-label-medium text-primary">{t('landing.anywhere.eyebrow')}</p>
+                <h3 className="text-title-large text-balance text-on-surface">{t('landing.anywhere.title')}</h3>
+                <p className="text-body-medium text-on-surface-variant">{t('landing.anywhere.intro')}</p>
+                <ul className="flex flex-col gap-2 pt-1">
                   {(t('landing.anywhere.points', { returnObjects: true }) as string[]).map((point) => (
-                    <li key={point} className="flex items-start gap-3 text-body-medium text-on-surface">
-                      <Icon name="check_circle" size={20} className="shrink-0 text-primary" />
+                    <li key={point} className="flex items-start gap-2.5 text-body-medium text-on-surface">
+                      <Icon name="check_circle" size={18} className="mt-px shrink-0 text-primary" />
                       {point}
                     </li>
                   ))}
                 </ul>
               </div>
-              {/* A smaller, shorter phone: the section stays about one screen tall (D-283) */}
-              <figure className="mx-auto flex w-72 max-w-full flex-col items-center gap-3">
-                <PhoneFrame label={t('landing.anywhere.phoneLabel')} className="w-72" compact>
+              <div className="fade-out-bottom mx-auto h-80 w-64 max-w-full self-end overflow-hidden md:h-96 md:w-72">
+                <PhoneFrame label={t('landing.anywhere.phoneLabel')} className="w-full">
                   <StatusBar />
                   <AppTopBar person="diego" />
                   <div className="flex min-h-0 flex-1 flex-col gap-3 overflow-hidden px-3.5 py-3">
                     <GuidePreview />
                     <WorkedExample />
-                    <span className="mt-auto rounded-sm bg-primary py-2.5 text-center text-label-large text-on-primary">{t('landing.anywhere.answer')}</span>
                   </div>
                   <BottomNav active="learn" />
                 </PhoneFrame>
-                <figcaption className="text-center text-body-small text-on-surface-variant">{t('landing.anywhere.mobile')}</figcaption>
-              </figure>
-            </section>
-          </Reveal>
+              </div>
+            </Reveal>
+          </ul>
         </Section>
 
         {/* 5b · Three contexts, the same wallet (D-74, D-75, D-83, D-84), each with its honest status */}
@@ -714,35 +685,22 @@ function HeroPhone() {
   );
 }
 
-/** One row of the solution: a product piece and a title with its key word, text and numbered list. */
-function FeatureRow({ rowKey, reverse = false, children }: { rowKey: 'route' | 'practice' | 'tracking'; reverse?: boolean; children: ReactNode }) {
+/** One card of the solution bento (D-285): the key word in primary, one line and a real piece of the product. */
+function BentoFeature({ rowKey, index, className, children }: { rowKey: 'route' | 'practice' | 'tracking'; index: number; className?: string; children: ReactNode }) {
   const { t } = useTranslation();
   const base = `landing.solution.rows.${rowKey}`;
-  const items = t(`${base}.items`, { returnObjects: true }) as string[];
   return (
-    <div className="grid h-full items-center gap-10 rounded-xl bg-surface-container p-5 md:p-10 lg:grid-cols-2 lg:gap-14">
-      <div className={cn('relative min-w-0 pt-6', reverse && 'lg:order-2')} aria-hidden>
-        {/* Floating tag on the visual (reference: the blue amount tag), flat */}
-        <span className="absolute top-0 left-4 z-10 rounded-md bg-primary px-3 py-1.5 text-label-large text-on-primary">{t(`${base}.chip`)}</span>
-        {children}
-      </div>
-      <div className="flex min-w-0 flex-col gap-4">
-        <h3 className="text-title-large text-balance text-on-surface md:text-headline-small">
+    <Reveal as="li" delay={index * STAGGER} className={cn('flex min-w-0 flex-col gap-5 rounded-xl bg-surface-container p-5 md:p-8', className)}>
+      <div className="flex flex-col gap-2">
+        <h3 className="text-title-large text-balance text-on-surface">
           {t(`${base}.titleStart`)} <span className="text-primary">{t(`${base}.titleKey`)}</span>
         </h3>
-        <p className="text-body-large text-on-surface-variant">{t(`${base}.body`)}</p>
-        <ol className="flex flex-col gap-2.5">
-          {items.map((item, i) => (
-            <li key={item} className="flex items-start gap-3 text-body-medium text-on-surface">
-              <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-primary-container text-label-medium text-on-primary-container tabular-nums">
-                {i + 1}
-              </span>
-              <span className="pt-0.5">{item}</span>
-            </li>
-          ))}
-        </ol>
+        <p className="text-body-medium text-on-surface-variant">{t(`${base}.short`)}</p>
       </div>
-    </div>
+      <div className="mt-auto min-w-0" aria-hidden>
+        {children}
+      </div>
+    </Reveal>
   );
 }
 

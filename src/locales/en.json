@@ -74,7 +74,7 @@
             "Just-in-time cards, even without a mission",
             "Locked sections show what is missing"
           ],
-          "tab": "Path"
+          "short": "\"Get to know you\" detects what you already know and proposes a path of seven levels, from the account to investing."
         },
         "practice": {
           "titleStart": "Practice with",
@@ -87,7 +87,7 @@
             "Pockets and goals adjusted for inflation",
             "Thirteen missions of 2 to 6 minutes"
           ],
-          "tab": "Practice"
+          "short": "Missions are played in your own wallet, with example values and visible assumptions."
         },
         "tracking": {
           "titleStart": "Tracking",
@@ -102,7 +102,7 @@
             "No amount leaves the browser",
             "Impact with Kirkpatrick levels 1 to 3"
           ],
-          "tab": "Tracking"
+          "short": "Tutoring and L&D see learning progress, never amounts."
         }
       },
       "levels": {
@@ -110,14 +110,6 @@
         "l2": "Level 2 · Pay",
         "l3": "Level 3 · Budget",
         "l4": "Level 4 · Pockets and goals"
-      },
-      "carousel": {
-        "label": "How Alcancía works",
-        "role": "carousel",
-        "slide": "slide",
-        "tabs": "Choose what to see",
-        "pause": "Pause the carousel",
-        "play": "Resume the carousel"
       }
     },
     "anywhere": {
