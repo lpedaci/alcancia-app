@@ -56,3 +56,4 @@
 | 14/11/2026 | Ajustes de Lourdes | "(obligatorio)" en rojo en todos los campos; ayuda de acceso más ancha, ordenada y sin scroll (D-239) | Lourdes revisa |
 | 14/11/2026 | Ajustes de Lourdes | Marco centrado con máximo de 1440 px, separaciones en múltiplos de 8, "Pendiente del nivel N" (D-240) | Lourdes revisa |
 | 14/11/2026 | Corrección | Los avisos se cierran solos a los 5 segundos aunque la ventana no tenga el foco (D-241) | Hecho |
+| 14/11/2026 | 21 · Revisión del ajuste | Sección "Ajuste" en `review-fase-a.md`: los 6 criterios del ajuste cumplen con tests (600 unitarios, 641 de Playwright en los 6 anchos con axe), lo que no se pudo verificar y las decisiones a confirmar. La fase B espera la aprobación de Lourdes | Lourdes revisa |

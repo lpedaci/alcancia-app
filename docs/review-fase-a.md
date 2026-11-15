@@ -251,3 +251,55 @@ En esta revisión se actualizaron dos cosas:
 ### Resumen
 
 Cumplen 23 de los 25 criterios de base y 2 quedan parciales: el lector de pantalla, que haces tú, y la documentación, que entra en el paso 15. De los 6 criterios del ajuste, 5 no se cumplen y 1 se cumple hoy, que es lo esperable antes de empezar los pasos 15 a 21.
+
+## Ajuste de fase A (pasos 15 a 21, 14/11/2026)
+
+> Revisión del ajuste de D-82: contraste de lo construido en los pasos 15 a 20, y en los ajustes de Lourdes que vinieron después, con los criterios que el ajuste sumó a la sección 11. Commit revisado: 42302e2. **La fase B no empieza hasta que Lourdes apruebe esta revisión.**
+
+### Resultados de las suites
+
+| Suite | Resultado |
+| --- | --- |
+| Tests unitarios (Vitest) | 600 de 600, en 43 archivos |
+| Playwright con el servidor de desarrollo (desbordes en los 6 anchos, axe a 375 y 1280 px, un `h1` por página) | 641 de 641 (71 páginas en 6 anchos, más axe y `h1` a 375 y 1280 px) |
+| Playwright sobre el build de producción (CSP, rutas y recorrido publicado) | 72 de 72 en la CI del commit 42302e2 |
+| Lint, tipos y build de producción | Sin errores en la CI del commit 42302e2 |
+
+Las capturas de las pantallas tocadas están en `docs/screenshots/` (`<página>-<ancho>.jpg`). La prueba de desbordes las vuelve a generar en cada corrida para las 71 páginas del recorrido en 320, 375, 768, 1024, 1280 y 1440 px. El ajuste tocó Inicio (`p1-*`), Pagar y sus flujos (`p3-*`), Presupuesto (`p4-*`), Apartados (`p5-*`), Rendir (`p6-*`), Tarjeta y préstamos (`p7-*`), Invertir (`p8-*`), Aprender y las guías (`p9-*`, `p10-*`), los desafíos (`p11-*`), las misiones (`p12-*`) y Perfil (`p14-*`). Los ajustes de Lourdes de después (D-217 a D-241) tocaron también los paneles del tutor y el admin, el acceso y las pantallas de sistema.
+
+### Criterios del ajuste (sección 11)
+
+| Criterio | Estado | Evidencia |
+| --- | --- | --- |
+| En el modo libre, sin misión activa, cada acción del catálogo mínimo de 5.3 dispara su tarjeta una sola vez, con fuente y pregunta, y respeta el nivel de presencia de Fuerte (tests) | **Cumple** | `src/data/learning-cards.json` con las 10 tarjetas del catálogo (D-211). `cards.test.ts` (18 tests): uno por disparador, cada uno con su caso negativo (segundo débito, mismo alias, tasa real positiva, pago total, fondo de 3 meses, aviso legítimo); fuente y parte de guía existentes en todas; una tarjeta por acción; no se repite si se respondió bien y vuelve si se respondió mal. `WhyMatters.test.tsx`: la tarjeta aparece con Fuerte en "Silencio", sin el personaje |
+| Cada pantalla de la billetera tiene "¿Por qué importa?" y lleva a la parte exacta de una guía, con "Volver" a la pantalla de origen sin perder lo cargado | **Cumple** | Visible en la pantalla, fuera del panel de Fuerte (D-209), en Inicio, Pagar, Transferir, QR, Servicios, Tarjeta y préstamos, Presupuesto, Apartados, Rendir, Invertir y Perfil, con diseño propio para cada tamaño (D-235). Enlace `/app/learn/guides/:guideId?part=n&from=<ruta>` (D-78, D-212). `WhyMatters.test.tsx` recorre las pantallas con Fuerte silenciado. `guide-from-action.test.tsx` va de Rendir a la tarjeta de tasa real negativa, de ahí a la parte de la guía, y vuelve a Rendir con lo cargado; también rechaza un `from` fuera de la app (sin redirección abierta). Las pantallas se abren arriba, salvo al volver de la guía (D-231) |
+| Las misiones de D-77 dejan su huella en la billetera (deuda, cuotas, intereses, monto perdido) y la devolución explica cómo revertirla dentro de la simulación (tests con casos calculados a mano) | **Cumple** | Las 13 misiones se juegan en la billetera de la persona (D-208, D-213) y "Aguanta la caída" usa la cartera real (D-214). Casos a mano en `docs/formulas.md`: **F-35** (préstamo de $ 600.000: $ 570.000 netos y cuota de $ 41.737,16), **F-36** (pagar el mínimo: $ 226.652,05, con $ 10.652,05 de intereses) y **F-37** (estafa: $ 70.000 si se reporta, $ 40.000 si no). Tests en `credit.test.ts` (11: el préstamo en Tus deudas, las cuotas que se debitan, la cancelación anticipada que quita la deuda de tasa alta y el mínimo que se vuelve deuda de tasa alta) y en `own-wallet.test.ts` (monto perdido por la estafa y reporte). La devolución de cada misión dice cómo se revierte (pagar, cancelar, reportar), sin "deshacer" |
+| Los desafíos de los niveles 5 y 6 tienen al menos una pregunta de caso con decisiones | **Cumple** | 4 preguntas `branching` en `question-banks.json` (D-216), fijadas con `alwaysInclude` en `challenge-level-5`, `mastery-level-5`, `challenge-level-6` y `mastery-level-6` para que el sorteo nunca las deje afuera. Tienen el fondo de emergencia cubierto y el plazo mínimo del UVA verificado en el BCRA (90 días, Q-16). `questions.test.ts` valida su estructura |
+| `docs/market-data.md` documenta las fuentes reales verificadas y el plan de fase B, sin cambiar todavía la interfaz | **Cumple** | `docs/market-data.md` documenta las 11 series de la API del BCRA v4.0 verificadas (identificadores 12, 1190, 1227, 7, 14, 31, 30, 5, 4, 27 y 28), con frecuencia, formato, validación con Zod, qué pasa si una fuente falla y por qué los precios de acciones y CEDEARs siguen de ejemplo. `scripts/fetch-market.mjs` (`npm run market`) se probó en local; el snapshot no se versiona y la interfaz no lo lee. El único cambio visible es el enlace a BYMADATA en Invertir, que pedía D-79 |
+| Los estados de demo de Mariana y Diego siguen coherentes después de los cambios | **Cumple** | `seed.test.ts`: Diego tiene el desafío del nivel 1 aprobado, el nivel 2 en curso y un desafío semanal cumplido; Mariana tiene el desafío del nivel 6 aprobado, Invertir bloqueado por su billetera (fondo de 2 de 3 meses) y un desafío semanal pendiente. `engine.test.ts` de niveles: los niveles 0 a 6 de Mariana, completos. En P1, la misión sugerida es la del nivel actual, o dice que quedó pendiente del nivel anterior ("Pendiente del nivel N", paso 19 y D-240) |
+
+### Lo que no se pudo verificar
+
+- **Prueba con lector de pantalla** (diagnóstico, una guía y un simulador) y **Lighthouse**: quedan a cargo de Lourdes. axe no encuentra errores, pero no reemplaza esa prueba.
+- **Contenido pendiente del Lic. Kevin Giampieri:** Q-01 a Q-06, Q-12, Q-13 y Q-15 siguen abiertas, y las consultas las hace Lourdes. Las ampliaciones siguen marcadas en `docs/content.md`.
+- **BYMADATA (Q-17):** el 14/11/2026, `open.bymadata.com.ar` mostraba "Sitio en mantenimiento". El enlace de Invertir apunta ahí y se vuelve a revisar antes de la fase B.
+- **Series 1190 y 1227 del BCRA (Q-18) y límite de pedidos de la API (Q-20):** las series respondieron en la prueba local, pero no figuran en "Principales Variables", y la API no documenta un límite de pedidos. Se confirman en el paso 22.
+- **Valores reales en la interfaz:** por diseño del ajuste, ninguna pantalla los usa todavía y los escenarios siguen rotulados "Valores de ejemplo". Eso es el paso 22, en la fase B.
+- **Dispositivos reales:** los anchos se verificaron con Playwright y con la emulación del navegador, no en un celular ni en una tablet físicos. La pulsación larga de las barras inferiores (D-228, D-237) se probó con eventos táctiles emulados.
+
+### Decisiones que tienes que confirmar
+
+| Decisión | Qué confirmar |
+| --- | --- |
+| **D-222** | Si el mínimo de $ 1.000 para el límite diario que fija la persona es el que quieres |
+| **D-223 y Q-19** | Que la inflación real salga de la variable 27 del BCRA, que coincide con el IPC del INDEC redondeado, y que el reemplazo sea la serie del INDEC en datos.gob.ar |
+| D-218 a D-221 | Tarjetas de opción en Rendir; orden de Apartados y metas, y dónde se crea una meta; eliminar una meta y qué pasa con su dinero; orden de Perfil y cómo se explica el límite diario |
+| D-224 a D-232 | Menú plegado que se abre al apoyar el puntero; pantalla de error con Fuerte; layout de los paneles; confirmación al categorizar; íconos a la izquierda y barra inferior solo con íconos; pantallas de sistema; cuentas de demo en el SSO; cada sección se abre arriba; módulos del programa en una tabla por nivel |
+| D-233 a D-240 | "Ya sé esto" arriba a la derecha; listas largas con scroll interno; "¿Por qué importa?" en cada tamaño; Logros con "Ver todas"; barra inferior del tutor y el admin; acciones sobre personas y cohortes, con los filtros de las alertas; "(obligatorio)" en rojo y ayuda de acceso; marco de 1440 px y separaciones en múltiplos de 8 |
+| README | La licencia: hoy dice "Todos los derechos reservados". Si prefieres otra (por ejemplo, código abierto con el contenido reservado), la cambio |
+
+D-217 ya está confirmada, D-215 quedó revertida y D-241 es una corrección (los avisos no se cerraban).
+
+### Resumen
+
+Los 6 criterios del ajuste se cumplen y cada uno tiene tests. De los 25 criterios de base, 24 se cumplen y 1 queda parcial: el lector de pantalla, que haces tú. La documentación ahora refleja D-74 a D-82 (paso 15) y suma `market-data.md`. Siguen abiertas tus confirmaciones de la tabla de arriba, las consultas a Kevin y las Q-17 a Q-20. Ninguna bloquea esta revisión, pero las Q-17 a Q-20 sí bloquean el paso 22.
