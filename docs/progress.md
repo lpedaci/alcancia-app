@@ -65,3 +65,4 @@
 | 15/11/2026 | Ajuste de Lourdes | "¿Por qué importa?" con borde verde y fondo verde claro, en su propia fila en el saludo de Inicio (D-252) | Lourdes revisa |
 | 15/11/2026 | Ajuste de Lourdes | Hornero siempre en el menú: "Ver dentro de Hornero" o "Volver a Hornero" (D-253) | Lourdes revisa |
 | 15/11/2026 | Ajuste de Lourdes y documentación | Mapa de niveles más liviano en celular y tablet (D-254); README con la sección de contextos y Hornero, la misión nueva y la imagen de "¿Por qué importa?" actualizada; sistema de diseño con los patrones de D-249 a D-254 | Lourdes revisa |
+| 15/11/2026 | Ajustes de Lourdes | Fuerte aparece abajo desde el inicio y la etiqueta de marca ficticia sale de la barra superior (D-255); celulares de la landing iguales a la billetera de hoy (D-256); panel del inicio de sesión como el hero y capturas del README regeneradas (D-257) | Lourdes revisa |

@@ -12,7 +12,6 @@ import { FuerteFab } from '@/features/companion/FuerteFab';
 import { LearningCardHost } from '@/features/learning-cards/LearningCardHost';
 import { InboxMenu } from './InboxMenu';
 import { HorneroMark } from '@/features/partner/HorneroMark';
-import { FictitiousBrandChip } from '@/features/partner/FictitiousBrandChip';
 import { HORNERO_HOME, usePartnerMode } from '@/features/partner/partner-mode';
 import type { FuerteState } from '@/features/companion/Fuerte';
 import { completedLights } from '@/features/levels/engine';
@@ -409,11 +408,9 @@ export function WalletShell({ section, children, fuerte }: { section: string; ch
               <p className="inline-flex shrink-0 items-center gap-1 rounded-full border border-outline-variant bg-surface-container px-2.5 py-1 text-label-medium whitespace-nowrap text-on-surface-variant large:shrink-0 large:gap-1.5 large:border-0 large:bg-inverse-surface large:px-3 large:text-inverse-on-surface">
                 {/* At 320 px the icon gives way, so the text always fits whole */}
                 <Icon name="info" size={16} className="hidden shrink-0 min-[22.5rem]:block" />
-                {/* With Hornero's label beside it, the short text stays until 1280 px so "Ver como" keeps its room */}
-                <span className={partner === 'hornero' ? 'xl:hidden' : 'expanded:hidden'}>{t('wallet.practiceBannerShort')}</span>
-                <span className={partner === 'hornero' ? 'hidden xl:inline' : 'hidden expanded:inline'}>{t('wallet.practiceBanner')}</span>
+                <span className="expanded:hidden">{t('wallet.practiceBannerShort')}</span>
+                <span className="hidden expanded:inline">{t('wallet.practiceBanner')}</span>
               </p>
-              {partner === 'hornero' && <FictitiousBrandChip className="hidden large:inline-flex" />}
               <span className="flex-1" />
               <ViewAsMenu />
               <IconButton icon="help" label={t('wallet.help')} className="hidden sm:inline-flex" />

@@ -153,12 +153,12 @@ Cada enlace entra a la demo con esa persona. El acceso con SSO y verificación e
 
 La misma billetera sirve para **equipos, aulas y productos**: una organización la ofrece a su gente (Andina Servicios S.A., en la demo), una institución de nivel superior a sus estudiantes de 18 años o más (Instituto Superior Ceibo, próximamente) o una app financiera la integra para sus usuarios. La billetera, los niveles, las misiones y la privacidad no cambian.
 
-El **modo integrado** se ve con **Hornero**, una billetera ficticia creada para la demo, con marca propia y la etiqueta "Marca ficticia de demostración" (no refiere a ninguna marca real). Hornero muestra el ahorro de la persona con su concepto de marca: el nido que crece de a poco ("Tu nido creció $ X este mes") y el nido que aguanta ("Tu nido aguanta X meses de gastos"). Desde ahí se abre Alcancía, sin otro inicio de sesión, y Hornero queda en el menú para volver. El socio solo recibe avisos de avance, nunca montos.
+El **modo integrado** se ve con **Hornero**, una billetera ficticia creada para la demo, con marca propia y la etiqueta "Marca ficticia de demostración" (no refiere a ninguna marca real). Hornero muestra el ahorro de la persona con su concepto de marca: el nido que crece de a poco ("Tu nido creció $ X este mes") y el nido que aguanta ("Tu nido aguanta X meses de gastos"). Desde ahí se abre Alcancía, sin otro inicio de sesión, y Hornero queda en el menú para volver; en el modo propio de Alcancía, el mismo ítem dice "Ver dentro de Hornero". El socio solo recibe avisos de avance, nunca montos.
 
 <table>
   <tr>
     <td width="50%"><img src="docs/readme/hornero-home.webp" alt="Inicio de Hornero, una billetera ficticia con marca propia en color atardecer: la etiqueta 'Marca ficticia de demostración', las tarjetas 'Tu nido crece' con lo guardado y lo que creció este mes, y 'Un nido que aguanta' con los meses de gastos que cubre el fondo de emergencia, y el botón 'Abrir Alcancía'."></td>
-    <td width="50%"><img src="docs/readme/hornero-wallet.webp" alt="La billetera de Mariana abierta dentro de Hornero: el menú lateral muestra 'Volver a Hornero' con la etiqueta de marca ficticia y la barra superior repite la etiqueta junto al cartel de dinero ficticio."></td>
+    <td width="50%"><img src="docs/readme/hornero-wallet.webp" alt="La billetera de Mariana abierta dentro de Hornero: el menú lateral muestra 'Volver a Hornero' con la etiqueta 'Marca ficticia de demostración', arriba de 'Tu avance', y la barra superior conserva el cartel de dinero ficticio."></td>
   </tr>
   <tr>
     <td align="center">Hornero, el socio ficticio</td>

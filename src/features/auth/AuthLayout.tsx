@@ -37,7 +37,7 @@ export function AuthLayout({ children, aside, showcase, wide }: AuthLayoutProps)
           {children}
         </div>
       </main>
-      <aside className="hidden min-w-0 overflow-hidden rounded-xl bg-primary-container px-10 py-12 lg:flex lg:flex-col lg:justify-center xl:px-16">
+      <aside className="hidden min-w-0 overflow-hidden rounded-xl bg-primary-container px-10 pt-12 lg:flex lg:flex-col xl:px-14">
         {showcase}
       </aside>
     </div>

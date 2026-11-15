@@ -837,8 +837,10 @@
     },
     "showcase": {
       "eyebrow": "Bienestar financiero 2026",
-      "title": "La billetera donde tu equipo aprende finanzas usándola",
-      "body": "Dinero ficticio, decisiones reales y aprendizaje en el momento justo. Tu empresa ve tu avance, nunca tus montos."
+      "body": "Dinero ficticio, decisiones reales. Tu empresa ve tu avance, nunca tus montos.",
+      "titleStart": "La billetera donde",
+      "titleKey": "se aprende finanzas",
+      "titleEnd": "usándola"
     },
     "methods": {
       "sso_microsoft": "Microsoft",

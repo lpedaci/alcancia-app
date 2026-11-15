@@ -98,7 +98,10 @@ export function AppTopBar({ person = 'mariana' }: { person?: 'mariana' | 'diego'
       <span className="flex size-7 items-center justify-center rounded-sm border border-outline text-primary">
         <Icon name="swap_horiz" size={16} />
       </span>
-      <Icon name="notifications" size={20} className="text-on-surface-variant" />
+      <span className="relative flex size-7 items-center justify-center text-on-surface-variant">
+        <Icon name="notifications" size={20} />
+        <span className="absolute -top-0.5 -right-0.5 flex size-4 items-center justify-center rounded-full bg-error text-label-small leading-none text-on-error tabular-nums">4</span>
+      </span>
       <Avatar name={person === 'diego' ? 'Diego Suárez' : MARIANA_NAME} role="participant" personId={`p-${person}`} size="sm" />
     </div>
   );
@@ -116,43 +119,56 @@ function FloatingFuerte() {
 
 const card = 'flex flex-col gap-2 rounded-lg border border-outline-variant bg-surface-container-lowest p-3';
 
-/** P1 on a phone, as the wallet draws it at 320 px: mission card, greeting, balance and quick actions. */
+/**
+ * P1 on a phone, as the wallet draws it today at 375 px (D-256): the pending mission, the greeting with its
+ * date and day chips, level and next unlock, "¿Por qué importa?" and the time controls with their label,
+ * and the balance card with its icon on the left (D-228), the purchasing power and the alias.
+ */
 function HomeScreen() {
   const { t } = useTranslation();
   const power = purchasingPowerToday(MARIANA);
-  const chip = 'inline-flex items-center gap-1 rounded-full border border-outline-variant bg-surface-container-lowest px-2 py-0.5 text-label-small';
+  const chip = 'inline-flex items-center gap-1 rounded-full border border-outline-variant bg-surface-container-lowest px-2 py-0.5 text-label-small whitespace-nowrap';
   return (
     <>
       <AppTopBar />
-      <div className="relative flex min-h-0 flex-1 flex-col gap-2.5 overflow-hidden px-3 py-3">
-        {/* Active mission: compact card above the content */}
+      <div className="relative flex min-h-0 flex-1 flex-col gap-2 overflow-hidden px-2.5 py-2.5">
+        {/* Pending mission of an earlier level */}
         <div className="flex items-center gap-2 rounded-lg border border-primary bg-surface-container-lowest p-2.5">
-          <span className="flex size-8 shrink-0 items-center justify-center rounded-md bg-primary-container text-on-primary-container">
+          <span className="flex size-7 shrink-0 items-center justify-center rounded-md bg-primary-container text-on-primary-container">
             <Icon name="flag" size={16} />
           </span>
           <span className="min-w-0 flex-1">
             <span className="block truncate text-label-small text-primary">{t('wallet.home.mission.kickerEarlier', { level: 5, minutes: 5 })}</span>
-            <span className="block truncate text-title-small text-on-surface">{ACTIVE_MISSION}</span>
+            <span className="block truncate text-label-large text-on-surface">{ACTIVE_MISSION}</span>
           </span>
-          <Icon name="arrow_forward" size={18} className="text-primary" />
+          <Icon name="arrow_forward" size={16} className="text-primary" />
         </div>
-        {/* Greeting with white context chips and the controls of time in one even row (D-162, D-169) */}
-        <div className="flex flex-col gap-2 rounded-lg bg-primary-container p-3 text-on-primary-container">
+        {/* Greeting */}
+        <div className="flex flex-col gap-1.5 rounded-lg bg-primary-container p-2.5 text-on-primary-container">
           <span className="flex flex-wrap gap-1">
             <span className={cn(chip, 'text-on-surface-variant')}>
               <Icon name="calendar_month" size={16} className="text-primary" />
               {formatDate(walletDate(MARIANA.day))}
+            </span>
+            <span className={cn(chip, 'text-on-surface-variant')}>
+              <Icon name="today" size={16} className="text-primary" />
+              {t('wallet.home.dayChip', { day: MARIANA.day })}
             </span>
           </span>
           <p className="text-title-large">
             {t('wallet.home.hello')} <span className="text-primary">Mariana</span>
           </p>
           <span className="flex flex-wrap gap-1">
-            <span className={cn(chip, 'text-on-surface')}>
+            <span className={cn(chip, 'font-medium text-on-surface')}>
               <Icon name="route" size={16} className="text-primary" />
               {t('wallet.home.chipLevel', { level: 6, section: t('wallet.sections.level-6') })}
             </span>
+            <span className={cn(chip, 'text-on-surface-variant')}>
+              <Icon name="lock" size={16} />
+              {t('wallet.home.chipNext', { section: t('wallet.sections.level-7') })}
+            </span>
           </span>
+          <span className="text-label-small font-medium">{t('wallet.home.time.label')}</span>
           <span className="grid grid-cols-3 gap-0.5 rounded-md bg-surface-container-lowest p-0.5">
             {(['day', 'week', 'month'] as const).map((k) => (
               <span key={k} className="truncate rounded-sm px-1 py-1 text-center text-label-small text-primary">
@@ -160,14 +176,19 @@ function HomeScreen() {
               </span>
             ))}
           </span>
+          <span className={cn(chip, 'w-fit py-1 text-primary')}>
+            <Icon name="lightbulb" size={16} />
+            {t('cards.why')}
+            <Icon name="keyboard_arrow_down" size={16} />
+          </span>
         </div>
-        {/* Balance with alias and CVU stacked (D-170) */}
+        {/* Balance: the section icon on the left with its title (D-228) */}
         <div className={card}>
-          <div className="flex items-center justify-between gap-2">
-            <p className="text-label-medium text-on-surface">{t('wallet.home.balance.title')}</p>
+          <div className="flex items-center gap-2">
             <span className="flex size-7 items-center justify-center rounded-md bg-primary-container text-on-primary-container">
               <Icon name="account_balance_wallet" size={16} />
             </span>
+            <p className="text-label-large text-on-surface">{t('wallet.home.balance.title')}</p>
           </div>
           <p className="text-headline-small text-on-surface">
             <MoneyText value={MARIANA.balance} />
@@ -193,49 +214,55 @@ function HomeScreen() {
   );
 }
 
+/** P9 on a phone, as the level map looks today (D-254): compact rows, the check on the node, the current level outlined. */
 function LevelsScreen() {
   const { t } = useTranslation();
-  const names = t('landing.phone.levels', { returnObjects: true }) as string[];
+  const rows = [0, 1, 2, 3, 4, 5, 6, 7];
   return (
     <>
       <AppTopBar />
-      <div className="relative flex min-h-0 flex-1 flex-col gap-3 overflow-hidden px-3.5 py-3">
-        <div>
-          <p className="text-title-medium text-on-surface">{t('landing.phone.levelsTitle')}</p>
-          <p className="text-label-small text-on-surface-variant">{t('landing.phone.levelsSubtitle')}</p>
-        </div>
-        <ol className="flex flex-col">
-          {names.map((name, i) => {
-            const done = i < 6;
-            return (
-              <li key={name} className="flex gap-2.5">
-                <span className="flex flex-col items-center">
+      <div className="relative flex min-h-0 flex-1 flex-col gap-2 overflow-hidden px-2.5 py-2.5">
+        <p className="text-title-large text-on-surface">{t('wallet.nav.learn')}</p>
+        <div className="flex flex-col gap-1 rounded-lg border border-outline-variant bg-surface-container-lowest p-2.5">
+          <p className="pb-1 text-title-small text-on-surface">{t('learn.map.levels')}</p>
+          <ol className="flex flex-col">
+            {rows.map((n) => {
+              const done = n < 6;
+              const current = n === 6;
+              return (
+                <li key={n} className="relative flex gap-2 pb-1.5">
+                  {n < rows.length - 1 && <span aria-hidden className="absolute top-7 bottom-0 left-3 w-0.5 -translate-x-1/2 bg-outline-variant" />}
                   <span
                     className={cn(
-                      'flex size-6 items-center justify-center rounded-full',
-                      done ? 'bg-success text-on-success' : 'border border-outline bg-surface-container-lowest text-on-surface-variant',
+                      'relative z-10 mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full',
+                      done && 'bg-success-container text-success',
+                      current && 'bg-primary text-on-primary',
+                      !done && !current && 'bg-surface-container text-on-surface-variant',
                     )}
                   >
-                    <Icon name={done ? 'check' : 'lock'} size={16} />
+                    <Icon name={done ? 'check_circle' : current ? 'play_arrow' : 'lock'} size={16} filled={done} />
                   </span>
-                  {i < names.length - 1 && <span className={cn('h-4 w-0.5', done ? 'bg-success' : 'bg-outline-variant')} />}
-                </span>
-                <span className="min-w-0 pt-0.5">
-                  <span className="block text-label-small text-on-surface-variant">{t('landing.phone.levelPrefix', { n: i + 1 })}</span>
-                  <span className={cn('block text-label-large', done ? 'text-on-surface' : 'text-on-surface-variant')}>{name}</span>
-                </span>
-              </li>
-            );
-          })}
-        </ol>
-        <div className="mt-auto flex flex-col gap-1.5 rounded-lg border border-outline-variant bg-surface-container-lowest p-3">
-          <p className="flex items-center gap-1 text-label-medium text-on-surface">
-            <Icon name="lock" size={16} /> {t('landing.phone.missing')}
-          </p>
-          <p className="text-label-small text-on-surface-variant">{t('landing.phone.missingFund')}</p>
-          <span className="h-1.5 rounded-full bg-surface-container">
-            <span className="block h-1.5 w-2/3 rounded-full bg-tertiary" />
-          </span>
+                  <span
+                    className={cn(
+                      'flex min-w-0 flex-1 items-center gap-1.5 rounded-md px-2 py-1',
+                      current && 'border border-primary bg-primary-container/40',
+                    )}
+                  >
+                    <span className="min-w-0 flex-1 truncate text-label-large text-on-surface">
+                      {t('learn.map.levelName', { n, name: t(`wallet.sections.level-${n}`) })}
+                    </span>
+                    {current && (
+                      <span className="inline-flex shrink-0 items-center gap-0.5 rounded-full bg-success-container px-1.5 text-label-small text-on-success-container">
+                        <Icon name="check_circle" size={16} className="text-success" />
+                        {t('learn.map.current')}
+                      </span>
+                    )}
+                    <Icon name="keyboard_arrow_down" size={16} className="shrink-0 text-primary" />
+                  </span>
+                </li>
+              );
+            })}
+          </ol>
         </div>
         <FloatingFuerte />
       </div>

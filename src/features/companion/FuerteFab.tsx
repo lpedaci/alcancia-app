@@ -107,6 +107,14 @@ export function FuerteFab({
     };
   }, [measure]);
   const measured = bounds.maxTop > 0;
+  // The slide between positions is only for moves after the first placement (D-255): on opening a
+  // screen, Fuerte appears already at the bottom instead of sliding down from the top.
+  const [settled, setSettled] = useState(false);
+  useEffect(() => {
+    if (!measured || settled) return;
+    const frame = requestAnimationFrame(() => setSettled(true));
+    return () => cancelAnimationFrame(frame);
+  }, [measured, settled]);
 
   const top = clamp(place.top ?? bounds.maxTop, bounds.minTop, bounds.maxTop);
 
@@ -187,7 +195,7 @@ export function FuerteFab({
           className={cn(
             !measured && 'invisible',
             'group fixed z-30 flex size-20 touch-none items-center justify-center rounded-full outline-offset-2 select-none focus-visible:outline-2 focus-visible:outline-primary',
-            drag ? 'cursor-grabbing' : 'cursor-grab transition-[top] duration-200 ease-standard motion-reduce:transition-none',
+            drag ? 'cursor-grabbing' : cn('cursor-grab', settled && 'transition-[top] duration-200 ease-standard motion-reduce:transition-none'),
           )}
         >
           {/* Fuerte alone, bigger and without a background: an 80 px target that is easy to tap */}

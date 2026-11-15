@@ -120,7 +120,7 @@ The **integrated mode** is shown with **Hornero**, a fictitious wallet made for 
 <table>
   <tr>
     <td width="50%"><img src="docs/readme/hornero-home.webp" alt="Home of Hornero, a fictitious wallet with its own sunset-colored brand: the 'Fictitious demo brand' label, the 'Your nest grows' and 'A nest that holds' cards, and the 'Open Alcancía' button."></td>
-    <td width="50%"><img src="docs/readme/hornero-wallet.webp" alt="Mariana's wallet opened inside Hornero: the side menu shows 'Back to Hornero' with the fictitious-brand label, and the top bar repeats the label next to the fictitious-money notice."></td>
+    <td width="50%"><img src="docs/readme/hornero-wallet.webp" alt="Mariana's wallet opened inside Hornero: the side menu shows 'Back to Hornero' with the 'Fictitious demo brand' label, above 'Your progress', and the top bar keeps the fictitious-money notice."></td>
   </tr>
 </table>
 
