@@ -28,6 +28,8 @@ const WelcomePage = lazyPage(() => import('@/features/onboarding/WelcomePage'), 
 const ProfilePage = lazyPage(() => import('@/features/profile/ProfilePage'), 'ProfilePage');
 const LearnPage = lazyPage(() => import('@/features/learning/LearnPage'), 'LearnPage');
 const ReviewPage = lazyPage(() => import('@/features/learning/ReviewPage'), 'ReviewPage');
+const CommunityPage = lazyPage(() => import('@/features/learning/CommunityPage'), 'CommunityPage');
+const CommunityModerationPage = lazyPage(() => import('@/features/tutor/CommunityModerationPage'), 'CommunityModerationPage');
 const GuidePage = lazyPage(() => import('@/features/learning/GuidePage'), 'GuidePage');
 const ChallengePage = lazyPage(() => import('@/features/learning/ChallengePage'), 'ChallengePage');
 const PayPage = lazyPage(() => import('@/features/pay/PayPage'), 'PayPage');
@@ -87,6 +89,7 @@ export function AppRoutes() {
           <Route path="/app/learn" element={<LearnPage />} />
           <Route path="/app/learn/guides/:guideId" element={<GuidePage />} />
           <Route path="/app/learn/review/:moduleId" element={<ReviewPage />} />
+          <Route path="/app/learn/community" element={<CommunityPage />} />
           <Route path="/app/learn/challenges/:challengeId" element={<ChallengePage />} />
           <Route path="/app/tools" element={<ToolsPage />} />
           <Route path="/app/tools/:simId" element={<SimToolPage />} />
@@ -100,6 +103,7 @@ export function AppRoutes() {
           <Route path="/tutor/cohorts/:id/challenge" element={<AssignChallengePage />} />
           <Route path="/tutor/assessments" element={<AssessmentsPage />} />
           <Route path="/tutor/questions" element={<QuestionsPage />} />
+          <Route path="/tutor/community" element={<CommunityModerationPage />} />
           <Route path="/admin" element={<AdminHomePage />} />
           <Route path="/admin/people" element={<PeoplePage />} />
           <Route path="/admin/people/import" element={<ImportPage />} />

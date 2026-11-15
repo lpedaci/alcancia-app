@@ -30,6 +30,7 @@ export function TutorShell({ children }: { children: ReactNode }) {
           match: (p) => p.startsWith('/tutor/questions'),
           badge: { count: unanswered, label: t('tutor.nav.unanswered', { count: unanswered }) },
         },
+        { key: 'community', to: '/tutor/community', icon: 'groups', label: t('tutor.nav.community'), match: (p) => p.startsWith('/tutor/community') },
       ]}
     >
       {children}

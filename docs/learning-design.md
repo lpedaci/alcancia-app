@@ -141,6 +141,12 @@ Los nueve eventos de instrucción de Gagné, Wager, Golas y Keller (2005), compr
 - **Sin límite de tiempo** (WCAG 2.2.1) y con alternativa accesible a todo arrastre.
 - **Retroalimentación** que explica por qué, nunca solo "Correcto" o "Incorrecto".
 
+## 6.z Meta colectiva y aprendizaje social (D-80 y F20, paso 26, D-274)
+
+**Meta colectiva.** El tutor propone una conducta para toda la cohorte, con porcentaje (50 a 100 %) y fecha: completar una misión (por ejemplo, "Crea tu fondo de emergencia") o aprobar el desafío de un nivel. **Se mide con datos de aprendizaje que el tutor ya ve, nunca con datos de la billetera:** "el 80 % con el fondo de emergencia iniciado" de la idea original se traduce en "el 80 % completó la misión del fondo de emergencia", porque el saldo de un apartado no sale del navegador (D-58). El avance es agregado, con el umbral de 5, sin rankings ni nombres; cada persona ve solo si ella ya sumó. Inspirada en las simulaciones grupales de BYMA LAB, sin su ranking.
+
+**Espacio de la cohorte (F20).** Preguntas y respuestas entre personas de la misma cohorte, moderadas por su tutor o tutora (Comunidad, T6): responde, destaca las buenas respuestas y oculta lo que no corresponde, con un motivo que ve quien lo escribió. Se puede publicar sin el nombre, y en ese caso nadie, ni la tutoría, ve quién fue. **El formulario no publica mensajes con montos, correos, teléfonos ni CBU o CVU**, y dice qué quitar. En Hornero no hay espacio de cohorte: sus usuarios no tienen cohortes ni tutoría (5.5).
+
 ## 6.y Repaso espaciado y recordatorios (F19 y F9, paso 25, D-273)
 
 **Repaso espaciado.** A los **7 y a los 30 días** de terminar la guía de un módulo, la persona tiene un repaso de **3 preguntas** de su banco (sin casos ramificados, tareas con simulador ni ordenamientos). Es formativo como la práctica de las guías: retroalimentación inmediata, reintentos ilimitados y sin puntaje. La ronda de 30 días llega después de la de 7, cada módulo muestra una sola ronda pendiente y nunca hay más de 3 repasos pendientes a la vez, para que no se acumulen. Se ven en Aprender ("Repasos") y en la campana. El resultado queda solo en el navegador de la persona.

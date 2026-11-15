@@ -49181,5 +49181,111 @@
    "text": "¿La regla de las 48 horas sirve para las compras online?",
    "askedAt": "2026-11-05T11:00:00.000Z"
   }
+ ],
+ "collectiveGoals": [
+  {
+   "id": "goal-1",
+   "createdBy": "p-kevin",
+   "createdAt": "2026-11-02",
+   "cohortId": "cohort-operations",
+   "kind": "mission",
+   "targetId": "mission-emergency-fund",
+   "targetShare": 0.6,
+   "dueDate": "2026-12-18"
+  },
+  {
+   "id": "goal-2",
+   "createdBy": "p-kevin",
+   "createdAt": "2026-11-02",
+   "cohortId": "cohort-technology",
+   "kind": "level",
+   "targetId": "level-5",
+   "targetShare": 0.7,
+   "dueDate": "2026-12-18"
+  },
+  {
+   "id": "ceibo-goal-1",
+   "createdBy": "p-martin",
+   "createdAt": "2026-11-02",
+   "cohortId": "cohort-ceibo-logistics",
+   "kind": "level",
+   "targetId": "level-2",
+   "targetShare": 0.7,
+   "dueDate": "2026-12-04"
+  }
+ ],
+ "cohortPosts": [
+  {
+   "id": "post-1",
+   "cohortId": "cohort-operations",
+   "personId": "p-hernan-flores",
+   "anonymous": false,
+   "text": "¿Alguien armó el presupuesto con la regla 70/20/10? Me cuesta ubicar los gastos fijos.",
+   "at": "2026-11-10T13:05:00.000Z"
+  },
+  {
+   "id": "post-1-1",
+   "cohortId": "cohort-operations",
+   "personId": "p-javier-vega",
+   "anonymous": false,
+   "text": "Yo empecé anotando todo durante un mes, como dice la guía. Recién ahí vi qué era fijo y qué no.",
+   "at": "2026-11-10T15:40:00.000Z",
+   "parentId": "post-1"
+  },
+  {
+   "id": "post-1-2",
+   "cohortId": "cohort-operations",
+   "personId": "p-kevin",
+   "anonymous": false,
+   "text": "Buen camino. La 70/20/10 es un punto de partida: si tus gastos fijos son altos, ajusta los porcentajes y mira cómo cambia mes a mes.",
+   "at": "2026-11-11T12:00:00.000Z",
+   "parentId": "post-1",
+   "endorsed": true
+  },
+  {
+   "id": "post-2",
+   "cohortId": "cohort-operations",
+   "personId": "p-laura-vega",
+   "anonymous": true,
+   "text": "Me llegó un mensaje de un supuesto soporte que pedía el código de verificación. No lo pasé, ¿hice bien?",
+   "at": "2026-11-12T09:20:00.000Z"
+  },
+  {
+   "id": "post-2-1",
+   "cohortId": "cohort-operations",
+   "personId": "p-kevin",
+   "anonymous": false,
+   "text": "Hiciste muy bien. Ningún soporte real te pide códigos. En la vida real, repórtalo desde la app y bloquea el contacto.",
+   "at": "2026-11-12T11:00:00.000Z",
+   "parentId": "post-2",
+   "endorsed": true
+  },
+  {
+   "id": "ceibo-post-1",
+   "cohortId": "cohort-ceibo-logistics",
+   "personId": "p-camila-vega",
+   "anonymous": false,
+   "text": "¿El fondo de emergencia también sirve si vivo con mi familia?",
+   "at": "2026-11-09T18:10:00.000Z"
+  },
+  {
+   "id": "ceibo-post-1-1",
+   "cohortId": "cohort-ceibo-logistics",
+   "personId": "p-leandro-gimenez",
+   "anonymous": false,
+   "text": "Yo lo pienso con mis gastos básicos propios, aunque sean menos que los de una casa.",
+   "at": "2026-11-09T21:30:00.000Z",
+   "parentId": "ceibo-post-1"
+  },
+  {
+   "id": "ceibo-post-1-2",
+   "cohortId": "cohort-ceibo-logistics",
+   "personId": "p-martin",
+   "anonymous": false,
+   "text": "Exacto: calcúlalo con tus gastos esenciales. Lo vemos en la próxima clase.",
+   "at": "2026-11-10T12:00:00.000Z",
+   "parentId": "ceibo-post-1",
+   "endorsed": true
+  }
  ]
 }

@@ -282,6 +282,41 @@ export interface TutorQuestion {
   answer?: { text: string; answeredAt: IsoDate };
 }
 
+/**
+ * Collective goal of a cohort (D-80, step 26): a behavior the cohort aims at together, measured with
+ * learning data already shared (a mission completed or a level challenge passed), never with wallet
+ * data. Aggregated with the threshold of 5, with no ranking and no names.
+ */
+export interface CollectiveGoal {
+  id: string;
+  cohortId: string;
+  kind: 'mission' | 'level';
+  /** Mission id, or level id whose challenge counts as passed. */
+  targetId: string;
+  /** Fraction of the cohort's active participants, e.g. 0.8. */
+  targetShare: number;
+  dueDate: IsoDate;
+  createdBy: string;
+  createdAt: IsoDate;
+}
+
+/** F20 · Social learning: a post of the cohort's space, moderated by its tutor. Never amounts. */
+export interface CohortPost {
+  id: string;
+  cohortId: string;
+  personId: string;
+  /** Published without the name: everybody, the tutor too, sees "Alguien de tu cohorte". */
+  anonymous: boolean;
+  text: string;
+  at: string;
+  /** A reply to another post. */
+  parentId?: string;
+  /** The tutor marked this answer as a good one. */
+  endorsed?: boolean;
+  /** The tutor hid it, with a reason the author sees. */
+  hidden?: { reason: string; at: string };
+}
+
 // Only in the participant's browser, never in metrics or other roles' views:
 export interface LocalScenario {
   id: string;

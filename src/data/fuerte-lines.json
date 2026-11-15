@@ -421,6 +421,13 @@
         "Repasar un poco cada tanto vale más que leer todo de golpe.",
         "Tres preguntas y listo. Lo que repasas, se queda."
       ]
+    },
+    "community.fuerte": {
+      "state": "neutral",
+      "variants": [
+        "Aprender con otros ayuda. Eso sí: conceptos sí, montos no.",
+        "Una buena pregunta acá le sirve a toda tu cohorte."
+      ]
     }
   }
 }

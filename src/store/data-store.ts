@@ -7,6 +7,8 @@ import type {
   ChallengeAttempt,
   ConsentRecord,
   Cohort,
+  CohortPost,
+  CollectiveGoal,
   DiagnosticKnowledgeResult,
   FollowUp30,
   GuideProgress,
@@ -46,6 +48,10 @@ export interface OrgData {
   weeklyReports: WeeklyChallengeReport[];
   followUps: FollowUp30[];
   tutorQuestions: TutorQuestion[];
+  /** D-80: collective goals of the cohorts, set by their tutors. */
+  collectiveGoals: CollectiveGoal[];
+  /** F20: posts of each cohort's space, moderated by its tutor. */
+  cohortPosts: CohortPost[];
   /** G4: requests to the help desk (no self-service, F0). */
   accessRequests: AccessRequest[];
   /** G5: accepted privacy notices, with their version. */
@@ -103,6 +109,8 @@ export function scopeToOrg(data: SharedData, orgId: string): OrgData {
     weeklyReports: mine(data.weeklyReports),
     followUps: mine(data.followUps),
     tutorQuestions: mine(data.tutorQuestions),
+    collectiveGoals: data.collectiveGoals.filter((g) => cohortIds.has(g.cohortId)),
+    cohortPosts: data.cohortPosts.filter((p) => cohortIds.has(p.cohortId)),
     accessRequests: data.accessRequests,
     consents: mine(data.consents),
   };
@@ -134,6 +142,12 @@ interface DataState extends SharedData {
   answerQuestion: (questionId: string, text: string, at: string) => void;
   /** T2: the tutor enables a level for a person or a cohort, with a reason that is recorded (5.0). */
   addUnlockRecord: (record: LevelUnlockRecord) => void;
+  /** D-80: a tutor sets (or replaces) the collective goal of a cohort. */
+  setCollectiveGoal: (goal: CollectiveGoal) => void;
+  /** F20: a post or a reply in the cohort's space. */
+  addPost: (post: CohortPost) => void;
+  /** F20: the tutor moderates: endorse a reply, or hide a post with a reason. */
+  moderatePost: (postId: string, patch: Pick<CohortPost, 'endorsed' | 'hidden'>) => void;
   /** O4: program configuration (the threshold never goes below 5, F1). */
   updateProgram: (program: Program, privacyThreshold: number) => void;
   /** O2 and O3: people added one by one or by CSV, always invited first (F8). */
@@ -203,6 +217,10 @@ export const useDataStore = create<DataState>()(
         set((state) => ({
           tutorQuestions: state.tutorQuestions.map((q) => (q.id === questionId ? { ...q, answer: { text, answeredAt: at } } : q)),
         })),
+      setCollectiveGoal: (goal) =>
+        set((state) => ({ collectiveGoals: [...state.collectiveGoals.filter((g) => g.cohortId !== goal.cohortId || g.dueDate < goal.createdAt), goal] })),
+      addPost: (post) => set((state) => ({ cohortPosts: [...state.cohortPosts, post] })),
+      moderatePost: (postId, patch) => set((state) => ({ cohortPosts: state.cohortPosts.map((p) => (p.id === postId ? { ...p, ...patch } : p)) })),
       addUnlockRecord: (record) => set((state) => ({ unlockRecords: [...state.unlockRecords, record] })),
       updateProgram: (program, privacyThreshold) =>
         set((state) => ({
@@ -224,6 +242,7 @@ export const useDataStore = create<DataState>()(
           weeklyReports: state.weeklyReports.filter((w) => w.personId !== personId),
           followUps: state.followUps.filter((f) => f.personId !== personId),
           diagnostics: state.diagnostics.filter((d) => d.personId !== personId),
+          cohortPosts: state.cohortPosts.filter((p) => p.personId !== personId),
         })),
       addCohort: (cohort) => set((state) => ({ cohorts: [...state.cohorts, cohort] })),
       updateCohort: (cohortId, patch) =>

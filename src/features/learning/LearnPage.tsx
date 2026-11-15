@@ -20,6 +20,7 @@ import { MasteryButton } from '@/features/levels/MasteryButton';
 import { fuerteLine } from '@/features/companion/fuerte-lines';
 import { useOrgKind } from '@/lib/org-context';
 import { DueReviews } from './DueReviews';
+import { CohortCommunityCard } from './Community';
 
 /**
  * P9, Aprender (5.0, 2.2.1 pattern 8): the map of levels as a timeline, one stretch per level with
@@ -176,6 +177,7 @@ export function LearnPage() {
           <div className="flex min-w-0 flex-col gap-6">
             <DueReviews personId={personId} />
             {/* The product context has no tutor (5.5): no weekly challenges and no questions to a tutor */}
+            {kind !== 'product' && <CohortCommunityCard personId={personId} />}
             {kind !== 'product' && <WeeklyChallenges personId={personId} />}
             {kind !== 'product' && <MyQuestions personId={personId} />}
             {/* Achievements */}

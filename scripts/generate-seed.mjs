@@ -418,7 +418,32 @@ function generateOrg(cfg) {
   }
 
 
+  // ---------- Collective goal (D-80) and the cohort's space (F20), step 26 ----------
+  // Built after everything else and without the PRNG, so no earlier value changes.
+  const collectiveGoals = (cfg.goals ?? []).map((g, i) => ({ id: `${cfg.idPrefix}goal-${i + 1}`, createdBy: cfg.tutorId, createdAt: '2026-11-02', ...g }));
+  const cohortPosts = [];
+  (cfg.forum ?? []).forEach((thread, ti) => {
+    const pool = participants.filter((p) => p.cohortIds.includes(thread.cohortId) && p.status === 'active' && !fresh(p) && p.id !== 'p-mariana' && p.id !== 'p-diego');
+    const author = (k) => pool[(ti * 5 + k * 3) % pool.length].id;
+    const rootId = `${cfg.idPrefix}post-${ti + 1}`;
+    cohortPosts.push({ id: rootId, cohortId: thread.cohortId, personId: author(0), anonymous: Boolean(thread.anonymous), text: thread.text, at: thread.at });
+    thread.replies.forEach((r, ri) =>
+      cohortPosts.push({
+        id: `${rootId}-${ri + 1}`,
+        cohortId: thread.cohortId,
+        personId: r.tutor ? cfg.tutorId : author(ri + 1),
+        anonymous: Boolean(r.anonymous),
+        text: r.text,
+        at: r.at,
+        parentId: rootId,
+        ...(r.endorsed ? { endorsed: true } : {}),
+      }),
+    );
+  });
+
   return {
+    collectiveGoals,
+    cohortPosts,
     organization,
     program,
     cohorts,
@@ -509,6 +534,30 @@ const ANDINA = {
   ],
   freshIds: [],
   levelBase: { operations: 2.4, administration: 3.6, technology: 4.4, commercial: 3.2 },
+  goals: [
+    { cohortId: 'cohort-operations', kind: 'mission', targetId: 'mission-emergency-fund', targetShare: 0.6, dueDate: '2026-12-18' },
+    { cohortId: 'cohort-technology', kind: 'level', targetId: 'level-5', targetShare: 0.7, dueDate: '2026-12-18' },
+  ],
+  forum: [
+    {
+      cohortId: 'cohort-operations',
+      text: '¿Alguien armó el presupuesto con la regla 70/20/10? Me cuesta ubicar los gastos fijos.',
+      at: '2026-11-10T13:05:00.000Z',
+      replies: [
+        { text: 'Yo empecé anotando todo durante un mes, como dice la guía. Recién ahí vi qué era fijo y qué no.', at: '2026-11-10T15:40:00.000Z' },
+        { tutor: true, endorsed: true, text: 'Buen camino. La 70/20/10 es un punto de partida: si tus gastos fijos son altos, ajusta los porcentajes y mira cómo cambia mes a mes.', at: '2026-11-11T12:00:00.000Z' },
+      ],
+    },
+    {
+      cohortId: 'cohort-operations',
+      anonymous: true,
+      text: 'Me llegó un mensaje de un supuesto soporte que pedía el código de verificación. No lo pasé, ¿hice bien?',
+      at: '2026-11-12T09:20:00.000Z',
+      replies: [
+        { tutor: true, endorsed: true, text: 'Hiciste muy bien. Ningún soporte real te pide códigos. En la vida real, repórtalo desde la app y bloquea el contacto.', at: '2026-11-12T11:00:00.000Z' },
+      ],
+    },
+  ],
   weekly: [
     ['Registra tus gastos durante 7 días', '2026-09-07', '2026-09-14'],
     ['Calcula el CFT de tu tarjeta con el resumen de este mes', '2026-10-05', '2026-10-12'],
@@ -586,6 +635,18 @@ const CEIBO = {
   ],
   freshIds: ['p-lucia'],
   levelBase: { logistics: 2.6, business_admin: 3.4, accounting: 3 },
+  goals: [{ cohortId: 'cohort-ceibo-logistics', kind: 'level', targetId: 'level-2', targetShare: 0.7, dueDate: '2026-12-04' }],
+  forum: [
+    {
+      cohortId: 'cohort-ceibo-logistics',
+      text: '¿El fondo de emergencia también sirve si vivo con mi familia?',
+      at: '2026-11-09T18:10:00.000Z',
+      replies: [
+        { text: 'Yo lo pienso con mis gastos básicos propios, aunque sean menos que los de una casa.', at: '2026-11-09T21:30:00.000Z' },
+        { tutor: true, endorsed: true, text: 'Exacto: calcúlalo con tus gastos esenciales. Lo vemos en la próxima clase.', at: '2026-11-10T12:00:00.000Z' },
+      ],
+    },
+  ],
   weekly: [
     ['Anota tus gastos durante 7 días', '2026-09-07', '2026-09-14'],
     ['Arma el presupuesto del mes con tu beca o tu ingreso', '2026-10-05', '2026-10-12'],
@@ -643,6 +704,7 @@ const seed = {
 for (const key of [
   'cohorts', 'people', 'diagnostics', 'guideProgress', 'challengeAttempts', 'itemResponses', 'levelLearning',
   'unlockRecords', 'missionCompletions', 'weeklyChallenges', 'weeklyReports', 'followUps', 'tutorQuestions',
+  'collectiveGoals', 'cohortPosts',
 ]) {
   seed[key] = orgs.flatMap((o) => o[key]);
 }

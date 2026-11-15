@@ -2848,7 +2848,8 @@
       "assessments": "Resultados",
       "questions": "Consultas",
       "unanswered_one": "{{count}} consulta sin responder",
-      "unanswered_other": "{{count}} consultas sin responder"
+      "unanswered_other": "{{count}} consultas sin responder",
+      "community": "Comunidad"
     },
     "home": {
       "subtitle_one": "Acompañas a {{count}} persona en el programa",
@@ -4487,6 +4488,93 @@
       "hello": "Hola, Ana.",
       "cta": "Abrir Alcancía",
       "disclaimer": "Vista previa simulada: no se envía nada y no imita la interfaz de esas aplicaciones. Ana es una persona de ejemplo."
+    }
+  },
+  "community": {
+    "card": {
+      "title": "Tu cohorte",
+      "noRanking": "Sin rankings: se ve el avance de toda la cohorte, nunca el de cada persona.",
+      "open_one": "Espacio de la cohorte · {{count}} conversación",
+      "open_other": "Espacio de la cohorte · {{count}} conversaciones"
+    },
+    "goal": {
+      "title": "Meta colectiva",
+      "intro": "Una conducta que la cohorte busca lograr junta, medida con datos de aprendizaje: una misión completada o un desafío de nivel aprobado. Se ve el avance de toda la cohorte, sin rankings ni nombres, y solo con 5 personas o más.",
+      "mission": "Que el {{share}} de la cohorte complete la misión «{{name}}»",
+      "level": "Que el {{share}} de la cohorte apruebe el desafío del nivel {{n}} · {{name}}",
+      "due": "Hasta el {{date}}",
+      "progressLabel": "Avance de la meta colectiva",
+      "progress": "{{share}} de {{goal}}",
+      "reached": "Meta alcanzada",
+      "insufficient": "El avance se muestra cuando hay al menos 5 personas activas en la cohorte.",
+      "youDid": "Tú ya sumaste a esta meta.",
+      "youCan": "Todavía puedes sumar: está en Aprender.",
+      "none": "Tu cohorte todavía no tiene una meta colectiva.",
+      "create": "Proponer meta",
+      "change": "Cambiar meta",
+      "save": "Guardar meta",
+      "saved": "Meta guardada",
+      "target": "Qué se busca lograr",
+      "targetHelp": "Una misión completada o un desafío de nivel aprobado: datos de aprendizaje, nunca de la billetera.",
+      "optionMission": "Completar la misión «{{name}}»",
+      "optionLevel": "Aprobar el desafío del nivel {{n}} · {{name}}",
+      "share": "Porcentaje de la cohorte",
+      "shareHelp": "Entre 50 y 100, por ejemplo: 70",
+      "shareError": "Escribe un porcentaje entre 50 y 100.",
+      "dueLabel": "Fecha límite",
+      "dueHelp": "Una fecha desde hoy, por ejemplo: el cierre de la cohorte"
+    },
+    "page": {
+      "title": "Espacio de tu cohorte",
+      "intro": "Preguntas y respuestas entre personas de tu cohorte, con tu tutor o tutora moderando. Para compartir dudas y aprendizajes, no situaciones personales.",
+      "rules": "No compartas montos ni datos personales: ni sueldos, ni saldos, ni deudas, ni correos o teléfonos. Si un mensaje los tiene, no se publica.",
+      "threads": "Conversaciones de {{cohort}}",
+      "empty": "Todavía no hay conversaciones. Puedes empezar con una pregunta.",
+      "none": "Este espacio es para cohortes con tutoría. En tu contexto aprendes con Fuerte y las guías."
+    },
+    "form": {
+      "title": "Nueva pregunta",
+      "label": "Tu pregunta o aprendizaje",
+      "replyLabel": "Tu respuesta",
+      "help": "Hasta 600 caracteres, sin montos ni datos personales. Por ejemplo: ¿cómo separan el ahorro apenas cobran?",
+      "anonymous": "Publicar sin mi nombre",
+      "anonymousHelp": "Tu cohorte y tu tutor o tutora ven \"Alguien de tu cohorte\".",
+      "post": "Publicar",
+      "reply": "Responder",
+      "posted": "Pregunta publicada",
+      "replied": "Respuesta publicada",
+      "errors": {
+        "empty": "Escribe tu mensaje.",
+        "tooLong": "Acórtalo a 600 caracteres.",
+        "money": "Quita los montos: el espacio es para conceptos, no para cifras personales.",
+        "contact": "Quita correos y teléfonos.",
+        "account": "Quita CBU, CVU o números de cuenta."
+      }
+    },
+    "post": {
+      "you": "Tú",
+      "youAnonymous": "Tú (sin tu nombre)",
+      "anonymous": "Alguien de tu cohorte",
+      "tutor": "{{name}} · Tutoría",
+      "endorsed": "Destacada por la tutoría",
+      "hidden": "Oculto por la tutoría: {{reason}}"
+    },
+    "mod": {
+      "title": "Comunidad",
+      "intro": "Los espacios de tus cohortes. Responde, destaca las buenas respuestas y oculta lo que no corresponde, con un motivo que la persona ve. Las publicaciones anónimas siguen anónimas.",
+      "cohort": "Cohorte",
+      "endorse": "Destacar",
+      "unendorse": "Quitar destacado",
+      "endorsed": "Respuesta destacada",
+      "unendorsed": "Destacado quitado",
+      "hide": "Ocultar",
+      "hideTitle": "Ocultar publicación",
+      "hideIntro": "Deja de verse en la cohorte. Quien la escribió ve el motivo.",
+      "hideConfirm": "Ocultar publicación",
+      "hidden": "Publicación oculta",
+      "reason": "Motivo",
+      "reasonHelp": "Breve y sin juicio, por ejemplo: incluye datos personales",
+      "reasonError": "Escribe un motivo de al menos 5 caracteres."
     }
   }
 }

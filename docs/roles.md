@@ -130,6 +130,8 @@ Leyenda: ✔ permitido · ◐ solo agregado con umbral de privacidad (mínimo 5)
 | `adoption.read` (O1) | ✖ | ✖ | ◐ | ◐ |
 | `impact.read` (D1) | ✖ | ✖ | ◐ | ◐ |
 | Registro de actividad tipo xAPI (O5, `/admin/activity`, F21) | ✖ | ✖ | ◐ con seudónimos | ✖ |
+| Meta colectiva de la cohorte (D-80) | ◐ avance agregado y si ella sumó | ✔ propone y ve el avance agregado | ✖ | ✖ |
+| Espacio de la cohorte (F20) | ✔ la propia: publica y responde | ✔ sus cohortes: responde, destaca y oculta con motivo | ✖ | ✖ |
 | `impact.export` | ✖ | ✖ | ✔ | ✔ |
 | `privacyThreshold.edit` (mínimo 5, no se puede bajar) | ✖ | ✖ | ✔ solo hacia arriba | ✖ |
 

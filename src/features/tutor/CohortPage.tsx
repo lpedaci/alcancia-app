@@ -26,6 +26,7 @@ import { TutorShell } from './TutorShell';
 import { WeeklyList } from './WeeklyList';
 import { type CellState, heatmap, kpis, LEVELS, learningByLevel, membersOf, moduleOrder, moduleTitle } from './tutor-data';
 import { pct, useTutorData } from './tutor-ui';
+import { CollectiveGoalSection } from './CollectiveGoalSection';
 
 /**
  * T2, a cohort (CLAUDE.md F6, D-193): its KPIs, the heat map of progress by person and module, the
@@ -83,6 +84,8 @@ export function CohortPage() {
           {t('tutor.insufficient')}
         </InlineAlert>
       )}
+
+      <CollectiveGoalSection cohort={cohort} />
 
       <section aria-labelledby="heat-title" className={card}>
         <div className="flex flex-wrap items-center justify-between gap-3">
