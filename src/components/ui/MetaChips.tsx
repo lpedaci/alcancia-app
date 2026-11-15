@@ -8,6 +8,8 @@ export interface MetaItem {
   dateTime?: string;
   /** Emphasis for the item that matters most (for example, the current level). */
   strong?: boolean;
+  /** Extra classes for one chip, for example to hide it on small screens. */
+  className?: string;
 }
 
 /**
@@ -24,6 +26,7 @@ export function MetaChips({ items, label, className }: { items: MetaItem[]; labe
           className={cn(
             'inline-flex min-h-7 items-center gap-1.5 rounded-full border border-outline-variant bg-surface-container-lowest px-3 py-1 text-label-medium',
             item.strong ? 'text-on-surface' : 'text-on-surface-variant',
+            item.className,
           )}
         >
           <Icon name={item.icon} size={16} className="shrink-0 text-primary" />

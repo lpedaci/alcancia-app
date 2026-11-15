@@ -88,6 +88,36 @@ function conditionKey(c: ConditionStatus) {
 }
 
 /** One condition as a chip: met with a check, pending with its progress, the profile test as a link. */
+/** One condition as a light line, for narrow cards (D-287): icon and text, no pill; a pending step stays one tap away. */
+function ConditionLine({ status }: { status: ConditionStatus }) {
+  const { t } = useTranslation();
+  const text = useConditionText()(status);
+  const key = conditionKey(status);
+  const icon = status.met ? "check_circle" : "radio_button_unchecked";
+  const link =
+    !status.met && status.condition.type === "challenge_passed"
+      ? `/app/learn/challenges/${status.condition.challengeId}`
+      : !status.met && key === "investor_profile_done"
+        ? INVESTOR_PROFILE_ROUTE
+        : undefined;
+  const label = key === "investor_profile_done" && !status.met ? t("wallet.unlock.doProfile") : text;
+  const body = (
+    <>
+      <Icon name={icon} size={18} filled={status.met} className={cn("shrink-0", status.met ? "text-success" : "text-on-surface-variant")} />
+      <span className="min-w-0">{label}</span>
+      <span className="sr-only">, {status.met ? t("wallet.unlock.metLabel") : t("wallet.unlock.pendingLabel")}</span>
+      {link && <Icon name="chevron_right" size={18} className="ml-auto shrink-0 text-primary" />}
+    </>
+  );
+  return link ? (
+    <Link to={link} className="flex min-h-10 w-full items-center gap-2 rounded-md py-1.5 text-body-medium text-primary hover:underline">
+      {body}
+    </Link>
+  ) : (
+    <span className={cn("flex min-h-10 w-full items-center gap-2 py-1.5 text-body-medium", status.met ? "text-on-surface-variant" : "text-on-surface")}>{body}</span>
+  );
+}
+
 export function ConditionChip({ status }: { status: ConditionStatus }) {
   const { t } = useTranslation();
   const text = useConditionText()(status);
@@ -168,7 +198,7 @@ export function UnlockCard({
     <section
       aria-labelledby={titleId}
       className={cn(
-        "@container flex min-w-0 flex-col gap-5 rounded-xl border border-outline-variant bg-surface-container-lowest p-(--space-card-padding)",
+        "@container flex min-w-0 flex-col gap-4 rounded-xl @md:gap-5 border border-outline-variant bg-surface-container-lowest p-(--space-card-padding)",
         className,
       )}
     >
@@ -199,7 +229,8 @@ export function UnlockCard({
             />
           )}
       </div>
-      <p className="text-body-medium text-on-surface-variant">
+      {/* The why, on wide cards only: on phones the title and what is missing are enough (D-287) */}
+      <p className="hidden text-body-medium text-on-surface-variant @md:block">
         {status.level.id === "level-7"
           ? t("wallet.unlock.investBody")
           : t("wallet.unlock.body")}
@@ -219,15 +250,14 @@ export function UnlockCard({
           tone="tertiary"
         />
       </div>
-      <ul
-        className="flex flex-wrap gap-2"
-        aria-label={t("wallet.unlock.missing")}
-      >
+      {/* A light list at every width, what is missing first (D-287); two columns on wide cards */}
+      <ul className="-my-1 grid grid-cols-1 divide-y divide-outline-variant @lg:grid-cols-2 @lg:gap-x-6 @lg:divide-y-0" aria-label={t("wallet.unlock.missing")}>
         {status.conditions
           .filter((c) => c.condition.type !== "first_sign_in")
+          .sort((a, b) => Number(a.met) - Number(b.met))
           .map((c, index) => (
-            <li key={index}>
-              <ConditionChip status={c} />
+            <li key={index} className="min-w-0">
+              <ConditionLine status={c} />
             </li>
           ))}
       </ul>

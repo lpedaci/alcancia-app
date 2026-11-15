@@ -544,7 +544,7 @@
       "actions": {
         "title": "Acciones rápidas",
         "transfer": "Transferir",
-        "qr": "Pagar con QR",
+        "qr": "Pagar QR",
         "bills": "Servicios",
         "pockets": "Apartar"
       },
@@ -560,7 +560,12 @@
       "movements": {
         "title": "Últimos movimientos",
         "all": "Ver todos",
-        "empty": "Todavía no hay movimientos. El primero llega con tu sueldo."
+        "empty": "Todavía no hay movimientos. El primero llega con tu sueldo.",
+        "showAll_one": "Ver el movimiento ({{count}})",
+        "showAll_other": "Ver todos los movimientos ({{count}})",
+        "showLess": "Ver menos",
+        "allLabel_one": "{{count}} movimiento",
+        "allLabel_other": "Todos los movimientos: {{count}}"
       },
       "mission": {
         "kicker": "Misión activa",

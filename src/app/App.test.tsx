@@ -177,16 +177,19 @@ describe('P1 and SIM-3 in the wallet (visual pilot)', () => {
   it('P1 offers to advance a day, a week and a month, and advancing changes the day', async () => {
     renderAt('/app');
     await screen.findByRole('heading', { level: 1 });
-    const group = screen.getByRole('group', { name: es.wallet.home.time.label });
-    for (const key of ['day', 'week', 'month'] as const) {
-      expect(within(group).getByRole('button', { name: es.wallet.home.time[key] })).toBeInTheDocument();
-    }
+    // D-288: one button opens a menu with the three ways to advance
+    const trigger = screen.getByRole('button', { name: es.wallet.home.time.label });
     expect(screen.getByText(/día 154 de la billetera/i)).toBeInTheDocument();
-    fireEvent.click(within(group).getByRole('button', { name: es.wallet.home.time.day }));
+    fireEvent.pointerDown(trigger, { button: 0, ctrlKey: false });
+    const menu = await screen.findByRole('menu', { name: es.wallet.home.time.label });
+    for (const key of ['day', 'week', 'month'] as const) {
+      expect(within(menu).getByRole('menuitem', { name: es.wallet.home.time[key] })).toBeInTheDocument();
+    }
+    fireEvent.click(within(menu).getByRole('menuitem', { name: es.wallet.home.time.day }));
     expect(await screen.findByText(/día 155 de la billetera/i)).toBeInTheDocument();
   });
 
-  it('Mariana sees Invertir locked with its conditions as chips and the profile test (D-67)', async () => {
+  it('Mariana sees Invertir locked with its conditions and the profile test (D-67)', async () => {
     renderAt('/app');
     const card = await screen.findByRole('region', { name: 'Invertir' });
     expect(within(card).getByText(/Fondo de emergencia · 2,3 de 3 meses/)).toBeInTheDocument();

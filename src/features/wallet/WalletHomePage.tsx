@@ -6,8 +6,8 @@ import { Button } from '@/components/ui/Button';
 import { Icon, type IconName } from '@/components/ui/Icon';
 import { IconButton } from '@/components/ui/IconButton';
 import { IconTile } from '@/components/ui/IconTile';
-import { MetaChips } from '@/components/ui/MetaChips';
 import { InlineAlert } from '@/components/ui/InlineAlert';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/DropdownMenu';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/Popover';
 import { toast } from '@/components/ui/toast-store';
 import { findPerson } from '@/features/auth/auth-service';
@@ -112,7 +112,10 @@ export function WalletHomePage() {
     </Button>
   ) : undefined;
 
-  const recent = [...wallet.movements].reverse().slice(0, 6);
+  // The last ones, and all of them on demand in a scrollable list (D-286)
+  const allMovements = [...wallet.movements].reverse();
+  const [showAll, setShowAll] = useState(false);
+  const recent = showAll ? allMovements : allMovements.slice(0, RECENT_SHOWN);
 
   if (!accountOpened) return <Navigate to="/app/welcome" replace />;
 
@@ -140,58 +143,61 @@ export function WalletHomePage() {
           </Link>
         )}
 
-        {/* Greeting (2.2.1, pattern 2) with the controls of time on a white surface, so they read clearly */}
-        <section aria-labelledby="home-title" className="flex flex-col gap-4 rounded-xl bg-primary-container p-(--space-card-padding) text-on-primary-container expanded:flex-row expanded:flex-wrap expanded:items-end expanded:justify-between">
-          <div className="flex min-w-0 flex-col gap-3">
-            <MetaChips
-              label={t('wallet.home.dateLabel')}
-              items={[
-                { icon: 'calendar_month', label: formatDate(walletDate(wallet.day)), dateTime: walletDate(wallet.day) },
-                { icon: 'today', label: t('wallet.home.dayChip', { day: wallet.day }) },
-              ]}
-            />
-            <h1 id="home-title" className="text-headline-medium">
+        {/* Greeting (2.2.1, pattern 2; D-287, D-288). Phones and tablets: on the page, with no card, as
+            wallets do; from 840 px, the tinted card. One date line, the name, the level, and two quiet
+            controls: "Avanzar el tiempo" opens a menu and "¿Por qué importa?" opens a dialog. */}
+        <section aria-labelledby="home-title" className="flex flex-col gap-3 px-1 text-on-surface expanded:flex-row expanded:items-end expanded:justify-between expanded:gap-4 expanded:rounded-xl expanded:bg-primary-container expanded:p-(--space-card-padding) expanded:text-on-primary-container">
+          <div className="flex min-w-0 flex-col gap-1.5">
+            <p className="text-label-medium text-on-surface-variant tabular-nums expanded:text-on-primary-container">
+              <time dateTime={walletDate(wallet.day)}>{formatDate(walletDate(wallet.day))}</time> · {t('wallet.home.dayChip', { day: wallet.day })}
+            </p>
+            <h1 id="home-title" className="text-headline-small expanded:text-headline-medium">
               {t('wallet.home.hello')} <span className="text-primary">{firstName}</span>
             </h1>
-            <MetaChips
-              label={t('wallet.home.context')}
-              items={[
-                ...(current ? [{ icon: 'route' as const, label: t('wallet.home.chipLevel', { level: current.level.order, section: currentSection }), strong: true }] : []),
-                ...(next ? [{ icon: 'lock' as const, label: t('wallet.home.chipNext', { section: nextSection }) }] : []),
-              ]}
-            />
+            {current && (
+              <p className="flex flex-wrap items-center gap-x-1.5 text-label-large text-primary">
+                <Icon name="route" size={16} />
+                {t('wallet.home.chipLevel', { level: current.level.order, section: currentSection })}
+                {next && (
+                  <span className="hidden items-center gap-1.5 text-on-primary-container expanded:inline-flex">
+                    <span aria-hidden>·</span>
+                    <Icon name="lock" size={16} />
+                    {t('wallet.home.chipNext', { section: nextSection })}
+                  </span>
+                )}
+              </p>
+            )}
           </div>
-          <div className="flex flex-col gap-1.5">
-            <p id="time-label" className="text-label-medium">{t('wallet.home.time.label')}</p>
+          <div className="flex items-center gap-2">
             {canAdvance ? (
-              // Phones: three equal buttons in one full-width row, text only, so they never wrap (D-169).
-              <div role="group" aria-labelledby="time-label" className="grid w-full grid-cols-3 gap-1 rounded-lg bg-surface-container-lowest p-1 sm:inline-flex sm:w-fit">
-                {(
-                  [
-                    ['day', 'skip_next'],
-                    ['week', 'fast_forward'],
-                    ['month', 'calendar_month'],
-                  ] as const
-                ).map(([kind, icon]) => (
-                  <Button key={kind} variant="text" size="s" className="min-w-0 px-2 sm:px-3" onClick={() => advance(kind)}>
-                    <Icon name={icon} size={20} className="hidden shrink-0 sm:block" />
-                    {t(`wallet.home.time.${kind}`)}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outlined" leadingIcon="schedule" trailingIcon="keyboard_arrow_down" className="bg-surface-container-lowest">
+                    {t('wallet.home.time.label')}
                   </Button>
-                ))}
-              </div>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="start" label={t('wallet.home.time.label')}>
+                  {(
+                    [
+                      ['day', 'skip_next'],
+                      ['week', 'fast_forward'],
+                      ['month', 'calendar_month'],
+                    ] as const
+                  ).map(([kind, icon]) => (
+                    <DropdownMenuItem key={kind} icon={icon} onSelect={() => advance(kind)}>
+                      {t(`wallet.home.time.${kind}`)}
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
             ) : (
               <p className="text-body-small">{t('wallet.home.time.notYet')}</p>
             )}
+            {whyKey && <WhyMatters screen={whyKey} />}
             <p className="sr-only" aria-live="polite">
               {announcement}
             </p>
           </div>
-          {/* "¿Por qué importa?" in its own full-width row (D-252): opening it never pushes the time controls */}
-          {whyKey && (
-            <div className="min-w-0 expanded:basis-full">
-              <WhyMatters screen={whyKey} />
-            </div>
-          )}
         </section>
 
         {wallet.pendingDebit && (
@@ -217,8 +223,9 @@ export function WalletHomePage() {
                 onClick={() => setAmountsHidden(!amountsHidden)}
               />
             </div>
-            <p className="text-display-small text-on-surface">
-              <MoneyText value={wallet.balance} compactBelow="xs" />
+            {/* The full amount: one type role smaller on narrow cards instead of abbreviating it (2.7, D-287) */}
+            <p className="text-headline-medium text-on-surface @sm:text-display-small">
+              <MoneyText value={wallet.balance} />
             </p>
             <p className="flex flex-wrap items-center gap-2 text-body-small text-on-surface-variant">
               <span className="inline-flex items-center gap-1 rounded-full bg-warning-container px-2 py-0.5 text-label-medium text-on-warning-container">
@@ -262,11 +269,12 @@ export function WalletHomePage() {
           {/* Quick actions, and the pockets folded under their total (D-260) */}
           <section aria-labelledby="actions-title" className={cn(card, '@container')}>
             <h2 id="actions-title" className="text-title-medium text-on-surface">{t('wallet.home.actions.title')}</h2>
-            <ul className="grid grid-cols-2 gap-2 @xs:grid-cols-4">
+            {/* One row of four at every size, as wallets do (D-287) */}
+            <ul className="-mx-2 grid grid-cols-4">
               {QUICK_ACTIONS.map((a) => (
-                <li key={a.key}>
-                  <Link to={a.to} className="flex min-h-12 flex-col items-center gap-1 rounded-lg p-2 text-center text-label-medium text-on-surface hover:bg-surface-container">
-                    <span className="inline-flex size-10 items-center justify-center rounded-full bg-secondary-container text-on-secondary-container">
+                <li key={a.key} className="min-w-0">
+                  <Link to={a.to} className="flex min-h-12 flex-col items-center gap-1.5 rounded-lg px-0.5 py-2 text-center text-label-medium text-balance text-on-surface hover:bg-surface-container">
+                    <span className="inline-flex size-12 items-center justify-center rounded-full bg-secondary-container text-on-secondary-container">
                       <Icon name={a.icon} />
                     </span>
                     {t(`wallet.home.actions.${a.key}`)}
@@ -321,26 +329,32 @@ export function WalletHomePage() {
         {/* Recent movements, with the category to confirm (D-114) */}
         <section aria-labelledby="movements-title" className={cn(card, '@container')}>
           <div className="flex items-center justify-between gap-2">
-            <h2 id="movements-title" className="text-title-large text-on-surface">{t('wallet.home.movements.title')}</h2>
+            <h2 id="movements-title" className="text-title-medium text-on-surface @md:text-title-large">{t('wallet.home.movements.title')}</h2>
           </div>
           {recent.length === 0 ? (
             <p className="text-body-medium text-on-surface-variant">{t('wallet.home.movements.empty')}</p>
           ) : (
-            <ul className="flex flex-col divide-y divide-outline-variant">
+            <ul
+              id="movements-list"
+              // Expanded, it scrolls inside its card so the page stays short; focusable for the keyboard
+              {...(showAll ? { tabIndex: 0, 'aria-label': t('wallet.home.movements.allLabel', { count: allMovements.length }) } : {})}
+              className={cn('flex flex-col divide-y divide-outline-variant', showAll && 'max-h-[32rem] overflow-y-auto rounded-lg pr-2 focus-visible:outline-2 focus-visible:outline-primary')}
+            >
               {recent.map((m) => (
-                <li key={m.id} className="flex items-center gap-4 py-4">
+                <li key={m.id} className="flex items-center gap-3 py-2.5 @md:gap-4 @md:py-4">
                   <span
                     className={cn(
-                      'inline-flex size-10 shrink-0 items-center justify-center rounded-full',
+                      'inline-flex size-9 shrink-0 items-center justify-center rounded-full @md:size-10',
                       D(m.amount).isNegative() ? 'bg-surface-container text-on-surface-variant' : 'bg-tertiary-container text-on-tertiary-container',
                     )}
                   >
                     <Icon name={MOVEMENT_ICON[m.type]} />
                   </span>
-                  <span className="flex min-w-0 flex-1 flex-col gap-2 @md:flex-row @md:items-center @md:gap-4">
+                  {/* Name and date on the left and the amount on the right, as wallets do; under it on the narrowest cards (D-287) */}
+                  <span className="flex min-w-0 flex-1 flex-col gap-1 @min-[18rem]:flex-row @min-[18rem]:items-start @min-[18rem]:gap-3 @md:items-center @md:gap-4">
                     <span className="min-w-0 flex-1">
-                      <span className="line-clamp-2 block text-body-large text-on-surface">{m.counterparty}</span>
-                      <span className="mt-1.5 flex flex-wrap items-center gap-2 text-body-small text-on-surface-variant">
+                      <span className="line-clamp-1 block text-body-medium text-on-surface @md:line-clamp-2 @md:text-body-large">{m.counterparty}</span>
+                      <span className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-body-small text-on-surface-variant @md:mt-1.5">
                         {formatDate(walletDate(m.day))}
                         {CATEGORIZABLE.includes(m.type) && (
                           <CategoryChip movement={m} onChoose={(category) => {
@@ -350,17 +364,32 @@ export function WalletHomePage() {
                         )}
                       </span>
                     </span>
-                    <MoneyText value={m.amount} trend flow className="text-label-large" />
+                    <MoneyText value={m.amount} trend flow className="shrink-0 text-label-medium @min-[18rem]:text-right @md:text-label-large" />
                   </span>
                 </li>
               ))}
             </ul>
+          )}
+          {allMovements.length > RECENT_SHOWN && (
+            <Button
+              variant="text"
+              trailingIcon={showAll ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}
+              className="self-start"
+              aria-expanded={showAll}
+              aria-controls="movements-list"
+              onClick={() => setShowAll(!showAll)}
+            >
+              {showAll ? t('wallet.home.movements.showLess') : t('wallet.home.movements.showAll', { count: allMovements.length })}
+            </Button>
           )}
         </section>
       </div>
     </WalletShell>
   );
 }
+
+/** Movements shown before "Ver todos" (D-286). */
+const RECENT_SHOWN = 5;
 
 const CATEGORIES: BudgetCategory[] = ['needs', 'wants', 'savings'];
 
