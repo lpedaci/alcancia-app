@@ -2,7 +2,6 @@ import { useTranslation } from 'react-i18next';
 import { isRouteErrorResponse, useRouteError } from 'react-router';
 import { Button } from '@/components/ui/Button';
 import { resetDemo } from '@/features/auth/auth-service';
-import { fuerteLine } from '@/features/companion/fuerte-lines';
 import { SystemMessage } from './SystemMessage';
 
 function messageOf(error: unknown): string {
@@ -32,7 +31,7 @@ export function RouteErrorPage() {
       code={t('errorPage.code')}
       title={t('errorPage.title')}
       body={t('errorPage.body')}
-      fuerte={{ state: 'sorry', line: fuerteLine('unexpected_error') }}
+      fuerte="sorry"
       actions={
         <>
           <Button leadingIcon="refresh" onClick={() => window.location.reload()}>

@@ -162,11 +162,11 @@ function Yield() {
           <div className="flex min-w-0 flex-col gap-(--space-bento-gap)">
             {/* Ganarle o no a la inflación: real rate of a month with the chosen option (F-03, SIM-4) */}
             <section aria-labelledby="real-title" className={cn(card, '@container')}>
-              <div className="flex items-start justify-between gap-3">
+              <div className="flex items-center gap-3">
+                <IconTile icon={beats ? 'trending_up' : 'trending_down'} tone={beats ? 'tertiary' : 'secondary'} size="sm" />
                 <h2 id="real-title" className="text-title-large text-on-surface">
                   {t('yield.real.title')}
                 </h2>
-                <IconTile icon={beats ? 'trending_up' : 'trending_down'} tone={beats ? 'tertiary' : 'secondary'} size="sm" />
               </div>
               <div className="flex flex-col gap-1">
                 <p className="text-label-medium text-on-surface-variant">{t('yield.real.earned')}</p>

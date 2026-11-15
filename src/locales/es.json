@@ -3070,7 +3070,17 @@
       },
       "leaveTitle": "¿Salir sin guardar?",
       "leaveBody": "Los cambios de la configuración se van a perder.",
-      "leaveConfirm": "Salir sin guardar"
+      "leaveConfirm": "Salir sin guardar",
+      "modulesSummaryLabel": "Resumen de módulos",
+      "modulesEnabled": "{{n}} de {{total}} habilitados",
+      "modulesRequired_one": "{{n}} obligatorio",
+      "modulesRequired_other": "{{n}} obligatorios",
+      "colModule": "Módulo",
+      "colEnabled": "Habilitado",
+      "levelGroup": "Nivel {{n}} · {{level}}",
+      "enableFor": "Habilitar: {{title}}",
+      "requiredHint": "Para marcar un módulo como obligatorio, primero tiene que estar habilitado.",
+      "discardShort": "Descartar"
     }
   },
   "sponsor": {

@@ -19,6 +19,7 @@ export function NotFoundPage() {
   return (
     <SystemMessage
       icon="search"
+      fuerte="thinking"
       code={t('notFound.code')}
       title={t('notFound.title')}
       body={t('notFound.body')}

@@ -106,7 +106,7 @@ export function ConsentPage() {
       };
 
   return (
-    <AuthLayout>
+    <AuthLayout wide>
       <div className="flex flex-col gap-2">
         <p className="text-label-large text-primary">{t("consent.eyebrow")}</p>
         <h1 className="text-headline-medium text-on-surface">
@@ -119,7 +119,7 @@ export function ConsentPage() {
 
       <section
         aria-labelledby="consent-step-title"
-        className="flex min-w-0 flex-col gap-6 rounded-xl border border-outline-variant bg-surface-container-lowest p-(--space-card-padding)"
+        className="flex min-w-0 flex-col gap-4 border-t border-outline-variant pt-4"
       >
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div aria-hidden className="flex items-center gap-1.5">
@@ -204,7 +204,24 @@ export function ConsentPage() {
           )}
         </div>
 
-        <div className="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
+        {/* Sign out on the left, the step actions on the right (one row, D-229) */}
+        <div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <Button
+            variant="text"
+            leadingIcon="logout"
+            className="-ml-3 w-fit"
+            aria-describedby="consent-signout-help"
+            onClick={() => {
+              signOut("manual");
+              navigate("/login", { replace: true });
+            }}
+          >
+            {t("consent.signOut")}
+          </Button>
+          <span id="consent-signout-help" className="sr-only">
+            {t("consent.signOutHelp")}
+          </span>
+          <div className="flex flex-col-reverse gap-3 sm:flex-row">
           {index > 0 && (
             <Button
               variant="outlined"
@@ -229,25 +246,9 @@ export function ConsentPage() {
               {t("consent.next")}
             </Button>
           )}
+          </div>
         </div>
       </section>
-
-      <div className="flex flex-col items-start gap-2">
-        <p className="text-body-small text-on-surface-variant">
-          {t("consent.signOutHelp")}
-        </p>
-        <Button
-          variant="text"
-          leadingIcon="logout"
-          className="-ml-3"
-          onClick={() => {
-            signOut("manual");
-            navigate("/login", { replace: true });
-          }}
-        >
-          {t("consent.signOut")}
-        </Button>
-      </div>
     </AuthLayout>
   );
 }

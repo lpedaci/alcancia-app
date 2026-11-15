@@ -1,5 +1,5 @@
-import { screen, within } from '@testing-library/react';
-import { beforeEach, describe, expect, it } from 'vitest';
+import { act, fireEvent, screen, within } from '@testing-library/react';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import es from '@/locales/es.json';
 import { renderAt } from '@/test/render-app';
 import { resetAll, signInAs } from '@/test/session';
@@ -20,7 +20,7 @@ function visibleText(element: HTMLElement) {
   return clone.textContent?.trim() ?? '';
 }
 
-describe('bottom navigation (D-72)', () => {
+describe('bottom navigation (D-72, D-228)', () => {
   beforeEach(() => {
     resetAll();
     signInAs('p-mariana');
@@ -36,22 +36,27 @@ describe('bottom navigation (D-72)', () => {
     expect(within(nav).getByRole('link', { name: `${es.wallet.nav.invest}, ${es.wallet.nav.locked}` })).toBeInTheDocument();
   });
 
-  it('only the active destination shows its name; the rest show only the icon', async () => {
+  it('no destination shows its name; the active one is marked with the pill and aria-current (D-228)', async () => {
     renderAt('/app');
     await screen.findByRole('heading', { level: 1 });
     const links = within(bottomNav()).getAllByRole('link');
     const active = links.filter((link) => link.getAttribute('aria-current') === 'page');
     expect(active).toHaveLength(1);
-    expect(visibleText(active[0]!)).toBe(es.wallet.nav.home);
-    for (const link of links.filter((l) => l !== active[0])) expect(visibleText(link)).toBe('');
+    expect(active[0]).toHaveAccessibleName(es.wallet.nav.home);
+    for (const link of links) expect(visibleText(link)).toBe('');
   });
 
-  it('the visible name follows the active destination', async () => {
-    renderAt('/app/tools/SIM-3');
-    await screen.findAllByRole('heading', { level: 1 });
-    const active = within(bottomNav())
-      .getAllByRole('link')
-      .find((link) => link.getAttribute('aria-current') === 'page')!;
-    expect(visibleText(active)).toBe(es.wallet.nav.learn);
+  it('holding an icon shows its name and does not navigate; a tap navigates (D-228)', async () => {
+    vi.useFakeTimers({ shouldAdvanceTime: true });
+    renderAt('/app');
+    await screen.findByRole('heading', { level: 1 });
+    const pay = within(bottomNav()).getByRole('link', { name: es.wallet.nav.pay });
+    fireEvent.pointerDown(pay, { pointerType: 'touch' });
+    act(() => vi.advanceTimersByTime(600));
+    expect(visibleText(pay)).toBe(es.wallet.nav.pay);
+    fireEvent.pointerUp(pay, { pointerType: 'touch' });
+    fireEvent.click(pay);
+    expect(window.location.hash).not.toContain('/app/pay');
+    vi.useRealTimers();
   });
 });

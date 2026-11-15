@@ -45,6 +45,11 @@ const SimToolPage = lazyPage(() => import('@/features/simulators/ToolsPages'), '
 
 // The internal style guide (CLAUDE.md 2.8) exists only in development: it is never bundled in production.
 const OgImagePage = import.meta.env.DEV ? lazyPage(() => import('@/features/og-image/OgImagePage'), 'OgImagePage') : null;
+/** Development only: a screen that throws, to review the unexpected error page (G7) without breaking demo data. */
+function DevThrow(): never {
+  throw new Error('Error de prueba para revisar la pantalla de error (solo en desarrollo)');
+}
+
 const StyleguidePage = import.meta.env.DEV ? lazyPage(() => import('@/features/styleguide/StyleguidePage'), 'StyleguidePage') : null;
 
 /**
@@ -101,6 +106,7 @@ export function AppRoutes() {
           <Route path="/sponsor/*" element={<NotFoundPage />} />
         </Route>
         {StyleguidePage && <Route path="/styleguide" element={<StyleguidePage />} />}
+        {import.meta.env.DEV && <Route path="/dev/error" element={<DevThrow />} />}
         {OgImagePage && <Route path="/og-image" element={<OgImagePage />} />}
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

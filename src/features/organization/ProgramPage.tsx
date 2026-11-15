@@ -7,6 +7,7 @@ import { Checkbox } from '@/components/ui/Checkbox';
 import { ConfirmDialog } from '@/components/ui/Dialog';
 import { IconTile } from '@/components/ui/IconTile';
 import { InlineAlert } from '@/components/ui/InlineAlert';
+import { MetaChips } from '@/components/ui/MetaChips';
 import { SegmentedButton } from '@/components/ui/SegmentedButton';
 import { StatusPill } from '@/components/ui/StatusPill';
 import { TextArea } from '@/components/ui/TextArea';
@@ -28,6 +29,12 @@ import { AdminShell } from './AdminShell';
 const card = 'flex min-w-0 flex-col gap-4 rounded-xl border border-outline-variant bg-surface-container-lowest p-(--space-card-padding)';
 const CHANNELS: Program['reminderChannels'] = ['email', 'teams', 'slack'];
 const PHASE_A = MODULES.filter((m) => m.phase === 'A');
+
+const levelNumber = (levelId: string) => Number(levelId.replace(/\D/g, ''));
+/** Modules grouped by level, in the fixed order of the wallet (D-232). */
+const LEVEL_GROUPS = [...new Set(PHASE_A.map((m) => m.levelId))]
+  .sort((x, y) => levelNumber(x) - levelNumber(y))
+  .map((levelId) => ({ levelId, modules: PHASE_A.filter((m) => m.levelId === levelId).sort((x, y) => x.order - y.order) }));
 
 interface Form {
   name: string;
@@ -186,40 +193,84 @@ export function ProgramPage() {
             {errors.modules}
           </InlineAlert>
         )}
-        <ul className="grid grid-cols-[minmax(0,1fr)] gap-x-6 gap-y-1 @3xl:grid-cols-2">
-          {PHASE_A.map((m) => {
-            const enabled = form.moduleIds.includes(m.id);
-            return (
-              <li key={m.id} className="flex flex-col border-b border-outline-variant py-2 @3xl:flex-row @3xl:items-start @3xl:justify-between @3xl:gap-3">
-                <Checkbox
-                  label={t('org.program.moduleLabel', {
-                    n: m.order,
-                    title: m.title,
-                  })}
-                  description={t('org.program.moduleLevel', {
-                    level: t(`wallet.sections.${m.levelId}`),
-                  })}
-                  checked={enabled}
-                  onChange={(e) =>
-                    setForm((f) => ({
-                      ...f,
-                      moduleIds: toggle(f.moduleIds, m.id, e.target.checked),
-                      requiredModuleIds: e.target.checked ? f.requiredModuleIds : f.requiredModuleIds.filter((x) => x !== m.id),
-                    }))
-                  }
-                />
-                <Checkbox
-                  label={t('org.program.required')}
-                  checked={form.requiredModuleIds.includes(m.id)}
-                  disabled={!enabled}
-                  onChange={(e) => set('requiredModuleIds', toggle(form.requiredModuleIds, m.id, e.target.checked))}
-                  aria-label={t('org.program.requiredFor', { title: m.title })}
-                  className="ml-8 shrink-0 @3xl:ml-0"
-                />
-              </li>
-            );
-          })}
-        </ul>
+        {/* One table grouped by level (D-232): the module on the left and two aligned columns, "Habilitado"
+            and "Obligatorio", so each box clearly belongs to its row. Levels keep the fixed order. */}
+        <MetaChips
+          label={t('org.program.modulesSummaryLabel')}
+          items={[
+            { icon: 'check_circle', label: t('org.program.modulesEnabled', { n: form.moduleIds.length, total: PHASE_A.length }) },
+            { icon: 'flag', label: t('org.program.modulesRequired', { count: form.requiredModuleIds.length, n: form.requiredModuleIds.length }) },
+          ]}
+        />
+        <div className="overflow-x-auto rounded-lg border border-outline-variant">
+          <table className="w-full min-w-[20rem] border-collapse text-left">
+            <caption className="sr-only">{t('org.program.modules')}</caption>
+            <thead className="bg-surface-container">
+              <tr>
+                <th scope="col" className="px-4 py-3 text-title-small text-on-surface">
+                  {t('org.program.colModule')}
+                </th>
+                <th scope="col" className="w-28 px-2 py-3 text-center text-title-small text-on-surface">
+                  {t('org.program.colEnabled')}
+                </th>
+                <th scope="col" className="w-28 px-2 py-3 text-center text-title-small text-on-surface">
+                  {t('org.program.required')}
+                </th>
+              </tr>
+            </thead>
+            {LEVEL_GROUPS.map(({ levelId, modules }) => (
+              <tbody key={levelId}>
+                <tr className="border-t border-outline-variant bg-surface-container-low">
+                  <th scope="colgroup" colSpan={3} className="px-4 py-2 text-label-large text-on-surface-variant">
+                    {t('org.program.levelGroup', { n: levelNumber(levelId), level: t(`wallet.sections.${levelId}`) })}
+                  </th>
+                </tr>
+                {modules.map((m) => {
+                  const enabled = form.moduleIds.includes(m.id);
+                  const required = form.requiredModuleIds.includes(m.id);
+                  const title = t('org.program.moduleLabel', { n: m.order, title: m.title });
+                  return (
+                    <tr key={m.id} className={cn('border-t border-outline-variant', !enabled && 'text-on-surface-variant')}>
+                      <th scope="row" className={cn('px-4 py-3 text-body-medium font-normal', enabled ? 'text-on-surface' : 'text-on-surface-variant')}>
+                        {title}
+                      </th>
+                      <td className="px-2 text-center">
+                        <label className="inline-flex size-12 cursor-pointer items-center justify-center md:size-10">
+                          <input
+                            type="checkbox"
+                            className="size-5 cursor-pointer rounded-xs accent-primary"
+                            aria-label={t('org.program.enableFor', { title: m.title })}
+                            checked={enabled}
+                            onChange={(e) =>
+                              setForm((f) => ({
+                                ...f,
+                                moduleIds: toggle(f.moduleIds, m.id, e.target.checked),
+                                requiredModuleIds: e.target.checked ? f.requiredModuleIds : f.requiredModuleIds.filter((x) => x !== m.id),
+                              }))
+                            }
+                          />
+                        </label>
+                      </td>
+                      <td className="px-2 text-center">
+                        <label className={cn('inline-flex size-12 items-center justify-center md:size-10', enabled ? 'cursor-pointer' : 'cursor-not-allowed')}>
+                          <input
+                            type="checkbox"
+                            className="size-5 cursor-pointer rounded-xs accent-primary disabled:cursor-not-allowed disabled:opacity-40"
+                            aria-label={t('org.program.requiredFor', { title: m.title })}
+                            checked={required}
+                            disabled={!enabled}
+                            onChange={(e) => set('requiredModuleIds', toggle(form.requiredModuleIds, m.id, e.target.checked))}
+                          />
+                        </label>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            ))}
+          </table>
+        </div>
+        <p className="text-body-small text-on-surface-variant">{t('org.program.requiredHint')}</p>
       </section>
 
       <div className="grid grid-cols-[minmax(0,1fr)] gap-(--space-bento-gap) large:grid-cols-2 large:items-start">
@@ -274,19 +325,29 @@ export function ProgramPage() {
         </fieldset>
       </section>
 
-      <div className="flex flex-wrap gap-3">
-        <Button leadingIcon="check" onClick={save} disabled={!dirty}>
+      {/* Save bar: fixed at the bottom while there are unsaved changes, so it is always at hand (D-232) */}
+      <div
+        className={cn(
+          'flex items-center gap-2 sm:flex-wrap sm:gap-3',
+          dirty && 'sticky bottom-3 z-20 rounded-xl border border-outline-variant bg-surface-container-lowest p-3 shadow-(--elevation-1)',
+        )}
+      >
+        {dirty && <StatusPill tone="warning" icon="edit" label={t('org.program.unsaved')} className="hidden sm:inline-flex" />}
+        <span className="hidden flex-1 sm:block" />
+        <Button leadingIcon="check" onClick={save} disabled={!dirty} className="flex-1 sm:flex-none">
           {t('org.program.save')}
         </Button>
         <Button
           variant="outlined"
+          className="flex-1 sm:flex-none"
           onClick={() => {
             setForm(saved);
             setTried(false);
           }}
           disabled={!dirty}
         >
-          {t('org.program.discard')}
+          <span className="sm:hidden">{t('org.program.discardShort')}</span>
+          <span className="hidden sm:inline">{t('org.program.discard')}</span>
         </Button>
       </div>
 

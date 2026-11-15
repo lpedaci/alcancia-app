@@ -165,6 +165,7 @@ export function AccessHelpPage() {
               {...register('email')}
             />
             <RadioGroup
+              optionsClassName="sm:grid sm:grid-cols-2 sm:gap-x-4"
               legend={t('accessHelp.reasonLegend')}
               required
               helperText={t('accessHelp.reasonHelp')}

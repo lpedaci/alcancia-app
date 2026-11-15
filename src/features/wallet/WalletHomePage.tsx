@@ -196,9 +196,10 @@ export function WalletHomePage() {
         <div className="grid grid-cols-1 gap-(--space-bento-gap) expanded:grid-cols-2">
           {/* Balance */}
           <section aria-labelledby="balance-title" className={cn(card, '@container')}>
-            <div className="flex items-start justify-between gap-2">
-              <h2 id="balance-title" className="text-title-medium text-on-surface">{t('wallet.home.balance.title')}</h2>
+            {/* Section card: the icon goes left, with the title (D-228); top right is only for KPI cards */}
+            <div className="flex items-center gap-3">
               <IconTile icon="account_balance_wallet" size="sm" />
+              <h2 id="balance-title" className="text-title-medium text-on-surface">{t('wallet.home.balance.title')}</h2>
             </div>
             <p className="text-display-small text-on-surface">
               <MoneyText value={wallet.balance} compactBelow="xs" />

@@ -16,6 +16,7 @@ export function AccessDeniedPage() {
   return (
     <SystemMessage
       icon="lock"
+      fuerte="attention"
       code={t('forbidden.code')}
       title={t('forbidden.title')}
       body={t('forbidden.body')}

@@ -94,6 +94,9 @@ export interface FuerteNote {
 
 /** How long the pointer rests on the folded menu before it opens over the page (D-224). */
 const PEEK_DELAY_MS = 700;
+/** Holding a bottom-bar icon this long shows its name, for this long (D-228). */
+const LONG_PRESS_MS = 500;
+const LABEL_MS = 1800;
 
 export function WalletShell({ section, children, fuerte }: { section: string; children: ReactNode; fuerte?: FuerteNote }) {
   const { t } = useTranslation();
@@ -114,6 +117,23 @@ export function WalletShell({ section, children, fuerte }: { section: string; ch
   // Folded menu (D-224): resting the pointer on it opens it over the page for a moment, without
   // moving the content; leaving it or Escape folds it again. The button below still pins it.
   const [peek, setPeek] = useState(false);
+  // Bottom bar: the name of a destination shows only while holding its icon (D-228)
+  const [labelFor, setLabelFor] = useState<string | undefined>();
+  const pressTimer = useRef<number | undefined>(undefined);
+  const labelTimer = useRef<number | undefined>(undefined);
+  const longPressed = useRef(false);
+  const showLabel = (id: string) => {
+    setLabelFor(id);
+    window.clearTimeout(labelTimer.current);
+    labelTimer.current = window.setTimeout(() => setLabelFor(undefined), LABEL_MS);
+  };
+  useEffect(
+    () => () => {
+      window.clearTimeout(pressTimer.current);
+      window.clearTimeout(labelTimer.current);
+    },
+    [],
+  );
   const peekTimer = useRef<number | undefined>(undefined);
   const expanded = pinned || peek;
   const startPeek = () => {
@@ -372,9 +392,9 @@ export function WalletShell({ section, children, fuerte }: { section: string; ch
         </div>
       </div>
 
-      {/* Bottom navigation bar (phones and tablets), D-72: every destination shows its icon; only the
-          active one shows its name, under the pill indicator. The rest keep their accessible name and a
-          tooltip (the name also says when it is locked). */}
+      {/* Bottom navigation bar (phones and tablets), D-228 (adjusts D-72): icons only, with the indicator
+          pill on the active one. Each name stays for screen readers; holding an icon for a moment shows it
+          in a bubble (and does not navigate), and a pointer shows it in a tooltip on hover. */}
       <nav
         data-wallet-bottom-nav
         aria-label={t('wallet.nav.label')}
@@ -391,26 +411,52 @@ export function WalletShell({ section, children, fuerte }: { section: string; ch
                 to={d.to}
                 aria-current={active ? 'page' : undefined}
                 data-bottom-nav-item={d.id}
-                className="flex min-h-16 flex-col items-center justify-center gap-1 px-1 py-2 text-on-surface-variant aria-[current=page]:text-on-surface"
+                onPointerDown={(e) => {
+                  if (e.pointerType === 'mouse') return;
+                  longPressed.current = false;
+                  window.clearTimeout(pressTimer.current);
+                  pressTimer.current = window.setTimeout(() => {
+                    longPressed.current = true;
+                    showLabel(d.id);
+                  }, LONG_PRESS_MS);
+                }}
+                onPointerUp={() => window.clearTimeout(pressTimer.current)}
+                onPointerCancel={() => window.clearTimeout(pressTimer.current)}
+                onPointerLeave={() => window.clearTimeout(pressTimer.current)}
+                onContextMenu={(e) => e.preventDefault()}
+                onClick={(e) => {
+                  // A long press only shows the name: it does not navigate
+                  if (longPressed.current) {
+                    e.preventDefault();
+                    longPressed.current = false;
+                  }
+                }}
+                className="relative flex min-h-16 touch-manipulation items-center justify-center px-1 py-2 text-on-surface-variant select-none [-webkit-touch-callout:none] aria-[current=page]:text-on-surface"
               >
                 <span className={cn('relative flex h-8 w-16 items-center justify-center rounded-full', active && 'bg-secondary-container text-on-secondary-container')}>
                   <Icon name={d.icon} size={24} filled={active} />
                   {locked && <Icon name="lock" size={16} className="absolute right-2 bottom-0 rounded-full bg-surface-container-lowest" />}
                 </span>
-                {active ? (
-                  <span className="max-w-full truncate text-label-medium">
+                <span className="sr-only">
+                  {name}
+                  {lockedText}
+                </span>
+                {labelFor === d.id && (
+                  <span
+                    aria-hidden
+                    className="absolute bottom-full left-1/2 mb-1 -translate-x-1/2 rounded-md bg-inverse-surface px-3 py-1.5 text-label-medium whitespace-nowrap text-inverse-on-surface shadow-(--elevation-1)"
+                  >
                     {name}
-                    {locked && <span className="sr-only">{lockedText}</span>}
-                  </span>
-                ) : (
-                  <span className="sr-only">
-                    {name}
-                    {lockedText}
+                    {locked && ` · ${t('wallet.nav.locked')}`}
                   </span>
                 )}
               </Link>
             );
-            return <li key={d.id}>{active ? link : <Tooltip content={name + (locked ? ` · ${t('wallet.nav.locked')}` : '')}>{link}</Tooltip>}</li>;
+            return (
+              <li key={d.id}>
+                <Tooltip content={name + (locked ? ` · ${t('wallet.nav.locked')}` : '')}>{link}</Tooltip>
+              </li>
+            );
           })}
         </ul>
       </nav>
