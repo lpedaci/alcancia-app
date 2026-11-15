@@ -4092,6 +4092,11 @@
         "D-294",
         "Filas que se tocan enteras",
         "En \"Qué falta\" y en las listas de avisos, toda la fila es el enlace: hover en surface-container, foco visible y chevron, sin subrayar solo el texto."
+      ],
+      [
+        "D-295",
+        "Control segmentado suave",
+        "Riel en píldora con la opción elegida sobre blanco y un check en primary; nunca corta una etiqueta: si no entra, el riel se desplaza."
       ]
     ],
     "money": {

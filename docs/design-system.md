@@ -157,6 +157,8 @@ La billetera ficticia que muestra Alcancía integrada en otra app (D-75, D-84). 
 - **Su cara (D-291, `fuerteMood`):** atención con un problema, pensativo con pendientes, celebración si está al día ("Estás al día con todo. Guardado."). Un estado elegido por la pantalla (apenado, atención, dormido) manda.
 - **Panel tipo chat (D-291, `FuerteParts.tsx`):** Fuerte y su nombre en una línea con "Mover" y "Cerrar"; su mensaje en un globo de ancho completo con `primary-container` al 50 % y la esquina superior izquierda recta; los tres primeros avisos y "Ver N avisos más"; "¿Por qué importa?" plegado en una línea; el consejo de arrastrar se cierra una vez leído.
 
+- **Control segmentado (D-295, `SegmentedButton`):** riel en píldora `surface-container` con borde `outline-variant`; la opción elegida en `surface-container-lowest` con borde y check en `primary`. Cada opción mide su texto; si no entran, el riel se desplaza y nada se corta.
+
 ### Valores reales (D-264)
 
 - **Tarjeta "Valores reales de hoy" (`RealValues`):** cada valor real en una celda con su nombre, la cifra en `title-large` y "Valor al DD/MM/AAAA · Fuente: …"; si no se pudo actualizar, lo dice. Abajo, el recordatorio de que lo que viene es un escenario y el aviso legal, y los enlaces a las fuentes oficiales. Sin snapshot, un aviso en `info` y la pantalla sigue con los escenarios de ejemplo.
