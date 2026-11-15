@@ -105,6 +105,10 @@ export function AccessHelpPage() {
         <div className="flex flex-col gap-6">
           {channelList}
           {ssoNote}
+          <p className="flex items-start gap-2 border-t border-outline-variant pt-4 text-body-small text-on-surface-variant">
+            <Icon name="info" size={16} className="mt-px shrink-0" />
+            {t('accessHelp.demoTip')}
+          </p>
         </div>
       }
     >
@@ -130,12 +134,11 @@ export function AccessHelpPage() {
         </section>
       ) : (
         <section aria-labelledby="help-form" className="flex flex-col gap-4">
-          <div>
-            <h2 id="help-form" className="text-title-large text-on-surface">
-              {t('accessHelp.formTitle')}
-            </h2>
-            <p className="text-body-medium text-on-surface-variant">{t('accessHelp.formIntro')}</p>
-          </div>
+          {/* Each field already says "(obligatorio)" or "(opcional)" (2.10), so no intro is repeated here */}
+          {/* The intro above already invites to tell what happens: the heading stays for screen readers */}
+          <h2 id="help-form" className="sr-only">
+            {t('accessHelp.formTitle')}
+          </h2>
 
           {serverError && (
             <InlineAlert
@@ -153,7 +156,7 @@ export function AccessHelpPage() {
             </InlineAlert>
           )}
 
-          <form noValidate onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
+          <form noValidate onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
             <TextField
               label={t('auth.login.emailLabel')}
               type="email"
@@ -175,17 +178,20 @@ export function AccessHelpPage() {
             />
             <TextArea
               label={t('accessHelp.commentLabel')}
+              rows={2}
               optional
               helperText={t('accessHelp.commentHelp')}
               error={fieldError(errors.comment)}
               {...register('comment')}
             />
-            <p className="flex items-start gap-2 text-body-small text-on-surface-variant">
+            {/* A note about the demo, not about the request: beside the form from 1024 px */}
+            <p className="flex items-start gap-2 text-body-small text-on-surface-variant lg:hidden">
               <Icon name="info" size={16} className="mt-px shrink-0" />
               {t('accessHelp.demoTip')}
             </p>
-            <div className="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
-              <Button asChild variant="outlined">
+            {/* Back on the left as text, the main action on the right (as in G2, D-230) */}
+            <div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <Button asChild variant="text" leadingIcon="arrow_back" className="-ml-3 w-fit">
                 <Link to="/login">{t('accessHelp.backToLogin')}</Link>
               </Button>
               <Button type="submit" loading={isSubmitting} loadingText={t('accessHelp.sending')}>

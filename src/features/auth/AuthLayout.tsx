@@ -58,7 +58,7 @@ function PlainLayout({ children, aside, wide }: { children: ReactNode; aside?: R
           <Logo />
         </Link>
       </header>
-      <div className={cn('mx-auto grid w-full flex-1 grid-cols-1 items-center gap-3 md:py-2', aside ? 'max-w-5xl lg:grid-cols-2 lg:items-stretch' : wide ? 'max-w-4xl' : 'max-w-3xl')}>
+      <div className={cn('mx-auto grid w-full flex-1 grid-cols-1 items-center gap-3 md:py-2 [@media(max-height:50rem)]:md:py-0', aside ? 'max-w-6xl lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] lg:items-stretch' : wide ? 'max-w-4xl' : 'max-w-3xl')}>
         <main
           id="main-content"
           tabIndex={-1}
@@ -67,7 +67,8 @@ function PlainLayout({ children, aside, wide }: { children: ReactNode; aside?: R
           {children}
         </main>
         {aside && (
-          <aside className="hidden min-w-0 items-center justify-center rounded-xl border border-outline-variant bg-surface-container p-10 lg:flex">
+          <aside className="hidden min-w-0 flex-col rounded-xl border border-outline-variant bg-surface-container p-8 lg:flex">
+            {/* Aligned to the top, next to the form it complements */}
             <div className="w-full max-w-md">{aside}</div>
           </aside>
         )}

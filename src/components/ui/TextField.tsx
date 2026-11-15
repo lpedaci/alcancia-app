@@ -108,7 +108,8 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(function T
     <div className={cn('flex min-w-0 flex-col gap-2', className)}>
       <label htmlFor={inputId} className={cn('text-label-medium text-on-surface', disabled && 'text-on-surface/38')}>
         {label}
-        {required && <span className="text-on-surface-variant"> ({t('ui.required')})</span>}
+        {/* Required in the error red (D-239): the text says it, the color only reinforces it */}
+        {required && <span className="text-error"> ({t('ui.required')})</span>}
         {optional && !required && <span className="text-on-surface-variant"> ({t('ui.optional')})</span>}
       </label>
 

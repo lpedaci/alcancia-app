@@ -41,7 +41,8 @@ export const RadioGroup = forwardRef<HTMLInputElement, RadioGroupProps>(function
     >
       <legend className="mb-1 text-label-medium text-on-surface">
         {legend}
-        {required && <span className="text-on-surface-variant"> ({t('ui.required')})</span>}
+        {/* Required in the error red (D-239): the text says it, the color only reinforces it */}
+        {required && <span className="text-error"> ({t('ui.required')})</span>}
       </legend>
       <div className={cn('flex flex-col', optionsClassName)}>
         {options.map((option) => {
