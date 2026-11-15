@@ -352,7 +352,8 @@
       "up": "aumento",
       "down": "disminución",
       "flat": "sin cambios"
-    }
+    },
+    "hidden": "Monto oculto"
   },
   "validation": {
     "required": "Este dato es obligatorio. Complétalo para continuar.",
@@ -490,7 +491,12 @@
         "title": "Saldo disponible",
         "power": "Poder de compra hoy",
         "alias": "Alias",
-        "cvu": "CVU de ejemplo"
+        "cvu": "CVU de ejemplo",
+        "hide": "Ocultar montos",
+        "show": "Mostrar montos",
+        "account": "Datos de la cuenta",
+        "accountHide": "Ocultar datos de la cuenta",
+        "accountHint": "Tu alias y tu CVU de práctica, para recibir transferencias."
       },
       "actions": {
         "title": "Acciones rápidas",
@@ -501,7 +507,9 @@
       },
       "pockets": {
         "total": "En apartados",
-        "empty": "Todavía no separaste dinero en apartados."
+        "empty": "Todavía no separaste dinero en apartados.",
+        "show": "Ver apartados",
+        "hide": "Ocultar apartados"
       },
       "unlock": {
         "go": "Ir a {{section}}"

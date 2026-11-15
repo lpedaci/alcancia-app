@@ -188,7 +188,8 @@ function HomeScreen() {
             <span className="flex size-7 items-center justify-center rounded-md bg-primary-container text-on-primary-container">
               <Icon name="account_balance_wallet" size={16} />
             </span>
-            <p className="text-label-large text-on-surface">{t('wallet.home.balance.title')}</p>
+            <p className="min-w-0 flex-1 text-label-large text-on-surface">{t('wallet.home.balance.title')}</p>
+            <Icon name="visibility" size={18} className="text-on-surface-variant" />
           </div>
           <p className="text-headline-small text-on-surface">
             <MoneyText value={MARIANA.balance} />
@@ -202,9 +203,11 @@ function HomeScreen() {
               <MoneyText value={power.toFixed(2)} />
             </span>
           </p>
-          <span className="flex flex-col gap-0.5 border-t border-outline-variant pt-2">
-            <span className="text-label-small text-on-surface-variant">{t('wallet.home.balance.alias')}</span>
-            <span className="text-label-medium text-on-surface">alcancia.practica.mariana</span>
+          {/* The account details stay folded behind a button (D-260) */}
+          <span className="flex items-center gap-1.5 border-t border-outline-variant pt-2 text-label-medium text-primary">
+            <Icon name="badge" size={16} />
+            {t('wallet.home.balance.account')}
+            <Icon name="keyboard_arrow_down" size={16} />
           </span>
         </div>
         <FloatingFuerte />

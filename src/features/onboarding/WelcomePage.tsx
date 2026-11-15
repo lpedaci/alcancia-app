@@ -139,15 +139,8 @@ export function WelcomePage() {
 
   return (
     <WalletShell section={t("welcome.section")} fuerte={fuerte}>
-      {/* Reading screens keep a comfortable width; results use two columns on desktop (D-164, 6) */}
-      <div
-        className={cn(
-          "flex flex-col gap-6",
-          stage === "overview" || stage === "result"
-            ? "max-w-6xl"
-            : "max-w-3xl",
-        )}
-      >
+      {/* One content width for every wallet screen (D-259) */}
+      <div className="flex flex-col gap-6">
         {stage === "overview" && latest && (
           <Overview
             diagnostic={latest}

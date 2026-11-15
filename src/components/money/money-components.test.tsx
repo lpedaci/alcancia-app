@@ -4,8 +4,19 @@ import { MINUS } from '@/lib/money';
 import { MoneyInput } from './MoneyInput';
 import { MoneyText } from './MoneyText';
 import { PercentInput } from './PercentInput';
+import { MaskAmountsContext } from '@/store/amounts-visibility';
 
 describe('MoneyText', () => {
+  it('hides the figure inside the wallet when the person chose to hide amounts (D-260)', () => {
+    render(
+      <MaskAmountsContext.Provider value>
+        <MoneyText value="1284958.86" />
+      </MaskAmountsContext.Provider>,
+    );
+    expect(screen.queryByText('$ 1.284.958,86')).toBeNull();
+    expect(screen.getByText('Monto oculto')).toBeInTheDocument();
+  });
+
   it('prints Argentine format with tabular figures and never wraps', () => {
     render(<MoneyText value="1284958.86" />);
     const text = screen.getByText('$ 1.284.958,86');

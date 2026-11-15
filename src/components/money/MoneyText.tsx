@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { Icon } from '@/components/ui/Icon';
 import { type Currency, type DecimalLike, formatCompactMoney, formatMoney } from '@/lib/money';
 import { cn } from '@/lib/utils';
+import { useMaskAmounts } from '@/store/amounts-visibility';
 import Decimal from 'decimal.js';
 
 export interface MoneyTextProps {
@@ -37,6 +38,16 @@ const COMPACT_SWAP = {
 /** The one way to print money in the interface: tabular figures, Argentine format, no wrapping. */
 export function MoneyText({ value, currency = 'ARS', decimals = 2, trend = false, flow = false, compactBelow, className }: MoneyTextProps) {
   const { t } = useTranslation();
+  const masked = useMaskAmounts();
+  if (masked) {
+    // Hidden amounts (D-260): the currency stays so the kind of value is clear; the figure is dots.
+    return (
+      <span className={cn('relative inline-flex items-center whitespace-nowrap tabular-nums', className)}>
+        <span aria-hidden>{currency === 'ARS' ? '$' : currency}{' '}••••••</span>
+        <span className="sr-only">{t('money.hidden')}</span>
+      </span>
+    );
+  }
   const d = new Decimal(value instanceof Decimal ? value : value.toString());
   const full = formatMoney(d, { currency, decimals, sign: trend ? 'always' : 'auto' });
   const direction = d.isZero() ? 'flat' : d.isNegative() ? 'down' : 'up';

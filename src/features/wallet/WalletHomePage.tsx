@@ -4,6 +4,7 @@ import { Link, Navigate } from 'react-router';
 import { MoneyText } from '@/components/money/MoneyText';
 import { Button } from '@/components/ui/Button';
 import { Icon, type IconName } from '@/components/ui/Icon';
+import { IconButton } from '@/components/ui/IconButton';
 import { IconTile } from '@/components/ui/IconTile';
 import { MetaChips } from '@/components/ui/MetaChips';
 import { InlineAlert } from '@/components/ui/InlineAlert';
@@ -19,6 +20,7 @@ import { cn } from '@/lib/utils';
 import { useDataStore } from '@/store/data-store';
 import { useCurrentUser } from '@/store/session-store';
 import { useWallet } from '@/store/wallet-store';
+import { setAmountsHidden, useAmountsHidden } from '@/store/amounts-visibility';
 import { advanceDays, advanceMonth, CATEGORIZABLE, categorize, pocketsTotal, purchasingPowerToday, walletMetrics } from './engine/engine';
 import type { BudgetCategory, WalletMovement } from './engine/types';
 import { WalletShell } from './WalletShell';
@@ -81,6 +83,9 @@ export function WalletHomePage() {
 
   const metrics = walletMetrics(wallet);
   const power = purchasingPowerToday(wallet);
+  const amountsHidden = useAmountsHidden();
+  const [showAccount, setShowAccount] = useState(false);
+  const [showPockets, setShowPockets] = useState(false);
   const canAdvance = wallet.completedMissionIds.includes('mission-1') && wallet.day > 0;
   const currentSection = current ? t(`wallet.sections.${current.level.id}`) : '';
   const nextSection = next ? t(`wallet.sections.${next.level.id}`) : '';
@@ -198,13 +203,19 @@ export function WalletHomePage() {
           </InlineAlert>
         )}
 
-        <div className="grid grid-cols-1 gap-(--space-bento-gap) expanded:grid-cols-2">
-          {/* Balance */}
+        <div className="grid grid-cols-1 items-start gap-(--space-bento-gap) expanded:grid-cols-2">
+          {/* Balance (D-260): amounts can be hidden from people looking at the screen, and the account
+              details (alias and CVU) are shown only on request, as wallets do */}
           <section aria-labelledby="balance-title" className={cn(card, '@container')}>
-            {/* Section card: the icon goes left, with the title (D-228); top right is only for KPI cards */}
             <div className="flex items-center gap-3">
               <IconTile icon="account_balance_wallet" size="sm" />
-              <h2 id="balance-title" className="text-title-medium text-on-surface">{t('wallet.home.balance.title')}</h2>
+              <h2 id="balance-title" className="min-w-0 flex-1 text-title-medium text-on-surface">{t('wallet.home.balance.title')}</h2>
+              <IconButton
+                icon={amountsHidden ? 'visibility_off' : 'visibility'}
+                label={amountsHidden ? t('wallet.home.balance.show') : t('wallet.home.balance.hide')}
+                aria-pressed={amountsHidden}
+                onClick={() => setAmountsHidden(!amountsHidden)}
+              />
             </div>
             <p className="text-display-small text-on-surface">
               <MoneyText value={wallet.balance} compactBelow="xs" />
@@ -216,20 +227,39 @@ export function WalletHomePage() {
               </span>
               <MoneyText value={power.toFixed(2)} className="text-label-large text-on-surface" />
             </p>
-            {/* Label over value on phones, side by side from 24 rem of card: more air between lines (D-170) */}
-            <dl className="mt-auto flex flex-col gap-3 border-t border-outline-variant pt-4">
-              <div className="flex flex-col gap-0.5 @xs:flex-row @xs:items-baseline @xs:justify-between @xs:gap-3">
-                <dt className="text-label-medium text-on-surface-variant">{t('wallet.home.balance.alias')}</dt>
-                <dd className="min-w-0 truncate text-body-medium text-on-surface">{alias}</dd>
-              </div>
-              <div className="flex flex-col gap-0.5 @xs:flex-row @xs:items-baseline @xs:justify-between @xs:gap-3">
-                <dt className="text-label-medium text-on-surface-variant">{t('wallet.home.balance.cvu')}</dt>
-                <dd className="text-body-medium text-on-surface tabular-nums">0000000 0000000 EJEMPLO 00</dd>
-              </div>
-            </dl>
+            <div className="flex flex-col gap-3 border-t border-outline-variant pt-3">
+              <Button
+                variant="text"
+                size="xs"
+                className="self-start"
+                leadingIcon="badge"
+                trailingIcon={showAccount ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}
+                aria-expanded={showAccount}
+                aria-controls="account-details"
+                onClick={() => setShowAccount((v) => !v)}
+              >
+                {showAccount ? t('wallet.home.balance.accountHide') : t('wallet.home.balance.account')}
+              </Button>
+              {showAccount && (
+                <div id="account-details" className="flex flex-col gap-3 rounded-lg bg-surface-container p-3">
+                  <p className="text-body-small text-on-surface-variant">{t('wallet.home.balance.accountHint')}</p>
+                  {/* Label over value on phones, side by side from 24 rem of card (D-170) */}
+                  <dl className="flex flex-col gap-3">
+                    <div className="flex flex-col gap-0.5 @xs:flex-row @xs:items-baseline @xs:justify-between @xs:gap-3">
+                      <dt className="text-label-medium text-on-surface-variant">{t('wallet.home.balance.alias')}</dt>
+                      <dd className="min-w-0 truncate text-body-medium text-on-surface">{alias}</dd>
+                    </div>
+                    <div className="flex flex-col gap-0.5 @xs:flex-row @xs:items-baseline @xs:justify-between @xs:gap-3">
+                      <dt className="text-label-medium text-on-surface-variant">{t('wallet.home.balance.cvu')}</dt>
+                      <dd className="text-body-medium text-on-surface tabular-nums">0000000 0000000 EJEMPLO 00</dd>
+                    </div>
+                  </dl>
+                </div>
+              )}
+            </div>
           </section>
 
-          {/* Quick actions and pockets */}
+          {/* Quick actions, and the pockets folded under their total (D-260) */}
           <section aria-labelledby="actions-title" className={cn(card, '@container')}>
             <h2 id="actions-title" className="text-title-medium text-on-surface">{t('wallet.home.actions.title')}</h2>
             <ul className="grid grid-cols-2 gap-2 @xs:grid-cols-4">
@@ -249,22 +279,37 @@ export function WalletHomePage() {
                 <p className="text-body-small text-on-surface-variant">{t('wallet.home.pockets.empty')}</p>
               ) : (
                 <>
-                  {/* The total only adds something with two pockets or more */}
-                  {wallet.pockets.length > 1 && (
-                    <div className="flex items-center justify-between gap-2 text-body-small">
-                      <span className="text-on-surface-variant">{t('wallet.home.pockets.total')}</span>
+                  <button
+                    type="button"
+                    aria-expanded={showPockets}
+                    aria-controls="home-pockets"
+                    onClick={() => setShowPockets((v) => !v)}
+                    className="-mx-2 flex min-h-12 items-center justify-between gap-2 rounded-lg px-2 text-left hover:bg-surface-container"
+                  >
+                    <span className="flex min-w-0 items-center gap-2">
+                      <Icon name="savings" size={18} className="text-tertiary" />
+                      <span className="text-label-large text-on-surface">{t('wallet.home.pockets.total')}</span>
+                      <span className="text-label-medium text-on-surface-variant tabular-nums">({wallet.pockets.length})</span>
+                    </span>
+                    <span className="flex items-center gap-1">
                       <MoneyText value={pocketsTotal(wallet).toFixed(2)} className="text-label-large text-on-surface" />
-                    </div>
+                      <Icon name={showPockets ? 'keyboard_arrow_up' : 'keyboard_arrow_down'} size={20} className="text-primary" />
+                      <span className="sr-only">{showPockets ? t('wallet.home.pockets.hide') : t('wallet.home.pockets.show')}</span>
+                    </span>
+                  </button>
+                  {showPockets && (
+                    <ul id="home-pockets" className="flex flex-col gap-2">
+                      {wallet.pockets.map((p) => (
+                        <li key={p.id} className="flex items-center justify-between gap-2 text-body-medium">
+                          <span className="flex min-w-0 items-center gap-2">
+                            <Icon name={p.isEmergencyFund ? 'shield' : p.goal ? 'target' : 'savings'} size={18} className="text-tertiary" />
+                            <span className="truncate">{p.name}</span>
+                          </span>
+                          <MoneyText value={p.amount} />
+                        </li>
+                      ))}
+                    </ul>
                   )}
-                  {wallet.pockets.map((p) => (
-                    <div key={p.id} className="flex items-center justify-between gap-2 text-body-medium">
-                      <span className="flex min-w-0 items-center gap-2">
-                        <Icon name={p.isEmergencyFund ? 'shield' : p.goal ? 'target' : 'savings'} size={18} className="text-tertiary" />
-                        <span className="truncate">{p.name}</span>
-                      </span>
-                      <MoneyText value={p.amount} />
-                    </div>
-                  ))}
                 </>
               )}
             </div>

@@ -352,7 +352,8 @@
       "up": "increase",
       "down": "decrease",
       "flat": "no change"
-    }
+    },
+    "hidden": "Amount hidden"
   },
   "validation": {
     "required": "This field is required. Fill it in to continue.",

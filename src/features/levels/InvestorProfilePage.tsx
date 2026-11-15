@@ -44,7 +44,7 @@ export function InvestorProfilePage() {
 
   return (
     <WalletShell section={t('wallet.nav.learn')} fuerte={{ state: 'thinking', message: fuerteLine('wallet.profile.fuerte') }}>
-      <div className="flex max-w-3xl flex-col gap-6">
+      <div className="flex flex-col gap-6">
         <header className="flex flex-col gap-2">
           <p className="text-label-large text-primary">{t('wallet.profile.kicker')}</p>
           <h1 className="text-headline-medium text-on-surface">{t('wallet.profile.title')}</h1>

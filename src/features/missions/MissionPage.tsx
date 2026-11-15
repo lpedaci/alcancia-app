@@ -104,7 +104,7 @@ function MissionRunner({ def }: { def: MissionDef & { steps: MissionStep[] } }) 
   if (level && !isOpen(def.levelId)) {
     return (
       <WalletShell section={t('wallet.nav.learn')} fuerte={{ state: 'thinking', message: fuerteDefault }}>
-        <div className="flex max-w-3xl flex-col gap-6">
+        <div className="flex flex-col gap-6">
           <h1 className="text-headline-medium text-on-surface">{t('wallet.mission.lockedTitle', { title: def.title })}</h1>
           <UnlockCard status={level} />
         </div>

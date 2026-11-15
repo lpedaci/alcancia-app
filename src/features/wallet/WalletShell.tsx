@@ -13,6 +13,7 @@ import { LearningCardHost } from '@/features/learning-cards/LearningCardHost';
 import { InboxMenu } from './InboxMenu';
 import { HorneroMark } from '@/features/partner/HorneroMark';
 import { HORNERO_HOME, usePartnerMode } from '@/features/partner/partner-mode';
+import { MaskAmountsContext, useAmountsHidden } from '@/store/amounts-visibility';
 import type { FuerteState } from '@/features/companion/Fuerte';
 import { completedLights } from '@/features/levels/engine';
 import { LEVEL_ROUTE } from '@/features/levels/UnlockCard';
@@ -264,6 +265,7 @@ export function WalletShell({ section, children, fuerte }: { section: string; ch
   };
 
   const partner = usePartnerMode();
+  const amountsHidden = useAmountsHidden();
   const horneroLabel = partner === 'hornero' ? t('partner.hornero.back') : t('demo.partnerHornero');
   const walletDestinations = DESTINATIONS.filter((d) => d.id !== 'learn');
   const learn = DESTINATIONS.find((d) => d.id === 'learn')!;
@@ -388,20 +390,10 @@ export function WalletShell({ section, children, fuerte }: { section: string; ch
           {/* From tablets, the header covers the gap above the floating bar so content never shows behind it */}
           <header data-wallet-header className="sticky top-0 z-30 print:!hidden border-b border-outline-variant bg-surface-container-lowest large:-mt-3 large:border-0 large:bg-surface large:pt-3">
             <div className="flex min-h-16 items-center gap-1 px-(--space-gutter) py-2 sm:gap-2 medium:px-6 large:gap-2 large:rounded-xl large:border large:border-outline-variant large:bg-surface-container-lowest large:px-4">
-              {/* Integrated mode below 1200 px (D-249): Hornero's mark takes the brand slot and leads back to Hornero;
-                  its name and the fictitious-brand label are in the user menu */}
-              {partner === 'hornero' ? (
-                <Link to={HORNERO_HOME} data-partner-bar className="inline-flex shrink-0 rounded-sm large:hidden">
-                  <span aria-hidden className="inline-flex size-8 items-center justify-center rounded-sm bg-partner-hornero text-on-partner-hornero">
-                    <HorneroMark size={20} />
-                  </span>
-                  <span className="sr-only">{t('partner.hornero.back')}</span>
-                </Link>
-              ) : (
-                <Link to="/app" className="inline-flex shrink-0 rounded-sm large:hidden">
-                  <Logo compact />
-                </Link>
-              )}
+              {/* Alcancía is always the app's brand; Hornero is an item of the menus (D-258) */}
+              <Link to="/app" className="inline-flex shrink-0 rounded-sm large:hidden">
+                <Logo compact />
+              </Link>
               {/* Fixed notice (5.3, D-69, D-169): always in sight inside the sticky top bar, on the same row
                   as the logo. Phones: a compact chip; from 840 px the full text; desktop, the dark pill.
                   "dinero ficticio" is never removed. */}
@@ -429,7 +421,7 @@ export function WalletShell({ section, children, fuerte }: { section: string; ch
           >
             {/* Printed pages (receipts, simulator summaries) keep the notice: "dinero ficticio" is never removed (D-69). */}
             <p className="mb-4 hidden border-b border-outline-variant pb-2 text-label-large text-on-surface print:block">{t('wallet.printBanner')}</p>
-            {children}
+            <MaskAmountsContext.Provider value={amountsHidden}>{children}</MaskAmountsContext.Provider>
           </main>
         </div>
       </div>
