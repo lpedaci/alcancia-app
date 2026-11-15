@@ -68,3 +68,4 @@
 | 15/11/2026 | Ajustes de Lourdes | Fuerte aparece abajo desde el inicio y la etiqueta de marca ficticia sale de la barra superior (D-255); celulares de la landing iguales a la billetera de hoy (D-256); panel del inicio de sesión como el hero y capturas del README regeneradas (D-257) | Lourdes revisa |
 | 15/11/2026 | Ajustes de Lourdes | Logo de Alcancía siempre en la barra (D-258); un solo ancho de contenido en la billetera (D-259); ocultar montos, datos de la cuenta y apartados plegados en Inicio (D-260) | Lourdes revisa |
 | 15/11/2026 | Ajustes de Lourdes | Marco de la billetera estable entre pantallas cortas y largas (D-261); inicio de sesión con marco de 1440 px, sin scroll y el celular que se disuelve abajo (D-262) | Lourdes revisa |
+| 15/11/2026 | Corrección | Abrir un menú o un diálogo ya no corre la pantalla hacia un costado (D-263) | Hecho |

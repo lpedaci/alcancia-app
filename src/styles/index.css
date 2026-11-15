@@ -185,6 +185,13 @@
       display: none;
     }
   }
+  /* Menus and dialogs lock the page scroll and pad the body by the scrollbar's width. The scrollbar's room
+     is already reserved (scrollbar-gutter, D-261), so that padding would push the page sideways (D-263). */
+  html body[data-scroll-locked] {
+    margin-right: 0 !important;
+    padding-right: 0 !important;
+  }
+
   html {
     /* The 1440 px frame keeps its place between short and long pages: the scrollbar's room is always kept (D-261) */
     scrollbar-gutter: stable;
