@@ -27,7 +27,9 @@
 
 **Tanda 3 (aprobada por Lourdes el 15/11/2026 y publicada):** guías 2 de los módulos 9, 10, 11 y 17, "Tu sueldo frente a los precios", "La TEA y el interés sobre el interés", "El plazo fijo UVA, paso a paso" y "Verificar antes de confiar". Documento: [content-review/tanda-3.md](content-review/tanda-3.md).
 
-Siguen las tandas 4 (módulos 12 a 15), 5 (guías 3 de todos) y los módulos 16 y 18 completos (F11) con el nivel 8 (F22).
+**Tanda 4 (aprobada por Lourdes el 15/11/2026 y publicada):** guías 2 de los módulos 12 a 15, "Empezar antes pesa más", "Tu perfil de inversor", "Diversificar sin adivinar" y "Lo que hay que saber antes de comprar un CEDEAR". Documento: [content-review/tanda-4.md](content-review/tanda-4.md).
+
+Siguen la tanda 5 (guías 3 de todos) y los módulos 16 y 18 completos (F11) con el nivel 8 (F22).
 
 ## Resumen
 
