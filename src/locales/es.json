@@ -18,10 +18,10 @@
       "contexts": "Contextos"
     },
     "hero": {
-      "titleStart": "La billetera donde tu equipo",
-      "titleKey": "aprende finanzas",
+      "titleStart": "La billetera donde",
+      "titleKey": "se aprende finanzas",
       "titleEnd": "usándola",
-      "body": "Un simulador de finanzas personales con forma de billetera virtual: cada persona cobra un sueldo de práctica, paga, presupuesta, ahorra e invierte con dinero ficticio, y aprende en el momento justo. Lo puede ofrecer una organización, una institución o una app financiera, que ve el avance de aprendizaje y nunca los montos.",
+      "body": "Dinero ficticio, decisiones reales. Para equipos, aulas y productos: quien la ofrece ve el avance, nunca los montos.",
       "caseStudy": "Ver el case study"
     },
     "pieces": {

@@ -74,7 +74,7 @@ export function BottomNav({ active }: { active: 'home' | 'learn' }) {
             <Icon name={icon} size={20} filled={key === active} />
             {key === 'invest' && <Icon name="lock" size={16} className="absolute -right-0.5 -bottom-0.5 rounded-full bg-surface-container-lowest" />}
           </span>
-          {key === active && <span className="max-w-full truncate text-label-small">{t(`wallet.nav.${key}`)}</span>}
+          <span className="sr-only">{t(`wallet.nav.${key}`)}</span>
         </span>
       ))}
     </div>
@@ -131,7 +131,7 @@ function HomeScreen() {
             <Icon name="flag" size={16} />
           </span>
           <span className="min-w-0 flex-1">
-            <span className="block truncate text-label-small text-primary">{t('wallet.home.mission.kickerMinutes', { minutes: 5 })}</span>
+            <span className="block truncate text-label-small text-primary">{t('wallet.home.mission.kickerEarlier', { level: 5, minutes: 5 })}</span>
             <span className="block truncate text-title-small text-on-surface">{ACTIVE_MISSION}</span>
           </span>
           <Icon name="arrow_forward" size={18} className="text-primary" />

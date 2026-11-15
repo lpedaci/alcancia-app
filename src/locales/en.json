@@ -18,10 +18,10 @@
       "contexts": "Contexts"
     },
     "hero": {
-      "titleStart": "The wallet where your team",
-      "titleKey": "learns finance",
+      "titleStart": "The wallet where",
+      "titleKey": "you learn finance",
       "titleEnd": "by using it",
-      "body": "A personal finance simulator shaped like a digital wallet: each person gets a practice salary, pays, budgets, saves and invests with fictitious money, and learns at the right moment. An organization, a school or a finance app can offer it; they see learning progress, never the amounts.",
+      "body": "Fictitious money, real decisions. For teams, classrooms and products: whoever offers it sees progress, never the amounts.",
       "caseStudy": "Read the case study"
     },
     "pieces": {

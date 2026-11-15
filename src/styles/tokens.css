@@ -44,10 +44,12 @@
   --ref-violet-90: #ede3f8;
   --ref-olive-40: #5d6b2f;
   --ref-olive-90: #e7ecd6;
-  /* Hornero, the fictitious partner of the integrated mode (D-75, D-86): its own plum, unlike any real wallet. */
-  --ref-plum-40: #7b2d55;
-  --ref-plum-90: #f8e1ec;
-  --ref-plum-10: #3b0f28;
+  /* Hornero, the fictitious partner of the integrated mode (D-75, D-86, D-244): colors of the bird and
+     its nest. Rufous back, ochre nest, buff breast and dark umber. Only on Hornero's own chrome. */
+  --ref-hornero-rufous: #8b4a23;
+  --ref-hornero-nest: #a0703f;
+  --ref-hornero-buff: #f3e6d6;
+  --ref-hornero-umber: #3a2210;
   /* Cool neutrals */
   --ref-neutral-100: #ffffff;
   --ref-neutral-96: #f1f3f5;
@@ -127,9 +129,10 @@
   --role-sponsor-container: var(--ref-olive-90);
 
   /* Partner brand of the integrated mode (D-75, D-86): only on Hornero's own chrome, never inside Alcancía. */
-  --partner-hornero: var(--ref-plum-40);
-  --partner-hornero-container: var(--ref-plum-90);
-  --partner-on-hornero-container: var(--ref-plum-10);
+  --partner-hornero: var(--ref-hornero-rufous);
+  --partner-hornero-nest: var(--ref-hornero-nest);
+  --partner-hornero-container: var(--ref-hornero-buff);
+  --partner-on-hornero-container: var(--ref-hornero-umber);
 
   /* Fuerte (D-52): only for the character and its lights. Never on buttons, backgrounds, charts or states. */
   --fuerte-body: var(--ref-fuerte-orange);

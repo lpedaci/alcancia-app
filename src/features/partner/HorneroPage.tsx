@@ -16,14 +16,14 @@ import { enterPartnerMode, exitPartnerMode } from './partner-mode';
 /** "2.0" → "2", "2.5" → "2,5": months without a useless decimal. */
 const monthsText = (months: string) => formatNumber(months, 1).replace(/,0$/, '');
 
-function NestLine({ icon, done, children }: { icon: IconName; done: boolean; children: React.ReactNode }) {
+function NestLine({ icon, done, tone = 'rufous', children }: { icon: IconName; done: boolean; tone?: 'rufous' | 'nest'; children: React.ReactNode }) {
   return (
     <li className="flex items-start gap-3">
       <span
         aria-hidden
         className={
           done
-            ? 'flex size-10 shrink-0 items-center justify-center rounded-full bg-partner-hornero text-on-primary'
+            ? `flex size-10 shrink-0 items-center justify-center rounded-full text-on-primary ${tone === 'nest' ? 'bg-partner-hornero-nest' : 'bg-partner-hornero'}`
             : 'flex size-10 shrink-0 items-center justify-center rounded-full bg-surface-container text-on-surface-variant'
         }
       >
@@ -114,12 +114,12 @@ export function HorneroPage() {
               {t('partner.hornero.solidityTitle')}
             </h2>
             <ul className="flex flex-col gap-3">
-              <NestLine icon="shield" done={Boolean(nest.monthsCovered && Number(nest.monthsCovered) > 0)}>
+              <NestLine icon="shield" tone="nest" done={Boolean(nest.monthsCovered && Number(nest.monthsCovered) > 0)}>
                 {nest.monthsCovered && Number(nest.monthsCovered) > 0
                   ? t('partner.hornero.holds', { count: Number(nest.monthsCovered), months: monthsText(nest.monthsCovered) })
                   : t('partner.hornero.holdsNone')}
               </NestLine>
-              <NestLine icon="verified_user" done={nest.resisted}>
+              <NestLine icon="verified_user" tone="nest" done={nest.resisted}>
                 {nest.resisted ? t('partner.hornero.resisted') : t('partner.hornero.resistedNone')}
               </NestLine>
             </ul>
