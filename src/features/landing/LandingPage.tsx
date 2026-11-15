@@ -543,7 +543,7 @@ export function LandingPage() {
  * its edges from 1280 px, and a segmented button to see three real screens. The cards enter after
  * the phone, once; nothing floats in a loop (2.6).
  */
-const SCREEN_ORDER: PhoneScreen[] = ['home', 'levels', 'tool'];
+const SCREEN_ORDER: PhoneScreen[] = ['home', 'mission', 'card', 'pockets', 'levels'];
 /** Time on each screen: long enough to read it (about 30 words each). */
 export const SCREEN_MS = 6000;
 

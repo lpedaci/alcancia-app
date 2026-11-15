@@ -98,3 +98,4 @@
 | 15/11/2026 | Ajuste de Lourdes | Control segmentado suave en toda la app (D-295) | Hecho |
 | 15/11/2026 | Ajuste de Lourdes | Condición de movimientos enlazada (D-296), tablas como tarjetas en celular y tablet (D-297) y desafíos de nivel con barra apilada (D-298) | Hecho |
 | 15/11/2026 | Ajuste de Lourdes | Chips de contexto debajo del título y en una fila (D-299); tablas como tarjetas en Presupuesto, Conocerte y herramientas | Hecho |
+| 15/11/2026 | Ajuste de Lourdes | Celular del hero con cinco pantallas: cuenta, misión, tarjeta de aprendizaje, apartados y niveles (D-300) | Hecho |
