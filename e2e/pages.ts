@@ -14,7 +14,7 @@ export interface CheckedPage {
   /** Sign in without the accepted privacy notice (to check G5). */
   noConsent?: boolean;
   /** A sign-in waiting for the second step (to check G3). */
-  pendingMfa?: 'p-paula' | 'p-ricardo';
+  pendingMfa?: 'p-julieta' | 'p-ricardo';
   /** Integrated mode inside a fictitious partner app (D-75, D-242). */
   partner?: 'hornero';
 }
@@ -23,7 +23,7 @@ export const PAGES: CheckedPage[] = [
   { id: 'g0-landing', path: '/#/' },
   { id: 'g1-login', path: '/#/login' },
   { id: 'g2-sso', path: '/#/login/sso?provider=microsoft' },
-  { id: 'g3-verify', path: '/#/login/verify', pendingMfa: 'p-paula' },
+  { id: 'g3-verify', path: '/#/login/verify', pendingMfa: 'p-julieta' },
   { id: 'g4-access-help', path: '/#/access-help' },
   { id: 'g5-consent', path: '/#/consent', as: 'p-diego', noConsent: true },
   { id: 'p1-home', path: '/#/app', as: 'p-mariana' },
@@ -86,13 +86,13 @@ export const PAGES: CheckedPage[] = [
   { id: 't6-community', path: '/#/tutor/community', as: 'p-kevin' },
   { id: 'p9-community-mariana', path: '/#/app/learn/community', as: 'p-mariana' },
   { id: 'c1-ceibo-community-lucia', path: '/#/app/learn/community', as: 'p-lucia' },
-  { id: 'o1-admin', path: '/#/admin', as: 'p-paula' },
-  { id: 'o2-people', path: '/#/admin/people', as: 'p-paula' },
-  { id: 'o3-import', path: '/#/admin/people/import', as: 'p-paula' },
-  { id: 'o4-program', path: '/#/admin/program', as: 'p-paula' },
-  { id: 'o5-activity', path: '/#/admin/activity', as: 'p-paula' },
+  { id: 'o1-admin', path: '/#/admin', as: 'p-julieta' },
+  { id: 'o2-people', path: '/#/admin/people', as: 'p-julieta' },
+  { id: 'o3-import', path: '/#/admin/people/import', as: 'p-julieta' },
+  { id: 'o4-program', path: '/#/admin/program', as: 'p-julieta' },
+  { id: 'o5-activity', path: '/#/admin/activity', as: 'p-julieta' },
   { id: 'p9-review-mariana', path: '/#/app/learn/review/module-09', as: 'p-mariana' },
-  { id: 'c1-ceibo-program', path: '/#/admin/program', as: 'p-silvia' },
+  { id: 'c1-ceibo-program', path: '/#/admin/program', as: 'p-bettyna' },
   { id: 'c2-hornero-program', path: '/#/admin/program', as: 'p-sofia' },
   { id: 'c2-hornero-learn-joaquin', path: '/#/app/learn', as: 'p-joaquin' },
   { id: 'd1-sponsor', path: '/#/sponsor', as: 'p-ricardo' },
@@ -101,8 +101,8 @@ export const PAGES: CheckedPage[] = [
   // Contexts of use (5.5, step 23): Instituto Superior Ceibo and Hornero
   { id: 'c1-ceibo-welcome-lucia', path: '/#/app/welcome', as: 'p-lucia' },
   { id: 'c1-ceibo-tutor', path: '/#/tutor', as: 'p-martin' },
-  { id: 'c1-ceibo-admin', path: '/#/admin', as: 'p-silvia' },
-  { id: 'c1-ceibo-people', path: '/#/admin/people', as: 'p-silvia' },
+  { id: 'c1-ceibo-admin', path: '/#/admin', as: 'p-bettyna' },
+  { id: 'c1-ceibo-people', path: '/#/admin/people', as: 'p-bettyna' },
   { id: 'c1-ceibo-sponsor', path: '/#/sponsor', as: 'p-hector' },
   { id: 'c2-hornero-joaquin', path: '/#/app/hornero', as: 'p-joaquin' },
   { id: 'c2-hornero-admin', path: '/#/admin', as: 'p-sofia' },
@@ -122,11 +122,11 @@ const ROLES = {
   'p-mariana': 'participant',
   'p-diego': 'participant',
   'p-kevin': 'tutor',
-  'p-paula': 'ld_admin',
+  'p-julieta': 'ld_admin',
   'p-ricardo': 'sponsor',
   'p-lucia': 'participant',
   'p-martin': 'tutor',
-  'p-silvia': 'ld_admin',
+  'p-bettyna': 'ld_admin',
   'p-hector': 'sponsor',
   'p-joaquin': 'participant',
   'p-sofia': 'ld_admin',
@@ -153,7 +153,7 @@ export async function prepareSession(page: Page, target: CheckedPage) {
         'alcancia-session',
         JSON.stringify({ state: { session, pending, returnTo: null, authAttempts: {}, demoUnlockAll: false }, version: 1 }),
       );
-      localStorage.setItem('alcancia-data', JSON.stringify({ state: { consents }, version: 2 }));
+      localStorage.setItem('alcancia-data', JSON.stringify({ state: { consents }, version: 3 }));
       if (partner) sessionStorage.setItem('alcancia-partner', partner);
     },
     { session, pending, consents, partner: target.partner ?? null },

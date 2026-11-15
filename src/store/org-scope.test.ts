@@ -42,6 +42,6 @@ describe('entering by context (5.5)', () => {
     for (const id of ['p-joaquin', 'p-lucia']) useDataStore.getState().acceptConsent({ personId: id, version: '1.0', acceptedAt: '2026-11-16T10:00:00.000Z' });
     expect(switchPerson('p-joaquin')).toBe('/app/hornero');
     expect(switchPerson('p-lucia')).toBe('/app');
-    expect(switchPerson('p-silvia')).toMatch(/^\/(consent|admin)/);
+    expect(switchPerson('p-bettyna')).toMatch(/^\/(consent|admin)/);
   });
 });

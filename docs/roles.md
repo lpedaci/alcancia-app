@@ -8,7 +8,7 @@ Alcancía sigue el principio de **mínimo privilegio** y de **privacidad por dis
 
 | Rol (código) | Persona de demo | Color de rol | Para qué entra |
 | --- | --- | --- | --- |
-| `ld_admin` | Paula Gómez, Líder de Aprendizaje y Beneficios | `role-org-admin` `#3D4FA8` | Configurar el programa, cargar personas, armar cohortes, seguir la adopción |
+| `ld_admin` | Julieta Martorelli, Líder de Aprendizaje y Beneficios | `role-org-admin` `#3D4FA8` | Configurar el programa, cargar personas, armar cohortes, seguir la adopción |
 | `tutor` | Kevin Giovanni, tutor de bienestar financiero | `role-tutor` `#00796B` | Acompañar cohortes, asignar desafíos semanales, reforzar temas, desbloquear con motivo |
 | `participant` | Mariana López (oficina) y Diego Suárez (operativo, celular) | `role-participant` `#7A4FB0` | Usar la billetera de práctica y aprender en ella |
 | `sponsor` | Ricardo Benítez, Gerente de Compensaciones | `role-sponsor` `#5D6B2F` | Leer el reporte de impacto agregado |
@@ -21,7 +21,7 @@ El código de los roles es el mismo en los tres contextos; cambian el nombre vis
 | --- | --- | --- | --- |
 | `participant` | Participante: Mariana López, Diego Suárez | Estudiante: Lucía Ferreyra (Tecnicatura en Logística, 1.er año) | Usuario de Hornero: Joaquín Paredes |
 | `tutor` | Tutoría: Kevin Giovanni | Tutoría: Martín Quiroga | No existe: aprendizaje autónomo con Fuerte |
-| `ld_admin` | Admin de L&D y Beneficios: Paula Gómez | Coordinación académica: Silvia Herrera | Equipo de producto: Sofía Cabral |
+| `ld_admin` | Admin de L&D y Beneficios: Julieta Martorelli | Coordinación académica: Bettyna Gonçalves | Equipo de producto: Sofía Cabral |
 | `sponsor` | Decisor: Ricardo Benítez | Dirección: Héctor Ramos | Equipo de producto · impacto: Nicolás Vidal |
 
 - Cada persona pertenece a una sola organización y **cada pantalla lee solo los datos de su organización** (`scopeToOrg` y `useOrgData` en `src/store/data-store.ts`, con tests en `org-scope.test.ts`).

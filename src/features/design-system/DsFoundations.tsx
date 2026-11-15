@@ -75,7 +75,7 @@ function RoleCard({ role, prefix }: { role: string; prefix: string }) {
 
 const SURFACES = ['surface', 'surface-container-lowest', 'surface-container', 'surface-container-high', 'on-surface', 'on-surface-variant', 'outline', 'outline-variant', 'inverse-surface'];
 const PEOPLE: { role: Role; personId: string; name: string; token: string }[] = [
-  { role: 'ld_admin', personId: 'p-paula', name: 'Paula Gómez', token: 'role-org-admin' },
+  { role: 'ld_admin', personId: 'p-julieta', name: 'Julieta Martorelli', token: 'role-org-admin' },
   { role: 'tutor', personId: 'p-kevin', name: 'Kevin Giovanni', token: 'role-tutor' },
   { role: 'participant', personId: 'p-mariana', name: 'Mariana López', token: 'role-participant' },
   { role: 'sponsor', personId: 'p-ricardo', name: 'Ricardo Benítez', token: 'role-sponsor' },

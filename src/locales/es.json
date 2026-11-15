@@ -149,11 +149,6 @@
         "does": "Acompaña a sus cohortes sin ver montos ni bloqueos de la billetera.",
         "explore": "Mapa de calor del avance, desafíos semanales y preguntas con más errores."
       },
-      "paula": {
-        "chip": "Admin de L&D y Beneficios",
-        "does": "Configura el programa, carga personas y sigue la adopción.",
-        "explore": "Panel con umbral de privacidad, personas y cohortes editables, carga por CSV y configuración."
-      },
       "ricardo": {
         "chip": "Decisor",
         "does": "Lee el impacto del programa en datos agregados.",
@@ -171,11 +166,6 @@
         "chip": "Tutoría",
         "does": "Acompaña a las tres cohortes del instituto.",
         "explore": "Avance de aprendizaje por cohorte, desafíos semanales y consultas, sin montos."
-      },
-      "silvia": {
-        "chip": "Coordinación académica",
-        "does": "Configura el programa, carga estudiantes y arma las cohortes por carrera.",
-        "explore": "Panel de adopción con umbral de privacidad, personas, carga por CSV y configuración."
       },
       "hector": {
         "chip": "Dirección",
@@ -197,7 +187,17 @@
         "does": "Analiza cuánto aprenden los usuarios y qué aplican.",
         "explore": "Reporte de impacto agregado, sin datos de ninguna persona."
       },
-      "ctaProduct": "Abrir Hornero como {{name}}"
+      "ctaProduct": "Abrir Hornero como {{name}}",
+      "julieta": {
+        "chip": "Admin de L&D y Beneficios",
+        "does": "Configura el programa, carga personas y sigue la adopción.",
+        "explore": "Panel con umbral de privacidad, personas y cohortes editables, carga por CSV y configuración."
+      },
+      "bettyna": {
+        "chip": "Coordinación académica",
+        "does": "Configura el programa, carga estudiantes y arma las cohortes por carrera.",
+        "explore": "Panel de adopción con umbral de privacidad, personas, carga por CSV y configuración."
+      }
     },
     "simulator": {
       "eyebrow": "Prueba un simulador sin iniciar sesión",
@@ -1140,15 +1140,15 @@
       "p-mariana": "Participante · oficina · nivel 6",
       "p-diego": "Participante · celular · nivel 2",
       "p-kevin": "Tutor de bienestar financiero",
-      "p-paula": "Admin de L&D y Beneficios",
       "p-ricardo": "Decisor",
       "p-lucia": "Estudiante · celular · cuenta nueva",
       "p-martin": "Tutor de finanzas personales",
-      "p-silvia": "Coordinación académica",
       "p-hector": "Dirección",
       "p-joaquin": "Usuario · entra desde la app de Hornero",
       "p-sofia": "Equipo de producto · adopción",
-      "p-nicolas": "Equipo de producto · impacto"
+      "p-nicolas": "Equipo de producto · impacto",
+      "p-julieta": "Admin de L&D y Beneficios",
+      "p-bettyna": "Coordinación académica"
     },
     "unlockAll": "Ver todo desbloqueado",
     "unlockAllHelp": "En la billetera, para recorrer todas las secciones",
@@ -3400,7 +3400,7 @@
       "score": "Puntaje {{value}}",
       "done": "Completo",
       "seeJson": "Ver JSON",
-      "seeJsonFor": "Ver el enunciado JSON de {{name}}",
+      "seeJsonFor": "Ver JSON de {{name}}",
       "more": "Mostrar 25 más",
       "jsonTitle": "Enunciado xAPI",
       "jsonIntro": "Así lo recibiría un LRS: actor con seudónimo, verbo, actividad, resultado y contexto, sin datos personales ni económicos.",
@@ -3712,7 +3712,7 @@
       "people": "Personas",
       "peopleNote": "Cada rol tiene su color, que identifica personas y nunca estados. Las cinco personas de la demo llevan foto con un anillo de ese color; el resto, iniciales.",
       "peopleNames": {
-        "ld_admin": "Admin de L&D · Paula",
+        "ld_admin": "Admin de L&D · Julieta",
         "tutor": "Tutor · Kevin",
         "participant": "Participante · Mariana",
         "sponsor": "Decisor · Ricardo"

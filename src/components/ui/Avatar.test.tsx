@@ -19,6 +19,6 @@ describe('Avatar (D-165)', () => {
   });
 
   it('has a photo for each demo person, except Joaquín (no unused licensed photo fits him)', () => {
-    expect(Object.keys(PERSON_PHOTOS).sort()).toEqual(['p-diego', 'p-hector', 'p-kevin', 'p-lucia', 'p-mariana', 'p-martin', 'p-nicolas', 'p-paula', 'p-ricardo', 'p-silvia', 'p-sofia']);
+    expect(Object.keys(PERSON_PHOTOS).sort()).toEqual(['p-bettyna', 'p-diego', 'p-hector', 'p-julieta', 'p-kevin', 'p-lucia', 'p-mariana', 'p-martin', 'p-nicolas', 'p-ricardo', 'p-sofia']);
   });
 });

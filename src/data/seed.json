@@ -391,15 +391,15 @@
  ],
  "people": [
   {
-   "id": "p-paula",
+   "id": "p-julieta",
    "role": "ld_admin",
-   "name": "Paula Gómez",
+   "name": "Julieta Martorelli",
    "jobOrProgram": "Líder de Aprendizaje y Beneficios",
    "area": "administration",
    "cohortIds": [],
    "device": "desktop",
    "orgId": "org-andina",
-   "email": "paula.gomez@andina.demo",
+   "email": "julieta.martorelli@andina.demo",
    "status": "active",
    "invitedAt": "2026-07-20",
    "activatedAt": "2026-07-24"
@@ -1702,15 +1702,15 @@
    "activatedAt": "2026-09-04"
   },
   {
-   "id": "p-silvia",
+   "id": "p-bettyna",
    "role": "ld_admin",
-   "name": "Silvia Herrera",
+   "name": "Bettyna Gonçalves",
    "jobOrProgram": "Coordinadora académica",
    "area": "business_admin",
    "cohortIds": [],
    "device": "desktop",
    "orgId": "org-ceibo",
-   "email": "silvia.herrera@ceibo.demo",
+   "email": "bettyna.goncalves@ceibo.demo",
    "status": "active",
    "invitedAt": "2026-07-20",
    "activatedAt": "2026-07-24"

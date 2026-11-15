@@ -53,13 +53,13 @@ const ROLES: Record<OrganizationKind, { id: string; name: string; role: Role }[]
     { id: 'mariana', name: 'Mariana López', role: 'participant' },
     { id: 'diego', name: 'Diego Suárez', role: 'participant' },
     { id: 'kevin', name: 'Kevin Giovanni', role: 'tutor' },
-    { id: 'paula', name: 'Paula Gómez', role: 'ld_admin' },
+    { id: 'julieta', name: 'Julieta Martorelli', role: 'ld_admin' },
     { id: 'ricardo', name: 'Ricardo Benítez', role: 'sponsor' },
   ],
   education: [
     { id: 'lucia', name: 'Lucía Ferreyra', role: 'participant' },
     { id: 'martin', name: 'Martín Quiroga', role: 'tutor' },
-    { id: 'silvia', name: 'Silvia Herrera', role: 'ld_admin' },
+    { id: 'bettyna', name: 'Bettyna Gonçalves', role: 'ld_admin' },
     { id: 'hector', name: 'Héctor Ramos', role: 'sponsor' },
   ],
   product: [

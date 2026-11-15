@@ -135,10 +135,10 @@ Cada enlace entra a la demo con esa persona. El acceso con SSO y verificación e
   </tr>
   <tr>
     <td width="50%" valign="top">
-      <img src="docs/readme/role-admin.webp" alt="Panel de Paula, admin de L&D y Beneficios: personas invitadas, activas, que hicieron Conocerte y módulos leídos, y una lista 'Para revisar' que avisa que dos cohortes tienen menos de 5 personas y sus cifras no se muestran.">
+      <img src="docs/readme/role-admin.webp" alt="Panel de Julieta, admin de L&D y Beneficios: personas invitadas, activas, que hicieron Conocerte y módulos leídos, y una lista 'Para revisar' que avisa que dos cohortes tienen menos de 5 personas y sus cifras no se muestran.">
       <h3>Admin de L&D y Beneficios</h3>
       <p>Configura el programa, carga personas por CSV con validación fila por fila, arma cohortes y sigue la adopción en cifras agregadas.</p>
-      <p><a href="https://lpedaci.github.io/alcancia-app/#/login?demo=paula">Entrar como Paula</a></p>
+      <p><a href="https://lpedaci.github.io/alcancia-app/#/login?demo=julieta">Entrar como Julieta</a></p>
     </td>
     <td width="50%" valign="top">
       <img src="docs/readme/role-sponsor.webp" alt="Reporte de impacto de Ricardo, decisor: 80 % de personas activas, satisfacción de 4,6 sobre 5, 17 puntos de mejora en Conocerte y 78 % con presupuesto armado, con el detalle de reacción y conducta. Son cifras agregadas, sin datos de ninguna persona.">
@@ -166,7 +166,7 @@ El **modo integrado** se ve con **Hornero**, una billetera ficticia creada para 
   </tr>
 </table>
 
-Pruébalo: <a href="https://lpedaci.github.io/alcancia-app/#/">desde la landing</a>, en "Un recorrido para cada rol", eligiendo el contexto: Andina, Ceibo (Lucía, estudiante; Martín, tutor; Silvia, coordinación académica; Héctor, dirección) o Hornero (Joaquín, usuario; Sofía y Nicolás, equipo de producto).
+Pruébalo: <a href="https://lpedaci.github.io/alcancia-app/#/">desde la landing</a>, en "Un recorrido para cada rol", eligiendo el contexto: Andina, Ceibo (Lucía, estudiante; Martín, tutor; Bettyna, coordinación académica; Héctor, dirección) o Hornero (Joaquín, usuario; Sofía y Nicolás, equipo de producto).
 
 ## Diseño UX/UI
 

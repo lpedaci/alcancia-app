@@ -42,7 +42,7 @@ describe('seed data (CLAUDE.md 7)', () => {
 
   it('has the four demo roles with their personas', () => {
     const byId = Object.fromEntries(seed.people.map((p) => [p.id, p]));
-    expect(byId['p-paula']).toMatchObject({ role: 'ld_admin', name: 'Paula Gómez' });
+    expect(byId['p-julieta']).toMatchObject({ role: 'ld_admin', name: 'Julieta Martorelli' });
     expect(byId['p-kevin']).toMatchObject({ role: 'tutor', name: 'Kevin Giovanni' });
     expect(byId['p-mariana']).toMatchObject({ role: 'participant', device: 'desktop', status: 'active' });
     expect(byId['p-diego']).toMatchObject({ role: 'participant', device: 'mobile', status: 'active' });
@@ -106,7 +106,7 @@ describe('three contexts of use (5.5, D-74, D-83, D-84)', () => {
     const people = byOrg('org-ceibo');
     expect(people.find((p) => p.id === 'p-lucia')).toMatchObject({ role: 'participant', name: 'Lucía Ferreyra', status: 'active' });
     expect(people.find((p) => p.id === 'p-martin')?.role).toBe('tutor');
-    expect(people.find((p) => p.id === 'p-silvia')).toMatchObject({ role: 'ld_admin', jobOrProgram: 'Coordinadora académica' });
+    expect(people.find((p) => p.id === 'p-bettyna')).toMatchObject({ role: 'ld_admin', jobOrProgram: 'Coordinadora académica' });
     expect(people.find((p) => p.id === 'p-hector')?.role).toBe('sponsor');
     // Higher education and vocational training only: no school years, no minors.
     expect(JSON.stringify(people) + JSON.stringify(seed.cohorts.filter((c) => c.orgId === 'org-ceibo'))).not.toMatch(/secundari|colegio|menor|escuela/i);

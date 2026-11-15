@@ -15,6 +15,14 @@ function ToLogin({ returnTo }: { returnTo: string }) {
   return <Navigate to="/login" replace />;
 }
 
+/** A saved session of a demo person that no longer exists (renamed, D-280): sign in again. */
+function StaleSession() {
+  useEffect(() => {
+    useSessionStore.getState().endSession('reset');
+  }, []);
+  return <Navigate to="/login" replace />;
+}
+
 /**
  * Guard of every protected route (CLAUDE.md F0, roles.md 3.4): a session, the accepted privacy
  * notice (G5) and the permission of the route in permissions.ts. Without permission it shows
@@ -23,11 +31,13 @@ function ToLogin({ returnTo }: { returnTo: string }) {
 export function RequireSession() {
   const user = useCurrentUser();
   const { pathname, search } = useLocation();
+  const exists = useDataStore((s) => (user ? s.people.some((p) => p.id === user.personId) : false));
   const consented = useDataStore((s) =>
     user ? s.consents.some((c) => c.personId === user.personId && c.version === PRIVACY_NOTICE_VERSION) : false,
   );
 
   if (!user) return <ToLogin returnTo={`${pathname}${search}`} />;
+  if (!exists) return <StaleSession />;
   if (!consented) return <Navigate to="/consent" replace />;
   const action = requiredPermission(pathname);
   if (action && !can(user, action)) return <AccessDeniedPage />;

@@ -607,7 +607,7 @@ export function StyleguidePage() {
             <ul className="flex flex-col gap-2">
               {(
                 [
-                  ['Paula Gómez', 'ld_admin', 'Admin de L&D: role-org-admin', 'p-paula'],
+                  ['Julieta Martorelli', 'ld_admin', 'Admin de L&D: role-org-admin', 'p-julieta'],
                   ['Kevin Giovanni', 'tutor', 'Tutor: role-tutor', 'p-kevin'],
                   ['Mariana López', 'participant', 'Participante: role-participant', 'p-mariana'],
                   ['Diego Suárez', 'participant', 'Participante (celular): role-participant', 'p-diego'],

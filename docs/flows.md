@@ -20,7 +20,7 @@ Al final están el mapa de pantallas por rol y los diagramas de estados.
 flowchart TD
   L["G0 Landing"] --> R{"¿Qué hace?"}
   R -- "Prueba SIM-3 sin iniciar sesión" --> S["SIM-3 embebido<br/>(sin sesión)"] --> R
-  R -- "Recorrer como Mariana / Diego / Andrés / Paula / Ricardo" --> LG["G1 Login<br/>/login?demo=persona"]
+  R -- "Recorrer como Mariana / Diego / Kevin / Julieta / Ricardo" --> LG["G1 Login<br/>/login?demo=persona"]
   R -- "Ver el case study" --> CS["Portfolio (externo)"]
   LG --> M{"Método"}
   M -- "Continuar con Microsoft o Google" --> SSO["G2 SSO simulado<br/>neutro y rotulado"]
@@ -70,7 +70,7 @@ Los cambios sin guardar se protegen con `useBlocker` antes del cierre o de salir
 
 ```mermaid
 flowchart LR
-  B["Barra superior · Ver como"] --> M["Menú: Mariana · Diego · Andrés · Paula · Ricardo"]
+  B["Barra superior · Ver como"] --> M["Menú: Mariana · Diego · Kevin · Julieta · Ricardo"]
   M --> S["Cambia la sesión simulada<br/>sin repetir la verificación"]
   B --> U["Interruptor 'Ver todo desbloqueado'"]
   B --> E["Cargar estado de ejemplo:<br/>Diego en nivel 2 · Mariana en nivel 6"]

@@ -271,14 +271,16 @@ export const useDataStore = create<DataState>()(
     }),
     {
       name: DATA_STORAGE_KEY,
-      // Version 2 (step 23, D-268): three organizations. Older demo data goes back to the seed,
-      // keeping only the accepted privacy notices and the help desk requests.
-      version: 2,
+      // Version 3 (D-280): Paula Gómez is now Julieta Martorelli and Silvia Herrera, Bettyna Gonçalves,
+      // with new ids; older demo data goes back to the seed with the accepted notices moved to the new ids.
+      version: 3,
       storage: createJSONStorage(() => localStorage),
       migrate: (persisted, version) => {
         const old = (persisted ?? {}) as Partial<SharedData>;
-        if (version >= 2) return persisted as DataState;
-        return { ...seedData(), consents: old.consents ?? [], accessRequests: old.accessRequests ?? [] } as unknown as DataState;
+        if (version >= 3) return persisted as DataState;
+        const renamed: Record<string, string> = { 'p-paula': 'p-julieta', 'p-silvia': 'p-bettyna' };
+        const consents = (old.consents ?? []).map((c) => ({ ...c, personId: renamed[c.personId] ?? c.personId }));
+        return { ...seedData(), consents, accessRequests: old.accessRequests ?? [] } as unknown as DataState;
       },
     },
   ),

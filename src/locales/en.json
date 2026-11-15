@@ -149,11 +149,6 @@
         "does": "Supports his cohorts without seeing amounts or wallet locks.",
         "explore": "Progress heat map, weekly challenges and most-missed questions."
       },
-      "paula": {
-        "chip": "L&D and Benefits admin",
-        "does": "Sets up the program, uploads people and tracks adoption.",
-        "explore": "Panel with a privacy threshold, editable people and cohorts, CSV import and settings."
-      },
       "ricardo": {
         "chip": "Sponsor",
         "does": "Reads the program impact in aggregated data.",
@@ -171,11 +166,6 @@
         "chip": "Tutoring",
         "does": "Supports the three cohorts of the institute.",
         "explore": "Learning progress by cohort, weekly challenges and questions, with no amounts."
-      },
-      "silvia": {
-        "chip": "Academic coordination",
-        "does": "Sets up the program, loads students and builds cohorts by degree.",
-        "explore": "Adoption panel with the privacy threshold, people, CSV upload and settings."
       },
       "hector": {
         "chip": "Direction",
@@ -197,7 +187,17 @@
         "does": "Analyzes how much users learn and what they apply.",
         "explore": "Aggregated impact report, with no data about any person."
       },
-      "ctaProduct": "Open Hornero as {{name}}"
+      "ctaProduct": "Open Hornero as {{name}}",
+      "julieta": {
+        "chip": "L&D and Benefits admin",
+        "does": "Sets up the program, uploads people and tracks adoption.",
+        "explore": "Panel with a privacy threshold, editable people and cohorts, CSV import and settings."
+      },
+      "bettyna": {
+        "chip": "Academic coordination",
+        "does": "Sets up the program, loads students and builds cohorts by degree.",
+        "explore": "Adoption panel with the privacy threshold, people, CSV upload and settings."
+      }
     },
     "simulator": {
       "eyebrow": "Try a simulator without signing in",

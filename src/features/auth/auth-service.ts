@@ -33,11 +33,11 @@ export const DEMO_KEYS = {
   mariana: 'p-mariana',
   diego: 'p-diego',
   kevin: 'p-kevin',
-  paula: 'p-paula',
+  julieta: 'p-julieta',
   ricardo: 'p-ricardo',
   lucia: 'p-lucia',
   martin: 'p-martin',
-  silvia: 'p-silvia',
+  bettyna: 'p-bettyna',
   hector: 'p-hector',
   joaquin: 'p-joaquin',
   sofia: 'p-sofia',
@@ -48,8 +48,8 @@ export const DEMO_PERSON_IDS: string[] = Object.values(DEMO_KEYS);
 
 /** "Ver como" goes context first, then person (5.5): the demo people of each context. */
 export const DEMO_CONTEXTS: { kind: OrganizationKind; personIds: string[] }[] = [
-  { kind: 'employer', personIds: ['p-mariana', 'p-diego', 'p-kevin', 'p-paula', 'p-ricardo'] },
-  { kind: 'education', personIds: ['p-lucia', 'p-martin', 'p-silvia', 'p-hector'] },
+  { kind: 'employer', personIds: ['p-mariana', 'p-diego', 'p-kevin', 'p-julieta', 'p-ricardo'] },
+  { kind: 'education', personIds: ['p-lucia', 'p-martin', 'p-bettyna', 'p-hector'] },
   { kind: 'product', personIds: ['p-joaquin', 'p-sofia', 'p-nicolas'] },
 ];
 

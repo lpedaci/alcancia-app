@@ -16,7 +16,7 @@ const levels = read('src/data/levels.json');
 const modules = read('src/data/modules.json');
 
 // Names of the demo people of the new contexts, kept out of the random pool.
-const DEMO_NAMES = ['Lucía Ferreyra', 'Martín Quiroga', 'Silvia Herrera', 'Héctor Ramos', 'Joaquín Paredes', 'Sofía Cabral', 'Nicolás Vidal'];
+const DEMO_NAMES = ['Lucía Ferreyra', 'Martín Quiroga', 'Bettyna Gonçalves', 'Héctor Ramos', 'Joaquín Paredes', 'Sofía Cabral', 'Nicolás Vidal'];
 
 // ---------- Deterministic helpers ----------
 let state = 0;
@@ -63,7 +63,7 @@ const LAST = [
   'Sosa', 'Toledo', 'Torres', 'Vega', 'Vera', 'Villalba', 'Zárate',
 ];
 
-const usedNames = new Set(['Paula Gómez', 'Kevin Giovanni', 'Mariana López', 'Diego Suárez', 'Ricardo Benítez', ...DEMO_NAMES]);
+const usedNames = new Set(['Julieta Martorelli', 'Kevin Giovanni', 'Mariana López', 'Diego Suárez', 'Ricardo Benítez', ...DEMO_NAMES]);
 function newName() {
   for (;;) {
     const name = `${pick(FIRST)} ${pick(LAST)}`;
@@ -524,7 +524,7 @@ const ANDINA = {
     },
   ],
   staff: [
-    { id: 'p-paula', role: 'ld_admin', name: 'Paula Gómez', jobOrProgram: 'Líder de Aprendizaje y Beneficios', area: 'administration', cohortIds: [], device: 'desktop' },
+    { id: 'p-julieta', role: 'ld_admin', name: 'Julieta Martorelli', jobOrProgram: 'Líder de Aprendizaje y Beneficios', area: 'administration', cohortIds: [], device: 'desktop' },
     { id: 'p-kevin', role: 'tutor', name: 'Kevin Giovanni', jobOrProgram: 'Tutor de bienestar financiero', area: 'administration', cohortIds: ['cohort-operations', 'cohort-administration', 'cohort-technology', 'cohort-commercial'], device: 'desktop' },
     { id: 'p-ricardo', role: 'sponsor', name: 'Ricardo Benítez', jobOrProgram: 'Gerente de Compensaciones', area: 'administration', cohortIds: [], device: 'desktop' },
   ],
@@ -626,7 +626,7 @@ const CEIBO = {
   tutorId: 'p-martin',
   cohorts: CEIBO_COHORTS,
   staff: [
-    { id: 'p-silvia', role: 'ld_admin', name: 'Silvia Herrera', jobOrProgram: 'Coordinadora académica', area: 'business_admin', cohortIds: [], device: 'desktop' },
+    { id: 'p-bettyna', role: 'ld_admin', name: 'Bettyna Gonçalves', jobOrProgram: 'Coordinadora académica', area: 'business_admin', cohortIds: [], device: 'desktop' },
     { id: 'p-martin', role: 'tutor', name: 'Martín Quiroga', jobOrProgram: 'Tutor de finanzas personales', area: 'business_admin', cohortIds: CEIBO_COHORTS.map((c) => c.id), device: 'desktop' },
     { id: 'p-hector', role: 'sponsor', name: 'Héctor Ramos', jobOrProgram: 'Director de estudios', area: 'business_admin', cohortIds: [], device: 'desktop' },
   ],

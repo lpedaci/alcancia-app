@@ -7,11 +7,11 @@ Fotos de stock descargadas de [Magnific](https://www.magnific.com/) con su licen
 | Mariana López | `3966.jpg` |
 | Diego Suárez | `2148958101.jpg` |
 | Tutor | `close-up-confident-male-employee-white-collar-shirt-smiling-camera-standing-self-assured-against-studio-background.jpg` |
-| Paula Gómez | `2148213468.jpg` |
+| Julieta Martorelli | `2148213468.jpg` |
 | Ricardo Benítez | `3600.jpg` |
 | Lucía Ferreyra (Ceibo, estudiante) | `2149015522.jpg` |
 | Martín Quiroga (Ceibo, tutor) | `young-man-formal-clothes_21730-2120.avif` |
-| Silvia Herrera (Ceibo, coordinación académica) | `11905.jpg` |
+| Bettyna Gonçalves (Ceibo, coordinación académica) | `11905.jpg` |
 | Héctor Ramos (Ceibo, dirección) | `719.jpg` |
 | Sofía Cabral (Hornero, equipo de producto) | `2149304146.jpg` |
 | Nicolás Vidal (Hornero, equipo de producto) | `34735.jpg` |

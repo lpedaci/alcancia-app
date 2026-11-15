@@ -97,10 +97,10 @@ There are nine assessment types, each with feedback per option, including a **ca
   </tr>
   <tr>
     <td width="50%" valign="top">
-      <img src="docs/readme/role-admin.webp" alt="Paula's L&D admin dashboard: invited and active people, diagnostics completed and modules read, and a review list noting that two cohorts have fewer than 5 people so their figures are hidden.">
+      <img src="docs/readme/role-admin.webp" alt="Julieta's L&D admin dashboard: invited and active people, diagnostics completed and modules read, and a review list noting that two cohorts have fewer than 5 people so their figures are hidden.">
       <h3>L&D and Benefits admin</h3>
       <p>Sets up the program, imports people from CSV with row-by-row validation and follows adoption in aggregate.</p>
-      <p><a href="https://lpedaci.github.io/alcancia-app/#/login?demo=paula">Sign in as Paula</a></p>
+      <p><a href="https://lpedaci.github.io/alcancia-app/#/login?demo=julieta">Sign in as Julieta</a></p>
     </td>
     <td width="50%" valign="top">
       <img src="docs/readme/role-sponsor.webp" alt="Ricardo's impact report: 80 % active, satisfaction 4.6 out of 5, 17 points of improvement and 78 % with a budget, with reaction and behavior details. Aggregated figures only.">

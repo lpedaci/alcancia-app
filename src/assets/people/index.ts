@@ -5,9 +5,9 @@ import lucia from './lucia.webp';
 import mariana from './mariana.webp';
 import martin from './martin.webp';
 import nicolas from './nicolas.webp';
-import paula from './paula.webp';
+import julieta from './julieta.webp';
 import ricardo from './ricardo.webp';
-import silvia from './silvia.webp';
+import bettyna from './bettyna.webp';
 import sofia from './sofia.webp';
 
 /**
@@ -20,13 +20,13 @@ export const PERSON_PHOTOS: Record<string, string> = {
   'p-mariana': mariana,
   'p-diego': diego,
   'p-kevin': kevin,
-  'p-paula': paula,
+  'p-julieta': julieta,
   'p-ricardo': ricardo,
   // Contexts of use (step 23): Instituto Superior Ceibo and Hornero. Joaquín keeps initials: there
   // was no unused casual photo of a young man among the licensed ones (README.md of this folder).
   'p-lucia': lucia,
   'p-martin': martin,
-  'p-silvia': silvia,
+  'p-bettyna': bettyna,
   'p-hector': hector,
   'p-sofia': sofia,
   'p-nicolas': nicolas,

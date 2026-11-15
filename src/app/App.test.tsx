@@ -31,7 +31,7 @@ describe('G0 landing (F0)', () => {
       '/login?demo=mariana',
       '/login?demo=diego',
       '/login?demo=kevin',
-      '/login?demo=paula',
+      '/login?demo=julieta',
       '/login?demo=ricardo',
     ]);
   });
@@ -231,7 +231,7 @@ describe('route guards (F0, roles.md 3.4)', () => {
 
   for (const [personId, path, name] of [
     ['p-kevin', '/tutor', 'Kevin'],
-    ['p-paula', '/admin', 'Paula'],
+    ['p-julieta', '/admin', 'Julieta'],
     ['p-ricardo', '/sponsor', 'Ricardo'],
   ] as const) {
     it(`opens the provisional home of ${name} with "Ver como" and the user menu`, async () => {
@@ -246,10 +246,10 @@ describe('route guards (F0, roles.md 3.4)', () => {
 
 describe('access flow (G1 to G5)', () => {
   it('one click from the landing: SSO, verification with the code prefilled, notice and home', async () => {
-    renderAt('/login?demo=paula');
+    renderAt('/login?demo=julieta');
     fireEvent.click(await screen.findByRole('button', { name: es.auth.login.ssoMicrosoft }));
     expect(await screen.findByRole('heading', { level: 1, name: /Iniciar sesión con Microsoft/ })).toBeInTheDocument();
-    expect(screen.getByText('paula.gomez@andina.demo')).toBeInTheDocument();
+    expect(screen.getByText('julieta.martorelli@andina.demo')).toBeInTheDocument();
     fireEvent.click(screen.getByRole('button', { name: es.auth.sso.continue }));
     expect(await screen.findByRole('heading', { level: 1, name: es.auth.mfa.title })).toBeInTheDocument();
     expect(screen.getByLabelText(es.auth.mfa.codeLabel)).toHaveValue('246810');
@@ -261,7 +261,7 @@ describe('access flow (G1 to G5)', () => {
     expect(await screen.findByText(es.consent.checkRequired)).toBeInTheDocument();
     fireEvent.click(screen.getByLabelText(es.consent.check));
     fireEvent.click(screen.getByRole('button', { name: es.consent.accept }));
-    expect(await screen.findByRole('heading', { level: 1 })).toHaveTextContent('Paula');
+    expect(await screen.findByRole('heading', { level: 1 })).toHaveTextContent('Julieta');
   });
 
   it('participants skip the second step', async () => {

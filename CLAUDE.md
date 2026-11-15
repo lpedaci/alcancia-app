@@ -456,7 +456,7 @@ Esto obliga a diseñar para públicos distintos dentro de la misma empresa, como
 
 | Rol | Persona de ejemplo | Qué hace en el MVP |
 | --- | --- | --- |
-| **Admin de L&D y Beneficios** | Paula Gómez, Líder de Aprendizaje y Beneficios | Configura el programa, carga personas, arma cohortes, asigna módulos y sigue la adopción |
+| **Admin de L&D y Beneficios** | Julieta Martorelli, Líder de Aprendizaje y Beneficios | Configura el programa, carga personas, arma cohortes, asigna módulos y sigue la adopción |
 | **Tutor** | Kevin Giovanni, tutor de bienestar financiero | Acompaña a sus cohortes: sigue el avance de aprendizaje, asigna desafíos, responde consultas y refuerza los temas con más errores |
 | **Participante** | Mariana López, Analista de Operaciones (oficina), y Diego Suárez, Operario de depósito (celular) | Hace el diagnóstico, cursa su ruta, usa simuladores, define metas y responde evaluaciones |
 | **Decisor** | Ricardo Benítez, Gerente de Compensaciones | Ve el reporte de impacto agregado, sin datos individuales |

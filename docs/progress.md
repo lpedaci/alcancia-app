@@ -84,3 +84,4 @@
 | 15/11/2026 | Ajuste de Lourdes | Aprender con columnas parejas (Logros debajo del mapa) y el botón del espacio de la cohorte sin salirse de la tarjeta (D-278) | Hecho |
 | 15/11/2026 | 27 · Contenido, tanda 2 | Guías 2 de los módulos 5 a 8 en borrador, validadas con tests, y documento `docs/content-review/tanda-2.md` | Esperando la revisión de Lourdes |
 | 15/11/2026 | Ajuste de Lourdes | Repasos como filas de lista de Material 3, sin botón anidado (D-279) | Hecho |
+| 15/11/2026 | Ajuste de Lourdes | Paula Gómez pasa a ser Julieta Martorelli y Silvia Herrera, Bettyna Gonçalves, en la app, los datos, la documentación y el README (D-280) | Hecho |

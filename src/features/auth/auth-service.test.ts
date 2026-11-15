@@ -50,8 +50,8 @@ describe('password sign-in (F0)', () => {
 
 describe('two-step verification (G3)', () => {
   it('is required for the admin and the sponsor, not for the tutor or participants', () => {
-    expect(signInWithSso('p-paula', 'sso_microsoft', true)).toEqual({ status: 'mfa' });
-    expect(session().pending).toMatchObject({ personId: 'p-paula', demo: true });
+    expect(signInWithSso('p-julieta', 'sso_microsoft', true)).toEqual({ status: 'mfa' });
+    expect(session().pending).toMatchObject({ personId: 'p-julieta', demo: true });
     expect(session().session).toBeNull();
     resetAll();
     expect(signInWithSso('p-ricardo', 'sso_google', false)).toEqual({ status: 'mfa' });
@@ -60,9 +60,9 @@ describe('two-step verification (G3)', () => {
   });
 
   it('accepts only the demo code, also pasted with spaces', () => {
-    signInWithSso('p-paula', 'sso_microsoft', true);
+    signInWithSso('p-julieta', 'sso_microsoft', true);
     expect(verifyMfa('111111')).toEqual({ status: 'invalid' });
-    acceptPrivacyNotice('p-paula');
+    acceptPrivacyNotice('p-julieta');
     expect(verifyMfa(` ${DEMO_MFA_CODE.slice(0, 3)} ${DEMO_MFA_CODE.slice(3)} `)).toEqual({ status: 'signed_in', path: '/admin' });
     expect(session().pending).toBeNull();
   });
