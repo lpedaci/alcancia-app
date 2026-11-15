@@ -1068,7 +1068,7 @@
           "icon": "visibility",
           "items": [
             "Cifras agregadas de grupos de 5 personas o más: cuántas personas leen guías, aprueban desafíos y completan misiones.",
-            "Eventos de aprendizaje sin datos económicos, como \"misión completada\" o \"nivel desbloqueado\".",
+            "Eventos de aprendizaje sin datos económicos, como \"misión completada\" o \"desafío aprobado\".",
             "Nada individual: no hay tutoría ni nadie que vea tu avance personal."
           ]
         },
@@ -3010,7 +3010,8 @@
       "label": "Administración del programa",
       "panel": "Panel",
       "people": "Personas y cohortes",
-      "program": "Programa"
+      "program": "Programa",
+      "activity": "Actividad"
     },
     "insufficient": "Datos insuficientes para mostrar este grupo sin identificar a nadie.",
     "insufficientShort": "Datos insuficientes",
@@ -3323,6 +3324,67 @@
       "enableFor": "Habilitar: {{title}}",
       "requiredHint": "Para marcar un módulo como obligatorio, primero tiene que estar habilitado.",
       "discardShort": "Descartar"
+    },
+    "activity": {
+      "title": "Registro de actividad",
+      "intro": "Cada acción de aprendizaje del programa como un enunciado \"actor, verbo, objeto\", con el formato xAPI que reciben un LRS o un LMS corporativo. Las personas aparecen con un seudónimo y solo hay datos de aprendizaje: nunca montos, hábitos ni decisiones dentro de la billetera.",
+      "kpi": {
+        "total": "Enunciados",
+        "totalCaption": "Acciones de aprendizaje registradas",
+        "completed": "Completados",
+        "completedCaption": "Guías, misiones, Conocerte y desafíos semanales",
+        "passed": "Desafíos aprobados",
+        "passedCaption_one": "De {{count}} intento de desafío de nivel",
+        "passedCaption_other": "De {{count}} intentos de desafíos de nivel"
+      },
+      "logTitle": "Enunciados",
+      "download": "Descargar JSON",
+      "filter": "Tipo de actividad",
+      "types": {
+        "all": "Todas",
+        "guide": "Guías",
+        "challenge": "Desafíos",
+        "mission": "Misiones",
+        "diagnostic": "Conocerte",
+        "weekly-challenge": "Semanales"
+      },
+      "count_one": "{{count}} enunciado",
+      "count_other": "{{count}} enunciados",
+      "cols": {
+        "actor": "Persona",
+        "verb": "Verbo",
+        "object": "Actividad",
+        "result": "Resultado",
+        "date": "Fecha",
+        "json": "Enunciado"
+      },
+      "verbs": {
+        "completed": "completó",
+        "passed": "aprobó",
+        "failed": "no aprobó",
+        "attempted": "informó"
+      },
+      "responses": {
+        "done": "Cumplido",
+        "partial": "En parte",
+        "not_done": "No cumplido"
+      },
+      "score": "Puntaje {{value}}",
+      "done": "Completo",
+      "seeJson": "Ver JSON",
+      "seeJsonFor": "Ver el enunciado JSON de {{name}}",
+      "more": "Mostrar 25 más",
+      "jsonTitle": "Enunciado xAPI",
+      "jsonIntro": "Así lo recibiría un LRS: actor con seudónimo, verbo, actividad, resultado y contexto, sin datos personales ni económicos.",
+      "privacy": "Los enunciados se arman con los datos de aprendizaje que el programa ya tiene. El seudónimo es estable dentro de la organización y no se puede revertir desde este panel. Nada sale de este navegador: la descarga es un archivo de ejemplo.",
+      "object": {
+        "guide": "Guía «{{name}}»",
+        "mission": "Misión «{{name}}»",
+        "challenge": "{{name}}",
+        "diagnostic": "{{name}}",
+        "weekly-challenge": "Desafío semanal «{{name}}»",
+        "level": "{{name}}"
+      }
     }
   },
   "sponsor": {
@@ -4305,11 +4367,19 @@
       "learnTitle": "Aprende finanzas usando tu billetera",
       "learnBody": "Alcancía vive dentro de Hornero: practicas con dinero ficticio y aprendes en el momento justo, sin otro inicio de sesión.",
       "open": "Abrir Alcancía",
-      "privacy": "Hornero solo recibe avisos de tu avance, como una misión completada o un nivel desbloqueado. Nunca recibe tus montos, tus movimientos ni tus metas.",
+      "privacy": "Hornero solo recibe avisos de tu avance, como una misión o una guía completada. Nunca recibe tus montos, tus movimientos ni tus metas.",
       "leave": "Salir del modo integrado",
       "back": "Volver a Hornero",
       "inside": "Alcancía dentro de Hornero",
-      "notice": "Hornero es una marca ficticia de demostración: no existe y no imita a ninguna billetera real."
+      "notice": "Hornero es una marca ficticia de demostración: no existe y no imita a ninguna billetera real.",
+      "eventsTitle": "Lo que Alcancía le avisó a Hornero",
+      "eventsBody": "Hitos de aprendizaje que Hornero recibe para mostrarte en su app: misiones y guías completadas y desafíos aprobados. Sin montos ni puntajes.",
+      "eventsEmpty": "Todavía no hay avisos. Cuando completes una misión o una guía en Alcancía, aparece acá.",
+      "event": {
+        "guide": "Completaste la guía «{{name}}»",
+        "mission": "Completaste la misión «{{name}}»",
+        "challenge": "Aprobaste: {{name}}"
+      }
     }
   },
   "market": {

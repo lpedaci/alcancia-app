@@ -50,7 +50,8 @@ describe('front-end safety rules (8.2)', () => {
 
   it('only links to https sites from the source', () => {
     for (const [path, code] of Object.entries(sources)) {
-      expect(code, `${path} links to an insecure http:// site`).not.toMatch(/["'`]http:\/\/(?!localhost|www\.w3\.org\/)/);
+      expect(code, `${path} links to an insecure http:// site`).not.toMatch(/["'`]http:\/\/(?!localhost|www\.w3\.org\/|adlnet\.gov\/expapi\/verbs\/)/);
+      // ADL verb IRIs (F21) are identifiers of the xAPI standard, never fetched or linked.
     }
   });
 });

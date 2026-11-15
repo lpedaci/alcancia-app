@@ -129,6 +129,7 @@ Leyenda: ✔ permitido · ◐ solo agregado con umbral de privacidad (mínimo 5)
 | `cohorts.read` | ✔ la propia | ✔ las suyas | ✔ todas | ✖ |
 | `adoption.read` (O1) | ✖ | ✖ | ◐ | ◐ |
 | `impact.read` (D1) | ✖ | ✖ | ◐ | ◐ |
+| Registro de actividad tipo xAPI (O5, `/admin/activity`, F21) | ✖ | ✖ | ◐ con seudónimos | ✖ |
 | `impact.export` | ✖ | ✖ | ✔ | ✔ |
 | `privacyThreshold.edit` (mínimo 5, no se puede bajar) | ✖ | ✖ | ✔ solo hacia arriba | ✖ |
 

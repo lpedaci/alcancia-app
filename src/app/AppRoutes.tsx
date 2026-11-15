@@ -19,6 +19,7 @@ const DesignSystemPage = lazyPage(() => import('@/features/design-system/DesignS
 const AdminHomePage = lazyPage(() => import('@/features/organization/AdminHomePage'), 'AdminHomePage');
 const PeoplePage = lazyPage(() => import('@/features/organization/PeoplePage'), 'PeoplePage');
 const ImportPage = lazyPage(() => import('@/features/organization/ImportPage'), 'ImportPage');
+const ActivityPage = lazyPage(() => import('@/features/organization/ActivityPage'), 'ActivityPage');
 const ProgramPage = lazyPage(() => import('@/features/organization/ProgramPage'), 'ProgramPage');
 const SponsorPage = lazyPage(() => import('@/features/sponsor/SponsorPage'), 'SponsorPage');
 const InvestorProfilePage = lazyPage(() => import('@/features/levels/InvestorProfilePage'), 'InvestorProfilePage');
@@ -101,6 +102,7 @@ export function AppRoutes() {
           <Route path="/admin/people" element={<PeoplePage />} />
           <Route path="/admin/people/import" element={<ImportPage />} />
           <Route path="/admin/program" element={<ProgramPage />} />
+          <Route path="/admin/activity" element={<ActivityPage />} />
           <Route path="/sponsor" element={<SponsorPage />} />
           {/* Other routes of a role's area: not found inside the guard, so another role gets G7 first. */}
           <Route path="/app/*" element={<NotFoundPage />} />

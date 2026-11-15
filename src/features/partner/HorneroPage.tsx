@@ -10,6 +10,9 @@ import { findPerson } from '@/features/auth/auth-service';
 import { formatMoney, formatNumber } from '@/lib/money';
 import { useCurrentUser } from '@/store/session-store';
 import { useWallet } from '@/store/wallet-store';
+import { useOrgData } from '@/store/data-store';
+import { formatDate } from '@/lib/dates';
+import { deriveStatements, partnerEvents } from '@/lib/xapi';
 import { FictitiousBrandChip } from './FictitiousBrandChip';
 import { HorneroMark } from './HorneroMark';
 import { nestSummary } from './nest';
@@ -52,6 +55,9 @@ export function HorneroPage() {
   const [wallet] = useWallet(personId);
   const nest = nestSummary(wallet);
   const firstName = findPerson(personId)?.name.split(' ')[0] ?? '';
+  // Events Alcancía sends to the partner (F21, D-272): milestones only, never amounts or scores
+  const data = useOrgData();
+  const events = partnerEvents(deriveStatements(data, personId)).slice(0, 5);
 
   // On opening Hornero, a notice says it is a fictitious demo brand (D-246); once per tab.
   useEffect(() => {
@@ -151,6 +157,33 @@ export function HorneroPage() {
           <Button size="m" leadingIcon="savings" onClick={open} className="shrink-0">
             {t('partner.hornero.open')}
           </Button>
+        </section>
+
+        <section aria-labelledby="nest-events" className="flex min-w-0 flex-col gap-3 rounded-xl border border-outline-variant bg-surface-container-lowest p-(--space-card-padding)">
+          <h2 id="nest-events" className="text-title-large text-on-surface">
+            {t('partner.hornero.eventsTitle')}
+          </h2>
+          <p className="text-body-medium text-on-surface-variant">{t('partner.hornero.eventsBody')}</p>
+          {events.length === 0 ? (
+            <p className="flex items-start gap-2 rounded-lg bg-surface-container p-4 text-body-medium text-on-surface-variant">
+              <Icon name="info" size={20} className="mt-0.5 shrink-0" />
+              {t('partner.hornero.eventsEmpty')}
+            </p>
+          ) : (
+            <ul className="flex flex-col divide-y divide-outline-variant">
+              {events.map((e) => (
+                <li key={e.id} className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 py-2">
+                  <span className="flex min-w-0 items-center gap-3 text-body-medium text-on-surface">
+                    <Icon name="task_alt" size={20} className="shrink-0 text-tertiary" />
+                    <span className="min-w-0">
+                      {t(`partner.hornero.event.${e.object.definition.type}`, { name: e.object.definition.name['es-AR'] })}
+                    </span>
+                  </span>
+                  <span className="text-body-small text-on-surface-variant tabular-nums">{formatDate(e.timestamp.slice(0, 10))}</span>
+                </li>
+              ))}
+            </ul>
+          )}
         </section>
 
         <p className="flex items-start gap-2 text-body-small text-on-surface-variant">

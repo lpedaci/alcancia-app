@@ -405,7 +405,7 @@ La CI corre lint, tipos, tests unitarios, `npm audit` y las pruebas de producci�
 
 - **Fase A, completa:** acceso simulado, la billetera con sus 8 niveles (0 a 7), 13 misiones, 16 módulos con su guía, 12 herramientas, la cuenta comitente de práctica y los paneles del tutor, el admin y el decisor.
 - **Ajuste de fase A, completo:** tarjetas en el momento justo también en el modo libre, la guía que nace de la acción, consecuencias en la billetera, casos con decisiones en los desafíos y la investigación de valores reales del mercado.
-- **Fase B, en curso:** hechos los valores reales con fecha y fuente del BCRA y el INDEC (paso 22) y los tres contextos de uso (paso 23). Siguen el registro de eventos del modo integrado, repaso espaciado y recordatorios, meta colectiva por cohorte, las guías 2 y 3 de cada módulo, cripto, el escape room "Tu primer sueldo", certificados y el inglés completo.
+- **Fase B, en curso:** hechos los valores reales con fecha y fuente del BCRA y el INDEC (paso 22), los tres contextos de uso (paso 23) y el registro de actividad tipo xAPI con los avisos al socio (paso 24). Siguen repaso espaciado y recordatorios, meta colectiva por cohorte, las guías 2 y 3 de cada módulo, cripto, el escape room "Tu primer sueldo", certificados y el inglés completo.
 - **Una posible fase C:** un backend con SSO real, roles en el servidor y datos cifrados, si el prototipo pasa a piloto. Sin fecha.
 
 ## Documentación

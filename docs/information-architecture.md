@@ -131,7 +131,7 @@ Landing, acceso (G1 a G5), "Abrir tu cuenta" (P2) y el recorrido de una misión 
 
 ### 5.x "Ver como" y la landing por contexto (paso 23)
 
-"Ver como" ordena la demo en dos pasos: **primero el contexto** (Organización · Andina, Institución educativa · Ceibo, Producto existente · Hornero), que deja el menú abierto, y **después la persona** de ese contexto. La sección "Un recorrido para cada rol" de la landing usa el mismo orden, con un botón segmentado de contexto arriba de las tarjetas; las tarjetas de "Tres contextos, la misma billetera" eligen el contexto y bajan a los recorridos.
+El admin suma "Actividad" (O5) en su menú, entre "Personas y cohortes" y "Programa": el registro tipo xAPI (F21). "Ver como" ordena la demo en dos pasos: **primero el contexto** (Organización · Andina, Institución educativa · Ceibo, Producto existente · Hornero), que deja el menú abierto, y **después la persona** de ese contexto. La sección "Un recorrido para cada rol" de la landing usa el mismo orden, con un botón segmentado de contexto arriba de las tarjetas; las tarjetas de "Tres contextos, la misma billetera" eligen el contexto y bajan a los recorridos.
 
 ## 6. Sistema de búsqueda
 

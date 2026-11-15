@@ -141,6 +141,24 @@ Los nueve eventos de instrucción de Gagné, Wager, Golas y Keller (2005), compr
 - **Sin límite de tiempo** (WCAG 2.2.1) y con alternativa accesible a todo arrastre.
 - **Retroalimentación** que explica por qué, nunca solo "Correcto" o "Incorrecto".
 
+## 6.x Registro de actividad tipo xAPI (F21, paso 24, D-272)
+
+Cada acción de aprendizaje se expresa como un enunciado **actor, verbo, objeto**, con la forma de xAPI que recibe un LRS o un LMS corporativo.
+
+| Actividad | Verbo (ADL) | Resultado |
+| --- | --- | --- |
+| Conocerte (inicio y final) | `completed` | Completo (sin puntajes por dimensión) |
+| Guía leída | `completed` | Completo |
+| Desafío de nivel o de suficiencia | `passed` o `failed` | Puntaje escalado (0 a 1) |
+| Misión | `completed` | Completo |
+| Desafío semanal del tutor | `attempted` | Cumplido, en parte o no cumplido |
+
+- **De dónde salen:** de los datos de aprendizaje que la organización ya tiene (`deriveStatements` en `src/lib/xapi.ts`). No suman nada que no estuviera: nunca montos, hábitos, reflexiones, decisiones dentro de la billetera ni si un nivel está bloqueado (D-58, D-62).
+- **Actor con seudónimo** estable por organización ("Persona 7F3A0C"): el admin ve el flujo de actividad sin saber de quién es, como pide 4.2. Ni el `id` del enunciado lleva el identificador de la persona.
+- **Dónde se ven:** el admin, en "Actividad" (O5), con filtro por tipo, el JSON de cada enunciado y la descarga del archivo. En el modo integrado, Hornero recibe **solo hitos** (misiones y guías completadas, desafíos aprobados), sin puntajes, dentro de la sesión de la persona, y se los muestra a ella en "Lo que Alcancía le avisó a Hornero"; el equipo de producto ve solo cifras agregadas.
+- **Lo que no se envía:** "nivel desbloqueado". La spec lo menciona como ejemplo de aviso al socio (5.5), pero de un desbloqueo se deduce el estado de la billetera (D-58), así que se manda "desafío aprobado" en su lugar.
+- **Línea futura:** enviar los enunciados a un LRS real (con su endpoint y credenciales del lado del servidor) y empaquetar el programa como cmi5.
+
 ## 7. Medición de impacto (Kirkpatrick)
 
 Modelo de Kirkpatrick y Kirkpatrick (2016), con la privacidad de D-58 y D-62:

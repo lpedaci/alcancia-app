@@ -487,7 +487,15 @@
   },
   "partner": {
     "hornero": {
-      "notice": "Hornero is a fictitious demo brand: it does not exist and does not imitate any real wallet."
+      "notice": "Hornero is a fictitious demo brand: it does not exist and does not imitate any real wallet.",
+      "eventsTitle": "What Alcancía told Hornero",
+      "eventsBody": "Learning milestones Hornero receives to show you in its app: missions and guides completed and challenges passed. No amounts or scores.",
+      "eventsEmpty": "No notices yet. When you complete a mission or a guide in Alcancía, it shows up here.",
+      "event": {
+        "guide": "You completed the guide \"{{name}}\"",
+        "mission": "You completed the mission \"{{name}}\"",
+        "challenge": "You passed: {{name}}"
+      }
     }
   },
   "market": {

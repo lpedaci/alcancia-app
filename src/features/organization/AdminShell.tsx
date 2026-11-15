@@ -25,6 +25,13 @@ export function AdminShell({ children }: { children: ReactNode }) {
           match: (p) => p.startsWith('/admin/people'),
         },
         {
+          key: 'activity',
+          to: '/admin/activity',
+          icon: 'timeline',
+          label: t('org.nav.activity'),
+          match: (p) => p.startsWith('/admin/activity'),
+        },
+        {
           key: 'program',
           to: '/admin/program',
           icon: 'settings',
