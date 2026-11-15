@@ -18,7 +18,6 @@ import {
   TableRow,
 } from "@/components/ui/Table";
 import { findPerson } from "@/features/auth/auth-service";
-import { Fuerte } from "@/features/companion/Fuerte";
 import { LEVEL_ROUTE } from "@/features/levels/UnlockCard";
 import { useLevels } from "@/features/levels/use-levels";
 import { WalletShell } from "@/features/wallet/WalletShell";
@@ -157,8 +156,8 @@ export function WelcomePage() {
             aria-labelledby="welcome-title"
             className="flex flex-col gap-5 rounded-xl border border-outline-variant bg-surface-container-lowest p-(--space-card-padding)"
           >
+            {/* Fuerte already greets from its floating place (D-270): the card shows only the progress */}
             <div className="flex items-center gap-4">
-              <Fuerte state="greeting" lights={0} size={4} />
               {/* Progress dots of the guided welcome (2.2.1, pattern 7) */}
               <p className="sr-only">
                 {t("welcome.slideOf", {

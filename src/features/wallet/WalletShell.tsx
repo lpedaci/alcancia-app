@@ -495,8 +495,9 @@ export function WalletShell({ section, children, fuerte }: { section: string; ch
         </ul>
       </nav>
 
-      {/* Learning cards of the free mode (D-76): they appear after an action, with or without Fuerte. */}
-      {user && <LearningCardHost personId={user.personId} showFuerte={presence !== 'silent'} />}
+      {/* Learning cards of the free mode (D-76): they appear after an action. Fuerte shows on the card
+          only when it is not already on screen as the floating companion (D-270), never twice. */}
+      {user && <LearningCardHost personId={user.personId} showFuerte={presence !== 'silent' && !fuerte} />}
 
       {/* Presence chosen in the profile (5.0.1): "Silencio" hides Fuerte; learning cards stay. */}
       {fuerte && presence !== 'silent' && (

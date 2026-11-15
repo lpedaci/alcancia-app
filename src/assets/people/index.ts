@@ -1,11 +1,17 @@
 import diego from './diego.webp';
+import hector from './hector.webp';
 import kevin from './kevin.webp';
+import lucia from './lucia.webp';
 import mariana from './mariana.webp';
+import martin from './martin.webp';
+import nicolas from './nicolas.webp';
 import paula from './paula.webp';
 import ricardo from './ricardo.webp';
+import silvia from './silvia.webp';
+import sofia from './sofia.webp';
 
 /**
- * Profile photos of the five demo people (D-165). Stock photos from Magnific under its free
+ * Profile photos of the demo people (D-165). Stock photos from Magnific under its free
  * license, which asks for "Designed by Magnific" with a link (D-71): in the landing footer, the case
  * study, the documentation and the design system site (README.md of this folder). Cropped square (256 px, WebP) with the same framing.
  * The 80 seed participants keep initials: they appear only in aggregated panels.
@@ -16,4 +22,12 @@ export const PERSON_PHOTOS: Record<string, string> = {
   'p-kevin': kevin,
   'p-paula': paula,
   'p-ricardo': ricardo,
+  // Contexts of use (step 23): Instituto Superior Ceibo and Hornero. Joaquín keeps initials: there
+  // was no unused casual photo of a young man among the licensed ones (README.md of this folder).
+  'p-lucia': lucia,
+  'p-martin': martin,
+  'p-silvia': silvia,
+  'p-hector': hector,
+  'p-sofia': sofia,
+  'p-nicolas': nicolas,
 };
