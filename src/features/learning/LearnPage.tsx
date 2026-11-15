@@ -242,7 +242,7 @@ export function LearnPage() {
                 <Button
                   variant="text"
                   size="xs"
-                  className="-mt-3 self-start"
+                  className="-mt-3 -mr-2 self-end"
                   trailingIcon={showAllBadges ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}
                   aria-expanded={showAllBadges}
                   aria-controls="badges-list"

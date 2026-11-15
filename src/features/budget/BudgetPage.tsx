@@ -46,8 +46,11 @@ export function BudgetPage() {
     return (
       <WalletShell section={t('wallet.sub.budget')} fuerte={{ state: 'thinking', message: fuerteLine('budget.fuerte.locked') }}>
         <div className="flex flex-col gap-6">
-          <h1 className="text-headline-medium text-on-surface">{t('wallet.placeholder.lockedTitle', { section: t('wallet.sub.budget') })}</h1>
-          <WhyMatters screen="budget" />
+          {/* Title row (D-292): the title on the left, "¿Por qué importa?" on the right */}
+          <div className="flex items-center justify-between gap-3">
+            <h1 className="text-headline-medium text-on-surface">{t('wallet.placeholder.lockedTitle', { section: t('wallet.sub.budget') })}</h1>
+            <WhyMatters screen="budget" />
+          </div>
           <UnlockCard status={status} />
         </div>
       </WalletShell>
@@ -107,9 +110,12 @@ function Budget() {
     <WalletShell section={t('wallet.sub.budget')} fuerte={{ state: b.green ? 'celebration' : 'neutral', message: b.green ? fuerteLine('budget.fuerte.green') : fuerteLine('budget.fuerte.home'), why: whyText('budget') }}>
       <div className="flex flex-col gap-6">
         <header className="flex flex-col gap-3">
-          <h1 className="text-headline-medium text-on-surface">{t('wallet.sub.budget')}</h1>
+          {/* Title row (D-292): the title on the left, "¿Por qué importa?" on the right */}
+          <div className="flex items-center justify-between gap-3">
+            <h1 className="text-headline-medium text-on-surface">{t('wallet.sub.budget')}</h1>
+            <WhyMatters screen="budget" />
+          </div>
           <p className="text-body-large text-on-surface-variant">{t('budget.intro')}</p>
-          <WhyMatters screen="budget" />
           <MetaChips
             label={t('budget.context')}
             items={[

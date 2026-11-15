@@ -60,8 +60,11 @@ function useInvestGate() {
     return (
       <WalletShell section={t('wallet.nav.invest')} fuerte={{ state: 'thinking', message: fuerteLine('invest.fuerte.locked') }}>
         <div className="flex flex-col gap-6">
-          <h1 className="text-headline-medium text-on-surface">{t('wallet.placeholder.lockedTitle', { section: t('wallet.nav.invest') })}</h1>
-          <WhyMatters screen="invest" />
+          {/* Title row (D-292): the title on the left, "¿Por qué importa?" on the right */}
+          <div className="flex items-center justify-between gap-3">
+            <h1 className="text-headline-medium text-on-surface">{t('wallet.placeholder.lockedTitle', { section: t('wallet.nav.invest') })}</h1>
+            <WhyMatters screen="invest" />
+          </div>
           <UnlockCard status={status} />
         </div>
       </WalletShell>
@@ -130,9 +133,12 @@ function Invest() {
     <WalletShell section={t('wallet.nav.invest')} fuerte={{ state: 'neutral', message: account ? fuerteLine('invest.fuerte.home') : fuerteLine('invest.fuerte.open'), why: whyText('invest') }}>
       <div className="flex flex-col gap-6">
         <header className="flex flex-col gap-3">
-          <h1 className="text-headline-medium text-on-surface">{t('wallet.nav.invest')}</h1>
+          {/* Title row (D-292): the title on the left, "¿Por qué importa?" on the right */}
+          <div className="flex items-center justify-between gap-3">
+            <h1 className="text-headline-medium text-on-surface">{t('wallet.nav.invest')}</h1>
+            <WhyMatters screen="invest" />
+          </div>
           <p className="text-body-large text-on-surface-variant">{t('invest.intro')}</p>
-          <WhyMatters screen="invest" />
           <MetaChips
             label={t('invest.context')}
             items={[

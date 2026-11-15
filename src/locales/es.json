@@ -655,9 +655,56 @@
       "title": "Fuerte",
       "close": "Cerrar",
       "whyTitle": "¿Por qué importa?",
-      "dragHint": "Puedes arrastrarme a otro lugar.",
+      "dragHint": "Puedes arrastrarme a otro lugar o usar el botón de mover.",
       "moveLeft": "Mover a la izquierda",
-      "moveRight": "Mover a la derecha"
+      "moveRight": "Mover a la derecha",
+      "noticesTitle": "Tus avisos",
+      "noticesEmpty": "Todo al día. Cuando haya algo pendiente, te aviso acá.",
+      "badge_one": "Fuerte tiene {{count}} aviso",
+      "badge_other": "Fuerte tiene {{count}} avisos",
+      "peekOpen": "Ver los avisos de Fuerte",
+      "peekClose": "Cerrar el aviso",
+      "kinds": {
+        "alert": "Atención",
+        "pending": "Pendiente",
+        "invest": "Tus inversiones",
+        "goal": "Metas",
+        "progress": "Tu avance"
+      },
+      "notices": {
+        "debit": "No alcanzó el saldo para pagar {{name}} ({{amount}}). Pasa dinero de un apartado para seguir.",
+        "card_zero": "El resumen de la tarjeta vence hoy. Pagar el total evita intereses.",
+        "card_one": "El resumen de la tarjeta vence mañana. Pagar el total evita intereses.",
+        "card_other": "El resumen de la tarjeta vence en {{count}} días. Pagar el total evita intereses.",
+        "installment_zero": "Hoy se debita la cuota {{n}} de {{total}} de {{name}}.",
+        "installment_one": "Mañana se debita la cuota {{n}} de {{total}} de {{name}}.",
+        "installment_other": "En {{count}} días se debita la cuota {{n}} de {{total}} de {{name}}.",
+        "messages_one": "Tienes {{count}} mensaje sin leer. Ojo con esto: revisa quién lo manda.",
+        "messages_other": "Tienes {{count}} mensajes sin leer. Ojo con esto: revisa quién los manda.",
+        "mission": "Misión pendiente: {{title}} ({{minutes}} min).",
+        "reminder_weekly": "Desafío semanal: {{title}}. Vence el {{date}}.",
+        "reminder_review": "Repaso de {{module}}: unas preguntas cortas para fijarlo.",
+        "reminder_guide": "Te espera la guía de {{module}}.",
+        "reminder_due": "El programa cierra el {{date}}.",
+        "depositToday": "Tu plazo fijo vence hoy: el dinero vuelve a tu cuenta.",
+        "deposit_one": "Tu plazo fijo vence mañana.",
+        "deposit_other": "Tu plazo fijo vence en {{count}} días.",
+        "settling_one": "Tu compra se acredita mañana, cuando se liquide.",
+        "settling_other": "Tu compra se acredita en {{count}} días, cuando se liquide.",
+        "heldOne_one": "Hace {{count}} día que tienes {{name}}. Lo que importa es el plazo que elegiste, no el día a día.",
+        "heldOne_other": "Hace {{count}} días que tienes {{name}}. Lo que importa es el plazo que elegiste, no el día a día.",
+        "heldMany_one": "Hace {{count}} día que invertiste en {{instruments}} instrumentos. Lo que importa es el plazo, no el día a día.",
+        "heldMany_other": "Hace {{count}} días que invertiste en {{instruments}} instrumentos. Lo que importa es el plazo, no el día a día.",
+        "goal": "{{name}}: llevas el {{pct}} % de tu meta.",
+        "goalReached": "Guardado. Alcanzaste la meta de {{name}}.",
+        "unlock": "{{section}}: {{met}} de {{total}} condiciones cumplidas."
+      },
+      "upToDate": "Estás al día con todo. Guardado.",
+      "moreNotices_one": "Ver {{count}} aviso más",
+      "moreNotices_other": "Ver {{count}} avisos más",
+      "fewerNotices": "Ver menos",
+      "dragHintClose": "Entendido, cerrar el consejo",
+      "badgeAlert": "Fuerte tiene algo que necesita tu atención"
     },
     "placeholder": {
       "lockedTitle": "{{section}} está bloqueado",
@@ -3900,7 +3947,22 @@
       "mastery": "Atajo \"Ya sé esto\"",
       "masteryNote": "Lleva al desafío de suficiencia de una sección bloqueada (D-233). Siempre botón tonal chico con el rayo, arriba a la derecha de la tarjeta o la fila, junto al título: es un camino secundario y nunca va relleno.",
       "masteryExample": "Presupuesto",
-      "masteryKicker": "Próximo desbloqueo · Nivel 3"
+      "masteryKicker": "Próximo desbloqueo · Nivel 3",
+      "titleRow": "Fila de título con \"¿Por qué importa?\"",
+      "titleRowNote": "D-288 y D-292: en toda pantalla de la billetera, el título a la izquierda y \"¿Por qué importa?\" a la derecha, con el contenedor de atención. En celular y tablet es solo el ícono, con su nombre accesible y un tooltip; desde 1200 px muestra el nombre. Abre un diálogo con el concepto, las fuentes y \"Ver en la guía\".",
+      "titleRowTitle": "Pagar",
+      "titleRowIntro": "Transfiere, paga con QR y revisa tus débitos.",
+      "quick": "Acciones en fila (celular y tablet)",
+      "quickNote": "D-287 y D-293: bajo 840 px, los atajos de una sección van en una tarjeta con una fila de cuatro íconos redondos de 48 px y un nombre corto, como en el inicio; lo bloqueado lleva un candado chico. Desde 840 px, tarjetas con su descripción.",
+      "quickTransfer": "Transferir",
+      "quickQr": "Pagar con QR",
+      "quickBills": "Servicios",
+      "quickCredit": "Tarjeta y préstamos",
+      "showMore": "\"Ver más\" al pie de una lista",
+      "showMoreNote": "D-291: los botones de texto que cierran una lista (ver más, ver todos, simular) van a la derecha, con la flecha que indica si abre o cierra. Volver y salir quedan a la izquierda.",
+      "showMoreA": "Almacén Don Ramiro",
+      "showMoreB": "Transporte · Tarjeta de viaje de ejemplo",
+      "showMoreButton": "Ver todos los movimientos (12)"
     },
     "fuerte": {
       "states": {
@@ -3920,7 +3982,25 @@
         "Se puede silenciar: Conversador, Solo lo importante o Silencio.",
         "En la billetera flota y se puede mover, con una alternativa al arrastre."
       ],
-      "quote": "Guardado. Tu fondo de emergencia ya cubre un mes. Faltan dos para desbloquear Invertir."
+      "quote": "Guardado. Tu fondo de emergencia ya cubre un mes. Faltan dos para desbloquear Invertir.",
+      "notices": {
+        "title": "Fuerte avisa",
+        "note": "D-290 y D-291: lo que Fuerte cuenta al abrirlo, calculado en el navegador de la persona, y la cara que pone según eso. Son las piezas reales del panel.",
+        "alertLabel": "Con un problema: preocupado y un signo de atención",
+        "pendingLabel": "Con pendientes: pensativo y el número",
+        "calmLabel": "Al día: contento, sin insignia",
+        "alertMessage": "Ojo con esto: no alcanzó el saldo para un débito. Lo resolvemos en un minuto.",
+        "pendingMessage": "Tienes dos cosas para hoy. La misión te lleva cinco minutos.",
+        "calmMessage": "Tu fondo de emergencia ya cubre 2,3 meses. Con 3 se abre Invertir.",
+        "rules": [
+          "Tipos de aviso, en este orden: atención, pendiente, tus inversiones, metas y tu avance. Cada uno con su color de contenedor e ícono.",
+          "El panel es un chat: Fuerte y su nombre en una línea, su mensaje en un globo de ancho completo con primary-container al 50 %.",
+          "Muestra los tres primeros avisos y \"Ver N avisos más\" a la derecha. Cada aviso lleva a la pantalla que lo resuelve.",
+          "En \"Conversador\", el primer aviso nuevo de la visita aparece unos segundos en un globo junto a él. \"Solo lo importante\" cuenta solo los de atención.",
+          "Con \"Silencio\", la misión pendiente y el débito sin saldo vuelven a la página.",
+          "\"Mover\" está siempre en el encabezado; el consejo de arrastrar se cierra una vez leído."
+        ]
+      }
     },
     "patterns": [
       [
@@ -3982,6 +4062,36 @@
         "D-197",
         "Cambios sin guardar",
         "Un aviso marca lo que cambió y salir pide confirmación, sin perder lo cargado."
+      ],
+      [
+        "D-286, D-291",
+        "Ver más a la derecha",
+        "Los últimos 5 movimientos y \"Ver todos los movimientos (N)\" a la derecha; la lista completa se desplaza dentro de su tarjeta."
+      ],
+      [
+        "D-287, D-293",
+        "Billetera liviana en celular y tablet",
+        "Saludo sin tarjeta, saldo completo, atajos en fila de cuatro íconos, condiciones de desbloqueo como lista y movimientos compactos."
+      ],
+      [
+        "D-288, D-292",
+        "\"¿Por qué importa?\" a la derecha del título",
+        "Botón de atención (solo el ícono bajo 1200 px) que abre un diálogo con el concepto, las fuentes y la parte exacta de la guía."
+      ],
+      [
+        "D-289, D-290",
+        "Encabezado equilibrado del inicio",
+        "Fecha, saludo y nivel a la izquierda; \"Avanzar el tiempo\" (con menú) y \"¿Por qué importa?\" a la derecha. Sin avisos sueltos en la página: los cuenta Fuerte."
+      ],
+      [
+        "D-290, D-291",
+        "Fuerte avisa",
+        "Atención, pendientes, inversiones, metas y avance; su cara acompaña y el panel se lee como un chat."
+      ],
+      [
+        "D-294",
+        "Filas que se tocan enteras",
+        "En \"Qué falta\" y en las listas de avisos, toda la fila es el enlace: hover en surface-container, foco visible y chevron, sin subrayar solo el texto."
       ]
     ],
     "money": {

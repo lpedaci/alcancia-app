@@ -68,12 +68,15 @@ export function PocketsPage() {
         }}
       >
         <div className="flex flex-col gap-6">
-          <h1 className="text-headline-medium text-on-surface">
-            {t('wallet.placeholder.lockedTitle', {
-              section: t('wallet.sub.pockets'),
-            })}
-          </h1>
-          <WhyMatters screen="pockets" />
+          {/* Title row (D-292): the title on the left, "¿Por qué importa?" on the right */}
+          <div className="flex items-center justify-between gap-3">
+            <h1 className="text-headline-medium text-on-surface">
+              {t('wallet.placeholder.lockedTitle', {
+                section: t('wallet.sub.pockets'),
+              })}
+            </h1>
+            <WhyMatters screen="pockets" />
+          </div>
           <UnlockCard status={status} />
         </div>
       </WalletShell>
@@ -118,9 +121,12 @@ function Pockets() {
     >
       <div className="flex flex-col gap-6">
         <header className="flex flex-col gap-3">
-          <h1 className="text-headline-medium text-on-surface">{t('wallet.sub.pockets')}</h1>
+          {/* Title row (D-292): the title on the left, "¿Por qué importa?" on the right */}
+          <div className="flex items-center justify-between gap-3">
+            <h1 className="text-headline-medium text-on-surface">{t('wallet.sub.pockets')}</h1>
+            <WhyMatters screen="pockets" />
+          </div>
           <p className="text-body-large text-on-surface-variant">{t('pockets.intro')}</p>
-          <WhyMatters screen="pockets" />
           <MetaChips
             label={t('pockets.context')}
             items={[

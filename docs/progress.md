@@ -93,3 +93,5 @@
 | 15/11/2026 | Ajuste de Lourdes | Landing: "La solución" como bento compacto, con "Aprende en cualquier lugar" como tarjeta ancha; se quita el carrusel (D-285) | Hecho |
 | 15/11/2026 | Ajuste de Lourdes | Inicio: desplegable de todos los movimientos (D-286), inicio liviano en celular y tablet (D-287), "Avanzar el tiempo" con menú y "¿Por qué importa?" como botón de atención con diálogo (D-288) | Hecho |
 | 15/11/2026 | Ajuste de Lourdes | Inicio: el saludo como encabezado sin tarjeta, arriba de la misión activa (D-289) | Hecho |
+| 15/11/2026 | Ajuste de Lourdes | Fuerte avisa pendientes, problemas, inversiones, metas y avance, con cara acorde y panel tipo chat; encabezado del inicio equilibrado; botones "Ver más" a la derecha (D-290, D-291) | Hecho |
+| 15/11/2026 | Ajuste de Lourdes | "¿Por qué importa?" a la derecha del título (D-292), atajos de Pagar en fila y auditoría de todas las personas (D-293), condiciones como filas clickeables (D-294) y sistema de diseño actualizado con estos patrones | Hecho |

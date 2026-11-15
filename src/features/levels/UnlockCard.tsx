@@ -94,12 +94,26 @@ function ConditionLine({ status }: { status: ConditionStatus }) {
   const text = useConditionText()(status);
   const key = conditionKey(status);
   const icon = status.met ? "check_circle" : "radio_button_unchecked";
-  const link =
-    !status.met && status.condition.type === "challenge_passed"
-      ? `/app/learn/challenges/${status.condition.challengeId}`
-      : !status.met && key === "investor_profile_done"
+  // 5.0: "un toque lleva a la acción que la acerca": every pending condition with a place to act on it
+  // is a link, and the whole row is the target (D-294)
+  const c = status.condition;
+  const link = status.met
+    ? undefined
+    : c.type === "challenge_passed"
+      ? `/app/learn/challenges/${c.challengeId}`
+      : key === "investor_profile_done"
         ? INVESTOR_PROFILE_ROUTE
-        : undefined;
+        : c.type === "mission_completed"
+          ? `/app/missions/${c.missionId}`
+          : c.type === "level_completed"
+            ? LEVEL_ROUTE[c.levelId]
+            : key === "emergency_months" || key === "emergency_pocket"
+              ? "/app/save/pockets"
+              : key === "months_closed_green"
+                ? "/app/save/budget"
+                : key === "high_rate_debt"
+                  ? "/app/pay/credit"
+                  : undefined;
   const label = key === "investor_profile_done" && !status.met ? t("wallet.unlock.doProfile") : text;
   const body = (
     <>
@@ -110,11 +124,11 @@ function ConditionLine({ status }: { status: ConditionStatus }) {
     </>
   );
   return link ? (
-    <Link to={link} className="flex min-h-10 w-full items-center gap-2 rounded-md py-1.5 text-body-medium text-primary hover:underline">
+    <Link to={link} className="-mx-2 flex min-h-11 items-center gap-2 rounded-md px-2 py-1.5 text-body-medium text-primary hover:bg-surface-container focus-visible:outline-2 focus-visible:outline-primary">
       {body}
     </Link>
   ) : (
-    <span className={cn("flex min-h-10 w-full items-center gap-2 py-1.5 text-body-medium", status.met ? "text-on-surface-variant" : "text-on-surface")}>{body}</span>
+    <span className={cn("flex min-h-11 w-full items-center gap-2 py-1.5 text-body-medium", status.met ? "text-on-surface-variant" : "text-on-surface")}>{body}</span>
   );
 }
 

@@ -1,11 +1,14 @@
 import { Popover as PopoverPrimitive } from 'radix-ui';
 import { type PointerEvent as ReactPointerEvent, type ReactNode, useCallback, useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/Button';
 import { Icon } from '@/components/ui/Icon';
 import { IconButton } from '@/components/ui/IconButton';
 import { cn } from '@/lib/utils';
 import { Fuerte, type FuerteState } from './Fuerte';
+import { FuerteBadge, FuerteSpeech, fuerteMood, NoticeRowContent, noticeRowClass, UpToDate, useNoticeText } from './FuerteParts';
+import type { Notice } from './notices';
 
 /**
  * Fuerte as a floating button (D-160, Lourdes's request): he waits at one side of the screen and
@@ -62,6 +65,34 @@ function verticalBounds() {
   return { minTop, maxTop: Math.max(minTop, limit - SIZE - 8), minLeft };
 }
 
+const PEEK_KEY = 'alcancia-ui:fuerte-peeked';
+const PEEK_MS = 7000;
+
+function peeked(): string[] {
+  try {
+    return JSON.parse(sessionStorage.getItem(PEEK_KEY) ?? '[]') as string[];
+  } catch {
+    return [];
+  }
+}
+function markPeeked(id: string) {
+  try {
+    sessionStorage.setItem(PEEK_KEY, JSON.stringify([...peeked(), id]));
+  } catch {
+    // Only for this view.
+  }
+}
+
+const NOTICES_SHOWN = 3;
+const HINT_KEY = 'alcancia-ui:fuerte-drag-hint-seen';
+function readHintSeen(): boolean {
+  try {
+    return localStorage.getItem(HINT_KEY) === '1';
+  } catch {
+    return false;
+  }
+}
+
 const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
 const sideMargin = () => (window.innerWidth >= 1200 ? 24 : 12);
 
@@ -71,6 +102,9 @@ export function FuerteFab({
   message,
   why,
   notify = true,
+  notices = [],
+  badge = [],
+  peek = false,
   children,
 }: {
   state?: FuerteState;
@@ -79,14 +113,55 @@ export function FuerteFab({
   why?: string;
   /** "Solo lo importante" (5.0.1): no dot for new messages. */
   notify?: boolean;
+  /** What Fuerte tells when opened (D-290): alerts, pending tasks, investments, goals and progress. */
+  notices?: Notice[];
+  /** The notices that count in the badge, by presence (alerts only with "Solo lo importante"). */
+  badge?: Notice[];
+  /** "Conversador": the first new notice of the visit shows for a moment in a bubble beside him. */
+  peek?: boolean;
   /** Optional action under the message (for example, the active mission). */
   children?: ReactNode;
 }) {
   const { t } = useTranslation();
+  const noticeText = useNoticeText();
   const [open, setOpen] = useState(false);
-  // A new message shows the dot again until it is read.
-  const [readMessage, setReadMessage] = useState<string | null>(null);
-  const unread = notify && readMessage !== message;
+  // A new message or notice shows the badge again until the panel is opened.
+  const signature = [message, ...badge.map((n) => n.id)].join('|');
+  const [readSignature, setReadSignature] = useState<string | null>(null);
+  const unread = readSignature !== signature && (badge.length > 0 || notify);
+  const count = badge.length;
+  const hasAlert = notices.some((n) => n.kind === 'alert');
+  const hasPending = notices.some((n) => n.kind === 'pending');
+  // His face follows what he has to tell (D-291)
+  const mood = fuerteMood(state, notices);
+  const upToDate = !hasAlert && !hasPending;
+  const [showAll, setShowAll] = useState(false);
+  const shown = showAll ? notices : notices.slice(0, NOTICES_SHOWN);
+  // The drag hint is read once: closing it hides it for good in this browser (D-291)
+  const [hintSeen, setHintSeen] = useState(readHintSeen);
+  const [whyOpen, setWhyOpen] = useState(false);
+
+  // The bubble (5.0.1: "sus mensajes salen como burbuja"): once per notice and per visit, never twice.
+  const [bubble, setBubble] = useState<Notice | undefined>();
+  // The notices are recomputed on every render: the effect follows the id, and reads the latest notice
+  const top0 = badge[0];
+  const latestTop = useRef(top0);
+  useEffect(() => {
+    latestTop.current = top0;
+  });
+  const topId = top0?.id;
+  useEffect(() => {
+    if (!peek || !topId || peeked().includes(topId)) return;
+    const show = window.setTimeout(() => {
+      markPeeked(topId);
+      setBubble(latestTop.current);
+    }, 900);
+    const hide = window.setTimeout(() => setBubble(undefined), 900 + PEEK_MS);
+    return () => {
+      window.clearTimeout(show);
+      window.clearTimeout(hide);
+    };
+  }, [peek, topId]);
 
   const [place, setPlace] = useState<Place>(readPlace);
   const [bounds, setBounds] = useState({ minTop: 0, maxTop: 0, minLeft: 0 });
@@ -172,14 +247,25 @@ export function FuerteFab({
       open={open}
       onOpenChange={(next) => {
         setOpen(next);
-        if (next) setReadMessage(message);
+        if (next) {
+          setReadSignature(signature);
+          setBubble(undefined);
+        }
       }}
     >
       <PopoverPrimitive.Trigger asChild>
         <button
           type="button"
           data-fuerte-fab
-          aria-label={unread ? t('wallet.fuerte.unread') : t('wallet.fuerte.open')}
+          aria-label={
+            unread && hasAlert && count > 0
+              ? `${t('wallet.fuerte.badgeAlert')}. ${t('wallet.fuerte.badge', { count })}`
+              : unread && count > 0
+                ? t('wallet.fuerte.badge', { count })
+                : unread
+                  ? t('wallet.fuerte.unread')
+                  : t('wallet.fuerte.open')
+          }
           onPointerDown={onPointerDown}
           onPointerMove={onPointerMove}
           onPointerUp={onPointerEnd}
@@ -200,13 +286,27 @@ export function FuerteFab({
         >
           {/* Fuerte alone, bigger and without a background: an 80 px target that is easy to tap */}
           <span className="pointer-events-none transition-transform duration-150 ease-standard group-hover:-translate-y-0.5 motion-reduce:transform-none">
-            <Fuerte state={state} lights={lights} size={4.5} />
+            <Fuerte state={mood} lights={lights} size={4.5} />
           </span>
-          {unread && (
-            <span aria-hidden className="absolute top-2 right-2 size-3.5 rounded-full border-2 border-surface-container-lowest bg-primary" />
-          )}
+          {unread && <FuerteBadge alert={hasAlert} count={count} />}
         </button>
       </PopoverPrimitive.Trigger>
+      {/* The bubble beside Fuerte: one notice, a few seconds, and a tap opens the panel */}
+      <div aria-live="polite" className="sr-only">
+        {bubble ? noticeText(bubble) : ''}
+      </div>
+      {bubble && measured && !drag && !open && (
+        <div
+          data-fuerte-bubble
+          style={place.side === 'right' ? { right: sideMargin() + SIZE + 4, top: top + 8 } : { left: bounds.minLeft + sideMargin() + SIZE + 4, top: top + 8 }}
+          className="fixed z-30 flex w-64 max-w-[calc(100vw-7.5rem)] animate-in items-start gap-1 rounded-lg border border-outline-variant bg-surface-container-lowest py-1 pr-1 pl-3 shadow-elevation-1 fade-in-0 zoom-in-95 print:hidden"
+        >
+          <button type="button" aria-hidden tabIndex={-1} onClick={() => setOpen(true)} className="min-w-0 flex-1 py-1.5 text-left text-body-small text-on-surface">
+            {noticeText(bubble)}
+          </button>
+          <IconButton icon="close" size="xs" label={t('wallet.fuerte.peekClose')} onClick={() => setBubble(undefined)} />
+        </div>
+      )}
       <PopoverPrimitive.Portal>
         <PopoverPrimitive.Content
           side="top"
@@ -214,38 +314,95 @@ export function FuerteFab({
           sideOffset={12}
           collisionPadding={12}
           aria-label={t('wallet.fuerte.title')}
+          // Focus goes to the panel itself, so no tooltip pops up on its first button
+          onOpenAutoFocus={(e) => {
+            e.preventDefault();
+            (e.currentTarget as HTMLElement | null)?.focus();
+          }}
           className={cn(
-            'z-40 flex w-80 max-w-[calc(100vw-1.5rem)] flex-col gap-3 rounded-lg border border-outline-variant bg-surface-container-lowest p-4 shadow-elevation-2 outline-none',
+            'z-40 flex max-h-[calc(100dvh-10rem)] w-80 max-w-[calc(100vw-1.5rem)] flex-col gap-3 overflow-y-auto rounded-xl border border-outline-variant bg-surface-container-lowest p-4 shadow-elevation-2 outline-none',
             'data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95',
           )}
         >
-          <div className="flex items-start gap-3">
-            <Fuerte state={state} lights={lights} size={3} />
-            <div className="min-w-0 flex-1">
-              <p className="text-title-small text-on-surface">{t('wallet.fuerte.title')}</p>
-              <p className="text-body-medium text-on-surface">{message}</p>
+          {/* Header as a chat (D-291), with the alternative to dragging always at hand (WCAG 2.5.7) */}
+          <FuerteSpeech
+            mood={mood}
+            lights={lights}
+            message={message}
+            actions={
+              <>
+                <IconButton icon="swap_horiz" size="xs" label={t(place.side === 'right' ? 'wallet.fuerte.moveLeft' : 'wallet.fuerte.moveRight')} onClick={switchSide} />
+                <PopoverPrimitive.Close asChild>
+                  <IconButton icon="close" size="xs" label={t('wallet.fuerte.close')} />
+                </PopoverPrimitive.Close>
+              </>
+            }
+          />
+
+          {upToDate && <UpToDate />}
+
+          {notices.length > 0 && (
+            <div className="flex flex-col">
+              <p className="pb-1 text-label-large text-on-surface-variant">{t('wallet.fuerte.noticesTitle')}</p>
+              <ul className="-mx-2 flex flex-col">
+                {shown.map((n) => (
+                  <li key={n.id}>
+                    <PopoverPrimitive.Close asChild>
+                      <Link to={n.to} className={noticeRowClass}>
+                        <NoticeRowContent notice={n} />
+                      </Link>
+                    </PopoverPrimitive.Close>
+                  </li>
+                ))}
+              </ul>
+              {notices.length > NOTICES_SHOWN && (
+                <Button variant="text" size="xs" className="-mr-2 self-end" trailingIcon={showAll ? 'keyboard_arrow_up' : 'keyboard_arrow_down'} aria-expanded={showAll} onClick={() => setShowAll((v) => !v)}>
+                  {showAll ? t('wallet.fuerte.fewerNotices') : t('wallet.fuerte.moreNotices', { count: notices.length - NOTICES_SHOWN })}
+                </Button>
+              )}
             </div>
-            <PopoverPrimitive.Close asChild>
-              <IconButton icon="close" size="xs" label={t('wallet.fuerte.close')} className="-mt-1 -mr-1" />
-            </PopoverPrimitive.Close>
-          </div>
+          )}
+
+          {/* "¿Por qué importa?" folded into one line: the screen has its own button too (D-288) */}
           {why && (
-            <div className="rounded-md bg-info-container px-3 py-2 text-on-info-container">
-              <p className="flex items-center gap-1.5 text-label-large">
-                <Icon name="lightbulb" size={16} className="text-info" />
-                {t('wallet.fuerte.whyTitle')}
-              </p>
-              <p className="mt-1 text-body-small">{why}</p>
+            <div className="flex flex-col">
+              <button
+                type="button"
+                aria-expanded={whyOpen}
+                onClick={() => setWhyOpen((v) => !v)}
+                className="-mx-2 flex min-h-10 items-center gap-2 rounded-md px-2 text-left text-label-large text-on-surface hover:bg-surface-container"
+              >
+                <span aria-hidden className="inline-flex size-7 shrink-0 items-center justify-center rounded-full bg-warning-container text-on-warning-container">
+                  <Icon name="lightbulb" size={16} />
+                </span>
+                <span className="flex-1">{t('wallet.fuerte.whyTitle')}</span>
+                <Icon name="keyboard_arrow_down" size={18} className={cn('text-on-surface-variant transition-transform duration-150', whyOpen && 'rotate-180')} />
+              </button>
+              {whyOpen && <p className="pt-1 pl-7 text-body-small text-on-surface-variant">{why}</p>}
             </div>
           )}
           {children}
-          {/* Alternative to dragging (WCAG 2.5.7) */}
-          <div className="flex items-center justify-between gap-2 border-t border-outline-variant pt-3">
-            <p className="text-body-small text-on-surface-variant">{t('wallet.fuerte.dragHint')}</p>
-            <Button variant="text" size="xs" leadingIcon="swap_horiz" onClick={switchSide} className="shrink-0">
-              {t(place.side === 'right' ? 'wallet.fuerte.moveLeft' : 'wallet.fuerte.moveRight')}
-            </Button>
-          </div>
+
+          {/* The drag hint, until it is read */}
+          {!hintSeen && (
+            <div className="-mx-1 flex items-center gap-2 rounded-md bg-surface-container px-3 py-1.5">
+              <Icon name="swap_horiz" size={16} className="shrink-0 text-on-surface-variant" />
+              <p className="min-w-0 flex-1 text-body-small text-on-surface-variant">{t('wallet.fuerte.dragHint')}</p>
+              <IconButton
+                icon="close"
+                size="xs"
+                label={t('wallet.fuerte.dragHintClose')}
+                onClick={() => {
+                  setHintSeen(true);
+                  try {
+                    localStorage.setItem(HINT_KEY, '1');
+                  } catch {
+                    // Hidden for this visit only.
+                  }
+                }}
+              />
+            </div>
+          )}
         </PopoverPrimitive.Content>
       </PopoverPrimitive.Portal>
     </PopoverPrimitive.Root>

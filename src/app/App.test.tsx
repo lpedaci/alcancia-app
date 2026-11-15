@@ -97,7 +97,9 @@ describe('the wallet of each person (step 6)', () => {
     expect(await screen.findByRole('heading', { level: 1 })).toHaveTextContent('Diego');
     expect(screen.getAllByText('$ 459.477,09').length).toBeGreaterThan(0);
     expect(screen.getByText(/día 12 de la billetera/i)).toBeInTheDocument();
-    expect(screen.getByText('Transfiere sin errores')).toBeInTheDocument();
+    // D-290: the pending mission is one of Fuerte's notices
+    fireEvent.click(screen.getByRole('button', { name: /Fuerte tiene \d+ avisos?/ }));
+    expect(await screen.findByText(/Misión pendiente: Transfiere sin errores/)).toBeInTheDocument();
     const card = screen.getByRole('region', { name: 'Presupuesto' });
     expect(within(card).getByText(/Movimientos categorizados · 4 de 10/)).toBeInTheDocument();
   });

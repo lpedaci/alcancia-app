@@ -9,6 +9,9 @@ import { Icon, type IconName } from '@/components/ui/Icon';
 import { IconButton } from '@/components/ui/IconButton';
 import { Tooltip } from '@/components/ui/Tooltip';
 import { FuerteFab } from '@/features/companion/FuerteFab';
+import { badgeNotices, fuerteNotices } from '@/features/companion/notices';
+import { instrumentById } from '@/features/invest/engine';
+import { useReminders } from '@/features/learning/use-reminders';
 import { LearningCardHost } from '@/features/learning-cards/LearningCardHost';
 import { InboxMenu } from './InboxMenu';
 import { HorneroMark } from '@/features/partner/HorneroMark';
@@ -105,9 +108,20 @@ export function WalletShell({ section, children, fuerte }: { section: string; ch
   const { t } = useTranslation();
   const { pathname } = useLocation();
   const user = useCurrentUser();
-  const { statuses, next, isOpen } = useLevels(user?.personId ?? '');
+  const { statuses, next, isOpen, activeMission, wallet } = useLevels(user?.personId ?? '');
   const lights = completedLights(statuses);
   const presence = readLocal(user?.personId ?? '').fuertePresence ?? 'chatty';
+  // Fuerte's notices (D-290): computed here, in the person's browser, on every wallet screen
+  const { reminders } = useReminders(user?.personId ?? '');
+  const notices = fuerteNotices({
+    wallet,
+    next,
+    activeMission,
+    reminders,
+    sectionName: (id) => t(`wallet.sections.${id}`),
+    instrumentName: (id) => instrumentById(id)?.name ?? id,
+    levelRoute: (id) => LEVEL_ROUTE[id] ?? '/app',
+  });
   // The section is named by the page and the tab title, not repeated in the top bar.
   useEffect(() => {
     document.title = `${section} · Alcancía`;
@@ -502,7 +516,16 @@ export function WalletShell({ section, children, fuerte }: { section: string; ch
       {/* Presence chosen in the profile (5.0.1): "Silencio" hides Fuerte; learning cards stay. */}
       {fuerte && presence !== 'silent' && (
         <div className="print:hidden">
-          <FuerteFab state={fuerte.state} lights={lights} message={fuerte.message} why={fuerte.why} notify={presence === 'chatty'}>
+          <FuerteFab
+            state={fuerte.state}
+            lights={lights}
+            message={fuerte.message}
+            why={fuerte.why}
+            notify={presence === 'chatty'}
+            notices={notices}
+            badge={badgeNotices(notices, presence)}
+            peek={presence === 'chatty'}
+          >
             {fuerte.action}
           </FuerteFab>
         </div>

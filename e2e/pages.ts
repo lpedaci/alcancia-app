@@ -97,6 +97,11 @@ export const PAGES: CheckedPage[] = [
   { id: 'c1-ceibo-program', path: '/#/admin/program', as: 'p-bettyna' },
   { id: 'c2-hornero-program', path: '/#/admin/program', as: 'p-sofia' },
   { id: 'c2-hornero-learn-joaquin', path: '/#/app/learn', as: 'p-joaquin' },
+  // Audit of the other contexts' participants against Mariana's design (D-292, D-293)
+  { id: 'c1-ceibo-home-lucia', path: '/#/app', as: 'p-lucia' },
+  { id: 'c1-ceibo-pay-lucia', path: '/#/app/pay', as: 'p-lucia' },
+  { id: 'c2-hornero-home-joaquin', path: '/#/app', as: 'p-joaquin' },
+  { id: 'c2-hornero-pay-joaquin', path: '/#/app/pay', as: 'p-joaquin' },
   { id: 'd1-sponsor', path: '/#/sponsor', as: 'p-ricardo' },
   { id: 'x1-hornero', path: '/#/app/hornero', as: 'p-mariana' },
   { id: 'x1-hornero-wallet', path: '/#/app', as: 'p-mariana', partner: 'hornero' },

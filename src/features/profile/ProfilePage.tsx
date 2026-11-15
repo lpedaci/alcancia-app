@@ -76,12 +76,12 @@ export function ProfilePage() {
       <div className="grid grid-cols-[minmax(0,1fr)] gap-(--space-bento-gap) large:grid-cols-2 large:items-stretch">
         <header className="flex items-center gap-4 large:col-span-2">
           {person && <Avatar name={person.name} role={person.role} personId={person.id} size="xl" />}
-          <div className="min-w-0">
+          <div className="min-w-0 flex-1">
             <h1 className="text-headline-medium text-on-surface">{person?.name}</h1>
             <p className="text-body-large text-on-surface-variant">{person?.jobOrProgram}</p>
           </div>
+          <WhyMatters screen="profile" className="ml-auto self-start" />
         </header>
-        <WhyMatters screen="profile" className="large:col-span-2" />
 
         <section aria-labelledby="profile-account" className={card}>
           <h2 id="profile-account" className="text-title-large text-on-surface">

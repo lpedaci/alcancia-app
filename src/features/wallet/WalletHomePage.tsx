@@ -2,7 +2,9 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, Navigate } from 'react-router';
 import { MoneyText } from '@/components/money/MoneyText';
-import { Button } from '@/components/ui/Button';
+import { Button, buttonVariants } from '@/components/ui/Button';
+import { Tooltip } from '@/components/ui/Tooltip';
+import { readLocal } from '@/store/local-store';
 import { Icon, type IconName } from '@/components/ui/Icon';
 import { IconButton } from '@/components/ui/IconButton';
 import { IconTile } from '@/components/ui/IconTile';
@@ -82,6 +84,8 @@ export function WalletHomePage() {
   const accountOpened = useDataStore((s) => s.diagnostics.some((d) => d.personId === personId && d.kind === 'initial'));
 
   const metrics = walletMetrics(wallet);
+  // With Fuerte in "Silencio" (5.0.1) his notices stay on the page instead
+  const silent = readLocal(personId).fuertePresence === 'silent';
   const power = purchasingPowerToday(wallet);
   const amountsHidden = useAmountsHidden();
   const [showAccount, setShowAccount] = useState(false);
@@ -96,7 +100,13 @@ export function WalletHomePage() {
     const nextState = kind === 'month' ? advanceMonth(wallet) : advanceDays(wallet, kind === 'day' ? 1 : 7);
     update(() => nextState);
     const days = nextState.day - wallet.day;
-    setAnnouncement(t('wallet.home.time.done', { count: days, movements: nextState.movements.length - before }));
+    const pending = nextState.pendingDebit
+      ? ` ${t('wallet.home.time.pending', {
+          name: nextState.pendingDebit.expenseKey ? t(`wallet.expenses.${nextState.pendingDebit.expenseKey}`) : (nextState.pendingDebit.counterparty ?? ''),
+          amount: formatMoney(nextState.pendingDebit.amount),
+        })}`
+      : '';
+    setAnnouncement(t('wallet.home.time.done', { count: days, movements: nextState.movements.length - before }) + pending);
   };
 
   // Fuerte's note: what the next unlock needs, and why the current section matters.
@@ -106,11 +116,6 @@ export function WalletHomePage() {
   else if (next) fuerteMessage = fuerteLine('wallet.home.fuerteGeneric', { section: nextSection });
   const whyKey = current ? WHY_BY_LEVEL[current.level.id] : undefined;
 
-  const missionAction = activeMission ? (
-    <Button asChild size="s" trailingIcon="arrow_forward" fullWidth>
-      <Link to={`/app/missions/${activeMission.id}`}>{t('wallet.home.mission.start')}</Link>
-    </Button>
-  ) : undefined;
 
   // The last ones, and all of them on demand in a scrollable list (D-286)
   const allMovements = [...wallet.movements].reverse();
@@ -122,14 +127,14 @@ export function WalletHomePage() {
   return (
     <WalletShell
       section={t('wallet.nav.home')}
-      fuerte={{ state: 'greeting', message: fuerteMessage, why: whyKey ? whyText(whyKey) : undefined, action: missionAction }}
+      fuerte={{ state: 'greeting', message: fuerteMessage, why: whyKey ? whyText(whyKey) : undefined }}
     >
       <div className="flex flex-col gap-(--space-bento-gap)">
-        {/* Greeting (2.2.1, pattern 2; D-287 to D-289): the page header, first and with no card at every
-            size, as wallets and the Avenra reference do. One date line, the name, the level, and two
-            quiet controls on the right: "Avanzar el tiempo" opens a menu and "¿Por qué importa?" a dialog.
-            The active mission comes right after, as the first card. */}
-        <section aria-labelledby="home-title" className="flex flex-col gap-3 px-1 text-on-surface expanded:flex-row expanded:items-end expanded:justify-between expanded:gap-4">
+        {/* Greeting (2.2.1, pattern 2; D-287 to D-290): the page header, first and with no card. The
+            text on the left and two controls on the right at every size, so it stays balanced: on
+            phones and tablets they are round icon buttons; from 840 px they show their names. The
+            notices (the pending mission, a debit without balance) are told by Fuerte (D-290). */}
+        <section aria-labelledby="home-title" className="flex items-end justify-between gap-3 px-1 text-on-surface expanded:gap-4">
           <div className="flex min-w-0 flex-col gap-1.5">
             <p className="text-label-medium text-on-surface-variant tabular-nums">
               <time dateTime={walletDate(wallet.day)}>{formatDate(walletDate(wallet.day))}</time> · {t('wallet.home.dayChip', { day: wallet.day })}
@@ -151,15 +156,26 @@ export function WalletHomePage() {
               </p>
             )}
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex shrink-0 items-center gap-2">
             {canAdvance ? (
               <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="outlined" leadingIcon="schedule" trailingIcon="keyboard_arrow_down" className="bg-surface-container-lowest">
-                    {t('wallet.home.time.label')}
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="start" label={t('wallet.home.time.label')}>
+                <Tooltip content={t('wallet.home.time.label')} className="expanded:hidden">
+                  <DropdownMenuTrigger asChild>
+                    <button
+                      type="button"
+                      aria-label={t('wallet.home.time.label')}
+                      className={cn(
+                        buttonVariants({ variant: 'outlined' }),
+                        'size-12 rounded-full bg-surface-container-lowest p-0 md:size-10 expanded:h-10 expanded:w-auto expanded:rounded-sm expanded:px-4',
+                      )}
+                    >
+                      <Icon name="schedule" size={20} />
+                      <span className="hidden expanded:inline">{t('wallet.home.time.label')}</span>
+                      <Icon name="keyboard_arrow_down" size={20} className="hidden expanded:block" />
+                    </button>
+                  </DropdownMenuTrigger>
+                </Tooltip>
+                <DropdownMenuContent align="end" label={t('wallet.home.time.label')}>
                   {(
                     [
                       ['day', 'skip_next'],
@@ -174,7 +190,7 @@ export function WalletHomePage() {
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-              <p className="text-body-small">{t('wallet.home.time.notYet')}</p>
+              <p className="max-w-40 text-body-small text-on-surface-variant expanded:max-w-56">{t('wallet.home.time.notYet')}</p>
             )}
             {whyKey && <WhyMatters screen={whyKey} />}
             <p className="sr-only" aria-live="polite">
@@ -183,8 +199,8 @@ export function WalletHomePage() {
           </div>
         </section>
 
-        {/* Active mission: one compact card above the content, at every size (5.3) */}
-        {activeMission && (
+        {/* Active mission (5.3): Fuerte tells it (D-290). With Fuerte in "Silencio", it stays as a card */}
+        {activeMission && silent && (
           <Link
             to={`/app/missions/${activeMission.id}`}
             className="flex items-center gap-3 rounded-xl border border-primary bg-surface-container-lowest p-4 hover:bg-surface-container"
@@ -201,7 +217,7 @@ export function WalletHomePage() {
           </Link>
         )}
 
-        {wallet.pendingDebit && (
+        {wallet.pendingDebit && silent && (
           <InlineAlert tone="warning" live="alert">
             {t('wallet.home.time.pending', {
               name: wallet.pendingDebit.expenseKey ? t(`wallet.expenses.${wallet.pendingDebit.expenseKey}`) : (wallet.pendingDebit.counterparty ?? ""),
@@ -375,7 +391,7 @@ export function WalletHomePage() {
             <Button
               variant="text"
               trailingIcon={showAll ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}
-              className="self-start"
+              className="-mr-3 self-end"
               aria-expanded={showAll}
               aria-controls="movements-list"
               onClick={() => setShowAll(!showAll)}

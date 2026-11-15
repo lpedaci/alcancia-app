@@ -65,8 +65,11 @@ export function YieldPage() {
     return (
       <WalletShell section={t('wallet.sub.yield')} fuerte={{ state: 'thinking', message: fuerteLine('yield.fuerte.locked') }}>
         <div className="flex flex-col gap-6">
-          <h1 className="text-headline-medium text-on-surface">{t('wallet.placeholder.lockedTitle', { section: t('wallet.sub.yield') })}</h1>
-          <WhyMatters screen="yield" />
+          {/* Title row (D-292): the title on the left, "¿Por qué importa?" on the right */}
+          <div className="flex items-center justify-between gap-3">
+            <h1 className="text-headline-medium text-on-surface">{t('wallet.placeholder.lockedTitle', { section: t('wallet.sub.yield') })}</h1>
+            <WhyMatters screen="yield" />
+          </div>
           <UnlockCard status={status} />
         </div>
       </WalletShell>
@@ -102,9 +105,12 @@ function Yield() {
     >
       <div className="flex flex-col gap-6">
         <header className="flex flex-col gap-3">
-          <h1 className="text-headline-medium text-on-surface">{t('wallet.sub.yield')}</h1>
+          {/* Title row (D-292): the title on the left, "¿Por qué importa?" on the right */}
+          <div className="flex items-center justify-between gap-3">
+            <h1 className="text-headline-medium text-on-surface">{t('wallet.sub.yield')}</h1>
+            <WhyMatters screen="yield" />
+          </div>
           <p className="text-body-large text-on-surface-variant">{t('yield.intro')}</p>
-          <WhyMatters screen="yield" />
           <MetaChips
             label={t('yield.context')}
             items={[
@@ -219,7 +225,7 @@ function Yield() {
                   ? t('yield.real.explain', { rate: formatPercent(periodRate(tna, 30), { decimals: 2 }), inflation: formatPercent(scenario.monthlyInflation, { decimals: 1 }) })
                   : t('yield.real.explainNone', { inflation: formatPercent(scenario.monthlyInflation, { decimals: 1 }) })}
               </p>
-              <Button asChild variant="text" trailingIcon="arrow_forward" className="self-start">
+              <Button asChild variant="text" trailingIcon="arrow_forward" className="-mr-3 self-end">
                 <Link to="/app/tools/SIM-4">{t('yield.real.simulate')}</Link>
               </Button>
             </section>

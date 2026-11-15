@@ -18,6 +18,9 @@ import { SegmentedProgress } from '@/components/ui/SegmentedProgress';
 import { StatusPill } from '@/components/ui/StatusPill';
 import { TextField } from '@/components/ui/TextField';
 import { Fuerte, FUERTE_STATES } from '@/features/companion/Fuerte';
+import { FuerteBadge, FuerteSpeech, fuerteMood, NoticeRowContent, UpToDate } from '@/features/companion/FuerteParts';
+import type { Notice } from '@/features/companion/notices';
+import { WhyMatters } from '@/features/learning-cards/WhyMatters';
 import { FictitiousBrandChip } from '@/features/partner/FictitiousBrandChip';
 import { HorneroMark } from '@/features/partner/HorneroMark';
 import { SourceList } from '@/features/learning/SourceList';
@@ -197,6 +200,53 @@ export function ComponentsSection() {
         </ul>
       </Specimen>
 
+      <Specimen title={c('titleRow')} note={c('titleRowNote')} className="xl:col-span-2">
+        <div className="flex flex-col gap-2">
+          <div className="flex items-center justify-between gap-3">
+            <p className="text-headline-medium text-on-surface">{c('titleRowTitle')}</p>
+            <WhyMatters screen="pay" />
+          </div>
+          <p className="text-body-large text-on-surface-variant">{c('titleRowIntro')}</p>
+        </div>
+      </Specimen>
+      <Specimen title={c('quick')} note={c('quickNote')}>
+        <ul className="grid grid-cols-4 gap-1 rounded-xl border border-outline-variant bg-surface-container-lowest p-2">
+          {(
+            [
+              ['send_money', 'quickTransfer', false],
+              ['qr_code_scanner', 'quickQr', false],
+              ['receipt_long', 'quickBills', false],
+              ['credit_card', 'quickCredit', true],
+            ] as const
+          ).map(([icon, key, locked]) => (
+            <li key={key} className="flex min-w-0 flex-col items-center gap-1.5 px-0.5 py-2 text-center">
+              <span aria-hidden className="relative inline-flex size-12 items-center justify-center rounded-full bg-secondary-container text-on-secondary-container">
+                <Icon name={icon} size={24} />
+                {locked && (
+                  <span className="absolute -right-1 -bottom-1 inline-flex size-5 items-center justify-center rounded-full border-2 border-surface-container-lowest bg-surface-container-high text-on-surface-variant">
+                    <Icon name="lock" size={16} />
+                  </span>
+                )}
+              </span>
+              <span className="text-label-medium text-balance text-on-surface">{c(key)}</span>
+            </li>
+          ))}
+        </ul>
+      </Specimen>
+      <Specimen title={c('showMore')} note={c('showMoreNote')}>
+        <div className="flex flex-col">
+          <ul className="flex flex-col divide-y divide-outline-variant">
+            {['showMoreA', 'showMoreB'].map((k) => (
+              <li key={k} className="py-2.5 text-body-medium text-on-surface">
+                {c(k)}
+              </li>
+            ))}
+          </ul>
+          <Button variant="text" trailingIcon="keyboard_arrow_down" className="-mr-3 self-end">
+            {c('showMoreButton')}
+          </Button>
+        </div>
+      </Specimen>
       <Specimen title={c('sources')} note={c('sourcesNote')} className="xl:col-span-2">
         <SourceList codes={['A-35', 'A-36', 'B-12', 'B-14']} variant="footer" />
       </Specimen>
@@ -209,6 +259,7 @@ export function FuerteSection() {
   const rules = t('designSystem.fuerte.rules', { returnObjects: true }) as string[];
   return (
     <div className="grid grid-cols-[minmax(0,1fr)] gap-(--space-bento-gap) xl:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
+      <FuerteNoticesSpecimen />
       <div className={panel}>
         <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3">
           {FUERTE_STATES.map((state, i) => (
@@ -235,6 +286,74 @@ export function FuerteSection() {
         </ul>
       </div>
     </div>
+  );
+}
+
+/** D-290, D-291: what Fuerte tells and the face that goes with it, with the real panel pieces. */
+const SAMPLE_NOTICES: Record<'alert' | 'pending' | 'calm', Notice[]> = {
+  alert: [
+    { id: 'a', kind: 'alert', icon: 'warning', key: 'debit', params: { name: 'Luz · Energía del Sur (ficticia)', expenseKey: '', amount: '26000.00' }, to: '' },
+    { id: 'b', kind: 'pending', icon: 'flag', key: 'mission', params: { title: 'El préstamo tentador', minutes: 5 }, to: '' },
+  ],
+  pending: [
+    { id: 'c', kind: 'pending', icon: 'flag', key: 'mission', params: { title: 'El préstamo tentador', minutes: 5 }, to: '' },
+    { id: 'd', kind: 'pending', icon: 'replay', key: 'reminder_review', params: { module: 'Tu recibo de sueldo' }, to: '' },
+  ],
+  calm: [
+    { id: 'e', kind: 'invest', icon: 'account_balance', key: 'deposit', params: { count: 5 }, to: '' },
+    { id: 'f', kind: 'goal', icon: 'shield', key: 'goal', params: { name: 'Fondo de emergencia', pct: 76 }, to: '' },
+    { id: 'g', kind: 'progress', icon: 'lock_open', key: 'unlock', params: { section: 'Invertir', met: 2, total: 4 }, to: '' },
+  ],
+};
+
+function FuerteNoticesSpecimen() {
+  const { t } = useTranslation();
+  const d = (k: string) => t(`designSystem.fuerte.notices.${k}`);
+  return (
+    <section className={cn(panel, 'xl:col-span-2')}>
+      <div className="flex flex-col gap-1">
+        <h3 className="text-title-large text-on-surface">{d('title')}</h3>
+        <p className="text-body-medium text-on-surface-variant">{d('note')}</p>
+      </div>
+      <ul className="grid grid-cols-[minmax(0,1fr)] gap-4 lg:grid-cols-3">
+        {(['alert', 'pending', 'calm'] as const).map((k) => {
+          const notices = SAMPLE_NOTICES[k];
+          const mood = fuerteMood('neutral', notices);
+          const badge = notices.filter((n) => n.kind === 'alert' || n.kind === 'pending');
+          return (
+            <li key={k} className="flex min-w-0 flex-col gap-3 rounded-lg bg-surface p-4">
+              <div className="flex items-center gap-3">
+                <span className="relative inline-flex size-20 shrink-0 items-center justify-center">
+                  <Fuerte state={mood} lights={6} size={4.5} />
+                  {badge.length > 0 && <FuerteBadge alert={notices.some((n) => n.kind === 'alert')} count={badge.length} />}
+                </span>
+                <p className="text-label-large text-on-surface">{d(`${k}Label`)}</p>
+              </div>
+              {/* The panel as it opens */}
+              <div className="flex flex-col gap-3 rounded-xl border border-outline-variant bg-surface-container-lowest p-4">
+                <FuerteSpeech mood={mood} lights={6} message={d(`${k}Message`)} />
+                {k === 'calm' && <UpToDate />}
+                <ul className="-mx-2 flex flex-col">
+                  {notices.map((n) => (
+                    <li key={n.id} className="flex min-h-11 items-center gap-2.5 rounded-md px-2 py-1.5">
+                      <NoticeRowContent notice={n} />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+      <ul className="grid grid-cols-[minmax(0,1fr)] gap-2 md:grid-cols-2">
+        {(t('designSystem.fuerte.notices.rules', { returnObjects: true }) as string[]).map((r) => (
+          <li key={r} className="flex items-start gap-2 text-body-medium text-on-surface">
+            <Icon name="check_circle" size={20} className="shrink-0 text-success" />
+            {r}
+          </li>
+        ))}
+      </ul>
+    </section>
   );
 }
 

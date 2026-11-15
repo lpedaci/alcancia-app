@@ -64,8 +64,11 @@ export function CreditPage() {
     return (
       <WalletShell section={t('wallet.nav.pay')} fuerte={{ state: 'thinking', message: fuerteLine('credit.fuerte.locked') }}>
         <div className="flex flex-col gap-6">
-          <h1 className="text-headline-medium text-on-surface">{t('wallet.placeholder.lockedTitle', { section: t('wallet.sub.credit') })}</h1>
-          <WhyMatters screen="credit" />
+          {/* Title row (D-292): the title on the left, "¿Por qué importa?" on the right */}
+          <div className="flex items-center justify-between gap-3">
+            <h1 className="text-headline-medium text-on-surface">{t('wallet.placeholder.lockedTitle', { section: t('wallet.sub.credit') })}</h1>
+            <WhyMatters screen="credit" />
+          </div>
           <UnlockCard status={status} />
         </div>
       </WalletShell>
@@ -132,9 +135,12 @@ function Credit() {
             <Icon name="arrow_back" size={18} />
             {t('pay.back')}
           </Link>
-          <h1 className="text-headline-medium text-on-surface">{t('wallet.sub.credit')}</h1>
+          {/* Title row (D-292): the title on the left, "¿Por qué importa?" on the right */}
+          <div className="flex items-center justify-between gap-3">
+            <h1 className="text-headline-medium text-on-surface">{t('wallet.sub.credit')}</h1>
+            <WhyMatters screen="credit" />
+          </div>
           <p className="text-body-large text-on-surface-variant">{t('credit.intro')}</p>
-          <WhyMatters screen="credit" />
           <MetaChips
             label={t('credit.context')}
             items={[
@@ -499,7 +505,7 @@ function DebtsSection({ debts, onPayOff }: { debts: ActiveDebt[]; onPayOff: (deb
               </li>
             ))}
           </ol>
-          <Button asChild variant="text" trailingIcon="arrow_forward" className="self-start">
+          <Button asChild variant="text" trailingIcon="arrow_forward" className="-mr-3 self-end">
             <Link to="/app/tools/SIM-9">{t('credit.debts.simulate')}</Link>
           </Button>
         </>

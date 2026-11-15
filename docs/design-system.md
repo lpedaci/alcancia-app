@@ -140,9 +140,22 @@ La billetera ficticia que muestra Alcancía integrada en otra app (D-75, D-84). 
 - **Paso de una misión, desafío o guía (D-250):** el tipo de paso como etiqueta chica con ícono (Pregunta, Tú decides, Calcula, Clasifica, Para saber), la pregunta como título en `title-large`, las opciones como tarjetas (`RadioGroup variant="cards"`, la elegida en primary-container con borde primary), la acción a la derecha y las fuentes al pie como chips. Navegación de pasos, igual en misiones, guías y desafíos (D-266): salir a la izquierda; "Anterior" y "Continuar" juntos a la derecha, con "Continuar" al final.
 - **Objetivo de la misión (D-250):** bloque con ícono de diana y "Al terminar vas a poder…", arriba del paso.
 - **Pista en dos tiempos (D-251):** el primer error de una cuenta muestra "Tómate un momento" con el método y sin el resultado; el segundo, la cuenta resuelta.
-- **"¿Por qué importa?" (D-252):** borde `tertiary` y fondo `tertiary-surface` (`#EEF8F6`), texto en `on-surface`; en un saludo o una tarjeta de color va en su propia fila a todo el ancho.
+- **"¿Por qué importa?" (D-288, D-292; reemplaza D-252):** botón de atención (`warning-container`, el ámbar del sistema) a la derecha del título de cada pantalla; en celular y tablet, solo el ícono con nombre accesible y tooltip; desde 1200 px, con su nombre. Abre un diálogo con el concepto, las fuentes y "Ver en la guía".
 - **Mapa de niveles en celular y tablet (D-254):** filas compactas; el nivel completado se marca con el check del nodo y su píldora queda para lectores de pantalla hasta que la fila es ancha; el desplegable queda en la misma fila del título.
 - **Hornero en el menú (D-249, D-253):** "Ver dentro de Hornero" o "Volver a Hornero", con la etiqueta de marca ficticia, arriba de "Tu avance"; en celular y tablet, en el menú de la persona.
+
+### Billetera en celular y tablet, y Fuerte que avisa (D-286 a D-294)
+
+- **Fila de título (D-292):** título a la izquierda, "¿Por qué importa?" a la derecha; la introducción debajo, a todo el ancho.
+- **Encabezado del inicio (D-289, D-290):** sin tarjeta. Fecha, "Hola, Nombre" y nivel a la izquierda; "Avanzar el tiempo" (botón con menú: Un día, Una semana, Un mes) y "¿Por qué importa?" a la derecha. Bajo 840 px, los dos son botones redondos de 48 px con ícono y tooltip.
+- **Acciones en fila (D-287, D-293):** bajo 840 px, una tarjeta con cuatro íconos redondos de 48 px (`secondary-container`) y un nombre corto; lo bloqueado lleva un candado chico. Desde 840 px, tarjetas con descripción.
+- **Saldo (D-287):** el monto completo, un rol tipográfico más chico en tarjetas angostas, nunca abreviado.
+- **Movimientos (D-286, D-287):** ícono de 36 px, nombre en una línea, monto en `label-medium`; los últimos 5 y "Ver todos los movimientos (N)" a la derecha, con la lista completa desplazándose dentro de la tarjeta.
+- **"Qué falta" (D-287, D-294):** lista liviana con ícono y texto centrados, lo pendiente primero, dos columnas en tarjetas anchas. Cada condición pendiente con un lugar donde resolverla es un enlace de fila completa con hover `surface-container`, sin subrayado, y un chevron.
+- **"Ver más" (D-291):** los botones de texto que cierran una lista van a la derecha; volver y salir, a la izquierda.
+- **Fuerte avisa (D-290):** avisos de atención, pendientes, inversiones, metas y avance, calculados en el navegador (`src/features/companion/notices.ts`). Insignia: signo de atención en `warning` si hay un problema; el número en `primary` si hay pendientes; nada si está al día. En "Conversador", el primer aviso nuevo de la visita aparece unos segundos en un globo junto a él.
+- **Su cara (D-291, `fuerteMood`):** atención con un problema, pensativo con pendientes, celebración si está al día ("Estás al día con todo. Guardado."). Un estado elegido por la pantalla (apenado, atención, dormido) manda.
+- **Panel tipo chat (D-291, `FuerteParts.tsx`):** Fuerte y su nombre en una línea con "Mover" y "Cerrar"; su mensaje en un globo de ancho completo con `primary-container` al 50 % y la esquina superior izquierda recta; los tres primeros avisos y "Ver N avisos más"; "¿Por qué importa?" plegado en una línea; el consejo de arrastrar se cierra una vez leído.
 
 ### Valores reales (D-264)
 

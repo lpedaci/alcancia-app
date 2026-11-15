@@ -65,8 +65,11 @@ export function PayPage() {
     return (
       <WalletShell section={t('wallet.nav.pay')} fuerte={{ state: 'thinking', message: fuerteLine('pay.fuerte.locked') }}>
         <div className="flex flex-col gap-6">
-          <h1 className="text-headline-medium text-on-surface">{t('wallet.placeholder.lockedTitle', { section: t('wallet.nav.pay') })}</h1>
-          <WhyMatters screen="pay" />
+          {/* Title row (D-292): the title on the left, "¿Por qué importa?" on the right */}
+          <div className="flex items-center justify-between gap-3">
+            <h1 className="text-headline-medium text-on-surface">{t('wallet.placeholder.lockedTitle', { section: t('wallet.nav.pay') })}</h1>
+            <WhyMatters screen="pay" />
+          </div>
           <UnlockCard status={status} />
         </div>
       </WalletShell>
@@ -148,24 +151,41 @@ function PayHome() {
     <WalletShell section={t('wallet.nav.pay')} fuerte={{ state: 'neutral', message: fuerteLine('pay.fuerte.home'), why: whyText('pay') }}>
       <div className="flex flex-col gap-6">
         <header className="flex flex-col gap-2">
-          <h1 className="text-headline-medium text-on-surface">{t('wallet.nav.pay')}</h1>
+          {/* Title row (D-292): the title on the left, "¿Por qué importa?" on the right */}
+          <div className="flex items-center justify-between gap-3">
+            <h1 className="text-headline-medium text-on-surface">{t('wallet.nav.pay')}</h1>
+            <WhyMatters screen="pay" />
+          </div>
           <p className="text-body-large text-on-surface-variant">{t('pay.intro')}</p>
-          <WhyMatters screen="pay" />
         </header>
 
-        <ul className="grid grid-fill-4 gap-(--space-bento-gap)">
+        {/* Phones and tablets (D-293): one card with a row of four round actions, like the quick actions
+            of Inicio; from 840 px, four cards with their description */}
+        <ul className="grid grid-cols-4 gap-1 rounded-xl border border-outline-variant bg-surface-container-lowest p-2 expanded:grid-fill-4 expanded:gap-(--space-bento-gap) expanded:border-0 expanded:bg-transparent expanded:p-0">
           {actions.map((a) => (
-            <li key={a.key}>
-              <Link to={a.to} className="group flex h-full flex-col gap-2 rounded-xl border border-outline-variant bg-surface-container-lowest p-(--space-card-padding) hover:border-primary">
-                <span className="flex items-start justify-between gap-2">
+            <li key={a.key} className="min-w-0">
+              <Link
+                to={a.to}
+                className="group flex h-full flex-col items-center gap-1.5 rounded-lg px-0.5 py-2 text-center hover:bg-surface-container expanded:items-stretch expanded:gap-2 expanded:rounded-xl expanded:border expanded:border-outline-variant expanded:bg-surface-container-lowest expanded:p-(--space-card-padding) expanded:text-left expanded:hover:border-primary expanded:hover:bg-surface-container-lowest"
+              >
+                {/* Phones: a round icon, with a padlock when locked */}
+                <span aria-hidden className="relative inline-flex size-12 items-center justify-center rounded-full bg-secondary-container text-on-secondary-container expanded:hidden">
+                  <Icon name={a.icon} size={24} />
+                  {a.locked && (
+                    <span className="absolute -right-1 -bottom-1 inline-flex size-5 items-center justify-center rounded-full border-2 border-surface-container-lowest bg-surface-container-high text-on-surface-variant">
+                      <Icon name="lock" size={16} />
+                    </span>
+                  )}
+                </span>
+                <span className="hidden items-start justify-between gap-2 expanded:flex">
                   <IconTile icon={a.icon} tone={a.locked ? 'secondary' : 'primary'} />
                   <Icon name={a.locked ? 'lock' : 'arrow_forward'} size={20} className="text-on-surface-variant transition-transform group-hover:translate-x-0.5 motion-reduce:transform-none" />
                 </span>
-                <span className="text-title-medium text-on-surface">
+                <span className="text-label-medium text-balance text-on-surface expanded:text-title-medium">
                   {t(`wallet.sub.${a.key}`)}
                   {a.locked && <span className="sr-only">, {t('wallet.nav.locked')}</span>}
                 </span>
-                <span className="text-body-medium text-on-surface-variant">{t(a.locked ? `pay.actions.${a.key}Locked` : `pay.actions.${a.key}`, { defaultValue: t(`pay.actions.${a.key}`) })}</span>
+                <span className="hidden text-body-medium text-on-surface-variant expanded:block">{t(a.locked ? `pay.actions.${a.key}Locked` : `pay.actions.${a.key}`, { defaultValue: t(`pay.actions.${a.key}`) })}</span>
               </Link>
             </li>
           ))}
@@ -291,11 +311,13 @@ function TransferFlow() {
     <WalletShell section={t('wallet.nav.pay')} fuerte={{ state: stage === 'confirm' ? 'attention' : 'neutral', message: stage === 'confirm' ? fuerteLine('pay.fuerte.confirm') : fuerteLine('pay.fuerte.transfer') }}>
       <div className="flex min-w-0 flex-col gap-6">
         <div className="flex min-w-0 flex-col gap-6">
-          <p className="flex items-center gap-2 text-label-large text-primary">
-            <Icon name="send_money" size={18} />
-            {t('wallet.sub.transfer')}
-          </p>
-          <WhyMatters screen="transfer" />
+          <div className="flex items-center justify-between gap-3">
+            <p className="flex items-center gap-2 text-label-large text-primary">
+              <Icon name="send_money" size={18} />
+              {t('wallet.sub.transfer')}
+            </p>
+            <WhyMatters screen="transfer" />
+          </div>
           {stage === 'form' && (
             <form noValidate onSubmit={next} className={card} aria-labelledby="transfer-title">
               <h1 id="transfer-title" ref={headingRef} tabIndex={-1} className="text-headline-medium text-on-surface focus:outline-none">
@@ -435,11 +457,13 @@ function QrFlow() {
     <WalletShell section={t('wallet.nav.pay')} fuerte={{ state: 'neutral', message: fuerteLine('pay.fuerte.qr') }}>
       <div className="flex min-w-0 flex-col gap-6">
         <div className="flex min-w-0 flex-col gap-6">
-          <p className="flex items-center gap-2 text-label-large text-primary">
-            <Icon name="qr_code_scanner" size={18} />
-            {t('wallet.sub.qr')}
-          </p>
-          <WhyMatters screen="qr" />
+          <div className="flex items-center justify-between gap-3">
+            <p className="flex items-center gap-2 text-label-large text-primary">
+              <Icon name="qr_code_scanner" size={18} />
+              {t('wallet.sub.qr')}
+            </p>
+            <WhyMatters screen="qr" />
+          </div>
           {stage === 'scan' && (
             <section aria-labelledby="qr-title" className={card}>
               <h1 id="qr-title" ref={headingRef} tabIndex={-1} className="text-headline-medium text-on-surface focus:outline-none">
@@ -534,7 +558,7 @@ function BillsPage() {
   return (
     <WalletShell section={t('wallet.nav.pay')} fuerte={{ state: 'neutral', message: fuerteLine('pay.fuerte.bills') }}>
       <div className="flex min-w-0 flex-col gap-6">
-        <WhyMatters screen="bills" />
+        <WhyMatters screen="bills" className="justify-end" />
         <section aria-labelledby="bills-title" className={cn(card, '@container')}>
           <p className="flex items-center gap-2 text-label-large text-primary">
             <Icon name="receipt_long" size={18} />
