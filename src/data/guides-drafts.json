@@ -1,0 +1,528 @@
+{
+ "note": "Phase B drafts of guides 2 and 3 (step 27, D-61). NOT shown in the app: each batch goes through Lourdes's review, with the extensions marked for Lic. Kevin Giampieri; after approval a guide moves to guides.json.",
+ "guides": [
+  {
+   "id": "module-01-guide-2",
+   "moduleId": "module-01",
+   "title": "Aportes, contribuciones y aguinaldo",
+   "minutes": 7,
+   "blocks": [
+    {
+     "type": "hook",
+     "body": "En diciembre tu recibo trae un concepto que no estaba los otros meses: el aguinaldo. Y todos los meses hay líneas que nadie te explicó."
+    },
+    {
+     "type": "objective",
+     "body": "Al terminar vas a poder clasificar los conceptos de tu recibo en aportes, contribuciones y sumas no remunerativas, y calcular la cuota bruta de tu aguinaldo."
+    },
+    {
+     "type": "recall",
+     "question": {
+      "id": "g01b-recall",
+      "moduleId": "module-01",
+      "type": "reflection",
+      "prompt": "¿Sabes en qué meses se paga el aguinaldo?",
+      "options": [
+       {
+        "id": "a",
+        "text": "Sí, lo sé"
+       },
+       {
+        "id": "b",
+        "text": "No estoy seguro"
+       }
+      ],
+      "feedback": {
+       "a": "Bien. Al final vas a poder calcular también cuánto es cada cuota.",
+       "b": "Es muy común. En esta guía lo vemos con un ejemplo."
+      },
+      "sourceIds": []
+     }
+    },
+    {
+     "type": "text",
+     "title": "Tu parte y la de la empresa",
+     "body": "Los **aportes** se descuentan de tu bruto: jubilación (11 %), obra social (3 %) y Ley 19.032 (3 %), entre otros. Las **contribuciones** las paga la empresa **además** de tu bruto. En el recibo del taller, el costo laboral es $ 2.171.180,60 y el bruto, $ 1.559.263,32: la diferencia, **$ 611.917,28**, son las contribuciones."
+    },
+    {
+     "type": "text",
+     "title": "Las sumas no remunerativas",
+     "body": "En general **no llevan aportes jubilatorios**, así que no suman para tu jubilación. Cuáles son y cuánto valen depende de tu convenio. En el recibo del taller son $ 90.000."
+    },
+    {
+     "type": "text",
+     "title": "El aguinaldo",
+     "body": "El **aguinaldo**, o **sueldo anual complementario**, se paga en dos cuotas: la primera vence el **30 de junio** y la segunda el **18 de diciembre**. Cada cuota es el **50 % de la mayor remuneración mensual** del semestre. Lo establece la Ley de Contrato de Trabajo (artículos 121 y 122)."
+    },
+    {
+     "type": "example",
+     "title": "Ejemplo resuelto: la cuota de diciembre",
+     "steps": [
+      "La mayor remuneración mensual del semestre fue de $ 1.000.000 (un número redondo de ejemplo).",
+      "Cuota de diciembre: 50 % × $ 1.000.000 = $ 500.000 brutos.",
+      "Al aguinaldo también se le descuentan aportes: lo que entra en tu cuenta es menor.",
+      "Decide antes de cobrarlo qué parte va a tu ahorro o a tu fondo de emergencia."
+     ]
+    },
+    {
+     "type": "practice",
+     "question": {
+      "id": "m01-sac",
+      "moduleId": "module-01",
+      "type": "numeric",
+      "prompt": "La mayor remuneración mensual de tu semestre fue de $ 1.200.000. ¿Cuánto es la cuota bruta del aguinaldo?",
+      "numeric": {
+       "answer": "600000",
+       "tolerance": "1.00",
+       "unit": "ARS"
+      },
+      "help": "Monto en pesos, por ejemplo: 500.000",
+      "feedback": {
+       "correct": "Correcto. Cada cuota es el 50 % de la mayor remuneración mensual del semestre: 50 % × $ 1.200.000 = $ 600.000.",
+       "incorrect": "Cada cuota es el 50 % de la mayor remuneración mensual del semestre: 50 % × $ 1.200.000 = $ 600.000 brutos."
+      },
+      "sourceIds": [
+       "LCT"
+      ]
+     }
+    },
+    {
+     "type": "takeaway",
+     "body": "Para tu vida: en tu próximo recibo, marca qué conceptos son aportes y cuáles son no remunerativos, y anota en tu calendario el 30 de junio y el 18 de diciembre."
+    }
+   ],
+   "sourceIds": [
+    "T",
+    "LCT"
+   ],
+   "review": {
+    "status": "draft",
+    "batch": 1,
+    "validated": [
+     "Aportes, contribuciones, no remunerativas y costo laboral: recibo del taller (T); las contribuciones salen de restar el bruto al costo laboral del mismo recibo"
+    ],
+    "extensions": [
+     "El aguinaldo: Ley 20.744, arts. 121 y 122 (InfoLEG, verificado el 15/11/2026)",
+     "Ejemplo y práctica de la cuota del aguinaldo, con números redondos",
+     "Los aportes también se descuentan del aguinaldo"
+    ]
+   }
+  },
+  {
+   "id": "module-02-guide-2",
+   "moduleId": "module-02",
+   "title": "Lo que cuesta de verdad",
+   "minutes": 6,
+   "blocks": [
+    {
+     "type": "hook",
+     "body": "Te aumentaron el sueldo y, a los tres meses, no te sobra más que antes. No compraste nada grande: tu estilo de vida subió con el aumento."
+    },
+    {
+     "type": "objective",
+     "body": "Al terminar vas a poder explicar el costo de oportunidad de un gasto y reconocer la inflación del estilo de vida en tus propias decisiones."
+    },
+    {
+     "type": "recall",
+     "question": {
+      "id": "g02b-recall",
+      "moduleId": "module-02",
+      "type": "reflection",
+      "prompt": "La última vez que cobraste más, ¿qué pasó con tus gastos?",
+      "options": [
+       {
+        "id": "a",
+        "text": "Subieron casi lo mismo"
+       },
+       {
+        "id": "b",
+        "text": "Ahorré la diferencia"
+       },
+       {
+        "id": "c",
+        "text": "No lo sé"
+       }
+      ],
+      "feedback": {
+       "a": "Le pasa a mucha gente. En esta guía vemos cómo evitarlo sin dejar de disfrutar el aumento.",
+       "b": "Muy bien. Esta guía te da las palabras para explicar por qué funciona.",
+       "c": "Es un buen punto de partida: en esta guía vemos qué mirar."
+      },
+      "sourceIds": []
+     }
+    },
+    {
+     "type": "text",
+     "title": "Costo de oportunidad",
+     "body": "Cada peso que gastas en algo que dura poco deja de crecer con el **interés compuesto**. Como dice el material del taller: no es solo un café de $ 5.000, es ese capital invertido a 30 años."
+    },
+    {
+     "type": "text",
+     "title": "La inflación del estilo de vida",
+     "body": "Pasa cuando cada aumento se convierte en más gastos fijos: un plan más caro, otra suscripción, un cambio de auto. El **minimalismo** como estrategia propone lo contrario: menos gastos fijos y menos decisiones de consumo, para que el aumento se note en tu ahorro."
+    },
+    {
+     "type": "text",
+     "title": "Hablar de dinero",
+     "body": "En muchas casas, el dinero es un tema del que no se habla. Las finanzas personales no son magia: son **administración y disciplina**, y se aprenden. Hablarlo en tu casa o con tu cohorte ayuda."
+    },
+    {
+     "type": "example",
+     "title": "Ejemplo resuelto: un aumento con plan",
+     "steps": [
+      "Tu neto pasa de $ 1.000.000 a $ 1.100.000: $ 100.000 más por mes.",
+      "Antes de cobrarlo, decides que la mitad, $ 50.000, va directo a tu ahorro.",
+      "La otra mitad puede mejorar tu mes.",
+      "Tu estilo de vida mejora un poco y tu ahorro crece todos los meses."
+     ]
+    },
+    {
+     "type": "practice",
+     "question": {
+      "id": "m02-lifestyle",
+      "moduleId": "module-02",
+      "type": "true_false_why",
+      "prompt": "Si mi sueldo sube, es normal que mis gastos fijos suban lo mismo.",
+      "options": [
+       {
+        "id": "true",
+        "text": "Verdadero"
+       },
+       {
+        "id": "false",
+        "text": "Falso"
+       }
+      ],
+      "correctOptionIds": [
+       "false"
+      ],
+      "why": {
+       "prompt": "¿Por qué?",
+       "options": [
+        {
+         "id": "w1",
+         "text": "Porque si los gastos fijos suben con cada aumento, el aumento nunca llega a tu ahorro"
+        },
+        {
+         "id": "w2",
+         "text": "Porque los gastos fijos no cambian nunca"
+        }
+       ],
+       "correct": "w1"
+      },
+      "feedback": {
+       "correct": "Correcto. Es común, pero no inevitable: si decides antes de cobrar qué parte del aumento va al ahorro, el aumento se nota.",
+       "incorrect": "Es falso: es común, pero si los gastos fijos suben con cada aumento, el aumento nunca llega a tu ahorro. Decide antes de cobrar qué parte va al ahorro."
+      },
+      "sourceIds": [
+       "A-15",
+       "A-16"
+      ]
+     }
+    },
+    {
+     "type": "takeaway",
+     "body": "Para tu vida: decide hoy qué parte de tu próximo aumento o de tu aguinaldo va directo al ahorro, antes de cobrarlo."
+    }
+   ],
+   "sourceIds": [
+    "A-06",
+    "A-08",
+    "A-15",
+    "A-16",
+    "A-19"
+   ],
+   "review": {
+    "status": "draft",
+    "batch": 1,
+    "validated": [
+     "Costo de oportunidad y el café de $ 5.000 (A-19)",
+     "Inflación del estilo de vida y minimalismo (A-15, A-16)",
+     "Tabú del dinero, administración y disciplina (A-06, A-08)"
+    ],
+    "extensions": [
+     "Ejemplo del aumento con plan (la mitad al ahorro), con números redondos: adaptación didáctica, sin datos nuevos"
+    ]
+   }
+  },
+  {
+   "id": "module-03-guide-2",
+   "moduleId": "module-03",
+   "title": "Un mes anotado",
+   "minutes": 7,
+   "blocks": [
+    {
+     "type": "hook",
+     "body": "Armaste tu presupuesto y a fin de mes no cerró. Antes de recortar a ciegas, conviene saber qué gastos se pueden mover y cuáles no."
+    },
+    {
+     "type": "objective",
+     "body": "Al terminar vas a poder separar tus gastos en fijos y variables, y decidir qué ajustar cuando tu presupuesto no cierra."
+    },
+    {
+     "type": "recall",
+     "question": {
+      "id": "g03b-recall",
+      "moduleId": "module-03",
+      "type": "reflection",
+      "prompt": "¿Anotaste alguna vez todos tus gastos durante un mes?",
+      "options": [
+       {
+        "id": "a",
+        "text": "Sí"
+       },
+       {
+        "id": "b",
+        "text": "Nunca"
+       }
+      ],
+      "feedback": {
+       "a": "Bien. Con ese registro, esta guía te ayuda a decidir qué ajustar.",
+       "b": "Es el primer paso, y el más útil. En esta guía vemos cómo hacerlo."
+      },
+      "sourceIds": []
+     }
+    },
+    {
+     "type": "text",
+     "title": "Fijos y variables",
+     "body": "Los **gastos fijos** se repiten todos los meses con un monto parecido: alquiler, servicios, cuotas y suscripciones. Los **variables** cambian según lo que decides: salidas, delivery, ropa. Los variables son los primeros que puedes mover; los fijos se revisan con más tiempo."
+    },
+    {
+     "type": "text",
+     "title": "El truco: anotar todo un mes",
+     "body": "Durante un mes, anota cada gasto, también los chicos. Al final vas a ver los **gastos hormiga** y las suscripciones que no usas, que sumados pueden pesar más de lo que parece."
+    },
+    {
+     "type": "text",
+     "title": "Cuando no cierra",
+     "body": "Primero, los deseos: reduce lo variable que menos valoras. Después, revisa los fijos: una suscripción que no usas o un plan que puedes bajar. Y el ahorro va primero: sepáralo apenas cobras, no con lo que sobra."
+    },
+    {
+     "type": "example",
+     "title": "Ejemplo resuelto: un mes en rojo",
+     "steps": [
+      "Neto: $ 1.000.000. Gastos fijos: $ 650.000. Gastos variables: $ 400.000. Faltan $ 50.000.",
+      "Variables: bajas delivery y salidas en $ 40.000.",
+      "Fijos: das de baja una suscripción de $ 10.000 que no usabas.",
+      "El mes cierra. El próximo, separas el ahorro el día que cobras y ajustas lo variable a lo que queda."
+     ]
+    },
+    {
+     "type": "practice",
+     "question": {
+      "id": "m03-fixed",
+      "moduleId": "module-03",
+      "type": "categorize",
+      "prompt": "Clasifica cada gasto como fijo o variable.",
+      "categorize": {
+       "categories": [
+        {
+         "id": "fixed",
+         "label": "Fijo (se repite todos los meses)"
+        },
+        {
+         "id": "variable",
+         "label": "Variable (depende de lo que decides)"
+        }
+       ],
+       "items": [
+        {
+         "id": "i1",
+         "text": "Alquiler",
+         "categoryId": "fixed"
+        },
+        {
+         "id": "i2",
+         "text": "Delivery",
+         "categoryId": "variable"
+        },
+        {
+         "id": "i3",
+         "text": "Suscripción de streaming",
+         "categoryId": "fixed"
+        },
+        {
+         "id": "i4",
+         "text": "Salidas",
+         "categoryId": "variable"
+        },
+        {
+         "id": "i5",
+         "text": "Luz",
+         "categoryId": "fixed"
+        },
+        {
+         "id": "i6",
+         "text": "Ropa",
+         "categoryId": "variable"
+        }
+       ]
+      },
+      "feedback": {
+       "correct": "Correcto. Alquiler, luz y suscripciones se repiten cada mes; delivery, salidas y ropa dependen de lo que decides, por eso son lo primero que puedes ajustar.",
+       "incorrect": "Revisa cuáles se repiten todos los meses con un monto parecido (alquiler, luz, suscripciones) y cuáles cambian según lo que decides (delivery, salidas, ropa)."
+      },
+      "sourceIds": [
+       "A-34"
+      ]
+     }
+    },
+    {
+     "type": "takeaway",
+     "body": "Para tu vida: anota todos tus gastos durante este mes, también los más chicos, y al final márcalos como fijos o variables."
+    }
+   ],
+   "sourceIds": [
+    "T",
+    "A-15",
+    "A-34"
+   ],
+   "review": {
+    "status": "draft",
+    "batch": 1,
+    "validated": [
+     "Gastos hormiga, suscripciones sin uso y anotar todo un mes (A-34, A-15)",
+     "Gastos fijos frente a variables (billetera de práctica, T)"
+    ],
+    "extensions": [
+     "Orden para ajustar un presupuesto en rojo (deseos, después fijos) y \"el ahorro va primero\": criterio didáctico",
+     "Ejemplo del mes en rojo con números redondos"
+    ]
+   }
+  },
+  {
+   "id": "module-04-guide-2",
+   "moduleId": "module-04",
+   "title": "Armarlo de a poco",
+   "minutes": 6,
+   "blocks": [
+    {
+     "type": "hook",
+     "body": "Un fondo de 3 meses de gastos parece imposible. Nadie lo arma de una vez: se arma con aportes chicos y constantes."
+    },
+    {
+     "type": "objective",
+     "body": "Al terminar vas a poder planificar cómo llegar a tu fondo de emergencia con aportes mensuales y decidir qué hacer cuando lo usas."
+    },
+    {
+     "type": "recall",
+     "question": {
+      "id": "g04b-recall",
+      "moduleId": "module-04",
+      "type": "reflection",
+      "prompt": "¿Cuántos meses de gastos esenciales cubre hoy tu ahorro?",
+      "options": [
+       {
+        "id": "a",
+        "text": "Menos de uno"
+       },
+       {
+        "id": "b",
+        "text": "Entre uno y tres"
+       },
+       {
+        "id": "c",
+        "text": "Tres o más"
+       }
+      ],
+      "feedback": {
+       "a": "Es el punto de partida más común. Esta guía es para ti.",
+       "b": "Vas bien. Esta guía te ayuda a llegar a la meta.",
+       "c": "Muy bien. Esta guía te ayuda a mantenerlo."
+      },
+      "sourceIds": []
+     }
+    },
+    {
+     "type": "text",
+     "title": "Primero, un objetivo chico",
+     "body": "Empieza por **un mes** de gastos esenciales. Cuando llegues, sigue hasta 3. Si tus ingresos son variables, conviene acercarse a 6."
+    },
+    {
+     "type": "text",
+     "title": "Separado y automático",
+     "body": "Ten el fondo en un **apartado separado** y aporta el día que cobras, antes de gastar. Lo que no ves en tu saldo disponible no se gasta por impulso."
+    },
+    {
+     "type": "text",
+     "title": "Si lo usas, se repone",
+     "body": "El fondo está para usarse en una **emergencia real**: un problema de salud o quedarte sin trabajo. Después, la prioridad es **reponerlo** antes de volver a otras metas."
+    },
+    {
+     "type": "text",
+     "title": "Dónde guardarlo",
+     "body": "Con liquidez en el día o en 24 horas y bajo riesgo, como una cuenta remunerada o un fondo money market. Ojo: si la cuenta de tu billetera \"rinde\", muchas veces el dinero está en un **fondo money market**, que no tiene la garantía de los depósitos y cuyo rendimiento varía todos los días."
+    },
+    {
+     "type": "example",
+     "title": "Ejemplo resuelto: cuándo llegas",
+     "steps": [
+      "Gastos esenciales: $ 600.000 por mes. Meta de 3 meses: $ 1.800.000.",
+      "Aportas $ 150.000 por mes: llegas en 12 meses ($ 1.800.000 ÷ $ 150.000).",
+      "Si sumas $ 300.000 de tu aguinaldo, te faltan $ 1.500.000: llegas en 10 meses, dos antes.",
+      "Cuando llegas, decides si sigues hasta 6 meses o pasas a otra meta."
+     ]
+    },
+    {
+     "type": "practice",
+     "question": {
+      "id": "m04-refill",
+      "moduleId": "module-04",
+      "type": "single",
+      "prompt": "Usaste la mitad de tu fondo por un problema de salud. ¿Qué haces ahora?",
+      "options": [
+       {
+        "id": "a",
+        "text": "Lo repongo antes de volver a otras metas"
+       },
+       {
+        "id": "b",
+        "text": "Lo dejo así: ya cumplió su función"
+       },
+       {
+        "id": "c",
+        "text": "Uso la otra mitad para unas vacaciones, total ya lo empecé a usar"
+       }
+      ],
+      "correctOptionIds": [
+       "a"
+      ],
+      "feedback": {
+       "a": "Correcto. Usarlo en una emergencia real es para lo que existe; después, reponerlo es la prioridad, porque la próxima emergencia no avisa.",
+       "b": "Cumplió su función, pero la próxima emergencia no avisa: la prioridad es reponerlo antes de otras metas.",
+       "c": "Las vacaciones van en otra meta. El fondo es solo para emergencias reales, y después de usarlo se repone."
+      },
+      "sourceIds": [
+       "A-35"
+      ]
+     }
+    },
+    {
+     "type": "takeaway",
+     "body": "Para tu vida: elige un monto fijo para tu fondo, aunque sea chico, y sepáralo el día que cobras."
+    }
+   ],
+   "sourceIds": [
+    "A-35",
+    "A-36",
+    "B-12",
+    "B-14",
+    "B-26"
+   ],
+   "review": {
+    "status": "draft",
+    "batch": 1,
+    "validated": [
+     "De 3 a 6 meses, solo para emergencias reales (A-35)",
+     "Liquidez en 24 horas y bajo riesgo: cuenta remunerada o fondo money market (A-36)"
+    ],
+    "extensions": [
+     "Empezar por un mes y aportar el día de cobro: criterio didáctico",
+     "Fondo money market sin garantía de los depósitos y con rendimiento que varía (B-12, B-14, B-26)",
+     "Ejemplo de cuándo llegas, con el aguinaldo, con números redondos"
+    ]
+   }
+  }
+ ]
+}

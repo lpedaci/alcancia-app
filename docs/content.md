@@ -12,6 +12,19 @@
 - **Ejemplos:** números redondos y ficticios; sin estadísticas inventadas.
 - **Fase A (D-61):** cada módulo tiene objetivo, **una guía completa** y su parte del banco de preguntas. Las guías 2 y 3 de cada módulo pasan a fase B.
 
+## Paso 27 · Tanda 1: guías 2 de los módulos 1 a 4 (D-276)
+
+Borradores en `src/data/guides-drafts.json`, **no visibles en la app** hasta la aprobación de Lourdes. Documento para revisar: [content-review/tanda-1.md](content-review/tanda-1.md) (se genera con `node scripts/guides-review.mjs 1`).
+
+| Módulo | Guía 2 | Validado | Ampliación, pendiente del Lic. Kevin Giampieri |
+| --- | --- | --- | --- |
+| 1 · Tu recibo de sueldo | "Aportes, contribuciones y aguinaldo" | Aportes, contribuciones, no remunerativas y costo laboral (T); contribuciones = costo laboral − bruto del mismo recibo ($ 611.917,28) | Aguinaldo: dos cuotas (30/6 y 18/12), cada una el 50 % de la mayor remuneración mensual del semestre (Ley 20.744, arts. 121 y 122, InfoLEG, verificado el 15/11/2026; fuente "LCT"); los aportes también se descuentan del aguinaldo |
+| 2 · Tu cerebro y el dinero | "Lo que cuesta de verdad" | Costo de oportunidad y el café de $ 5.000 (A-19), inflación del estilo de vida y minimalismo (A-15, A-16), tabú y disciplina (A-06, A-08) | Ejemplo del aumento con plan, con números redondos |
+| 3 · Presupuesto y gastos hormiga | "Un mes anotado" | Anotar todo un mes, gastos hormiga y suscripciones sin uso (A-34, A-15); fijos y variables (T) | Orden para ajustar un mes en rojo y "el ahorro va primero" (criterio didáctico) |
+| 4 · Fondo de emergencia | "Armarlo de a poco" | De 3 a 6 meses, solo emergencias reales (A-35); liquidez y bajo riesgo (A-36) | Empezar por un mes y aportar el día de cobro; fondo money market sin garantía y con rendimiento variable (B-12, B-14, B-26) |
+
+Siguen las tandas 2 (guías 2 de los módulos 5 a 8), 3 (módulos 9 a 11 y 17), 4 (módulos 12 a 15), 5 (guías 3 de todos) y los módulos 16 y 18 completos (F11) con el nivel 8 (F22).
+
 ## Resumen
 
 | Mód. | Título | Nivel | Dimensión | Fuente | Estado |

@@ -157,6 +157,7 @@ La billetera ficticia que muestra Alcancía integrada en otra app (D-75, D-84). 
 - Montos largos: si no entran, notación abreviada (`$ 12,3 M`) con el valor completo accesible.
 - Crédito: el CFT primero, junto a lo que se recibe y lo que se paga en total; "Tasa alta" en warning (D-178).
 - Datos clave con tono, metadatos en chips y consecuencias en avisos de color (D-183).
+- Listas de "lo que se ve" y "lo que nunca se ve" (aviso de privacidad, G5): lo permitido con `check_circle` en success y lo prohibido con `block` en error, con su mosaico del mismo tono; siempre con ícono y texto (D-275).
 - Escenarios, no promesas; supuestos a la vista; aviso legal: "Contenido educativo. No es asesoramiento financiero ni una recomendación de inversión."
 
 ## Seguridad y privacidad

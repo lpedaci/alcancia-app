@@ -68,7 +68,9 @@ export function ConsentPage() {
   const renderStep = (item: NoticeStep, titleId?: string) => (
     <>
       <div className="flex items-center gap-3">
-        <IconTile icon={item.icon} />
+        {/* What is never seen is a prohibition (error); what is seen or kept safe is fine (success).
+            Always with the icon and the text, never with color alone (D-275) */}
+        <IconTile icon={item.icon} tone={item.icon === "visibility_off" ? "error" : item.icon === "visibility" ? "success" : undefined} />
         <h2 id={titleId} className="text-title-large text-on-surface">
           {item.title}
         </h2>
@@ -82,7 +84,7 @@ export function ConsentPage() {
             <Icon
               name={item.icon === "visibility_off" ? "block" : "check_circle"}
               size={20}
-              className="mt-0.5 shrink-0 text-primary"
+              className={cn("mt-0.5 shrink-0", item.icon === "visibility_off" ? "text-error" : "text-success")}
             />
             {line}
           </li>
