@@ -101,3 +101,4 @@
 | 15/11/2026 | Ajuste de Lourdes | Celular del hero con cinco pantallas: cuenta, misión, tarjeta de aprendizaje, apartados y niveles (D-300) | Hecho |
 | 15/11/2026 | 27 · Contenido, tanda 4 | Guías 2 de los módulos 12, 13, 14 y 15 en borrador, validadas con tests y con los números calculados a mano, y documento `docs/content-review/tanda-4.md` | Esperando la revisión de Lourdes |
 | 15/11/2026 | 27 · Contenido, tanda 4 aprobada | Las guías 2 de los módulos 12, 13, 14 y 15 pasan a la app como guías para profundizar | Hecho |
+| 15/11/2026 | 27 · Contenido, tanda 5 | Guías 3 de los módulos 1, 2, 3 y 4 (tramo Bases) en borrador, validadas con tests y con los números calculados a mano, y documento `docs/content-review/tanda-5.md`. Las guías 3 se dividen por tramos: siguen las tandas 6 (deudas), 7 (ahorro e inflación) y 8 (invertir y billeteras) | Esperando la revisión de Lourdes |
