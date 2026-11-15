@@ -87,7 +87,7 @@ export function CohortCommunityCard({ personId, showLink = true }: { personId: s
       )}
       <p className="text-body-small text-on-surface-variant">{t('community.card.noRanking')}</p>
       {showLink && (
-        <Button asChild variant="tonal" leadingIcon="forum" className="self-start">
+        <Button asChild variant="tonal" leadingIcon="forum" className="h-auto min-h-10 max-w-full self-start py-2 text-left whitespace-normal">
           <Link to="/app/learn/community">{t('community.card.open', { count: threads })}</Link>
         </Button>
       )}

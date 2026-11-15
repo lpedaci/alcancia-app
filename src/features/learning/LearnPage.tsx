@@ -82,6 +82,9 @@ export function LearnPage() {
 
         <div className="grid grid-cols-[minmax(0,1fr)] gap-6 large:grid-cols-[minmax(0,2fr)_minmax(20rem,1fr)] large:items-start">
           {/* Timeline of levels */}
+          {/* The wide column holds the map and the achievements, so the two columns end at a similar
+              height and the page scrolls less (D-278). Same order on every width. */}
+          <div className="flex min-w-0 flex-col gap-6">
           <section aria-labelledby="map-title" className="flex flex-col gap-4 rounded-xl border border-outline-variant bg-surface-container-lowest p-3 sm:p-(--space-card-padding)">
             <h2 id="map-title" className="text-title-large text-on-surface">
               {t('learn.map.levels')}
@@ -173,25 +176,18 @@ export function LearnPage() {
               })}
             </ol>
           </section>
-
-          <div className="flex min-w-0 flex-col gap-6">
-            <DueReviews personId={personId} />
-            {/* The product context has no tutor (5.5): no weekly challenges and no questions to a tutor */}
-            {kind !== 'product' && <CohortCommunityCard personId={personId} />}
-            {kind !== 'product' && <WeeklyChallenges personId={personId} />}
-            {kind !== 'product' && <MyQuestions personId={personId} />}
             {/* Achievements */}
-            <section aria-labelledby="badges-title" className="flex flex-col gap-6 rounded-xl border border-outline-variant bg-surface-container-lowest p-(--space-card-padding)">
+            <section aria-labelledby="badges-title" className="@container flex flex-col gap-6 rounded-xl border border-outline-variant bg-surface-container-lowest p-(--space-card-padding)">
               <h2 id="badges-title" className="text-title-large text-on-surface">
                 {t('learn.map.achievements')}
               </h2>
-              <dl className="grid grid-cols-2 gap-3">
+              <dl className="grid grid-cols-2 gap-3 @xl:grid-cols-3">
                 {[
                   ['military_tech', t('learn.map.badgesCount'), `${badges.size}`],
                   ['flag', t('learn.map.missionsCount'), `${missionsDone}`],
                   ['lightbulb', t('learn.map.lights'), t('learn.map.lightsValue', { n: lights })],
                 ].map(([icon, label, value]) => (
-                  <div key={label} className="flex flex-col gap-1 rounded-lg bg-surface-container p-3 last:col-span-2">
+                  <div key={label} className="flex flex-col gap-1 rounded-lg bg-surface-container p-3 last:col-span-2 @xl:last:col-span-1">
                     <dt className="flex items-center gap-1.5 text-label-medium text-on-surface-variant">
                       <Icon name={icon as IconName} size={16} className="text-tertiary" />
                       {label}
@@ -201,7 +197,7 @@ export function LearnPage() {
                 ))}
               </dl>
               {/* D-236: only the first badges show, so the panel is not crowded; the rest behind "Ver todas" */}
-              <ul id="badges-list" className="flex flex-col gap-2" aria-label={t('learn.map.badges')}>
+              <ul id="badges-list" className="grid grid-cols-1 gap-2 @xl:grid-cols-2" aria-label={t('learn.map.badges')}>
                 {BADGE_MODULES.slice(0, showAllBadges ? undefined : BADGES_VISIBLE).map((m) => {
                   const earned = badges.has(m.id);
                   // D-210: a badge not earned says why and how to try again; the rule of D-57 does not change.
@@ -271,6 +267,14 @@ export function LearnPage() {
                 </Link>
               </div>
             </section>
+          </div>
+
+          <div className="flex min-w-0 flex-col gap-6">
+            <DueReviews personId={personId} />
+            {/* The product context has no tutor (5.5): no weekly challenges and no questions to a tutor */}
+            {kind !== 'product' && <CohortCommunityCard personId={personId} />}
+            {kind !== 'product' && <WeeklyChallenges personId={personId} />}
+            {kind !== 'product' && <MyQuestions personId={personId} />}
           </div>
         </div>
       </div>

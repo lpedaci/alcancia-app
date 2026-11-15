@@ -1574,8 +1574,8 @@
       "cardTitle": "Repasos",
       "cardIntro": "A los 7 y a los 30 días de cada guía, tres preguntas para no olvidar lo aprendido.",
       "empty": "No tienes repasos pendientes. Aparecen 7 días después de terminar una guía.",
-      "item_one": "A {{count}} día de la guía",
-      "item_other": "A {{count}} días de la guía",
+      "item_one": "A {{count}} día de la guía · 3 preguntas",
+      "item_other": "A {{count}} días de la guía · 3 preguntas",
       "start": "Repasar",
       "startFor": "Repasar {{title}}"
     }
@@ -4497,8 +4497,8 @@
     "card": {
       "title": "Tu cohorte",
       "noRanking": "Sin rankings: se ve el avance de toda la cohorte, nunca el de cada persona.",
-      "open_one": "Espacio de la cohorte · {{count}} conversación",
-      "open_other": "Espacio de la cohorte · {{count}} conversaciones"
+      "open_one": "Ver la conversación ({{count}})",
+      "open_other": "Ver las conversaciones ({{count}})"
     },
     "goal": {
       "title": "Meta colectiva",

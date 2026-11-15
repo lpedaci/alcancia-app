@@ -23,7 +23,9 @@
 | 3 · Presupuesto y gastos hormiga | "Un mes anotado" | Anotar todo un mes, gastos hormiga y suscripciones sin uso (A-34, A-15); fijos y variables (T) | Orden para ajustar un mes en rojo y "el ahorro va primero" (criterio didáctico) |
 | 4 · Fondo de emergencia | "Armarlo de a poco" | De 3 a 6 meses, solo emergencias reales (A-35); liquidez y bajo riesgo (A-36) | Empezar por un mes y aportar el día de cobro; fondo money market sin garantía y con rendimiento variable (B-12, B-14, B-26) |
 
-Siguen las tandas 2 (guías 2 de los módulos 5 a 8), 3 (módulos 9 a 11 y 17), 4 (módulos 12 a 15), 5 (guías 3 de todos) y los módulos 16 y 18 completos (F11) con el nivel 8 (F22).
+**Tanda 2 (borrador, esperando la revisión de Lourdes):** guías 2 de los módulos 5 a 8, "Antes de endeudarte", "Leer tu resumen", "La bola de nieve, paso a paso" y "Las cuotas se suman". Documento: [content-review/tanda-2.md](content-review/tanda-2.md).
+
+Siguen las tandas 3 (módulos 9 a 11 y 17), 4 (módulos 12 a 15), 5 (guías 3 de todos) y los módulos 16 y 18 completos (F11) con el nivel 8 (F22).
 
 ## Resumen
 
