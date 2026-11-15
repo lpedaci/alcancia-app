@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, useParams } from 'react-router';
+import { Link, useLocation, useNavigate, useParams } from 'react-router';
 import { DEMO_TODAY } from '@/app/config';
 import { Button } from '@/components/ui/Button';
 import { Icon } from '@/components/ui/Icon';
@@ -81,6 +81,7 @@ function ChallengeRunner({ challenge }: { challenge: ChallengeDef }) {
     return (
       <WalletShell section={t('wallet.nav.learn')} fuerte={{ state: 'thinking', message: fuerteLine('learn.challenge.fuerte') }}>
         <div className="flex flex-col gap-6">
+          <BackButton />
           <h1 className="text-headline-medium text-on-surface">{t('learn.challenge.locked', { title })}</h1>
           <UnlockCard status={status} />
         </div>
@@ -124,6 +125,9 @@ function ChallengeRunner({ challenge }: { challenge: ChallengeDef }) {
   return (
     <WalletShell section={t('wallet.nav.learn')} fuerte={{ state: result ? (result.score >= passing ? 'celebration' : 'thinking') : 'neutral', message: fuerteMessage }}>
       <div className="flex flex-col gap-6">
+        {/* The way back, top left and before the title (D-265); hidden while answering, where leaving
+            would lose the attempt in progress */}
+        {(!questions || result) && <BackButton />}
         {/* ---------- Intro ---------- */}
         {!questions && (
           <>
@@ -296,5 +300,25 @@ function ChallengeRunner({ challenge }: { challenge: ChallengeDef }) {
         )}
       </div>
     </WalletShell>
+  );
+}
+
+/**
+ * "Volver" (D-265): back to where the person came from (the level map, a section or "Conocerte");
+ * when the challenge was opened directly, back to Aprender.
+ */
+export function BackButton() {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const hasHistory = location.key !== 'default';
+  return hasHistory ? (
+    <Button variant="text" size="xs" leadingIcon="arrow_back" className="-ml-2 self-start" onClick={() => navigate(-1)}>
+      {t('learn.challenge.back')}
+    </Button>
+  ) : (
+    <Button asChild variant="text" size="xs" leadingIcon="arrow_back" className="-ml-2 self-start">
+      <Link to="/app/learn">{t('learn.challenge.backToLearn')}</Link>
+    </Button>
   );
 }

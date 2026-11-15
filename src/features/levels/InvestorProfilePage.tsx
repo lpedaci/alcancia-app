@@ -8,6 +8,7 @@ import { RadioGroup } from '@/components/ui/RadioGroup';
 import { WalletShell } from '@/features/wallet/WalletShell';
 import { type InvestorProfile, readLocal, writeLocal } from '@/store/local-store';
 import { useCurrentUser } from '@/store/session-store';
+import { BackButton } from '@/features/learning/ChallengePage';
 import { fuerteLine } from '@/features/companion/fuerte-lines';
 
 /**
@@ -45,6 +46,7 @@ export function InvestorProfilePage() {
   return (
     <WalletShell section={t('wallet.nav.learn')} fuerte={{ state: 'thinking', message: fuerteLine('wallet.profile.fuerte') }}>
       <div className="flex flex-col gap-6">
+        <BackButton />
         <header className="flex flex-col gap-2">
           <p className="text-label-large text-primary">{t('wallet.profile.kicker')}</p>
           <h1 className="text-headline-medium text-on-surface">{t('wallet.profile.title')}</h1>
