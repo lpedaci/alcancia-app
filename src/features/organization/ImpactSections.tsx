@@ -152,27 +152,50 @@ export function LearningSection({ data }: { data: OrgMetricsData }) {
           </div>
         </>
       )}
+      {/* Level challenges (D-298): one row per level with a stacked bar, first attempt over the total
+          that passed, in the same colors as the comparison above; the people count on the right and
+          the two percentages in one short line. One column on phones, two from 42rem of card. */}
       <div className="flex flex-col gap-3 border-t border-outline-variant pt-4">
-        <h3 className="text-title-medium text-on-surface">{t('org.k.l2.challenges')}</h3>
-        <ul className="grid grid-cols-[minmax(0,1fr)] gap-2 @2xl:grid-cols-2">
+        <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
+          <h3 className="text-title-medium text-on-surface">{t('org.k.l2.challenges')}</h3>
+          <ul aria-hidden className="flex flex-wrap items-center gap-x-4 gap-y-1 text-body-small text-on-surface-variant">
+            <li className="inline-flex items-center gap-1.5">
+              <span className="size-2.5 rounded-full bg-primary" />
+              {t('org.k.l2.firstLabel')}
+            </li>
+            <li className="inline-flex items-center gap-1.5">
+              <span className="size-2.5 rounded-full bg-[var(--chart-3)]" />
+              {t('org.k.l2.totalLabel')}
+            </li>
+          </ul>
+        </div>
+        <ul className="grid grid-cols-[minmax(0,1fr)] gap-x-8 @2xl:grid-cols-2">
           {results.map(({ levelId, result }) => (
-            <li key={levelId} className="flex flex-col gap-1.5 rounded-lg bg-surface-container p-3">
-              <span className="text-label-large text-on-surface">
-                {t('org.k.l2.level', {
-                  name: t(`wallet.sections.${levelId}`),
-                  n: levelId.replace('level-', ''),
-                })}
-              </span>
-              {result.status === 'ok' ? (
-                <span className="text-body-small text-on-surface-variant">
-                  {t('org.k.l2.passRates', {
-                    first: formatPercent(result.value.firstPass, {
-                      decimals: 0,
-                    }),
-                    passed: formatPercent(result.value.passed, { decimals: 0 }),
-                    count: result.count,
+            <li key={levelId} className="flex min-w-0 flex-col gap-1.5 border-b border-outline-variant py-3 last:border-b-0 @2xl:[&:nth-last-child(2):nth-child(odd)]:border-b-0">
+              <div className="flex items-baseline justify-between gap-3">
+                <span className="min-w-0 text-label-large text-on-surface">
+                  {t('org.k.l2.level', {
+                    name: t(`wallet.sections.${levelId}`),
+                    n: levelId.replace('level-', ''),
                   })}
                 </span>
+                {result.status === 'ok' && (
+                  <span className="shrink-0 text-body-small text-on-surface-variant tabular-nums">{t('org.k.l2.people', { count: result.count })}</span>
+                )}
+              </div>
+              {result.status === 'ok' ? (
+                <>
+                  <div aria-hidden className="relative h-2 overflow-hidden rounded-full bg-surface-container-high">
+                    <span className="absolute inset-y-0 left-0 rounded-full bg-[var(--chart-3)]" style={{ width: `${Number(result.value.passed) * 100}%` }} />
+                    <span className="absolute inset-y-0 left-0 rounded-full bg-primary" style={{ width: `${Number(result.value.firstPass) * 100}%` }} />
+                  </div>
+                  <span className="text-body-small text-on-surface-variant tabular-nums">
+                    {t('org.k.l2.passShort', {
+                      first: formatPercent(result.value.firstPass, { decimals: 0 }),
+                      passed: formatPercent(result.value.passed, { decimals: 0 }),
+                    })}
+                  </span>
+                </>
               ) : (
                 <StatusPill tone="neutral" icon="visibility_off" label={t('org.insufficientShort')} className="self-start" />
               )}

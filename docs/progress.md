@@ -96,3 +96,4 @@
 | 15/11/2026 | Ajuste de Lourdes | Fuerte avisa pendientes, problemas, inversiones, metas y avance, con cara acorde y panel tipo chat; encabezado del inicio equilibrado; botones "Ver más" a la derecha (D-290, D-291) | Hecho |
 | 15/11/2026 | Ajuste de Lourdes | "¿Por qué importa?" a la derecha del título (D-292), atajos de Pagar en fila y auditoría de todas las personas (D-293), condiciones como filas clickeables (D-294) y sistema de diseño actualizado con estos patrones | Hecho |
 | 15/11/2026 | Ajuste de Lourdes | Control segmentado suave en toda la app (D-295) | Hecho |
+| 15/11/2026 | Ajuste de Lourdes | Condición de movimientos enlazada (D-296), tablas como tarjetas en celular y tablet (D-297) y desafíos de nivel con barra apilada (D-298) | Hecho |

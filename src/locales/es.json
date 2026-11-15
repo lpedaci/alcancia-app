@@ -3204,7 +3204,12 @@
         "challenges": "Desafíos de nivel",
         "level": "Nivel {{n}} · {{name}}",
         "passRates_one": "{{first}} aprobó en el primer intento · {{passed}} aprobó en total ({{count}} persona)",
-        "passRates_other": "{{first}} aprobó en el primer intento · {{passed}} aprobó en total ({{count}} personas)"
+        "passRates_other": "{{first}} aprobó en el primer intento · {{passed}} aprobó en total ({{count}} personas)",
+        "firstLabel": "Aprobó en el primer intento",
+        "totalLabel": "Aprobó en total",
+        "passShort": "{{first}} en el primer intento · {{passed}} en total",
+        "people_one": "{{count}} persona",
+        "people_other": "{{count}} personas"
       },
       "l3": {
         "title": "Conducta",
@@ -4097,6 +4102,21 @@
         "D-295",
         "Control segmentado suave",
         "Riel en píldora con la opción elegida sobre blanco y un check en primary; nunca corta una etiqueta: si no entra, el riel se desplaza."
+      ],
+      [
+        "D-296",
+        "Cada condición lleva a su acción",
+        "\"Movimientos categorizados\" abre todos los movimientos en el inicio, donde se categorizan."
+      ],
+      [
+        "D-297",
+        "Tablas como tarjetas",
+        "En contenedores angostos cada fila es una tarjeta con su título y \"columna: valor\"; nada se desplaza de costado."
+      ],
+      [
+        "D-298",
+        "Resultados por nivel",
+        "Barra apilada de primer intento sobre total, con leyenda y los porcentajes en texto."
       ]
     ],
     "money": {

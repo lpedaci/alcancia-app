@@ -113,7 +113,9 @@ function ConditionLine({ status }: { status: ConditionStatus }) {
                 ? "/app/save/budget"
                 : key === "high_rate_debt"
                   ? "/app/pay/credit"
-                  : undefined;
+                  : key === "categorized_movements"
+                    ? "/app?focus=movements"
+                    : undefined;
   const label = key === "investor_profile_done" && !status.met ? t("wallet.unlock.doProfile") : text;
   const body = (
     <>

@@ -154,8 +154,8 @@ export function AdminHomePage() {
           </h2>
         </div>
         <p className="text-body-medium text-on-surface-variant">{t('org.cohorts.intro')}</p>
-        <TableContainer label={t('org.cohorts.title')}>
-          <Table>
+        <TableContainer label={t('org.cohorts.title')} stack>
+          <Table stack>
             <TableHead>
               <TableRow>
                 <TableHeaderCell className="text-left">{t('org.cohorts.cohort')}</TableHeaderCell>

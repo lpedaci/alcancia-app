@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, Navigate } from 'react-router';
+import { Link, Navigate, useSearchParams } from 'react-router';
 import { MoneyText } from '@/components/money/MoneyText';
 import { Button, buttonVariants } from '@/components/ui/Button';
 import { Tooltip } from '@/components/ui/Tooltip';
@@ -119,8 +119,21 @@ export function WalletHomePage() {
 
   // The last ones, and all of them on demand in a scrollable list (D-286)
   const allMovements = [...wallet.movements].reverse();
-  const [showAll, setShowAll] = useState(false);
+  const [showAllState, setShowAll] = useState(false);
+  // "Movimientos categorizados" in "Qué falta" opens them all here, where they are categorized (D-296)
+  const [params, setParams] = useSearchParams();
+  const focusMovements = params.get('focus') === 'movements';
+  const showAll = showAllState || focusMovements;
   const recent = showAll ? allMovements : allMovements.slice(0, RECENT_SHOWN);
+  useEffect(() => {
+    if (!focusMovements) return;
+    const frame = requestAnimationFrame(() => {
+      const title = document.getElementById('movements-title');
+      title?.scrollIntoView?.({ block: 'start', behavior: window.matchMedia?.('(prefers-reduced-motion: reduce)').matches === false ? 'smooth' : 'auto' });
+      title?.focus({ preventScroll: true });
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [focusMovements]);
 
   if (!accountOpened) return <Navigate to="/app/welcome" replace />;
 
@@ -346,7 +359,7 @@ export function WalletHomePage() {
         {/* Recent movements, with the category to confirm (D-114) */}
         <section aria-labelledby="movements-title" className={cn(card, '@container')}>
           <div className="flex items-center justify-between gap-2">
-            <h2 id="movements-title" className="text-title-medium text-on-surface @md:text-title-large">{t('wallet.home.movements.title')}</h2>
+            <h2 id="movements-title" tabIndex={-1} className="scroll-mt-24 outline-none text-title-medium text-on-surface @md:text-title-large">{t('wallet.home.movements.title')}</h2>
           </div>
           {recent.length === 0 ? (
             <p className="text-body-medium text-on-surface-variant">{t('wallet.home.movements.empty')}</p>
@@ -394,7 +407,10 @@ export function WalletHomePage() {
               className="-mr-3 self-end"
               aria-expanded={showAll}
               aria-controls="movements-list"
-              onClick={() => setShowAll(!showAll)}
+              onClick={() => {
+                setShowAll(!showAll);
+                if (focusMovements) setParams({}, { replace: true });
+              }}
             >
               {showAll ? t('wallet.home.movements.showLess') : t('wallet.home.movements.showAll', { count: allMovements.length })}
             </Button>

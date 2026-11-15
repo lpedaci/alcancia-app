@@ -94,8 +94,8 @@ export function ActivityPage() {
         <p className="text-body-small text-on-surface-variant" aria-live="polite">
           {t('org.activity.count', { count: list.length })}
         </p>
-        <TableContainer label={t('org.activity.logTitle')}>
-          <Table>
+        <TableContainer label={t('org.activity.logTitle')} stack>
+          <Table stack>
             <TableHead>
               <TableRow>
                 <TableHeaderCell className="text-left">{t('org.activity.cols.actor')}</TableHeaderCell>

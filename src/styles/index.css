@@ -309,3 +309,65 @@
 @utility fade-out-bottom {
   mask-image: linear-gradient(to bottom, black 62%, transparent 96%);
 }
+
+/*
+ * Tables as cards on narrow containers (D-297, CLAUDE.md 2.7: "Tablas en mobile como listas de
+ * tarjetas"). With `stack`, below 42rem of container each row is a card: the first cell is its title
+ * and every other cell shows its column name (data-label, filled from the header) and its value.
+ * The table keeps its roles, so screen readers still read it as a table.
+ */
+@container table-stack (max-width: 42rem) {
+  .table-stack thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .table-stack,
+  .table-stack tbody,
+  .table-stack tr,
+  .table-stack tbody th,
+  .table-stack td {
+    display: block;
+    width: 100%;
+  }
+  .table-stack tr {
+    padding: 0.75rem 1rem;
+  }
+  /* In a card nothing scrolls sideways: every text wraps, the title too */
+  .table-stack tbody th,
+  .table-stack td {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+  .table-stack td {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.25rem 0;
+    text-align: right;
+  }
+  .table-stack td::before {
+    content: attr(data-label);
+    flex-shrink: 0;
+    max-width: 55%;
+    text-align: left;
+    color: var(--color-on-surface-variant);
+    font-size: var(--text-body-small);
+    line-height: var(--text-body-small--line-height);
+  }
+  .table-stack tbody th,
+  .table-stack td:first-child {
+    padding: 0 0 0.375rem;
+    text-align: left;
+    font-size: var(--text-title-small);
+    line-height: var(--text-title-small--line-height);
+    font-weight: var(--text-title-small--font-weight);
+  }
+  .table-stack td:first-child::before {
+    content: none;
+  }
+}

@@ -159,6 +159,9 @@ La billetera ficticia que muestra Alcancía integrada en otra app (D-75, D-84). 
 
 - **Control segmentado (D-295, `SegmentedButton`):** riel en píldora `surface-container` con borde `outline-variant`; la opción elegida en `surface-container-lowest` con borde y check en `primary`. Cada opción mide su texto; si no entran, el riel se desplaza y nada se corta.
 
+- **Tablas como tarjetas (D-297, `TableContainer stack` + `Table stack`):** bajo 42 rem de contenedor cada fila es una tarjeta con la primera celda como título y "columna: valor" en las demás; nada se desplaza de costado. Las matrices (mapa de calor) quedan como tabla con desplazamiento interno.
+- **Resultados por nivel (D-298):** fila con nombre y cantidad de personas, barra apilada primer intento (`primary`) sobre total (`--chart-3`) con leyenda, y los dos porcentajes en texto.
+
 ### Valores reales (D-264)
 
 - **Tarjeta "Valores reales de hoy" (`RealValues`):** cada valor real en una celda con su nombre, la cifra en `title-large` y "Valor al DD/MM/AAAA · Fuente: …"; si no se pudo actualizar, lo dice. Abajo, el recordatorio de que lo que viene es un escenario y el aviso legal, y los enlaces a las fuentes oficiales. Sin snapshot, un aviso en `info` y la pantalla sigue con los escenarios de ejemplo.

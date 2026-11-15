@@ -191,6 +191,14 @@ describe('P1 and SIM-3 in the wallet (visual pilot)', () => {
     expect(await screen.findByText(/día 155 de la billetera/i)).toBeInTheDocument();
   });
 
+  it('"Movimientos categorizados" opens every movement where they are categorized (D-296)', async () => {
+    signInAs('p-diego');
+    renderAt('/app');
+    const card = await screen.findByRole('region', { name: 'Presupuesto' });
+    fireEvent.click(within(card).getByRole('link', { name: /Movimientos categorizados/ }));
+    expect(await screen.findByRole('button', { name: es.wallet.home.movements.showLess })).toBeInTheDocument();
+  });
+
   it('Mariana sees Invertir locked with its conditions and the profile test (D-67)', async () => {
     renderAt('/app');
     const card = await screen.findByRole('region', { name: 'Invertir' });
