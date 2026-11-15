@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { cn } from '@/lib/utils';
 import { Icon, type IconName } from './Icon';
 import { IconButton } from './IconButton';
-import { dismissToast, type ToastTone, useToasts } from './toast-store';
+import { dismissToast, holdToast, releaseToast, type ToastTone, useToasts } from './toast-store';
 
 const toneIcon: Record<ToastTone, IconName> = {
   success: 'check_circle',
@@ -21,7 +21,8 @@ export function Toaster() {
   const toasts = useToasts();
 
   return (
-    <Toast.Provider swipeDirection="down" duration={5000} label={t('ui.notificationsRegion')}>
+    <Toast.Provider swipeDirection="down" duration={Infinity} label={t('ui.notificationsRegion')}>
+      {/* The closing time is ours (toast-store, D-241), not Radix's: it does not depend on the window focus */}
       {toasts.map((item) => (
         <Toast.Root
           key={item.id}
@@ -29,6 +30,10 @@ export function Toaster() {
           onOpenChange={(open) => {
             if (!open) dismissToast(item.id);
           }}
+          onPointerEnter={() => holdToast(item.id)}
+          onPointerLeave={() => releaseToast(item.id)}
+          onFocus={() => holdToast(item.id)}
+          onBlur={() => releaseToast(item.id)}
           className={cn(
             // As wide as the message needs (Rumbo D-109): one line when it fits, two at most on phones.
             'flex w-fit max-w-full items-center gap-2 rounded-md bg-inverse-surface py-2 pr-1 pl-3 sm:gap-3 sm:pr-2 sm:pl-4 text-body-medium text-inverse-on-surface shadow-elevation-2',
