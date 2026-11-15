@@ -52,3 +52,4 @@
 | 14/11/2026 | Ajustes de Lourdes | Cada sección se abre arriba (D-231); módulos del programa en una tabla por nivel y barra de guardar fija (D-232) | Lourdes revisa |
 | 14/11/2026 | Ajustes de Lourdes | "Ya sé esto" arriba a la derecha en todas sus apariciones, registrado en el sistema de diseño (D-233); avance por nivel con scroll interno, más aire entre tarjetas de Resultados, Reacción y Conducta del mismo alto (D-234) | Lourdes revisa |
 | 14/11/2026 | Ajustes de Lourdes | "¿Por qué importa?" rediseñado para celular, tablet y escritorio, y "%" sin cortes (D-235); Logros con "Ver todas" (D-236) | Lourdes revisa |
+| 14/11/2026 | Ajustes de Lourdes | Barra inferior para el tutor y el admin, y margen del "%" en los campos (D-237); editar, cambiar el estado o quitar personas, editar o eliminar cohortes, y alertas que abren la lista filtrada (D-238) | Lourdes revisa |

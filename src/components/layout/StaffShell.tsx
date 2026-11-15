@@ -39,7 +39,7 @@ function readNavPref(): boolean | null {
  * the wallet (2.2.1, pattern 5; D-226): from 1200 px, a side menu that reaches the top with the logo,
  * the role's pages (active item in a pill) and the fold control, folding to icons and opening over
  * the page when the pointer rests on it (D-224); a floating top bar beside it with "Ver como", help
- * and the user menu. Below 1200 px, a plain top bar and the pages as tabs that scroll inside (2.7).
+ * and the user menu. Below 1200 px, a plain top bar and the pages in a bottom bar, as in the wallet (D-237).
  */
 export function StaffShell({ children, nav = [], home, navLabel }: { children: ReactNode; nav?: StaffNavItem[]; home: string; navLabel?: string }) {
   const { t } = useTranslation();
@@ -49,6 +49,10 @@ export function StaffShell({ children, nav = [], home, navLabel }: { children: R
   const [expandedPref, setExpandedPref] = useState<boolean | null>(readNavPref);
   const pinned = expandedPref ?? isLarge;
   const [peek, setPeek] = useState(false);
+  const [labelFor, setLabelFor] = useState<string | undefined>();
+  const pressTimer = useRef<number | undefined>(undefined);
+  const labelTimer = useRef<number | undefined>(undefined);
+  const longPressed = useRef(false);
   const peekTimer = useRef<number | undefined>(undefined);
   const expanded = pinned || peek;
   const startPeek = () => {
@@ -60,7 +64,14 @@ export function StaffShell({ children, nav = [], home, navLabel }: { children: R
     window.clearTimeout(peekTimer.current);
     setPeek(false);
   };
-  useEffect(() => () => window.clearTimeout(peekTimer.current), []);
+  useEffect(
+    () => () => {
+      window.clearTimeout(peekTimer.current);
+      window.clearTimeout(pressTimer.current);
+      window.clearTimeout(labelTimer.current);
+    },
+    [],
+  );
   const toggleNav = () => {
     endPeek();
     const value = !pinned;
@@ -126,23 +137,60 @@ export function StaffShell({ children, nav = [], home, navLabel }: { children: R
     );
   };
 
-  /** Tab below 1200 px. */
-  const tab = (n: StaffNavItem) => {
+  /** Bottom bar item below 1200 px (D-237): like the wallet's (D-228), icon with the indicator pill; the
+   * name for screen readers, in a tooltip with a pointer and in a bubble when held. */
+  const bottomItem = (n: StaffNavItem) => {
     const active = n.match(pathname);
     return (
-      <Link
-        key={n.key}
-        to={n.to}
-        aria-current={active ? 'page' : undefined}
-        className={cn(
-          'relative flex min-h-10 shrink-0 items-center gap-2 rounded-full px-3 text-label-large',
-          active ? 'bg-secondary-container text-on-secondary-container' : 'text-on-surface-variant hover:bg-surface-container',
-        )}
-      >
-        <Icon name={n.icon} filled={active} size={20} />
-        <span>{n.label}</span>
-        {badge(n, false)}
-      </Link>
+      <li key={n.key}>
+        <Tooltip content={n.label}>
+          <Link
+            to={n.to}
+            aria-current={active ? 'page' : undefined}
+            data-staff-bottom-item={n.key}
+            onPointerDown={(e) => {
+              if (e.pointerType === 'mouse') return;
+              longPressed.current = false;
+              window.clearTimeout(pressTimer.current);
+              pressTimer.current = window.setTimeout(() => {
+                longPressed.current = true;
+                setLabelFor(n.key);
+                window.clearTimeout(labelTimer.current);
+                labelTimer.current = window.setTimeout(() => setLabelFor(undefined), 1800);
+              }, 500);
+            }}
+            onPointerUp={() => window.clearTimeout(pressTimer.current)}
+            onPointerCancel={() => window.clearTimeout(pressTimer.current)}
+            onPointerLeave={() => window.clearTimeout(pressTimer.current)}
+            onContextMenu={(e) => e.preventDefault()}
+            onClick={(e) => {
+              if (longPressed.current) {
+                e.preventDefault();
+                longPressed.current = false;
+              }
+            }}
+            className="relative flex min-h-16 touch-manipulation items-center justify-center px-1 py-2 text-on-surface-variant select-none [-webkit-touch-callout:none] aria-[current=page]:text-on-surface"
+          >
+            <span className={cn('relative flex h-8 w-16 items-center justify-center rounded-full', active && 'bg-secondary-container text-on-secondary-container')}>
+              <Icon name={n.icon} size={24} filled={active} />
+              {n.badge && n.badge.count > 0 && (
+                <span aria-hidden className="absolute top-0 right-3 min-w-4 rounded-full bg-primary px-1 text-center text-label-small text-on-primary tabular-nums">
+                  {n.badge.count}
+                </span>
+              )}
+            </span>
+            <span className="sr-only">
+              {n.label}
+              {n.badge && n.badge.count > 0 && `, ${n.badge.label}`}
+            </span>
+            {labelFor === n.key && (
+              <span aria-hidden className="absolute bottom-full left-1/2 mb-1 -translate-x-1/2 rounded-md bg-inverse-surface px-3 py-1.5 text-label-medium whitespace-nowrap text-inverse-on-surface shadow-(--elevation-1)">
+                {n.label}
+              </span>
+            )}
+          </Link>
+        </Tooltip>
+      </li>
     );
   };
 
@@ -207,17 +255,24 @@ export function StaffShell({ children, nav = [], home, navLabel }: { children: R
               <span className="flex-1" />
               {actions}
             </div>
-            {hasNav && (
-              <nav aria-label={navLabel} className="large:hidden print:hidden">
-                <div className="flex gap-1 overflow-x-auto px-(--space-gutter) pb-2 medium:px-6">{nav.map(tab)}</div>
-              </nav>
-            )}
           </header>
-          <main id="main-content" tabIndex={-1} className="mx-auto flex w-full max-w-[120rem] min-w-0 flex-col gap-6 px-(--space-gutter) pt-6 pb-16 focus:outline-none medium:px-6 large:px-0 print:p-0">
+          <main id="main-content" tabIndex={-1} className={cn('mx-auto flex w-full max-w-[120rem] min-w-0 flex-col gap-6 px-(--space-gutter) pt-6 pb-16 focus:outline-none medium:px-6 large:px-0 print:p-0', hasNav && 'pb-28 large:pb-16')}>
             {children}
           </main>
         </div>
       </div>
+      {/* Below 1200 px the role's pages go in a bottom bar, as in the wallet (D-237) */}
+      {hasNav && (
+        <nav
+          aria-label={navLabel}
+          data-staff-bottom-nav
+          className="fixed inset-x-0 bottom-0 z-30 border-t border-outline-variant bg-surface-container-lowest pb-[env(safe-area-inset-bottom)] large:hidden print:!hidden"
+        >
+          <ul className="mx-auto grid max-w-xl" style={{ gridTemplateColumns: `repeat(${nav.length}, minmax(0, 1fr))` }}>
+            {nav.map(bottomItem)}
+          </ul>
+        </nav>
+      )}
     </div>
   );
 }

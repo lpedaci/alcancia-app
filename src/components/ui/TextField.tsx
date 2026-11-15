@@ -142,7 +142,10 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(function T
           )}
           {...props}
         />
-        {trailing && <div className="absolute right-1 flex items-center">{trailing}</div>}
+        {/* A text suffix (like "%") gets the same inner margin as the value; an icon button keeps its own target */}
+        {trailing && (
+          <div className={cn('absolute flex items-center', typeof trailing === 'string' ? 'pointer-events-none right-3 text-body-large text-on-surface-variant md:text-body-medium' : 'right-1')}>{trailing}</div>
+        )}
       </div>
 
       <p

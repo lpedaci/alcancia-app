@@ -84,8 +84,16 @@ interface DataState extends OrgData {
   updateProgram: (program: Program, privacyThreshold: number) => void;
   /** O2 and O3: people added one by one or by CSV, always invited first (F8). */
   addPeople: (people: Person[]) => void;
+  /** O2 (D-238): edit a person's data, or change their status (reactivate, deactivate). */
+  updatePerson: (personId: string, patch: Partial<Pick<Person, 'name' | 'email' | 'jobOrProgram' | 'cohortIds' | 'status'>>) => void;
+  /** O2 (D-238): remove a person from the program; their learning records leave the aggregates too. */
+  removePerson: (personId: string) => void;
   /** O2: a new cohort with its tutor and deadline (F8). */
   addCohort: (cohort: Cohort) => void;
+  /** O2 (D-238): edit a cohort's name, tutor or deadline. */
+  updateCohort: (cohortId: string, patch: Partial<Pick<Cohort, 'name' | 'tutorId' | 'dueDate'>>) => void;
+  /** O2 (D-238): remove an empty cohort (a cohort with people is never removed). */
+  removeCohort: (cohortId: string) => void;
   /** O4: due dates per cohort when the program is assigned (F1). */
   setCohortDueDates: (dueDates: Record<string, string | undefined>) => void;
 }
@@ -145,7 +153,33 @@ export const useDataStore = create<DataState>()(
       updateProgram: (program, privacyThreshold) =>
         set((state) => ({ program, organization: { ...state.organization, privacyThreshold: Math.max(5, Math.floor(privacyThreshold)) } })),
       addPeople: (people) => set((state) => ({ people: [...state.people, ...people] })),
+      updatePerson: (personId, patch) => set((state) => ({ people: state.people.map((p) => (p.id === personId ? { ...p, ...patch } : p)) })),
+      removePerson: (personId) =>
+        set((state) => ({
+          people: state.people.filter((p) => p.id !== personId),
+          guideProgress: state.guideProgress.filter((g) => g.personId !== personId),
+          challengeAttempts: state.challengeAttempts.filter((a) => a.personId !== personId),
+          itemResponses: state.itemResponses.filter((i) => i.personId !== personId),
+          levelLearning: state.levelLearning.filter((l) => l.personId !== personId),
+          missionCompletions: state.missionCompletions.filter((m) => m.personId !== personId),
+          weeklyReports: state.weeklyReports.filter((w) => w.personId !== personId),
+          followUps: state.followUps.filter((f) => f.personId !== personId),
+          diagnostics: state.diagnostics.filter((d) => d.personId !== personId),
+        })),
       addCohort: (cohort) => set((state) => ({ cohorts: [...state.cohorts, cohort] })),
+      updateCohort: (cohortId, patch) =>
+        set((state) => ({
+          cohorts: state.cohorts.map((c) => {
+            if (c.id !== cohortId) return c;
+            const next = { ...c, ...patch };
+            if (!next.dueDate) delete next.dueDate;
+            return next;
+          }),
+        })),
+      removeCohort: (cohortId) =>
+        set((state) =>
+          state.people.some((p) => p.role === 'participant' && p.cohortIds.includes(cohortId)) ? {} : { cohorts: state.cohorts.filter((c) => c.id !== cohortId) },
+        ),
       setCohortDueDates: (dueDates) =>
         set((state) => ({
           cohorts: state.cohorts.map((c) => {

@@ -2850,7 +2850,10 @@
       "due_soon_other": "El plazo de {{count}} cohortes vence en {{days}} días.",
       "hidden_one": "{{count}} cohorte tiene menos de 5 personas: sus cifras no se muestran.",
       "hidden_other": "{{count}} cohortes tienen menos de 5 personas: sus cifras no se muestran.",
-      "seePeople": "Ver personas"
+      "seePeople": "Ver personas",
+      "seeInvited": "Ver las personas invitadas",
+      "seeCohort": "Ver las personas de la cohorte",
+      "seeDeadlines": "Revisar los plazos"
     },
     "cohorts": {
       "title": "Adopción por cohorte",
@@ -2874,7 +2877,21 @@
       "tutor": "Tutoría: {{name}}",
       "due": "Fecha límite",
       "dueHelpAssigned": "El programa es asignado: elige una fecha desde hoy, en formato DD/MM/AAAA",
-      "dueHelpVoluntary": "El programa es voluntario: la fecha es opcional, en formato DD/MM/AAAA"
+      "dueHelpVoluntary": "El programa es voluntario: la fecha es opcional, en formato DD/MM/AAAA",
+      "actions": "Acciones sobre la cohorte {{name}}",
+      "edit": "Editar cohorte",
+      "seePeople": "Ver sus personas",
+      "remove": "Eliminar cohorte",
+      "removeBlocked_one": "Tiene {{count}} persona: muévela a otra cohorte antes.",
+      "removeBlocked_other": "Tiene {{count}} personas: muévelas a otra cohorte antes.",
+      "removeTitle": "¿Eliminar la cohorte {{name}}?",
+      "removeBody": "No tiene personas. Se elimina con su plazo y su tutoría. No se puede deshacer.",
+      "removeConfirm": "Eliminar cohorte",
+      "removed": "Cohorte {{name}} eliminada",
+      "editTitle": "Editar la cohorte {{name}}",
+      "editIntro": "Cambia su nombre, su tutoría o su plazo.",
+      "editSubmit": "Guardar cambios",
+      "edited": "Cohorte guardada"
     },
     "areas": {
       "operations": "Operaciones",
@@ -2962,7 +2979,28 @@
       "prev": "Anterior",
       "next": "Siguiente",
       "page": "Página {{n}} de {{total}}",
-      "statusHelp": "Muestra solo las personas en ese estado"
+      "statusHelp": "Muestra solo las personas en ese estado",
+      "actions": "Acciones sobre {{name}}",
+      "actionsCol": "Acciones",
+      "edit": "Editar datos",
+      "resend": "Reenviar invitación",
+      "deactivate": "Desactivar",
+      "deactivateHelp": "Deja de recibir recordatorios; su avance se conserva.",
+      "reactivate": "Reactivar",
+      "remove": "Quitar del programa",
+      "statusDone": {
+        "invited": "Invitación reenviada a {{name}}",
+        "inactive": "{{name}} quedó inactiva",
+        "active": "{{name}} quedó activa"
+      },
+      "removeTitle": "¿Quitar a {{name}} del programa?",
+      "removeBody": "Deja de ver la billetera y sus datos de aprendizaje salen de las cifras del programa. No se puede deshacer.",
+      "removeConfirm": "Quitar del programa",
+      "removed": "{{name}} ya no está en el programa",
+      "editTitle": "Editar a {{name}}",
+      "editIntro": "Los mismos datos que al agregarla. El correo tiene que ser único.",
+      "editSubmit": "Guardar cambios",
+      "edited": "Datos guardados"
     },
     "import": {
       "back": "Personas y cohortes",

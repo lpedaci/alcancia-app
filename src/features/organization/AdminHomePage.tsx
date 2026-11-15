@@ -121,9 +121,20 @@ export function AdminHomePage() {
                       name: cohortName(al.cohortId),
                     })}
                   </span>
+                  {/* Each alert opens what it talks about, already filtered (D-238) */}
                   {al.kind === 'invited' && (
-                    <Link to="/admin/people" className="w-fit text-label-large text-primary underline-offset-4 hover:underline">
-                      {t('org.alerts.seePeople')}
+                    <Link to="/admin/people?status=invited" className="w-fit text-label-large text-primary underline-offset-4 hover:underline">
+                      {t('org.alerts.seeInvited')}
+                    </Link>
+                  )}
+                  {al.kind === 'low_adoption' && al.cohortId && (
+                    <Link to={`/admin/people?cohort=${al.cohortId}`} className="w-fit text-label-large text-primary underline-offset-4 hover:underline">
+                      {t('org.alerts.seeCohort')}
+                    </Link>
+                  )}
+                  {al.kind === 'due_soon' && (
+                    <Link to="/admin/program" className="w-fit text-label-large text-primary underline-offset-4 hover:underline">
+                      {t('org.alerts.seeDeadlines')}
                     </Link>
                   )}
                 </span>
