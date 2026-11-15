@@ -88,3 +88,4 @@
 | 15/11/2026 | 27 · Contenido, tanda 2 aprobada | Las guías 2 de los módulos 5 a 8 pasan a la app como guías para profundizar; `scripts/guides-publish.mjs` publica cada tanda aprobada | Hecho |
 | 15/11/2026 | 27 · Contenido, tanda 3 | Guías 2 de los módulos 9, 10, 11 y 17 en borrador, validadas con tests, y documento `docs/content-review/tanda-3.md` | Esperando la revisión de Lourdes |
 | 15/11/2026 | 27 · Contenido, tanda 3 aprobada | Las guías 2 de los módulos 9, 10, 11 y 17 pasan a la app como guías para profundizar | Hecho |
+| 15/11/2026 | Ajuste de Lourdes | Landing: "La solución" como carrusel con pestañas (D-281), textos sin palabras solas y "Mis ahorros valen cada vez menos" (D-282), celular de "Aprende en cualquier lugar" más compacto (D-283) | Hecho |

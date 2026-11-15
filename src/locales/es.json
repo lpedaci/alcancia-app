@@ -46,7 +46,7 @@
         "savings": "Ahorro"
       },
       "inflation": {
-        "title": "La inflación se come mis ahorros",
+        "title": "Mis ahorros valen cada vez menos",
         "body": "El dinero quieto pierde poder de compra mes a mes.",
         "today": "Hoy",
         "later": "En 12 meses, al 3 % mensual"
@@ -73,7 +73,8 @@
             "\"Ya sé esto\" para saltar lo que dominas",
             "Tarjetas en el momento justo, también sin misión",
             "Lo bloqueado se ve, con lo que falta"
-          ]
+          ],
+          "tab": "Ruta"
         },
         "practice": {
           "titleStart": "Practicar con",
@@ -85,7 +86,8 @@
             "Doce herramientas con supuestos visibles",
             "Apartados y metas ajustados por inflación",
             "Trece misiones de 2 a 6 minutos"
-          ]
+          ],
+          "tab": "Práctica"
         },
         "tracking": {
           "titleStart": "Seguimiento",
@@ -99,7 +101,8 @@
             "Métricas solo con 5 personas o más",
             "Ningún monto sale del navegador",
             "Impacto con Kirkpatrick 1 a 3"
-          ]
+          ],
+          "tab": "Seguimiento"
         }
       },
       "levels": {
@@ -107,6 +110,14 @@
         "l2": "Nivel 2 · Pagar",
         "l3": "Nivel 3 · Presupuesto",
         "l4": "Nivel 4 · Apartados y metas"
+      },
+      "carousel": {
+        "label": "Cómo funciona Alcancía",
+        "role": "carrusel",
+        "slide": "diapositiva",
+        "tabs": "Elegir qué ver",
+        "pause": "Pausar el carrusel",
+        "play": "Reanudar el carrusel"
       }
     },
     "anywhere": {

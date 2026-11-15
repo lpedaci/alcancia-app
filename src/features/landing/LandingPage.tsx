@@ -26,6 +26,7 @@ import { FictitiousBrandChip } from '@/features/partner/FictitiousBrandChip';
 import { HorneroMark } from '@/features/partner/HorneroMark';
 import { CountUp, Reveal } from './Reveal';
 import { SegmentedButton } from '@/components/ui/SegmentedButton';
+import { SolutionCarousel } from './SolutionCarousel';
 import { ctx } from '@/lib/org-context';
 import type { OrganizationKind } from '@/types/domain';
 
@@ -244,18 +245,25 @@ export function LandingPage() {
               <Reveal as="li" key={key} delay={index * STAGGER} className={cn('flex min-w-0 flex-col gap-5 rounded-xl p-3 pb-6', tone)}>
                 <div className="flex min-h-36 flex-col justify-center rounded-lg border border-outline-variant bg-surface-container-lowest p-4">{scene}</div>
                 <div className="flex flex-col gap-2 px-3 text-center">
-                  <h3 className="text-title-medium text-on-surface">{t(`landing.problem.${key}.title`)}</h3>
-                  <p className="text-body-medium text-on-surface-variant">{t(`landing.problem.${key}.body`)}</p>
+                  <h3 className="text-title-medium text-balance text-on-surface">{t(`landing.problem.${key}.title`)}</h3>
+                  <p className="text-body-medium text-balance text-on-surface-variant">{t(`landing.problem.${key}.body`)}</p>
                 </div>
               </Reveal>
             ))}
           </ul>
         </Section>
 
-        {/* 4 · The solution: alternating feature rows with a numbered list */}
+        {/* 4 · The solution: a carousel with tabs, one feature at a time (D-281) */}
         <Section id="solucion">
           <SectionTitle id="solucion" eyebrow={t('landing.solution.eyebrow')} title={t('landing.solution.title')} intro={t('landing.solution.intro')} />
-          <ul className="-mb-6 flex flex-col gap-(--space-bento-gap) md:-mb-8">
+          <Reveal className="-mb-6 md:-mb-8">
+            <SolutionCarousel
+              label={t('landing.solution.carousel.label')}
+              slides={[
+                {
+                  key: 'route',
+                  tab: t('landing.solution.rows.route.tab'),
+                  content: (
             <FeatureRow rowKey="route">
               <div className="flex flex-col gap-4 rounded-lg border border-outline-variant bg-surface-container-lowest p-5 sm:flex-row sm:items-end sm:justify-between">
                 <PieceLevelMap />
@@ -270,12 +278,24 @@ export function LandingPage() {
                 </div>
               </div>
             </FeatureRow>
+                  ),
+                },
+                {
+                  key: 'practice',
+                  tab: t('landing.solution.rows.practice.tab'),
+                  content: (
             <FeatureRow rowKey="practice" reverse>
               <div className="grid gap-3 sm:grid-cols-2">
                 <PieceSimResult />
                 <PieceGoal />
               </div>
             </FeatureRow>
+                  ),
+                },
+                {
+                  key: 'tracking',
+                  tab: t('landing.solution.rows.tracking.tab'),
+                  content: (
             <FeatureRow rowKey="tracking">
               <div className="grid gap-3 sm:grid-cols-2">
                 <PieceKpi />
@@ -288,7 +308,11 @@ export function LandingPage() {
                 </div>
               </div>
             </FeatureRow>
-          </ul>
+                  ),
+                },
+              ]}
+            />
+          </Reveal>
 
           {/* 5 · Learn anywhere: the same guide on a computer and on a real-size phone */}
           <Reveal>
@@ -308,8 +332,9 @@ export function LandingPage() {
                   ))}
                 </ul>
               </div>
-              <figure className="mx-auto flex w-80 max-w-full flex-col items-center gap-3">
-                <PhoneFrame label={t('landing.anywhere.phoneLabel')}>
+              {/* A smaller, shorter phone: the section stays about one screen tall (D-283) */}
+              <figure className="mx-auto flex w-72 max-w-full flex-col items-center gap-3">
+                <PhoneFrame label={t('landing.anywhere.phoneLabel')} className="w-72" compact>
                   <StatusBar />
                   <AppTopBar person="diego" />
                   <div className="flex min-h-0 flex-1 flex-col gap-3 overflow-hidden px-3.5 py-3">
@@ -695,7 +720,7 @@ function FeatureRow({ rowKey, reverse = false, children }: { rowKey: 'route' | '
   const base = `landing.solution.rows.${rowKey}`;
   const items = t(`${base}.items`, { returnObjects: true }) as string[];
   return (
-    <Reveal as="li" className="grid items-center gap-10 rounded-xl bg-surface-container p-5 md:p-10 lg:grid-cols-2 lg:gap-14">
+    <div className="grid h-full items-center gap-10 rounded-xl bg-surface-container p-5 md:p-10 lg:grid-cols-2 lg:gap-14">
       <div className={cn('relative min-w-0 pt-6', reverse && 'lg:order-2')} aria-hidden>
         {/* Floating tag on the visual (reference: the blue amount tag), flat */}
         <span className="absolute top-0 left-4 z-10 rounded-md bg-primary px-3 py-1.5 text-label-large text-on-primary">{t(`${base}.chip`)}</span>
@@ -717,7 +742,7 @@ function FeatureRow({ rowKey, reverse = false, children }: { rowKey: 'route' | '
           ))}
         </ol>
       </div>
-    </Reveal>
+    </div>
   );
 }
 

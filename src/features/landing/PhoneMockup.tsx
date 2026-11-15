@@ -28,10 +28,11 @@ const ACTIVE_MISSION = 'El préstamo tentador';
  * Never a screenshot and never a real wallet's look (1.1.1). The whole phone is one image for
  * assistive tech: its label says which screen it shows.
  */
-export function PhoneFrame({ children, label, className }: { children: ReactNode; label: string; className?: string }) {
+/** `compact`: a shorter screen (9:17.5) for sections where the full height only adds empty space (D-283). */
+export function PhoneFrame({ children, label, className, compact = false }: { children: ReactNode; label: string; className?: string; compact?: boolean }) {
   return (
     <div role="img" aria-label={label} className={cn('relative mx-auto w-80 max-w-full shrink-0 rounded-2xl bg-on-surface p-2.5', className)}>
-      <div className="relative flex aspect-[9/19] flex-col overflow-hidden rounded-[calc(var(--radius-2xl)-0.625rem)] bg-surface">
+      <div className={cn('relative flex flex-col overflow-hidden rounded-[calc(var(--radius-2xl)-0.625rem)] bg-surface', compact ? 'aspect-[9/17.5]' : 'aspect-[9/19]')}>
         {/* Camera island */}
         <span aria-hidden className="absolute top-2 left-1/2 z-10 h-5 w-20 -translate-x-1/2 rounded-full bg-on-surface" />
         {children}

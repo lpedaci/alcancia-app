@@ -46,7 +46,7 @@
         "savings": "Savings"
       },
       "inflation": {
-        "title": "Inflation eats my savings",
+        "title": "My savings are worth less and less",
         "body": "Idle money loses purchasing power month after month.",
         "today": "Today",
         "later": "In 12 months, at 3 % monthly"
@@ -73,7 +73,8 @@
             "\"I know this\" to skip what you master",
             "Just-in-time cards, even without a mission",
             "Locked sections show what is missing"
-          ]
+          ],
+          "tab": "Path"
         },
         "practice": {
           "titleStart": "Practice with",
@@ -85,7 +86,8 @@
             "Twelve tools with visible assumptions",
             "Pockets and goals adjusted for inflation",
             "Thirteen missions of 2 to 6 minutes"
-          ]
+          ],
+          "tab": "Practice"
         },
         "tracking": {
           "titleStart": "Tracking",
@@ -99,7 +101,8 @@
             "Metrics only with 5 people or more",
             "No amount leaves the browser",
             "Impact with Kirkpatrick levels 1 to 3"
-          ]
+          ],
+          "tab": "Tracking"
         }
       },
       "levels": {
@@ -107,6 +110,14 @@
         "l2": "Level 2 · Pay",
         "l3": "Level 3 · Budget",
         "l4": "Level 4 · Pockets and goals"
+      },
+      "carousel": {
+        "label": "How Alcancía works",
+        "role": "carousel",
+        "slide": "slide",
+        "tabs": "Choose what to see",
+        "pause": "Pause the carousel",
+        "play": "Resume the carousel"
       }
     },
     "anywhere": {
