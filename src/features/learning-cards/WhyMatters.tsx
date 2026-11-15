@@ -1,6 +1,7 @@
 import { useId, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router';
+import { Button } from '@/components/ui/Button';
 import { Icon } from '@/components/ui/Icon';
 import { SourceList } from '@/features/learning/SourceList';
 import { cn } from '@/lib/utils';
@@ -35,16 +36,17 @@ export function WhyMatters({ screen, className }: { screen: WhyScreen; className
       {open && (
         <div id={panelId} className="@container rounded-lg border border-outline-variant bg-tertiary-container p-4 text-on-tertiary-container md:p-5">
           {/* Full width (Lourdes, 14/11/2026): the concept first and, beside it when there is room, where to go next */}
-          <div className="grid grid-cols-[minmax(0,1fr)] gap-4 @3xl:grid-cols-[minmax(0,3fr)_minmax(16rem,2fr)] @3xl:gap-6">
-            <div className="flex min-w-0 flex-col gap-3">
-              <p className="max-w-prose text-body-large">{why.body}</p>
-              <Link to={guideHref(why.guide, pathname)} onClick={() => rememberScroll(pathname)} className="inline-flex min-h-12 w-fit items-center gap-1.5 text-label-large underline underline-offset-4 md:min-h-6">
-                <Icon name="menu_book" size={18} />
-                {t('cards.toGuide')}
-              </Link>
-            </div>
-            <div className="min-w-0 @3xl:border-l @3xl:border-on-tertiary-container/15 @3xl:pl-6">
-              <SourceList codes={why.sourceIds} legal={false} />
+          {/* D-235: the concept first; then one clear action (the exact part of the guide) and the
+              sources in a single compact line. From wide tablets, the concept left and both on the right. */}
+          <div className="grid grid-cols-[minmax(0,1fr)] gap-4 @3xl:grid-cols-[minmax(0,3fr)_minmax(16rem,2fr)] @3xl:items-center @3xl:gap-6">
+            <p className="max-w-prose text-body-large">{why.body}</p>
+            <div className="flex min-w-0 flex-col gap-3 border-t border-on-tertiary-container/15 pt-4 @3xl:border-t-0 @3xl:border-l @3xl:pt-0 @3xl:pl-6">
+              <Button asChild variant="outlined" size="s" leadingIcon="menu_book" className="w-full bg-surface-container-lowest sm:w-fit">
+                <Link to={guideHref(why.guide, pathname)} onClick={() => rememberScroll(pathname)}>
+                  {t('cards.toGuide')}
+                </Link>
+              </Button>
+              <SourceList codes={why.sourceIds} variant="footer" className="bg-transparent p-0" />
             </div>
           </div>
         </div>

@@ -39,6 +39,7 @@ import {
   route,
   scoreKnowledge,
 } from "./conocerte";
+import { MasteryButton } from "@/features/levels/MasteryButton";
 import { fuerteLine } from '@/features/companion/fuerte-lines';
 
 /**
@@ -506,7 +507,7 @@ function Route({ scores }: { scores: Record<Dimension, number> }) {
           return (
             <li
               key={d}
-              className="flex flex-wrap items-center gap-3 rounded-lg bg-surface-container px-4 py-3"
+              className="flex items-start gap-3 rounded-lg bg-surface-container px-4 py-3"
             >
               <span
                 aria-hidden
@@ -526,11 +527,10 @@ function Route({ scores }: { scores: Record<Dimension, number> }) {
                 </span>
               </span>
               {advanced && locked && (
-                <Button asChild variant="tonal" size="xs" leadingIcon="bolt">
-                  <Link to={LEVEL_ROUTE[levelId] ?? "/app/learn"}>
-                    {t("welcome.result.mastery")}
-                  </Link>
-                </Button>
+                <MasteryButton
+                  to={LEVEL_ROUTE[levelId] ?? "/app/learn"}
+                  section={t(`wallet.sections.${levelId}`)}
+                />
               )}
             </li>
           );

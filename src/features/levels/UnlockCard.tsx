@@ -6,6 +6,7 @@ import { ProgressBar } from "@/components/ui/ProgressBar";
 import { formatNumber, NBSP } from "@/lib/money";
 import { cn } from "@/lib/utils";
 import type { ConditionStatus, LevelStatus } from "./engine";
+import { MasteryButton } from "./MasteryButton";
 import { MISSIONS } from "./use-levels";
 
 /** Route of the section each level opens (5.3). */
@@ -167,19 +168,20 @@ export function UnlockCard({
     <section
       aria-labelledby={titleId}
       className={cn(
-        "flex min-w-0 flex-col gap-5 rounded-xl border border-outline-variant bg-surface-container-lowest p-(--space-card-padding)",
+        "@container flex min-w-0 flex-col gap-5 rounded-xl border border-outline-variant bg-surface-container-lowest p-(--space-card-padding)",
         className,
       )}
     >
       {/* Hierarchy (D-170): what is next, why it matters, how far you are and what is missing */}
-      <div className="flex items-center gap-3">
+      <div className="flex flex-wrap items-start gap-3">
+        {/* The padlock is decorative: on narrow cards it gives its place to the title and the button */}
         <span
           aria-hidden
-          className="flex size-12 shrink-0 items-center justify-center rounded-lg bg-surface-container text-on-surface-variant"
+          className="hidden size-12 shrink-0 items-center justify-center rounded-lg bg-surface-container text-on-surface-variant @md:flex"
         >
           <Icon name="lock" size={24} />
         </span>
-        <div className="flex min-w-0 flex-1 flex-col gap-1">
+        <div className="flex min-w-[8rem] flex-1 flex-col gap-1">
           <p className="text-label-medium text-on-surface-variant">
             {t("wallet.unlock.kicker", { level: status.level.order })}
           </p>
@@ -187,6 +189,15 @@ export function UnlockCard({
             {section}
           </Heading>
         </div>
+        {/* "Ya sé esto" (5.0, D-233): top right of the card, next to the title */}
+        {status.level.masteryChallengeId &&
+          CHALLENGE_IDS.has(status.level.masteryChallengeId) && (
+            <MasteryButton
+              to={`/app/learn/challenges/${status.level.masteryChallengeId}`}
+              section={section}
+              className="ml-auto"
+            />
+          )}
       </div>
       <p className="max-w-prose text-body-medium text-on-surface-variant">
         {status.level.id === "level-7"
@@ -220,17 +231,6 @@ export function UnlockCard({
             </li>
           ))}
       </ul>
-      {/* "Ya sé esto" (5.0): the mastery challenge opens the section without the previous levels */}
-      {status.level.masteryChallengeId &&
-        CHALLENGE_IDS.has(status.level.masteryChallengeId) && (
-          <Link
-            to={`/app/learn/challenges/${status.level.masteryChallengeId}`}
-            className="inline-flex min-h-10 items-center gap-2 self-start rounded-sm px-1 text-label-large text-primary hover:underline"
-          >
-            <Icon name="bolt" size={18} />
-            {t("wallet.unlock.mastery")}
-          </Link>
-        )}
     </section>
   );
 }

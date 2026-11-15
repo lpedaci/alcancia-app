@@ -16,6 +16,7 @@ import { useDataStore } from '@/store/data-store';
 import { useCurrentUser } from '@/store/session-store';
 import { challengeById, guideOfModule, MODULES, moduleById } from './questions';
 import { MyQuestions, WeeklyChallenges } from './Tutoring';
+import { MasteryButton } from '@/features/levels/MasteryButton';
 import { fuerteLine } from '@/features/companion/fuerte-lines';
 
 /**
@@ -28,8 +29,13 @@ const STATE_ICON: Record<LevelStatus['status'], IconName> = { completed: 'check_
 const STATE_TONE = { completed: 'success', unlocked: 'primary', locked: 'neutral' } as const;
 const pct = (n: number) => `${Math.round(n * 100)}${NBSP}%`;
 
+/** Badges listed in Logros, and how many show before "Ver todas" (D-236). */
+const BADGE_MODULES = MODULES.filter((m) => m.phase === 'A' && guideOfModule(m.id));
+const BADGES_VISIBLE = 4;
+
 export function LearnPage() {
   const { t } = useTranslation();
+  const [showAllBadges, setShowAllBadges] = useState(false);
   const user = useCurrentUser();
   const personId = user?.personId ?? '';
   const { statuses, current, wallet, isOpen } = useLevels(personId);
@@ -105,18 +111,38 @@ export function LearnPage() {
                     >
                       <Icon name={STATE_ICON[s.status]} size={20} filled={s.status === 'completed'} />
                     </span>
-                    <div className={cn('flex min-w-0 flex-1 flex-col gap-4 rounded-lg p-3 sm:p-4', isCurrent ? 'border border-primary bg-primary-container/40' : 'border border-transparent')}>
-                      <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-                        <h3 className="text-title-medium text-on-surface">{t('learn.map.levelName', { n: s.level.order, name })}</h3>
-                        {phaseB ? (
-                          <StatusPill tone="neutral" icon="schedule" label={t('learn.map.phaseB')} />
-                        ) : (
-                          <StatusPill tone={STATE_TONE[s.status]} icon={STATE_ICON[s.status]} label={isCurrent ? t('learn.map.current') : t(`learn.map.state.${s.status}`)} />
-                        )}
+                    <div
+                      className={cn(
+                        '@container flex min-w-0 flex-1 flex-col gap-4 rounded-lg p-3 sm:p-4',
+                        isCurrent ? 'border border-primary bg-primary-container/40' : 'border border-transparent',
+                      )}
+                    >
+                      <div className="flex flex-wrap items-start gap-x-3 gap-y-2 @md:flex-nowrap">
+                        <div className="flex min-w-0 basis-full flex-wrap items-center gap-x-3 gap-y-1 @md:basis-auto @md:flex-1">
+                          <h3 className="text-title-medium text-on-surface">{t('learn.map.levelName', { n: s.level.order, name })}</h3>
+                          {phaseB ? (
+                            <StatusPill tone="neutral" icon="schedule" label={t('learn.map.phaseB')} />
+                          ) : (
+                            <StatusPill tone={STATE_TONE[s.status]} icon={STATE_ICON[s.status]} label={isCurrent ? t('learn.map.current') : t(`learn.map.state.${s.status}`)} />
+                          )}
+                        </div>
                         {!phaseB && (
-                          <Button variant="text" size="xs" className="ml-auto" trailingIcon={expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down'} aria-expanded={expanded} onClick={() => toggle(s.level.id)}>
-                            {expanded ? t('learn.map.hide') : t('learn.map.show')}
-                          </Button>
+                          <span className="ml-auto flex shrink-0 items-center gap-2">
+                            {/* "Ya sé esto" (D-233): top right of the level, next to its toggle */}
+                            {s.status === 'locked' && s.level.masteryChallengeId && challengeById(s.level.masteryChallengeId) && (
+                              <MasteryButton to={`/app/learn/challenges/${s.level.masteryChallengeId}`} section={name} />
+                            )}
+                            <Button
+                              variant="text"
+                              size="xs"
+                              trailingIcon={expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}
+                              aria-expanded={expanded}
+                              onClick={() => toggle(s.level.id)}
+                            >
+                              {/* On narrow levels the toggle is its chevron only; the text stays for screen readers */}
+                              <span className="sr-only @md:not-sr-only">{expanded ? t('learn.map.hide') : t('learn.map.show')}</span>
+                            </Button>
+                          </span>
                         )}
                       </div>
                       <AnimatePresence initial={false}>
@@ -141,76 +167,99 @@ export function LearnPage() {
           </section>
 
           <div className="flex min-w-0 flex-col gap-6">
-          <WeeklyChallenges personId={personId} />
-          <MyQuestions personId={personId} />
-          {/* Achievements */}
-          <section aria-labelledby="badges-title" className="flex flex-col gap-6 rounded-xl border border-outline-variant bg-surface-container-lowest p-(--space-card-padding)">
-            <h2 id="badges-title" className="text-title-large text-on-surface">
-              {t('learn.map.achievements')}
-            </h2>
-            <dl className="grid grid-cols-2 gap-3">
-              {[
-                ['military_tech', t('learn.map.badgesCount'), `${badges.size}`],
-                ['flag', t('learn.map.missionsCount'), `${missionsDone}`],
-                ['lightbulb', t('learn.map.lights'), t('learn.map.lightsValue', { n: lights })],
-              ].map(([icon, label, value]) => (
-                <div key={label} className="flex flex-col gap-1 rounded-lg bg-surface-container p-3 last:col-span-2">
-                  <dt className="flex items-center gap-1.5 text-label-medium text-on-surface-variant">
-                    <Icon name={icon as IconName} size={16} className="text-tertiary" />
-                    {label}
-                  </dt>
-                  <dd className="text-title-large text-on-surface tabular-nums">{value}</dd>
-                </div>
-              ))}
-            </dl>
-            <ul className="flex flex-col gap-2" aria-label={t('learn.map.badges')}>
-              {MODULES.filter((m) => m.phase === 'A' && guideOfModule(m.id)).map((m) => {
-                const earned = badges.has(m.id);
-                // D-210: a badge not earned says why and how to try again; the rule of D-57 does not change.
-                const level = statuses.find((s) => s.level.id === moduleById(m.id)?.levelId)?.level;
-                const part = attempts.reduce<number | undefined>((best, a) => (a.moduleScores[m.id] === undefined ? best : Math.max(best ?? 0, a.moduleScores[m.id]!)), undefined);
-                const why = earned
-                  ? undefined
-                  : part === undefined
-                    ? t('learn.map.badgeHow', { level: level?.order })
-                    : t('learn.map.badgeBelow', { part: pct(part), passing: pct(passing), level: level?.order });
-                return (
-                  <li key={m.id} className={cn('flex flex-col gap-1 rounded-lg px-3 py-2', earned ? 'bg-tertiary-container text-on-tertiary-container' : 'border border-dashed border-outline-variant text-on-surface-variant')}>
-                    <span className="flex items-center gap-3">
-                      <Icon name="military_tech" size={20} filled={earned} />
-                      <span className="min-w-0 flex-1 text-body-medium">{t('learn.challenge.module', { n: m.order, title: m.title })}</span>
-                      <span className="text-label-medium">{earned ? t('learn.map.earned') : t('learn.map.notEarned')}</span>
-                    </span>
-                    {why && (
-                      <span className="pl-8 text-body-small">
-                        {why}{' '}
-                        {level?.challengeId && isOpen(level.id) && (
-                          <Link to={`/app/learn/challenges/${level.challengeId}`} className="text-primary underline underline-offset-2">
-                            {t('learn.map.badgeTry', { level: level.order })}
-                          </Link>
-                        )}
+            <WeeklyChallenges personId={personId} />
+            <MyQuestions personId={personId} />
+            {/* Achievements */}
+            <section aria-labelledby="badges-title" className="flex flex-col gap-6 rounded-xl border border-outline-variant bg-surface-container-lowest p-(--space-card-padding)">
+              <h2 id="badges-title" className="text-title-large text-on-surface">
+                {t('learn.map.achievements')}
+              </h2>
+              <dl className="grid grid-cols-2 gap-3">
+                {[
+                  ['military_tech', t('learn.map.badgesCount'), `${badges.size}`],
+                  ['flag', t('learn.map.missionsCount'), `${missionsDone}`],
+                  ['lightbulb', t('learn.map.lights'), t('learn.map.lightsValue', { n: lights })],
+                ].map(([icon, label, value]) => (
+                  <div key={label} className="flex flex-col gap-1 rounded-lg bg-surface-container p-3 last:col-span-2">
+                    <dt className="flex items-center gap-1.5 text-label-medium text-on-surface-variant">
+                      <Icon name={icon as IconName} size={16} className="text-tertiary" />
+                      {label}
+                    </dt>
+                    <dd className="text-title-large text-on-surface tabular-nums">{value}</dd>
+                  </div>
+                ))}
+              </dl>
+              {/* D-236: only the first badges show, so the panel is not crowded; the rest behind "Ver todas" */}
+              <ul id="badges-list" className="flex flex-col gap-2" aria-label={t('learn.map.badges')}>
+                {BADGE_MODULES.slice(0, showAllBadges ? undefined : BADGES_VISIBLE).map((m) => {
+                  const earned = badges.has(m.id);
+                  // D-210: a badge not earned says why and how to try again; the rule of D-57 does not change.
+                  const level = statuses.find((s) => s.level.id === moduleById(m.id)?.levelId)?.level;
+                  const part = attempts.reduce<number | undefined>(
+                    (best, a) => (a.moduleScores[m.id] === undefined ? best : Math.max(best ?? 0, a.moduleScores[m.id]!)),
+                    undefined,
+                  );
+                  const why = earned
+                    ? undefined
+                    : part === undefined
+                      ? t('learn.map.badgeHow', { level: level?.order })
+                      : t('learn.map.badgeBelow', { part: pct(part), passing: pct(passing), level: level?.order });
+                  return (
+                    <li
+                      key={m.id}
+                      className={cn(
+                        'flex flex-col gap-1 rounded-lg px-3 py-2',
+                        earned ? 'bg-tertiary-container text-on-tertiary-container' : 'border border-dashed border-outline-variant text-on-surface-variant',
+                      )}
+                    >
+                      <span className="flex items-center gap-3">
+                        <Icon name="military_tech" size={20} filled={earned} />
+                        <span className="min-w-0 flex-1 text-body-medium">{t('learn.challenge.module', { n: m.order, title: m.title })}</span>
+                        <span className="text-label-medium">{earned ? t('learn.map.earned') : t('learn.map.notEarned')}</span>
                       </span>
-                    )}
-                  </li>
-                );
-              })}
-            </ul>
-            <p className="-mt-3 text-body-small text-on-surface-variant">{t('learn.map.badgesNote')}</p>
-            <div className="flex flex-col gap-3 border-t border-outline-variant pt-5">
-              <Link to="/app/welcome" className="inline-flex items-center gap-2 text-label-large text-primary hover:underline">
-                <Icon name="person" size={18} />
-                {t('learn.map.conocerte')}
-              </Link>
-              <Link to="/app/learn/investor-profile" className="inline-flex items-center gap-2 text-label-large text-primary hover:underline">
-                <Icon name="psychology" size={18} />
-                {t('learn.map.profile')}
-              </Link>
-              <Link to="/app/tools/SIM-3" className="inline-flex items-center gap-2 text-label-large text-primary hover:underline">
-                <Icon name="calculate" size={18} />
-                {t('learn.map.tools')}
-              </Link>
-            </div>
-          </section>
+                      {why && (
+                        <span className="pl-8 text-body-small">
+                          {why}{' '}
+                          {level?.challengeId && isOpen(level.id) && (
+                            <Link to={`/app/learn/challenges/${level.challengeId}`} className="text-primary underline underline-offset-2">
+                              {t('learn.map.badgeTry', { level: level.order })}
+                            </Link>
+                          )}
+                        </span>
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
+              {BADGE_MODULES.length > BADGES_VISIBLE && (
+                <Button
+                  variant="text"
+                  size="xs"
+                  className="-mt-3 self-start"
+                  trailingIcon={showAllBadges ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}
+                  aria-expanded={showAllBadges}
+                  aria-controls="badges-list"
+                  onClick={() => setShowAllBadges((v) => !v)}
+                >
+                  {showAllBadges ? t('learn.map.badgesLess') : t('learn.map.badgesAll', { count: BADGE_MODULES.length })}
+                </Button>
+              )}
+              <p className="-mt-3 text-body-small text-on-surface-variant">{t('learn.map.badgesNote')}</p>
+              <div className="flex flex-col gap-3 border-t border-outline-variant pt-5">
+                <Link to="/app/welcome" className="inline-flex items-center gap-2 text-label-large text-primary hover:underline">
+                  <Icon name="person" size={18} />
+                  {t('learn.map.conocerte')}
+                </Link>
+                <Link to="/app/learn/investor-profile" className="inline-flex items-center gap-2 text-label-large text-primary hover:underline">
+                  <Icon name="psychology" size={18} />
+                  {t('learn.map.profile')}
+                </Link>
+                <Link to="/app/tools/SIM-3" className="inline-flex items-center gap-2 text-label-large text-primary hover:underline">
+                  <Icon name="calculate" size={18} />
+                  {t('learn.map.tools')}
+                </Link>
+              </div>
+            </section>
           </div>
         </div>
       </div>
@@ -253,11 +302,6 @@ function LevelDetail({
                 </li>
               ))}
           </ul>
-          {level.masteryChallengeId && challengeById(level.masteryChallengeId) && (
-            <Button asChild variant="tonal" size="xs" className="self-start" leadingIcon="bolt">
-              <Link to={`/app/learn/challenges/${level.masteryChallengeId}`}>{t('learn.map.mastery')}</Link>
-            </Button>
-          )}
         </div>
       )}
 
@@ -316,7 +360,11 @@ function LevelDetail({
             <Link to={`/app/learn/challenges/${level.challengeId}`} className={row}>
               <Icon name="quiz" size={20} className={best !== undefined && best >= passing ? 'text-success' : 'text-primary'} />
               <span className="flex-1 text-body-medium text-on-surface">
-                {best === undefined ? t('learn.map.challengePending') : best >= passing ? t('learn.map.challengePassed', { score: pct(best) }) : t('learn.map.challengeBest', { score: pct(best) })}
+                {best === undefined
+                  ? t('learn.map.challengePending')
+                  : best >= passing
+                    ? t('learn.map.challengePassed', { score: pct(best) })
+                    : t('learn.map.challengeBest', { score: pct(best) })}
               </span>
               <Icon name="chevron_right" size={20} className="text-on-surface-variant" />
             </Link>

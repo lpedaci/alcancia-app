@@ -6,7 +6,7 @@
       "trigger": "salary_received",
       "condition": "no_saving_since_last_salary",
       "title": "Primero separa, después gastas",
-      "body": "Cobraste tu sueldo y desde el cobro anterior no separaste ahorro. Si apartas una parte apenas cobras, el ahorro no depende de lo que sobre a fin de mes. La regla 50/30/20 propone un 20 % como punto de partida, no como obligación.",
+      "body": "Cobraste tu sueldo y desde el cobro anterior no separaste ahorro. Si apartas una parte apenas cobras, el ahorro no depende de lo que sobre a fin de mes. La regla 50/30/20 propone un 20 % como punto de partida, no como obligación.",
       "sourceIds": [
         "A-32",
         "T"
@@ -154,7 +154,7 @@
         "B-40"
       ],
       "question": {
-        "prompt": "Si un plazo fijo paga 2,5 % en el mes y la inflación del mes es 3 %, la tasa real es…",
+        "prompt": "Si un plazo fijo paga 2,5 % en el mes y la inflación del mes es 3 %, la tasa real es…",
         "options": [
           {
             "id": "negative",
@@ -167,8 +167,8 @@
         ],
         "correct": "negative",
         "feedback": {
-          "correct": "Así es: (1,025 ÷ 1,03) − 1 ≈ −0,5 %. Tienes más pesos, pero compran menos.",
-          "incorrect": "Es negativa: (1,025 ÷ 1,03) − 1 ≈ −0,5 %. Los precios suben más que tus pesos."
+          "correct": "Así es: (1,025 ÷ 1,03) − 1 ≈ −0,5 %. Tienes más pesos, pero compran menos.",
+          "incorrect": "Es negativa: (1,025 ÷ 1,03) − 1 ≈ −0,5 %. Los precios suben más que tus pesos."
         }
       },
       "guide": {
@@ -418,7 +418,7 @@
       }
     },
     "budget": {
-      "body": "Anotar todo durante un mes muestra los gastos hormiga, que pueden llegar al 15 % del ingreso. Con el reparto a la vista, decides qué cambiar.",
+      "body": "Anotar todo durante un mes muestra los gastos hormiga, que pueden llegar al 15 % del ingreso. Con el reparto a la vista, decides qué cambiar.",
       "sourceIds": [
         "A-34",
         "A-32"

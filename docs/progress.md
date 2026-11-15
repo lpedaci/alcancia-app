@@ -50,3 +50,5 @@
 | 14/11/2026 | Ajustes de Lourdes | Íconos de tarjetas de sección a la izquierda; barra inferior solo con íconos y nombre al mantener pulsado (D-228); ruta `/#/dev/error`, solo en desarrollo, para revisar la pantalla de error | Lourdes revisa |
 | 14/11/2026 | Ajustes de Lourdes | Pantallas de sistema y de acceso con encabezado a todo el ancho y contenido centrado sin scroll (D-229); cuentas de SSO en tarjetas compactas (D-230) | Lourdes revisa |
 | 14/11/2026 | Ajustes de Lourdes | Cada sección se abre arriba (D-231); módulos del programa en una tabla por nivel y barra de guardar fija (D-232) | Lourdes revisa |
+| 14/11/2026 | Ajustes de Lourdes | "Ya sé esto" arriba a la derecha en todas sus apariciones, registrado en el sistema de diseño (D-233); avance por nivel con scroll interno, más aire entre tarjetas de Resultados, Reacción y Conducta del mismo alto (D-234) | Lourdes revisa |
+| 14/11/2026 | Ajustes de Lourdes | "¿Por qué importa?" rediseñado para celular, tablet y escritorio, y "%" sin cortes (D-235); Logros con "Ver todas" (D-236) | Lourdes revisa |

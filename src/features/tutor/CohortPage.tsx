@@ -78,7 +78,11 @@ export function CohortPage() {
           <KpiCard label={t('tutor.kpi.weekly')} value={pct(k.weeklyDone, t)} icon="task_alt" iconTone="tertiary" caption={t('tutor.kpi.weeklyCaption')} />
         </KpiRow>
       </BentoGrid>
-      {k.participation.status !== 'ok' && <InlineAlert tone="info" live="none">{t('tutor.insufficient')}</InlineAlert>}
+      {k.participation.status !== 'ok' && (
+        <InlineAlert tone="info" live="none">
+          {t('tutor.insufficient')}
+        </InlineAlert>
+      )}
 
       <section aria-labelledby="heat-title" className={card}>
         <div className="flex flex-wrap items-center justify-between gap-3">
@@ -128,7 +132,11 @@ export function CohortPage() {
                   {cells.map((c) => (
                     <TableCell key={c.moduleId} className="p-1 text-center">
                       <span
-                        className={cn('inline-flex h-8 min-w-12 items-center justify-center gap-0.5 rounded-md px-1 text-label-small tabular-nums', CELL[c.state].className, c.state === 'done' && c.score !== undefined && c.score < 0.7 && 'bg-warning-container text-on-warning-container')}
+                        className={cn(
+                          'inline-flex h-8 min-w-12 items-center justify-center gap-0.5 rounded-md px-1 text-label-small tabular-nums',
+                          CELL[c.state].className,
+                          c.state === 'done' && c.score !== undefined && c.score < 0.7 && 'bg-warning-container text-on-warning-container',
+                        )}
                         title={`${moduleTitle(c.moduleId)}: ${t(`tutor.cohort.cell.${c.state}`)}`}
                       >
                         <Icon name={c.state === 'done' && c.score !== undefined && c.score < 0.7 ? 'warning' : CELL[c.state].icon} size={16} />
@@ -226,37 +234,55 @@ function PersonLevels({ cohortId }: { cohortId: string }) {
           {progress.length === 0 ? (
             <p className="text-body-medium text-on-surface-variant">{t('tutor.levels.empty', { name: person?.name ?? '' })}</p>
           ) : (
-            <ul className="flex flex-col divide-y divide-outline-variant">
-              {progress.map((l) => (
-                <li key={l.levelId} className="flex flex-col gap-2 py-3">
-                  <div className="flex flex-wrap items-center justify-between gap-2">
-                    <p className="text-body-large text-on-surface">{t('tutor.levels.level', { n: l.levelOrder, name: t(`wallet.sections.${l.levelId}`) })}</p>
-                    {l.completed && <StatusPill tone="success" icon="task_alt" label={t('tutor.levels.completed')} />}
-                  </div>
-                  <ul className="flex flex-wrap gap-2" aria-label={t('tutor.levels.data')}>
-                    <li>
-                      <StatusPill tone="neutral" icon="menu_book" label={t('tutor.levels.guides', { read: l.guidesRead, total: l.guidesTotal })} />
-                    </li>
-                    <li>
-                      <StatusPill
-                        tone={CHALLENGE_TONE[l.challenge] ?? 'neutral'}
-                        icon={l.challenge === 'passed' ? 'check_circle' : l.challenge === 'attempts_exhausted' ? 'warning' : 'quiz'}
-                        label={t(`tutor.levels.challenge.${l.challenge}`, { best: l.bestScore !== undefined ? formatPercent(l.bestScore, { decimals: 0 }) : '', first: l.firstScore !== undefined ? formatPercent(l.firstScore, { decimals: 0 }) : '' })}
-                      />
-                    </li>
-                    {l.enabledBy && (
+            // Internal scroll (D-234): many levels stay in a bounded, focusable region with its name, so the
+            // page and the "Habilitar un nivel" panel keep their place
+            <div
+              role="region"
+              aria-label={t('tutor.levels.listLabel', { name: person?.name ?? '' })}
+              tabIndex={0}
+              className="max-h-[26rem] overflow-y-auto overscroll-contain rounded-lg border border-outline-variant px-4 [scrollbar-gutter:stable] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            >
+              <ul className="flex flex-col divide-y divide-outline-variant">
+                {progress.map((l) => (
+                  <li key={l.levelId} className="flex flex-col gap-2 py-3">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <p className="text-body-large text-on-surface">{t('tutor.levels.level', { n: l.levelOrder, name: t(`wallet.sections.${l.levelId}`) })}</p>
+                      {l.completed && <StatusPill tone="success" icon="task_alt" label={t('tutor.levels.completed')} />}
+                    </div>
+                    <ul className="flex flex-wrap gap-2" aria-label={t('tutor.levels.data')}>
                       <li>
-                        <StatusPill tone="primary" icon="lock_open" label={t(`tutor.levels.enabledBy.${l.enabledBy.kind}`)} />
+                        <StatusPill tone="neutral" icon="menu_book" label={t('tutor.levels.guides', { read: l.guidesRead, total: l.guidesTotal })} />
                       </li>
+                      <li>
+                        <StatusPill
+                          tone={CHALLENGE_TONE[l.challenge] ?? 'neutral'}
+                          icon={l.challenge === 'passed' ? 'check_circle' : l.challenge === 'attempts_exhausted' ? 'warning' : 'quiz'}
+                          label={t(`tutor.levels.challenge.${l.challenge}`, {
+                            best: l.bestScore !== undefined ? formatPercent(l.bestScore, { decimals: 0 }) : '',
+                            first: l.firstScore !== undefined ? formatPercent(l.firstScore, { decimals: 0 }) : '',
+                          })}
+                        />
+                      </li>
+                      {l.enabledBy && (
+                        <li>
+                          <StatusPill tone="primary" icon="lock_open" label={t(`tutor.levels.enabledBy.${l.enabledBy.kind}`)} />
+                        </li>
+                      )}
+                    </ul>
+                    {l.challenge === 'passed' && l.firstScore !== undefined && l.bestScore !== undefined && l.firstScore !== l.bestScore && (
+                      <p className="text-body-small text-on-surface-variant">
+                        {t('tutor.levels.firstVsBest', {
+                          first: formatPercent(l.firstScore, { decimals: 0 }),
+                          best: formatPercent(l.bestScore, { decimals: 0 }),
+                          count: l.attempts,
+                        })}
+                      </p>
                     )}
-                  </ul>
-                  {l.challenge === 'passed' && l.firstScore !== undefined && l.bestScore !== undefined && l.firstScore !== l.bestScore && (
-                    <p className="text-body-small text-on-surface-variant">{t('tutor.levels.firstVsBest', { first: formatPercent(l.firstScore, { decimals: 0 }), best: formatPercent(l.bestScore, { decimals: 0 }), count: l.attempts })}</p>
-                  )}
-                  {l.enabledBy?.kind === 'tutor' && <p className="text-body-small text-on-surface-variant">{t('tutor.levels.reason', { reason: l.enabledBy.reason })}</p>}
-                </li>
-              ))}
-            </ul>
+                    {l.enabledBy?.kind === 'tutor' && <p className="text-body-small text-on-surface-variant">{t('tutor.levels.reason', { reason: l.enabledBy.reason })}</p>}
+                  </li>
+                ))}
+              </ul>
+            </div>
           )}
         </div>
         <div className="flex min-w-0 flex-col gap-4 rounded-lg bg-surface-container p-5">

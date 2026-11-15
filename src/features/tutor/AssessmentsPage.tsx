@@ -66,7 +66,7 @@ export function AssessmentsPage() {
           </h2>
         </div>
         <p className="text-body-medium text-on-surface-variant">{t('tutor.assessments.levelsIntro')}</p>
-        <ul className="grid grid-cols-[minmax(0,1fr)] gap-3 @2xl:grid-cols-2 @5xl:grid-cols-4">
+        <ul className="grid grid-cols-[minmax(0,1fr)] gap-4 @2xl:grid-cols-2 @5xl:grid-cols-4">
           {levelRows.map(({ level, result }) => (
             <li key={level.id} className="flex flex-col gap-2 rounded-lg border border-outline-variant p-4">
               <p className="text-title-small text-on-surface">{t('tutor.levels.level', { n: level.order, name: t(`wallet.sections.${level.id}`) })}</p>
@@ -103,7 +103,7 @@ export function AssessmentsPage() {
             {t('tutor.insufficient')}
           </InlineAlert>
         ) : (
-          <ol className="grid grid-cols-[minmax(0,1fr)] gap-3 @4xl:grid-cols-2">
+          <ol className="grid grid-cols-[minmax(0,1fr)] gap-4 @4xl:grid-cols-2">
             {stats.slice(0, 8).map((s, index) => {
               const hard = s.errorRate >= 0.4;
               return (

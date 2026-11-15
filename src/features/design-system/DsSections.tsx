@@ -10,6 +10,7 @@ import { IconTile } from '@/components/ui/IconTile';
 import { InlineAlert } from '@/components/ui/InlineAlert';
 import { KpiCard, KpiRow } from '@/components/ui/KpiCard';
 import { OptionCard } from '@/components/ui/OptionCard';
+import { MasteryButton } from '@/features/levels/MasteryButton';
 import { MetaChips } from '@/components/ui/MetaChips';
 import { ProgressBar } from '@/components/ui/ProgressBar';
 import { SegmentedButton } from '@/components/ui/SegmentedButton';
@@ -145,6 +146,19 @@ export function ComponentsSection() {
             <ProgressBar value={66.7} label={c('progressLabel')} valueText={c('progressValue')} tone="tertiary" />
           </div>
           <SegmentedProgress done={3} total={5} label={c('progress')} valueText={c('stepsValue')} />
+        </div>
+      </Specimen>
+
+      <Specimen title={c('mastery')} note={c('masteryNote')}>
+        <div className="@container flex flex-wrap items-start gap-3 rounded-lg border border-outline-variant bg-surface-container-lowest p-4">
+          <span aria-hidden className="hidden size-12 shrink-0 items-center justify-center rounded-lg bg-surface-container text-on-surface-variant @md:flex">
+            <Icon name="lock" size={24} />
+          </span>
+          <div className="flex min-w-[8rem] flex-1 flex-col gap-1">
+            <p className="text-label-medium text-on-surface-variant">{c('masteryKicker')}</p>
+            <p className="text-title-large text-on-surface">{c('masteryExample')}</p>
+          </div>
+          <MasteryButton to="/design-system" section={c('masteryExample')} className="ml-auto" />
         </div>
       </Specimen>
 

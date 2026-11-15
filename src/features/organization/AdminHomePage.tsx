@@ -186,7 +186,7 @@ export function AdminHomePage() {
         <h2 className="text-title-large text-on-surface">{t('org.k.title')}</h2>
         <p className="text-body-medium text-on-surface-variant">{t('org.k.intro')}</p>
       </div>
-      <div className="grid grid-cols-[minmax(0,1fr)] gap-(--space-bento-gap) large:grid-cols-2 large:items-start">
+      <div className="grid grid-cols-[minmax(0,1fr)] gap-(--space-bento-gap) large:grid-cols-2 large:items-stretch">
         <ReactionSection data={data} />
         <BehaviorSection data={data} />
       </div>

@@ -548,7 +548,8 @@
       },
       "goTo": "Ir a {{section}}",
       "missing": "Qué falta",
-      "mastery": "Ya sé esto"
+      "mastery": "Ya sé esto",
+      "masteryLabel": "Ya sé esto: demostrarlo en el desafío de {{section}}"
     },
     "categorize": {
       "none": "Sin categoría",
@@ -1295,7 +1296,9 @@
       "tools": "Simulador de inflación",
       "badgeBelow": "Tu parte de este módulo en el desafío quedó en {{part}}, bajo {{passing}}. Vale tu mejor intento: puedes volver a intentarlo.",
       "badgeHow": "Se obtiene con tu parte de este módulo en el desafío del nivel {{level}}.",
-      "badgeTry": "Ir al desafío del nivel {{level}}"
+      "badgeTry": "Ir al desafío del nivel {{level}}",
+      "badgesAll": "Ver todas las insignias ({{count}})",
+      "badgesLess": "Ver menos"
     },
     "sources": {
       "title": "Fuentes",
@@ -2705,7 +2708,8 @@
       },
       "firstVsBest_one": "Primer intento {{first}}, mejor intento {{best}} ({{count}} intento).",
       "firstVsBest_other": "Primer intento {{first}}, mejor intento {{best}} ({{count}} intentos).",
-      "reason": "Motivo: {{reason}}"
+      "reason": "Motivo: {{reason}}",
+      "listLabel": "Avance por nivel de {{name}}"
     },
     "unlock": {
       "title": "Habilitar un nivel",
@@ -3549,7 +3553,11 @@
       "optionRateB": "TNA 31 % en promedio",
       "optionLow": "Bajo",
       "optionNow": "Inmediata",
-      "optionDay": "En el día"
+      "optionDay": "En el día",
+      "mastery": "Atajo \"Ya sé esto\"",
+      "masteryNote": "Lleva al desafío de suficiencia de una sección bloqueada (D-233). Siempre botón tonal chico con el rayo, arriba a la derecha de la tarjeta o la fila, junto al título: es un camino secundario y nunca va relleno.",
+      "masteryExample": "Presupuesto",
+      "masteryKicker": "Próximo desbloqueo · Nivel 3"
     },
     "fuerte": {
       "states": {
