@@ -132,4 +132,5 @@
 | 16/11/2026 | Ajuste de Lourdes | Fuerte y Hornero más apagados en modo oscuro (D-323); landing en celular con menú, portada centrada, barra fija con la acción y carruseles (D-324) | Hecho |
 | 16/11/2026 | Ajuste de Lourdes | Landing en celular: portada en una pantalla, menos texto, recorridos como filas en celular y tablet, simulador que se abre a pedido (D-325) | Hecho |
 | 16/11/2026 | Ajuste de Lourdes | Landing en celular sin carruseles, franja final sobre el gris de las preguntas con botón a todo el ancho, cifras en 2 × 2 con etiquetas de una palabra (D-326) | Hecho |
+| 16/11/2026 | 35 · Inglés, tanda 2 | Aprender en inglés: mapa de niveles, guías, desafíos, repasos, consultas y desafío semanal, tarjetas, glosario, biblioteca, certificado, seguimiento a 30 días, Mi privacidad, perfil, recordatorios y "Abrir tu cuenta" (unos 540 textos). El contenido de aprendizaje sigue en español con el aviso | Hecho |
 | (pendiente) | Cierre de la fase B | Después del informe final (`docs/review.md`, paso 36), crear la Release `v1.0.0` en GitHub con notas que resuman las funcionalidades (D-306). Es el último paso del plan | Pendiente |
