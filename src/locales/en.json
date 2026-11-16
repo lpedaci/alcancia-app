@@ -382,7 +382,12 @@
         "body": "Higher education and vocational training, only with people aged 18 or older: students, tutoring, academic coordination and direction, with the same privacy.",
         "cta": "See its journeys"
       }
-    }
+    },
+    "menu": {
+      "open": "Open the menu",
+      "title": "Menu"
+    },
+    "carousel": "{{title}}: swipe to see more"
   },
   "notFound": {
     "title": "We could not find this page",

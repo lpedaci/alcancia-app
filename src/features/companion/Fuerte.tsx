@@ -83,7 +83,7 @@ export function Fuerte({ state = 'neutral', lights = 0, size = 8, className }: F
       </defs>
 
       {/* Floor shadow */}
-      <ellipse cx="80" cy="145" rx="50" ry="5" className="fill-on-surface opacity-10" />
+      <ellipse cx="80" cy="145" rx="50" ry="5" className="fill-fuerte-ink opacity-10" />
 
       {/* Celebration sparks and greeting wave */}
       {state === 'celebration' && (
@@ -113,8 +113,8 @@ export function Fuerte({ state = 'neutral', lights = 0, size = 8, className }: F
       )}
 
       {/* Hinges */}
-      <rect x="11" y="42" width="15" height="20" rx="7" className="fill-outline-variant" />
-      <rect x="11" y="92" width="15" height="20" rx="7" className="fill-outline-variant" />
+      <rect x="11" y="42" width="15" height="20" rx="7" className="fill-fuerte-metal" />
+      <rect x="11" y="92" width="15" height="20" rx="7" className="fill-fuerte-metal" />
 
       {/* Body: flat orange with a flat lighter patch and a flat shade, no gradients */}
       <rect x="20" y="16" width="120" height="122" rx="46" className="fill-fuerte-body" />
@@ -125,56 +125,56 @@ export function Fuerte({ state = 'neutral', lights = 0, size = 8, className }: F
       <rect x="29" y="25" width="102" height="104" rx="38" fill="none" strokeWidth="2" className="stroke-fuerte-shade opacity-40" />
 
       {/* Visor */}
-      <rect x="36" y="44" width="88" height="50" rx="25" className="fill-on-surface" />
-      <path d="M45 60c2-6 7-9.5 13-10.5" fill="none" strokeWidth="3" strokeLinecap="round" className="stroke-surface-container-lowest opacity-30" />
+      <rect x="36" y="44" width="88" height="50" rx="25" className="fill-fuerte-ink" />
+      <path d="M45 60c2-6 7-9.5 13-10.5" fill="none" strokeWidth="3" strokeLinecap="round" className="stroke-fuerte-paper opacity-30" />
 
       {/* Eyes */}
       {state === 'celebration' ? (
-        <path d={star(63) + star(97)} className="fill-surface-container-lowest" />
+        <path d={star(63) + star(97)} className="fill-fuerte-paper" />
       ) : state === 'greeting' ? (
-        <g fill="none" strokeWidth="4" strokeLinecap="round" className="stroke-surface-container-lowest">
+        <g fill="none" strokeWidth="4" strokeLinecap="round" className="stroke-fuerte-paper">
           <path d="M54 73q9-11 18 0M88 73q9-11 18 0" />
         </g>
       ) : state === 'sleeping' ? (
-        <g fill="none" strokeWidth="3.4" strokeLinecap="round" className="stroke-surface-container-lowest">
+        <g fill="none" strokeWidth="3.4" strokeLinecap="round" className="stroke-fuerte-paper">
           <path d="M54 69q9 7 18 0M88 69q9 7 18 0" />
         </g>
       ) : (
         <g>
-          <circle cx="63" cy="69" r={state === 'attention' ? 12 : state === 'sorry' ? 10 : 11} className="fill-surface-container-lowest" />
-          <circle cx="97" cy="69" r={state === 'attention' ? 12 : state === 'sorry' ? 10 : 11} className="fill-surface-container-lowest" />
+          <circle cx="63" cy="69" r={state === 'attention' ? 12 : state === 'sorry' ? 10 : 11} className="fill-fuerte-paper" />
+          <circle cx="97" cy="69" r={state === 'attention' ? 12 : state === 'sorry' ? 10 : 11} className="fill-fuerte-paper" />
           <g transform={PUPILS[state]}>
-            <circle cx="63" cy="70" r="5.6" className="fill-on-surface" />
-            <circle cx="97" cy="70" r="5.6" className="fill-on-surface" />
-            <circle cx="61" cy="67.6" r="1.7" className="fill-surface-container-lowest" />
-            <circle cx="95" cy="67.6" r="1.7" className="fill-surface-container-lowest" />
+            <circle cx="63" cy="70" r="5.6" className="fill-fuerte-ink" />
+            <circle cx="97" cy="70" r="5.6" className="fill-fuerte-ink" />
+            <circle cx="61" cy="67.6" r="1.7" className="fill-fuerte-paper" />
+            <circle cx="95" cy="67.6" r="1.7" className="fill-fuerte-paper" />
           </g>
         </g>
       )}
 
       {/* Brows */}
-      <g fill="none" strokeWidth="3.4" strokeLinecap="round" className="stroke-surface-container-lowest">
+      <g fill="none" strokeWidth="3.4" strokeLinecap="round" className="stroke-fuerte-paper">
         <path d="M55.5 53.5q7.5-4.2 15-0.6" transform={brows.left} />
         <path d="M89.5 52.9q7.5-3.6 15 0.6" transform={brows.right} />
       </g>
 
       {/* Lights panel: one light per completed level */}
-      <rect x="38" y="104" width="84" height="14" rx="7" className="fill-on-surface" />
+      <rect x="38" y="104" width="84" height="14" rx="7" className="fill-fuerte-ink" />
       {Array.from({ length: LIGHTS }, (_, i) => (
         <circle
           key={i}
           cx={44 + i * 12}
           cy="111"
           r="3.6"
-          className={i < lit ? 'fill-fuerte-light' : 'fill-surface-container-lowest opacity-15'}
+          className={i < lit ? 'fill-fuerte-light' : 'fill-fuerte-paper opacity-15'}
         />
       ))}
 
       {/* Combination dial, like an ear */}
       <g transform={`rotate(${DIAL[state]} 141 78)`}>
-        <circle cx="141" cy="78" r="16" className="fill-outline-variant" />
+        <circle cx="141" cy="78" r="16" className="fill-fuerte-metal" />
         <circle cx="141" cy="78" r="9.5" className="fill-outline" />
-        <path d="M141 70.5v5" strokeWidth="2.6" strokeLinecap="round" className="stroke-surface-container-lowest" />
+        <path d="M141 70.5v5" strokeWidth="2.6" strokeLinecap="round" className="stroke-fuerte-paper" />
       </g>
     </motion.svg>
   );

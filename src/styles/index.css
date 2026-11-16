@@ -65,6 +65,9 @@
   --color-fuerte-body: var(--fuerte-body);
   --color-fuerte-light: var(--fuerte-light);
   --color-fuerte-shade: var(--fuerte-shade);
+  --color-fuerte-ink: var(--fuerte-ink);
+  --color-fuerte-paper: var(--fuerte-paper);
+  --color-fuerte-metal: var(--fuerte-metal);
 
   --color-surface: var(--md-sys-color-surface);
   --color-surface-container-lowest: var(--md-sys-color-surface-container-lowest);

@@ -142,6 +142,10 @@
   --fuerte-body: var(--ref-fuerte-orange);
   --fuerte-light: var(--ref-fuerte-light);
   --fuerte-shade: var(--ref-fuerte-shade);
+  /* Fuerte's visor, eyes and metal parts (D-323): its own tokens, so they never flip with the theme */
+  --fuerte-ink: var(--ref-neutral-10);
+  --fuerte-paper: var(--ref-neutral-100);
+  --fuerte-metal: var(--ref-neutral-86);
 
   /* Chart series, in this order (2.1.1). Area fills are flat, at low opacity. */
   --chart-1: var(--ref-indigo-40);
@@ -280,10 +284,18 @@
   --chart-5: #9aa1ab;
   --chart-area-opacity: 0.2;
 
-  /* Hornero, the fictitious partner (D-248): the same dusk, lighter, so its text reads on dark */
-  --partner-hornero: #f0b3bc;
-  --partner-on-hornero: #3a1018;
-  --partner-hornero-accent: #d88d99;
-  --partner-hornero-container: #5c2330;
+  /* Fuerte in the dark (D-323): the same orange, a step deeper so it does not glare; the visor stays dark */
+  --fuerte-body: #d27a36;
+  --fuerte-light: #f0b27a;
+  --fuerte-shade: #8f4615;
+  --fuerte-ink: #101316;
+  --fuerte-paper: #eef1f3;
+  --fuerte-metal: #4f565d;
+
+  /* Hornero, the fictitious partner (D-248, D-323): the dusk, muted for the dark, so it does not glare and its text still reads */
+  --partner-hornero: #c27d8a;
+  --partner-on-hornero: #1f080d;
+  --partner-hornero-accent: #b8707c;
+  --partner-hornero-container: #36141b;
   --partner-on-hornero-container: #f7e1e4;
 }

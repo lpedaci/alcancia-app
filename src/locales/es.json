@@ -382,7 +382,12 @@
         "body": "Nivel superior y formación profesional, solo con personas mayores de 18 años: estudiantes, tutoría, coordinación académica y dirección, con la misma privacidad.",
         "cta": "Ver sus recorridos"
       }
-    }
+    },
+    "menu": {
+      "open": "Abrir el menú",
+      "title": "Menú"
+    },
+    "carousel": "{{title}}: desliza para ver más"
   },
   "notFound": {
     "title": "No encontramos esta página",
@@ -4086,6 +4091,11 @@
       }
     },
     "patterns": [
+      [
+        "D-324",
+        "Landing en celular",
+        "Menú, portada centrada con una acción, barra fija abajo después de la portada y carruseles con deslizamiento que dejan ver la tarjeta siguiente."
+      ],
       [
         "D-322",
         "Modo oscuro",

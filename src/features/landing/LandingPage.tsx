@@ -26,6 +26,7 @@ import { ResetDemoButton } from './ResetDemoButton';
 import { LanguageToggle } from '@/components/layout/LanguageToggle';
 import { FictitiousBrandChip } from '@/features/partner/FictitiousBrandChip';
 import { HorneroMark } from '@/features/partner/HorneroMark';
+import { carouselItem, carouselList, LandingMenu, StickyJourneyBar } from './MobileLanding';
 import { CountUp, Reveal } from './Reveal';
 import { SegmentedButton } from '@/components/ui/SegmentedButton';
 import { ctx } from '@/lib/org-context';
@@ -167,12 +168,13 @@ export function LandingPage() {
               ))}
             </ul>
           </nav>
+          {/* D-324: phones get the language and a menu; the action moves to a sticky bar at the bottom */}
           <div className="col-start-3 flex items-center gap-1">
-            {/* At 320 px the top bar has no room: the language is also in the footer */}
-            <LanguageToggle compact className="hidden min-[22.5rem]:inline-flex" />
-            <Button asChild size="s">
+            <LanguageToggle compact />
+            <Button asChild size="s" className="hidden medium:inline-flex">
               <InPageLink to="recorridos">{t('landing.chooseJourney')}</InPageLink>
             </Button>
+            <LandingMenu nav={NAV} caseStudyUrl={CASE_STUDY_URL} />
           </div>
         </div>
       </header>
@@ -181,24 +183,25 @@ export function LandingPage() {
         {/* 2 · Hero: text on the left, the app on a real-size phone with feature cards on the right */}
         <section aria-labelledby="hero-title" className="overflow-hidden pt-10 pb-16 md:pt-16 md:pb-24">
           <div className={cn(container, 'grid grid-cols-[minmax(0,1fr)] items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-8')}>
-            <div className="flex min-w-0 flex-col items-start gap-6">
+            {/* Phones (D-324): centered, as fintech landings do; from tablets, aligned to the left */}
+            <div className="flex min-w-0 flex-col items-center gap-6 text-center medium:items-start medium:text-left">
               {/* Announcement badge: the case type as a tag, the product category as text */}
               <Reveal>
-                <p className="inline-flex max-w-full flex-wrap items-center gap-x-2 gap-y-1 rounded-lg border border-outline-variant bg-surface-container-lowest p-1 pr-3 text-label-medium text-on-surface-variant xl:flex-nowrap xl:rounded-full xl:whitespace-nowrap">
+                <p className="inline-flex max-w-full flex-wrap items-center gap-x-2 gap-y-1 rounded-lg border border-outline-variant bg-surface-container-lowest p-1 pr-3 text-label-medium text-on-surface-variant max-medium:flex-col max-medium:border-0 max-medium:bg-transparent max-medium:p-0 xl:flex-nowrap xl:rounded-full xl:whitespace-nowrap">
                   <span className="rounded-sm bg-primary-container px-2.5 py-1 text-on-primary-container xl:rounded-full">{t('landing.eyebrowTag')}</span>
                   <span className="px-1 py-0.5">{t('landing.eyebrowText')}</span>
                 </p>
               </Reveal>
               <Reveal delay={STAGGER}>
-                <h1 id="hero-title" className="text-headline-small text-balance text-on-surface md:text-display-small xl:text-display-medium">
+                <h1 id="hero-title" className="text-headline-medium text-balance text-on-surface md:text-display-small xl:text-display-medium">
                   {t('landing.hero.titleStart')} <Underlined>{t('landing.hero.titleKey')}</Underlined> {t('landing.hero.titleEnd')}
                 </h1>
               </Reveal>
               <Reveal delay={STAGGER * 2}>
                 <p className="max-w-xl text-body-large text-on-surface-variant">{t('landing.hero.body')}</p>
               </Reveal>
-              <Reveal delay={STAGGER * 3} className="w-full sm:w-auto">
-                <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+              <Reveal delay={STAGGER * 3} className="w-full medium:w-auto">
+                <div className="flex w-full flex-col gap-3 medium:w-auto medium:flex-row">
                   <Button asChild size="m">
                     <InPageLink to="recorridos">{t('landing.chooseJourney')}</InPageLink>
                   </Button>
@@ -239,7 +242,8 @@ export function LandingPage() {
         {/* 3 · The problem: tinted cards with a scene on top (reference: "Why choose us") */}
         <Section id="problema" tone="surface">
           <SectionTitle id="problema" eyebrow={t('landing.problem.eyebrow')} title={t('landing.problem.title')} />
-          <ul className="grid grid-cols-1 gap-(--space-bento-gap) md:grid-cols-3">
+          {/* Phones: a carousel with snap (D-324); the list scrolls with the keyboard too */}
+          <ul tabIndex={0} aria-label={t('landing.carousel', { title: t('landing.problem.title') })} className={cn('grid grid-cols-1 gap-(--space-bento-gap) md:grid-cols-3', carouselList)}>
             {(
               [
                 ['budget', 'bg-primary-container', <SceneBudget key="b" />],
@@ -247,7 +251,7 @@ export function LandingPage() {
                 ['card', 'bg-secondary-container', <SceneCard key="c" />],
               ] as const
             ).map(([key, tone, scene], index) => (
-              <Reveal as="li" key={key} delay={index * STAGGER} className={cn('flex min-w-0 flex-col gap-5 rounded-xl p-3 pb-6', tone)}>
+              <Reveal as="li" key={key} delay={index * STAGGER} className={cn('flex min-w-0 flex-col gap-5 rounded-xl p-3 pb-6', tone, carouselItem)}>
                 <div className="flex min-h-36 flex-col justify-center rounded-lg border border-outline-variant bg-surface-container-lowest p-4">{scene}</div>
                 <div className="flex flex-col gap-2 px-3 text-center">
                   <h3 className="text-title-medium text-balance text-on-surface">{t(`landing.problem.${key}.title`)}</h3>
@@ -330,7 +334,7 @@ export function LandingPage() {
         {/* 5b · Three contexts, the same wallet (D-74, D-75, D-83, D-84), each with its honest status */}
         <Section id="contextos">
           <SectionTitle id="contextos" eyebrow={t('landing.contexts.eyebrow')} title={t('landing.contexts.title')} intro={t('landing.contexts.intro')} />
-          <ul className="grid grid-cols-1 gap-(--space-bento-gap) md:grid-cols-2 large:grid-cols-3">
+          <ul aria-label={t('landing.carousel', { title: t('landing.contexts.title') })} className={cn('grid grid-cols-1 gap-(--space-bento-gap) md:grid-cols-2 large:grid-cols-3', carouselList)}>
             <ContextCard index={0} icon="apartment" contextKey="org" status="live">
               <Button asChild variant="tonal" className="mt-auto self-start" trailingIcon="arrow_downward">
                 <InPageLink to="recorridos" onClick={() => setRoleContext('employer')}>{t('landing.contexts.org.cta')}</InPageLink>
@@ -362,7 +366,7 @@ export function LandingPage() {
           />
           {/* No holes (2.4): Andina, two participants on the first row and three roles on the second;
               Ceibo, two by two; Hornero, three in a row. On tablets an odd last card takes the full row. */}
-          <ul key={roleContext} className="grid grid-cols-1 gap-(--space-bento-gap) md:grid-cols-2 large:grid-cols-6">
+          <ul key={roleContext} aria-label={t('landing.carousel', { title: t('landing.roles.title') })} className={cn('grid grid-cols-1 gap-(--space-bento-gap) md:grid-cols-2 large:grid-cols-6', carouselList)}>
             {ROLES[roleContext].map((r, index) => (
               <Reveal
                 as="li"
@@ -371,6 +375,7 @@ export function LandingPage() {
                 className={cn(
                   'flex min-w-0 flex-col gap-3 overflow-hidden rounded-xl border border-outline-variant bg-surface-container-lowest p-(--space-card-padding) pt-0',
                   roleSpan(roleContext, index),
+                  carouselItem,
                 )}
               >
                 {/* Role color identifies the person (2.1.1), as a flat bar on top */}
@@ -452,7 +457,7 @@ export function LandingPage() {
         </section>
       </main>
 
-      <footer className="border-t border-outline-variant">
+      <footer id="landing-footer" className="border-t border-outline-variant">
         <div className={cn(container, 'grid grid-cols-1 gap-8 py-12 md:grid-cols-2 large:grid-cols-[minmax(0,1.4fr)_repeat(3,minmax(0,1fr))]')}>
           <div className="flex max-w-sm flex-col gap-3">
             <Logo />
@@ -541,6 +546,7 @@ export function LandingPage() {
           </div>
         </div>
       </footer>
+      <StickyJourneyBar />
     </div>
   );
 }
@@ -586,7 +592,7 @@ function ContextCard({
     <Reveal
       as="li"
       delay={index * STAGGER}
-      className={cn('flex min-w-0 flex-col gap-3 rounded-xl border border-outline-variant bg-surface-container-lowest p-(--space-card-padding)', className)}
+      className={cn('flex min-w-0 flex-col gap-3 rounded-xl border border-outline-variant bg-surface-container-lowest p-(--space-card-padding)', carouselItem, className)}
     >
       <div className="flex flex-wrap items-start justify-between gap-2">
         <span
