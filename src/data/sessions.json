@@ -1,0 +1,98 @@
+{
+  "note": "F13 (D-319): demo agenda of sessions with the tutor. Group sessions per cohort (past ones with a simulated recording) and a 1:1 request. No amounts nor personal data.",
+  "sessions": [
+    {
+      "id": "session-ops-1",
+      "orgId": "org-andina",
+      "tutorId": "p-kevin",
+      "kind": "group",
+      "cohortId": "cohort-operations",
+      "title": "Tu recibo de sueldo, línea por línea",
+      "moduleId": "module-01",
+      "startsAt": "2026-11-05T14:00",
+      "minutes": 40,
+      "status": "scheduled",
+      "recording": {
+        "minutes": 38,
+        "summary": "Recorrimos un recibo de ejemplo de punta a punta: bruto, aportes, contribuciones y neto. Respondimos dudas sobre horas extras y sumas no remunerativas.",
+        "chapters": [
+          "Del bruto al neto",
+          "Aportes y contribuciones",
+          "Horas extras y sumas no remunerativas",
+          "Preguntas de la cohorte"
+        ]
+      }
+    },
+    {
+      "id": "session-ops-2",
+      "orgId": "org-andina",
+      "tutorId": "p-kevin",
+      "kind": "group",
+      "cohortId": "cohort-operations",
+      "title": "Cuotas o contado: cómo comparar",
+      "moduleId": "module-08",
+      "startsAt": "2026-11-19T14:00",
+      "minutes": 40,
+      "status": "scheduled"
+    },
+    {
+      "id": "session-adm-1",
+      "orgId": "org-andina",
+      "tutorId": "p-kevin",
+      "kind": "group",
+      "cohortId": "cohort-administration",
+      "title": "El fondo de emergencia en la práctica",
+      "moduleId": "module-04",
+      "startsAt": "2026-11-20T17:30",
+      "minutes": 45,
+      "status": "scheduled"
+    },
+    {
+      "id": "session-mariana-1",
+      "orgId": "org-andina",
+      "tutorId": "p-kevin",
+      "kind": "one_on_one",
+      "personId": "p-mariana",
+      "title": "Encuentro 1:1: plazo fijo UVA o money market",
+      "moduleId": "module-11",
+      "startsAt": "2026-11-18T10:00",
+      "minutes": 20,
+      "status": "scheduled"
+    },
+    {
+      "id": "session-ceibo-1",
+      "orgId": "org-ceibo",
+      "tutorId": "p-martin",
+      "kind": "group",
+      "cohortId": "cohort-ceibo-logistics",
+      "title": "Presupuesto con beca o primer ingreso",
+      "moduleId": "module-03",
+      "startsAt": "2026-11-21T19:00",
+      "minutes": 40,
+      "status": "scheduled"
+    }
+  ],
+  "requests": [
+    {
+      "id": "request-1",
+      "personId": "p-hernan-flores",
+      "tutorId": "p-kevin",
+      "moduleId": "module-06",
+      "preferred": "afternoon",
+      "note": "Quiero entender el resumen de la tarjeta y qué es el pago mínimo.",
+      "requestedAt": "2026-11-14",
+      "status": "pending"
+    },
+    {
+      "id": "request-2",
+      "personId": "p-mariana",
+      "tutorId": "p-kevin",
+      "moduleId": "module-11",
+      "preferred": "morning",
+      "note": "Comparar plazo fijo UVA y fondo money market para mi apartado.",
+      "requestedAt": "2026-11-12",
+      "status": "scheduled",
+      "sessionId": "session-mariana-1"
+    }
+  ]
+}

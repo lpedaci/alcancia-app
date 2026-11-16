@@ -2948,7 +2948,8 @@
       "unanswered_one": "{{count}} consulta sin responder",
       "unanswered_other": "{{count}} consultas sin responder",
       "community": "Comunidad",
-      "lessons": "Lecciones"
+      "lessons": "Lecciones",
+      "sessions": "Encuentros"
     },
     "home": {
       "subtitle_one": "Acompañas a {{count}} persona en el programa",
@@ -4070,6 +4071,11 @@
       }
     },
     "patterns": [
+      [
+        "D-319",
+        "Reproductor simulado",
+        "Un recuadro 16:9 con la duración y qué habría en un programa real, y debajo el resumen y los temas; nunca un botón de reproducir que no hace nada."
+      ],
       [
         "D-317",
         "Constructor por bloques",
@@ -5324,6 +5330,106 @@
       "guide": "la guía y su parte;",
       "cohorts": "una cohorte;",
       "question": "completar la pregunta y su retroalimentación."
+    }
+  },
+  "sessions": {
+    "title": "Encuentros",
+    "intro": "Tu agenda de encuentros grupales con cada cohorte y de encuentros 1:1. Es una simulación: no hay llamadas, invitaciones ni calendario real.",
+    "requests_one": "Pedidos de encuentro 1:1 · {{count}}",
+    "requests_other": "Pedidos de encuentro 1:1 · {{count}}",
+    "noRequests": "No hay pedidos pendientes.",
+    "requestedOn": "Pedido el {{date}}",
+    "preferred": {
+      "morning": "Prefiere a la mañana",
+      "afternoon": "Prefiere a la tarde"
+    },
+    "oneOnOneTitle": "Encuentro 1:1: {{topic}}",
+    "decline": "No puedo por ahora",
+    "declined": "Pedido respondido",
+    "schedule": "Programar",
+    "scheduled": "Encuentro programado",
+    "upcoming": "Próximos encuentros",
+    "noUpcoming": "No hay encuentros programados.",
+    "past": "Encuentros pasados",
+    "noPast": "Todavía no hubo encuentros.",
+    "minutes_one": "{{count}} minuto",
+    "minutes_other": "{{count}} minutos",
+    "kind": {
+      "group": "Grupal",
+      "one_on_one": "1:1"
+    },
+    "cancel": "Cancelar",
+    "cancelTitle": "¿Cancelar este encuentro?",
+    "cancelBody": "\"{{title}}\" deja de figurar en la agenda de quienes iban a participar.",
+    "cancelConfirm": "Cancelar encuentro",
+    "canceled": "Encuentro cancelado",
+    "recorded_one": "Grabación de {{count}} minuto",
+    "recorded_other": "Grabación de {{count}} minutos",
+    "addRecording": "Publicar la grabación",
+    "noRecording1on1": "Sin grabación (1:1)",
+    "summary": "Resumen del encuentro",
+    "summaryHelp": "Qué se vio, en dos o tres frases. Sin nombres ni montos de nadie.",
+    "publishRecording": "Publicar la grabación (simulada)",
+    "recordingSaved": "Grabación publicada para la cohorte",
+    "cancelForm": "Cancelar",
+    "new": "Programar un encuentro",
+    "form": {
+      "kind": "Tipo de encuentro",
+      "cohort": "Cohorte",
+      "cohortHelp": "Quiénes lo ven en Aprender.",
+      "person": "Persona",
+      "personHelp": "Solo de tus cohortes.",
+      "title": "Título (obligatorio)",
+      "titleHelp": "Por ejemplo: Cuotas o contado: cómo comparar",
+      "module": "Módulo",
+      "moduleHelp": "Opcional: el tema del encuentro.",
+      "noModule": "Sin módulo",
+      "date": "Fecha (obligatorio)",
+      "dateHelp": "Desde hoy en adelante",
+      "dateError": "Elige una fecha desde hoy.",
+      "time": "Hora (obligatorio)",
+      "timeHelp": "Hora de Argentina",
+      "minutes": "Duración",
+      "minutesHelp": "Los encuentros grupales suelen durar 40 minutos",
+      "required": "Completa este campo.",
+      "missing": "Revisa los campos marcados.",
+      "submit": "Programar encuentro"
+    },
+    "learn": {
+      "title": "Encuentros con tu tutoría",
+      "with": "Con {{name}}",
+      "none": "No hay encuentros programados para tu cohorte.",
+      "calendar": "Agregar a mi calendario",
+      "icsNote": "Encuentro de Alcancía, simulador de finanzas personales. Simulación: no hay una llamada real.",
+      "recordings": "Grabaciones",
+      "recordingDetail": "Grabación simulada · {{minutes}} min",
+      "myRequests": "Tus pedidos de encuentro",
+      "requestOf": "Pedido 1:1 sobre {{topic}}",
+      "requestStatus": {
+        "pending": "Esperando respuesta",
+        "declined": "Sin lugar por ahora",
+        "scheduled": "Programado"
+      },
+      "ask": "Pedir un encuentro 1:1",
+      "topic": "Tema (obligatorio)",
+      "topicHelp": "El módulo sobre el que quieres hablar.",
+      "when": "¿Cuándo prefieres?",
+      "note": "Qué quieres ver (obligatorio)",
+      "noteHelp": "Una o dos frases. No compartas montos ni datos personales.",
+      "noteError": "Escribe al menos 10 caracteres.",
+      "send": "Enviar pedido",
+      "sent": "Pedido enviado a tu tutoría",
+      "recordingTitle": "Grabación",
+      "recordingKicker": "Grabación simulada · {{date}}",
+      "fuerte": "Si te perdiste el encuentro, acá está lo que se vio.",
+      "player": "Video del encuentro · {{minutes}} min",
+      "playerNote": "En un programa real, acá estaría el video con subtítulos y la transcripción. En el prototipo se muestran el resumen y los temas.",
+      "summaryTitle": "Resumen",
+      "chapters": "Temas",
+      "privacy": "Las grabaciones grupales no muestran a quienes participaron ni sus preguntas con nombre.",
+      "guide": "Repasar la guía del tema",
+      "morning": "A la mañana",
+      "afternoon": "A la tarde"
     }
   }
 }

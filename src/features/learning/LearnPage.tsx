@@ -20,6 +20,7 @@ import { cn } from '@/lib/utils';
 import { useDataStore, useProgram } from '@/store/data-store';
 import { useCurrentUser } from '@/store/session-store';
 import { challengeById, guideNumber, guideOfModule, guidesOfModule, MODULES, moduleById } from './questions';
+import { SessionsCard } from './Sessions';
 import { MyQuestions, WeeklyChallenges } from './Tutoring';
 import { MasteryButton } from '@/features/levels/MasteryButton';
 import { fuerteLine } from '@/features/companion/fuerte-lines';
@@ -332,6 +333,7 @@ export function LearnPage() {
             <DueReviews personId={personId} />
             {/* The product context has no tutor (5.5): no weekly challenges and no questions to a tutor */}
             {kind !== 'product' && <CohortCommunityCard personId={personId} />}
+            {kind !== 'product' && <SessionsCard personId={personId} />}
             {kind !== 'product' && <WeeklyChallenges personId={personId} />}
             {kind !== 'product' && <MyQuestions personId={personId} />}
           </div>

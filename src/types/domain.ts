@@ -244,6 +244,40 @@ export interface GuideProgress {
 
 /** Missions are shared only as aggregated counts per cohort (5.3). */
 /**
+ * Sessions with the tutor (F13, step 32, D-319): a simulated agenda of group sessions for a cohort
+ * (live, with a simulated recording afterwards) and 1:1 sessions. A request for a 1:1 carries the
+ * module and a short note, never amounts. Nothing is sent: there is no real call nor calendar.
+ */
+export interface TutorSession {
+  id: string;
+  orgId: string;
+  tutorId: string;
+  kind: 'group' | 'one_on_one';
+  cohortId?: string;
+  personId?: string;
+  title: string;
+  moduleId?: string;
+  /** Local date and time, YYYY-MM-DDTHH:mm. */
+  startsAt: string;
+  minutes: number;
+  status: 'scheduled' | 'canceled';
+  /** Simulated recording of a past group session. */
+  recording?: { minutes: number; summary: string; chapters: string[] };
+}
+
+export interface SessionRequest {
+  id: string;
+  personId: string;
+  tutorId: string;
+  moduleId: string;
+  preferred: 'morning' | 'afternoon';
+  note: string;
+  requestedAt: IsoDate;
+  status: 'pending' | 'scheduled' | 'declined';
+  sessionId?: string;
+}
+
+/**
  * Lessons and learning cards authored by a tutor or L&D (F14, D-317). Learning content only: a lesson
  * reuses the guide blocks and is published to cohorts; a card joins the catalog of the right moment
  * (D-76) for the people of those cohorts. Never money nor data of anyone.

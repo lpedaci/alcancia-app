@@ -60,6 +60,7 @@ flowchart LR
 | **Misiones** (completadas, intentos, aciertos) | Datos de aprendizaje | Persona; tutor y admin **solo agregado por cohorte**, con umbral de 5 (5.3) |
 | **Escape room** (completado e insignias; nunca reflexiones, respuestas, pistas ni tiempo) | Datos de aprendizaje (`escapeCompletions`); el juego queda en el navegador | Persona; tutor por persona en su cohorte; admin solo la proporción por cohorte, con umbral de 5 (5.1, D-313) |
 | **Seguimiento a 30 días** (sí o no: presupuesto, fondo de emergencia, pago total de la tarjeta) | Datos de aprendizaje (`followUps`), sin montos ni texto libre | Persona; admin y decisor solo el porcentaje del programa, con umbral de 5; tutoría no (F15, D-316) |
+| **Encuentros con el tutor** (agenda, pedidos 1:1 con módulo y nota, grabaciones) | Datos de aprendizaje (`tutorSessions`, `sessionRequests`), sin montos | Persona; su tutor ve sus pedidos para responderlos; admin y decisor no (F13, D-319) |
 | **Desafíos semanales** (cumplido, parcial, no) | Datos de aprendizaje | Persona; tutor individual; admin agregado. La **reflexión** opcional solo la ve la persona |
 | **Satisfacción y seguimiento a 30 días** | Datos de aprendizaje | Persona; admin y decisor agregados |
 | **Consultas al tutor** | Datos de aprendizaje | Persona y su tutor |

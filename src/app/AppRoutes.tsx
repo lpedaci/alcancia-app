@@ -49,6 +49,8 @@ const EscapeRoomPage = lazyPage(() => import('@/features/escape/EscapeRoomPage')
 const CertificatePage = lazyPage(() => import('@/features/learning/CertificatePage'), 'CertificatePage');
 const FollowUpPage = lazyPage(() => import('@/features/learning/FollowUpPage'), 'FollowUpPage');
 const CustomLessonPage = lazyPage(() => import('@/features/learning/GuidePage'), 'CustomLessonPage');
+const SessionRecordingPage = lazyPage(() => import('@/features/learning/SessionRecordingPage'), 'SessionRecordingPage');
+const SessionsPage = lazyPage(() => import('@/features/tutor/SessionsPage'), 'SessionsPage');
 const TutorAuthoringPage = lazyPage(() => import('@/features/authoring/AuthoringRoutes'), 'TutorAuthoringPage');
 const AdminAuthoringPage = lazyPage(() => import('@/features/authoring/AuthoringRoutes'), 'AdminAuthoringPage');
 const ToolsPage = lazyPage(() => import('@/features/simulators/ToolsPages'), 'ToolsPage');
@@ -99,6 +101,7 @@ export function AppRoutes() {
           <Route path="/app/learn/certificate" element={<CertificatePage />} />
           <Route path="/app/learn/follow-up" element={<FollowUpPage />} />
           <Route path="/app/learn/lessons/:lessonId" element={<CustomLessonPage />} />
+          <Route path="/app/learn/sessions/:sessionId" element={<SessionRecordingPage />} />
           <Route path="/app/learn/guides/:guideId" element={<GuidePage />} />
           <Route path="/app/learn/review/:moduleId" element={<ReviewPage />} />
           <Route path="/app/learn/community" element={<CommunityPage />} />
@@ -117,6 +120,7 @@ export function AppRoutes() {
           <Route path="/tutor/questions" element={<QuestionsPage />} />
           <Route path="/tutor/community" element={<CommunityModerationPage />} />
           <Route path="/tutor/lessons" element={<TutorAuthoringPage />} />
+          <Route path="/tutor/sessions" element={<SessionsPage />} />
           <Route path="/admin" element={<AdminHomePage />} />
           <Route path="/admin/people" element={<PeoplePage />} />
           <Route path="/admin/people/import" element={<ImportPage />} />
