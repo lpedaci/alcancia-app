@@ -168,6 +168,9 @@ La billetera ficticia que muestra Alcancía integrada en otra app (D-75, D-84). 
 
 - **Globo de Fuerte (D-303):** el aviso breve que aparece junto a Fuerte va en `inverse-surface` con cola hacia él, como los tooltips: nunca se pierde sobre una tarjeta blanca.
 
+- **Escape room (D-304):** se arma con los componentes de siempre: `QuestionView` para cada candado, `Dialog` para inspeccionar objetos, `ListLinkRow` para ir a la guía, `InlineAlert` para el resultado y `TextArea` para la reflexión. Las pistas van en `warning-container`, como "¿Por qué importa?"; los candados abiertos, en `tertiary-container`, el color de los logros.
+- **Diálogos (D-304):** al abrirse enfocan el propio diálogo, no el botón "Cerrar", para que Escape lo cierre a la primera.
+
 ### Valores reales (D-264)
 
 - **Tarjeta "Valores reales de hoy" (`RealValues`):** cada valor real en una celda con su nombre, la cifra en `title-large` y "Valor al DD/MM/AAAA · Fuente: …"; si no se pudo actualizar, lo dice. Abajo, el recordatorio de que lo que viene es un escenario y el aviso legal, y los enlaces a las fuentes oficiales. Sin snapshot, un aviso en `info` y la pantalla sigue con los escenarios de ejemplo.

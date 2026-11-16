@@ -20,6 +20,8 @@ const ICONS = [
   'show_chart', 'monitoring', 'pie_chart', 'bar_chart', 'query_stats', 'target', 'flag',
   'add_card', 'bolt', 'wifi', 'local_fire_department', 'shopping_cart', 'store', 'subscriptions',
   'calendar_month', 'event', 'schedule', 'fast_forward', 'skip_next', 'today',
+  // Escape room (F18, D-304)
+  'label', 'mobile', 'door_front', 'door_open',
   // Learning
   'menu_book', 'article', 'quiz', 'trophy', 'military_tech', 'workspace_premium', 'lightbulb',
   'psychology', 'checklist', 'task_alt', 'play_circle', 'auto_stories',

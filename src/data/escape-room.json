@@ -1,0 +1,390 @@
+{
+  "note": "Escape room \"Tu primer sueldo\" (F18, paso 28, D-304), adaptado del escape room del taller \"Del aula al primer trabajo\" (gamificación y diseño instruccional de Lourdes Pedaci; contenido de finanzas del Lic. Kevin Giampieri). Versión inicial de las cinco salas, con tú y el vocabulario de 2.9. Todos los montos, tasas y nombres son ficticios y salen del original. Las versiones intermedia y avanzada llegan en la segunda tanda.",
+  "economy": { "keys": 3, "keysPerReflection": 1, "hintCost": 1, "freeHintAfterFails": 3 },
+  "seals": [
+    { "id": "gold", "maxHints": 1 },
+    { "id": "silver", "maxHints": 4 },
+    { "id": "bronze", "maxHints": 99 }
+  ],
+  "words": [
+    { "word": "METAS", "question": "¿Qué necesitas para que tu sueldo te alcance?", "anagrams": ["TEMAS", "MATES"] },
+    { "word": "RENTA", "question": "¿Cómo se llama lo que te paga una inversión por usar tu dinero?", "anagrams": ["TERNA"] }
+  ],
+  "rooms": [
+    {
+      "id": "room-1",
+      "habit": "Claridad",
+      "place": "Recepción",
+      "title": "El recibo",
+      "icon": "receipt_long",
+      "scene": "En el escritorio de recepción quedó tu recibo de sueldo, con una taza de café volcada encima. Al lado hay una nota de Recursos Humanos.",
+      "objects": [
+        {
+          "id": "receipt",
+          "icon": "receipt_long",
+          "name": "Recibo de sueldo",
+          "summary": "Tu primera liquidación, con una mancha de café.",
+          "title": "Andina Servicios S.A. · Recibo de ejemplo · Mes 1",
+          "rows": [
+            { "label": "Sueldo básico (30 días)", "value": "$ 1.000.000,00" },
+            { "label": "Sueldo bruto", "value": "$ 1.000.000,00", "strong": true },
+            { "label": "Jubilación", "value": "11 %" },
+            { "label": "Ley 19.032 (PAMI)", "value": "3 %" },
+            { "label": "Obra social", "value": "3 %" },
+            { "label": "Sueldo neto", "value": "Tapado por una mancha de café", "strong": true }
+          ],
+          "note": "Contribuciones de la empresa, aparte: seguridad social 18 % ($ 180.000) y obra social patronal 6 % ($ 60.000). Las paga la empresa además de tu sueldo; no se descuentan de lo que cobras."
+        },
+        {
+          "id": "hr-note",
+          "icon": "description",
+          "name": "Nota de Recursos Humanos",
+          "summary": "Un papel pegado en el monitor.",
+          "title": "Recursos Humanos",
+          "lines": ["Te damos la bienvenida al equipo.", "Los descuentos del trabajador suman 17 %.", "Cualquier duda, pasa por la oficina."]
+        }
+      ],
+      "lock": {
+        "id": "esc-1-net",
+        "moduleId": "module-01",
+        "type": "numeric",
+        "prompt": "¿Cuál es tu sueldo neto?",
+        "numeric": { "answer": "830000", "tolerance": "1.00", "unit": "ARS" },
+        "help": "Monto en pesos, por ejemplo: 800.000",
+        "feedback": {
+          "correct": "Abriste el candado. $ 1.000.000 − 17 % = $ 830.000.",
+          "incorrect": "Todavía no. Vuelve a mirar los objetos de la sala."
+        },
+        "sourceIds": ["T"]
+      },
+      "errors": [
+        { "values": ["1000000"], "message": "Ese es el bruto. El neto es lo que te queda después de los descuentos." },
+        { "values": ["170000"], "message": "Eso es lo que te descuentan. ¿Cuánto te queda a ti?" },
+        { "values": ["890000", "970000", "860000"], "message": "Revisa: ¿sumaste los tres descuentos?" },
+        { "values": ["760000"], "message": "Restaste las contribuciones de la empresa. Esas las paga la empresa aparte: no salen de tu sueldo." },
+        { "values": ["1240000"], "message": "Eso es lo que le cuesta tu trabajo a la empresa. Tú cobras menos que el bruto, no más." }
+      ],
+      "hints": ["Bruto menos descuentos es igual a neto.", "El 17 % de $ 1.000.000 es $ 170.000."],
+      "debrief": [
+        "El sueldo bruto es lo que ganas. El neto es lo que cobras después de tus aportes: jubilación (11 %), Ley 19.032 o PAMI (3 %) y obra social (3 %).",
+        "Según el convenio de tu actividad, puede haber además otros aportes. Y aparte de tu sueldo, la empresa paga contribuciones que no se te descuentan."
+      ],
+      "guide": "module-01-guide-1",
+      "reflection": "¿Qué dato del recibo te conviene revisar todos los meses, y por qué?"
+    },
+    {
+      "id": "room-2",
+      "habit": "Orden",
+      "place": "Oficina",
+      "title": "El presupuesto",
+      "icon": "checklist",
+      "scene": "En el escritorio de la oficina hay una lista con tus gastos del mes. Pegado en la taza, un post-it.",
+      "objects": [
+        {
+          "id": "list",
+          "icon": "checklist",
+          "name": "Lista de gastos del mes",
+          "summary": "Lo que piensas gastar con tu primer sueldo.",
+          "title": "Mis gastos del mes",
+          "rows": [
+            { "label": "Alquiler compartido", "value": "$ 250.000" },
+            { "label": "Carga de la tarjeta de transporte", "value": "$ 35.000" },
+            { "label": "Plan básico de celular", "value": "$ 18.000" },
+            { "label": "Salida del sábado", "value": "$ 40.000" },
+            { "label": "Zapatillas de marca para estrenar", "value": "$ 100.000" },
+            { "label": "Café de paso todos los días", "value": "Mira el post-it" }
+          ]
+        },
+        {
+          "id": "postit",
+          "icon": "description",
+          "name": "Post-it de la taza",
+          "summary": "Una cuenta que quedó a medias.",
+          "title": "Tú, ayer",
+          "lines": ["Café de paso: $ 3.000.", "Todos los días hábiles (22 al mes).", "¿Cuánto es por mes?"]
+        }
+      ],
+      "before": {
+        "id": "esc-2-classify",
+        "moduleId": "module-03",
+        "type": "categorize",
+        "prompt": "Antes de abrir el candado, clasifica cada gasto como necesidad o deseo.",
+        "categorize": {
+          "categories": [
+            { "id": "need", "label": "Necesidad" },
+            { "id": "want", "label": "Deseo" }
+          ],
+          "items": [
+            { "id": "rent", "text": "Alquiler compartido", "categoryId": "need" },
+            { "id": "transport", "text": "Carga de la tarjeta de transporte", "categoryId": "need" },
+            { "id": "phone", "text": "Plan básico de celular", "categoryId": "need" },
+            { "id": "outing", "text": "Salida del sábado", "categoryId": "want" },
+            { "id": "sneakers", "text": "Zapatillas de marca para estrenar", "categoryId": "want" },
+            { "id": "coffee", "text": "Café de paso todos los días", "categoryId": "want" }
+          ]
+        },
+        "feedback": {
+          "correct": "Bien clasificados. Se encendió el candado.",
+          "incorrect": "Hay gastos para revisar: lo esencial para vivir y trabajar es necesidad; lo que suma pero puede esperar, deseo."
+        },
+        "sourceIds": ["A-32"]
+      },
+      "lock": {
+        "id": "esc-2-coffee",
+        "moduleId": "module-03",
+        "type": "numeric",
+        "prompt": "¿Cuánto se va por mes en café?",
+        "numeric": { "answer": "66000", "tolerance": "1.00", "unit": "ARS" },
+        "help": "Monto en pesos, por ejemplo: 50.000",
+        "feedback": {
+          "correct": "Abriste el candado. $ 3.000 × 22 = $ 66.000 por mes.",
+          "incorrect": "Todavía no. Vuelve a mirar el post-it."
+        },
+        "sourceIds": ["A-34"]
+      },
+      "errors": [
+        { "values": ["3000"], "message": "Ese es un solo café. ¿Y en el mes?" },
+        { "values": ["90000", "93000"], "message": "Contaste todos los días del mes. El post-it dice días hábiles." },
+        { "values": ["15000"], "message": "Eso es lo de una semana hábil. El candado pide el mes." }
+      ],
+      "hints": ["Multiplica el precio del café por la cantidad de días.", "3.000 × 22."],
+      "debrief": [
+        "Los gastos hormiga son gastos chicos y repetidos: un café por día parece poco, pero son $ 66.000 por mes, casi el 8 % de un sueldo neto de $ 830.000.",
+        "Para repartir el ingreso, una referencia es la regla 50/30/20: la mitad para lo esencial, un 30 % para deseos y un 20 % para ahorro e inversión. Es un punto de partida, no una obligación."
+      ],
+      "guide": "module-03-guide-1",
+      "reflection": "¿Qué gasto hormiga tienes tú, o alguien que conoces, y cuánto suma en un mes?"
+    },
+    {
+      "id": "room-3",
+      "habit": "Prudencia",
+      "place": "Caja",
+      "title": "La tarjeta",
+      "icon": "credit_card",
+      "scene": "Sobre el mostrador de la caja quedaron el resumen de tu tarjeta y dos folletos del mismo celular en 12 cuotas.",
+      "objects": [
+        {
+          "id": "statement",
+          "icon": "credit_card",
+          "name": "Resumen de la tarjeta",
+          "summary": "Lo que gastaste este mes con la tarjeta.",
+          "title": "Resumen de tu tarjeta de crédito",
+          "rows": [
+            { "label": "Saldo total a pagar", "value": "$ 200.000", "strong": true },
+            { "label": "Pago mínimo", "value": "$ 20.000" },
+            { "label": "Vencimiento", "value": "Día 10" }
+          ],
+          "note": "Si pagas menos que el saldo total, la diferencia se financia y genera intereses."
+        },
+        {
+          "id": "flyer-a",
+          "icon": "label",
+          "name": "Folleto A",
+          "summary": "La cuota más baja de la vidriera.",
+          "title": "Oferta A · 12 cuotas de $ 26.000",
+          "rows": [
+            { "label": "Precio de contado", "value": "$ 240.000" },
+            { "label": "Comisión de otorgamiento", "value": "$ 30.000" },
+            { "label": "Seguro", "value": "$ 2.000 por mes" },
+            { "label": "TNA", "value": "47 %" },
+            { "label": "CFTEA", "value": "157 %", "strong": true }
+          ]
+        },
+        {
+          "id": "flyer-b",
+          "icon": "label",
+          "name": "Folleto B",
+          "summary": "La cuota es apenas más alta.",
+          "title": "Oferta B · 12 cuotas de $ 28.000",
+          "rows": [
+            { "label": "Precio de contado", "value": "$ 240.000" },
+            { "label": "Comisiones y seguros", "value": "No tiene" },
+            { "label": "TNA", "value": "67 %" },
+            { "label": "CFTEA", "value": "92 %", "strong": true }
+          ]
+        }
+      ],
+      "lock": {
+        "id": "esc-3-cft",
+        "moduleId": "module-06",
+        "type": "single",
+        "prompt": "¿Qué dato tienes que comparar entre las dos ofertas para saber cuál cuesta menos?",
+        "options": [
+          { "id": "cft", "text": "El costo financiero total (CFT o CFTEA)" },
+          { "id": "tna", "text": "La tasa nominal anual (TNA)" },
+          { "id": "installment", "text": "El valor de la cuota" }
+        ],
+        "correctOptionIds": ["cft"],
+        "feedback": {
+          "cft": "Abriste el candado. El CFT suma intereses, comisiones y seguros: por eso la oferta B, con cuota más alta, termina siendo más barata.",
+          "tna": "La TNA no incluye todos los costos. Busca el dato que suma todo.",
+          "installment": "La cuota más baja no siempre es la más barata. Busca el dato que suma todos los costos."
+        },
+        "sourceIds": ["B-04"]
+      },
+      "hints": ["Búscalo al lado de la tasa en los dos folletos: es el dato que suma todos los costos.", "Es el costo financiero total."],
+      "debrief": [
+        "Si pagas solo el mínimo, el resto del resumen queda financiado: genera intereses, más IVA sobre esos intereses, y aparece en el resumen del mes siguiente.",
+        "En las compras en cuotas, la cuota más baja no siempre es la más barata. Para comparar, mira el costo financiero total (CFT o CFTEA): suma intereses, comisiones y seguros."
+      ],
+      "guide": "module-06-guide-1",
+      "reflection": "Antes de comprar algo en cuotas, ¿qué vas a mirar a partir de hoy?"
+    },
+    {
+      "id": "room-4",
+      "habit": "Previsión",
+      "place": "Bóveda",
+      "title": "La inflación",
+      "icon": "savings",
+      "scene": "En la caja fuerte está el sobre donde guardaste dinero para las zapatillas que anotaste en el presupuesto. Al lado, la etiqueta de precio.",
+      "objects": [
+        {
+          "id": "envelope",
+          "icon": "mail",
+          "name": "Sobre de ahorro",
+          "summary": "El dinero que juntaste el mes pasado.",
+          "title": "Para las zapatillas",
+          "rows": [{ "label": "En el sobre", "value": "$ 100.000", "strong": true }],
+          "note": "Lo guardé el mes pasado, justo lo que costaban."
+        },
+        {
+          "id": "tag",
+          "icon": "label",
+          "name": "Etiqueta de precio",
+          "summary": "El precio de las zapatillas, actualizado.",
+          "title": "Zapatillas de marca",
+          "rows": [
+            { "label": "Mes pasado", "value": "$ 100.000" },
+            { "label": "Este mes", "value": "Subieron 10 %", "strong": true }
+          ]
+        }
+      ],
+      "before": {
+        "id": "esc-4-steps",
+        "moduleId": "module-09",
+        "type": "ordering",
+        "prompt": "Antes de abrir el candado, ordena los pasos para saber cuánto te falta.",
+        "ordering": {
+          "items": [
+            { "id": "rise", "text": "Mirar cuánto subió el precio" },
+            { "id": "new", "text": "Calcular el precio nuevo" },
+            { "id": "subtract", "text": "Restarle lo que tienes en el sobre" },
+            { "id": "plan", "text": "Planificar cómo juntar la diferencia" }
+          ],
+          "correctOrder": ["rise", "new", "subtract", "plan"]
+        },
+        "feedback": {
+          "correct": "Buen orden. Se encendió el candado.",
+          "incorrect": "Primero el aumento, después el precio nuevo, luego la resta con lo que tienes y, al final, el plan."
+        },
+        "sourceIds": ["A-21"]
+      },
+      "lock": {
+        "id": "esc-4-missing",
+        "moduleId": "module-09",
+        "type": "numeric",
+        "prompt": "¿Cuánto dinero te falta ahora para las zapatillas?",
+        "numeric": { "answer": "10000", "tolerance": "1.00", "unit": "ARS" },
+        "help": "Monto en pesos, por ejemplo: 20.000",
+        "feedback": {
+          "correct": "Abriste el candado. $ 100.000 + 10 % = $ 110.000; te faltan $ 10.000.",
+          "incorrect": "Todavía no. Vuelve a mirar la etiqueta."
+        },
+        "sourceIds": ["A-21"]
+      },
+      "errors": [
+        { "values": ["110000"], "message": "Ese es el precio nuevo. ¿Cuánto te falta con lo que tienes en el sobre?" },
+        { "values": ["0"], "message": "Los precios subieron, pero tu sobre no." },
+        { "values": ["90000"], "message": "Calculaste un 10 % menos. El precio subió, no bajó." }
+      ],
+      "hints": ["Calcula primero el precio nuevo.", "$ 100.000 más el 10 % es $ 110.000."],
+      "debrief": [
+        "Con inflación, el dinero quieto pierde poder de compra: el sobre sigue teniendo $ 100.000, pero ahora alcanza para menos.",
+        "Ahorrar es guardar; invertir es poner el dinero en activos que pueden generar más, con algo de riesgo. Para el fondo de emergencia, de 3 a 6 meses de gastos básicos, lo primero es la liquidez."
+      ],
+      "guide": "module-09-guide-1",
+      "reflection": "¿Para qué te gustaría ahorrar con tu primer sueldo, y dónde guardarías ese dinero?"
+    },
+    {
+      "id": "room-5",
+      "habit": "Seguridad",
+      "place": "Salida",
+      "title": "Los mensajes",
+      "icon": "mobile",
+      "scene": "Ya casi estás afuera. Tu celular vibra: llegaron cuatro mensajes. Uno solo es de verdad.",
+      "objects": [
+        {
+          "id": "phone",
+          "icon": "mobile",
+          "name": "Tu celular",
+          "summary": "Cuatro mensajes nuevos.",
+          "title": "Mensajes nuevos",
+          "rows": [
+            { "label": "SMS · AVISO-CUENTA", "value": "Tu cuenta fue bloqueada. Ingresa YA en un enlace acortado para evitar la baja definitiva." },
+            { "label": "WhatsApp · Sofi (número nuevo)", "value": "Te llegó un código de 6 números por SMS, ¿me lo pasas? Es para anotarte en un sorteo, que se termina hoy." },
+            { "label": "Correo · premios de un dominio desconocido", "value": "Ganaste $ 500.000. Completa tus datos y los de tu tarjeta para cobrar el premio antes de las 18 h." },
+            { "label": "Aviso de la app · Tu cuenta sueldo", "value": "Recibiste una transferencia de $ 830.000 de Andina Servicios S.A. Concepto: sueldo." }
+          ]
+        }
+      ],
+      "lock": {
+        "id": "esc-5-messages",
+        "moduleId": "module-18",
+        "type": "branching",
+        "prompt": "Revisa los cuatro mensajes, uno por uno. ¿Qué haces con cada uno?",
+        "branching": {
+          "startNodeId": "sms",
+          "nodes": {
+            "sms": {
+              "text": "SMS: \"Tu cuenta fue bloqueada. Ingresa YA en el enlace para evitar la baja definitiva.\"",
+              "choices": [
+                { "id": "open", "text": "Toco el enlace para desbloquearla", "outcome": "fell_link" },
+                { "id": "app", "text": "No toco el enlace y reviso entrando a la app por mi cuenta", "next": "whatsapp" }
+              ]
+            },
+            "whatsapp": {
+              "text": "WhatsApp de Sofi, con un número nuevo: \"¿Me pasas el código de 6 números que te llegó? Es para un sorteo.\"",
+              "choices": [
+                { "id": "send", "text": "Se lo paso: es una amiga", "outcome": "fell_code" },
+                { "id": "keep", "text": "No lo comparto y le escribo a Sofi a su número de siempre", "next": "mail" }
+              ]
+            },
+            "mail": {
+              "text": "Correo: \"Ganaste $ 500.000. Completa tus datos y los de tu tarjeta antes de las 18 h.\"",
+              "choices": [
+                { "id": "fill", "text": "Completo los datos para cobrar el premio", "outcome": "fell_prize" },
+                { "id": "drop", "text": "Lo descarto: no participé de ningún sorteo", "next": "app" }
+              ]
+            },
+            "app": {
+              "text": "Aviso de la app: \"Recibiste una transferencia de $ 830.000 de Andina Servicios S.A. Concepto: sueldo.\"",
+              "choices": [
+                { "id": "check", "text": "Es real: lo confirmo en la app y coincide con mi sueldo", "outcome": "safe" },
+                { "id": "delete", "text": "Lo borro por las dudas", "outcome": "missed_real" }
+              ]
+            }
+          },
+          "outcomes": {
+            "safe": { "good": true, "feedback": "Abriste el candado. Las tres estafas te apuraban, te pedían un código o tus datos; el aviso real no te pedía nada y coincidía con tu sueldo." },
+            "fell_link": { "good": false, "feedback": "El SMS te apura y te manda a un enlace acortado. Ninguna entidad te pide entrar así: se revisa entrando a la app por tu cuenta." },
+            "fell_code": { "good": false, "feedback": "Con ese código pueden robarte la cuenta. Nadie legítimo te lo pide, ni siquiera alguien conocido desde un número nuevo." },
+            "fell_prize": { "good": false, "feedback": "Un premio que no pediste y que te pide los datos de tu tarjeta es una estafa." },
+            "missed_real": { "good": false, "feedback": "Ese aviso era real: no tenía enlaces, no te apuraba, no te pedía nada y coincidía con tu sueldo. No todo mensaje es una estafa." }
+          }
+        },
+        "feedback": {
+          "correct": "Abriste el candado.",
+          "incorrect": "Todavía no. Vuelve a revisar los mensajes."
+        },
+        "sourceIds": ["T", "B-24"]
+      },
+      "hints": ["Desconfía de la urgencia, de los enlaces y de los pedidos de códigos.", "Uno solo es real: no te pide nada y coincide con tu sueldo."],
+      "debrief": [
+        "Nunca compartas códigos de verificación ni claves: ninguna entidad te los pide por mensaje. Desconfía de la urgencia, de los enlaces raros y de los premios que no pediste.",
+        "Antes de transferir a un alias nuevo, revisa el nombre del titular. Si te pasa algo, avisa enseguida a tu banco o billetera por sus canales oficiales."
+      ],
+      "guide": "module-18-guide-1",
+      "reflection": "¿Qué harías si te llega un mensaje pidiéndote un código?"
+    }
+  ]
+}

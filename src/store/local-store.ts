@@ -1,3 +1,4 @@
+import type { EscapeState } from '@/features/escape/engine';
 import type { MissionRun } from '@/features/missions/engine';
 import type { LevelProgress, LocalGoal, LocalScenario } from '@/types/domain';
 
@@ -32,6 +33,8 @@ export interface LocalData {
   reviews?: { moduleId: string; round: 7 | 30; at: string }[];
   /** xAPI-like statements of the cards (F21): verb, card and simulated day, never amounts. */
   cardStatements?: { verb: 'experienced' | 'answered' | 'passed'; object: string; day: number }[];
+  /** Escape room "Tu primer sueldo" (F18, D-304): the game and its reflections, never shared. */
+  escape?: EscapeState;
 }
 
 export type FuertePresence = 'chatty' | 'important' | 'silent';

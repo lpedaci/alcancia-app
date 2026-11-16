@@ -1557,7 +1557,9 @@
       "shortcuts": "Atajos",
       "conocerteDetail": "Repite el diagnóstico y mira tu ruta",
       "profileDetail": "Educativo: describe tus rasgos, sin recomendarte nada",
-      "toolsDetail": "Los 12 simuladores, con valores de ejemplo"
+      "toolsDetail": "Los 12 simuladores, con valores de ejemplo",
+      "escape": "Escape room: Tu primer sueldo",
+      "escapeDetail": "Cinco salas con Fuerte · desde el nivel 4"
     },
     "sources": {
       "title": "Fuentes",
@@ -4785,5 +4787,114 @@
     "verifyRegistryDetail": "Registros oficiales y la ficha de billeteras y fintech",
     "backToInvest": "Tu cuenta comitente de práctica",
     "backToInvestDetail": "Volver a Invertir"
+  },
+  "escape": {
+    "title": "Tu primer sueldo",
+    "kicker": "Escape room",
+    "lockedTitle": "El escape room está bloqueado",
+    "lockedBody": "Es un desafío especial que se abre con el nivel 4. Mientras tanto, cada sala que juegues después repasa lo que ya aprendiste.",
+    "storyTitle": "La historia",
+    "story": [
+      "Es tu primer día de cobro. Fuiste a Andina a firmar el recibo y la puerta de la oficina se trabó.",
+      "Para salir tienes que abrir 5 candados, uno por sala. Cada candado que abres te da una letra del código de la puerta final."
+    ],
+    "facts": {
+      "rooms": {
+        "title": "5 salas",
+        "body": "Se abren en orden, cada una con un tipo de desafío distinto."
+      },
+      "time": {
+        "title": "Sin límite de tiempo",
+        "body": "No hay cuenta regresiva ni forma de perder."
+      },
+      "keys": {
+        "title": "Pistas a cambio de llaves",
+        "body": "Empiezas con 3 y ganas una por cada reflexión."
+      }
+    },
+    "credits": "Adaptado del escape room del taller \"Del aula al primer trabajo\". Gamificación y diseño instruccional: Lourdes Pedaci. Contenido de finanzas: Lic. Kevin Giampieri.",
+    "start": "Entrar a la oficina",
+    "progressLabel": "Tu avance en el escape room",
+    "state": {
+      "solved": "abierto",
+      "current": "en curso",
+      "locked": "cerrado"
+    },
+    "keys": "Llaves",
+    "hintsUsed": "Pistas usadas",
+    "letters": "Letras",
+    "lettersValue": "{{count}} de {{total}} letras",
+    "time": {
+      "label": "Tiempo",
+      "hidden": "Oculto",
+      "show": "Mostrar tiempo",
+      "hide": "Ocultar tiempo"
+    },
+    "reset": "Empezar de cero",
+    "resetTitle": "¿Empezar de cero?",
+    "resetBody": "Se borran tu avance, tus reflexiones y tus insignias del escape room. No se puede deshacer.",
+    "again": "Volver a jugar",
+    "againTitle": "¿Jugar una partida nueva?",
+    "againBody": "Empiezas de nuevo con otra palabra en la puerta. Tus insignias se conservan.",
+    "roomOf": "Sala {{n}} de {{total}} · {{place}}",
+    "inspectTitle": "Inspecciona los objetos",
+    "inspect": "Inspeccionar",
+    "habit": "Este candado enciende la luz de {{habit}}.",
+    "check": "Revisar",
+    "try": "Probar",
+    "lockOff": "Primero completa el desafío de arriba para encender el candado.",
+    "hints": "Pistas",
+    "hintN": "Pista {{n}}",
+    "hintCost": "Ver pista (1 llave)",
+    "hintFree": "Ver pista (gratis)",
+    "noKeys": "No te quedan llaves. Ganas una con cada reflexión, y si fallas 3 veces seguidas la próxima pista se abre sola.",
+    "opened": "Abriste el candado. Ganaste la letra {{letter}}.",
+    "debriefTitle": "Lo que acabas de resolver",
+    "toGuide": "Repasar en la guía",
+    "toGuideDetail": "La guía del módulo que trabaja este tema",
+    "reflectionHelp": "Es opcional y no se corrige. Si escribes algo, ganas una llave. Solo tú lo ves.",
+    "reflectionSave": "Guardar reflexión",
+    "reflectionKey": "Reflexión guardada. Ganaste una llave.",
+    "reflectionSaved": "Reflexión guardada.",
+    "nextRoom": "Seguir a la sala",
+    "toDoor": "Ir a la puerta final",
+    "door": {
+      "kicker": "Puerta final",
+      "title": "La puerta final",
+      "label": "Tu respuesta",
+      "help": "Una palabra de {{n}} letras, con las letras que juntaste.",
+      "open": "Abrir la puerta",
+      "anagram": "Usaste todas las letras, pero esa palabra no responde la pregunta.",
+      "wrong": "Todavía no. Prueba ordenar las letras de otra manera.",
+      "missing": "Todavía te faltan letras. Resuelve las salas que quedan.",
+      "empty": "Escribe una palabra antes de probar."
+    },
+    "exit": {
+      "title": "Saliste",
+      "body": "Abriste la puerta final y se encendieron las cinco luces de los candados.",
+      "seal": "Tu sello"
+    },
+    "seals": {
+      "gold": "Salida limpia",
+      "silver": "Buena estrategia",
+      "bronze": "Saliste"
+    },
+    "badges": {
+      "bronze": "Insignia de bronce",
+      "bronzeBody": "Las cinco salas resueltas en su versión inicial. Las versiones intermedia y avanzada dan plata y oro."
+    },
+    "backToLearn": "Volver a Aprender",
+    "backToLearnDetail": "Tu mapa de niveles y tus logros",
+    "fuerte": {
+      "locked": "El escape room se abre con el nivel 4. Primero lo que te protege; después, el juego.",
+      "hello": "Hola, soy Fuerte. Acá equivocarte es gratis: cada candado que abras enciende una de las luces de la sala.",
+      "start": "Empecemos por la recepción. Inspecciona los objetos antes de probar.",
+      "almost": "Casi. Mira lo que dice abajo.",
+      "hint": "Te paso una ayuda.",
+      "solved": "Guardado. Se encendió otra luz.",
+      "next": "Siguiente sala. Inspecciona antes de probar.",
+      "door": "Ya tienes todas las letras. Vamos a la puerta.",
+      "out": "Saliste. Cinco luces encendidas."
+    }
   }
 }

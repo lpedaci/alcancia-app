@@ -266,6 +266,9 @@ export function LearnPage() {
                   <li>
                     <ListLinkRow to="/app/tools" icon="calculate" title={t('learn.map.tools')} detail={t('learn.map.toolsDetail')} />
                   </li>
+                  <li>
+                    <ListLinkRow to="/app/learn/escape" icon="door_front" title={t('learn.map.escape')} detail={t('learn.map.escapeDetail')} />
+                  </li>
                 </ul>
               </div>
             </section>
