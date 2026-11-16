@@ -111,8 +111,7 @@ export function EscapeRoomPage() {
           </div>
           {state && (
             <div className="flex flex-wrap gap-2">
-
-              <Button variant="text" size="xs" leadingIcon="restart_alt" onClick={() => setConfirmReset(true)}>
+              <Button variant="outlined" size="xs" leadingIcon="restart_alt" onClick={() => setConfirmReset(true)}>
                 {t('escape.reset')}
               </Button>
             </div>
@@ -221,14 +220,22 @@ function Progress({ state, onToggleTime }: { state: EscapeState; onToggleTime: (
       </ol>
       {/* Four small tiles (D-307): the label on top and its value below, so a value never reads as the
           next label's; dividers between them on wide cards */}
-      <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-lg bg-outline-variant @lg:grid-cols-4">
+      <dl className="grid grid-cols-3 gap-px overflow-hidden rounded-lg bg-outline-variant @lg:grid-cols-4">
         <Stat icon="key" label={t('escape.keys')}>
           {state.keys}
         </Stat>
-        <Stat icon="lightbulb" label={t('escape.hintsUsed')}>
+        <Stat
+          icon="lightbulb"
+          label={
+            <>
+              <span className="@lg:hidden">{t('escape.hints')}</span>
+              <span className="hidden @lg:inline">{t('escape.hintsUsed')}</span>
+            </>
+          }
+        >
           {state.hintsUsed}
         </Stat>
-        <Stat icon="door_front" label={t('escape.letters')}>
+        <Stat icon="door_front" label={t('escape.letters')} className="col-span-3 order-last @lg:order-none @lg:col-span-1">
           <span className="sr-only">{t('escape.lettersValue', { count: letters.filter(Boolean).length, total: ROOMS.length })}</span>
           {/* Five slots that fill in, one per room */}
           <span aria-hidden className="flex gap-1">
@@ -264,10 +271,11 @@ function Progress({ state, onToggleTime }: { state: EscapeState; onToggleTime: (
   );
 }
 
-function Stat({ icon, label, children }: { icon: 'key' | 'lightbulb' | 'door_front' | 'schedule'; label: string; children: ReactNode }) {
+function Stat({ icon, label, children, className }: { icon: 'key' | 'lightbulb' | 'door_front' | 'schedule'; label: ReactNode; children: ReactNode; className?: string }) {
   return (
-    <div className="flex min-w-0 flex-col gap-1 bg-surface-container-lowest px-3 py-2">
-      <dt className="flex items-center gap-1.5 text-body-small text-on-surface-variant">
+    // Phones and tablets (D-307): keys, hints and time in one row; the letters below at full width
+    <div className={cn('flex min-w-0 flex-col gap-1 bg-surface-container-lowest px-2.5 py-2 @lg:px-3', className)}>
+      <dt className="flex min-w-0 items-center gap-1.5 truncate text-label-small text-on-surface-variant @lg:text-body-small">
         <Icon name={icon} size={16} className="shrink-0 text-primary" />
         {label}
       </dt>
