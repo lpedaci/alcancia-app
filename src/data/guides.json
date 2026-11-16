@@ -4402,6 +4402,406 @@
     "F-12",
     "F-13"
    ]
+  },
+  {
+   "id": "module-09-guide-3",
+   "moduleId": "module-09",
+   "title": "Lo que vas a pagar mañana",
+   "minutes": 6,
+   "blocks": [
+    {
+     "type": "hook",
+     "body": "Juntas para algo que hoy cuesta $ 200.000. En un año juntaste justo eso, pero el precio ya no es el mismo."
+    },
+    {
+     "type": "objective",
+     "body": "Al terminar vas a poder estimar el precio futuro de algo que quieres comprar en un escenario de inflación y ajustar tu meta de ahorro."
+    },
+    {
+     "type": "recall",
+     "question": {
+      "id": "g09c-recall",
+      "moduleId": "module-09",
+      "type": "reflection",
+      "prompt": "Cuando defines una meta de ahorro, ¿tienes en cuenta que el precio va a subir?",
+      "options": [
+       {
+        "id": "a",
+        "text": "Sí"
+       },
+       {
+        "id": "b",
+        "text": "No"
+       }
+      ],
+      "feedback": {
+       "a": "Bien. En esta guía lo calculas con una fórmula corta.",
+       "b": "Es lo más común. En esta guía ves cuánto puede cambiar la meta."
+      },
+      "sourceIds": []
+     }
+    },
+    {
+     "type": "text",
+     "title": "El precio también se mueve",
+     "body": "Con inflación, lo que hoy cuesta **M** cuesta más en el futuro: **precio futuro = M × (1 + inflación mensual) ^ meses**. Si tu meta es un monto fijo de hoy, cuando llegues puede no alcanzar. Por eso una meta de ahorro se ajusta por el escenario de inflación."
+    },
+    {
+     "type": "text",
+     "title": "Escenarios, no predicciones",
+     "body": "No sabemos la inflación futura: por eso se calculan **escenarios** (baja, media o alta) y se revisa la meta cada tanto. La inflación oficial del pasado es el **IPC** que publica el INDEC; la del futuro siempre es un supuesto."
+    },
+    {
+     "type": "example",
+     "title": "Ejemplo resuelto: algo que hoy cuesta $ 100.000",
+     "steps": [
+      "Con 3 % mensual durante 12 meses: $ 100.000 × 1,03^12 = $ 142.576,09.",
+      "Con 6 % mensual: $ 100.000 × 1,06^12 = $ 201.219,65, el doble.",
+      "Con inflación anual, la fórmula es la misma con años: en la calculadora del taller, $ 100 con 25 % anual en 5 años compran lo que hoy $ 32,77.",
+      "Tu meta no es el precio de hoy: es el precio del escenario en la fecha en que vas a comprar."
+     ]
+    },
+    {
+     "type": "practice",
+     "question": {
+      "id": "m09-future-price",
+      "moduleId": "module-09",
+      "type": "numeric",
+      "prompt": "Algo que quieres comprar hoy cuesta $ 200.000. Con una inflación de ejemplo del 3 % mensual, ¿cuánto costaría en 12 meses?",
+      "numeric": {
+       "answer": "285152.18",
+       "tolerance": "1.00",
+       "unit": "ARS"
+      },
+      "help": "Monto en pesos, con dos decimales, por ejemplo: 250.000,00",
+      "feedback": {
+       "correct": "Correcto. $ 200.000 × 1,03^12 = $ 285.152,18: tu meta tendría que ser ese monto, no $ 200.000.",
+       "incorrect": "Multiplica por (1 + inflación) elevado a los meses: $ 200.000 × 1,03^12 = $ 285.152,18."
+      },
+      "sourceIds": [
+       "F-05"
+      ]
+     }
+    },
+    {
+     "type": "takeaway",
+     "body": "Para tu vida: elige algo que quieras comprar y calcula su precio en el escenario medio con la herramienta \"Meta de ahorro con inflación\".",
+     "toolId": "SIM-8"
+    }
+   ],
+   "sourceIds": [
+    "A-21",
+    "B-40",
+    "T",
+    "F-05",
+    "F-06",
+    "F-07"
+   ]
+  },
+  {
+   "id": "module-10-guide-3",
+   "moduleId": "module-10",
+   "title": "La misma tasa, dos resultados",
+   "minutes": 6,
+   "blocks": [
+    {
+     "type": "hook",
+     "body": "Un plazo fijo con una TNA del 36 %. Con una inflación pierdes poder de compra; con otra, ganas. La tasa no cambió."
+    },
+    {
+     "type": "objective",
+     "body": "Al terminar vas a poder calcular la tasa real de un plazo en dos escenarios de inflación y explicar por qué una tasa sola no dice si le ganas a la inflación."
+    },
+    {
+     "type": "recall",
+     "question": {
+      "id": "g10c-recall",
+      "moduleId": "module-10",
+      "type": "reflection",
+      "prompt": "¿Una TNA alta asegura que le ganes a la inflación?",
+      "options": [
+       {
+        "id": "a",
+        "text": "Sí"
+       },
+       {
+        "id": "b",
+        "text": "No"
+       },
+       {
+        "id": "c",
+        "text": "No lo sé"
+       }
+      ],
+      "feedback": {
+       "a": "Es una idea común. En esta guía ves por qué depende de la inflación del mismo período.",
+       "b": "Bien. En esta guía lo pones en números.",
+       "c": "En esta guía lo ves con un ejemplo."
+      },
+      "sourceIds": []
+     }
+    },
+    {
+     "type": "text",
+     "title": "Comparar en el mismo período",
+     "body": "La **tasa real** compara lo que rinde un plazo con la inflación **del mismo período**: **tasa real = (1 + tasa del período) ÷ (1 + inflación del período) − 1**. Una TNA anual no se compara con una inflación mensual: primero se pasa la TNA al plazo, **TNA × días ÷ 365**."
+    },
+    {
+     "type": "text",
+     "title": "El signo es lo que importa",
+     "body": "Si la tasa real es **positiva**, tu dinero compra un poco más al final. Si es **negativa**, tienes más pesos pero compras menos: pierdes poder de compra. Es información, no una falla tuya: depende del escenario."
+    },
+    {
+     "type": "example",
+     "title": "Ejemplo resuelto: TNA del 36 % a 30 días",
+     "steps": [
+      "Tasa del período: 36 % × 30 ÷ 365 = 2,96 %.",
+      "Con inflación del 3 % mensual: 1,0296 ÷ 1,03 − 1 = −0,04 %. Pierdes poder de compra.",
+      "Con inflación del 1,5 % mensual: 1,0296 ÷ 1,015 − 1 = +1,44 %. Ganas poder de compra.",
+      "La misma tasa da dos resultados: por eso se mira siempre con la inflación del escenario."
+     ]
+    },
+    {
+     "type": "practice",
+     "question": {
+      "id": "m10-real-low",
+      "moduleId": "module-10",
+      "type": "numeric",
+      "prompt": "Un plazo fijo a 30 días rinde 2,96 % en el período (TNA del 36 %). Si la inflación del mes es del 1,5 %, ¿cuál es la tasa real del período? (en porcentaje)",
+      "numeric": {
+       "answer": "1.44",
+       "tolerance": "0.01",
+       "unit": "percent"
+      },
+      "help": "Porcentaje con dos decimales, por ejemplo: 1,20",
+      "feedback": {
+       "correct": "Correcto. 1,0296 ÷ 1,015 − 1 = 1,44 %: en ese escenario, le ganas a la inflación.",
+       "incorrect": "Divide en lugar de restar: (1 + 0,0296) ÷ (1 + 0,015) − 1 = 1,44 %."
+      },
+      "sourceIds": [
+       "F-03",
+       "F-04"
+      ]
+     }
+    },
+    {
+     "type": "takeaway",
+     "body": "Para tu vida: en la herramienta \"Tasa real\", prueba la misma TNA con los tres escenarios de inflación y mira cuándo cambia de signo.",
+     "toolId": "SIM-4"
+    }
+   ],
+   "sourceIds": [
+    "B-40",
+    "F-01",
+    "F-03",
+    "F-04"
+   ]
+  },
+  {
+   "id": "module-11-guide-3",
+   "moduleId": "module-11",
+   "title": "Cuánto rinde por día",
+   "minutes": 6,
+   "blocks": [
+    {
+     "type": "hook",
+     "body": "Tu billetera muestra que tu saldo \"rindió\" unos pesos hoy. ¿De dónde sale ese número y qué tipo de producto lo paga?"
+    },
+    {
+     "type": "objective",
+     "body": "Al terminar vas a poder calcular el rendimiento diario de un saldo con una TNA y reconocer si viene de una cuenta o de un fondo."
+    },
+    {
+     "type": "recall",
+     "question": {
+      "id": "g11c-recall",
+      "moduleId": "module-11",
+      "type": "reflection",
+      "prompt": "¿Tu billetera te muestra cuánto rinde tu saldo por día?",
+      "options": [
+       {
+        "id": "a",
+        "text": "Sí"
+       },
+       {
+        "id": "b",
+        "text": "No"
+       },
+       {
+        "id": "c",
+        "text": "No uso billetera"
+       }
+      ],
+      "feedback": {
+       "a": "Bien. En esta guía ves cómo se calcula.",
+       "b": "En esta guía ves de dónde sale ese número.",
+       "c": "En la billetera de práctica lo ves al avanzar el tiempo."
+      },
+      "sourceIds": []
+     }
+    },
+    {
+     "type": "text",
+     "title": "El cálculo de cada día",
+     "body": "Con una tasa anual, lo que rinde un día es **saldo × TNA ÷ 365**. Al otro día, si el rendimiento se suma al saldo, también genera rendimiento: interés sobre interés, de a poco. Es lo que ves en la billetera de práctica al avanzar el tiempo."
+    },
+    {
+     "type": "text",
+     "title": "Cuenta o fondo",
+     "body": "Si el saldo rinde en una **cuenta remunerada** de una billetera con CVU, el proveedor debe trasladarte **toda** la retribución que cobra por tus pesos depositados en bancos. Si rinde porque suscribe un **fondo money market**, es una inversión en un FCI: el rendimiento **varía a diario** y no tiene la garantía de los depósitos. Mira en los términos de tu billetera cuál de las dos es."
+    },
+    {
+     "type": "example",
+     "title": "Ejemplo resuelto: $ 1.000.000 con una TNA de ejemplo del 30 %",
+     "steps": [
+      "Un día: $ 1.000.000 × 0,30 ÷ 365 = $ 821,92.",
+      "Al día siguiente, el saldo es $ 1.000.821,92 y rinde un poco más.",
+      "Si es un fondo, la tasa de mañana puede ser otra: el rendimiento varía.",
+      "Para saber si le gana a la inflación, compara con la inflación del mismo período."
+     ]
+    },
+    {
+     "type": "practice",
+     "question": {
+      "id": "m11-daily",
+      "moduleId": "module-11",
+      "type": "numeric",
+      "prompt": "Tienes $ 500.000 con una TNA de ejemplo del 30 %. ¿Cuánto rinde en un día?",
+      "numeric": {
+       "answer": "410.96",
+       "tolerance": "0.01",
+       "unit": "ARS"
+      },
+      "help": "Monto en pesos, con dos decimales, por ejemplo: 400,00",
+      "feedback": {
+       "correct": "Correcto. $ 500.000 × 0,30 ÷ 365 = $ 410,96 en un día.",
+       "incorrect": "Multiplica el saldo por la TNA y divide por 365: $ 500.000 × 0,30 ÷ 365 = $ 410,96."
+      },
+      "sourceIds": [
+       "B-13",
+       "B-14"
+      ]
+     }
+    },
+    {
+     "type": "takeaway",
+     "body": "Para tu vida: en Rendir, elige cuenta o fondo y avanza una semana: mira cuánto rindió cada día y lee qué dice la ficha de cada opción."
+    }
+   ],
+   "sourceIds": [
+    "B-12",
+    "B-13",
+    "B-14",
+    "B-26"
+   ]
+  },
+  {
+   "id": "module-17-guide-3",
+   "moduleId": "module-17",
+   "title": "Dónde está el dinero de las billeteras",
+   "minutes": 6,
+   "blocks": [
+    {
+     "type": "hook",
+     "body": "Decimos \"tengo el dinero en la billetera\". Pero en Argentina, la mayor parte de ese dinero no está en la cuenta: está invertido en un fondo."
+    },
+    {
+     "type": "objective",
+     "body": "Al terminar vas a poder interpretar los datos oficiales sobre billeteras y explicar por qué importa si tu dinero está en una cuenta o en un fondo."
+    },
+    {
+     "type": "recall",
+     "question": {
+      "id": "g17c-recall",
+      "moduleId": "module-17",
+      "type": "reflection",
+      "prompt": "¿Sabes si tu dinero en la billetera está en la cuenta o en un fondo?",
+      "options": [
+       {
+        "id": "a",
+        "text": "En la cuenta"
+       },
+       {
+        "id": "b",
+        "text": "En un fondo"
+       },
+       {
+        "id": "c",
+        "text": "No lo sé"
+       }
+      ],
+      "feedback": {
+       "a": "En esta guía ves qué protección tiene.",
+       "b": "Bien. En esta guía ves qué implica.",
+       "c": "Es lo más común. En esta guía ves dónde mirarlo."
+      },
+      "sourceIds": []
+     }
+    },
+    {
+     "type": "text",
+     "title": "Lo que dicen los datos",
+     "body": "Según el **Informe de Pagos Minoristas del BCRA** de septiembre de 2026 (datos de agosto): había **70,1 millones de cuentas de pago**, con **$ 0,9 billones** en saldos de esas cuentas y **$ 9 billones** invertidos en **fondos de dinero** a través de las billeteras. El 75 % de las transferencias inmediatas en pesos tuvo una CVU de origen o destino."
+    },
+    {
+     "type": "text",
+     "title": "Por qué importa",
+     "body": "Una **cuenta de pago** y un **fondo money market** no son lo mismo: el fondo es una inversión, su rendimiento varía a diario y ninguno de los dos tiene la garantía de los depósitos. Cuando una billetera dice que tu saldo \"rinde\", muchas veces es porque lo invierte en un fondo. Saberlo te deja comparar con información."
+    },
+    {
+     "type": "example",
+     "title": "Ejemplo resuelto: leer el dato",
+     "steps": [
+      "En fondos de dinero: $ 9 billones. En saldos de cuentas de pago: $ 0,9 billones.",
+      "Total: $ 9,9 billones.",
+      "En fondos: 9 ÷ 9,9 = 90,9 %. De cada $ 10 en billeteras, unos $ 9 estaban en fondos.",
+      "Es un dato con fecha (agosto de 2026): los números cambian, y el informe del BCRA los actualiza."
+     ]
+    },
+    {
+     "type": "practice",
+     "question": {
+      "id": "m17-funds-share",
+      "moduleId": "module-17",
+      "type": "single",
+      "prompt": "Según el informe del BCRA (datos de agosto de 2026), de cada $ 10 que las personas tenían en billeteras, ¿cuántos estaban invertidos en fondos de dinero?",
+      "options": [
+       {
+        "id": "a",
+        "text": "Unos $ 9"
+       },
+       {
+        "id": "b",
+        "text": "Unos $ 5"
+       },
+       {
+        "id": "c",
+        "text": "Unos $ 1"
+       }
+      ],
+      "correctOptionIds": [
+       "a"
+      ],
+      "feedback": {
+       "a": "Correcto. $ 9 billones en fondos contra $ 0,9 billones en cuentas: cerca del 91 % estaba en fondos.",
+       "b": "Era bastante más: $ 9 billones en fondos contra $ 0,9 billones en cuentas, cerca del 91 %.",
+       "c": "Es al revés: lo que quedaba en las cuentas era cerca de $ 1 de cada $ 10. En fondos estaban unos $ 9."
+      },
+      "sourceIds": [
+       "B-17"
+      ]
+     }
+    },
+    {
+     "type": "takeaway",
+     "body": "Para tu vida: abre los términos de tu billetera y busca si tu saldo remunerado es una cuenta o un fondo. Si es un fondo, busca su nombre en la CNV."
+    }
+   ],
+   "sourceIds": [
+    "B-12",
+    "B-14",
+    "B-17"
+   ]
   }
  ]
 }
