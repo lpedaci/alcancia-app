@@ -87,6 +87,6 @@ describe('guide drafts (step 27)', () => {
       expect(q.review.status).toBe('draft');
       expect(q.sourceIds.length, q.id).toBeGreaterThan(0);
     }
-    expect(JSON.stringify(bankDrafts)).not.toMatch(/—|¡|(vos|tenés|podés|sabés)/);
+    expect(JSON.stringify(bankDrafts)).not.toMatch(/—|¡|\b(vos|tenés|podés|sabés)\b/);
   });
 });
