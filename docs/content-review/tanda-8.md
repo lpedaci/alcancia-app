@@ -1,6 +1,6 @@
 # Tanda 8 del paso 27: guías para revisar
 
-> **Aprobada por Lourdes el undefined/undefined/15/11/2026.** Las guías pasaron a `src/data/guides.json` y se ven en la app. Las ampliaciones siguen pendientes de revisión del Lic. Kevin Giampieri.
+> **Aprobada por Lourdes el 15/11/2026.** Las guías pasaron a `src/data/guides.json` y se ven en la app. Las ampliaciones siguen pendientes de revisión del Lic. Kevin Giampieri.
 
 > Borradores de `src/data/guides-drafts.json`, generados con `node scripts/guides-review.mjs 8`. **No se muestran en la app** hasta que Lourdes los apruebe; las ampliaciones quedan marcadas para el Lic. Kevin Giampieri (D-276).
 
@@ -11,7 +11,7 @@ Cómo revisar: marca en cada guía "Aprobada", "Con cambios" (y cuáles) o "No v
 - **Id:** `module-12-guide-3` · **Fuentes:** A-19, A-34, A-38, A-39, F-19
 - **Validado (sin cambiar datos):** Costo de oportunidad y el café de $ 5.000 invertido a 30 años (A-19); Gastos hormiga (A-34); ahorrar frente a invertir (A-38); interés compuesto (A-39)
 - **Ampliación, pendiente del Lic. Kevin Giampieri:** Ejemplo de USD 3 por día durante 10 años (USD 20.703,48) y práctica de USD 60 por mes durante 24 meses (USD 1.618,41), con la fórmula F-19 y calculados a mano
-- **Decisión de Lourdes:** ☑ Aprobada (undefined/undefined/15/11/2026)
+- **Decisión de Lourdes:** ☑ Aprobada (15/11/2026)
 
 **Situación:** Un gasto chico de todos los días no se siente. Pero sumado durante años, y con interés compuesto, es mucho más que la suma de los tickets.
 
@@ -56,7 +56,7 @@ Cada peso que gastas en algo que dura poco deja de crecer con el **interés comp
 - **Id:** `module-13-guide-3` · **Fuentes:** B-20, B-21, B-22, B-23, B-24
 - **Validado (sin cambiar datos):** Alertas al inversor y señales: rendimientos garantizados, urgencia, oportunidad única, falta de matrícula (B-24); La publicidad de un agente muestra su categoría y registro (B-21); costos informados antes de operar (B-20); subcuenta comitente (B-22); reclamos al Responsable de Relaciones con el Público (B-23)
 - **Ampliación, pendiente del Lic. Kevin Giampieri:** Ejemplo de una oferta revisada señal por señal y práctica de clasificar señales
-- **Decisión de Lourdes:** ☑ Aprobada (undefined/undefined/15/11/2026)
+- **Decisión de Lourdes:** ☑ Aprobada (15/11/2026)
 
 **Situación:** Un mensaje promete un 5 % por mes "garantizado" y dice que la oportunidad termina hoy. Tiene logo, testimonios y un botón para transferir.
 
@@ -102,7 +102,7 @@ Un agente registrado muestra en su publicidad su **categoría y su número de re
 - **Id:** `module-14-guide-3` · **Fuentes:** A-35, A-36, F-38
 - **Validado (sin cambiar datos):** Invertir solo con el fondo de emergencia armado (A-35, A-36; regla de desbloqueo de Invertir, 5.0)
 - **Ampliación, pendiente del Lic. Kevin Giampieri:** Asimetría de caídas y subas: 1 ÷ (1 − caída) − 1, con 42,86 % y 25 % calculados a mano; Ejemplo con la serie sintética de la cuenta comitente de práctica (src/data/invest.json, mínimo 0,70 en el mes 5 y vuelta sobre 1 en el mes 10), rotulada como sintética; No se usa el dato de A-42 (probabilidades por plazo) porque falta confirmar su fuente
-- **Decisión de Lourdes:** ☑ Aprobada (undefined/undefined/15/11/2026)
+- **Decisión de Lourdes:** ☑ Aprobada (15/11/2026)
 
 **Situación:** Tu inversión cae 30 %. Después sube 30 %. ¿Volviste a donde estabas? No.
 
@@ -148,7 +148,7 @@ Mientras no vendes, la caída es una variación del precio. Si vendes en la caí
 - **Id:** `module-15-guide-3` · **Fuentes:** B-20, B-22, B-34, F-33
 - **Validado (sin cambiar datos):** Los agentes deben informar sus costos antes de operar (B-20); Acreditación en el día o a 24 horas (B-34); tenencia en la subcuenta comitente (B-22)
 - **Ampliación, pendiente del Lic. Kevin Giampieri:** Comisión (0,5 %) y derechos de mercado (0,08 %) son los costos ficticios del bróker de ejemplo de la cuenta comitente de práctica (src/data/invest.json), rotulados así; Ejemplo ($ 452.610) y práctica ($ 181.044) calculados a mano
-- **Decisión de Lourdes:** ☑ Aprobada (undefined/undefined/15/11/2026)
+- **Decisión de Lourdes:** ☑ Aprobada (15/11/2026)
 
 **Situación:** Compras 10 CEDEARs a $ 45.000 cada uno. En tu cuenta se debitan más de $ 450.000. ¿Por qué?
 

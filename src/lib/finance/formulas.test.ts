@@ -292,3 +292,12 @@ describe('F-38 · rise needed to recover a drop (module 14, guide 3)', () => {
     expect(recoveryRise('0.5').toFixed(4)).toBe('1.0000');
   });
 });
+
+describe('F-39 · average cost of periodic purchases (module 16, guide 3)', () => {
+  it('USD 100 at 50, 25 and 100 cost 42,86; USD 120 at 40, 60 and 120 cost 60; USD 100 at 50 and 25 cost 33,33', async () => {
+    const { averageCost } = await import('./rates');
+    expect(averageCost('100', ['50', '25', '100']).toFixed(2)).toBe('42.86');
+    expect(averageCost('120', ['40', '60', '120']).toFixed(2)).toBe('60.00');
+    expect(averageCost('100', ['50', '25']).toFixed(2)).toBe('33.33');
+  });
+});

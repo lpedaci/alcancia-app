@@ -37,7 +37,9 @@
 
 **Tanda 8 (aprobada por Lourdes el 15/11/2026 y publicada):** guías 3 de los módulos 12 a 15, "El gasto hormiga, invertido", "Señales de alerta", "Lo que cuesta recuperar una caída" y "Lo que cuesta comprar". Documento: [content-review/tanda-8.md](content-review/tanda-8.md).
 
-Después siguen los módulos 16 y 18 completos (F11) con el nivel 8 (F22).
+**Tanda 9 (borrador, esperando la revisión de Lourdes), F11:** módulo 16 completo, "Qué es una criptomoneda", "Dónde se compra y quién la guarda" y "Volatilidad y compras periódicas", con cinco preguntas para su banco; y guías 2 y 3 del módulo 18, "La página parecida" y "Si ya caíste". Documento: [content-review/tanda-9.md](content-review/tanda-9.md).
+
+Después sigue el nivel 8, Cripto (F22), que usa el módulo 16.
 
 ## Resumen
 

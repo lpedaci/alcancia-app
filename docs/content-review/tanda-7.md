@@ -1,6 +1,6 @@
 # Tanda 7 del paso 27: guías para revisar
 
-> **Aprobada por Lourdes el undefined/undefined/15/11/2026.** Las guías pasaron a `src/data/guides.json` y se ven en la app. Las ampliaciones siguen pendientes de revisión del Lic. Kevin Giampieri.
+> **Aprobada por Lourdes el 15/11/2026.** Las guías pasaron a `src/data/guides.json` y se ven en la app. Las ampliaciones siguen pendientes de revisión del Lic. Kevin Giampieri.
 
 > Borradores de `src/data/guides-drafts.json`, generados con `node scripts/guides-review.mjs 7`. **No se muestran en la app** hasta que Lourdes los apruebe; las ampliaciones quedan marcadas para el Lic. Kevin Giampieri (D-276).
 
@@ -11,7 +11,7 @@ Cómo revisar: marca en cada guía "Aprobada", "Con cambios" (y cuáles) o "No v
 - **Id:** `module-09-guide-3` · **Fuentes:** A-21, B-40, T, F-05, F-06, F-07
 - **Validado (sin cambiar datos):** El dinero quieto pierde poder de compra (A-21); el IPC lo publica el INDEC (B-40); Calculadora de inflación del taller: $ 100 con 25 % anual en 5 años = $ 32,77 (T, caso F-07); Casos F-05 ($ 142.576,09) y F-06 ($ 201.219,65) de docs/formulas.md, con test
 - **Ampliación, pendiente del Lic. Kevin Giampieri:** Precio futuro de una meta en un escenario y la idea de revisar la meta; Práctica con $ 200.000 × 1,03^12 = $ 285.152,18, calculado a mano
-- **Decisión de Lourdes:** ☑ Aprobada (undefined/undefined/15/11/2026)
+- **Decisión de Lourdes:** ☑ Aprobada (15/11/2026)
 
 **Situación:** Juntas para algo que hoy cuesta $ 200.000. En un año juntaste justo eso, pero el precio ya no es el mismo.
 
@@ -56,7 +56,7 @@ No sabemos la inflación futura: por eso se calculan **escenarios** (baja, media
 - **Id:** `module-10-guide-3` · **Fuentes:** B-40, F-01, F-03, F-04
 - **Validado (sin cambiar datos):** Casos F-03 (−0,04 %) y F-04 (+1,44 %) de docs/formulas.md, con test; Tasa del período TNA × d ÷ 365 (F-01)
 - **Ampliación, pendiente del Lic. Kevin Giampieri:** Lectura de la tasa real por su signo, con el tono de 2.1.1 (pérdida de poder de compra como información)
-- **Decisión de Lourdes:** ☑ Aprobada (undefined/undefined/15/11/2026)
+- **Decisión de Lourdes:** ☑ Aprobada (15/11/2026)
 
 **Situación:** Un plazo fijo con una TNA del 36 %. Con una inflación pierdes poder de compra; con otra, ganas. La tasa no cambió.
 
@@ -102,7 +102,7 @@ Si la tasa real es **positiva**, tu dinero compra un poco más al final. Si es *
 - **Id:** `module-11-guide-3` · **Fuentes:** B-12, B-13, B-14, B-26
 - **Validado (sin cambiar datos):** La retribución de los saldos en pesos se traslada por completo al cliente (B-13); Un money market es un FCI, sin garantía y con rendimiento que varía a diario (B-14, B-26); cuentas de pago sin garantía (B-12); Rendimiento diario saldo × TNA ÷ 365, la regla de la billetera de práctica (spec 5.3, docs/wallet-engine.md)
 - **Ampliación, pendiente del Lic. Kevin Giampieri:** Ejemplo ($ 821,92 por día) y práctica ($ 410,96 por día), calculados a mano
-- **Decisión de Lourdes:** ☑ Aprobada (undefined/undefined/15/11/2026)
+- **Decisión de Lourdes:** ☑ Aprobada (15/11/2026)
 
 **Situación:** Tu billetera muestra que tu saldo "rindió" unos pesos hoy. ¿De dónde sale ese número y qué tipo de producto lo paga?
 
@@ -148,7 +148,7 @@ Si el saldo rinde en una **cuenta remunerada** de una billetera con CVU, el prov
 - **Id:** `module-17-guide-3` · **Fuentes:** B-12, B-14, B-17
 - **Validado (sin cambiar datos):** Datos del Informe de Pagos Minoristas del BCRA, septiembre de 2026, con datos de agosto: 70,1 millones de cuentas, $ 0,9 billones en cuentas, $ 9 billones en fondos, 75 % de las transferencias con CVU (B-17); Cuentas de pago y money market sin garantía de los depósitos (B-12, B-14)
 - **Ampliación, pendiente del Lic. Kevin Giampieri:** Cálculo de la proporción (9 ÷ 9,9 = 90,9 %), hecho a mano; Rótulo del dato como fechado y actualizable
-- **Decisión de Lourdes:** ☑ Aprobada (undefined/undefined/15/11/2026)
+- **Decisión de Lourdes:** ☑ Aprobada (15/11/2026)
 
 **Situación:** Decimos "tengo el dinero en la billetera". Pero en Argentina, la mayor parte de ese dinero no está en la cuenta: está invertido en un fondo.
 

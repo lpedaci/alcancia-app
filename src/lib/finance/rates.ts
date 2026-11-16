@@ -34,3 +34,9 @@ export function annualInflation(monthlyInflation: Num): Decimal {
 export function recoveryRise(drop: Num): Decimal {
   return ONE.div(ONE.minus(drop)).minus(1);
 }
+
+/** F-39 · Average cost of periodic purchases (DCA): the same amount each period, total invested ÷ units. */
+export function averageCost(amountPerPeriod: Num, prices: Num[]): Decimal {
+  const units = prices.reduce<Decimal>((sum, price) => sum.plus(D(amountPerPeriod).div(price)), D(0));
+  return D(amountPerPeriod).times(prices.length).div(units);
+}

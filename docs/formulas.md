@@ -299,6 +299,8 @@ Datos, costos y serie en `src/data/invest.json`; todo es de ejemplo y ficticio (
 
 **Caso F-38 · Suba necesaria para recuperar una caída** (`recoveryRise`, guía 3 del módulo 14): `1 / (1 − caída) − 1`. Caída del 20 % → **25 %**; del 30 % → **42,86 %** (la serie de práctica baja a 0,70 en el mes 5); del 50 % → **100 %**. Calculado a mano y con test.
 
+**Caso F-39 · Costo promedio de compras periódicas (DCA)** (`averageCost`, módulo 16): con el mismo monto por período, `costo promedio = monto × períodos ÷ Σ (monto ÷ precio)`. USD 100 a precios de ejemplo de 50, 25 y 100 → 7 unidades, **USD 42,86** (precio promedio USD 58,33); USD 120 a 40, 60 y 120 → **USD 60**; USD 100 a 50 y 25 → **USD 33,33**. Precios de ejemplo, no reales. Calculado a mano y con test.
+
 ## 19. Consecuencias en la billetera (D-77, paso 18)
 
 Casos con el escenario medio (préstamo personal TNA 55 %, tarjeta TNA 60 %), calculados a mano con aritmética decimal y redondeo a centavos.
@@ -351,6 +353,7 @@ Casos con el escenario medio (préstamo personal TNA 55 %, tarjeta TNA 60 %), ca
 | F-36 | `payCard(...)` y el cierre del resumen | $ 226.652,05 · $ 10.652,05 de intereses |
 | F-37 | `fallForScam(...)`, `markMessage(...)` | $ 70.000 si se reporta · $ 40.000 si no |
 | F-38 | `recoveryRise(...)` | 25 % · 42,86 % · 100 % |
+| F-39 | `averageCost(...)` | USD 42,86 · USD 60 · USD 33,33 |
 
 ## Referencias
 

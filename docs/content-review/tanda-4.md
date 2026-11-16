@@ -1,6 +1,6 @@
 # Tanda 4 del paso 27: guías para revisar
 
-> **Aprobada por Lourdes el undefined/undefined/15/11/2026.** Las guías pasaron a `src/data/guides.json` y se ven en la app. Las ampliaciones siguen pendientes de revisión del Lic. Kevin Giampieri.
+> **Aprobada por Lourdes el 15/11/2026.** Las guías pasaron a `src/data/guides.json` y se ven en la app. Las ampliaciones siguen pendientes de revisión del Lic. Kevin Giampieri.
 
 > Borradores de `src/data/guides-drafts.json`, generados con `node scripts/guides-review.mjs 4`. **No se muestran en la app** hasta que Lourdes los apruebe; las ampliaciones quedan marcadas para el Lic. Kevin Giampieri (D-276).
 
@@ -11,7 +11,7 @@ Cómo revisar: marca en cada guía "Aprobada", "Con cambios" (y cuáles) o "No v
 - **Id:** `module-12-guide-2` · **Fuentes:** A-39, A-55, F-19
 - **Validado (sin cambiar datos):** El tiempo es el factor más potente del interés compuesto (A-39); USD 200 por mes al 12 % anual durante 33 años ≈ USD 1.008.712,49 (A-55, caso F-19 de docs/formulas.md, con test)
 - **Ampliación, pendiente del Lic. Kevin Giampieri:** Fórmula del valor futuro de aportes mensuales de la spec (sección 5, F-19) explicada paso a paso; Comparación de empezar diez años después: USD 291.694,51 con 276 meses, calculado a mano con la misma fórmula; Práctica con USD 100 por mes al 1 % mensual durante 12 meses = USD 1.268,25, calculado a mano
-- **Decisión de Lourdes:** ☑ Aprobada (undefined/undefined/15/11/2026)
+- **Decisión de Lourdes:** ☑ Aprobada (15/11/2026)
 
 **Situación:** Dos personas aportan USD 200 por mes con la misma tasa de ejemplo. Una empieza diez años antes que la otra. ¿Cuánta diferencia puede hacer una década?
 
@@ -57,7 +57,7 @@ El **interés compuesto** hace que los intereses también generen intereses. Por
 - **Id:** `module-13-guide-2` · **Fuentes:** A-54, B-20
 - **Validado (sin cambiar datos):** Pasos para abrir una cuenta: elegir bróker, validar identidad, test de inversor (conservador, moderado o agresivo), fondear (A-54); Los agentes deben informar sus costos antes de operar (B-20)
 - **Ampliación, pendiente del Lic. Kevin Giampieri:** Qué mide el test: horizonte, objetivo y caída tolerada; Descripción de cada perfil y la idea de que el perfil depende del objetivo y del plazo; Ejemplo con Mariana y práctica de clasificar respuestas; el perfil nunca se traduce en una cartera (1.2, D-67)
-- **Decisión de Lourdes:** ☑ Aprobada (undefined/undefined/15/11/2026)
+- **Decisión de Lourdes:** ☑ Aprobada (15/11/2026)
 
 **Situación:** Al abrir una cuenta en un bróker te piden completar un test. ¿Para qué sirve y qué dice de ti?
 
@@ -104,7 +104,7 @@ El resultado suele ser **conservador** (priorizas no perder y necesitas el diner
 - **Id:** `module-14-guide-2` · **Fuentes:** A-43, A-44, A-45, B-25
 - **Validado (sin cambiar datos):** Qué siguen el Nasdaq 100, el Dow Jones y el MSCI ACWI (A-43, A-44, A-45); Los FCI son patrimonios de los cuotapartistas, regulados por la CNV (B-25)
 - **Ampliación, pendiente del Lic. Kevin Giampieri:** Diversificar como repartir para que una caída puntual pese poco, y que el riesgo de mercado no desaparece; Ejemplo y práctica con caídas de una empresa entre diez, con valores de ejemplo calculados a mano (USD 950 y USD 940)
-- **Decisión de Lourdes:** ☑ Aprobada (undefined/undefined/15/11/2026)
+- **Decisión de Lourdes:** ☑ Aprobada (15/11/2026)
 
 **Situación:** Una empresa que parecía segura cae a la mitad en una semana. Si todo tu dinero estaba ahí, perdiste la mitad. ¿Y si estaba repartido?
 
@@ -150,7 +150,7 @@ Un **fondo común de inversión (FCI)** reúne el dinero de muchas personas y lo
 - **Id:** `module-15-guide-2` · **Fuentes:** B-22, B-31, B-32, B-34, B-36, F-20
 - **Validado (sin cambiar datos):** Fórmula del precio teórico y caso de partida de $ 45.000 (B-36, caso F-20 de docs/formulas.md, con test); Los dividendos se cobran en dólares (B-32); los ratios pueden cambiar (B-31); acreditación en el día o a 24 horas (B-34); tenencia en la subcuenta comitente (B-22)
 - **Ampliación, pendiente del Lic. Kevin Giampieri:** Efecto de una baja del tipo de cambio: 600 ÷ 20 × 1.350 = $ 40.500, calculado a mano; Ejemplo de fuentes que se compensan: 540 ÷ 20 × 1.650 = $ 44.550, calculado a mano
-- **Decisión de Lourdes:** ☑ Aprobada (undefined/undefined/15/11/2026)
+- **Decisión de Lourdes:** ☑ Aprobada (15/11/2026)
 
 **Situación:** La acción de una empresa no se movió en un mes, pero tu CEDEAR vale menos. ¿Qué pasó?
 

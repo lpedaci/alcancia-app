@@ -12,8 +12,14 @@ const file = (p) => join(root, p);
 const drafts = JSON.parse(readFileSync(file('src/data/guides-drafts.json'), 'utf8'));
 const published = JSON.parse(readFileSync(file('src/data/guides.json'), 'utf8'));
 
+// The date as AAAA-MM-DD or DD/MM/AAAA; anything else stops the script before writing a broken date
+const iso = /^(\d{4})-(\d{2})-(\d{2})$/.exec(date);
+const local = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec(date);
+if (!iso && !local) throw new Error(`Date must be AAAA-MM-DD or DD/MM/AAAA, got "${date}"`);
+const [y, m, d] = iso ? [iso[1], iso[2], iso[3]] : [local[3], local[2], local[1]];
 const approved = drafts.guides.filter((g) => g.review?.batch === batch);
-if (approved.length === 0) throw new Error(`Batch ${batch} has no drafts`);
+const approvedQuestions = (drafts.questions ?? []).filter((q) => q.review?.batch === batch);
+if (approved.length === 0 && approvedQuestions.length === 0) throw new Error(`Batch ${batch} has no drafts`);
 const ids = new Set(published.guides.map((g) => g.id));
 for (const g of approved) {
   if (ids.has(g.id)) throw new Error(`${g.id} is already published`);
@@ -24,10 +30,9 @@ drafts.guides = drafts.guides.filter((g) => g.review?.batch !== batch);
 writeFileSync(file('src/data/guides.json'), `${JSON.stringify(published, null, 1)}\n`);
 writeFileSync(file('src/data/guides-drafts.json'), `${JSON.stringify(drafts, null, 1)}\n`);
 
-const [y, m, d] = date.split('-');
 const docPath = file(`docs/content-review/tanda-${batch}.md`);
 const doc = readFileSync(docPath, 'utf8')
   .replace(/^(# .+)$/m, `$1\n\n> **Aprobada por Lourdes el ${d}/${m}/${y}.** Las guías pasaron a \`src/data/guides.json\` y se ven en la app. Las ampliaciones siguen pendientes de revisión del Lic. Kevin Giampieri.`)
   .replaceAll('- **Decisión de Lourdes:** ☐ Aprobada · ☐ Con cambios · ☐ No va', `- **Decisión de Lourdes:** ☑ Aprobada (${d}/${m}/${y})`);
 writeFileSync(docPath, doc);
-console.log(`Batch ${batch}: ${approved.length} guides published`);
+console.log(`Batch ${batch}: ${approved.length} guides and ${approvedQuestions.length} bank questions published`);

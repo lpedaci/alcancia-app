@@ -8,10 +8,11 @@ import { fileURLToPath } from 'node:url';
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const batch = Number(process.argv[2] ?? 1);
 const read = (p) => JSON.parse(readFileSync(join(root, p), 'utf8'));
-const { guides } = read('src/data/guides-drafts.json');
+const { guides, questions = [] } = read('src/data/guides-drafts.json');
 const modules = read('src/data/modules.json');
 const list = guides.filter((g) => g.review?.batch === batch);
-if (list.length === 0) {
+const bank = questions.filter((q) => q.review?.batch === batch);
+if (list.length === 0 && bank.length === 0) {
   // An approved batch already left the drafts: its review document stays as the record.
   console.log(`Batch ${batch} has no drafts (already approved?): docs/content-review/tanda-${batch}.md is kept as is.`);
   process.exit(0);
@@ -20,6 +21,7 @@ if (list.length === 0) {
 const question = (q) => {
   const lines = [`**${q.prompt}**`, ''];
   if (q.type === 'reflection') lines.push(...q.options.map((o) => `- ${o.text}: _${q.feedback[o.id]}_`));
+  if (q.type === 'multiple') lines.push(...q.options.map((o) => `- ${q.correctOptionIds.includes(o.id) ? '✔' : '✖'} ${o.text}`), `- Correcta: _${q.feedback.correct ?? ''}_`, `- Incorrecta: _${q.feedback.incorrect ?? ''}_`);
   if (q.type === 'single') lines.push(...q.options.map((o) => `- ${q.correctOptionIds.includes(o.id) ? '✔' : '✖'} ${o.text}: _${q.feedback[o.id]}_`));
   if (q.type === 'true_false_why') {
     lines.push(`- Respuesta: ${q.options.find((o) => o.id === q.correctOptionIds[0]).text}`);
@@ -60,6 +62,13 @@ for (const g of list) {
   }
   out.push('---', '');
 }
+if (bank.length > 0) {
+  out.push('## Preguntas nuevas del banco (desafío de nivel)', '');
+  for (const q of bank) {
+    const m = modules.find((x) => x.id === q.moduleId);
+    out.push(`### Módulo ${m.order} · \`${q.id}\` (${q.type})`, '', `- **Fuentes:** ${q.sourceIds.join(', ') || 'ninguna'}`, `- **Ampliación:** ${q.review.extension ? 'sí, pendiente del Lic. Kevin Giampieri' : 'no, contenido validado'}`, '', ...question(q), '');
+  }
+}
 mkdirSync(join(root, 'docs/content-review'), { recursive: true });
 writeFileSync(join(root, `docs/content-review/tanda-${batch}.md`), out.join('\n'));
-console.log(`docs/content-review/tanda-${batch}.md: ${list.length} guides`);
+console.log(`docs/content-review/tanda-${batch}.md: ${list.length} guides, ${bank.length} bank questions`);

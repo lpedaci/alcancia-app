@@ -10,11 +10,15 @@ import guides from './guides.json';
  */
 type Draft = Guide & { review: { status: 'draft' | 'approved'; batch: number; validated: string[]; extensions: string[] } };
 const list = drafts.guides as unknown as Draft[];
+type BankDraft = LearningQuestion & { review: { status: 'draft'; batch: number; extension: boolean } };
+const bankDrafts = ((drafts as { questions?: unknown[] }).questions ?? []) as BankDraft[];
 
 const rightAnswer = (q: LearningQuestion): Answer | undefined => {
   switch (q.type) {
     case 'single':
       return q.correctOptionIds[0];
+    case 'multiple':
+      return q.correctOptionIds;
     case 'true_false_why':
       return { value: q.correctOptionIds[0]!, why: q.why.correct };
     case 'numeric':
@@ -37,7 +41,8 @@ describe('guide drafts (step 27)', () => {
       expect(types.at(-1)).toBe('takeaway');
       expect(g.minutes).toBeGreaterThanOrEqual(5);
       expect(g.minutes).toBeLessThanOrEqual(8);
-      expect(g.id).toMatch(new RegExp(`^${g.moduleId}-guide-[23]$`));
+      // Guides 2 and 3; guide 1 too for the phase B modules (16, F11)
+      expect(g.id).toMatch(new RegExp(`^${g.moduleId}-guide-[123]$`));
     }
   });
 
@@ -55,7 +60,7 @@ describe('guide drafts (step 27)', () => {
 
   it('ids never collide with the published guides or the banks', () => {
     const published = new Set([...guides.guides.map((g) => g.id), ...banks.questions.map((q) => q.id)]);
-    const mine = list.flatMap((g) => [g.id, ...g.blocks.flatMap((b) => ('question' in b ? [b.question.id] : []))]);
+    const mine = [...list.flatMap((g) => [g.id, ...g.blocks.flatMap((b) => ('question' in b ? [b.question.id] : []))]), ...bankDrafts.map((q) => q.id)];
     expect(new Set(mine).size).toBe(mine.length);
     for (const id of mine) expect(published.has(id), id).toBe(false);
   });
@@ -71,5 +76,17 @@ describe('guide drafts (step 27)', () => {
   it('keep the voice rules: tú, no exclamations and no em dashes', () => {
     const text = JSON.stringify(list);
     expect(text).not.toMatch(/—|¡|\b(vos|tenés|podés|sabés)\b/);
+  });
+
+  it('bank drafts accept their right answer, explain the feedback and have sources', () => {
+    for (const q of bankDrafts) {
+      const answer = rightAnswer(q);
+      expect(answer, q.id).toBeDefined();
+      expect(isCorrect(q, answer), q.id).toBe(true);
+      expect(Object.values(q.feedback as Record<string, string>).every((f) => f.length > 20), q.id).toBe(true);
+      expect(q.review.status).toBe('draft');
+      expect(q.sourceIds.length, q.id).toBeGreaterThan(0);
+    }
+    expect(JSON.stringify(bankDrafts)).not.toMatch(/—|¡|(vos|tenés|podés|sabés)/);
   });
 });
