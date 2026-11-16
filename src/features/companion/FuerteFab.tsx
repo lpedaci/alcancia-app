@@ -299,12 +299,15 @@ export function FuerteFab({
         <div
           data-fuerte-bubble
           style={place.side === 'right' ? { right: sideMargin() + SIZE + 4, top: top + 8 } : { left: bounds.minLeft + sideMargin() + SIZE + 4, top: top + 8 }}
-          className="fixed z-30 flex w-64 max-w-[calc(100vw-7.5rem)] animate-in items-start gap-1 rounded-lg border border-outline-variant bg-surface-container-lowest py-1 pr-1 pl-3 shadow-elevation-1 fade-in-0 zoom-in-95 print:hidden"
+          // D-303: on inverse-surface, like tooltips and toasts, so it never blends with a white card; the
+          // tail points at Fuerte
+          className="fixed z-30 flex w-64 max-w-[calc(100vw-7.5rem)] animate-in items-start gap-1 rounded-lg bg-inverse-surface py-1 pr-1 pl-3 text-inverse-on-surface shadow-elevation-1 fade-in-0 zoom-in-95 print:hidden"
         >
-          <button type="button" aria-hidden tabIndex={-1} onClick={() => setOpen(true)} className="min-w-0 flex-1 py-1.5 text-left text-body-small text-on-surface">
+          <span aria-hidden className={cn('absolute top-4 size-2.5 rotate-45 bg-inverse-surface', place.side === 'right' ? '-right-1' : '-left-1')} />
+          <button type="button" aria-hidden tabIndex={-1} onClick={() => setOpen(true)} className="relative min-w-0 flex-1 py-1.5 text-left text-body-small">
             {noticeText(bubble)}
           </button>
-          <IconButton icon="close" size="xs" label={t('wallet.fuerte.peekClose')} onClick={() => setBubble(undefined)} />
+          <IconButton icon="close" size="xs" label={t('wallet.fuerte.peekClose')} onClick={() => setBubble(undefined)} className="relative text-inverse-on-surface" />
         </div>
       )}
       <PopoverPrimitive.Portal>

@@ -166,6 +166,8 @@ La billetera ficticia que muestra Alcancía integrada en otra app (D-75, D-84). 
 
 - **Filas con una sola acción (D-301, `ListLinkRow`):** toda la fila es el enlace, en superficie tonal, con ícono, título, detalle opcional y chevron. Repasos y atajos de Aprender.
 
+- **Globo de Fuerte (D-303):** el aviso breve que aparece junto a Fuerte va en `inverse-surface` con cola hacia él, como los tooltips: nunca se pierde sobre una tarjeta blanca.
+
 ### Valores reales (D-264)
 
 - **Tarjeta "Valores reales de hoy" (`RealValues`):** cada valor real en una celda con su nombre, la cifra en `title-large` y "Valor al DD/MM/AAAA · Fuente: …"; si no se pudo actualizar, lo dice. Abajo, el recordatorio de que lo que viene es un escenario y el aviso legal, y los enlaces a las fuentes oficiales. Sin snapshot, un aviso en `info` y la pantalla sigue con los escenarios de ejemplo.

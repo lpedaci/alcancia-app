@@ -114,8 +114,10 @@ function FloatingFuerte({ bubble, count = 0, state = 'greeting' }: { bubble?: st
   return (
     <>
       {bubble && (
-        <span aria-hidden className="pointer-events-none absolute right-16 bottom-[4.5rem] z-10 max-w-[11rem] rounded-lg border border-outline-variant bg-surface-container-lowest px-2.5 py-1.5 text-label-small text-on-surface shadow-elevation-1">
-          {bubble}
+        // The same bubble as the wallet (D-303): inverse-surface, with its tail toward Fuerte
+        <span aria-hidden className="pointer-events-none absolute right-16 bottom-[4.5rem] z-10 max-w-[11rem] rounded-lg bg-inverse-surface px-2.5 py-1.5 text-label-small text-inverse-on-surface shadow-elevation-1">
+          <span className="absolute top-3 -right-1 size-2 rotate-45 bg-inverse-surface" />
+          <span className="relative">{bubble}</span>
         </span>
       )}
       <span aria-hidden className="pointer-events-none absolute right-2 bottom-16 z-10">

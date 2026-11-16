@@ -4163,6 +4163,11 @@
         "D-301",
         "Atajos como filas",
         "Los accesos de una sección van como filas tocables con una línea de detalle, igual que los repasos; no como enlaces sueltos subrayados."
+      ],
+      [
+        "D-303",
+        "Globo de Fuerte oscuro",
+        "El aviso breve junto a Fuerte va en inverse-surface con su cola, como un tooltip, para que se lea sobre cualquier tarjeta."
       ]
     ],
     "money": {
