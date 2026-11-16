@@ -1,5 +1,6 @@
 import { type ReactNode, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSearchParams } from 'react-router';
 import { Button } from '@/components/ui/Button';
 import { ConfirmDialog, Dialog, DialogContent, DialogTrigger } from '@/components/ui/Dialog';
 import { Icon } from '@/components/ui/Icon';
@@ -18,6 +19,7 @@ import { cn } from '@/lib/utils';
 import { readLocal, writeLocal } from '@/store/local-store';
 import { useCurrentUser } from '@/store/session-store';
 import { EscapeObjectView } from './EscapeObjects';
+import { SimpleMode } from './EscapeSimple';
 import { BadgeStrip, VersionPicker } from './EscapeVersions';
 import {
   type EscapeObject,
@@ -67,6 +69,9 @@ export function EscapeRoomPage() {
   // The version chosen for the next game (D-310): the first one whose badge is still missing
   const [version, setVersion] = useState<Version>(() => nextVersion(readLocal(personId).escape?.badges ?? []));
   const title = t('escape.title');
+  // Simple mode (D-312): the same rooms as a linear questionnaire, without the game layer
+  const [params, setParams] = useSearchParams();
+  const simple = params.get('mode') === 'simple';
 
   const setState = (update: (s: EscapeState) => EscapeState) =>
     setStateRaw((current) => {
@@ -77,7 +82,7 @@ export function EscapeRoomPage() {
     });
 
   // The hidden clock runs only while a game is in progress (the original keeps it, shown on request)
-  const playing = Boolean(state && state.current <= ROOMS.length);
+  const playing = Boolean(!simple && state && state.current <= ROOMS.length);
   useEffect(() => {
     if (!playing) return;
     const id = window.setInterval(() => setState((s) => ({ ...s, timeMs: s.timeMs + 1000 })), 1000);
@@ -110,6 +115,35 @@ export function EscapeRoomPage() {
     setMood({ state: 'greeting', key: 'hello' });
   };
 
+  // A badge earned in simple mode is kept with the game's badges; without a game, it starts at the exit
+  const earnInSimple = (badge: (typeof BADGES)[number]) => {
+    const base = state ?? { ...newGame(Math.random, [], version), current: ROOMS.length + 1, solved: ROOMS.map((r) => r.id) };
+    const next = base.badges.includes(badge) ? base : { ...base, badges: [...base.badges, badge] };
+    writeLocal(personId, (d) => ({ ...d, escape: next }));
+    setStateRaw(next);
+    setMood({ state: 'celebration', key: 'solved' });
+  };
+
+  if (simple) {
+    return (
+      <WalletShell section={title} fuerte={{ state: mood.state, message: t(`escape.fuerte.${mood.key}`) }}>
+        <div className="flex flex-col gap-(--space-bento-gap)">
+          <header className="flex flex-col gap-1">
+            <p className="text-label-large text-primary">{t('escape.simple.kicker')}</p>
+            <h1 className="text-headline-medium text-on-surface">{title}</h1>
+          </header>
+          <SimpleMode
+            version={version}
+            onVersion={setVersion}
+            badges={state?.badges ?? []}
+            onBadge={earnInSimple}
+            onBackToGame={() => setParams({})}
+          />
+        </div>
+      </WalletShell>
+    );
+  }
+
   return (
     <WalletShell section={title} fuerte={{ state: mood.state, message: t(`escape.fuerte.${mood.key}`) }}>
       <div className="flex flex-col gap-(--space-bento-gap)">
@@ -131,7 +165,7 @@ export function EscapeRoomPage() {
         </header>
 
         {!state ? (
-          <Intro onStart={start} version={version} onVersion={setVersion} />
+          <Intro onStart={start} version={version} onVersion={setVersion} onSimple={() => setParams({ mode: 'simple' })} />
         ) : (
           <>
             <Progress state={state} onToggleTime={() => setState((s) => ({ ...s, timeVisible: !s.timeVisible }))} />
@@ -172,7 +206,7 @@ export function EscapeRoomPage() {
   );
 }
 
-function Intro({ onStart, version, onVersion }: { onStart: () => void; version: Version; onVersion: (v: Version) => void }) {
+function Intro({ onStart, version, onVersion, onSimple }: { onStart: () => void; version: Version; onVersion: (v: Version) => void; onSimple: () => void }) {
   const { t } = useTranslation();
   const facts = [
     { icon: 'door_front' as const, key: 'rooms' },
@@ -207,6 +241,13 @@ function Intro({ onStart, version, onVersion }: { onStart: () => void; version: 
       <Button size="m" trailingIcon="arrow_forward" className="w-full medium:w-auto medium:self-end md:h-10 md:px-4 md:text-label-large" onClick={onStart}>
         {t('escape.start')}
       </Button>
+      {/* The accessible alternative of the original: the same questions without the game layer */}
+      <p className="flex flex-wrap items-center gap-x-1 text-body-medium text-on-surface-variant medium:self-end">
+        {t('escape.simple.offer')}
+        <Button variant="text" size="xs" onClick={onSimple}>
+          {t('escape.simple.cta')}
+        </Button>
+      </p>
     </section>
   );
 }

@@ -13,7 +13,7 @@ import type { Dimension, Person } from '@/types/domain';
  */
 export type OrgMetricsData = Pick<
   OrgData,
-  'organization' | 'program' | 'cohorts' | 'people' | 'diagnostics' | 'guideProgress' | 'challengeAttempts' | 'levelLearning' | 'weeklyChallenges' | 'weeklyReports' | 'followUps'
+  'organization' | 'program' | 'cohorts' | 'people' | 'diagnostics' | 'guideProgress' | 'challengeAttempts' | 'levelLearning' | 'weeklyChallenges' | 'weeklyReports' | 'followUps' | 'escapeCompletions'
 >;
 
 export const DIMENSIONS: Dimension[] = ['budget', 'savings', 'debt', 'inflation_rates', 'goals'];
@@ -54,8 +54,10 @@ export function adoption(data: OrgMetricsData, people = participantsOf(data)): A
 }
 
 /** Adoption by cohort (O1): the parts below the threshold are hidden, with complementary suppression. */
-export function adoptionByCohort(data: OrgMetricsData): BreakdownResult<{ active: number; diagnosed: number; modules: number }> {
+export function adoptionByCohort(data: OrgMetricsData): BreakdownResult<{ active: number; diagnosed: number; modules: number; escape: number }> {
   const diagnosed = diagnosedIds(data);
+  // F18, D-313: only whether the escape room was completed, never anything about how
+  const escaped = new Set(data.escapeCompletions.map((e) => e.personId));
   return breakdown(
     data.cohorts.map((c) => {
       const people = participantsOf(data).filter((p) => p.cohortIds.includes(c.id));
@@ -66,6 +68,7 @@ export function adoptionByCohort(data: OrgMetricsData): BreakdownResult<{ active
           active: share(people, (p) => p.status === 'active') ?? 0,
           diagnosed: share(people, (p) => diagnosed.has(p.id)) ?? 0,
           modules: average(people.filter((p) => p.status === 'active').map((p) => moduleShare(data, p))) ?? 0,
+          escape: share(people, (p) => escaped.has(p.id)) ?? 0,
         },
       };
     }),

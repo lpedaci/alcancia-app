@@ -441,7 +441,29 @@ function generateOrg(cfg) {
     );
   });
 
+  // Escape room "Tu primer sueldo" (F18, D-310, D-313): what tutors and L&D may know is only whether
+  // it was completed and with which badges; never reflections, answers nor amounts (5.1). It opens with
+  // level 4, so only people who completed it play. A hash of the id (not the PRNG) keeps every
+  // earlier record of the seed unchanged.
+  const hash = (text) => {
+    let h = 2166136261;
+    for (const ch of text) {
+      h ^= ch.charCodeAt(0);
+      h = Math.imul(h, 16777619);
+    }
+    return (h >>> 0) / 4294967296;
+  };
+  const escapeCompletions = [];
+  for (const l of levelLearning) {
+    if (l.levelId !== 'level-4' || !l.completed) continue;
+    const r = hash(l.personId);
+    if (r >= 0.55) continue;
+    const badges = r < 0.12 ? ['bronze', 'silver', 'gold'] : r < 0.3 ? ['bronze', 'silver'] : ['bronze'];
+    escapeCompletions.push({ personId: l.personId, badges, completedAt: iso(DEMO_TODAY - Math.floor(2 + hash(`${l.personId}-day`) * 40) * DAY) });
+  }
+
   return {
+    escapeCompletions,
     collectiveGoals,
     cohortPosts,
     organization,
@@ -704,14 +726,14 @@ const seed = {
 for (const key of [
   'cohorts', 'people', 'diagnostics', 'guideProgress', 'challengeAttempts', 'itemResponses', 'levelLearning',
   'unlockRecords', 'missionCompletions', 'weeklyChallenges', 'weeklyReports', 'followUps', 'tutorQuestions',
-  'collectiveGoals', 'cohortPosts',
+  'collectiveGoals', 'cohortPosts', 'escapeCompletions',
 ]) {
   seed[key] = orgs.flatMap((o) => o[key]);
 }
 writeFileSync(join(root, 'src/data/seed.json'), `${JSON.stringify(seed, null, 1)}\n`);
 
 // ---------- Demo states of the two participants (local to their browser, 5.0 demo mode) ----------
-const levelsAll = levels.filter((l) => l.phase === 'A');
+const levelsAll = levels; // every level, level 8 included (D-302)
 const lockStates = (personId, current) =>
   levelsAll.map((l) => ({
     personId,
@@ -728,7 +750,7 @@ const demoStates = {
     levelProgress: lockStates('p-mariana', 6).map((l) => (l.levelId === 'level-6' ? { ...l, status: 'completed' } : l)),
   },
 };
-writeFileSync(join(root, 'src/data/demo-states.json'), `${JSON.stringify(demoStates, null, 1)}\n`);
+writeFileSync(join(root, 'src/data/demo-states.json'), `${JSON.stringify(demoStates, null, 2)}\n`);
 
 for (const o of orgs) {
   const participants = o.people.filter((p) => p.role === 'participant');

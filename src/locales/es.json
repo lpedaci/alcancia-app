@@ -3108,6 +3108,11 @@
       "privacy": "No pidas ni incluyas montos ni datos personales: la consulta es sobre el aprendizaje, no sobre la situación de nadie.",
       "send": "Enviar respuesta",
       "sent": "Respuesta enviada"
+    },
+    "escape": {
+      "label": "Escape room \"Tu primer sueldo\":",
+      "done": "Completado · insignias: {{badges}} · {{date}}",
+      "notYet": "Sin completar"
     }
   },
   "org": {
@@ -3190,7 +3195,8 @@
       "edited": "Cohorte guardada",
       "areaHelp_education": "La carrera o el trayecto al que pertenece la cohorte",
       "areaHelp_product": "El segmento de usuarios al que pertenece la cohorte",
-      "noTutor": "Sin tutoría: los usuarios aprenden con Fuerte"
+      "noTutor": "Sin tutoría: los usuarios aprenden con Fuerte",
+      "escape": "Escape room completado"
     },
     "areas": {
       "operations": "Operaciones",
@@ -4046,6 +4052,11 @@
       }
     },
     "patterns": [
+      [
+        "D-312",
+        "Alternativa sin capa de juego",
+        "Debajo de la acción principal de un juego, un enlace de texto a su versión lineal, con todo visible en una página y la misma recompensa."
+      ],
       [
         "D-311",
         "Secciones dentro de una tarjeta larga",
@@ -4971,6 +4982,19 @@
       "earned": "Ya tienes la insignia de {{badge}}",
       "gives": "Da la insignia de {{badge}}",
       "chip": "Versión {{version}}"
+    },
+    "simple": {
+      "kicker": "Escape room · Modo simple",
+      "title": "Las mismas preguntas, sin capa de juego",
+      "body": "Cada sala con su escena, sus objetos a la vista y sus preguntas, una debajo de la otra. Sin llaves, sin letras ni puerta, y con las pistas a mano. Si abres los cinco candados, ganas la misma insignia que en el juego.",
+      "backToGame": "Volver al juego",
+      "progress": "Candados abiertos: {{n}} de {{total}}",
+      "objects": "Los objetos de la sala",
+      "hints": "Ver pistas",
+      "endTitle": "Al terminar",
+      "endPending": "Te faltan {{n}} candados para la insignia de esta versión.",
+      "offer": "¿Prefieres responder sin la capa de juego?",
+      "cta": "Usar el modo simple"
     }
   },
   "rights": {

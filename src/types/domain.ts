@@ -243,6 +243,16 @@ export interface GuideProgress {
 }
 
 /** Missions are shared only as aggregated counts per cohort (5.3). */
+/**
+ * Escape room "Tu primer sueldo" (F18, D-313): the only thing tutors and L&D know is that it was
+ * completed and which badges were earned. Reflections, answers, hints and time stay in the browser.
+ */
+export interface EscapeCompletion {
+  personId: string;
+  badges: ('bronze' | 'silver' | 'gold')[];
+  completedAt: IsoDate;
+}
+
 export interface MissionCompletion {
   personId: string;
   missionId: string;

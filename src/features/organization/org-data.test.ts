@@ -29,6 +29,21 @@ describe('organization metrics (O1, D1, F7)', () => {
     expect(orgAlerts(data).some((a) => a.kind === 'hidden')).toBe(true);
   });
 
+  it('the escape room reaches L&D only as the share of each cohort that completed it (F18, D-313)', () => {
+    for (const part of adoptionByCohort(data)) {
+      if (part.result.status !== 'ok') continue;
+      expect(part.result.value.escape).toBeGreaterThanOrEqual(0);
+      expect(part.result.value.escape).toBeLessThanOrEqual(1);
+    }
+    expect(adoptionByCohort(data).some((p) => p.result.status === 'ok' && p.result.value.escape > 0)).toBe(true);
+    // The shared record holds who, which badges and when, and nothing else from the game
+    for (const e of data.escapeCompletions) {
+      expect(Object.keys(e).sort()).toEqual(['badges', 'completedAt', 'personId']);
+      expect(e.badges.length).toBeGreaterThan(0);
+      for (const b of e.badges) expect(['bronze', 'silver', 'gold']).toContain(b);
+    }
+  });
+
   it('Kirkpatrick 2 uses only people with both Conocerte and knowledge scores (D-62)', () => {
     const l = learning(data);
     const pairs = data.diagnostics.filter((d) => d.kind === 'final' && data.diagnostics.some((i) => i.kind === 'initial' && i.personId === d.personId));

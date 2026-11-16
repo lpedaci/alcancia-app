@@ -49287,5 +49287,124 @@
    "parentId": "ceibo-post-1",
    "endorsed": true
   }
+ ],
+ "escapeCompletions": [
+  {
+   "personId": "p-mariana",
+   "badges": [
+    "bronze",
+    "silver"
+   ],
+   "completedAt": "2026-10-08"
+  },
+  {
+   "personId": "p-rodrigo-morales",
+   "badges": [
+    "bronze"
+   ],
+   "completedAt": "2026-10-10"
+  },
+  {
+   "personId": "p-graciela-ibanez",
+   "badges": [
+    "bronze",
+    "silver"
+   ],
+   "completedAt": "2026-10-25"
+  },
+  {
+   "personId": "p-mauro-mendez",
+   "badges": [
+    "bronze",
+    "silver"
+   ],
+   "completedAt": "2026-10-25"
+  },
+  {
+   "personId": "p-alejandro-morales",
+   "badges": [
+    "bronze"
+   ],
+   "completedAt": "2026-10-26"
+  },
+  {
+   "personId": "p-agustina-zarate",
+   "badges": [
+    "bronze",
+    "silver"
+   ],
+   "completedAt": "2026-11-12"
+  },
+  {
+   "personId": "p-laura-fernandez",
+   "badges": [
+    "bronze",
+    "silver"
+   ],
+   "completedAt": "2026-10-24"
+  },
+  {
+   "personId": "p-claudio-juarez",
+   "badges": [
+    "bronze"
+   ],
+   "completedAt": "2026-11-08"
+  },
+  {
+   "personId": "p-matias-sosa",
+   "badges": [
+    "bronze"
+   ],
+   "completedAt": "2026-10-28"
+  },
+  {
+   "personId": "p-franco-gutierrez",
+   "badges": [
+    "bronze"
+   ],
+   "completedAt": "2026-11-09"
+  },
+  {
+   "personId": "p-leandro-mendez",
+   "badges": [
+    "bronze",
+    "silver",
+    "gold"
+   ],
+   "completedAt": "2026-10-13"
+  },
+  {
+   "personId": "p-sebastian-fernandez",
+   "badges": [
+    "bronze",
+    "silver",
+    "gold"
+   ],
+   "completedAt": "2026-10-11"
+  },
+  {
+   "personId": "p-marcela-moreno",
+   "badges": [
+    "bronze",
+    "silver"
+   ],
+   "completedAt": "2026-11-03"
+  },
+  {
+   "personId": "p-patricia-ruiz",
+   "badges": [
+    "bronze"
+   ],
+   "completedAt": "2026-11-10"
+  },
+  {
+   "personId": "p-jimena-aguirre",
+   "badges": [
+    "bronze",
+    "silver",
+    "gold"
+   ],
+   "completedAt": "2026-10-14"
+  }
  ]
 }

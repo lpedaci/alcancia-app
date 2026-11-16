@@ -164,6 +164,7 @@ export function AdminHomePage() {
                 <TableHeaderCell className="text-right">{t('org.kpi.active')}</TableHeaderCell>
                 <TableHeaderCell className="text-right">{t('org.kpi.diagnosed')}</TableHeaderCell>
                 <TableHeaderCell className="text-right">{t('org.kpi.modules')}</TableHeaderCell>
+                <TableHeaderCell className="text-right">{t('org.cohorts.escape')}</TableHeaderCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -178,9 +179,10 @@ export function AdminHomePage() {
                       <TableCell className="text-right tabular-nums">{formatPercent(result.value.active, { decimals: 0 })}</TableCell>
                       <TableCell className="text-right tabular-nums">{formatPercent(result.value.diagnosed, { decimals: 0 })}</TableCell>
                       <TableCell className="text-right tabular-nums">{formatPercent(result.value.modules, { decimals: 0 })}</TableCell>
+                      <TableCell className="text-right tabular-nums">{formatPercent(result.value.escape, { decimals: 0 })}</TableCell>
                     </>
                   ) : (
-                    <TableCell colSpan={4} className="text-right">
+                    <TableCell colSpan={5} className="text-right">
                       <StatusPill tone="neutral" icon="visibility_off" label={t('org.insufficientShort')} />
                     </TableCell>
                   )}

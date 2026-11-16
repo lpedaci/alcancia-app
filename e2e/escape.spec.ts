@@ -138,3 +138,56 @@ test('escape room advanced version can be chosen and its first lock opened @ 375
   await axe(page);
   await page.screenshot({ path: 'docs/screenshots/escape-advanced-375.jpg', fullPage: true, quality: 70, type: 'jpeg' });
 });
+
+// D-312: simple mode, the accessible alternative: the five rooms as a linear questionnaire, with the
+// objects visible, and the same badge at the end
+test('escape room simple mode gives the badge when the five locks open @ 375px', async ({ page }) => {
+  test.setTimeout(60_000);
+  await page.setViewportSize({ width: 375, height: 900 });
+  await prepareSession(page, PAGES.find((p) => p.id === 'p9-escape-mariana')!);
+  await page.goto('/#/app/learn/escape');
+  await page.getByRole('button', { name: 'Usar el modo simple' }).click();
+  await expect(page.getByRole('heading', { name: 'Las mismas preguntas, sin capa de juego' })).toBeVisible();
+  await axe(page);
+  const room = (name: string) => page.getByRole('region', { name: new RegExp(`^${name}`) });
+  const check = (name: string) => room(name).getByRole('button', { name: 'Revisar' }).last().press('Enter');
+
+  await room('El recibo').getByLabel('¿Cuál es tu sueldo neto?').fill('830000');
+  await check('El recibo');
+  for (const [item, category] of [
+    ['Alquiler compartido', 'Necesidad'],
+    ['Carga de la tarjeta de transporte', 'Necesidad'],
+    ['Plan básico de celular', 'Necesidad'],
+    ['Salida del sábado', 'Deseo'],
+    ['Zapatillas de marca para estrenar', 'Deseo'],
+    ['Café de paso todos los días', 'Deseo'],
+  ]) {
+    await room('El presupuesto').getByLabel(item, { exact: true }).selectOption({ label: category });
+  }
+  await room('El presupuesto').getByRole('button', { name: 'Revisar' }).first().press('Enter');
+  await room('El presupuesto').getByLabel('¿Cuánto se va por mes en café?').fill('66000');
+  await check('El presupuesto');
+  await room('La tarjeta').getByText('El costo financiero total (CFT o CFTEA)').click();
+  await check('La tarjeta');
+  const order = ['Mirar cuánto subió el precio', 'Calcular el precio nuevo', 'Restarle lo que tienes en el sobre', 'Planificar cómo juntar la diferencia'];
+  for (let target = 0; target < order.length; target++) {
+    for (let guard = 0; guard < 4; guard++) {
+      const items = await room('La inflación').getByRole('group', { name: /ordena los pasos/i }).getByRole('listitem').allInnerTexts();
+      if (items.findIndex((t) => t.includes(order[target]!)) <= target) break;
+      await room('La inflación').getByRole('button', { name: `Subir: ${order[target]}` }).click();
+    }
+  }
+  await room('La inflación').getByRole('button', { name: 'Revisar' }).first().press('Enter');
+  await room('La inflación').getByLabel('¿Cuánto dinero te falta ahora para las zapatillas?').fill('10000');
+  await check('La inflación');
+  for (const choice of ['No toco el enlace', 'No lo comparto', 'Lo descarto', 'Es real']) {
+    await room('Los mensajes').getByText(choice, { exact: false }).first().click();
+    const next = room('Los mensajes').getByRole('button', { name: /Continuar|Siguiente|Elegir/ });
+    if (await next.count()) await next.first().click();
+  }
+  await check('Los mensajes');
+  await expect(page.getByText('Candados abiertos: 5 de 5')).toBeVisible();
+  await expect(page.getByText('Ganaste la insignia de bronce')).toBeVisible();
+  await axe(page);
+  await page.screenshot({ path: 'docs/screenshots/escape-simple-375.jpg', fullPage: true, quality: 70, type: 'jpeg' });
+});

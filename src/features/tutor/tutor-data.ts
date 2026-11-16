@@ -14,7 +14,7 @@ import type { Cohort, LevelLearningProgress, Person } from '@/types/domain';
  */
 export type TutorData = Pick<
   OrgData,
-  'organization' | 'program' | 'cohorts' | 'people' | 'guideProgress' | 'challengeAttempts' | 'itemResponses' | 'levelLearning' | 'unlockRecords' | 'missionCompletions' | 'weeklyChallenges' | 'weeklyReports' | 'tutorQuestions'
+  'organization' | 'program' | 'cohorts' | 'people' | 'guideProgress' | 'challengeAttempts' | 'itemResponses' | 'levelLearning' | 'unlockRecords' | 'missionCompletions' | 'escapeCompletions' | 'weeklyChallenges' | 'weeklyReports' | 'tutorQuestions'
 >;
 
 const DAY = 86400000;

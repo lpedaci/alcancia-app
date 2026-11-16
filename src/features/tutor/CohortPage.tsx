@@ -198,6 +198,8 @@ function PersonLevels({ cohortId }: { cohortId: string }) {
   const progress = learningByLevel(data, personId);
   const reasonError = tried && reason.trim().length < 10 ? t('tutor.unlock.reasonError') : undefined;
   const person = members.find((m) => m.id === personId);
+  // F18, D-313: the escape room, only completed or not and its badges
+  const escape = data.escapeCompletions.find((e) => e.personId === personId);
 
   const submit = () => {
     setTried(true);
@@ -235,6 +237,18 @@ function PersonLevels({ cohortId }: { cohortId: string }) {
             onChange={(e) => setPersonId(e.target.value)}
             options={members.map((m) => ({ value: m.id, label: m.name }))}
           />
+          <p className="flex flex-wrap items-center gap-2 text-body-medium text-on-surface">
+            <span>{t('tutor.escape.label')}</span>
+            {escape ? (
+              <StatusPill
+                tone="success"
+                icon="workspace_premium"
+                label={t('tutor.escape.done', { badges: escape.badges.map((b) => t(`escape.badges.short.${b}`)).join(', '), date: formatDate(escape.completedAt) })}
+              />
+            ) : (
+              <StatusPill tone="neutral" icon="remove" label={t('tutor.escape.notYet')} />
+            )}
+          </p>
           {progress.length === 0 ? (
             <p className="text-body-medium text-on-surface-variant">{t('tutor.levels.empty', { name: person?.name ?? '' })}</p>
           ) : (

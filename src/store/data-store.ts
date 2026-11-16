@@ -15,6 +15,7 @@ import type {
   ItemResponse,
   LevelLearningProgress,
   LevelUnlockRecord,
+  EscapeCompletion,
   MissionCompletion,
   Organization,
   Person,
@@ -44,6 +45,8 @@ export interface OrgData {
   levelLearning: LevelLearningProgress[];
   unlockRecords: LevelUnlockRecord[];
   missionCompletions: MissionCompletion[];
+  /** F18, D-313: escape room completed and badges, nothing else. */
+  escapeCompletions: EscapeCompletion[];
   weeklyChallenges: WeeklyChallenge[];
   weeklyReports: WeeklyChallengeReport[];
   followUps: FollowUp30[];
@@ -105,6 +108,8 @@ export function scopeToOrg(data: SharedData, orgId: string): OrgData {
     levelLearning: mine(data.levelLearning),
     unlockRecords: data.unlockRecords.filter((r) => (r.target.kind === 'person' ? ids.has(r.target.personId) : cohortIds.has(r.target.cohortId))),
     missionCompletions: mine(data.missionCompletions),
+    // `?? []`: demo data saved before D-313 has no list
+    escapeCompletions: mine(data.escapeCompletions ?? []),
     weeklyChallenges: data.weeklyChallenges.filter((w) => cohortIds.has(w.cohortId)),
     weeklyReports: mine(data.weeklyReports),
     followUps: mine(data.followUps),
