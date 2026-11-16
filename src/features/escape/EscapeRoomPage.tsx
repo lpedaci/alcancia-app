@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { type ReactNode, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/Button';
 import { ConfirmDialog, Dialog, DialogContent, DialogTrigger } from '@/components/ui/Dialog';
@@ -219,45 +219,59 @@ function Progress({ state, onToggleTime }: { state: EscapeState; onToggleTime: (
           );
         })}
       </ol>
-      <dl className="grid grid-cols-2 gap-2 border-t border-outline-variant pt-3 @lg:grid-cols-4">
-        <Stat icon="key" label={t('escape.keys')} value={String(state.keys)} />
-        <Stat icon="lightbulb" label={t('escape.hintsUsed')} value={String(state.hintsUsed)} />
-        <Stat
-          icon="door_front"
-          label={t('escape.letters')}
-          value={letters.map((l) => l ?? '·').join(' ')}
-          valueLabel={t('escape.lettersValue', { count: letters.filter(Boolean).length, total: ROOMS.length })}
-        />
+      {/* Four small tiles (D-307): the label on top and its value below, so a value never reads as the
+          next label's; dividers between them on wide cards */}
+      <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-lg bg-outline-variant @lg:grid-cols-4">
+        <Stat icon="key" label={t('escape.keys')}>
+          {state.keys}
+        </Stat>
+        <Stat icon="lightbulb" label={t('escape.hintsUsed')}>
+          {state.hintsUsed}
+        </Stat>
+        <Stat icon="door_front" label={t('escape.letters')}>
+          <span className="sr-only">{t('escape.lettersValue', { count: letters.filter(Boolean).length, total: ROOMS.length })}</span>
+          {/* Five slots that fill in, one per room */}
+          <span aria-hidden className="flex gap-1">
+            {letters.map((l, i) => (
+              <span
+                key={i}
+                className={cn(
+                  'flex size-6 items-center justify-center rounded-sm text-label-large',
+                  l ? 'bg-tertiary-container text-on-tertiary-container' : 'border border-dashed border-outline-variant',
+                )}
+              >
+                {l ?? ''}
+              </span>
+            ))}
+          </span>
+        </Stat>
         {/* The time is hidden by default (original game); the eye shows or hides it, right beside it */}
-        <div className="flex min-w-0 items-center gap-2">
-          <Icon name="schedule" size={18} className="shrink-0 text-primary" />
-          <dt className="text-body-small text-on-surface-variant">{t('escape.time.label')}</dt>
-          <dd className="ml-auto flex items-center gap-1 text-label-large text-on-surface tabular-nums">
-            {state.timeVisible && <span>{formatTime(state.timeMs)}</span>}
+        <Stat icon="schedule" label={t('escape.time.label')}>
+          <span className="flex items-center gap-1">
+            {state.timeVisible ? <span>{formatTime(state.timeMs)}</span> : <span className="sr-only">{t('escape.time.hidden')}</span>}
             <IconButton
               icon={state.timeVisible ? 'visibility_off' : 'visibility'}
               size="xs"
               label={state.timeVisible ? t('escape.time.hide') : t('escape.time.show')}
               selected={state.timeVisible}
               onClick={onToggleTime}
-              className="-my-1"
+              className="-my-1 -ml-1"
             />
-          </dd>
-        </div>
+          </span>
+        </Stat>
       </dl>
     </section>
   );
 }
 
-function Stat({ icon, label, value, valueLabel }: { icon: 'key' | 'lightbulb' | 'door_front' | 'schedule'; label: string; value: string; valueLabel?: string }) {
+function Stat({ icon, label, children }: { icon: 'key' | 'lightbulb' | 'door_front' | 'schedule'; label: string; children: ReactNode }) {
   return (
-    <div className="flex min-w-0 items-center gap-2">
-      <Icon name={icon} size={18} className="shrink-0 text-primary" />
-      <dt className="text-body-small text-on-surface-variant">{label}</dt>
-      <dd className="ml-auto text-label-large text-on-surface tabular-nums">
-        <span aria-hidden={valueLabel ? true : undefined}>{value}</span>
-        {valueLabel && <span className="sr-only">{valueLabel}</span>}
-      </dd>
+    <div className="flex min-w-0 flex-col gap-1 bg-surface-container-lowest px-3 py-2">
+      <dt className="flex items-center gap-1.5 text-body-small text-on-surface-variant">
+        <Icon name={icon} size={16} className="shrink-0 text-primary" />
+        {label}
+      </dt>
+      <dd className="flex min-h-8 items-center text-title-medium text-on-surface tabular-nums">{children}</dd>
     </div>
   );
 }
