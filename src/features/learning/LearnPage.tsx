@@ -2,7 +2,9 @@ import { AnimatePresence, motion } from 'motion/react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
+import { DEMO_TODAY } from '@/app/config';
 import { Button } from '@/components/ui/Button';
+import { IconButton } from '@/components/ui/IconButton';
 import { ListLinkRow } from '@/components/ui/ListLinkRow';
 import { Icon, type IconName } from '@/components/ui/Icon';
 import { StatusPill } from '@/components/ui/StatusPill';
@@ -10,6 +12,8 @@ import { ConditionList } from '@/features/levels/UnlockCard';
 import { completedLights, type LevelStatus } from '@/features/levels/engine';
 import { MISSIONS, useLevels } from '@/features/levels/use-levels';
 import { WalletShell } from '@/features/wallet/WalletShell';
+import { badgeSvg, downloadSvg } from '@/lib/badge-image';
+import { formatDate } from '@/lib/dates';
 import { NBSP } from '@/lib/money';
 import { duration, easing, useShouldReduceMotion } from '@/lib/motion';
 import { cn } from '@/lib/utils';
@@ -50,7 +54,9 @@ export function LearnPage() {
   const guideProgress = allGuides.filter((g) => g.personId === personId);
   const attempts = allAttempts.filter((a) => a.personId === personId);
   const missionCompletions = allMissions.filter((m) => m.personId === personId);
-  const passing = useProgram().passingScore;
+  const program = useProgram();
+  const passing = program.passingScore;
+  const programName = program.name;
   const kind = useOrgKind();
   const reduce = useShouldReduceMotion();
   const [open, setOpen] = useState<Set<string>>(() => new Set(current ? [current.level.id] : []));
@@ -224,6 +230,26 @@ export function LearnPage() {
                         <Icon name="military_tech" size={20} filled={earned} />
                         <span className="min-w-0 flex-1 text-body-medium">{t('learn.challenge.module', { n: m.order, title: m.title })}</span>
                         <span className="text-label-medium">{earned ? t('learn.map.earned') : t('learn.map.notEarned')}</span>
+                        {/* F12, D-315: an earned badge can be saved as an image, without data of the person */}
+                        {earned && (
+                          <IconButton
+                            icon="download"
+                            size="xs"
+                            label={t('learn.map.badgeDownload', { n: m.order, title: m.title })}
+                            className="-my-1 -mr-1"
+                            onClick={() =>
+                              downloadSvg(
+                                badgeSvg({
+                                  mark: `${m.order}`,
+                                  name: t('learn.map.badgeImageName', { n: m.order }),
+                                  line: m.title,
+                                  foot: t('learn.map.badgeImageFoot', { program: programName, date: formatDate(DEMO_TODAY) }),
+                                }),
+                                t('learn.map.badgeFile', { n: m.order }),
+                              )
+                            }
+                          />
+                        )}
                       </span>
                       {why && (
                         <span className="pl-8 text-body-small">
@@ -265,6 +291,9 @@ export function LearnPage() {
                   </li>
                   <li>
                     <ListLinkRow to="/app/tools" icon="calculate" title={t('learn.map.tools')} detail={t('learn.map.toolsDetail')} />
+                  </li>
+                  <li>
+                    <ListLinkRow to="/app/learn/certificate" icon="workspace_premium" title={t('learn.map.certificate')} detail={t('learn.map.certificateDetail')} />
                   </li>
                   <li>
                     <ListLinkRow to="/app/learn/escape" icon="door_front" title={t('learn.map.escape')} detail={t('learn.map.escapeDetail')} />

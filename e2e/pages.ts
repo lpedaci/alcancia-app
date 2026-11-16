@@ -83,6 +83,8 @@ export const PAGES: CheckedPage[] = [
   { id: 'p8-crypto-mariana', path: '/#/app/invest/crypto', as: 'p-mariana', unlockAll: true },
   { id: 'p9-escape-mariana', path: '/#/app/learn/escape', as: 'p-mariana' },
   { id: 'p9-escape-locked-diego', path: '/#/app/learn/escape', as: 'p-diego' },
+  { id: 'p9-certificate-mariana', path: '/#/app/learn/certificate', as: 'p-mariana' },
+  { id: 'p9-certificate-diego', path: '/#/app/learn/certificate', as: 'p-diego' },
   { id: 'p9-sources-diego', path: '/#/app/learn/sources', as: 'p-diego' },
   { id: 'p12-mission-broker-mariana', path: '/#/app/missions/mission-broker-account', as: 'p-mariana' },
   { id: 'p12-mission-cedear-mariana', path: '/#/app/missions/mission-first-cedear', as: 'p-mariana' },

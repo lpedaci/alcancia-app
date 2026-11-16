@@ -272,6 +272,10 @@ Fuente: `https://lpedaci.github.io/taller-primerempleo/escape/` (gamificación y
 9. **Versiones (D-310, 16/11/2026):** la persona elige la versión antes de entrar, en lugar del sorteo por sala del original, para que cada insignia dependa de una partida completa en esa versión. Las preguntas extra del original son el desafío previo que enciende el candado. Las insignias se descargan como imagen, sin datos personales.
 10. **Modo simple (D-312):** las mismas preguntas como cuestionario lineal, sin capa de juego, con la misma insignia. **Visibilidad (D-313):** tutoría ve, por persona, si lo completó y con qué insignias; L&D, la proporción por cohorte con el umbral de 5.
 
+### 11.3 Insignias y certificado (F12, D-315)
+
+Las insignias de módulo (D-57) y las del escape room se descargan como imagen, sin datos de la persona. El certificado de finalización reconoce el programa completo (niveles 1 a 7) con los módulos y sus insignias, nunca montos ni hábitos, y es un certificado de demostración sin validez oficial. **Línea futura:** emitirlos como credenciales verificables con el estándar Open Badges 3.0 (1EdTech), para que la persona las lleve a su perfil profesional.
+
 ## 12. Plan de mejora
 
 | Cuándo | Qué se revisa | Con qué datos | Qué se puede cambiar |

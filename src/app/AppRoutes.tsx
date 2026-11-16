@@ -46,6 +46,7 @@ const InvestPage = lazyPage(() => import('@/features/invest/InvestPage'), 'Inves
 const InstrumentPage = lazyPage(() => import('@/features/invest/InvestPage'), 'InstrumentPage');
 const CryptoPage = lazyPage(() => import('@/features/invest/CryptoPage'), 'CryptoPage');
 const EscapeRoomPage = lazyPage(() => import('@/features/escape/EscapeRoomPage'), 'EscapeRoomPage');
+const CertificatePage = lazyPage(() => import('@/features/learning/CertificatePage'), 'CertificatePage');
 const ToolsPage = lazyPage(() => import('@/features/simulators/ToolsPages'), 'ToolsPage');
 const SimToolPage = lazyPage(() => import('@/features/simulators/ToolsPages'), 'SimToolPage');
 const HorneroPage = lazyPage(() => import('@/features/partner/HorneroPage'), 'HorneroPage');
@@ -91,6 +92,7 @@ export function AppRoutes() {
           <Route path="/app/invest/:instrumentId" element={<InstrumentPage />} />
           <Route path="/app/learn" element={<LearnPage />} />
           <Route path="/app/learn/escape" element={<EscapeRoomPage />} />
+          <Route path="/app/learn/certificate" element={<CertificatePage />} />
           <Route path="/app/learn/guides/:guideId" element={<GuidePage />} />
           <Route path="/app/learn/review/:moduleId" element={<ReviewPage />} />
           <Route path="/app/learn/community" element={<CommunityPage />} />

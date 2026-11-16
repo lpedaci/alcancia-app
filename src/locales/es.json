@@ -1559,7 +1559,13 @@
       "profileDetail": "Educativo: describe tus rasgos, sin recomendarte nada",
       "toolsDetail": "Los 12 simuladores, con valores de ejemplo",
       "escape": "Escape room: Tu primer sueldo",
-      "escapeDetail": "Cinco salas con Fuerte · desde el nivel 4"
+      "escapeDetail": "Cinco salas con Fuerte · desde el nivel 4",
+      "badgeDownload": "Descargar la insignia del módulo {{n}}: {{title}}",
+      "badgeImageName": "Insignia del módulo {{n}}",
+      "badgeImageFoot": "{{program}} · Alcancía · {{date}}",
+      "badgeFile": "alcancia-insignia-modulo-{{n}}",
+      "certificate": "Certificado del programa",
+      "certificateDetail": "Se emite al completar los niveles 1 a 7"
     },
     "sources": {
       "title": "Fuentes",
@@ -4053,6 +4059,11 @@
     },
     "patterns": [
       [
+        "D-315",
+        "Certificado",
+        "Tarjeta plana con doble marco, la medalla en tertiary, el nombre destacado y los módulos con su insignia; vista previa rotulada hasta emitirse."
+      ],
+      [
         "D-312",
         "Alternativa sin capa de juego",
         "Debajo de la acción principal de un juego, un enlace de texto a su versión lineal, con todo visible en una página y la misma recompensa."
@@ -4999,5 +5010,33 @@
     "notice": "© 2026 Lourdes Pedaci · Todos los derechos reservados",
     "license": "Licencia",
     "newTab": "(se abre en una pestaña nueva)"
+  },
+  "certificate": {
+    "kicker": "Aprender",
+    "title": "Certificado del programa",
+    "intro": "Reconoce lo que aprendiste en el programa: los módulos y sus insignias. Nunca muestra montos ni nada de tu billetera.",
+    "fuerteIssued": "Guardado. Lo que aprendiste ya es tuyo, con certificado y todo.",
+    "fuertePreview": "Así va a quedar tu certificado. Se emite cuando completes los siete niveles.",
+    "issuedTitle": "Tu certificado está listo",
+    "issuedBody": "Completaste los niveles 1 a 7. Puedes imprimirlo o guardarlo como PDF.",
+    "print": "Imprimir o guardar como PDF",
+    "previewTitle": "Vista previa",
+    "previewBody_one": "Se emite al completar los niveles 1 a 7. Te falta {{count}} nivel:",
+    "previewBody_other": "Se emite al completar los niveles 1 a 7. Te faltan {{count}} niveles:",
+    "levelName": "Nivel {{n}} · {{name}}",
+    "previewChip": "Vista previa",
+    "heading": "Certificado de finalización",
+    "certifies": "Se certifica que",
+    "completed": "completó el programa \"{{program}}\" de {{organization}}, en Alcancía, el simulador de finanzas personales.",
+    "modules": "Módulos del programa",
+    "module": "Módulo {{n}}: {{title}}",
+    "badgeEarned": "con insignia",
+    "badgeMissing": "sin insignia",
+    "badgesNote": "Insignias de módulo: {{count}} de {{total}}. La insignia sale de la parte del módulo en su desafío de nivel.",
+    "date": "Fecha",
+    "datePending": "Al completar el nivel 7",
+    "issuer": "Emitido por",
+    "issuerValue": "{{organization}} · Alcancía",
+    "disclaimer": "Certificado de demostración de un prototipo de portfolio, sin validez oficial. Simulador de finanzas personales · dinero ficticio."
   }
 }
