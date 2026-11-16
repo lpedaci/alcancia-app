@@ -55,41 +55,67 @@ export function VersionPicker({ value, onChange, badges }: { value: Version; onC
 export function BadgeStrip({ badges, highlight }: { badges: Badge[]; highlight?: Badge }) {
   const { t } = useTranslation();
   return (
-    <ul aria-label={t('escape.badges.list')} className="@container grid grid-cols-1 gap-2 @xl:grid-cols-3">
-      {BADGES.map((badge, i) => {
-        const earned = badges.includes(badge);
-        return (
-          <li
-            key={badge}
-            className={cn(
-              'flex min-w-0 flex-col gap-2 rounded-lg p-3',
-              earned ? 'bg-tertiary-container text-on-tertiary-container' : 'border border-dashed border-outline-variant text-on-surface-variant',
-              highlight === badge && 'ring-2 ring-tertiary ring-inset',
-            )}
-          >
-            <span className="flex items-center gap-2">
-              <Icon name={earned ? 'workspace_premium' : 'lock'} size={20} className="shrink-0" />
-              <span className="text-title-small">{t(`escape.badges.${badge}`)}</span>
-            </span>
-            <span className="text-body-small">
-              {earned ? t('escape.badges.earnedBody', { version: t(`escape.versions.${VERSIONS[i]}.title`).toLowerCase() }) : t('escape.badges.missingBody', { version: t(`escape.versions.${VERSIONS[i]}.title`).toLowerCase() })}
-            </span>
-            {earned && (
-              <Button variant="outlined" size="xs" leadingIcon="download" className="w-full medium:w-auto medium:self-start" onClick={() => downloadBadge(badge, t)}>
-                {t('escape.badges.download')}
-                <span className="sr-only"> {t(`escape.badges.${badge}`)}</span>
-              </Button>
-            )}
-          </li>
-        );
-      })}
-    </ul>
+    // Each row: the badge drawn on the left, its name and what it means, and "Descargar" on the right
+    // (D-311). Phones: the badge and the text side by side, the download below at full width (D-308)
+    <div className="@container">
+      <ul aria-label={t('escape.badges.list')} className="flex flex-col gap-2">
+        {BADGES.map((badge, i) => {
+          const earned = badges.includes(badge);
+          const versionName = t(`escape.versions.${VERSIONS[i]}.title`).toLowerCase();
+          return (
+            <li
+              key={badge}
+              className={cn(
+                'grid min-w-0 grid-cols-[auto_minmax(0,1fr)] items-center gap-x-3 gap-y-3 rounded-lg p-3 @lg:grid-cols-[auto_minmax(0,1fr)_auto] @lg:gap-x-4',
+                earned ? 'bg-tertiary-container text-on-tertiary-container' : 'border border-dashed border-outline-variant text-on-surface-variant',
+                highlight === badge && 'ring-2 ring-tertiary ring-inset',
+              )}
+            >
+              <BadgeMedal earned={earned} />
+              <span className="flex min-w-0 flex-col gap-0.5">
+                <span className="text-title-small">{t(`escape.badges.${badge}`)}</span>
+                <span className="text-body-small">{earned ? t('escape.badges.earnedBody', { version: versionName }) : t('escape.badges.missingBody', { version: versionName })}</span>
+              </span>
+              {earned ? (
+                <Button variant="outlined" size="xs" leadingIcon="download" className="col-span-2 w-full @lg:col-span-1 @lg:w-auto" onClick={() => downloadBadge(badge, t)}>
+                  {t('escape.badges.download')}
+                  <span className="sr-only"> {t(`escape.badges.${badge}`)}</span>
+                </Button>
+              ) : (
+                <span className="col-span-2 hidden items-center gap-1.5 text-label-large @lg:col-span-1 @lg:flex">
+                  <Icon name="lock" size={18} className="shrink-0" />
+                  {t('escape.badges.pending')}
+                </span>
+              )}
+            </li>
+          );
+        })}
+      </ul>
+    </div>
   );
 }
 
 /** A color token resolved by the browser, so the image keeps the palette without loose values (2.1). */
 const token = (name: string, fallback: string) =>
   (typeof window !== 'undefined' && getComputedStyle(document.documentElement).getPropertyValue(`--md-sys-color-${name}`).trim()) || fallback;
+
+/**
+ * The badge drawn small: the medal in a circle. Earned, filled in tertiary; missing, a dashed outline
+ * in the neutral tone. Decorative: the name is in the text beside it.
+ */
+function BadgeMedal({ earned }: { earned: boolean }) {
+  return (
+    <span
+      aria-hidden
+      className={cn(
+        'flex size-12 shrink-0 items-center justify-center rounded-full',
+        earned ? 'bg-tertiary text-on-tertiary' : 'border-2 border-dashed border-outline text-on-surface-variant',
+      )}
+    >
+      <Icon name="workspace_premium" size={24} filled={earned} />
+    </span>
+  );
+}
 
 const escapeXml = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 

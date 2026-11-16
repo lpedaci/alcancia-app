@@ -14,7 +14,7 @@ Cómo revisar: marca en cada versión "Aprobada", "Con cambios" (y cuáles) o "N
 
 ### Intermedia (plata)
 
-- **Decisión de Lourdes:** ☐ Aprobada · ☐ Con cambios · ☐ No va
+- **Decisión de Lourdes:** ☑ Aprobada (16/11/2026) · ☐ Con cambios · ☐ No va
 
 **Escena:** En el escritorio de recepción quedó tu recibo de sueldo, con horas extras y una taza de café volcada encima. Al lado hay una nota de Recursos Humanos.
 
@@ -42,7 +42,7 @@ Cómo revisar: marca en cada versión "Aprobada", "Con cambios" (y cuáles) o "N
 
 ### Avanzada (oro)
 
-- **Decisión de Lourdes:** ☐ Aprobada · ☐ Con cambios · ☐ No va
+- **Decisión de Lourdes:** ☑ Aprobada (16/11/2026) · ☐ Con cambios · ☐ No va
 
 **Escena:** En el escritorio de recepción quedó tu recibo de sueldo, con una suma no remunerativa y una taza de café volcada encima. Al lado hay una nota de Recursos Humanos.
 
@@ -74,7 +74,7 @@ Cómo revisar: marca en cada versión "Aprobada", "Con cambios" (y cuáles) o "N
 
 ### Intermedia (plata)
 
-- **Decisión de Lourdes:** ☐ Aprobada · ☐ Con cambios · ☐ No va
+- **Decisión de Lourdes:** ☑ Aprobada (16/11/2026) · ☐ Con cambios · ☐ No va
 
 **Escena:** En el escritorio de la oficina hay una lista con tus gastos del mes. Pegado en la taza, un post-it.
 
@@ -112,7 +112,7 @@ Cómo revisar: marca en cada versión "Aprobada", "Con cambios" (y cuáles) o "N
 
 ### Avanzada (oro)
 
-- **Decisión de Lourdes:** ☐ Aprobada · ☐ Con cambios · ☐ No va
+- **Decisión de Lourdes:** ☑ Aprobada (16/11/2026) · ☐ Con cambios · ☐ No va
 
 **Escena:** En el escritorio de la oficina hay una lista con tus gastos del mes. Pegado en la taza, un post-it.
 
@@ -154,7 +154,7 @@ Cómo revisar: marca en cada versión "Aprobada", "Con cambios" (y cuáles) o "N
 
 ### Intermedia (plata)
 
-- **Decisión de Lourdes:** ☐ Aprobada · ☐ Con cambios · ☐ No va
+- **Decisión de Lourdes:** ☑ Aprobada (16/11/2026) · ☐ Con cambios · ☐ No va
 
 **Escena:** Sobre el mostrador de la caja quedaron el resumen de tu tarjeta y dos folletos del mismo celular en 12 cuotas.
 
@@ -182,7 +182,7 @@ Cómo revisar: marca en cada versión "Aprobada", "Con cambios" (y cuáles) o "N
 
 ### Avanzada (oro)
 
-- **Decisión de Lourdes:** ☐ Aprobada · ☐ Con cambios · ☐ No va
+- **Decisión de Lourdes:** ☑ Aprobada (16/11/2026) · ☐ Con cambios · ☐ No va
 
 **Escena:** Sobre el mostrador de la caja quedaron el resumen de tu tarjeta y dos folletos de otro celular en 12 cuotas.
 
@@ -221,7 +221,7 @@ Cómo revisar: marca en cada versión "Aprobada", "Con cambios" (y cuáles) o "N
 
 ### Intermedia (plata)
 
-- **Decisión de Lourdes:** ☐ Aprobada · ☐ Con cambios · ☐ No va
+- **Decisión de Lourdes:** ☑ Aprobada (16/11/2026) · ☐ Con cambios · ☐ No va
 
 **Escena:** En la caja fuerte está el sobre donde guardaste dinero para las zapatillas hace dos meses. Al lado, la etiqueta de precio.
 
@@ -257,7 +257,7 @@ Cómo revisar: marca en cada versión "Aprobada", "Con cambios" (y cuáles) o "N
 
 ### Avanzada (oro)
 
-- **Decisión de Lourdes:** ☐ Aprobada · ☐ Con cambios · ☐ No va
+- **Decisión de Lourdes:** ☑ Aprobada (16/11/2026) · ☐ Con cambios · ☐ No va
 
 **Escena:** En la bóveda está el saldo de la cuenta remunerada donde dejaste el dinero de las zapatillas. Al lado, la etiqueta de precio.
 
@@ -295,7 +295,7 @@ Cómo revisar: marca en cada versión "Aprobada", "Con cambios" (y cuáles) o "N
 
 ### Intermedia (plata)
 
-- **Decisión de Lourdes:** ☐ Aprobada · ☐ Con cambios · ☐ No va
+- **Decisión de Lourdes:** ☑ Aprobada (16/11/2026) · ☐ Con cambios · ☐ No va
 
 **Escena:** Ya casi estás afuera. Tu celular vibra: llegaron cuatro mensajes. Uno solo es de verdad.
 
@@ -332,7 +332,7 @@ Resultados:
 
 ### Avanzada (oro)
 
-- **Decisión de Lourdes:** ☐ Aprobada · ☐ Con cambios · ☐ No va
+- **Decisión de Lourdes:** ☑ Aprobada (16/11/2026) · ☐ Con cambios · ☐ No va
 
 **Escena:** Ya casi estás afuera. Tu celular vibra: llegaron cuatro mensajes. Uno solo es de verdad.
 

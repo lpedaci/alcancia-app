@@ -241,7 +241,7 @@ function Progress({ state, onToggleTime }: { state: EscapeState; onToggleTime: (
           );
         })}
       </ol>
-      <dl className="grid grid-cols-3 gap-2 border-t border-outline-variant pt-3 @lg:flex @lg:flex-wrap @lg:items-center @lg:gap-x-0 @5xl:shrink-0 @5xl:border-t-0 @5xl:border-l @5xl:pt-0 @5xl:pl-6">
+      <dl className="grid grid-cols-3 gap-2 border-t border-outline-variant pt-3 @lg:flex @lg:flex-wrap @lg:items-center @lg:justify-center @lg:gap-x-0 @lg:gap-y-2 @5xl:shrink-0 @5xl:border-t-0 @5xl:border-l @5xl:pt-0 @5xl:pl-6">
         <Stat icon="key" label={t('escape.keys')}>
           {state.keys}
         </Stat>
@@ -286,7 +286,7 @@ function Stat({ icon, label, children, className }: { icon: 'key' | 'lightbulb' 
   return (
     // Phones: a chip with the icon and the value, three in a row and the letters below. Wider: icon, label and value in one line, with a
     // divider between items
-    <div className={cn('flex h-9 min-w-0 items-center justify-center gap-2 rounded-full bg-surface-container px-3 @lg:h-8 @lg:justify-start @lg:rounded-none @lg:bg-transparent @lg:px-4 @lg:not-first:border-l @lg:not-first:border-outline-variant @lg:first:pl-0', className)}>
+    <div className={cn('flex h-9 min-w-0 items-center justify-center gap-2 rounded-full bg-surface-container px-3 @lg:h-8 @lg:justify-start @lg:rounded-none @lg:bg-transparent @lg:px-4 @lg:not-first:border-l @lg:not-first:border-outline-variant', className)}>
       <dt className="flex min-w-0 items-center gap-1.5 text-body-small text-on-surface-variant">
         <Icon name={icon} size={18} className="shrink-0 text-primary" />
         <span className="sr-only @lg:not-sr-only @lg:whitespace-nowrap">{label}</span>
@@ -539,39 +539,45 @@ function Exit({ state, version, onVersion, onAgain }: { state: EscapeState; vers
   const seal = sealOf(state.hintsUsed);
   const badge = BADGES[versionOf(state)]!;
   return (
-    <section aria-labelledby="exit-title" className={card}>
-      <h2 id="exit-title" className="text-headline-small text-on-surface">
-        {t('escape.exit.title')}
-      </h2>
-      <p className="text-body-large text-on-surface">{t('escape.exit.body')}</p>
-      <dl className="grid grid-fill-3 gap-3">
-        <div className="flex flex-col gap-1 rounded-lg bg-surface-container p-3">
-          <dt className="text-body-small text-on-surface-variant">{t('escape.exit.seal')}</dt>
-          <dd className="text-title-medium text-on-surface">{t(`escape.seals.${seal}`)}</dd>
-        </div>
-        <div className="flex flex-col gap-1 rounded-lg bg-surface-container p-3">
-          <dt className="text-body-small text-on-surface-variant">{t('escape.hintsUsed')}</dt>
-          <dd className="text-title-medium text-on-surface tabular-nums">{state.hintsUsed}</dd>
-        </div>
-        <div className="flex flex-col gap-1 rounded-lg bg-surface-container p-3">
-          <dt className="text-body-small text-on-surface-variant">{t('escape.time.label')}</dt>
-          <dd className="text-title-medium text-on-surface tabular-nums">{formatTime(state.timeMs)}</dd>
-        </div>
-      </dl>
-      {/* The badge of the version played (D-310), then the three with their downloads */}
-      <InlineAlert tone="success" title={t('escape.badges.new', { badge: t(`escape.badges.short.${badge}`) })}>
-        {t('escape.badges.earnedBody', { version: t(`escape.versions.${VERSIONS[versionOf(state)]}.title`).toLowerCase() })}
-      </InlineAlert>
+    // Sections 32 px apart (--space-section, 2.4) and 8 to 16 px inside each one (D-311)
+    <section aria-labelledby="exit-title" className={cn(card, 'gap-(--space-section)')}>
+      <div className="@container flex flex-col gap-4">
+        <h2 id="exit-title" className="text-headline-small text-on-surface">
+          {t('escape.exit.title')}
+        </h2>
+        <p className="text-body-large text-on-surface">{t('escape.exit.body')}</p>
+        {/* Phones: one block with a row per datum (label left, value right); wider: three tiles (D-311) */}
+        <dl className="flex flex-col divide-y divide-outline-variant rounded-lg bg-surface-container @md:grid @md:grid-cols-3 @md:gap-3 @md:divide-y-0 @md:bg-transparent">
+          <div className="flex items-baseline justify-between gap-3 px-3 py-2.5 @md:flex-col @md:items-start @md:justify-start @md:gap-1 @md:rounded-lg @md:bg-surface-container @md:p-3">
+            <dt className="text-body-small text-on-surface-variant">{t('escape.exit.seal')}</dt>
+            <dd className="text-title-medium text-on-surface">{t(`escape.seals.${seal}`)}</dd>
+          </div>
+          <div className="flex items-baseline justify-between gap-3 px-3 py-2.5 @md:flex-col @md:items-start @md:justify-start @md:gap-1 @md:rounded-lg @md:bg-surface-container @md:p-3">
+            <dt className="text-body-small text-on-surface-variant">{t('escape.hintsUsed')}</dt>
+            <dd className="text-title-medium text-on-surface tabular-nums">{state.hintsUsed}</dd>
+          </div>
+          <div className="flex items-baseline justify-between gap-3 px-3 py-2.5 @md:flex-col @md:items-start @md:justify-start @md:gap-1 @md:rounded-lg @md:bg-surface-container @md:p-3">
+            <dt className="text-body-small text-on-surface-variant">{t('escape.time.label')}</dt>
+            <dd className="text-title-medium text-on-surface tabular-nums">{formatTime(state.timeMs)}</dd>
+          </div>
+        </dl>
+        {/* The badge of the version played (D-310) */}
+        <InlineAlert tone="success" title={t('escape.badges.new', { badge: t(`escape.badges.short.${badge}`) })}>
+          {t('escape.badges.earnedBody', { version: t(`escape.versions.${VERSIONS[versionOf(state)]}.title`).toLowerCase() })}
+        </InlineAlert>
+      </div>
       <section aria-labelledby="badges-title" className="flex flex-col gap-3">
         <h3 id="badges-title" className="text-title-medium text-on-surface">
           {t('escape.badges.title')}
         </h3>
         <BadgeStrip badges={state.badges} highlight={badge} />
       </section>
-      <VersionPicker value={version} onChange={onVersion} badges={state.badges} />
-      <Button variant="outlined" leadingIcon="restart_alt" className="w-full medium:w-auto medium:self-end" onClick={onAgain}>
-        {t('escape.again')}
-      </Button>
+      <div className="flex flex-col gap-4">
+        <VersionPicker value={version} onChange={onVersion} badges={state.badges} />
+        <Button variant="outlined" leadingIcon="restart_alt" className="w-full medium:w-auto medium:self-end" onClick={onAgain}>
+          {t('escape.again')}
+        </Button>
+      </div>
       <ListLinkRow to="/app/learn" icon="school" title={t('escape.backToLearn')} detail={t('escape.backToLearnDetail')} />
     </section>
   );

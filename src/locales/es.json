@@ -4047,6 +4047,11 @@
     },
     "patterns": [
       [
+        "D-311",
+        "Secciones dentro de una tarjeta larga",
+        "32 px entre secciones y de 8 a 16 px dentro de cada una. Una fila con un objeto y su acción: el objeto a la izquierda, el texto al medio y la acción a la derecha desde tablet; en celular, la acción debajo y a todo el ancho."
+      ],
+      [
         "D-310",
         "Elegir una versión con su recompensa",
         "Tarjetas de opción con qué cambia y qué insignia dan; la elegida en primary-container con borde e ícono de radio relleno. Las insignias ganadas se descargan; las que faltan dicen cómo obtenerlas."
@@ -4921,7 +4926,8 @@
       "svgLine": "Escape room \"Tu primer sueldo\" · versión {{version}}",
       "svgFoot": "Alcancía · Simulador de finanzas personales · {{date}}",
       "new": "Ganaste la insignia de {{badge}}",
-      "title": "Tus insignias"
+      "title": "Tus insignias",
+      "pending": "Pendiente"
     },
     "backToLearn": "Volver a Aprender",
     "backToLearnDetail": "Tu mapa de niveles y tus logros",
