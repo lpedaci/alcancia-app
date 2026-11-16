@@ -139,7 +139,7 @@ function MissionRunner({ def }: { def: MissionDef & { steps: MissionStep[] } }) 
               {def.practiceOnly ? t('wallet.mission.practiceOnlyNote') : done ? t('wallet.mission.replayNote') : t('wallet.mission.ownNote')}
             </p>
             {done && <InlineAlert tone="success">{t('wallet.mission.alreadyDone')}</InlineAlert>}
-            <Button className="self-end" leadingIcon={done ? 'replay' : 'play_arrow'} onClick={begin}>
+            <Button className="w-full medium:w-auto medium:self-end" leadingIcon={done ? 'replay' : 'play_arrow'} onClick={begin}>
               {done ? t('wallet.mission.replay') : t('wallet.mission.start')}
             </Button>
           </section>
@@ -380,7 +380,7 @@ function StepBody({
           {kicker('touch_app', t('wallet.mission.actionTitle'))}
           <p className="text-title-large text-on-surface">{fillText(step.instruction, run)}</p>
           {!result?.done && (
-            <Button className="self-end" leadingIcon="touch_app" onClick={() => onAnswer()}>
+            <Button className="w-full medium:w-auto medium:self-end" leadingIcon="touch_app" onClick={() => onAnswer()}>
               {step.button}
             </Button>
           )}
@@ -413,7 +413,7 @@ function StepBody({
           />
           {step.kind === 'decision' && locked && <p className="text-body-medium text-on-surface-variant">{t('wallet.mission.decisionFinal')}</p>}
           {!locked && (
-            <Button type="submit" variant={result?.done ? 'outlined' : 'filled'} className="self-end" leadingIcon="check">
+            <Button type="submit" variant={result?.done ? 'outlined' : 'filled'} className="w-full medium:w-auto medium:self-end" leadingIcon="check">
               {step.kind === 'decision' && result?.done ? t('wallet.mission.change') : t('wallet.mission.answer')}
             </Button>
           )}
@@ -440,7 +440,7 @@ function StepBody({
             error={tried && !amount.trim() ? t('wallet.mission.amountMissing') : undefined}
           />
           {!result?.correct && (
-            <Button type="submit" className="self-end" leadingIcon="calculate">
+            <Button type="submit" className="w-full medium:w-auto medium:self-end" leadingIcon="calculate">
               {t('wallet.mission.check')}
             </Button>
           )}
@@ -483,7 +483,7 @@ function StepBody({
             ))}
           </fieldset>
           {!result?.correct && (
-            <Button type="submit" className="self-end" leadingIcon="check">
+            <Button type="submit" className="w-full medium:w-auto medium:self-end" leadingIcon="check">
               {t('wallet.mission.answer')}
             </Button>
           )}
@@ -511,12 +511,12 @@ function StepBody({
           {run.finished ? (
             <>
               <p className="text-body-large text-on-surface">{t('wallet.mission.doneBody')}</p>
-              <Button variant="outlined" className="self-end" leadingIcon="replay" onClick={onReplay}>
+              <Button variant="outlined" className="w-full medium:w-auto medium:self-end" leadingIcon="replay" onClick={onReplay}>
                 {t('wallet.mission.replay')}
               </Button>
             </>
           ) : allMet ? (
-            <Button className="self-end" leadingIcon="task_alt" onClick={onComplete}>
+            <Button className="w-full medium:w-auto medium:self-end" leadingIcon="task_alt" onClick={onComplete}>
               {t('wallet.mission.complete')}
             </Button>
           ) : (

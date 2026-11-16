@@ -184,7 +184,7 @@ function Intro({ onStart }: { onStart: () => void }) {
         ))}
       </ul>
       <p className="text-body-small text-on-surface-variant">{t('escape.credits')}</p>
-      <Button size="m" trailingIcon="arrow_forward" className="self-end md:h-10 md:px-4 md:text-label-large" onClick={onStart}>
+      <Button size="m" trailingIcon="arrow_forward" className="w-full medium:w-auto medium:self-end md:h-10 md:px-4 md:text-label-large" onClick={onStart}>
         {t('escape.start')}
       </Button>
     </section>
@@ -408,7 +408,7 @@ function RoomView({
           <div className={card}>
             <QuestionView question={room.before} value={beforeAnswer} onChange={setBeforeAnswer} disabled={switched} idPrefix="esc-before" />
             {!switched && (
-              <Button className="self-end" disabled={!isAnswered(room.before, beforeAnswer)} onClick={checkBefore}>
+              <Button className="w-full medium:w-auto medium:self-end" disabled={!isAnswered(room.before, beforeAnswer)} onClick={checkBefore}>
                 {t('escape.check')}
               </Button>
             )}
@@ -421,7 +421,7 @@ function RoomView({
             {!switched && <InlineAlert tone="info">{t('escape.lockOff')}</InlineAlert>}
             <QuestionView question={room.lock} value={answer} onChange={setAnswer} disabled={!switched} idPrefix="esc-lock" />
             {switched && (
-              <Button className="self-end" leadingIcon="key" disabled={!isAnswered(room.lock, answer)} onClick={tryLock}>
+              <Button className="w-full medium:w-auto medium:self-end" leadingIcon="key" disabled={!isAnswered(room.lock, answer)} onClick={tryLock}>
                 {t('escape.try')}
               </Button>
             )}
@@ -444,7 +444,7 @@ function RoomView({
                   variant="tonal"
                   size="xs"
                   leadingIcon="lightbulb"
-                  className="self-start"
+                  className="w-full medium:w-auto medium:self-start"
                   disabledReason={!free && state.keys < 1 ? t('escape.noKeys') : undefined}
                   onClick={hint}
                 >
@@ -465,12 +465,12 @@ function RoomView({
             <ListLinkRow to={`/app/learn/guides/${room.guide}`} icon="menu_book" title={t('escape.toGuide')} detail={t('escape.toGuideDetail')} />
             <div className="flex flex-col gap-2 border-t border-outline-variant pt-3">
               <TextArea label={room.reflection} helperText={t('escape.reflectionHelp')} optional value={reflection} onChange={(e) => setReflection(e.target.value)} />
-              <Button variant="outlined" size="xs" className="self-end" onClick={saveReflection}>
+              <Button variant="outlined" size="xs" className="w-full medium:w-auto medium:self-end" onClick={saveReflection}>
                 {t('escape.reflectionSave')}
               </Button>
               <div aria-live="polite">{saved && <p className="text-body-small text-on-surface-variant">{saved}</p>}</div>
             </div>
-            <Button className="self-end" trailingIcon="arrow_forward" onClick={next}>
+            <Button className="w-full medium:w-auto medium:self-end" trailingIcon="arrow_forward" onClick={next}>
               {index + 1 < ROOMS.length ? t('escape.nextRoom') : t('escape.toDoor')}
             </Button>
           </div>
@@ -514,7 +514,7 @@ function Door({ state, setState, setMood }: { state: EscapeState; setState: (u: 
         ))}
       </ul>
       <TextField label={t('escape.door.label')} helperText={t('escape.door.help', { n: w.word.length })} value={text} onChange={(e) => setText(e.target.value)} autoComplete="off" />
-      <Button className="self-end" leadingIcon="door_open" disabled={!text.trim()} onClick={tryIt}>
+      <Button className="w-full medium:w-auto medium:self-end" leadingIcon="door_open" disabled={!text.trim()} onClick={tryIt}>
         {t('escape.door.open')}
       </Button>
       <div aria-live="polite">{msg && <InlineAlert tone="info">{msg}</InlineAlert>}</div>

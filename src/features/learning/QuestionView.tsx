@@ -194,7 +194,7 @@ export function QuestionView({
 export function CheckButton({ onClick, disabled }: { onClick: () => void; disabled?: boolean }) {
   const { t } = useTranslation();
   return (
-    <Button variant="tonal" className="self-end" leadingIcon="check" onClick={onClick} disabled={disabled}>
+    <Button variant="tonal" className="w-full medium:w-auto medium:self-end" leadingIcon="check" onClick={onClick} disabled={disabled}>
       {t('learn.q.check')}
     </Button>
   );
