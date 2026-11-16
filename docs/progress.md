@@ -124,5 +124,6 @@
 | 16/11/2026 | 31 · Constructor de lecciones (F14) | Constructor para tutoría y L&D con lecciones de 6 tipos de bloque y 4 tipos de pregunta, publicación por cohorte, lecciones en Aprender sin bloqueo por nivel, y tarjetas en el momento justo que se suman al catálogo (D-317) | Hecho |
 | 16/11/2026 | 31 · Constructor, los 9 tipos | Ordenar, unir pares, clasificar, caso con decisiones (lineal) y ejercicio con herramienta en el constructor (D-318) | Hecho |
 | 16/11/2026 | 32 · Sesiones con el tutor (F13) | Agenda del tutor con pedidos 1:1, próximos, pasados con grabación simulada y formulario; encuentros, calendario .ics, grabaciones y pedido 1:1 para quien participa (D-319) | Hecho; D-319 confirmada |
-| 16/11/2026 | 33 · Mi privacidad (F16) | Qué hay sobre la persona y dónde, descarga de sus datos y pedidos de acceso, corrección y borrado con los plazos de la Ley 25.326 (D-320) | Hecho; D-320 espera la confirmación de Lourdes |
+| 16/11/2026 | 33 · Mi privacidad (F16) | Qué hay sobre la persona y dónde, descarga de sus datos y pedidos de acceso, corrección y borrado con los plazos de la Ley 25.326 (D-320) | Hecho; D-320 confirmada |
+| 16/11/2026 | Ajuste de Lourdes | En el perfil, "Empezar de cero" y "Guardar límite" a todo el ancho en celular, como el resto de las acciones (D-308) | Hecho |
 | (pendiente) | Cierre de la fase B | Después del informe final (`docs/review.md`, paso 36), crear la Release `v1.0.0` en GitHub con notas que resuman las funcionalidades (D-306). Es el último paso del plan | Pendiente |

@@ -149,7 +149,7 @@ export function ProfilePage() {
                 error={limitError}
                 className="min-w-0 flex-1 basis-48"
               />
-              <Button variant="tonal" className="mt-7 shrink-0" onClick={saveOwnLimit}>
+              <Button variant="tonal" className="w-full shrink-0 medium:mt-7 medium:w-auto" onClick={saveOwnLimit}>
                 {t('profile.security.limitSave')}
               </Button>
             </div>
@@ -225,7 +225,7 @@ export function ProfilePage() {
             {t('profile.reset.title')}
           </h2>
           <p className="text-body-medium text-on-surface-variant">{t('profile.reset.body')}</p>
-          <Button variant="outlined" className="self-start" leadingIcon="restart_alt" onClick={() => setConfirmReset(true)}>
+          <Button variant="outlined" className="w-full medium:w-auto medium:self-start" leadingIcon="restart_alt" onClick={() => setConfirmReset(true)}>
             {t('profile.reset.action')}
           </Button>
         </section>
