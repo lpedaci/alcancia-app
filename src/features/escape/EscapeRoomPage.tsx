@@ -18,10 +18,12 @@ import { cn } from '@/lib/utils';
 import { readLocal, writeLocal } from '@/store/local-store';
 import { useCurrentUser } from '@/store/session-store';
 import { EscapeObjectView } from './EscapeObjects';
+import { BadgeStrip, VersionPicker } from './EscapeVersions';
 import {
   type EscapeObject,
   type EscapeRoom,
   type EscapeState,
+  BADGES,
   expectedError,
   failTry,
   formatTime,
@@ -29,14 +31,19 @@ import {
   lettersOf,
   newGame,
   nextRoom,
+  nextVersion,
   openDoor,
   openHint,
   reflect,
   ROOMS,
+  roomsOf,
   sealOf,
   solveRoom,
   switchOn,
   tryDoor,
+  type Version,
+  VERSIONS,
+  versionOf,
   word,
 } from './engine';
 
@@ -57,6 +64,8 @@ export function EscapeRoomPage() {
   const [mood, setMood] = useState<{ state: FuerteState; key: string }>({ state: 'greeting', key: 'hello' });
   const [confirmReset, setConfirmReset] = useState(false);
   const [confirmAgain, setConfirmAgain] = useState(false);
+  // The version chosen for the next game (D-310): the first one whose badge is still missing
+  const [version, setVersion] = useState<Version>(() => nextVersion(readLocal(personId).escape?.badges ?? []));
   const title = t('escape.title');
 
   const setState = (update: (s: EscapeState) => EscapeState) =>
@@ -90,7 +99,7 @@ export function EscapeRoomPage() {
   }
 
   const start = () => {
-    const next = newGame(Math.random, state?.badges ?? []);
+    const next = newGame(Math.random, state?.badges ?? [], version);
     writeLocal(personId, (d) => ({ ...d, escape: next }));
     setStateRaw(next);
     setMood({ state: 'greeting', key: 'start' });
@@ -106,7 +115,10 @@ export function EscapeRoomPage() {
       <div className="flex flex-col gap-(--space-bento-gap)">
         <header className="flex flex-wrap items-end justify-between gap-3">
           <div className="flex min-w-0 flex-col gap-1">
-            <p className="text-label-large text-primary">{t('escape.kicker')}</p>
+            <p className="text-label-large text-primary">
+              {t('escape.kicker')}
+              {state && state.current <= ROOMS.length && ` · ${t('escape.versions.chip', { version: t(`escape.versions.${VERSIONS[versionOf(state)]}.title`).toLowerCase() })}`}
+            </p>
             <h1 className="text-headline-medium text-on-surface">{title}</h1>
           </div>
           {state && (
@@ -119,15 +131,22 @@ export function EscapeRoomPage() {
         </header>
 
         {!state ? (
-          <Intro onStart={start} />
+          <Intro onStart={start} version={version} onVersion={setVersion} />
         ) : (
           <>
             <Progress state={state} onToggleTime={() => setState((s) => ({ ...s, timeVisible: !s.timeVisible }))} />
             {state.current < ROOMS.length && (
-              <RoomView key={ROOMS[state.current]!.id} room={ROOMS[state.current]!} index={state.current} state={state} setState={setState} setMood={setMood} />
+              <RoomView
+                key={`${versionOf(state)}-${ROOMS[state.current]!.id}`}
+                room={roomsOf(versionOf(state))[state.current]!}
+                index={state.current}
+                state={state}
+                setState={setState}
+                setMood={setMood}
+              />
             )}
             {state.current === ROOMS.length && <Door state={state} setState={setState} setMood={setMood} />}
-            {state.current > ROOMS.length && <Exit state={state} onAgain={() => setConfirmAgain(true)} />}
+            {state.current > ROOMS.length && <Exit state={state} version={version} onVersion={setVersion} onAgain={() => setConfirmAgain(true)} />}
           </>
         )}
       </div>
@@ -144,7 +163,7 @@ export function EscapeRoomPage() {
         open={confirmAgain}
         onOpenChange={setConfirmAgain}
         title={t('escape.againTitle')}
-        description={t('escape.againBody')}
+        description={t('escape.againBody', { version: t(`escape.versions.${VERSIONS[version]}.title`).toLowerCase() })}
         confirmLabel={t('escape.again')}
         destructive={false}
         onConfirm={start}
@@ -153,7 +172,7 @@ export function EscapeRoomPage() {
   );
 }
 
-function Intro({ onStart }: { onStart: () => void }) {
+function Intro({ onStart, version, onVersion }: { onStart: () => void; version: Version; onVersion: (v: Version) => void }) {
   const { t } = useTranslation();
   const facts = [
     { icon: 'door_front' as const, key: 'rooms' },
@@ -183,6 +202,7 @@ function Intro({ onStart }: { onStart: () => void }) {
           </li>
         ))}
       </ul>
+      <VersionPicker value={version} onChange={onVersion} badges={[]} />
       <p className="text-body-small text-on-surface-variant">{t('escape.credits')}</p>
       <Button size="m" trailingIcon="arrow_forward" className="w-full medium:w-auto medium:self-end md:h-10 md:px-4 md:text-label-large" onClick={onStart}>
         {t('escape.start')}
@@ -514,9 +534,10 @@ function Door({ state, setState, setMood }: { state: EscapeState; setState: (u: 
   );
 }
 
-function Exit({ state, onAgain }: { state: EscapeState; onAgain: () => void }) {
+function Exit({ state, version, onVersion, onAgain }: { state: EscapeState; version: Version; onVersion: (v: Version) => void; onAgain: () => void }) {
   const { t } = useTranslation();
   const seal = sealOf(state.hintsUsed);
+  const badge = BADGES[versionOf(state)]!;
   return (
     <section aria-labelledby="exit-title" className={card}>
       <h2 id="exit-title" className="text-headline-small text-on-surface">
@@ -537,19 +558,20 @@ function Exit({ state, onAgain }: { state: EscapeState; onAgain: () => void }) {
           <dd className="text-title-medium text-on-surface tabular-nums">{formatTime(state.timeMs)}</dd>
         </div>
       </dl>
-      {/* Badges: bronze for the five rooms in their initial version (the other two versions come next) */}
-      <div className="flex items-center gap-3 rounded-lg bg-tertiary-container p-4 text-on-tertiary-container">
-        <Icon name="workspace_premium" size={24} className="shrink-0" />
-        <span className="flex flex-col">
-          <span className="text-title-small">{t('escape.badges.bronze')}</span>
-          <span className="text-body-small">{t('escape.badges.bronzeBody')}</span>
-        </span>
-      </div>
-      <div className="flex flex-wrap justify-end gap-2">
-        <Button variant="outlined" leadingIcon="restart_alt" onClick={onAgain}>
-          {t('escape.again')}
-        </Button>
-      </div>
+      {/* The badge of the version played (D-310), then the three with their downloads */}
+      <InlineAlert tone="success" title={t('escape.badges.new', { badge: t(`escape.badges.short.${badge}`) })}>
+        {t('escape.badges.earnedBody', { version: t(`escape.versions.${VERSIONS[versionOf(state)]}.title`).toLowerCase() })}
+      </InlineAlert>
+      <section aria-labelledby="badges-title" className="flex flex-col gap-3">
+        <h3 id="badges-title" className="text-title-medium text-on-surface">
+          {t('escape.badges.title')}
+        </h3>
+        <BadgeStrip badges={state.badges} highlight={badge} />
+      </section>
+      <VersionPicker value={version} onChange={onVersion} badges={state.badges} />
+      <Button variant="outlined" leadingIcon="restart_alt" className="w-full medium:w-auto medium:self-end" onClick={onAgain}>
+        {t('escape.again')}
+      </Button>
       <ListLinkRow to="/app/learn" icon="school" title={t('escape.backToLearn')} detail={t('escape.backToLearnDetail')} />
     </section>
   );

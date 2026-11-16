@@ -4047,6 +4047,11 @@
     },
     "patterns": [
       [
+        "D-310",
+        "Elegir una versión con su recompensa",
+        "Tarjetas de opción con qué cambia y qué insignia dan; la elegida en primary-container con borde e ícono de radio relleno. Las insignias ganadas se descargan; las que faltan dicen cómo obtenerlas."
+      ],
+      [
         "D-309",
         "Datos de avance compactos",
         "En celular, chips con ícono y valor, con la etiqueta para lectores de pantalla; en tablet y escritorio, ícono, etiqueta y valor en una línea con divisores."
@@ -4853,9 +4858,9 @@
     "reset": "Empezar de cero",
     "resetTitle": "¿Empezar de cero?",
     "resetBody": "Se borran tu avance, tus reflexiones y tus insignias del escape room. No se puede deshacer.",
-    "again": "Volver a jugar",
+    "again": "Jugar otra partida",
     "againTitle": "¿Jugar una partida nueva?",
-    "againBody": "Empiezas de nuevo con otra palabra en la puerta. Tus insignias se conservan.",
+    "againBody": "Empiezas de nuevo en la versión {{version}}, con otra palabra en la puerta. Tus insignias se conservan.",
     "roomOf": "Sala {{n}} de {{total}} · {{place}}",
     "inspectTitle": "Inspecciona los objetos",
     "inspect": "Inspeccionar",
@@ -4901,7 +4906,22 @@
     },
     "badges": {
       "bronze": "Insignia de bronce",
-      "bronzeBody": "Las cinco salas resueltas en su versión inicial. Las versiones intermedia y avanzada dan plata y oro."
+      "silver": "Insignia de plata",
+      "gold": "Insignia de oro",
+      "short": {
+        "bronze": "bronce",
+        "silver": "plata",
+        "gold": "oro"
+      },
+      "list": "Tus insignias del escape room",
+      "earnedBody": "Las cinco salas resueltas en su versión {{version}}.",
+      "missingBody": "Resuelve las cinco salas en su versión {{version}}.",
+      "download": "Descargar",
+      "fileName": "alcancia-escape-room-insignia-{{badge}}",
+      "svgLine": "Escape room \"Tu primer sueldo\" · versión {{version}}",
+      "svgFoot": "Alcancía · Simulador de finanzas personales · {{date}}",
+      "new": "Ganaste la insignia de {{badge}}",
+      "title": "Tus insignias"
     },
     "backToLearn": "Volver a Aprender",
     "backToLearnDetail": "Tu mapa de niveles y tus logros",
@@ -4925,7 +4945,26 @@
       "deductions": "Deducciones",
       "toCalculate": "A calcular",
       "gross": "Total bruto",
-      "stain": "Mancha de café"
+      "stain": "Mancha de café",
+      "noDeductions": "Sin descuentos"
+    },
+    "versions": {
+      "legend": "Elige la versión",
+      "initial": {
+        "title": "Inicial",
+        "body": "Las cuentas del primer sueldo, de a una."
+      },
+      "intermediate": {
+        "title": "Intermedia",
+        "body": "Horas extras, dos gastos hormiga y aumentos que se acumulan."
+      },
+      "advanced": {
+        "title": "Avanzada",
+        "body": "Sumas no remunerativas, totales de cuotas y rendimiento contra inflación."
+      },
+      "earned": "Ya tienes la insignia de {{badge}}",
+      "gives": "Da la insignia de {{badge}}",
+      "chip": "Versión {{version}}"
     }
   },
   "rights": {

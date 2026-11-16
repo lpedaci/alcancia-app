@@ -8,7 +8,8 @@ import { parseDecimalInput } from '@/lib/money';
  * Escape room "Tu primer sueldo" (F18, step 28, D-304): the rules of the original game, as pure
  * functions. Five rooms in order, keys for hints (3 to start, +1 per reflection, a free hint after
  * 3 failed tries in a row), one letter of the door word per room, a seal by hints used and the
- * bronze badge for the five rooms in their initial version. No time limit and no way to lose.
+ * badge of the version played: bronze, silver or gold for the five rooms in their initial, intermediate
+ * or advanced version (D-310). No time limit and no way to lose.
  */
 export interface EscapeObject {
   id: string;
@@ -20,6 +21,8 @@ export interface EscapeObject {
   earnings?: { label: string; unit: string; value: string }[];
   deductions?: { label: string; unit: string }[];
   gross?: string;
+  /** Advanced payslip: sums that are paid but carry no deductions. */
+  nonRemunerative?: { label: string; unit: string; value: string }[];
   stained?: string;
   messages?: { channel: string; from: string; text: string }[];
   icon: IconName;
@@ -48,15 +51,33 @@ export interface EscapeRoom {
   debrief: string[];
   guide: string;
   reflection: string;
+  /** Intermediate and advanced versions: only the fields that change (D-310, as in the original). */
+  versions?: Partial<Pick<EscapeRoom, 'scene' | 'objects' | 'before' | 'lock' | 'errors' | 'hints' | 'debrief'>>[];
 }
 
 export const ROOMS = data.rooms as unknown as EscapeRoom[];
+/** Initial, intermediate and advanced (D-310). */
+export const VERSIONS = ['initial', 'intermediate', 'advanced'] as const;
+export type Version = 0 | 1 | 2;
+/** The rooms of a version: each room with the fields of that version over the initial ones. */
+export function roomsOf(version: Version): EscapeRoom[] {
+  return ROOMS.map((room) => (version === 0 ? room : { ...room, ...room.versions?.[version - 1] }));
+}
 export const ECONOMY = data.economy;
 export const WORDS = data.words;
 export type Seal = 'gold' | 'silver' | 'bronze';
 export type Badge = 'bronze' | 'silver' | 'gold';
+/** The badge of each version: bronze, silver and gold. */
+export const BADGES: Badge[] = ['bronze', 'silver', 'gold'];
+/** The first version whose badge is still missing (the advanced one when all are earned). */
+export function nextVersion(badges: Badge[]): Version {
+  const missing = BADGES.findIndex((b) => !badges.includes(b));
+  return (missing === -1 ? 2 : missing) as Version;
+}
 
 export interface EscapeState {
+  /** The version chosen at the start (D-310); missing in games saved before it, so read with versionOf. */
+  version?: Version;
   wordIndex: number;
   /** Index of the room being played; ROOMS.length is the door, ROOMS.length + 1 the exit. */
   current: number;
@@ -76,8 +97,11 @@ export interface EscapeState {
   badges: Badge[];
 }
 
-export function newGame(random: () => number = Math.random, badges: Badge[] = []): EscapeState {
+export const versionOf = (state: EscapeState): Version => state.version ?? 0;
+
+export function newGame(random: () => number = Math.random, badges: Badge[] = [], version: Version = 0): EscapeState {
   return {
+    version,
     wordIndex: Math.floor(random() * WORDS.length),
     current: 0,
     solved: [],
@@ -160,9 +184,10 @@ export function tryDoor(state: EscapeState, text: string): 'open' | 'anagram' | 
   return 'wrong';
 }
 
-/** The door opens: on to the exit, and the badge of the version played (the initial one, bronze). */
+/** The door opens: on to the exit, and the badge of the version played. */
 export function openDoor(state: EscapeState): EscapeState {
-  return { ...state, current: ROOMS.length + 1, badges: state.badges.includes('bronze') ? state.badges : [...state.badges, 'bronze'] };
+  const badge = BADGES[versionOf(state)]!;
+  return { ...state, current: ROOMS.length + 1, badges: state.badges.includes(badge) ? state.badges : [...state.badges, badge] };
 }
 
 export const sealOf = (hintsUsed: number): Seal => (data.seals.find((s) => hintsUsed <= s.maxHints)?.id ?? 'bronze') as Seal;

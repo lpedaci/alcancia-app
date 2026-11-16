@@ -108,8 +108,33 @@ for (const width of [375, 768, 1280]) {
     await shot('door');
     await page.getByRole('button', { name: 'Abrir la puerta' }).press('Enter');
     await expect(page.getByRole('heading', { name: 'Saliste' })).toBeVisible();
-    await expect(page.getByText('Insignia de bronce')).toBeVisible();
+    await expect(page.getByText('Ganaste la insignia de bronce')).toBeVisible();
     await axe(page);
     await shot('exit');
   });
 }
+
+// D-310: the advanced version, chosen before playing, changes the rooms (the payslip has a
+// non-remunerative sum) and is announced in the page kicker
+test('escape room advanced version can be chosen and its first lock opened @ 375px', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 900 });
+  await prepareSession(page, PAGES.find((p) => p.id === 'p9-escape-mariana')!);
+  await page.goto('/#/app/learn/escape');
+  await page.locator('label', { hasText: 'Avanzada' }).click();
+  await expect(page.getByRole('radio', { name: /Avanzada/ })).toBeChecked();
+  await axe(page);
+  await page.getByRole('button', { name: 'Entrar a la oficina' }).click();
+  await expect(page.getByText('Escape room · Versión avanzada')).toBeVisible();
+  await page.getByRole('button', { name: /Inspeccionar: Recibo de sueldo/ }).click();
+  await expect(page.getByRole('dialog').getByText('Suma no remunerativa (acuerdo)')).toBeVisible();
+  await axe(page);
+  await page.keyboard.press('Escape');
+  await page.getByLabel('¿Cuál es tu sueldo neto?').fill('913000');
+  await page.getByRole('button', { name: 'Probar' }).press('Enter');
+  await expect(page.getByText('Le aplicaste los descuentos también a la suma no remunerativa.', { exact: false })).toBeVisible();
+  await page.getByLabel('¿Cuál es tu sueldo neto?').fill('930000');
+  await page.getByRole('button', { name: 'Probar' }).press('Enter');
+  await expect(page.getByText('Abriste el candado. Ganaste la letra', { exact: false })).toBeVisible();
+  await axe(page);
+  await page.screenshot({ path: 'docs/screenshots/escape-advanced-375.jpg', fullPage: true, quality: 70, type: 'jpeg' });
+});

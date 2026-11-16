@@ -8,8 +8,10 @@ import {
   newGame,
   openDoor,
   openHint,
+  nextVersion,
   reflect,
   ROOMS,
+  roomsOf,
   sealOf,
   solveRoom,
   tryDoor,
@@ -96,6 +98,63 @@ describe('escape room rules', () => {
     s = openDoor(s);
     expect(s.badges).toEqual(['bronze']);
     expect(newGame(fixed, s.badges).badges).toEqual(['bronze']); // badges are kept
+  });
+
+  it('has three versions per room, and every lock and challenge of each one accepts its right answer (D-310)', () => {
+    const answers: Record<string, string[]> = {
+      'esc-5-messages-2': ['official', 'call', 'check', 'confirm'],
+      'esc-5-messages-3': ['official', 'check', 'drop', 'balance'],
+    };
+    const right = (q: (typeof ROOMS)[number]['lock']) => {
+      if (answers[q.id]) return answers[q.id];
+      switch (q.type) {
+        case 'numeric':
+          return q.numeric.answer;
+        case 'single':
+          return q.correctOptionIds[0];
+        case 'categorize':
+          return Object.fromEntries(q.categorize.items.map((i) => [i.id, i.categoryId]));
+        case 'ordering':
+          return q.ordering.correctOrder;
+        default:
+          return undefined;
+      }
+    };
+    for (const room of ROOMS) expect(room.versions, room.id).toHaveLength(2);
+    for (const version of [1, 2] as const) {
+      for (const room of roomsOf(version)) {
+        expect(isCorrect(room.lock, right(room.lock)), `${version} ${room.lock.id}`).toBe(true);
+        if (room.before) expect(isCorrect(room.before, right(room.before)), `${version} ${room.before.id}`).toBe(true);
+      }
+    }
+    // Hand-checked amounts of the original (escape-versiones.js)
+    const answer = (v: 1 | 2, i: number) => {
+      const q = roomsOf(v)[i]!.lock;
+      return q.type === 'numeric' ? q.numeric.answer : q.type;
+    };
+    expect([0, 1, 2, 3].map((i) => answer(1, i))).toEqual(['996000', '88000', '336000', '21000']); // 1.200.000 − 17 %; (2.500 + 1.500) × 22; 12 × 28.000; 100.000 × 1,1 × 1,1 − 100.000
+    expect([0, 1, 2, 3].map((i) => answer(2, i))).toEqual(['930000', '114000', '34000', '6000']); // 1.000.000 − 170.000 + 100.000; 3.000 × 22 + 12.000 × 4; 430.000 − 396.000; 110.000 − 104.000
+    // A version keeps the fields it does not change
+    expect(roomsOf(1)[2]!.objects).toEqual(ROOMS[2]!.objects);
+    expect(roomsOf(2)[4]!.guide).toBe(ROOMS[4]!.guide);
+  });
+
+  it('explains the expected mistakes of each version', () => {
+    expect(expectedError(roomsOf(1)[0]!, '913000')).toMatch(/horas extras/);
+    expect(expectedError(roomsOf(2)[0]!, '913000')).toMatch(/no remunerativa/);
+    expect(expectedError(roomsOf(1)[3]!, '20000')).toMatch(/precio ya aumentado/);
+    expect(expectedError(roomsOf(2)[3]!, '14000')).toMatch(/rendimiento/);
+  });
+
+  it('gives the badge of the version played, and suggests the first one still missing', () => {
+    let s = newGame(fixed, ['bronze'], 2);
+    for (const room of ROOMS) s = solveRoom(s, room.id);
+    expect(openDoor(s).badges).toEqual(['bronze', 'gold']);
+    expect(openDoor({ ...s, version: undefined }).badges).toEqual(['bronze']); // games saved before D-310
+    expect(nextVersion([])).toBe(0);
+    expect(nextVersion(['bronze'])).toBe(1);
+    expect(nextVersion(['bronze', 'gold'])).toBe(1);
+    expect(nextVersion(['bronze', 'silver', 'gold'])).toBe(2);
   });
 
   it('gives the seal by hints used', () => {

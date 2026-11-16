@@ -34,7 +34,8 @@ const paper = 'rounded-md border border-outline-variant bg-surface-container-low
 function Receipt({ object }: { object: EscapeObject }) {
   const { t } = useTranslation();
   return (
-    <figure className={cn(paper, 'flex flex-col gap-3 p-4 text-body-small')}>
+    // Narrow cards (D-310): the unit goes under the concept, so the amounts keep their width
+    <figure className={cn(paper, '@container flex flex-col gap-3 p-4 text-body-small')}>
       <header className="flex flex-wrap items-start justify-between gap-2 border-b border-outline-variant pb-3">
         <span className="flex flex-col">
           <span className="text-title-small">{object.company}</span>
@@ -57,24 +58,30 @@ function Receipt({ object }: { object: EscapeObject }) {
         <thead>
           <tr className="border-y border-outline-variant text-label-small text-on-surface-variant uppercase">
             <th scope="col" className="py-1 font-medium">{t('escape.objects.concept')}</th>
-            <th scope="col" className="py-1 font-medium">{t('escape.objects.unit')}</th>
-            <th scope="col" className="py-1 text-right font-medium">{t('escape.objects.earnings')}</th>
-            <th scope="col" className="py-1 text-right font-medium">{t('escape.objects.deductions')}</th>
+            <th scope="col" className="hidden py-1 font-medium @md:table-cell">{t('escape.objects.unit')}</th>
+            <th scope="col" className="py-1 pl-2 text-right font-medium">{t('escape.objects.earnings')}</th>
+            <th scope="col" className="py-1 pl-2 text-right font-medium">{t('escape.objects.deductions')}</th>
           </tr>
         </thead>
         <tbody>
           {object.earnings?.map((e) => (
             <tr key={e.label}>
-              <td className="py-1">{e.label}</td>
-              <td className="py-1">{e.unit}</td>
+              <td className="py-1 pr-2">
+                {e.label}
+                <span className="block text-on-surface-variant @md:hidden">{e.unit}</span>
+              </td>
+              <td className="hidden py-1 @md:table-cell">{e.unit}</td>
               <td className="py-1 text-right">{e.value}</td>
               <td className="py-1" />
             </tr>
           ))}
           {object.deductions?.map((e) => (
             <tr key={e.label}>
-              <td className="py-1">{e.label}</td>
-              <td className="py-1">{e.unit}</td>
+              <td className="py-1 pr-2">
+                {e.label}
+                <span className="block text-on-surface-variant @md:hidden">{e.unit}</span>
+              </td>
+              <td className="hidden py-1 @md:table-cell">{e.unit}</td>
               <td className="py-1" />
               <td className="py-1 text-right text-on-surface-variant">{t('escape.objects.toCalculate')}</td>
             </tr>
@@ -82,12 +89,25 @@ function Receipt({ object }: { object: EscapeObject }) {
         </tbody>
         <tfoot>
           <tr className="border-t border-outline-variant">
-            <th scope="row" colSpan={2} className="py-1 text-left font-medium">
+            <th scope="row" className="py-1 text-left font-medium">
               {t('escape.objects.gross')}
             </th>
+            <td className="hidden @md:table-cell" />
             <td className="py-1 text-right font-medium">{object.gross}</td>
             <td />
           </tr>
+          {/* Advanced version: paid but outside the base of the deductions (D-310) */}
+          {object.nonRemunerative?.map((e) => (
+            <tr key={e.label} className="border-t border-dashed border-outline-variant">
+              <td className="py-1 pr-2">
+                {e.label}
+                <span className="block text-on-surface-variant @md:hidden">{e.unit}</span>
+              </td>
+              <td className="hidden py-1 @md:table-cell">{e.unit}</td>
+              <td className="py-1 text-right">{e.value}</td>
+              <td className="py-1 pl-2 text-right text-on-surface-variant">{t('escape.objects.noDeductions')}</td>
+            </tr>
+          ))}
         </tfoot>
       </table>
       {/* The net, under a coffee stain: the lock asks for it */}
