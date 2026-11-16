@@ -317,8 +317,9 @@ describe('locales', () => {
     for (const group of groups) {
       expect(keysOf(en[group]).sort(), group).toEqual(keysOf(es[group]).sort());
     }
-    // The rest falls back to Spanish until F17 (phase B).
-    expect(keysOf(en).every((k) => keysOf(es).includes(k))).toBe(true);
+    // Every English key exists in Spanish (a Set: the English bundle is complete since F17).
+    const spanish = new Set(keysOf(es));
+    expect(keysOf(en).filter((k) => !spanish.has(k))).toEqual([]);
   });
 
   it('Spanish texts follow the voice rules (CLAUDE.md 2.9)', () => {

@@ -3451,5 +3451,2135 @@
         "No taxes or fees."
       ]
     }
+  },
+  "sponsor": {
+    "subtitle": "Aggregate impact report · read only",
+    "intro": "How the program is going across the company: how many people take part, how they rate it, how much they learn and what they apply. These are aggregate figures: there is no data about any person.",
+    "print": "Print or save as PDF",
+    "kpi": {
+      "activeCaption": "Participants who already signed in",
+      "satisfaction": "Satisfaction",
+      "satisfactionCaption": "Average from 1 to 5 of the guides",
+      "learning": "Learning",
+      "learningCaption": "Points of improvement in Get to know you, at the start and at the end",
+      "behavior": "Budget made",
+      "behaviorCaption": "Reported at 30 days"
+    },
+    "csv": {
+      "download": "Download CSV",
+      "level": "Level",
+      "indicator": "Indicator",
+      "value": "Value",
+      "adoption": "Adoption",
+      "satisfaction": "Average satisfaction (1 to 5)",
+      "challenge": "Level {{n}} challenge: passed"
+    },
+    "privacy": "Only aggregate figures, calculated from the data. No group of fewer than {{threshold}} people is shown.",
+    "intro_education": "How the program is going across the institution: how many people take part, how they rate it, how much they learn and what they apply. These are aggregate figures: there is no data about any person.",
+    "intro_product": "How Hornero users learn with Alcancía: how many people take part, how they rate it, how much they learn and what they apply. These are aggregate figures: there is no data about any person."
+  },
+  "community": {
+    "card": {
+      "title": "Your cohort",
+      "noRanking": "No rankings: you see the progress of the whole cohort, never of each person.",
+      "open_one": "See the conversation ({{count}})",
+      "open_other": "See the conversations ({{count}})"
+    },
+    "goal": {
+      "title": "Group goal",
+      "intro": "A behavior the cohort aims to reach together, measured with learning data: a completed mission or a passed level challenge. You see the whole cohort's progress, with no rankings or names, and only with 5 people or more.",
+      "mission": "{{share}} of the cohort completes the mission “{{name}}”",
+      "level": "{{share}} of the cohort passes the level {{n}} challenge · {{name}}",
+      "due": "By {{date}}",
+      "progressLabel": "Group goal progress",
+      "progress": "{{share}} of {{goal}}",
+      "reached": "Goal reached",
+      "insufficient": "Progress shows when there are at least 5 active people in the cohort.",
+      "youDid": "You already added to this goal.",
+      "youCan": "You can still add to it: it is in Learn.",
+      "none": "Your cohort does not have a group goal yet.",
+      "create": "Propose goal",
+      "change": "Change goal",
+      "save": "Save goal",
+      "saved": "Goal saved",
+      "target": "What the cohort aims for",
+      "targetHelp": "A completed mission or a passed level challenge: learning data, never wallet data.",
+      "optionMission": "Complete the mission “{{name}}”",
+      "optionLevel": "Pass the level {{n}} challenge · {{name}}",
+      "share": "Share of the cohort",
+      "shareHelp": "Between 50 and 100, for example: 70",
+      "shareError": "Write a percentage between 50 and 100.",
+      "dueLabel": "Deadline",
+      "dueHelp": "A date from today on, for example: the cohort's end"
+    },
+    "page": {
+      "title": "Your cohort's space",
+      "intro": "Questions and answers among people in your cohort, moderated by your tutor. For sharing questions and learnings, not personal situations.",
+      "rules": "Do not share amounts or personal data: no salaries, balances, debts, emails or phone numbers. If a message has them, it is not posted.",
+      "threads": "Conversations in {{cohort}}",
+      "empty": "There are no conversations yet. You can start with a question.",
+      "none": "This space is for cohorts with a tutor. In your context you learn with Fuerte and the guides."
+    },
+    "form": {
+      "title": "New question",
+      "label": "Your question or learning",
+      "replyLabel": "Your answer",
+      "help": "Up to 600 characters, with no amounts or personal data. For example: how do you set savings aside right after payday?",
+      "anonymous": "Post without my name",
+      "anonymousHelp": "Your cohort and your tutor see \"Someone in your cohort\".",
+      "post": "Post",
+      "reply": "Reply",
+      "posted": "Question posted",
+      "replied": "Answer posted",
+      "errors": {
+        "empty": "Write your message.",
+        "tooLong": "Shorten it to 600 characters.",
+        "money": "Remove the amounts: the space is for concepts, not personal figures.",
+        "contact": "Remove emails and phone numbers.",
+        "account": "Remove CBU, CVU or account numbers."
+      }
+    },
+    "post": {
+      "you": "You",
+      "youAnonymous": "You (without your name)",
+      "anonymous": "Someone in your cohort",
+      "tutor": "{{name}} · Tutor",
+      "endorsed": "Highlighted by the tutor",
+      "hidden": "Hidden by the tutor: {{reason}}"
+    },
+    "mod": {
+      "title": "Community",
+      "intro": "Your cohorts' spaces. Reply, highlight good answers and hide what does not belong, with a reason the person sees. Anonymous posts stay anonymous.",
+      "cohort": "Cohort",
+      "endorse": "Highlight",
+      "unendorse": "Remove highlight",
+      "endorsed": "Answer highlighted",
+      "unendorsed": "Highlight removed",
+      "hide": "Hide",
+      "hideTitle": "Hide post",
+      "hideIntro": "It is no longer visible in the cohort. Whoever wrote it sees the reason.",
+      "hideConfirm": "Hide post",
+      "hidden": "Post hidden",
+      "reason": "Reason",
+      "reasonHelp": "Brief and without judgment, for example: it includes personal data",
+      "reasonError": "Write a reason of at least 5 characters."
+    }
+  },
+  "sessions": {
+    "title": "Sessions",
+    "intro": "Your schedule of group sessions with each cohort and 1:1 sessions. It is a simulation: there are no calls, invitations or real calendar.",
+    "requests_one": "1:1 session requests · {{count}}",
+    "requests_other": "1:1 session requests · {{count}}",
+    "noRequests": "No pending requests.",
+    "requestedOn": "Requested on {{date}}",
+    "preferred": {
+      "morning": "Prefers mornings",
+      "afternoon": "Prefers afternoons"
+    },
+    "oneOnOneTitle": "1:1 session: {{topic}}",
+    "decline": "I cannot for now",
+    "declined": "Request answered",
+    "schedule": "Schedule",
+    "scheduled": "Session scheduled",
+    "upcoming": "Upcoming sessions",
+    "noUpcoming": "No sessions scheduled.",
+    "past": "Past sessions",
+    "noPast": "There have been no sessions yet.",
+    "minutes_one": "{{count}} minute",
+    "minutes_other": "{{count}} minutes",
+    "kind": {
+      "group": "Group",
+      "one_on_one": "1:1"
+    },
+    "cancel": "Cancel",
+    "cancelTitle": "Cancel this session?",
+    "cancelBody": "\"{{title}}\" is removed from the schedule of those who were going to attend.",
+    "cancelConfirm": "Cancel session",
+    "canceled": "Session cancelled",
+    "recorded_one": "{{count}}-minute recording",
+    "recorded_other": "{{count}}-minute recording",
+    "addRecording": "Publish the recording",
+    "noRecording1on1": "No recording (1:1)",
+    "summary": "Session summary",
+    "summaryHelp": "What was covered, in two or three sentences. No names or amounts of anyone.",
+    "publishRecording": "Publish the recording (simulated)",
+    "recordingSaved": "Recording published for the cohort",
+    "cancelForm": "Cancel",
+    "new": "Schedule a session",
+    "form": {
+      "kind": "Session type",
+      "cohort": "Cohort",
+      "cohortHelp": "Who sees it in Learn.",
+      "person": "Person",
+      "personHelp": "Only from your cohorts.",
+      "title": "Title (required)",
+      "titleHelp": "For example: Installments or cash: how to compare",
+      "module": "Module",
+      "moduleHelp": "Optional: the session's topic.",
+      "noModule": "No module",
+      "date": "Date (required)",
+      "dateHelp": "From today on",
+      "dateError": "Choose a date from today on.",
+      "time": "Time (required)",
+      "timeHelp": "Argentina time",
+      "minutes": "Duration",
+      "minutesHelp": "Group sessions usually last 40 minutes",
+      "required": "Fill in this field.",
+      "missing": "Check the marked fields.",
+      "submit": "Schedule session"
+    },
+    "learn": {
+      "title": "Sessions with your tutor",
+      "with": "With {{name}}",
+      "none": "There are no sessions scheduled for your cohort.",
+      "calendar": "Add to my calendar",
+      "icsNote": "Alcancía session, personal finance simulator. Simulation: there is no real call.",
+      "recordings": "Recordings",
+      "recordingDetail": "Simulated recording · {{minutes}} min",
+      "myRequests": "Your session requests",
+      "requestOf": "1:1 request about {{topic}}",
+      "requestStatus": {
+        "pending": "Waiting for an answer",
+        "declined": "No room for now",
+        "scheduled": "Scheduled"
+      },
+      "ask": "Request a 1:1 session",
+      "topic": "Topic (required)",
+      "topicHelp": "The module you want to talk about.",
+      "when": "When do you prefer?",
+      "note": "What you want to cover (required)",
+      "noteHelp": "One or two sentences. Do not share amounts or personal data.",
+      "noteError": "Write at least 10 characters.",
+      "send": "Send request",
+      "sent": "Request sent to your tutor",
+      "recordingTitle": "Recording",
+      "recordingKicker": "Simulated recording · {{date}}",
+      "fuerte": "If you missed the session, here is what was covered.",
+      "player": "Session video · {{minutes}} min",
+      "playerNote": "In a real program, the video with captions and the transcript would be here. The prototype shows the summary and the topics.",
+      "summaryTitle": "Summary",
+      "chapters": "Topics",
+      "privacy": "Group recordings do not show who took part or their questions with names.",
+      "guide": "Review the topic's guide",
+      "morning": "In the morning",
+      "afternoon": "In the afternoon"
+    }
+  },
+  "tutor": {
+    "insufficient": "Not enough data to show this group without identifying anyone.",
+    "insufficientShort": "Not enough data",
+    "privacy": "You see your cohorts' learning progress. You never see amounts, movements, goals, answers about habits or whether a level is locked.",
+    "back": "Back to Tutoring",
+    "status": {
+      "invited": "Invited",
+      "inactive": "Inactive",
+      "active": "Active"
+    },
+    "nav": {
+      "label": "Tutoring",
+      "title": "Tutoring",
+      "home": "Home",
+      "assessments": "Results",
+      "questions": "Questions",
+      "unanswered_one": "{{count}} unanswered question",
+      "unanswered_other": "{{count}} unanswered questions",
+      "community": "Community",
+      "lessons": "Lessons",
+      "sessions": "Sessions"
+    },
+    "home": {
+      "subtitle_one": "You support {{count}} person in the program",
+      "subtitle_other": "You support {{count}} people in the program",
+      "cohortsChip_one": "{{count}} cohort",
+      "cohortsChip_other": "{{count}} cohorts",
+      "cohortsTitle": "Your cohorts",
+      "cohortData": "Cohort data",
+      "people_one": "{{count}} person",
+      "people_other": "{{count}} people",
+      "due": "Deadline: {{date}}",
+      "cohortLine": "Participation {{participation}} · challenge average {{challenges}}"
+    },
+    "kpi": {
+      "participation": "Participation",
+      "participationCaption": "active people",
+      "modules": "Modules completed",
+      "modulesCaption": "of the path, on average",
+      "challenges": "Challenge average",
+      "challengesCaption": "best attempt",
+      "weekly": "Weekly challenges",
+      "weeklyCaption": "completed"
+    },
+    "alerts": {
+      "title": "To look at",
+      "empty": "Nothing urgent. You can check the assessment results to prepare the next session.",
+      "not_started_one": "{{count}} person has not started module {{module}}",
+      "not_started_other": "{{count}} people have not started module {{module}}",
+      "exhausted_one": "{{count}} person used up the attempts of a level challenge: you can enable the level with a reason",
+      "exhausted_other": "{{count}} people used up the attempts of a level challenge: you can enable the level with a reason",
+      "unanswered_one": "{{count}} question is waiting for your answer",
+      "unanswered_other": "{{count}} questions are waiting for your answer",
+      "due_soon_one": "The program deadline is in {{days}} days",
+      "due_soon_other": "The program deadline is in {{days}} days for your {{count}} cohorts"
+    },
+    "cohort": {
+      "modules_one": "{{count}} module in the path",
+      "modules_other": "{{count}} modules in the path",
+      "heatTitle": "Progress by person and module",
+      "heatIntro": "Each cell is a module of the path: whether they read its guide and, when they took the level challenge, their best result in that module.",
+      "heatNote": "A result below 70 % is marked for reinforcement. On phones, the table scrolls inside its box.",
+      "legend": "Map key",
+      "person": "Person",
+      "cell": {
+        "done": "Guide read and challenge taken",
+        "reading": "Guide read",
+        "none": "Not started"
+      }
+    },
+    "levels": {
+      "title": "One person's progress by level",
+      "privacy": "You see the guides read, the level challenge and whether it was enabled by mastery or by a tutor. You do not see whether a level is locked: that would reveal the state of their wallet.",
+      "person": "Person",
+      "personHelp": "Choose who you want to support.",
+      "empty": "{{name}} has not started any level yet.",
+      "level": "Level {{n}} · {{name}}",
+      "data": "Level progress",
+      "completed": "Completed",
+      "guides": "Guides: {{read}} of {{total}}",
+      "challenge": {
+        "not_started": "Challenge pending",
+        "in_progress": "Challenge in progress",
+        "passed": "Challenge passed · {{best}}",
+        "attempts_exhausted": "Attempts used up"
+      },
+      "enabledBy": {
+        "mastery": "Enabled by mastery",
+        "tutor": "Enabled by a tutor"
+      },
+      "firstVsBest_one": "First attempt {{first}}, best attempt {{best}} ({{count}} attempt).",
+      "firstVsBest_other": "First attempt {{first}}, best attempt {{best}} ({{count}} attempts).",
+      "reason": "Reason: {{reason}}",
+      "listLabel": "Progress by level of {{name}}"
+    },
+    "unlock": {
+      "title": "Enable a level",
+      "intro": "A reasonable adjustment: for accessibility, for the person's role or when they used up the attempts and you reviewed together. The reason is recorded.",
+      "target": "For whom?",
+      "person": "Only for {{name}}",
+      "cohort": "For the whole {{name}} cohort",
+      "level": "Level",
+      "levelHelp": "The level that is enabled, without meeting its condition.",
+      "reason": "Reason",
+      "reasonHelp": "Why you enable it, at least 10 characters. For example: we reviewed the topic in Friday's session. No amounts or personal data.",
+      "reasonError": "Write the reason, in at least 10 characters.",
+      "submit": "Enable level",
+      "done": "Level enabled, with its reason recorded"
+    },
+    "weekly": {
+      "title": "Weekly challenges",
+      "assign": "Assign weekly challenge",
+      "empty": "There are no weekly challenges in this cohort yet.",
+      "results": "Challenge results",
+      "closed": "Closed on {{date}}",
+      "dueIn_one": "Due in {{count}} day",
+      "dueIn_other": "Due in {{count}} days",
+      "done_one": "{{count}} did it",
+      "done_other": "{{count}} did it",
+      "partial_one": "{{count}} partly",
+      "partial_other": "{{count}} partly",
+      "notDone_one": "{{count}} did not do it",
+      "notDone_other": "{{count}} did not do it",
+      "pending": "No answer: {{count}} of {{total}}"
+    },
+    "assign": {
+      "back": "Back to {{name}}",
+      "title": "Assign a weekly challenge",
+      "intro_one": "For {{name}}: it reaches {{count}} active person, who answers whether they did it.",
+      "intro_other": "For {{name}}: it reaches {{count}} active people, who answer whether they did it.",
+      "formTitle": "The challenge",
+      "template": "Choose a challenge",
+      "templates": {
+        "track": "Track your expenses for 7 days",
+        "cft": "Calculate your card's CFT",
+        "subscriptions": "Review your subscriptions and cancel one you do not use",
+        "budget": "Build your budget with the 50/30/20 rule",
+        "emergency": "Calculate what your 3-month emergency fund would be"
+      },
+      "custom": "Another one, in my own words",
+      "customLabel": "Your challenge",
+      "customHelp": "A concrete action for this week, with a verb. For example: Compare two installment offers.",
+      "customError": "Write the challenge, in at least 5 characters.",
+      "due": "Deadline",
+      "dueHelp": "From today on. A week is usually enough.",
+      "dueError": "Choose a date from today on.",
+      "privacy": "Each person answers whether they did it (yes, partly or no). Their reflection stays in their browser: you see only the result.",
+      "submit": "Assign challenge",
+      "done": "Challenge assigned",
+      "preview": "This is how people see it",
+      "previewChip": "Weekly challenge from your tutor",
+      "previewEmpty": "Write the challenge to see it here",
+      "previewDue": "Until {{date}}",
+      "previewReport": "Did you do it? Yes · Partly · No, and an optional reflection that only you see."
+    },
+    "assessments": {
+      "title": "Assessment results",
+      "intro": "Which questions were hardest and which answers were chosen, to reinforce them in the next session. Only groups of at least 5 people.",
+      "cohort": "Cohort",
+      "cohortHelp": "See all your cohorts together or one at a time.",
+      "allCohorts": "All my cohorts",
+      "levelsTitle": "Level challenges: first and best attempt",
+      "levelsIntro": "The first attempt shows how much they knew when they arrived; the best, how much they learned (the best one counts to pass).",
+      "first": "First attempt",
+      "best": "Best attempt",
+      "itemsTitle": "Questions with the most mistakes",
+      "itemsIntro": "Sorted from most to fewest mistakes. In single-choice ones, which option they chose: the correct one is green and has its icon.",
+      "module": "Module {{n}} · {{name}}",
+      "errorRate": "{{value}} mistakes",
+      "options": "Answers chosen",
+      "correct": "(correct answer)",
+      "hidden_one": "{{count}} question is not shown because fewer than 5 people answered it.",
+      "hidden_other": "{{count}} questions are not shown because fewer than 5 people answered them."
+    },
+    "questions": {
+      "title": "People's questions",
+      "intro_one": "Questions about the modules. {{count}} is waiting for your answer.",
+      "intro_other": "Questions about the modules. {{count}} are waiting for your answer.",
+      "filter": "Show questions",
+      "pending": "Unanswered ({{count}})",
+      "answered": "Answered",
+      "all": "All",
+      "empty": {
+        "pending": "There are no unanswered questions.",
+        "answered": "You have not answered any question yet.",
+        "all": "There are no questions yet."
+      },
+      "statusPending": "Unanswered",
+      "statusAnswered": "Answered",
+      "data": "Question data",
+      "yourAnswer": "Your answer, on {{date}}",
+      "answerLabel": "Your answer",
+      "answerHelp": "Explain with an example and, if it helps, suggest the guide or tool that practices it. At least 10 characters.",
+      "answerError": "Write the answer, in at least 10 characters.",
+      "privacy": "Do not ask for or include amounts or personal data: the question is about learning, not anyone's situation.",
+      "send": "Send answer",
+      "sent": "Answer sent"
+    },
+    "escape": {
+      "label": "Escape room \"Your first paycheck\":",
+      "done": "Completed · badges: {{badges}} · {{date}}",
+      "notYet": "Not completed"
+    }
+  },
+  "authoring": {
+    "title": "Lesson builder",
+    "intro": {
+      "tutor": "Build short lessons for your cohorts and cards that show up at the right moment, when someone does something in their wallet. Content only: never anyone's data.",
+      "admin": "Build short lessons and right-moment cards for the program's cohorts. Content only: never anyone's data."
+    },
+    "view": "What you want to build",
+    "lessons": "Lessons",
+    "cards": "Right-moment cards",
+    "newLesson": "New lesson",
+    "editLesson": "Edit lesson",
+    "noLessons": "You have not built any lessons yet. Start with \"New lesson\": an objective, a text and a question are enough.",
+    "lessonMeta": "Module {{module}} · {{blocks}} blocks · Cohorts: {{cohorts}} · {{date}}",
+    "by": "by {{name}}",
+    "status": {
+      "draft": "Draft",
+      "published": "Published"
+    },
+    "edit": "Edit: {{title}}",
+    "delete": "Delete: {{title}}",
+    "deleteLessonTitle": "Delete this lesson?",
+    "deleteLessonBody": "\"{{title}}\" is no longer available to its cohorts. This cannot be undone.",
+    "deleteLesson": "Delete lesson",
+    "deleteCardTitle": "Delete this card?",
+    "deleteCardBody": "\"{{title}}\" stops showing up in its cohorts' wallets. This cannot be undone.",
+    "deleteCard": "Delete card",
+    "deleted": "Deleted",
+    "saved": "Draft saved",
+    "published": "Published for its cohorts",
+    "backToList": "Back to the list",
+    "lessonTitle": "Title (required)",
+    "lessonTitleHelp": "Short and with a verb, for example: Compare two installment offers",
+    "minutes": "Minutes",
+    "minutesHelp": "From 1 to 15; guides take 5 to 8",
+    "module": "Module (required)",
+    "moduleHelp": "The topic it belongs to. It does not change its badges or levels.",
+    "moduleOption": "Module {{n}}: {{title}}",
+    "choose": "Choose an option",
+    "cohorts": "Cohorts (required)",
+    "cohortsHelp": "Who sees it in Learn when you publish it.",
+    "cohortsError": "Choose at least one cohort.",
+    "blocks": "Blocks",
+    "blocksHelp": "The lesson reads like a guide, one block per screen. Follow the sequence: objective, content, example, practice and \"For your life\".",
+    "addBlock": "Add block",
+    "blockN": "Block {{n}} · {{kind}}",
+    "block": {
+      "objective": "Objective",
+      "text": "Text",
+      "example": "Worked example",
+      "practice": "Practice question",
+      "tool": "Tool",
+      "takeaway": "For your life"
+    },
+    "blockHelp": {
+      "objective": "What the person will be able to do by the end",
+      "text": "One idea with its explanation",
+      "example": "A step-by-step calculation",
+      "practice": "With immediate feedback",
+      "tool": "A simulator inside the lesson",
+      "takeaway": "An action for this week"
+    },
+    "up": "Move block {{n}} up",
+    "down": "Move block {{n}} down",
+    "removeBlock": "Remove block {{n}}",
+    "required": "Fill in this field.",
+    "field": {
+      "objective": "Objective",
+      "objectiveHelp": "Start with \"By the end you will be able to…\" and an observable verb: calculate, compare, decide.",
+      "takeaway": "For your life",
+      "takeawayHelp": "A concrete action for this week, for example: check the CFT of your next installment purchase.",
+      "title": "Title",
+      "titleHelp": "One idea, in a few words",
+      "body": "Text",
+      "bodyHelp": "Short sentences. No real amounts or people's data.",
+      "exampleTitleHelp": "For example: 12 installments or cash",
+      "step": "Step {{n}}",
+      "stepHelp": "One calculation per step, with round numbers",
+      "addStep": "Add step",
+      "tool": "Tool",
+      "toolHelp": "It shows inside the lesson, with its assumptions and the legal notice.",
+      "tryThis": "What to try",
+      "tryThisHelp": "For example: change inflation and see which is better."
+    },
+    "q": {
+      "kind": "Question type",
+      "kindHelp": "The nine types in 5.1. The drag-and-drop ones have their alternative with buttons or menus.",
+      "kinds": {
+        "single": "Single choice",
+        "multiple": "Multiple choice",
+        "true_false_why": "True or false with why",
+        "numeric": "Numeric answer",
+        "ordering": "Order the steps",
+        "matching": "Match pairs",
+        "categorize": "Sort into categories",
+        "branching": "Case with decisions",
+        "simulator_task": "Exercise with a tool"
+      },
+      "prompt": "Question",
+      "statement": "Statement",
+      "promptHelp": "A single idea, no tricks.",
+      "options": "Options",
+      "whyOptions": "Why options",
+      "markOne": "Mark the correct option.",
+      "markSome": "Mark all the correct ones.",
+      "isCorrect": "Option {{n}} is correct",
+      "option": "Option {{n}}",
+      "removeOption": "Remove option {{n}}",
+      "addOption": "Add option",
+      "statementIs": "The statement is",
+      "true": "True",
+      "false": "False",
+      "whyPrompt": "Why question",
+      "whyPromptHelp": "For example: Why?",
+      "answer": "Answer",
+      "answerHelp": "For example: 150.000",
+      "tolerance": "Tolerance",
+      "toleranceHelp": "How much difference is accepted, for example: 1",
+      "unit": "Unit",
+      "unitHelp": "How the answer is written",
+      "units": {
+        "ARS": "Pesos",
+        "percent": "Percentage",
+        "months": "Months"
+      },
+      "correctFeedback": "If they get it right",
+      "correctFeedbackHelp": "Explain why it is right.",
+      "incorrectFeedback": "If they do not",
+      "incorrectFeedbackHelp": "A hint to try again, without blame.",
+      "whichCorrect": "Which one is correct?",
+      "simHelp": "The tool opens inside the question and the person writes the result.",
+      "items": "Steps, in the right order",
+      "itemsHelp": "Write them in order: the person sees them shuffled. From 3 to 6.",
+      "item": "Item {{n}}",
+      "removeItem": "Remove item {{n}}",
+      "addItem": "Add item",
+      "pairs": "Pairs",
+      "pairsHelp": "Each term with its definition. Definitions are shown in alphabetical order. From 3 to 6.",
+      "term": "Term {{n}}",
+      "definition": "Definition {{n}}",
+      "removePair": "Remove pair {{n}}",
+      "addPair": "Add pair",
+      "categories": "Categories",
+      "categoriesHelp": "From 2 to 4, for example: Need and Want.",
+      "category": "Category {{n}}",
+      "addCategory": "Add category",
+      "removeCategory": "Remove the last category",
+      "catItems": "Items to sort",
+      "catItemsHelp": "Each one with its correct category; each category with at least one. From 4 to 10.",
+      "itemCategory": "Category of item {{n}}",
+      "steps": "Case steps",
+      "stepsHelp": "In each step, a decision that continues the case and another that ends it with its consequence. From 2 to 5.",
+      "step": "Step {{n}}",
+      "removeStep": "Remove step {{n}}",
+      "addStep": "Add step",
+      "situation": "Situation",
+      "situationHelp": "What happens at this moment, for example: you are offered a pre-approved loan.",
+      "goodChoice": "Decision that continues",
+      "goodChoiceHelp": "The better one; it leads to the next step.",
+      "badChoice": "Decision that ends the case",
+      "badChoiceHelp": "A tempting option that is not a good idea.",
+      "badFeedback": "What happens if they choose it",
+      "badFeedbackHelp": "The consequence, without blame, and what to look at next time.",
+      "goodOutcome": "Case ending",
+      "goodOutcomeHelp": "What is said when reaching the end with all the good decisions."
+    },
+    "qMissing": {
+      "prompt": "Write the question.",
+      "options": "Write at least two options.",
+      "correct": "Mark the correct answer.",
+      "why": "Write the why and at least two options.",
+      "answer": "Write the answer as a number.",
+      "tolerance": "Write the tolerance as a number.",
+      "feedback": "Write both feedback messages.",
+      "items": "Write at least three steps.",
+      "pairs": "Fill in at least three pairs.",
+      "categories": "Write at least two categories.",
+      "catItems": "Write at least four items, and each category with at least one.",
+      "steps": "Fill in each step: situation, both decisions and the consequence.",
+      "goodOutcome": "Write the case ending."
+    },
+    "missingTitle": "To publish, it still needs",
+    "missing": {
+      "title": "the title;",
+      "module": "the module;",
+      "cohorts": "a cohort;",
+      "blocks": "at least two blocks;",
+      "incomplete": "the marked blocks completed."
+    },
+    "saveDraft": "Save draft",
+    "publish": "Publish",
+    "update": "Update publication",
+    "tutorNote": "L&D can see your lessons and cards to support the program.",
+    "newCard": "New card",
+    "editCard": "Edit card",
+    "noCards": "You have not built any cards yet.",
+    "cardsHelp": "They show up in the wallet of people in the chosen cohorts, when they do the trigger action. Once per person, and never during a mission.",
+    "cardMeta": "{{trigger}} · Cohorts: {{cohorts}} · {{date}}",
+    "trigger": "Trigger (required)",
+    "triggerHelp": "The wallet action that shows it.",
+    "triggers": {
+      "salary_received": "Getting paid",
+      "subscription_first_debit": "First debit of a subscription",
+      "transfer_new_payee": "Transferring to a new alias",
+      "yield_mode_chosen": "Choosing where the balance earns",
+      "term_deposit_made": "Opening a term deposit",
+      "card_paid_partially": "Paying less than the card total",
+      "installment_purchase": "Buying in installments",
+      "loan_taken": "Taking a loan",
+      "investment_bought": "Buying an investment",
+      "message_received": "Receiving a suspicious message"
+    },
+    "cardTitle": "Title (required)",
+    "cardTitleHelp": "One idea in a few words",
+    "cardBody": "Text (required)",
+    "cardBodyHelp": "It is read in 20 to 40 seconds: the concept and the fact.",
+    "source": "Official source",
+    "sourceHelp": "The official fact behind the card (Annex B).",
+    "noSource": "No source",
+    "guide": "Guide (required)",
+    "guideHelp": "\"See it in the guide\" leads to this guide.",
+    "part": "Part",
+    "partHelp": "From 1 to {{total}}",
+    "withQuestion": "Add a one-tap question",
+    "withQuestionHelp": "Two options and feedback for each case.",
+    "cardMissing": {
+      "trigger": "the trigger;",
+      "title": "the title;",
+      "body": "the text;",
+      "guide": "the guide and its part;",
+      "cohorts": "a cohort;",
+      "question": "the question and its feedback completed."
+    }
+  },
+  "org": {
+    "nav": {
+      "label": "Program administration",
+      "panel": "Dashboard",
+      "people": "People and cohorts",
+      "program": "Program",
+      "activity": "Activity",
+      "lessons": "Lessons"
+    },
+    "insufficient": "Not enough data to show this group without identifying anyone.",
+    "insufficientShort": "Not enough data",
+    "showTable": "See as a table",
+    "hideTable": "See as a chart",
+    "privacy": "All figures are aggregate and calculated from learning data. No group of fewer than 5 people is shown, and you never see anyone's practice money or habits.",
+    "home": {
+      "subtitle": "Program: {{mode}} · aggregate progress and adoption"
+    },
+    "kpi": {
+      "invited": "Invited",
+      "invitedCaption": "Participants loaded into the program",
+      "active": "Active",
+      "activeCaption_one": "{{count}} person signed in at least once",
+      "activeCaption_other": "{{count}} people signed in at least once",
+      "diagnosed": "Took Get to know you",
+      "diagnosedCaption": "Completed the initial diagnostic",
+      "modules": "Modules read",
+      "modulesCaption": "Average of modules with their guide read"
+    },
+    "alerts": {
+      "title": "To review",
+      "invited_one": "{{count}} person has not accepted the invitation yet.",
+      "invited_other": "{{count}} people have not accepted the invitation yet.",
+      "low_adoption": "{{name}}: only {{count}} % of people are active.",
+      "due_soon_one": "The deadline of {{count}} cohort is in {{days}} days.",
+      "due_soon_other": "The deadline of {{count}} cohorts is in {{days}} days.",
+      "hidden_one": "{{count}} cohort has fewer than 5 people: its figures are not shown.",
+      "hidden_other": "{{count}} cohorts have fewer than 5 people: their figures are not shown.",
+      "seePeople": "See people",
+      "seeInvited": "See invited people",
+      "seeCohort": "See the cohort's people",
+      "seeDeadlines": "Review deadlines"
+    },
+    "cohorts": {
+      "title": "Adoption by cohort",
+      "intro": "What share of each cohort is active, took Get to know you and read its modules.",
+      "cohort": "Cohort",
+      "people": "People",
+      "hidden": "Cohorts with fewer than 5 people show no figures. If only one were hidden, another one is hidden too, so it cannot be worked out by subtracting from the total.",
+      "listTitle": "Cohorts",
+      "create": "Create cohort",
+      "createTitle": "Create cohort",
+      "createIntro": "The cohort groups people who move forward together, with their tutor and their deadline.",
+      "createSubmit": "Create cohort",
+      "created": "Cohort created",
+      "name": "Name",
+      "nameHelp": "At least 3 characters, for example: Operations · night shift",
+      "nameError": "Write a name of at least 3 characters.",
+      "area": "Area",
+      "areaHelp": "The company area the cohort belongs to",
+      "tutorLabel": "Tutor",
+      "tutorHelp": "Who supports the cohort",
+      "tutor": "Tutor: {{name}}",
+      "due": "Deadline",
+      "dueHelpAssigned": "The program is assigned: choose a date from today on, as DD/MM/YYYY",
+      "dueHelpVoluntary": "The program is voluntary: the date is optional, as DD/MM/YYYY",
+      "actions": "Actions on the cohort {{name}}",
+      "edit": "Edit cohort",
+      "seePeople": "See its people",
+      "remove": "Delete cohort",
+      "removeBlocked_one": "It has {{count}} person: move them to another cohort first.",
+      "removeBlocked_other": "It has {{count}} people: move them to another cohort first.",
+      "removeTitle": "Delete the cohort {{name}}?",
+      "removeBody": "It has no people. It is deleted with its deadline and its tutor. This cannot be undone.",
+      "removeConfirm": "Delete cohort",
+      "removed": "Cohort {{name}} deleted",
+      "editTitle": "Edit the cohort {{name}}",
+      "editIntro": "Change its name, its tutor or its deadline.",
+      "editSubmit": "Save changes",
+      "edited": "Cohort saved",
+      "areaHelp_education": "The program of study the cohort belongs to",
+      "areaHelp_product": "The user segment the cohort belongs to",
+      "noTutor": "No tutor: users learn with Fuerte",
+      "escape": "Escape room completed"
+    },
+    "areas": {
+      "operations": "Operations",
+      "administration": "Administration",
+      "technology": "Technology",
+      "commercial": "Sales",
+      "logistics": "Logistics technical degree",
+      "business_admin": "Business administration technical degree",
+      "accounting": "Vocational training",
+      "new_users": "New users",
+      "regular_users": "Regular users"
+    },
+    "k": {
+      "title": "Program impact",
+      "intro": "Measured with the Kirkpatrick model: reaction, learning and behavior. Business results remain a future line.",
+      "level": "Level {{n}}",
+      "l1": {
+        "title": "Reaction",
+        "what": "How people rate the guides, from 1 to 5.",
+        "of5_one": "out of 5 · {{count}} person answered",
+        "of5_other": "out of 5 · {{count}} people answered",
+        "distribution": "Rating distribution",
+        "stars_one": "{{count}} point",
+        "stars_other": "{{count}} points"
+      },
+      "l2": {
+        "title": "Learning",
+        "what": "Get to know you at the start and at the end, with the knowledge questions only, and the level challenges. Answers about habits never leave the browser.",
+        "conclusion_one": "On average, correct answers rose {{points}} points between the first and the last Get to know you ({{count}} person with both).",
+        "conclusion_other": "On average, correct answers rose {{points}} points between the first and the last Get to know you ({{count}} people with both).",
+        "chart": "Correct answers by dimension, before and after",
+        "dimension": "Dimension",
+        "before": "At the start",
+        "after": "At the end",
+        "challenges": "Level challenges",
+        "level": "Level {{n}} · {{name}}",
+        "passRates_one": "{{first}} passed on the first attempt · {{passed}} passed in total ({{count}} person)",
+        "passRates_other": "{{first}} passed on the first attempt · {{passed}} passed in total ({{count}} people)",
+        "firstLabel": "Passed on the first attempt",
+        "totalLabel": "Passed in total",
+        "passShort": "{{first}} on the first attempt · {{passed}} in total",
+        "people_one": "{{count}} person",
+        "people_other": "{{count}} people"
+      },
+      "l3": {
+        "title": "Behavior",
+        "what": "30-day self-report: what they applied from what they learned.",
+        "respondents_one": "{{count}} person answered the follow-up",
+        "respondents_other": "{{count}} people answered the follow-up",
+        "budget": "Made a budget",
+        "emergencyFund": "Started their emergency fund",
+        "fullCardPayment": "Pays the card in full",
+        "weekly": "Weekly challenges completed"
+      },
+      "l4": {
+        "title": "Results",
+        "body": "Reported financial wellbeing or turnover would be measured with the company's own data. The demo does not make up business data.",
+        "future": "Future line",
+        "body_education": "Retention or reported financial wellbeing would be measured with the institution's own data. The demo does not make up institutional data.",
+        "body_product": "Retention or app usage would be measured with Hornero's own data. The demo does not make up business data."
+      }
+    },
+    "people": {
+      "title": "People and cohorts",
+      "intro_one": "{{count}} participant in the program.",
+      "intro_other": "{{count}} participants in the program.",
+      "add": "Add person",
+      "import": "Upload CSV",
+      "listTitle": "Participants",
+      "search": "Search",
+      "searchHelp": "By name or email, for example: López",
+      "cohort": "Cohort",
+      "cohortHelp": "Shows only the people in one cohort",
+      "allCohorts": "All cohorts",
+      "status": "Status",
+      "all": "All ({{count}})",
+      "statusCount": {
+        "active": "Active ({{count}})",
+        "invited": "Invited ({{count}})",
+        "inactive": "Inactive ({{count}})"
+      },
+      "empty": "No one matches these filters. Try another cohort or clear the search.",
+      "name": "First and last name",
+      "nameHelp": "For example: Lucía Benítez",
+      "email": "Work email",
+      "emailHelp": "Ends in .demo, for example: lucia.benitez@andina.demo",
+      "job": "Job",
+      "jobHelp": "For example: Warehouse assistant",
+      "cohortAddHelp": "The cohort they will move forward in",
+      "addTitle": "Add person",
+      "addIntro": "They get an invitation and show as invited until they sign in.",
+      "addSubmit": "Add person",
+      "added": "Person added as invited",
+      "showing_one": "{{count}} person matches.",
+      "showing_other": "{{count}} people match · showing {{from}} to {{to}}.",
+      "pagination": "People pages",
+      "prev": "Previous",
+      "next": "Next",
+      "page": "Page {{n}} of {{total}}",
+      "statusHelp": "Shows only the people with that status",
+      "actions": "Actions on {{name}}",
+      "actionsCol": "Actions",
+      "edit": "Edit details",
+      "resend": "Resend invitation",
+      "deactivate": "Deactivate",
+      "deactivateHelp": "They stop getting reminders; their progress is kept.",
+      "reactivate": "Reactivate",
+      "remove": "Remove from the program",
+      "statusDone": {
+        "invited": "Invitation resent to {{name}}",
+        "inactive": "{{name}} is now inactive",
+        "active": "{{name}} is now active"
+      },
+      "removeTitle": "Remove {{name}} from the program?",
+      "removeBody": "They no longer see the wallet and their learning data leaves the program's figures. This cannot be undone.",
+      "removeConfirm": "Remove from the program",
+      "removed": "{{name}} is no longer in the program",
+      "editTitle": "Edit {{name}}",
+      "editIntro": "The same details as when adding them. The email has to be unique.",
+      "editSubmit": "Save changes",
+      "edited": "Details saved"
+    },
+    "import": {
+      "back": "People and cohorts",
+      "title": "Bulk upload by CSV",
+      "intro": "Add several people at once. You review each row before confirming and fix what is needed: nothing is loaded until the last step.",
+      "step": "Step {{n}} of 3",
+      "step1": "Choose the file",
+      "step2": "Review each row",
+      "step3": "Confirm the upload",
+      "paste": "CSV content",
+      "pasteHelp": "Paste the content or upload a file. One person per line: name, email, cohort and job.",
+      "formatTitle": "Format",
+      "format1": "Columns: name, email, cohort and job. The header row is optional.",
+      "format2": "Separated by commas or semicolons. The email ends in .demo.",
+      "format3": "The cohort can go by its name, for example: Operaciones.",
+      "useExample": "Use the example",
+      "preview": "Review rows",
+      "upload": "Upload CSV file",
+      "previewDisabled": "Paste the content or upload a file to review the rows.",
+      "emptyFile": "The file has no rows. Check that it has one person per line.",
+      "validCount_one": "{{count}} row ready",
+      "validCount_other": "{{count}} rows ready",
+      "errorCount_one": "{{count}} row to fix",
+      "errorCount_other": "{{count}} rows to fix",
+      "fixHint": "Fix each marked field or remove the row. Rows with errors are not loaded.",
+      "row": "Row {{n}}",
+      "rowOk": "Ready",
+      "rowErrors_one": "{{count}} error",
+      "rowErrors_other": "{{count}} errors",
+      "remove": "Remove",
+      "removeRow": "Remove row {{n}}",
+      "nameHelp": "First and last name",
+      "emailHelp": "Ends in .demo",
+      "cohortHelp": "For example: Operaciones",
+      "jobHelp": "For example: Analyst",
+      "noRows": "You removed all the rows. Go back to step 1 to load others.",
+      "confirmAll_one": "{{count}} person will be added as invited.",
+      "confirmAll_other": "{{count}} people will be added as invited.",
+      "confirmPartial_one": "{{count}} person will be added as invited. Rows with errors ({{skipped}}) are not loaded.",
+      "confirmPartial_other": "{{count}} people will be added as invited. Rows with errors ({{skipped}}) are not loaded.",
+      "confirm_one": "Add {{count}} person",
+      "confirm_other": "Add {{count}} people",
+      "done_one": "{{count}} person added as invited",
+      "done_other": "{{count}} people added as invited",
+      "errors": {
+        "name_missing": "The name is missing.",
+        "email_invalid": "The email is not valid. Check that it has @ and a domain, for example: ana@andina.demo",
+        "email_domain": "Use a demo email, ending in .demo.",
+        "email_duplicate_file": "This email is already in another row of the file.",
+        "email_exists": "There is already a person with this email in the program.",
+        "cohort_unknown": "That cohort does not exist. Use one of: Operaciones, Administración, Tecnología or Comercial."
+      }
+    },
+    "program": {
+      "title": "Program settings",
+      "intro": "You define what is studied, how it is passed and what is protected. The order of the levels does not change: it is the program's content.",
+      "data": "Program details",
+      "name": "Name",
+      "nameHelp": "For example: Bienestar financiero 2026",
+      "description": "Description",
+      "descriptionHelp": "One or two sentences people see when they start",
+      "mode": "Mode",
+      "modes": {
+        "voluntary": "voluntary",
+        "assigned": "assigned"
+      },
+      "modeHelp": {
+        "voluntary": "Each person moves at their own pace, with no deadline.",
+        "assigned": "Each cohort has a deadline to complete the required modules."
+      },
+      "dueDates": "Deadline by cohort",
+      "dueHelp": "From today on, as DD/MM/YYYY",
+      "modules": "Modules",
+      "modulesIntro": "Choose which modules are enabled and which are required. A disabled module cannot be required.",
+      "orderFixed": "The order of the levels cannot be changed: each wallet section opens with what the previous ones teach.",
+      "moduleLabel": "{{n}}. {{title}}",
+      "moduleLevel": "Level: {{level}}",
+      "required": "Required",
+      "requiredFor": "Required: {{title}}",
+      "assessment": "Level challenges",
+      "passing": "Passing score",
+      "passingHelp": "Between 50 and 100, for example: 70. The best attempt counts.",
+      "attempts": "Attempts per challenge",
+      "attemptsHelp": "Between 1 and 10. When they run out, unlocking goes to the tutor and nothing is lost.",
+      "privacy": "Privacy",
+      "threshold": "Minimum people per group",
+      "thresholdHelp": "No figure is shown for smaller groups. It can go up, never below 5.",
+      "freeMode": "Free mode",
+      "freeModeHelp": "Every wallet section is unlocked for everyone.",
+      "reminders": "Reminder channels",
+      "remindersIntro": "Where reminders would arrive. In this version only the settings are saved: nothing is sent.",
+      "channels": {
+        "email": "Email",
+        "teams": "Microsoft Teams",
+        "slack": "Slack",
+        "campus": "Virtual campus (simulated)",
+        "app": "Hornero app notification (simulated)"
+      },
+      "save": "Save changes",
+      "discard": "Discard changes",
+      "saved": "Settings saved",
+      "unsaved": "Unsaved changes",
+      "errors": {
+        "name": "Write a name of at least 3 characters.",
+        "threshold": "Write a whole number of 5 or more.",
+        "passing": "Write a whole number between 50 and 100.",
+        "attempts": "Write a whole number between 1 and 10.",
+        "modules": "Enable at least one module.",
+        "due": "Each cohort needs a deadline from today on.",
+        "summary": "Check the marked fields before saving."
+      },
+      "leaveTitle": "Leave without saving?",
+      "leaveBody": "The settings changes will be lost.",
+      "leaveConfirm": "Leave without saving",
+      "modulesSummaryLabel": "Modules summary",
+      "modulesEnabled": "{{n}} of {{total}} enabled",
+      "modulesRequired_one": "{{n}} required",
+      "modulesRequired_other": "{{n}} required",
+      "colModule": "Module",
+      "colEnabled": "Enabled",
+      "levelGroup": "Level {{n}} · {{level}}",
+      "enableFor": "Enable: {{title}}",
+      "requiredHint": "To mark a module as required, it first has to be enabled.",
+      "discardShort": "Discard"
+    },
+    "activity": {
+      "title": "Activity log",
+      "intro": "Each learning action in the program as an \"actor, verb, object\" statement, in the xAPI format an LRS or a corporate LMS receives. People appear under a pseudonym and there is only learning data: never amounts, habits or decisions inside the wallet.",
+      "kpi": {
+        "total": "Statements",
+        "totalCaption": "Learning actions recorded",
+        "completed": "Completed",
+        "completedCaption": "Guides, missions, Get to know you and weekly challenges",
+        "passed": "Challenges passed",
+        "passedCaption_one": "Out of {{count}} level challenge attempt",
+        "passedCaption_other": "Out of {{count}} level challenge attempts"
+      },
+      "logTitle": "Statements",
+      "download": "Download JSON",
+      "filter": "Activity type",
+      "types": {
+        "all": "All",
+        "guide": "Guides",
+        "challenge": "Challenges",
+        "mission": "Missions",
+        "diagnostic": "Get to know you",
+        "weekly-challenge": "Weekly"
+      },
+      "count_one": "{{count}} statement",
+      "count_other": "{{count}} statements",
+      "cols": {
+        "actor": "Person",
+        "verb": "Verb",
+        "object": "Activity",
+        "result": "Result",
+        "date": "Date",
+        "json": "Statement"
+      },
+      "verbs": {
+        "completed": "completed",
+        "passed": "passed",
+        "failed": "did not pass",
+        "attempted": "reported"
+      },
+      "responses": {
+        "done": "Done",
+        "partial": "Partly",
+        "not_done": "Not done"
+      },
+      "score": "Score {{value}}",
+      "done": "Complete",
+      "seeJson": "See JSON",
+      "seeJsonFor": "See JSON for {{name}}",
+      "more": "Show 25 more",
+      "jsonTitle": "xAPI statement",
+      "jsonIntro": "This is how an LRS would receive it: pseudonymous actor, verb, activity, result and context, with no personal or financial data.",
+      "privacy": "Statements are built from the learning data the program already has. The pseudonym is stable within the organization and cannot be reversed from this panel. Nothing leaves this browser: the download is an example file.",
+      "object": {
+        "guide": "Guide “{{name}}”",
+        "mission": "Mission “{{name}}”",
+        "challenge": "{{name}}",
+        "diagnostic": "{{name}}",
+        "weekly-challenge": "Weekly challenge “{{name}}”",
+        "level": "{{name}}"
+      }
+    }
+  },
+  "designSystem": {
+    "tiers": {
+      "ref": {
+        "items": [
+          [
+            "--ref-indigo-40",
+            "Raw values: the only place with hexadecimals"
+          ],
+          [
+            "--ref-neutral-96",
+            "Cool gray neutrals"
+          ],
+          [
+            "--ref-fuerte-orange",
+            "Fuerte's orange, isolated"
+          ]
+        ],
+        "title": "1 · Reference"
+      },
+      "sys": {
+        "items": [
+          [
+            "--md-sys-color-primary",
+            "M3 color roles"
+          ],
+          [
+            "--role-tutor",
+            "Color of each person role"
+          ],
+          [
+            "--chart-1 to --chart-5",
+            "Chart series, in order"
+          ],
+          [
+            "--space-*, --elevation-*",
+            "Space, shape and motion"
+          ]
+        ],
+        "title": "2 · System"
+      },
+      "theme": {
+        "items": [
+          [
+            "@theme inline",
+            "Without the default palette or radii"
+          ],
+          [
+            "bg-primary, rounded-xl",
+            "Classes that point to the roles"
+          ],
+          [
+            "text-title-large",
+            "The M3 type scale"
+          ]
+        ],
+        "title": "3 · Tailwind theme"
+      },
+      "comp": {
+        "items": [
+          [
+            "Button (cva)",
+            "Filled, tonal, outlined, text and danger variants"
+          ],
+          [
+            "MoneyText",
+            "Money format with a non-breaking space"
+          ],
+          [
+            "KpiCard, StatusPill",
+            "States with icon and text"
+          ]
+        ],
+        "title": "4 · Components"
+      },
+      "qa": {
+        "items": [
+          [
+            "tokens.test.ts",
+            "AA contrast of each combination"
+          ],
+          [
+            "no-raw-values.test.ts",
+            "No loose color, shadow or gradient"
+          ],
+          [
+            "Playwright",
+            "No overflow at 6 widths and axe with no errors"
+          ]
+        ],
+        "title": "Automatic checks"
+      },
+      "caption": "Each tier can only use the previous one. If a component needs a new color, the role is created first."
+    },
+    "docTitle": "Design system",
+    "title": "Design system",
+    "skip": "Skip to content",
+    "nav": {
+      "label": "Design system groups",
+      "onThisPage": "On this page",
+      "menu": "Sections",
+      "current": "Current section:",
+      "close": "Close the index",
+      "sheetDescription": "Choose a section to go to it.",
+      "demo": "See the demo",
+      "foundations": "Foundations",
+      "components": "Components",
+      "patterns": "Patterns",
+      "guidelines": "Guidelines"
+    },
+    "hero": {
+      "eyebrow": "Alcancía design system · customized Material Design 3",
+      "title": "A calm system to talk about money without fear",
+      "highlight": "talk about money",
+      "intro": "The tokens, components and patterns the personal finance simulator is built with. Everything you see here is the product's real code: colors and contrasts are read live from the tokens.",
+      "stats": {
+        "tokens": "system tokens",
+        "roles": "color roles",
+        "type": "type roles",
+        "patterns": "documented patterns"
+      },
+      "md": "Read the Markdown version"
+    },
+    "sections": {
+      "principles": {
+        "eyebrow": "Principles",
+        "title": "Six ideas that decide every screen",
+        "intro": "When two design options are valid, the one that best meets these principles wins."
+      },
+      "tokens": {
+        "eyebrow": "Token architecture",
+        "title": "Four tiers, no loose values",
+        "intro": "Following Material Design 3 and the W3C Design Tokens Community Group: raw values live only in the first tier and every component uses named roles."
+      },
+      "color": {
+        "eyebrow": "Color",
+        "title": "Trustworthy, clear and calm",
+        "intro": "Indigo and teal over cool gray neutrals. No casino or trading look: color informs, it does not push you to decide."
+      },
+      "type": {
+        "eyebrow": "Typography",
+        "title": "Inter with the Material 3 scale",
+        "intro": "Headings with the emphasized variant of M3 Expressive. Amounts, percentages and dates always with tabular figures, so they can be compared in a column."
+      },
+      "space": {
+        "eyebrow": "Space and shape",
+        "title": "An 8 px rhythm and tonal depth",
+        "intro": "Airier in the learning views and denser in the dashboards. Depth comes from the surface, not from shadow."
+      },
+      "icons": {
+        "eyebrow": "Icons",
+        "title": "Material Symbols Rounded, weight 300",
+        "intro": "A single component, each icon imported as SVG. Outline by default and fill only for what is active."
+      },
+      "motion": {
+        "eyebrow": "Motion",
+        "title": "Short, meaningful and optional",
+        "intro": "150 to 300 ms with the M3 curves. Each animation explains a change; none is looping decoration."
+      },
+      "components": {
+        "eyebrow": "Components",
+        "title": "The product's real components",
+        "intro": "None of these samples is an image: they are the same components the wallet and dashboards use, with their texts."
+      },
+      "fuerte": {
+        "eyebrow": "Fuerte",
+        "title": "The wallet's companion",
+        "intro": "The orange safe from the workshop's escape room keeps each person company: it welcomes them, warns them and celebrates with them. It is the only exception to the cool palette (D-52)."
+      },
+      "patterns": {
+        "eyebrow": "Patterns",
+        "title": "Solutions that repeat",
+        "intro": "Each pattern carries the number of the decision that started it, recorded in docs/decisions.md."
+      },
+      "money": {
+        "eyebrow": "How we show money",
+        "title": "Amounts that read well, compare well and do not scare",
+        "intro": "The format, color and notices of each figure. We teach with scenarios, never with promises."
+      },
+      "security": {
+        "eyebrow": "Security and privacy",
+        "title": "Privacy by design, in three layers",
+        "intro": "What is simulated in the interface, what the front end really protects today and what a production version would add (D-70)."
+      },
+      "a11y": {
+        "eyebrow": "Accessibility",
+        "title": "WCAG 2.2 AA from the design",
+        "intro": "Standard ISO/IEC 40500:2025. Checked with axe on every screen and at 6 widths, with keyboard walkthroughs and a screen reader."
+      },
+      "voice": {
+        "eyebrow": "Voice and tone",
+        "title": "Like someone who explains without judging",
+        "intro": "Neutral Latin American Spanish, with tú. Clear, patient and non-judgmental; never alarmist or salesy."
+      },
+      "credits": {
+        "eyebrow": "Credits",
+        "title": "What we did not make",
+        "intro": "Third-party resources, validated content and licenses."
+      },
+      "hornero": {
+        "eyebrow": "Hornero",
+        "title": "The fictitious partner's brand",
+        "intro": "Hornero is the fictitious wallet that shows Alcancía embedded in another app (D-75, D-84). It has its own brand built with tokens, does not refer to a real brand and is always labeled as a demo brand."
+      }
+    },
+    "principles": [
+      {
+        "title": "Learn by using",
+        "body": "Participants do not enter a campus: they enter a wallet with fictitious money. Each action teaches something in the moment and sections open with achievements (D-50)."
+      },
+      {
+        "title": "Education, not advice",
+        "body": "Scenarios with their assumptions in view, never predictions. No screen recommends a product, an entity or an investment."
+      },
+      {
+        "title": "Calm is not flat",
+        "body": "With no gradients and almost no shadows, richness comes from hierarchy, data, accent and layered composition."
+      },
+      {
+        "title": "Privacy by design",
+        "body": "Amounts live only in each person's browser. The company sees aggregate learning, with a minimum of 5 people per group."
+      },
+      {
+        "title": "For the office and the warehouse",
+        "body": "The same guide on Mariana's computer and on Diego's phone: short sessions, simple texts and nothing that depends on a gesture."
+      },
+      {
+        "title": "Measured gamification",
+        "body": "Levels and achievements that celebrate healthy behaviors. No punishing streaks, no rankings, no countdowns or urgency."
+      }
+    ],
+    "color": {
+      "brand": "Brand",
+      "status": "States",
+      "surfaces": "Surfaces and neutrals",
+      "container": "Container",
+      "aa": "AA",
+      "aaa": "AAA",
+      "fail": "does not reach AA",
+      "roles": {
+        "primary": "Primary · indigo",
+        "secondary": "Secondary · muted indigo",
+        "tertiary": "Tertiary · teal",
+        "error": "Error",
+        "success": "Success",
+        "warning": "Warning",
+        "info": "Information"
+      },
+      "uses": {
+        "primary": "Main action, active navigation, links and focus.",
+        "secondary": "Tonal buttons, filter chips and lower emphasis.",
+        "tertiary": "Achievements, goals reached and the second chart series.",
+        "error": "Errors and destructive actions.",
+        "success": "Completed, correct, money coming in.",
+        "warning": "Risk, pending and loss of purchasing power.",
+        "info": "Notices, help, assumptions and answers to review."
+      },
+      "rule": "State colors are only for states, never for chart series. And they are never the only signal: they always come with an icon and text.",
+      "surfaceNames": {
+        "surface": "Page background",
+        "surface-container-lowest": "Cards",
+        "surface-container": "Inner panels",
+        "surface-container-high": "Sources footer",
+        "on-surface": "Text",
+        "on-surface-variant": "Secondary text",
+        "outline": "Field borders",
+        "outline-variant": "Dividers",
+        "inverse-surface": "Tooltips and toasts"
+      },
+      "people": "People",
+      "peopleNote": "Each role has its color, which identifies people and never states. The twelve demo people have a photo with a ring in that color; everyone else, initials.",
+      "peopleNames": {
+        "ld_admin": "L&D admin · Julieta",
+        "tutor": "Tutor · Kevin",
+        "participant": "Participant · Mariana",
+        "sponsor": "Sponsor · Ricardo"
+      },
+      "charts": "Chart series",
+      "chartsNote": "Always in this order and with at least 3:1 on white. Areas use a flat, low-opacity fill.",
+      "fuerte": "The exception: Fuerte's orange",
+      "fuerteNote": "Only on the character and its lights, with a flat fill. Never on buttons, backgrounds, charts or states (D-52).",
+      "fuerteNames": {
+        "body": "Body",
+        "light": "Lights",
+        "shade": "Shade"
+      }
+    },
+    "type": {
+      "samples": {
+        "display-medium": "$ 1.284.958,86",
+        "display-small": "Hi, Mariana",
+        "headline-medium": "This month's budget",
+        "headline-small": "Your fund for the unexpected",
+        "title-large": "Latest movements",
+        "title-medium": "Interest-bearing account",
+        "title-small": "Cohort",
+        "body-large": "Idle money loses purchasing power when there is inflation.",
+        "body-medium": "You set aside 20 % of your salary in the Savings pocket.",
+        "body-small": "Example values for learning.",
+        "label-large": "Calculate scenario",
+        "label-medium": "Level 3 · Budget",
+        "label-small": "12"
+      },
+      "uses": {
+        "display-medium": "Simulator result",
+        "display-small": "KPIs and result on phones",
+        "headline-medium": "Page title (single h1)",
+        "headline-small": "Featured title",
+        "title-large": "Section title (h2)",
+        "title-medium": "Card, dialog and group (h3)",
+        "title-small": "Subtitles and table headers",
+        "body-large": "Guide text",
+        "body-medium": "Dashboard text",
+        "body-small": "Help, assumptions and metadata",
+        "label-large": "Buttons and navigation",
+        "label-medium": "Chips and pills",
+        "label-small": "Counters only"
+      },
+      "note": "Size, line height and weight read from the browser. Guides are read at 60 to 72 characters per line and the final CSS uses rem, never fixed px."
+    },
+    "space": {
+      "spacing": "Space",
+      "rhythm": "An 8 px vertical rhythm: 32 px between sections and 8 to 16 px within each one. Values grow on tablets and desktops.",
+      "tokens": {
+        "space-gutter": "Page side margin",
+        "space-bento-gap": "Gap between cards",
+        "space-card-padding": "Card padding",
+        "space-section": "Between sections"
+      },
+      "shape": "Shape",
+      "shapeNote": "A single shape, square with soft corners, with no shape-change animation. Bento cards use the most open one.",
+      "shapes": {
+        "xs": "4 px · checkboxes",
+        "sm": "8 px · buttons and fields",
+        "md": "12 px · menus",
+        "lg": "16 px · dialogs and panels",
+        "xl": "24 px · cards",
+        "full": "Pills and avatars"
+      },
+      "elevation": "Elevation",
+      "levels": {
+        "tonal": "At rest: surface and border, no shadow",
+        "e1": "Elevation 1: menus, popovers and tooltips",
+        "e2": "Elevation 2: dialogs and toasts"
+      }
+    },
+    "icons": {
+      "outline": "Outline · default",
+      "filled": "Filled · active or selected",
+      "rules": [
+        "A single component: <Icon name=\"…\" />.",
+        "Decorative ones carry aria-hidden.",
+        "An icon-only button has an accessible name and a tooltip.",
+        "Sizes of 16, 18, 20 and 24 px.",
+        "No company logos, except Microsoft and Google at sign-in and the author's profiles in the footer."
+      ]
+    },
+    "motion": {
+      "curves": {
+        "standard": "Standard",
+        "decelerate": "Emphasized, entering",
+        "accelerate": "Emphasized, exiting"
+      },
+      "durations": "Durations",
+      "short": "short",
+      "medium": "medium",
+      "long": "long",
+      "uses": [
+        "A simulator's result changes with a short transition, without counting from zero.",
+        "Progress bars fill when entering and update when they change.",
+        "Lists and the bento enter staggered, 50 ms between items.",
+        "An unlock appears with a short scale, only once and with Fuerte."
+      ],
+      "replay": "Replay the entrance",
+      "reduced": "With the system's or the profile's \"reduce motion\", only opacity remains. No bounces, confetti or loops."
+    },
+    "magnific": "Designed by Magnific",
+    "newTab": "(opens in a new tab)",
+    "footer": {
+      "demo": "See the demo",
+      "md": "Design system in Markdown",
+      "repo": "GitHub repository",
+      "docs": "Documentation"
+    },
+    "fuerte": {
+      "states": {
+        "neutral": "Neutral",
+        "greeting": "Greeting",
+        "thinking": "Thinking",
+        "attention": "Attention",
+        "celebration": "Celebration",
+        "sleeping": "Asleep",
+        "sorry": "Sorry"
+      },
+      "lights": "The seven lights show the completed levels, one per level.",
+      "rules": [
+        "It speaks at key moments and never interrupts the same action twice in a row.",
+        "It never judges, does not recommend products or promise returns. Two sentences at most.",
+        "The illustration is decorative: its message is announced as text.",
+        "It can be silenced: Chatty, Only what matters or Silent.",
+        "In the wallet it floats and can be moved, with an alternative to dragging."
+      ],
+      "quote": "Saved. Your emergency fund already covers one month. Two more to unlock Invest.",
+      "notices": {
+        "title": "Fuerte's notices",
+        "note": "D-290 and D-291: what Fuerte tells when opened, calculated in the person's browser, and the face it makes accordingly. These are the panel's real pieces.",
+        "alertLabel": "With a problem: worried and an attention sign",
+        "pendingLabel": "With pending items: thinking and the number",
+        "calmLabel": "All caught up: happy, no badge",
+        "alertMessage": "Careful with this: the balance was not enough for a debit. We can fix it in a minute.",
+        "pendingMessage": "You have two things for today. The mission takes five minutes.",
+        "calmMessage": "Your emergency fund already covers 2,3 months. With 3, Invest opens.",
+        "rules": [
+          "Notice types, in this order: attention, pending, your investments, goals and your progress. Each one with its container color and icon.",
+          "The panel is a chat: Fuerte and its name on one line, its message in a full-width bubble with primary-container at 50 %.",
+          "It shows the first three notices and \"See N more notices\" on the right. Each notice leads to the screen that resolves it.",
+          "In \"Chatty\", the visit's first new notice shows for a few seconds in a bubble next to it. \"Only what matters\" counts only attention ones.",
+          "With \"Silent\", the pending mission and the unpaid debit go back to the page.",
+          "\"Move\" is always in the header; the dragging tip closes once read."
+        ]
+      }
+    },
+    "money": {
+      "formats": "Format",
+      "long": "Long amounts",
+      "longNote": "If an amount does not fit, it switches to short notation ($ 12,3 M) and the full value stays in the accessible name. It is never cut.",
+      "rows": {
+        "ars": "Pesos",
+        "usd": "Foreign currency, always with its code",
+        "percent": "Percentage, always with its period",
+        "in": "Money coming in",
+        "out": "Money going out",
+        "loss": "Loss of purchasing power",
+        "lossLabel": "You lose purchasing power"
+      },
+      "monthly": "monthly",
+      "yearly": "annual",
+      "credit": "Credit: the CFT first",
+      "creditNote": "The installment never appears alone. A high-rate debt carries the \"High rate\" pill in warning: it is information, not a failure (D-178).",
+      "cft": "Total financial cost (CFT)",
+      "tna": "Nominal annual rate (TNA)",
+      "received": "What you receive",
+      "total": "What you pay in total",
+      "inputs": "Masked fields",
+      "inputsNote": "They only accept digits and a decimal comma, format thousands on blur and accept pasting \"$ 1.500,50\" or \"1500.50\".",
+      "rules": [
+        [
+          "Non-breaking space",
+          "Between $, USD or − and the number, so the sign is never left alone at the end of a line (D-68)."
+        ],
+        [
+          "Tabular figures",
+          "Amounts, percentages and dates with equal-width figures, to compare them in a column."
+        ],
+        [
+          "Gains and losses",
+          "With a sign, a trend icon and text, never just green and red."
+        ],
+        [
+          "Scenarios, not promises",
+          "\"If inflation were 3 % a month…\", never \"You will earn…\"."
+        ],
+        [
+          "Assumptions in view",
+          "Next to each result, with \"Example values\" and where to see the real values."
+        ],
+        [
+          "Legal notice",
+          "Educational content. It is not financial advice or an investment recommendation."
+        ]
+      ],
+      "legal": "Educational content. It is not financial advice or an investment recommendation."
+    },
+    "security": {
+      "layers": [
+        {
+          "title": "1 · Simulated in the interface",
+          "body": "Patterns that show what the real corporate experience would be like.",
+          "items": [
+            "Sign-in with a neutral, labeled SSO that never imitates Microsoft or Google",
+            "Two-step verification required for admin and sponsor",
+            "Lockout after 5 attempts and referral to the help desk",
+            "Session expiry warning and privacy notice on first sign-in",
+            "Least-privilege roles from permissions.ts"
+          ]
+        },
+        {
+          "title": "2 · Really applied today",
+          "body": "What protects the front end published on GitHub Pages.",
+          "items": [
+            "Content security policy (CSP) on the page, and CI walks every screen of the build without a single violation",
+            "No unescaped inserted HTML or text run as code, checked by tests",
+            "Pinned dependency versions, audited in every build and updated with Dependabot",
+            "Form validation with Zod",
+            "External links with rel=\"noopener noreferrer\", checked by tests"
+          ]
+        },
+        {
+          "title": "3 · In production",
+          "body": "What GitHub Pages does not allow and a custom domain would add.",
+          "items": [
+            "Real HTTP headers with Cloudflare: frame-ancestors, HSTS, X-Content-Type-Options, Referrer-Policy and Permissions-Policy",
+            "Protection against bots and denial of service",
+            "SSO with OIDC or SAML and sessions in HttpOnly cookies",
+            "Permissions checked on the server and data separated by company"
+          ]
+        }
+      ],
+      "design": "Privacy is designed too",
+      "designItems": [
+        [
+          "Fictitious money, always in view",
+          "The \"Personal finance simulator · fictitious money\" banner is on the whole wallet and is never removed (D-69)."
+        ],
+        [
+          "Own brand",
+          "The wallet does not imitate the colors, icons or flows of any real app."
+        ],
+        [
+          "No real data",
+          "It never asks for an ID, CBU, cards or passwords. The CVU is shown in a format that is not valid."
+        ],
+        [
+          "Amounts do not leave the browser",
+          "Balances, movements, goals and habits stay on each person's device."
+        ],
+        [
+          "Threshold of 5",
+          "No figure is shown for groups of fewer than 5 people, and the admin cannot lower it."
+        ]
+      ],
+      "who": "What each role sees",
+      "whoCols": {
+        "role": "Role",
+        "learning": "Learning progress",
+        "money": "Amounts and movements",
+        "habits": "Get to know you habits",
+        "locked": "Whether a level is locked"
+      },
+      "whoRows": [
+        [
+          "Participant",
+          "All of their own",
+          "Only their own",
+          "Only their own",
+          "Yes, their own"
+        ],
+        [
+          "Tutor",
+          "Per person, in their cohorts",
+          "Never",
+          "Never",
+          "Never (D-58)"
+        ],
+        [
+          "L&D admin",
+          "Aggregate, with threshold",
+          "Never",
+          "Never",
+          "Never"
+        ],
+        [
+          "Sponsor",
+          "Aggregate report",
+          "Never",
+          "Never",
+          "Never"
+        ]
+      ],
+      "doc": "Read docs/security.md"
+    },
+    "a11y": [
+      [
+        "Forms",
+        "Visible label, help with format and example, \"(required)\" in text and errors next to the field."
+      ],
+      [
+        "Keyboard and focus",
+        "Everything works with the keyboard, focus is visible and never covered, and dialogs trap it."
+      ],
+      [
+        "Charts",
+        "Title, a sentence with the conclusion and the same information as a table."
+      ],
+      [
+        "Money and percentages",
+        "Masked fields, and sliders always with a numeric field next to them."
+      ],
+      [
+        "Announced changes",
+        "Balances and results are announced with a live region, after a short delay."
+      ],
+      [
+        "No required dragging",
+        "Ordering, matching and sorting have buttons or menus as an alternative."
+      ],
+      [
+        "No time limit",
+        "Challenges have no clock; the session warns before expiring."
+      ],
+      [
+        "Touch targets",
+        "48 × 48 px on phones and 24 × 24 px on desktops."
+      ],
+      [
+        "Reflow and zoom",
+        "No overflow at 320 px or at 200 % zoom, checked at 6 widths."
+      ]
+    ],
+    "voice": {
+      "principles": [
+        [
+          "Clarity first",
+          "Short sentences, one idea per sentence and examples with round numbers."
+        ],
+        [
+          "No blaming or shaming",
+          "\"Many people pay the card minimum; let's see what it costs.\""
+        ],
+        [
+          "Terms explained",
+          "The first time, with a brief definition and a chip to the glossary."
+        ],
+        [
+          "Scenarios, not promises",
+          "\"If…, then…\", never \"You will earn\"."
+        ],
+        [
+          "Tone by moment",
+          "Warm in achievements, neutral in dashboards and serious about debt, scams and privacy."
+        ]
+      ],
+      "use": "Use (Spanish copy)",
+      "avoid": "Avoid",
+      "vocab": [
+        [
+          "Iniciar sesión (sign in)",
+          "Ingresar, loguearse"
+        ],
+        [
+          "Panel (dashboard)",
+          "Dashboard"
+        ],
+        [
+          "Costo financiero total, CFT (total financial cost)",
+          "\"Interés de la tarjeta\" (card interest)"
+        ],
+        [
+          "Inflación, poder de compra (purchasing power)",
+          "\"Pérdida de plata\" (losing money)"
+        ],
+        [
+          "Cuotas sin interés (interest-free installments)",
+          "\"Cuotas gratis\" (free installments)"
+        ],
+        [
+          "Fondo de emergencia (emergency fund)",
+          "Colchón (cushion)"
+        ],
+        [
+          "Meta de ahorro (savings goal)",
+          "Objetivo, target"
+        ],
+        [
+          "Tutor o tutora (tutor)",
+          "Docente, facilitador"
+        ],
+        [
+          "Desafío de nivel (level challenge)",
+          "Examen, prueba (exam, test)"
+        ],
+        [
+          "Celular, computadora (phone, computer)",
+          "Móvil, ordenador"
+        ]
+      ]
+    },
+    "credits": [
+      [
+        "Finance content",
+        "Based on Kevin Giampieri's presentation for the workshop \"Del aula al primer trabajo\". Extensions are marked for his review."
+      ],
+      [
+        "Fuerte",
+        "Lourdes Pedaci's own character, created for the escape room \"Tu primer sueldo\" (Your first paycheck)."
+      ],
+      [
+        "Photos of the demo people",
+        "Stock photos with a free license."
+      ],
+      [
+        "Icons",
+        "Google's Material Symbols, under the Apache 2.0 license."
+      ],
+      [
+        "Typeface",
+        "Inter, by Rasmus Andersson, under the SIL Open Font license."
+      ]
+    ],
+    "components": {
+      "buttons": "Buttons",
+      "buttonsNote": "Only one Filled per region. The error Filled only confirms destructive actions and repeats the consequence.",
+      "filled": "Save goal",
+      "tonal": "See as a table",
+      "outlined": "Cancel",
+      "text": "See all",
+      "danger": "Delete goal",
+      "disabled": "Confirm transfer",
+      "xs": "XS",
+      "s": "S",
+      "m": "M",
+      "fields": "Fields",
+      "fieldsNote": "Label on top and help below with what to enter, format and example. The error shows when leaving the field, says what to fix and never erases what was entered.",
+      "alias": "Alias or CVU",
+      "aliasHelp": "For example: sofia.ramos.practica",
+      "aliasValue": "sofia.ramso.practica",
+      "aliasError": "We could not find that alias. Check that it is spelled right.",
+      "amount": "Amount",
+      "amountHelp": "Amount in pesos, for example: 150.000",
+      "rate": "Monthly inflation",
+      "rateHelp": "Percentage, for example: 3",
+      "chips": "States and chips",
+      "chipsNote": "Each state carries an icon and text. Metadata goes in neutral chips; filters, in segmented buttons. D-299: in a screen header they go below the title (`compact`): on phones and tablets, the two main ones on a single row; if they do not fit, the second is shortened with an ellipsis. From 840 px, all of them.",
+      "statuses": {
+        "done": "Completed",
+        "progress": "In progress",
+        "soon": "Due soon",
+        "error": "Data to review",
+        "neutral": "Locked"
+      },
+      "meta1": "Level 3 · Budget",
+      "meta2": "6 min",
+      "meta3": "16/11/2026",
+      "segmentLabel": "Inflation scenario",
+      "seg": {
+        "low": "Low",
+        "medium": "Medium",
+        "high": "High"
+      },
+      "kpi": "KPIs",
+      "kpiNote": "Icon in a color container, a big number, a sparkline and context text. They count up to their value once per session.",
+      "kpiBalance": "Available balance",
+      "kpiBalanceCaption": "Fictitious practice money",
+      "kpiFund": "Emergency fund",
+      "kpiFundCaption": "1 month left for Invest",
+      "alerts": "Notices",
+      "alertsNote": "Information in info, achievements in success, risk in warning and errors only for real failures. A person's mistake in practice is info, never blame.",
+      "alertInfo": "Example values for learning. Check current values in the official sources.",
+      "alertSuccess": "Saved. Your emergency fund already covers one month.",
+      "alertWarning": "Careful with this: the account holder does not match the name you were looking for.",
+      "alertError": "We could not save the settings. Try again in a few seconds.",
+      "progress": "Progress",
+      "progressNote": "Bars with their value in text and segmented steps in guided flows.",
+      "progressLabel": "Emergency fund",
+      "progressValue": "2 of 3 months",
+      "sources": "Sources",
+      "sourcesNote": "At the foot of each section with data: short chips that open Learn > Sources, on surface-container-high (D-182, D-187).",
+      "stepsValue": "Step 3 of 5",
+      "option": "Option cards",
+      "optionNote": "To compare options before choosing one (D-218): the same sheet for all, the compared figure larger and the chosen one in primary-container with a border and a check pill.",
+      "optionA": "Option A",
+      "optionB": "Option B",
+      "optionChosen": "Chosen",
+      "optionChoose": "Choose",
+      "optionRate": "Example rate",
+      "optionRisk": "Risk",
+      "optionLiquidity": "Liquidity",
+      "optionRateA": "TNA 30 %",
+      "optionRateB": "TNA 31 % on average",
+      "optionLow": "Low",
+      "optionNow": "Immediate",
+      "optionDay": "Same day",
+      "mastery": "\"I already know this\" shortcut",
+      "masteryNote": "It leads to the mastery challenge of a locked section (D-233). Always a small tonal button with the bolt, top right of the card or row, next to the title: it is a secondary path and is never filled.",
+      "masteryExample": "Budget",
+      "masteryKicker": "Next unlock · Level 3",
+      "titleRow": "Title row with \"Why does it matter?\"",
+      "titleRowNote": "D-288 and D-292: on every wallet screen, the title on the left and \"Why does it matter?\" on the right, with the attention container. On phones and tablets it is just the icon, with its accessible name and a tooltip; from 1200 px it shows the name. It opens a dialog with the concept, the sources and \"See it in the guide\".",
+      "titleRowTitle": "Pay",
+      "titleRowIntro": "Transfer, pay by QR and check your debits.",
+      "quick": "Actions in a row (phones and tablets)",
+      "quickNote": "D-287 and D-293: below 840 px, a section's shortcuts go in a card with a row of four 48 px round icons and a short name, like on Home; locked ones carry a small padlock. From 840 px, cards with their description.",
+      "quickTransfer": "Transfer",
+      "quickQr": "Pay by QR",
+      "quickBills": "Bills",
+      "quickCredit": "Card and loans",
+      "showMore": "\"See more\" at the foot of a list",
+      "showMoreNote": "D-291: text buttons that close a list (see more, see all, simulate) go on the right, with the arrow showing whether it opens or closes. Back and exit stay on the left.",
+      "showMoreA": "Almacén Don Ramiro",
+      "showMoreB": "Transport · Example travel card",
+      "showMoreButton": "See all movements (12)",
+      "stackTable": "Table as cards",
+      "stackTableNote": "D-297: with `stack`, below a 42 rem container each row is a card: the first cell as the title and \"column: value\" in the others. Nothing scrolls sideways. Matrices (heat map) stay as a table.",
+      "stackCohort": "Cohort",
+      "stackPeople": "People",
+      "stackActive": "Active",
+      "stackRowA": "Operaciones · Centro de distribución y oficina",
+      "stackRowB": "Administración",
+      "stackInsufficient": "Not enough data",
+      "linkRows": "Rows with a single action (ListLinkRow)",
+      "linkRowsNote": "D-279, D-294 and D-301: when a row leads to a single place, the whole row is the link: tonal surface, icon, title, an optional detail line and a chevron. Hover and focus go on the row, never an underline on one word. Used in Reviews, the Learn shortcuts and similar lists.",
+      "linkRowA": "Tu recibo de sueldo",
+      "linkRowADetail": "7 days after the guide · 3 questions",
+      "linkRowB": "Tools",
+      "linkRowBDetail": "The 12 simulators, with example values"
+    },
+    "hornero": {
+      "paletteTitle": "\"Sunset\" palette",
+      "paletteIntro": "The hornero lives in open grasslands, woodland edges and parks. The palette takes the pampas sky at sunset: it stands apart from the Warning color, Fuerte's orange, the Error red and the colors of Alcancía and of real wallets (D-248).",
+      "swatches": [
+        {
+          "token": "partner-hornero",
+          "name": "Sunset",
+          "hex": "#7A2E3B",
+          "use": "Brand, icon and titles.",
+          "pills": [
+            "9,2:1 on white · AAA",
+            "7,4:1 on the container · AAA"
+          ]
+        },
+        {
+          "token": "partner-hornero-accent",
+          "name": "Afterglow",
+          "hex": "#B05A66",
+          "use": "Icons of the solidity layer.",
+          "pills": [
+            "4,7:1 on white · AA"
+          ]
+        },
+        {
+          "token": "partner-hornero-container",
+          "name": "Glow",
+          "hex": "#F7E1E4",
+          "use": "Small containers and the band on phones.",
+          "pills": [
+            "Containers only"
+          ]
+        },
+        {
+          "token": "partner-on-hornero-container",
+          "name": "Dusk",
+          "hex": "#3A1018",
+          "use": "Text on the glow.",
+          "pills": [
+            "13,3:1 · AAA"
+          ]
+        }
+      ],
+      "markTitle": "Icon",
+      "markIntro": "The hornero's little house in profile, rounded, with an arched entrance and resting on a branch. Drawn from scratch in SVG, monochrome, legible from 16 px.",
+      "sizes": "Sizes",
+      "onTile": "On the brand color",
+      "onLight": "On a light background",
+      "iconsTitle": "Hornero icons",
+      "iconsIntro": "The brand icon and the Material Symbols icons each layer of the concept uses.",
+      "icons": [
+        [
+          "mark",
+          "Back to Hornero",
+          "Brand"
+        ],
+        [
+          "info",
+          "Fictitious demo brand",
+          "Label"
+        ],
+        [
+          "trending_up",
+          "Your nest grew $ X this month",
+          "Savings"
+        ],
+        [
+          "savings",
+          "You added $ X to your nest",
+          "Savings"
+        ],
+        [
+          "shield",
+          "Your nest holds X months of expenses",
+          "Solidity"
+        ],
+        [
+          "verified_user",
+          "Your nest held up: you did not transfer to a stranger",
+          "Solidity"
+        ],
+        [
+          "logout",
+          "Leave the embedded mode",
+          "Interface"
+        ]
+      ],
+      "rulesTitle": "Brand rules",
+      "rules": [
+        "The \"Fictitious demo brand\" label appears on Hornero's page, in the notice when opening it and next to \"Back to Hornero\" in the menu (D-87, D-246, D-249).",
+        "It does not refer to a real brand: no colors, logos or feature names (D-86).",
+        "The nest microcopy goes only in the embedded mode; Alcancía's own mode keeps its tone (D-85).",
+        "Two concept layers: savings (the nest grows little by little) and solidity (the nest holds up). Never the word for \"mud\".",
+        "Hornero's colors live only in its pieces: never in Alcancía's buttons, states or charts."
+      ],
+      "chip": "Fixed label"
+    },
+    "patterns": [
+      [
+        "D-324",
+        "Landing on phones",
+        "Menu, a hero that fits one screen with one action, a sticky bar at the bottom, no section intros or carousels, rows to choose people, figures in a 2 × 2 grid and long tools that open on request."
+      ],
+      [
+        "D-322",
+        "Dark mode",
+        "The same roles in their dark version, checked in both themes; chosen in the person's menu: light, dark or system."
+      ],
+      [
+        "D-319",
+        "Simulated player",
+        "A 16:9 box with the duration and what a real program would have, and below it the summary and topics; never a play button that does nothing."
+      ],
+      [
+        "D-317",
+        "Block builder",
+        "Each block in a card with its type and move up, move down and remove actions; add from a menu with one line per type; errors when publishing, next to each field and summarized."
+      ],
+      [
+        "D-315",
+        "Certificate",
+        "A flat card with a double frame, the medal in tertiary, the name highlighted and the modules with their badge; a labeled preview until it is issued."
+      ],
+      [
+        "D-312",
+        "Alternative without the game layer",
+        "Below a game's main action, a text link to its linear version, with everything visible on one page and the same reward."
+      ],
+      [
+        "D-311",
+        "Sections inside a long card",
+        "32 px between sections and 8 to 16 px within each one. A row with an object and its action: the object on the left, the text in the middle and the action on the right from tablets; on phones, the action below and full width."
+      ],
+      [
+        "D-310",
+        "Choosing a version with its reward",
+        "Option cards with what changes and which badge they give; the chosen one in primary-container with a border and a filled radio icon. Earned badges can be downloaded; missing ones say how to get them."
+      ],
+      [
+        "D-309",
+        "Compact progress data",
+        "On phones, chips with icon and value, with the label for screen readers; on tablets and desktops, icon, label and value on one line with dividers."
+      ],
+      [
+        "D-308",
+        "Full-width one-step actions on phones",
+        "Below 600 px, a step's main action and its secondary actions take the full width, as Material 3 asks for the compact window; from 600 px they go back to their size, on the right."
+      ],
+      [
+        "D-50",
+        "The app is a wallet",
+        "Guides, challenges and tools live inside the wallet's sections, which open with achievements."
+      ],
+      [
+        "5.0",
+        "Locked things are visible",
+        "Each locked section shows a padlock, what it is for and what is missing, with progress and a shortcut to the action that brings it closer."
+      ],
+      [
+        "D-164, D-72",
+        "Navigation by size",
+        "A bottom bar on phones and tablets, with the name only on the active destination; a side menu with subsections from 1200 px."
+      ],
+      [
+        "2.2.1",
+        "Simulator anatomy",
+        "Data on the left, result and sentence on the right, chart with a table, collapsible assumptions, scenario comparison and legal notice."
+      ],
+      [
+        "D-166",
+        "Declarative missions",
+        "Each mission defines steps, triggers, learning cards and criteria in JSON: L&D can add missions without touching code."
+      ],
+      [
+        "2.2.1",
+        "Formative feedback",
+        "Correct in success with an explanation; to review in info with a hint. Never a message that blames."
+      ],
+      [
+        "D-188",
+        "Bento by amount of content",
+        "Short cards together at the top; the one with the most content, full width and with its list in columns."
+      ],
+      [
+        "D-178",
+        "The CFT before the installment",
+        "In a credit offer, the total financial cost comes first, next to what you receive and what you pay in total."
+      ],
+      [
+        "D-182, D-187",
+        "Sources at the foot",
+        "Short chips that open the sources page, with no codes inside the text."
+      ],
+      [
+        "D-195",
+        "Not enough data",
+        "No group of fewer than 5 people shows figures; if only one is left hidden, another one is hidden so it cannot be worked out by subtraction."
+      ],
+      [
+        "D-196",
+        "Upload in three steps",
+        "Choose the file, review each row with the error next to the field and confirm. Nothing is loaded before the last step."
+      ],
+      [
+        "D-197",
+        "Unsaved changes",
+        "A notice marks what changed and leaving asks for confirmation, without losing what was entered."
+      ],
+      [
+        "D-286, D-291",
+        "See more on the right",
+        "The last 5 movements and \"See all movements (N)\" on the right; the full list scrolls inside its card."
+      ],
+      [
+        "D-287, D-293",
+        "Light wallet on phones and tablets",
+        "Greeting without a card, full balance, shortcuts in a row of four icons, unlock conditions as a list and compact movements."
+      ],
+      [
+        "D-288, D-292",
+        "\"Why does it matter?\" to the right of the title",
+        "An attention button (icon only below 1200 px) that opens a dialog with the concept, the sources and the exact part of the guide."
+      ],
+      [
+        "D-289, D-290",
+        "Balanced home header",
+        "Date, greeting and level on the left; \"Advance time\" (with a menu) and \"Why does it matter?\" on the right. No loose notices on the page: Fuerte tells them."
+      ],
+      [
+        "D-290, D-291",
+        "Fuerte's notices",
+        "Attention, pending items, investments, goals and progress; its face goes along and the panel reads like a chat."
+      ],
+      [
+        "D-294",
+        "Rows you tap as a whole",
+        "In \"What is missing\" and in notice lists, the whole row is the link: hover in surface-container, visible focus and a chevron, without underlining just the text."
+      ],
+      [
+        "D-295",
+        "Soft segmented control",
+        "A pill rail with the chosen option on white and a check in primary; it never cuts a label: if it does not fit, the rail scrolls."
+      ],
+      [
+        "D-296",
+        "Each condition leads to its action",
+        "\"Categorized movements\" opens all the movements on Home, where they are categorized."
+      ],
+      [
+        "D-297",
+        "Tables as cards",
+        "In narrow containers each row is a card with its title and \"column: value\"; nothing scrolls sideways."
+      ],
+      [
+        "D-298",
+        "Results by level",
+        "A stacked bar of first attempt over total, with a legend and the percentages in text."
+      ],
+      [
+        "D-299",
+        "Context chips below the title",
+        "On phones and tablets, the two main ones on one row, never on two lines; from 840 px, all of them."
+      ],
+      [
+        "D-301",
+        "Shortcuts as rows",
+        "A section's links go as tappable rows with a detail line, like the reviews; not as loose underlined links."
+      ],
+      [
+        "D-303",
+        "Dark Fuerte bubble",
+        "The brief notice next to Fuerte goes in inverse-surface with its tail, like a tooltip, so it reads over any card."
+      ],
+      [
+        "D-305",
+        "What is missing, a single list",
+        "The unlock card and the level map share ConditionList: icon and text, pending items first, rows tapped as a whole."
+      ],
+      [
+        "D-306",
+        "Authorship footer",
+        "Every screen ends with the all-rights-reserved notice and the link to the license."
+      ]
+    ]
   }
 }
