@@ -121,4 +121,8 @@ export function allOfficialSources(): ContentSource[] {
 }
 
 /** Every code used in content must be known here (checked by a test). */
+/** The codes of the official data (Anexo B) with their name, for the card builder (F14, D-317). */
+export const officialSourceOptions = (): { code: string; name: string }[] =>
+  Object.keys(OFFICIAL).flatMap((code) => describeSources([code]).map((s) => ({ code, name: `${code} · ${s.name}` })));
+
 export const isKnownSourceCode = (code: string) => code === 'T' || /^A-\d+$/.test(code) || /^F-\d+$/.test(code) || code in OFFICIAL;

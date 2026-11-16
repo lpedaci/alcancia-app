@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
+import customContent from '@/data/custom-content.json';
 import seed from '@/data/seed.json';
 import type {
   AccessRequest,
@@ -15,6 +16,8 @@ import type {
   ItemResponse,
   LevelLearningProgress,
   LevelUnlockRecord,
+  CustomCard,
+  CustomLesson,
   EscapeCompletion,
   MissionCompletion,
   Organization,
@@ -47,6 +50,9 @@ export interface OrgData {
   missionCompletions: MissionCompletion[];
   /** F18, D-313: escape room completed and badges, nothing else. */
   escapeCompletions: EscapeCompletion[];
+  /** F14, D-317: lessons and learning cards authored by tutors and L&D. */
+  customLessons: CustomLesson[];
+  customCards: CustomCard[];
   weeklyChallenges: WeeklyChallenge[];
   weeklyReports: WeeklyChallengeReport[];
   followUps: FollowUp30[];
@@ -79,7 +85,9 @@ export function seedData(): SharedData {
   const copy = structuredClone(seed) as unknown as SharedData & { generatedFor?: string; note?: string };
   delete copy.generatedFor;
   delete copy.note;
-  return { ...copy, accessRequests: [], consents: [] };
+  // F14 (D-317): the demo content written with the builder
+  const custom = structuredClone(customContent) as unknown as { lessons: CustomLesson[]; cards: CustomCard[] };
+  return { ...copy, accessRequests: [], consents: [], customLessons: custom.lessons, customCards: custom.cards };
 }
 
 export const organizationOf = (data: Pick<SharedData, 'organizations'>, orgId: string): Organization =>
@@ -110,6 +118,9 @@ export function scopeToOrg(data: SharedData, orgId: string): OrgData {
     missionCompletions: mine(data.missionCompletions),
     // `?? []`: demo data saved before D-313 has no list
     escapeCompletions: mine(data.escapeCompletions ?? []),
+    // `?? []`: demo data saved before D-317 has no lists
+    customLessons: (data.customLessons ?? []).filter((l) => l.orgId === orgId),
+    customCards: (data.customCards ?? []).filter((c) => c.orgId === orgId),
     weeklyChallenges: data.weeklyChallenges.filter((w) => cohortIds.has(w.cohortId)),
     weeklyReports: mine(data.weeklyReports),
     followUps: mine(data.followUps),
@@ -150,6 +161,11 @@ interface DataState extends SharedData {
   addUnlockRecord: (record: LevelUnlockRecord) => void;
   /** F15 (D-316): the person's 30-day self-report, replaced if answered again. */
   saveFollowUp: (followUp: FollowUp30) => void;
+  /** F14 (D-317): create or replace a lesson or a card, and delete it. */
+  saveLesson: (lesson: CustomLesson) => void;
+  deleteLesson: (id: string) => void;
+  saveCard: (card: CustomCard) => void;
+  deleteCard: (id: string) => void;
   /** D-80: a tutor sets (or replaces) the collective goal of a cohort. */
   setCollectiveGoal: (goal: CollectiveGoal) => void;
   /** F20: a post or a reply in the cohort's space. */
@@ -230,6 +246,10 @@ export const useDataStore = create<DataState>()(
       addPost: (post) => set((state) => ({ cohortPosts: [...state.cohortPosts, post] })),
       moderatePost: (postId, patch) => set((state) => ({ cohortPosts: state.cohortPosts.map((p) => (p.id === postId ? { ...p, ...patch } : p)) })),
       addUnlockRecord: (record) => set((state) => ({ unlockRecords: [...state.unlockRecords, record] })),
+      saveLesson: (lesson) => set((state) => ({ customLessons: [...(state.customLessons ?? []).filter((l) => l.id !== lesson.id), lesson] })),
+      deleteLesson: (id) => set((state) => ({ customLessons: (state.customLessons ?? []).filter((l) => l.id !== id) })),
+      saveCard: (card) => set((state) => ({ customCards: [...(state.customCards ?? []).filter((c) => c.id !== card.id), card] })),
+      deleteCard: (id) => set((state) => ({ customCards: (state.customCards ?? []).filter((c) => c.id !== id) })),
       saveFollowUp: (followUp) => set((state) => ({ followUps: [...state.followUps.filter((f) => f.personId !== followUp.personId), followUp] })),
       updateProgram: (program, privacyThreshold) =>
         set((state) => ({
@@ -281,11 +301,17 @@ export const useDataStore = create<DataState>()(
       name: DATA_STORAGE_KEY,
       // Version 3 (D-280): Paula Gómez is now Julieta Martorelli and Silvia Herrera, Bettyna Gonçalves,
       // with new ids; older demo data goes back to the seed with the accepted notices moved to the new ids.
-      version: 3,
+      // Version 4 (D-317): demo data saved before the builder gets its example lesson and card.
+      version: 4,
       storage: createJSONStorage(() => localStorage),
       migrate: (persisted, version) => {
         const old = (persisted ?? {}) as Partial<SharedData>;
-        if (version >= 3) return persisted as DataState;
+        if (version >= 4) return persisted as DataState;
+        if (version === 3) {
+          const fresh = seedData();
+          const kept = persisted as DataState;
+          return { ...kept, customLessons: kept.customLessons ?? fresh.customLessons, customCards: kept.customCards ?? fresh.customCards } as DataState;
+        }
         const renamed: Record<string, string> = { 'p-paula': 'p-julieta', 'p-silvia': 'p-bettyna' };
         const consents = (old.consents ?? []).map((c) => ({ ...c, personId: renamed[c.personId] ?? c.personId }));
         return { ...seedData(), consents, accessRequests: old.accessRequests ?? [] } as unknown as DataState;

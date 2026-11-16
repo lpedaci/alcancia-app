@@ -276,6 +276,10 @@ Fuente: `https://lpedaci.github.io/taller-primerempleo/escape/` (gamificación y
 
 Las insignias de módulo (D-57) y las del escape room se descargan como imagen, sin datos de la persona. El certificado de finalización reconoce el programa completo (niveles 1 a 7) con los módulos y sus insignias, nunca montos ni hábitos, y es un certificado de demostración sin validez oficial. **Línea futura:** emitirlos como credenciales verificables con el estándar Open Badges 3.0 (1EdTech), para que la persona las lleve a su perfil profesional.
 
+### 11.4 Constructor de lecciones (F14, D-317)
+
+Tutoría y L&D arman lecciones con la misma secuencia de las guías (objetivo, contenido, ejemplo resuelto, práctica con retroalimentación, herramienta y "Para tu vida") y las publican a sus cohortes; el constructor recuerda la secuencia y no deja publicar sin dos bloques completos ni preguntas sin retroalimentación. Las tarjetas que arman se suman a las del momento justo de esas cohortes. Así el programa se adapta a lo que tutoría ve en los encuentros sin tocar el código, que es lo que pide la sección 5.3 para las misiones y las tarjetas.
+
 ## 12. Plan de mejora
 
 | Cuándo | Qué se revisa | Con qué datos | Qué se puede cambiar |

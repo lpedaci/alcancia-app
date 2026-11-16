@@ -1,3 +1,5 @@
+import { GenericSimulator } from '@/features/simulators/GenericSimulator';
+import { simById } from '@/features/simulators/defs';
 import { AnimatePresence, motion } from 'motion/react';
 import { Fragment, type ReactNode, useEffect, useMemo, useRef, useState } from 'react';
 import { type TFunction } from 'i18next';
@@ -49,6 +51,23 @@ export function GuidePage() {
     if (saved > 0 && saved < guide.blocks.length) return <GuideReader key={`${guide.id}:saved:${from ?? ''}`} guide={guide} start={saved} from={from} />;
   }
   return <GuideReader key={`${guide.id}:${start}:${from ?? ''}`} guide={guide} start={start} from={from} />;
+}
+
+/**
+ * A lesson authored by a tutor or L&D (F14, D-317), for the people of the cohorts it was published to.
+ * A draft, or a lesson of other cohorts, is not found.
+ */
+export function CustomLessonPage() {
+  const { lessonId = '' } = useParams();
+  const { t } = useTranslation();
+  const user = useCurrentUser();
+  const lesson = useDataStore((s) => (s.customLessons ?? []).find((l) => l.id === lessonId));
+  const person = useDataStore((s) => s.people.find((p) => p.id === user?.personId));
+  const author = useDataStore((s) => s.people.find((p) => p.id === lesson?.authorId));
+  const visible = lesson && lesson.status === 'published' && lesson.cohortIds.some((c) => person?.cohortIds.includes(c));
+  if (!lesson || !visible) return <NotFoundPage />;
+  const guide: Guide = { id: lesson.id, moduleId: lesson.moduleId, title: lesson.title, minutes: lesson.minutes, blocks: lesson.blocks, sourceIds: [] };
+  return <GuideReader key={lesson.id} guide={guide} custom={{ kicker: t('learn.custom.kicker', { name: author?.name ?? '', minutes: lesson.minutes }) }} />;
 }
 
 /** The name of the screen to go back to, for "Volver a <sección>" (D-78). */
@@ -114,12 +133,19 @@ function blockText(block: GuideBlock): string {
       return block.body;
     case 'example':
       return block.steps.join(' ');
+    case 'tool':
+      return block.body;
     default:
       return '';
   }
 }
 
-function GuideReader({ guide, start = 0, from }: { guide: Guide; start?: number; from?: string }) {
+/**
+ * The reader of a guide. With `custom` (F14, D-317), a lesson authored by a tutor or L&D: the same
+ * reader and blocks, but it does not count as one of the module's guides (levels and badges keep
+ * their rule) and its kicker says who wrote it.
+ */
+function GuideReader({ guide, start = 0, from, custom }: { guide: Guide; start?: number; from?: string; custom?: { kicker: string } }) {
   const { t } = useTranslation();
   const user = useCurrentUser();
   const personId = user?.personId ?? '';
@@ -147,7 +173,8 @@ function GuideReader({ guide, start = 0, from }: { guide: Guide; start?: number;
   }, [index, finished]);
 
   const status = statuses.find((s) => s.level.id === levelId);
-  if (status && !isOpen(levelId)) {
+  // A lesson sent by the tutor or L&D is never locked: they chose to send it (D-317)
+  if (status && !isOpen(levelId) && !custom) {
     return (
       <WalletShell section={t('wallet.nav.learn')} fuerte={{ state: 'thinking', message: fuerteLine('learn.guide.fuerte') }}>
         <div className="flex flex-col gap-6">
@@ -167,7 +194,7 @@ function GuideReader({ guide, start = 0, from }: { guide: Guide; start?: number;
 
   const finish = () => {
     saveGuidePart(guide.id, 0);
-    markGuideDone(personId, guide.moduleId, guide.id, DEMO_TODAY, satisfaction ? (Number(satisfaction) as GuideProgress['satisfaction']) : undefined);
+    if (!custom) markGuideDone(personId, guide.moduleId, guide.id, DEMO_TODAY, satisfaction ? (Number(satisfaction) as GuideProgress['satisfaction']) : undefined);
     setFinished(true);
   };
 
@@ -191,7 +218,9 @@ function GuideReader({ guide, start = 0, from }: { guide: Guide; start?: number;
             {from && <BackToOrigin from={from} />}
             <p className="flex flex-wrap items-center gap-x-2 text-label-large text-primary">
               <Icon name="menu_book" size={18} />
-              {guidesOfModule(guide.moduleId).length > 1
+              {custom
+                ? custom.kicker
+                : guidesOfModule(guide.moduleId).length > 1
                 ? t('learn.guide.kickerOf', { module: module?.order, k: guideNumber(guide.id), total: guidesOfModule(guide.moduleId).length, minutes: guide.minutes })
                 : t('learn.guide.kicker', { module: module?.order, minutes: guide.minutes })}
             </p>
@@ -219,14 +248,14 @@ function GuideReader({ guide, start = 0, from }: { guide: Guide; start?: number;
               <div className="flex flex-wrap gap-3">
                 {/* The next guide of the module, to go deeper (D-276) */}
                 {(() => {
-                  const next = guidesOfModule(guide.moduleId).find((g) => guideNumber(g.id) === guideNumber(guide.id) + 1);
+                  const next = custom ? undefined : guidesOfModule(guide.moduleId).find((g) => guideNumber(g.id) === guideNumber(guide.id) + 1);
                   return next ? (
                     <Button asChild trailingIcon="arrow_forward">
                       <Link to={`/app/learn/guides/${next.id}`}>{t('learn.guide.toNext', { title: next.title })}</Link>
                     </Button>
                   ) : null;
                 })()}
-                {challengeId && (
+                {challengeId && !custom && (
                   <Button asChild trailingIcon="arrow_forward">
                     <Link to={`/app/learn/challenges/${challengeId}`}>{t('learn.guide.toChallenge', { level: level?.order })}</Link>
                   </Button>
@@ -466,6 +495,30 @@ function Block({
           )}
         </>
       );
+    case 'tool': {
+      const def = simById(block.simId);
+      return (
+        <>
+          <IconTile icon="calculate" tone="secondary" />
+          {title(t('learn.guide.tool'))}
+          <p className="text-body-large text-on-surface">
+            <GlossaryText text={block.body} terms={terms} />
+          </p>
+          {def ? (
+            <div className="rounded-lg border border-outline-variant bg-surface p-3">
+              <span id={`tool-${def.id}`} className="sr-only">
+                {t(`sims.${def.id}.title`)}
+              </span>
+              <GenericSimulator def={def} labelledBy={`tool-${def.id}`} />
+            </div>
+          ) : (
+            <Button asChild variant="tonal" leadingIcon="calculate" className="self-start">
+              <Link to={`/app/tools/${block.simId}`}>{t('learn.guide.openTool', { name: block.simId === 'SIM-3' ? t('sim3.title') : t(`sims.${block.simId}.title`) })}</Link>
+            </Button>
+          )}
+        </>
+      );
+    }
     case 'recall':
     case 'practice': {
       const right = isCorrect(block.question, answer);

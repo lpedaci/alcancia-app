@@ -1459,7 +1459,8 @@
       "previousScreen": "la pantalla anterior",
       "exit": "Salir y seguir después",
       "kickerOf": "Guía {{k}} de {{total}} · módulo {{module}} · {{minutes}} min",
-      "toNext": "Seguir con «{{title}}»"
+      "toNext": "Seguir con «{{title}}»",
+      "tool": "Prueba la herramienta"
     },
     "challenge": {
       "locked": "{{title}} está bloqueado",
@@ -1666,6 +1667,12 @@
       "item_other": "A {{count}} días de la guía · 3 preguntas",
       "start": "Repasar",
       "startFor": "Repasar {{title}}"
+    },
+    "custom": {
+      "kicker": "Lección de {{name}} · {{minutes}} min",
+      "title": "Lecciones de tu tutoría y de L&D",
+      "empty": "Cuando tu tutor o L&D publiquen una lección para tu cohorte, aparece acá.",
+      "by": "De {{name}} · {{minutes}} min"
     }
   },
   "pay": {
@@ -2940,7 +2947,8 @@
       "questions": "Consultas",
       "unanswered_one": "{{count}} consulta sin responder",
       "unanswered_other": "{{count}} consultas sin responder",
-      "community": "Comunidad"
+      "community": "Comunidad",
+      "lessons": "Lecciones"
     },
     "home": {
       "subtitle_one": "Acompañas a {{count}} persona en el programa",
@@ -3130,7 +3138,8 @@
       "panel": "Panel",
       "people": "Personas y cohortes",
       "program": "Programa",
-      "activity": "Actividad"
+      "activity": "Actividad",
+      "lessons": "Lecciones"
     },
     "insufficient": "Datos insuficientes para mostrar este grupo sin identificar a nadie.",
     "insufficientShort": "Datos insuficientes",
@@ -4061,6 +4070,11 @@
       }
     },
     "patterns": [
+      [
+        "D-317",
+        "Constructor por bloques",
+        "Cada bloque en una tarjeta con su tipo y acciones de subir, bajar y quitar; agregar desde un menú con una línea por tipo; errores al publicar, junto a cada campo y resumidos."
+      ],
       [
         "D-315",
         "Certificado",
@@ -5078,5 +5092,192 @@
     "update": "Actualizar respuestas",
     "doneTitle": "Respuestas guardadas",
     "doneBody": "Gracias. Suman al seguimiento del programa, sin tu nombre."
+  },
+  "authoring": {
+    "title": "Constructor de lecciones",
+    "intro": {
+      "tutor": "Arma lecciones cortas para tus cohortes y tarjetas que aparecen en el momento justo, cuando alguien hace algo en su billetera. Solo contenido: nunca datos de nadie.",
+      "admin": "Arma lecciones cortas y tarjetas en el momento justo para las cohortes del programa. Solo contenido: nunca datos de nadie."
+    },
+    "view": "Qué quieres armar",
+    "lessons": "Lecciones",
+    "cards": "Tarjetas en el momento justo",
+    "newLesson": "Nueva lección",
+    "editLesson": "Editar lección",
+    "noLessons": "Todavía no armaste lecciones. Empieza con \"Nueva lección\": un objetivo, un texto y una pregunta alcanzan.",
+    "lessonMeta": "Módulo {{module}} · {{blocks}} bloques · Cohortes: {{cohorts}} · {{date}}",
+    "by": "de {{name}}",
+    "status": {
+      "draft": "Borrador",
+      "published": "Publicada"
+    },
+    "edit": "Editar: {{title}}",
+    "delete": "Eliminar: {{title}}",
+    "deleteLessonTitle": "¿Eliminar esta lección?",
+    "deleteLessonBody": "\"{{title}}\" deja de estar disponible para sus cohortes. No se puede deshacer.",
+    "deleteLesson": "Eliminar lección",
+    "deleteCardTitle": "¿Eliminar esta tarjeta?",
+    "deleteCardBody": "\"{{title}}\" deja de aparecer en las billeteras de sus cohortes. No se puede deshacer.",
+    "deleteCard": "Eliminar tarjeta",
+    "deleted": "Eliminada",
+    "saved": "Borrador guardado",
+    "published": "Publicada para sus cohortes",
+    "backToList": "Volver a la lista",
+    "lessonTitle": "Título (obligatorio)",
+    "lessonTitleHelp": "Corto y con verbo, por ejemplo: Comparar dos ofertas en cuotas",
+    "minutes": "Minutos",
+    "minutesHelp": "De 1 a 15; las guías duran de 5 a 8",
+    "module": "Módulo (obligatorio)",
+    "moduleHelp": "El tema al que pertenece. No cambia sus insignias ni sus niveles.",
+    "moduleOption": "Módulo {{n}}: {{title}}",
+    "choose": "Elige una opción",
+    "cohorts": "Cohortes (obligatorio)",
+    "cohortsHelp": "Quiénes la ven en Aprender cuando la publiques.",
+    "cohortsError": "Elige al menos una cohorte.",
+    "blocks": "Bloques",
+    "blocksHelp": "La lección se lee como una guía, un bloque por pantalla. Sigue la secuencia: objetivo, contenido, ejemplo, práctica y \"Para tu vida\".",
+    "addBlock": "Agregar bloque",
+    "blockN": "Bloque {{n}} · {{kind}}",
+    "block": {
+      "objective": "Objetivo",
+      "text": "Texto",
+      "example": "Ejemplo resuelto",
+      "practice": "Pregunta de práctica",
+      "tool": "Herramienta",
+      "takeaway": "Para tu vida"
+    },
+    "blockHelp": {
+      "objective": "Qué va a poder hacer la persona al terminar",
+      "text": "Una idea con su explicación",
+      "example": "Una cuenta paso a paso",
+      "practice": "Con retroalimentación inmediata",
+      "tool": "Un simulador dentro de la lección",
+      "takeaway": "Una acción para esta semana"
+    },
+    "up": "Subir el bloque {{n}}",
+    "down": "Bajar el bloque {{n}}",
+    "removeBlock": "Quitar el bloque {{n}}",
+    "required": "Completa este campo.",
+    "field": {
+      "objective": "Objetivo",
+      "objectiveHelp": "Empieza con \"Al terminar vas a poder…\" y un verbo observable: calcular, comparar, decidir.",
+      "takeaway": "Para tu vida",
+      "takeawayHelp": "Una acción concreta para esta semana, por ejemplo: revisa el CFT de tu próxima compra en cuotas.",
+      "title": "Título",
+      "titleHelp": "Una idea, en pocas palabras",
+      "body": "Texto",
+      "bodyHelp": "Frases cortas. Sin montos reales ni datos de personas.",
+      "exampleTitleHelp": "Por ejemplo: 12 cuotas o contado",
+      "step": "Paso {{n}}",
+      "stepHelp": "Una cuenta por paso, con números redondos",
+      "addStep": "Agregar paso",
+      "tool": "Herramienta",
+      "toolHelp": "Se muestra dentro de la lección, con sus supuestos y el aviso legal.",
+      "tryThis": "Qué probar",
+      "tryThisHelp": "Por ejemplo: cambia la inflación y mira cuál conviene."
+    },
+    "q": {
+      "kind": "Tipo de pregunta",
+      "kindHelp": "En esta tanda: opción única, opción múltiple, verdadero o falso con por qué y respuesta numérica.",
+      "kinds": {
+        "single": "Opción única",
+        "multiple": "Opción múltiple",
+        "true_false_why": "Verdadero o falso con por qué",
+        "numeric": "Respuesta numérica"
+      },
+      "prompt": "Pregunta",
+      "statement": "Afirmación",
+      "promptHelp": "Una sola idea, sin trampas.",
+      "options": "Opciones",
+      "whyOptions": "Opciones del por qué",
+      "markOne": "Marca la opción correcta.",
+      "markSome": "Marca todas las correctas.",
+      "isCorrect": "La opción {{n}} es correcta",
+      "option": "Opción {{n}}",
+      "removeOption": "Quitar la opción {{n}}",
+      "addOption": "Agregar opción",
+      "statementIs": "La afirmación es",
+      "true": "Verdadera",
+      "false": "Falsa",
+      "whyPrompt": "Pregunta del por qué",
+      "whyPromptHelp": "Por ejemplo: ¿Por qué?",
+      "answer": "Respuesta",
+      "answerHelp": "Por ejemplo: 150.000",
+      "tolerance": "Tolerancia",
+      "toleranceHelp": "Cuánto se acepta de diferencia, por ejemplo: 1",
+      "unit": "Unidad",
+      "unitHelp": "Cómo se escribe la respuesta",
+      "units": {
+        "ARS": "Pesos",
+        "percent": "Porcentaje",
+        "months": "Meses"
+      },
+      "correctFeedback": "Si acierta",
+      "correctFeedbackHelp": "Explica por qué está bien.",
+      "incorrectFeedback": "Si no acierta",
+      "incorrectFeedbackHelp": "Una pista para volver a intentarlo, sin culpar.",
+      "whichCorrect": "¿Cuál es la correcta?"
+    },
+    "qMissing": {
+      "prompt": "Escribe la pregunta.",
+      "options": "Escribe al menos dos opciones.",
+      "correct": "Marca la respuesta correcta.",
+      "why": "Escribe el por qué y al menos dos opciones.",
+      "answer": "Escribe la respuesta como número.",
+      "tolerance": "Escribe la tolerancia como número.",
+      "feedback": "Escribe las dos retroalimentaciones."
+    },
+    "missingTitle": "Para publicar falta",
+    "missing": {
+      "title": "el título;",
+      "module": "el módulo;",
+      "cohorts": "una cohorte;",
+      "blocks": "al menos dos bloques;",
+      "incomplete": "completar los bloques marcados."
+    },
+    "saveDraft": "Guardar borrador",
+    "publish": "Publicar",
+    "update": "Actualizar publicación",
+    "tutorNote": "L&D puede ver tus lecciones y tarjetas para acompañar el programa.",
+    "newCard": "Nueva tarjeta",
+    "editCard": "Editar tarjeta",
+    "noCards": "Todavía no armaste tarjetas.",
+    "cardsHelp": "Aparecen en la billetera de quienes forman parte de las cohortes elegidas, cuando hacen la acción del disparador. Una vez por persona, y nunca durante una misión.",
+    "cardMeta": "{{trigger}} · Cohortes: {{cohorts}} · {{date}}",
+    "trigger": "Disparador (obligatorio)",
+    "triggerHelp": "La acción de la billetera que la muestra.",
+    "triggers": {
+      "salary_received": "Cobrar el sueldo",
+      "subscription_first_debit": "Primer débito de una suscripción",
+      "transfer_new_payee": "Transferir a un alias nuevo",
+      "yield_mode_chosen": "Elegir dónde rinde el saldo",
+      "term_deposit_made": "Constituir un plazo fijo",
+      "card_paid_partially": "Pagar menos que el total de la tarjeta",
+      "installment_purchase": "Comprar en cuotas",
+      "loan_taken": "Tomar un préstamo",
+      "investment_bought": "Comprar una inversión",
+      "message_received": "Recibir un mensaje sospechoso"
+    },
+    "cardTitle": "Título (obligatorio)",
+    "cardTitleHelp": "Una idea en pocas palabras",
+    "cardBody": "Texto (obligatorio)",
+    "cardBodyHelp": "Se lee en 20 a 40 segundos: el concepto y el dato.",
+    "source": "Fuente oficial",
+    "sourceHelp": "El dato oficial que respalda la tarjeta (Anexo B).",
+    "noSource": "Sin fuente",
+    "guide": "Guía (obligatorio)",
+    "guideHelp": "\"Ver en la guía\" lleva a esta guía.",
+    "part": "Parte",
+    "partHelp": "De 1 a {{total}}",
+    "withQuestion": "Sumar una pregunta de un toque",
+    "withQuestionHelp": "Dos opciones y una retroalimentación para cada caso.",
+    "cardMissing": {
+      "trigger": "el disparador;",
+      "title": "el título;",
+      "body": "el texto;",
+      "guide": "la guía y su parte;",
+      "cohorts": "una cohorte;",
+      "question": "completar la pregunta y su retroalimentación."
+    }
   }
 }

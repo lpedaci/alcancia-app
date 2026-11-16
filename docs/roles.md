@@ -120,6 +120,7 @@ Leyenda: ✔ permitido · ◐ solo agregado con umbral de privacidad (mínimo 5)
 | `questions.ask` (consultas) | ✔ | ✖ | ✖ | ✖ |
 | `questions.answer` | ✖ | ✔ sus cohortes | ✖ | ✖ |
 | `assessments.readItemStats` (preguntas con más errores) | ✖ | ◐ sus cohortes | ◐ | ✖ |
+| `content.author` (lecciones y tarjetas propias, F14, D-317) | ✖ | ✔ sus cohortes | ✔ | ✖ |
 
 ### 3.3 Organización e impacto
 

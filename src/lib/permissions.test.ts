@@ -34,6 +34,7 @@ const MATRIX: Partial<Record<Action, Record<Role, Scope | null>>> = {
   'questions.ask': R('own', null, null, null),
   'questions.answer': R(null, 'cohorts', null, null),
   'assessments.readItemStats': R(null, 'cohorts_aggregate', 'all_aggregate', null),
+  'content.author': R(null, 'cohorts', 'all', null),
   // 3.3
   'program.configure': R(null, null, 'all', null),
   'people.manage': R(null, null, 'all', null),

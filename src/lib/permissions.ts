@@ -52,6 +52,8 @@ export const PERMISSIONS = {
   'questions.ask': { participant: 'own' },
   'questions.answer': { tutor: 'cohorts' },
   'assessments.readItemStats': { tutor: 'cohorts_aggregate', ld_admin: 'all_aggregate' },
+  /** F14 (D-317): lessons and learning cards for the cohorts; content only, never data of people. */
+  'content.author': { tutor: 'cohorts', ld_admin: 'all' },
 
   // 3.3 Organization and impact
   'program.configure': { ld_admin: 'all' },

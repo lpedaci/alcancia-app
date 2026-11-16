@@ -55,7 +55,9 @@ export type GuideBlock =
   | { type: 'takeaway'; body: string; toolId?: string }
   | { type: 'text'; title: string; body: string }
   | { type: 'example'; title: string; steps: string[] }
-  | { type: 'recall' | 'practice'; question: LearningQuestion };
+  | { type: 'recall' | 'practice'; question: LearningQuestion }
+  /** A tool embedded in the lesson, with a line on what to try (F14, D-317). */
+  | { type: 'tool'; simId: string; body: string };
 
 export interface Guide {
   id: string;

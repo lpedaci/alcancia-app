@@ -48,6 +48,9 @@ const CryptoPage = lazyPage(() => import('@/features/invest/CryptoPage'), 'Crypt
 const EscapeRoomPage = lazyPage(() => import('@/features/escape/EscapeRoomPage'), 'EscapeRoomPage');
 const CertificatePage = lazyPage(() => import('@/features/learning/CertificatePage'), 'CertificatePage');
 const FollowUpPage = lazyPage(() => import('@/features/learning/FollowUpPage'), 'FollowUpPage');
+const CustomLessonPage = lazyPage(() => import('@/features/learning/GuidePage'), 'CustomLessonPage');
+const TutorAuthoringPage = lazyPage(() => import('@/features/authoring/AuthoringRoutes'), 'TutorAuthoringPage');
+const AdminAuthoringPage = lazyPage(() => import('@/features/authoring/AuthoringRoutes'), 'AdminAuthoringPage');
 const ToolsPage = lazyPage(() => import('@/features/simulators/ToolsPages'), 'ToolsPage');
 const SimToolPage = lazyPage(() => import('@/features/simulators/ToolsPages'), 'SimToolPage');
 const HorneroPage = lazyPage(() => import('@/features/partner/HorneroPage'), 'HorneroPage');
@@ -95,6 +98,7 @@ export function AppRoutes() {
           <Route path="/app/learn/escape" element={<EscapeRoomPage />} />
           <Route path="/app/learn/certificate" element={<CertificatePage />} />
           <Route path="/app/learn/follow-up" element={<FollowUpPage />} />
+          <Route path="/app/learn/lessons/:lessonId" element={<CustomLessonPage />} />
           <Route path="/app/learn/guides/:guideId" element={<GuidePage />} />
           <Route path="/app/learn/review/:moduleId" element={<ReviewPage />} />
           <Route path="/app/learn/community" element={<CommunityPage />} />
@@ -112,11 +116,13 @@ export function AppRoutes() {
           <Route path="/tutor/assessments" element={<AssessmentsPage />} />
           <Route path="/tutor/questions" element={<QuestionsPage />} />
           <Route path="/tutor/community" element={<CommunityModerationPage />} />
+          <Route path="/tutor/lessons" element={<TutorAuthoringPage />} />
           <Route path="/admin" element={<AdminHomePage />} />
           <Route path="/admin/people" element={<PeoplePage />} />
           <Route path="/admin/people/import" element={<ImportPage />} />
           <Route path="/admin/program" element={<ProgramPage />} />
           <Route path="/admin/activity" element={<ActivityPage />} />
+          <Route path="/admin/lessons" element={<AdminAuthoringPage />} />
           <Route path="/sponsor" element={<SponsorPage />} />
           {/* Other routes of a role's area: not found inside the guard, so another role gets G7 first. */}
           <Route path="/app/*" element={<NotFoundPage />} />

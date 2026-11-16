@@ -54,6 +54,11 @@ export function LearnPage() {
   const guideProgress = allGuides.filter((g) => g.personId === personId);
   const attempts = allAttempts.filter((a) => a.personId === personId);
   const missionCompletions = allMissions.filter((m) => m.personId === personId);
+  // F14 (D-317): lessons published by the tutor or L&D for the person's cohorts
+  const allLessons = useDataStore((s) => s.customLessons);
+  const allPeople = useDataStore((s) => s.people);
+  const me = allPeople.find((p) => p.id === personId);
+  const lessons = (allLessons ?? []).filter((l) => l.status === 'published' && l.cohortIds.some((c) => me?.cohortIds.includes(c)));
   const program = useProgram();
   const passing = program.passingScore;
   const programName = program.name;
@@ -279,6 +284,23 @@ export function LearnPage() {
                 </Button>
               )}
               <p className="-mt-3 text-body-small text-on-surface-variant">{t('learn.map.badgesNote')}</p>
+              {lessons.length > 0 && (
+                <div className="flex flex-col gap-2 border-t border-outline-variant pt-5">
+                  <h3 className="text-title-small text-on-surface">{t('learn.custom.title')}</h3>
+                  <ul className="grid grid-cols-[minmax(0,1fr)] gap-2">
+                    {lessons.map((l) => (
+                      <li key={l.id}>
+                        <ListLinkRow
+                          to={`/app/learn/lessons/${l.id}`}
+                          icon="edit_note"
+                          title={l.title}
+                          detail={t('learn.custom.by', { name: allPeople.find((p) => p.id === l.authorId)?.name ?? '', minutes: l.minutes })}
+                        />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
               {/* Shortcuts as whole-row links with a line of detail (D-301), like the reviews list */}
               <div className="flex flex-col gap-2 border-t border-outline-variant pt-5">
                 <h3 className="text-title-small text-on-surface">{t('learn.map.shortcuts')}</h3>

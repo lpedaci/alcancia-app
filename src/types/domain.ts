@@ -244,6 +244,39 @@ export interface GuideProgress {
 
 /** Missions are shared only as aggregated counts per cohort (5.3). */
 /**
+ * Lessons and learning cards authored by a tutor or L&D (F14, D-317). Learning content only: a lesson
+ * reuses the guide blocks and is published to cohorts; a card joins the catalog of the right moment
+ * (D-76) for the people of those cohorts. Never money nor data of anyone.
+ */
+export interface CustomLesson {
+  id: string;
+  orgId: string;
+  authorId: string;
+  title: string;
+  moduleId: string;
+  minutes: number;
+  blocks: import('@/features/learning/questions').GuideBlock[];
+  cohortIds: string[];
+  status: 'draft' | 'published';
+  updatedAt: IsoDate;
+}
+
+export interface CustomCard {
+  id: string;
+  orgId: string;
+  authorId: string;
+  trigger: string;
+  title: string;
+  body: string;
+  sourceIds: string[];
+  question?: { prompt: string; options: { id: string; text: string }[]; correct: string; feedback: { correct: string; incorrect: string } };
+  guide: { guideId: string; part: number };
+  cohortIds: string[];
+  status: 'draft' | 'published';
+  updatedAt: IsoDate;
+}
+
+/**
  * Escape room "Tu primer sueldo" (F18, D-313): the only thing tutors and L&D know is that it was
  * completed and which badges were earned. Reflections, answers, hints and time stay in the browser.
  */

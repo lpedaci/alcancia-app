@@ -1,0 +1,114 @@
+{
+  "note": "F14 (D-317): demo content authored in the builder. A lesson of Kevin Giovanni for the Operations cohort and a learning card for the Administration cohort. Learning content only.",
+  "lessons": [
+    {
+      "id": "lesson-demo-cuotas",
+      "orgId": "org-andina",
+      "authorId": "p-kevin",
+      "title": "Cuotas del centro de distribución",
+      "moduleId": "module-08",
+      "minutes": 5,
+      "cohortIds": [
+        "cohort-operations"
+      ],
+      "status": "published",
+      "updatedAt": "2026-11-12",
+      "blocks": [
+        {
+          "type": "objective",
+          "body": "Al terminar vas a poder comparar una compra en cuotas con el precio de contado, mirando el total y no la cuota."
+        },
+        {
+          "type": "text",
+          "title": "La cuota no es el precio",
+          "body": "En el encuentro del jueves vimos que una cuota baja puede esconder un total alto. Para comparar, multiplica la cuota por la cantidad de cuotas y suma los cargos: ese es el precio en cuotas."
+        },
+        {
+          "type": "example",
+          "title": "Una heladera en 12 cuotas",
+          "steps": [
+            "Contado: $ 600.000.",
+            "12 cuotas de $ 60.000 = $ 720.000.",
+            "La diferencia es $ 120.000: lo que te cuesta financiarte."
+          ]
+        },
+        {
+          "type": "tool",
+          "simId": "SIM-6",
+          "body": "Prueba con el precio de algo que quieras comprar y cambia la inflación esperada: mira cuándo conviene cada opción."
+        },
+        {
+          "type": "practice",
+          "question": {
+            "id": "lesson-demo-cuotas-q5",
+            "moduleId": "module-08",
+            "type": "single",
+            "prompt": "Te ofrecen 6 cuotas de $ 25.000 o $ 135.000 de contado. ¿Qué dato miras primero?",
+            "options": [
+              {
+                "id": "a",
+                "text": "El total en cuotas: $ 150.000"
+              },
+              {
+                "id": "b",
+                "text": "La cuota: $ 25.000"
+              }
+            ],
+            "correctOptionIds": [
+              "a"
+            ],
+            "feedback": {
+              "correct": "Así es. Con el total a la vista, ves que pagas $ 15.000 más por financiarte.",
+              "incorrect": "La cuota sola no dice cuánto pagas. Multiplica por la cantidad de cuotas y compara con el contado."
+            },
+            "sourceIds": []
+          }
+        },
+        {
+          "type": "takeaway",
+          "body": "Para tu vida: antes de tu próxima compra en cuotas, anota el total y compáralo con el precio de contado."
+        }
+      ]
+    }
+  ],
+  "cards": [
+    {
+      "id": "card-demo-transfer",
+      "orgId": "org-andina",
+      "authorId": "p-kevin",
+      "trigger": "transfer_new_payee",
+      "title": "El titular, antes que el alias",
+      "body": "Antes de confirmar una transferencia a alguien nuevo, mira el nombre del titular que muestra la app. Las transferencias inmediatas se acreditan en segundos y no se pueden deshacer desde la app.",
+      "sourceIds": [
+        "B-15"
+      ],
+      "question": {
+        "prompt": "¿Qué revisas antes de confirmar?",
+        "options": [
+          {
+            "id": "a",
+            "text": "El nombre del titular"
+          },
+          {
+            "id": "b",
+            "text": "Solo el alias"
+          }
+        ],
+        "correct": "a",
+        "feedback": {
+          "correct": "Bien. El titular confirma que el dinero llega a quien buscas.",
+          "incorrect": "Un alias mal escrito puede ser de otra persona. El titular es lo que lo confirma."
+        }
+      },
+      "guide": {
+        "guideId": "module-17-guide-1",
+        "part": 3
+      },
+      "cohortIds": [
+        "cohort-administration"
+      ],
+      "status": "published",
+      "updatedAt": "2026-11-13"
+    }
+  ]
+}

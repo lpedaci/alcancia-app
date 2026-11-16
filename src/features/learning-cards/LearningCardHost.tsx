@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router';
 import { readLocal, writeLocal } from '@/store/local-store';
 import { onWalletChange } from '@/store/wallet-store';
-import { emptyRecord, type LearningCardDef, pickCard, recordCard } from './cards';
+import { useDataStore } from '@/store/data-store';
+import { emptyRecord, LEARNING_CARDS, type LearningCardDef, pickCard, recordCard } from './cards';
 import { FloatingLearningCard, LearningCardContent } from './LearningCard';
 
 /**
@@ -16,6 +17,16 @@ export function LearningCardHost({ personId, showFuerte }: { personId: string; s
   const open = useRef(false);
   const inMission = pathname.startsWith('/app/missions');
   const suppressed = useRef(inMission);
+  // F14 (D-317): cards published by the tutor or L&D for the person's cohorts come first, then the catalog
+  const customCards = useDataStore((s) => s.customCards);
+  const cohortIds = useDataStore((s) => s.people.find((p) => p.id === personId)?.cohortIds);
+  const catalog = useRef<LearningCardDef[]>(LEARNING_CARDS);
+  useEffect(() => {
+    const mine = (customCards ?? [])
+      .filter((c) => c.status === 'published' && c.cohortIds.some((id) => cohortIds?.includes(id)))
+      .map((c) => ({ ...c, trigger: c.trigger as LearningCardDef['trigger'] }));
+    catalog.current = [...mine, ...LEARNING_CARDS];
+  }, [customCards, cohortIds]);
   useEffect(() => {
     suppressed.current = inMission;
   }, [inMission]);
@@ -25,7 +36,7 @@ export function LearningCardHost({ personId, showFuerte }: { personId: string; s
       onWalletChange((who, prev, next) => {
         if (who !== personId || suppressed.current || open.current) return;
         const local = readLocal(personId);
-        const found = pickCard(prev, next, local.learningCards ?? emptyRecord());
+        const found = pickCard(prev, next, local.learningCards ?? emptyRecord(), catalog.current);
         if (!found) return;
         writeLocal(personId, (d) => ({
           ...d,
