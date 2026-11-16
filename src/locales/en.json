@@ -2699,5 +2699,757 @@
       "sell_one": "Sell · {{count}} unit",
       "sell_other": "Sell · {{count}} units"
     }
+  },
+  "escape": {
+    "title": "Your first paycheck",
+    "kicker": "Escape room",
+    "lockedTitle": "The escape room is locked",
+    "lockedBody": "It is a special challenge that opens with level 4. Meanwhile, each room you play later reviews what you already learned.",
+    "storyTitle": "The story",
+    "story": [
+      "It is your first payday. You went to Andina to sign your payslip and the office door got stuck.",
+      "To get out you have to open 5 locks, one per room. Each lock you open gives you a letter of the final door's code."
+    ],
+    "facts": {
+      "rooms": {
+        "title": "5 rooms",
+        "body": "They open in order, each with a different kind of challenge."
+      },
+      "time": {
+        "title": "No time limit",
+        "body": "There is no countdown and no way to lose."
+      },
+      "keys": {
+        "title": "Hints for keys",
+        "body": "You start with 3 and earn one for each reflection."
+      }
+    },
+    "credits": "Adapted from the escape room of the workshop \"Del aula al primer trabajo\". Gamification and instructional design: Lourdes Pedaci. Finance content: Kevin Giampieri.",
+    "start": "Enter the office",
+    "progressLabel": "Your progress in the escape room",
+    "state": {
+      "solved": "open",
+      "current": "in progress",
+      "locked": "closed"
+    },
+    "keys": "Keys",
+    "hintsUsed": "Hints used",
+    "letters": "Letters",
+    "lettersValue": "{{count}} of {{total}} letters",
+    "time": {
+      "label": "Time",
+      "hidden": "Hidden",
+      "show": "Show time",
+      "hide": "Hide time"
+    },
+    "reset": "Start over",
+    "resetTitle": "Start over?",
+    "resetBody": "Your progress, your reflections and your escape room badges are erased. This cannot be undone.",
+    "roomOf": "Room {{n}} of {{total}} · {{place}}",
+    "inspectTitle": "Inspect the objects",
+    "inspect": "Inspect",
+    "habit": "This lock turns on the light of {{habit}}.",
+    "check": "Check",
+    "try": "Try",
+    "lockOff": "First complete the challenge above to turn on the lock.",
+    "hints": "Hints",
+    "hintN": "Hint {{n}}",
+    "hintCost": "See hint (1 key)",
+    "hintFree": "See hint (free)",
+    "noKeys": "You have no keys left. You earn one with each reflection, and if you miss 3 times in a row the next hint opens by itself.",
+    "opened": "You opened the lock. You earned the letter {{letter}}.",
+    "debriefTitle": "What you just solved",
+    "toGuide": "Review in the guide",
+    "toGuideDetail": "The guide of the module that covers this topic",
+    "reflectionHelp": "It is optional and not graded. If you write something, you earn a key. Only you see it.",
+    "reflectionSave": "Save reflection",
+    "reflectionKey": "Reflection saved. You earned a key.",
+    "reflectionSaved": "Reflection saved.",
+    "nextRoom": "Go on to the room",
+    "toDoor": "Go to the final door",
+    "door": {
+      "kicker": "Final door",
+      "title": "The final door",
+      "label": "Your answer",
+      "help": "A {{n}}-letter word, with the letters you collected.",
+      "open": "Open the door",
+      "anagram": "You used all the letters, but that word does not answer the question.",
+      "wrong": "Not yet. Try ordering the letters another way.",
+      "missing": "You are still missing letters. Solve the rooms that are left.",
+      "empty": "Write a word before trying."
+    },
+    "exit": {
+      "title": "You got out",
+      "body": "You opened the final door and the five lock lights came on.",
+      "seal": "Your seal"
+    },
+    "seals": {
+      "gold": "Clean exit",
+      "silver": "Good strategy",
+      "bronze": "You got out"
+    },
+    "badges": {
+      "bronze": "Bronze badge",
+      "silver": "Silver badge",
+      "gold": "Gold badge",
+      "short": {
+        "bronze": "bronze",
+        "silver": "silver",
+        "gold": "gold"
+      },
+      "list": "Your escape room badges",
+      "earnedBody": "The five rooms solved in their {{version}} version.",
+      "missingBody": "Solve the five rooms in their {{version}} version.",
+      "download": "Download",
+      "fileName": "alcancia-escape-room-badge-{{badge}}",
+      "svgLine": "Escape room \"Your first paycheck\" · {{version}} version",
+      "svgFoot": "Alcancía · Personal finance simulator · {{date}}",
+      "new": "You earned the {{badge}} badge",
+      "title": "Your badges",
+      "pending": "Pending"
+    },
+    "backToLearn": "Back to Learn",
+    "backToLearnDetail": "Your level map and your achievements",
+    "fuerte": {
+      "locked": "The escape room opens with level 4. First what protects you; then, the game.",
+      "hello": "Hi, I am Fuerte. Here mistakes are free: each lock you open turns on one of the room's lights.",
+      "start": "Let's start at the reception. Inspect the objects before trying.",
+      "almost": "Almost. Look at what it says below.",
+      "hint": "Here is a little help.",
+      "solved": "Saved. Another light came on.",
+      "next": "Next room. Inspect before trying.",
+      "door": "You have all the letters now. Let's go to the door.",
+      "out": "You got out. Five lights on."
+    },
+    "objects": {
+      "payslip": "Payslip",
+      "example": "Example payslip",
+      "concept": "Item",
+      "unit": "Unit",
+      "earnings": "Earnings",
+      "deductions": "Deductions",
+      "toCalculate": "To calculate",
+      "gross": "Gross total",
+      "stain": "Coffee stain",
+      "noDeductions": "No deductions"
+    },
+    "versions": {
+      "legend": "Choose the version",
+      "initial": {
+        "title": "Beginner",
+        "body": "The first paycheck's math, one step at a time."
+      },
+      "intermediate": {
+        "title": "Intermediate",
+        "body": "Overtime, two small recurring expenses and raises that add up."
+      },
+      "advanced": {
+        "title": "Advanced",
+        "body": "Non-remunerative amounts, installment totals and yield against inflation."
+      },
+      "earned": "You already have the {{badge}} badge",
+      "gives": "Gives the {{badge}} badge",
+      "chip": "{{version}} version"
+    },
+    "simple": {
+      "kicker": "Escape room · Simple mode",
+      "title": "The same questions, without the game layer",
+      "body": "Each room with its scene, its objects in view and its questions, one below the other. No keys, no letters or door, and the hints at hand. If you open the five locks, you earn the same badge as in the game.",
+      "backToGame": "Back to the game",
+      "progress": "Locks open: {{n}} of {{total}}",
+      "objects": "The room's objects",
+      "hints": "See hints",
+      "endTitle": "When you finish",
+      "endPending": "You need {{n}} more locks for this version's badge.",
+      "offer": "Would you rather answer without the game layer?",
+      "cta": "Use simple mode"
+    },
+    "playVersion": "Play the {{version}} version"
+  },
+  "sims": {
+    "common": {
+      "intro": "The twelve tools together. Each one calculates a scenario with example values or with data from your practice wallet: nothing leaves your browser.",
+      "sectionLocked": "its section opens at level {{level}}",
+      "data": "Scenario data",
+      "slider": "{{label}}, slider",
+      "invalid": "Check the data: a field is empty or out of range.",
+      "assumptionsSummary": "Scenario assumptions · Example values",
+      "examples": "Example values for learning. Check current values in the official sources.",
+      "whereReal": "Where to see the real values",
+      "preset": "Some data comes from your practice wallet.",
+      "table": "Result table",
+      "category": "Category",
+      "month": "Month",
+      "year": "Year",
+      "today": "Today",
+      "concept": "Item",
+      "value": "Value",
+      "option": "Option",
+      "method": "Method",
+      "scenario": "Scenario",
+      "print": "Print or save as PDF"
+    },
+    "SIM-3": {
+      "short": "How much your money buys with inflation, month by month."
+    },
+    "SIM-1": {
+      "title": "Monthly budget",
+      "short": "Your income, your expenses and what is left, against 50/30/20 or 70/20/10.",
+      "intro": "Build your month and compare it with a reference rule. The rule is a starting point, not an obligation.",
+      "fields": {
+        "income": {
+          "label": "Net income for the month",
+          "help": "Amount in pesos, for example: 1.284.958,86",
+          "short": "Income"
+        },
+        "aguinaldo": {
+          "label": "Add the prorated aguinaldo",
+          "help": "The aguinaldo (13th-month salary) spread over 12 months, approximated as the net salary divided by 12.",
+          "choices": {
+            "no": "No",
+            "yes": "Yes"
+          }
+        },
+        "needs": {
+          "label": "Spending on needs",
+          "help": "Rent, food, bills and transport. For example: 650.000",
+          "short": "Needs"
+        },
+        "wants": {
+          "label": "Spending on wants",
+          "help": "Going out, clothes, subscriptions. For example: 186.500",
+          "short": "Wants"
+        },
+        "rule": {
+          "label": "Reference rule",
+          "help": "50/30/20 in general; 70/20/10 if your fixed expenses are high.",
+          "choices": {
+            "50/30/20": "50/30/20",
+            "70/20/10": "70/20/10"
+          }
+        }
+      },
+      "main": "Left to save",
+      "sentence": "With this data, needs are {{needs}} of your income, wants {{wants}} and you have {{saved}} left to save. Compare it with the {{rule}} reference.",
+      "sentenceNegative": "With this data, expenses exceed income by {{missing}}. Check which expense can be adjusted.",
+      "pillNegative": "Expenses exceed income",
+      "pillSaved": "Savings: {{saved}} of income",
+      "chartTitle": "Your split against the reference",
+      "chartConclusion": "Each bar compares your amount with what the {{rule}} rule suggests.",
+      "yours": "Your budget",
+      "reference": "Reference",
+      "meaning": "The 50/30/20 and 70/20/10 rules are starting points. If your needs go above the reference, it is not a mistake: it is information to decide where to adjust or how to save even a little each month.",
+      "try": "Try switching the rule to 70/20/10 and see how the savings reference changes.",
+      "assumptions": [
+        "One month of income and expenses, with no price changes.",
+        "The prorated aguinaldo is an approximation: monthly net divided by 12.",
+        "What is left after needs and wants counts as savings."
+      ]
+    },
+    "SIM-2": {
+      "title": "Emergency fund",
+      "short": "How much you need, how much is missing and in how many months you get there.",
+      "intro": "Calculate your emergency fund from your essential expenses and how many months it takes to build it.",
+      "fields": {
+        "essentials": {
+          "label": "Essential expenses per month",
+          "help": "Rent, food, bills and transport. For example: 650.000",
+          "short": "Essentials"
+        },
+        "months": {
+          "label": "Months of coverage",
+          "help": "3 to 6 months is a common reference.",
+          "short": "Months"
+        },
+        "current": {
+          "label": "What you already have saved",
+          "help": "Amount in pesos, for example: 0",
+          "short": "Saved"
+        },
+        "monthly": {
+          "label": "How much you set aside per month",
+          "help": "Amount in pesos, for example: 128.495,89"
+        }
+      },
+      "main": "Your {{months}}-month goal",
+      "sentence_one": "You are missing {{missing}}. Setting aside {{monthly}} per month, you get there in {{count}} month.",
+      "sentence_other": "You are missing {{missing}}. Setting aside {{monthly}} per month, you get there in {{count}} months.",
+      "sentenceNoSaving": "You are missing {{missing}}. Without a monthly amount, there is no estimated date.",
+      "sentenceDone": "You already reached your goal: keeping it available and risk-free is what matters now.",
+      "pillMissing": "Missing: {{missing}}",
+      "pillMonths_one": "{{count}} month to get there",
+      "pillMonths_other": "{{count}} months to get there",
+      "chartTitle": "Your savings toward the goal",
+      "chartConclusion_one": "At this pace, the savings line reaches the goal in {{count}} month.",
+      "chartConclusion_other": "At this pace, the savings line reaches the goal in {{count}} months.",
+      "saved": "Saved",
+      "goal": "Goal",
+      "meaning": "The emergency fund is for real surprises, like a health problem or losing your job. It is best kept available within 24 hours and risk-free.",
+      "try": "Try changing the months of coverage from 3 to 6 and see how much longer it takes.",
+      "assumptions": [
+        "Constant essential expenses.",
+        "Equal contributions every month, with no yield.",
+        "Months are rounded up: a partial month still requires saving."
+      ]
+    },
+    "SIM-4": {
+      "title": "Real rate",
+      "short": "Whether a rate beats the scenario's inflation or not.",
+      "intro": "Go from the nominal annual rate (TNA) to the rate for the period and compare it with inflation over the same period.",
+      "fields": {
+        "tna": {
+          "label": "Nominal annual rate (TNA)",
+          "help": "As an annual percentage, for example: 34",
+          "short": "TNA"
+        },
+        "days": {
+          "label": "Term in days",
+          "help": "From 1 to 365 days, for example: 30",
+          "short": "Days"
+        },
+        "inflation": {
+          "label": "Scenario monthly inflation",
+          "help": "As a monthly percentage, for example: 3",
+          "short": "Inflation"
+        }
+      },
+      "main": "Real rate over {{days}} days",
+      "sentenceWins": "Over {{days}} days, the period rate ({{rate}}) is above the period inflation ({{inflation}}): your money gains purchasing power in this scenario.",
+      "sentenceLoses": "Over {{days}} days, the period rate ({{rate}}) does not reach the period inflation ({{inflation}}): your money loses purchasing power in this scenario.",
+      "pillWins": "Beats the scenario's inflation",
+      "pillLoses": "You lose purchasing power",
+      "chartTitle": "Rate and inflation over {{days}} days",
+      "percentOfPeriod": "% of the period",
+      "periodRate": "Period rate",
+      "periodInflation": "Period inflation",
+      "tnaRow": "TNA",
+      "teaRow": "Effective annual rate (TEA)",
+      "realRow": "Real rate",
+      "meaning": "The TNA is a reference rate; what you earn over a term is TNA × days ÷ 365. The real rate discounts inflation: if it is negative, the money buys less at the end even with more pesos.",
+      "try": "Try changing inflation to the high scenario (6 %) and see what happens to the real rate.",
+      "assumptions": [
+        "Constant monthly inflation over the period.",
+        "Simple interest for the term: TNA × days ÷ 365.",
+        "No taxes or fees."
+      ]
+    },
+    "SIM-5": {
+      "title": "Traditional or UVA term deposit",
+      "short": "What is left in pesos and in purchasing power with each one.",
+      "intro": "Compare a traditional term deposit with a UVA one (inflation-adjusted) in the same scenario.",
+      "fields": {
+        "amount": {
+          "label": "Amount",
+          "help": "Amount in pesos, for example: 1.000.000",
+          "short": "Amount"
+        },
+        "days": {
+          "label": "Term in days",
+          "help": "From 30 to 365 days, for example: 180",
+          "short": "Days"
+        },
+        "tna": {
+          "label": "Traditional term deposit TNA",
+          "help": "As an annual percentage, for example: 34",
+          "short": "TNA"
+        },
+        "uvaExtra": {
+          "label": "UVA additional rate",
+          "help": "As an annual percentage, for example: 1"
+        },
+        "inflation": {
+          "label": "Scenario monthly inflation",
+          "help": "As a monthly percentage, for example: 3"
+        }
+      },
+      "main": "After {{days}} days",
+      "uvaHigher": "The UVA ends with more",
+      "tradHigher": "The traditional one ends with more",
+      "sentence": "After {{days}} days, the traditional one reaches {{trad}} and the UVA one {{uva}}, in this scenario.",
+      "pillMinimum": "Many banks ask for 90 or 180 days for the UVA",
+      "pillPower": "In purchasing power: {{trad}} and {{uva}}",
+      "chartTitle": "Final amount in pesos and in purchasing power",
+      "chartConclusion": "The second bar of each option discounts the scenario's inflation.",
+      "inPesos": "In pesos",
+      "inPower": "In purchasing power",
+      "trad": "Traditional",
+      "uva": "UVA",
+      "meaning": "The traditional one pays a fixed rate; the UVA one adjusts the principal for inflation and adds a small rate. If inflation goes up, the UVA protects better; if it goes down, it can earn less. Conditions depend on each bank.",
+      "try": "Try changing inflation to the low scenario (1,5 %) and see which one ends with more.",
+      "assumptions": [
+        "The UVA is approximated with the scenario's inflation; the real UVA adjusts by CER with a lag.",
+        "The UVA minimum term and early withdrawal depend on the bank: check its conditions.",
+        "No taxes."
+      ]
+    },
+    "SIM-6": {
+      "title": "Interest-free installments or cash",
+      "short": "Which is better in a scenario: a discount today or installments that inflation shrinks.",
+      "intro": "Compare the discounted cash price with today's value of the installments, with the scenario's inflation.",
+      "fields": {
+        "price": {
+          "label": "Installment price",
+          "help": "Total amount in pesos, for example: 120.000",
+          "short": "Price"
+        },
+        "count": {
+          "label": "Number of installments",
+          "help": "From 1 to 36, for example: 12",
+          "short": "Installments"
+        },
+        "discount": {
+          "label": "Discount for paying cash",
+          "help": "As a percentage, for example: 15",
+          "short": "Discount"
+        },
+        "inflation": {
+          "label": "Scenario monthly inflation",
+          "help": "As a monthly percentage, for example: 3"
+        },
+        "first": {
+          "label": "First installment",
+          "help": "Whether it is paid in a month or at the time of purchase.",
+          "choices": {
+            "next": "In a month",
+            "today": "Today"
+          }
+        }
+      },
+      "main": "In this scenario, the better option is",
+      "cash": "Cash",
+      "installments": "Installments",
+      "sentenceCash": "Discounted cash ({{cash}}) costs less than today's value of the {{count}} installments of {{installment}} ({{pv}}).",
+      "sentenceInstallments": "The {{count}} installments of {{installment}} are worth {{pv}} today, less than discounted cash ({{cash}}): inflation shrinks each installment.",
+      "pillScenario": "Depends on the scenario's inflation",
+      "chartTitle": "What you pay, in today's pesos",
+      "chartCash": "Cash is the lowest bar in this scenario.",
+      "chartInstallments": "Today's value of the installments is the lowest bar in this scenario.",
+      "inToday": "In today's pesos",
+      "cashBar": "Discounted cash",
+      "pvBar": "Installments, today's value",
+      "nominalBar": "Installments, total sum",
+      "installmentRow": "Installment (of {{count}})",
+      "meaning": "A future installment is worth less than the same amount today, because inflation raises prices. That is why interest-free installments can be better, unless the cash discount is bigger.",
+      "try": "Try changing the discount to 5 % and see if the better option changes.",
+      "assumptions": [
+        "Constant monthly inflation.",
+        "Equal, interest-free installments.",
+        "It does not include the yield you could get with the money."
+      ]
+    },
+    "SIM-7": {
+      "title": "Credit card",
+      "short": "What paying the minimum costs compared with paying the total.",
+      "intro": "See how long it takes and how much interest you pay if you only pay the minimum, with no new purchases.",
+      "fields": {
+        "balance": {
+          "label": "Statement balance",
+          "help": "Amount in pesos, for example: 240.000",
+          "short": "Balance"
+        },
+        "tna": {
+          "label": "Financing rate (TNA)",
+          "help": "As an annual percentage, for example: 60",
+          "short": "TNA"
+        },
+        "cft": {
+          "label": "Total financial cost (CFT)",
+          "help": "The one shown on your statement, as an annual percentage. For example: 95"
+        },
+        "minimum": {
+          "label": "Minimum payment",
+          "help": "As a percentage of the balance, for example: 10"
+        }
+      },
+      "main": "Interest if you pay the minimum",
+      "sentence_one": "Paying the minimum, it takes you {{count}} month, you pay {{interest}} in interest and {{total}} in total. Paying the total today, you pay {{balance}}.",
+      "sentence_other": "Paying the minimum, it takes you {{count}} months, you pay {{interest}} in interest and {{total}} in total. Paying the total today, you pay {{balance}}.",
+      "sentenceNever": "With this data, the minimum payment does not cover the interest: the debt never gets paid off.",
+      "pillMonths_one": "{{count}} month paying the minimum",
+      "pillMonths_other": "{{count}} months paying the minimum",
+      "pillCft": "CFT {{cft}} against TNA {{tna}}",
+      "chartTitle": "Card balance paying the minimum",
+      "chartConclusion_one": "The balance reaches zero in {{count}} month.",
+      "chartConclusion_other": "The balance reaches zero in {{count}} months.",
+      "balance": "Balance",
+      "payMinimum": "Paying the minimum",
+      "payTotal": "Paying the total",
+      "paid": "Total paid",
+      "interest": "Interest",
+      "time": "Time",
+      "months_one": "{{count}} month",
+      "months_other": "{{count}} months",
+      "now": "Today",
+      "meaning": "What you do not pay on the statement is financed at the card's rate. The CFT adds fees and charges to that rate: it is the number to compare. Paying the total avoids interest.",
+      "try": "Try changing the minimum payment from 10 % to 5 % and see how many more months it takes.",
+      "assumptions": [
+        "No new purchases or taxes: it is a simplification.",
+        "Monthly interest = TNA × 30 ÷ 365 on the balance; minimum with a floor of $ 1.000.",
+        "The CFT is shown for comparison; the calculation uses the TNA."
+      ]
+    },
+    "SIM-8": {
+      "title": "Savings goal with inflation",
+      "short": "What your goal will cost and how much to set aside per month.",
+      "intro": "Adjust your goal's price for the scenario's inflation and calculate how much to set aside each month.",
+      "fields": {
+        "price": {
+          "label": "What it costs today",
+          "help": "Amount in pesos, for example: 1.500.000",
+          "short": "Price"
+        },
+        "months": {
+          "label": "Term in months",
+          "help": "From 1 to 60, for example: 12",
+          "short": "Months"
+        },
+        "inflation": {
+          "label": "Scenario monthly inflation",
+          "help": "As a monthly percentage, for example: 3"
+        },
+        "return": {
+          "label": "Monthly yield on savings",
+          "help": "As a monthly percentage; 0 if you keep it with no yield. For example: 2,5"
+        }
+      },
+      "main": "Set aside per month",
+      "sentence_one": "What costs {{price}} today would cost {{future}} in {{count}} month. To get there, set aside {{monthly}} per month.",
+      "sentence_other": "What costs {{price}} today would cost {{future}} in {{count}} months. To get there, set aside {{monthly}} per month.",
+      "pillFuture": "Estimated price at the end: {{future}}",
+      "chartTitle": "Your goal's price and your savings",
+      "chartConclusion_one": "The two lines meet in month {{count}}.",
+      "chartConclusion_other": "The two lines meet in month {{count}}.",
+      "priceSeries": "Goal price",
+      "savedSeries": "Saved",
+      "meaning": "With inflation, a goal moves away if it is not adjusted. Calculating the final price and the monthly savings keeps you from arriving with less than you need.",
+      "try": "Try adding a 2,5 % monthly yield and see how much the monthly savings drop.",
+      "assumptions": [
+        "Constant monthly inflation and yield.",
+        "Equal contributions at the end of each month."
+      ]
+    },
+    "SIM-9": {
+      "title": "Getting out of debt: snowball or avalanche",
+      "short": "Two ways to order your debts, compared side by side.",
+      "intro": "Compare paying the smallest debt first (snowball) or the highest-rate one first (avalanche), with the same monthly amount.",
+      "fields": {
+        "b1": {
+          "label": "Debt 1 · balance",
+          "help": "Amount in pesos, for example: 40.000"
+        },
+        "r1": {
+          "label": "Debt 1 · annual rate",
+          "help": "As an annual percentage, for example: 150"
+        },
+        "m1": {
+          "label": "Debt 1 · minimum payment",
+          "help": "Amount in pesos per month, for example: 4.000"
+        },
+        "b2": {
+          "label": "Debt 2 · balance",
+          "help": "Amount in pesos, for example: 15.000"
+        },
+        "r2": {
+          "label": "Debt 2 · annual rate",
+          "help": "As an annual percentage, for example: 110"
+        },
+        "m2": {
+          "label": "Debt 2 · minimum payment",
+          "help": "Amount in pesos per month, for example: 1.500"
+        },
+        "b3": {
+          "label": "Debt 3 · balance",
+          "help": "Amount in pesos, for example: 200.000"
+        },
+        "r3": {
+          "label": "Debt 3 · annual rate",
+          "help": "As an annual percentage, for example: 80"
+        },
+        "m3": {
+          "label": "Debt 3 · minimum payment",
+          "help": "Amount in pesos per month, for example: 10.000"
+        },
+        "extra": {
+          "label": "Extra amount per month",
+          "help": "What you can add on top of the minimums, for example: 20.000"
+        }
+      },
+      "debt1": "Card",
+      "debt2": "Lender",
+      "debt3": "Bank loan",
+      "main": "Interest difference",
+      "sentence_one": "The avalanche saves you {{saving}} in interest; the snowball pays off the first debt {{count}} month sooner.",
+      "sentence_other": "The avalanche saves you {{saving}} in interest; the snowball pays off the first debt {{count}} months sooner.",
+      "pillSnow": "Snowball: {{count}} months",
+      "pillAval": "Avalanche: {{count}} months",
+      "chartTitle": "Total interest of each method",
+      "chartConclusion": "The lowest bar is the one that pays the least interest.",
+      "interest": "Interest",
+      "snowball": "Snowball",
+      "avalanche": "Avalanche",
+      "order": "Order in which they are paid off",
+      "monthsCol": "Months",
+      "meaning": "The snowball tackles the smallest debt first and gives quick results; the avalanche tackles the highest rate first and pays less interest. What matters is paying all the minimums and keeping up the extra.",
+      "try": "Try raising the extra amount to 40.000 and see how many fewer months it takes.",
+      "assumptions": [
+        "Monthly interest = annual rate × 30 ÷ 365 on each balance.",
+        "When a debt is paid off, its minimum is added to the next one's payment.",
+        "The example data comes from the workshop presentation; the minimums and the extra are assumptions for practice."
+      ]
+    },
+    "SIM-10": {
+      "title": "Compound interest and regular contributions",
+      "short": "How much a monthly contribution grows over time.",
+      "intro": "See how capital grows with monthly contributions and an example annual rate.",
+      "fields": {
+        "currency": {
+          "label": "Currency",
+          "help": "Pesos or dollars.",
+          "choices": {
+            "USD": "Dollars",
+            "ARS": "Pesos"
+          }
+        },
+        "initial": {
+          "label": "Initial capital",
+          "help": "For example: 0",
+          "short": "Initial"
+        },
+        "monthly": {
+          "label": "Monthly contribution",
+          "help": "For example: 200",
+          "short": "Contribution"
+        },
+        "rate": {
+          "label": "Expected annual rate",
+          "help": "As an annual percentage, for example: 12",
+          "short": "Rate"
+        },
+        "years": {
+          "label": "Years",
+          "help": "From 1 to 50, for example: 33"
+        }
+      },
+      "main_one": "Capital after {{count}} year",
+      "main_other": "Capital after {{count}} years",
+      "sentence_one": "Contributing {{monthly}} per month at {{rate}} a year for {{count}} year, you would reach {{final}} in this scenario; {{interest}} would be interest.",
+      "sentence_other": "Contributing {{monthly}} per month at {{rate}} a year for {{count}} years, you would reach {{final}} in this scenario; {{interest}} would be interest.",
+      "pillContributed": "Contributed: {{amount}}",
+      "pillInterest": "Interest: {{amount}}",
+      "chartTitle": "Capital growth",
+      "chartConclusion": "The gap between the two areas is the interest: it grows more the more time passes.",
+      "finalSeries": "Capital",
+      "contributedSeries": "Contributed",
+      "meaning": "Compound interest makes interest earn interest too. That is why starting earlier weighs more than contributing a lot later. Past returns do not guarantee future returns.",
+      "try": "Try lowering the years from 33 to 20 and see how much the result changes.",
+      "assumptions": [
+        "Constant annual rate, monthly compounding (rate ÷ 12).",
+        "Contributions at the end of each month.",
+        "No taxes, fees or inflation. Past returns do not guarantee future returns."
+      ]
+    },
+    "SIM-11": {
+      "title": "CEDEAR: from the stock to the peso price",
+      "short": "How a CEDEAR's price is formed and what moves it.",
+      "intro": "Calculate a CEDEAR's theoretical price from the dollar price, the ratio and the implied exchange rate. All values are examples.",
+      "fields": {
+        "usdPrice": {
+          "label": "Stock or ETF price in dollars",
+          "help": "For example: 600"
+        },
+        "ratio": {
+          "label": "Conversion ratio",
+          "help": "How many CEDEARs equal one share. For example: 20 (20:1)"
+        },
+        "fx": {
+          "label": "Implied exchange rate",
+          "help": "Pesos per dollar, for example: 1.500"
+        }
+      },
+      "main": "CEDEAR theoretical price",
+      "sentence": "With a price of {{usd}}, a ratio of {{ratio}}:1 and an exchange rate of {{fx}}, the CEDEAR would be worth about {{price}}.",
+      "pillExample": "Example values, not current prices",
+      "chartTitle": "What happens if the stock or the exchange rate goes up 10 %",
+      "chartConclusion": "Either increase moves the peso price in the same proportion.",
+      "priceSeries": "Price in pesos",
+      "base": "Today",
+      "stockUp": "Stock +10 %",
+      "fxUp": "Exchange rate +10 %",
+      "bothUp": "Both +10 %",
+      "meaning": "A CEDEAR's price depends on the asset's price abroad and on the exchange rate. The real price can have a premium or a discount from supply and demand. Ratios can change: check the current list.",
+      "try": "Try changing the ratio from 20 to 10 and see how each CEDEAR's price changes.",
+      "assumptions": [
+        "Theoretical price: dollars ÷ ratio × implied exchange rate.",
+        "No fees or market charges.",
+        "The ratio is an example: current ones are on BYMA's list."
+      ]
+    },
+    "SIM-12": {
+      "title": "Where do I keep my emergency fund?",
+      "short": "Compare liquidity, yield and protection of three options.",
+      "intro": "Compare an interest-bearing account, a term deposit and a money market fund with example rates. It is not a recommendation: it is a comparison of features.",
+      "fields": {
+        "amount": {
+          "label": "Amount",
+          "help": "Amount in pesos, for example: 3.000.000",
+          "short": "Amount"
+        },
+        "days": {
+          "label": "Term in days",
+          "help": "From 1 to 365, for example: 30",
+          "short": "Days"
+        },
+        "inflation": {
+          "label": "Scenario monthly inflation",
+          "help": "As a monthly percentage, for example: 3"
+        },
+        "remunerated": {
+          "label": "Interest-bearing account TNA",
+          "help": "Example value, as an annual percentage"
+        },
+        "fixedTerm": {
+          "label": "Term deposit TNA",
+          "help": "Example value, as an annual percentage"
+        },
+        "moneyMarket": {
+          "label": "Money market fund TNA",
+          "help": "Example value, as an annual percentage"
+        }
+      },
+      "main": "Over {{days}} days, in this scenario",
+      "beating_one": "{{count}} option beats inflation",
+      "beating_other": "{{count}} options beat inflation",
+      "sentence": "The scenario's inflation over {{days}} days is {{inflation}}. Besides the yield, look at when you can use the money and what protection it has.",
+      "pillNotAdvice": "Comparison, not a recommendation",
+      "chartTitle": "Final amount over {{days}} days",
+      "chartConclusion": "The second bar discounts the scenario's inflation.",
+      "finalSeries": "Final amount",
+      "powerSeries": "In purchasing power",
+      "realCol": "Real rate",
+      "liquidity": "Liquidity",
+      "guarantee": "Deposit guarantee",
+      "options": {
+        "remunerated": "Interest-bearing account",
+        "fixedTerm": "Term deposit",
+        "moneyMarket": "Money market fund"
+      },
+      "liquidityOf": {
+        "remunerated": "Immediate",
+        "fixedTerm": "At maturity",
+        "moneyMarket": "Same day"
+      },
+      "guaranteeOf": {
+        "remunerated": "It depends: at a bank yes; in a wallet, no",
+        "fixedTerm": "Yes, up to the current cap",
+        "moneyMarket": "No: it is a fund"
+      },
+      "meaning": "For an emergency fund, liquidity and low risk matter. An account in a wallet has no deposit guarantee; neither does a money market fund, and its yield varies daily.",
+      "try": "Try changing the term to 90 days and see how the comparison changes.",
+      "assumptions": [
+        "Account and fund with daily yield; term deposit with simple interest at maturity.",
+        "Constant example rates and inflation.",
+        "No taxes or fees."
+      ]
+    }
   }
 }

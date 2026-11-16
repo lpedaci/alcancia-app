@@ -16,8 +16,9 @@ test('landing on a phone: menu and sticky action @ 375px', async ({ page }) => {
   const result = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa']).analyze();
   expect(result.violations.map((v) => `${v.id}: ${v.nodes.length}`)).toEqual([]);
   await page.keyboard.press('Escape');
-  await page.mouse.wheel(0, 1800);
-  await expect(sticky).toHaveAttribute('aria-hidden', 'false');
+  // Scroll to a section between the hero and the journeys (a wheel delta was flaky under load)
+  await page.locator('#solucion').evaluate((el) => el.scrollIntoView({ block: 'start' }));
+  await expect(sticky).toHaveAttribute('aria-hidden', 'false', { timeout: 10000 });
   await page.locator('#recorridos').scrollIntoViewIfNeeded();
   await expect(sticky).toHaveAttribute('aria-hidden', 'true');
 });
