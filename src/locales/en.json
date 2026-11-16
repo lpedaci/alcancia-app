@@ -216,8 +216,8 @@
       "eyebrow": "Try a simulator without signing in",
       "title": "How much does your money buy if you keep it idle?",
       "intro": "Change the amount, the scenario or the months and see how the result changes.",
-      "teaserLabel": "$ 100,000 kept for 12 months, with 3 % monthly inflation, buys what",
-      "teaserValue": "$ 70,138",
+      "teaserLabel": "$ 100.000 kept for 12 months, with 3 % monthly inflation, buys what",
+      "teaserValue": "$ 70.138",
       "teaserBody": "It loses almost 30 % of its purchasing power. Try your own amount and another scenario.",
       "teaserOpen": "Try the simulator"
     },
@@ -1384,9 +1384,9 @@
       "limitReset": "The counter goes back to zero every day.",
       "limitNone": "No limit: choose one to protect your account.",
       "limitOwn": "Another amount",
-      "limitOwnHelp": "Minimum {{min}}, for example: 50,000",
+      "limitOwnHelp": "Minimum {{min}}, for example: 50.000",
       "limitSave": "Save limit",
-      "limitTooLow": "The limit has to be at least {{min}}, for example: 50,000."
+      "limitTooLow": "The limit has to be at least {{min}}, for example: 50.000."
     },
     "fuerte": {
       "title": "Fuerte",
@@ -2018,6 +2018,686 @@
       "title": "Lessons from your tutor and L&D",
       "empty": "When your tutor or L&D publish a lesson for your cohort, it shows up here.",
       "by": "By {{name}} · {{minutes}} min"
+    }
+  },
+  "pay": {
+    "intro": "Transfer, pay by QR and check your debits. All with fictitious money and made-up people, entities and shops.",
+    "balance": "Available balance:",
+    "back": "Back to Pay",
+    "cancel": "Cancel",
+    "source": "Source: {{source}}",
+    "actions": {
+      "transfer": "To an alias, CBU or CVU",
+      "qr": "At shops, with any QR",
+      "bills": "Power, phone and subscriptions",
+      "credit": "Card, loans and installments",
+      "creditLocked": "Opens at level 5"
+    },
+    "learn": {
+      "title": "Learn and practice",
+      "guideMeta": "Guide · {{minutes}} min",
+      "missionMeta": "Mission · {{minutes}} min"
+    },
+    "recent": {
+      "title": "Latest payments",
+      "empty": "When you transfer, pay by QR or a bill is debited, you will see it here."
+    },
+    "transfer": {
+      "title": "Transfer",
+      "alias": "Alias, CBU or CVU",
+      "aliasHelp": "In the practice we use aliases. For example: tomas.diaz.practica.",
+      "aliasMissing": "Write the alias of the person you are transferring to.",
+      "aliasUnknown": "We could not find that alias in the practice wallet. Check how it is written or choose one from the list.",
+      "contacts": "Practice contacts",
+      "amount": "Amount",
+      "amountHelp": "Amount in pesos, for example: 12.000",
+      "amountMissing": "Write an amount greater than zero, for example: 12.000.",
+      "continue": "Continue",
+      "confirmTitle": "Check before confirming",
+      "holder": "Account holder",
+      "aliasLabel": "Alias",
+      "entity": "Entity",
+      "account": "Account type",
+      "type": {
+        "CVU": "Payment account with CVU",
+        "CBU": "Bank account with CBU"
+      },
+      "confirm": "Confirm transfer",
+      "edit": "Fix details",
+      "sent": "Transfer sent",
+      "another": "Make another transfer"
+    },
+    "qr": {
+      "title": "Pay by QR",
+      "body": "Choose the shop: the demo does not use the camera, and choosing from a list is the accessible alternative to scanning.",
+      "confirmTitle": "Check the payment",
+      "merchant": "Shop",
+      "pay": "Pay",
+      "paid": "Payment made",
+      "method": "Method",
+      "methodValue": "Interoperable QR",
+      "another": "Pay another QR"
+    },
+    "bills": {
+      "title": "Bills and debits",
+      "body": "These expenses are debited automatically on the day shown. If the balance is not enough one day, time stops moving forward until you fix it.",
+      "next": "Next debit: {{date}}",
+      "cancelled": "Cancelled",
+      "category": {
+        "needs": "Need",
+        "wants": "Want",
+        "savings": "Savings"
+      },
+      "cancel": "Cancel subscription",
+      "cancelTitle": "Cancel the subscription?",
+      "cancelBody": "It stops being debited next month. You can reactivate it whenever you want.",
+      "cancelledToast": "Subscription cancelled",
+      "reactivate": "Reactivate",
+      "reactivated": "Subscription reactivated",
+      "pending": "There is a pending debit because the balance was not enough",
+      "note": "Amounts rise with the scenario's inflation, except the subscription, which has a fixed price.",
+      "status": "Debit status",
+      "soon_one": "Debited tomorrow",
+      "soon_other": "Debited in {{count}} days",
+      "ant": "Small recurring expense"
+    },
+    "receipt": {
+      "title": "Receipt",
+      "subtitle": "It was credited in seconds. Keep it in case you need to file a claim.",
+      "operation": "Operation",
+      "example": "example",
+      "date": "Date",
+      "amount": "Amount",
+      "note": "Fictitious receipt from the practice wallet: it is not valid as real proof.",
+      "print": "Download as PDF or print"
+    },
+    "errors": {
+      "amount_not_positive": "Write an amount greater than zero.",
+      "insufficient_balance": "The available balance is not enough. Check the amount or move money from a pocket.",
+      "daily_limit": "It goes over your daily transfer limit. You can change it in your profile, under Security.",
+      "unknown": "The payment could not be made. Try again.",
+      "nothing_to_pay": "There is nothing to pay right now.",
+      "more_than_due": "The amount is more than what is left to pay on the statement. Check the amount.",
+      "loan_active": "You already have an active practice loan. You can pay it off in \"Your debts\".",
+      "invalid_term": "Choose one of the practice terms."
+    }
+  },
+  "budget": {
+    "intro": "How your month splits compared with a reference. Rules are a starting point, not an obligation: every life has its own expenses.",
+    "context": "Wallet month",
+    "monthRange": "Current month: {{from}} to {{to}}",
+    "totals": {
+      "income": "Income this month",
+      "spent": "Spent",
+      "saved": "Set aside in pockets"
+    },
+    "split": {
+      "title": "Your split this month",
+      "rule": "Reference",
+      "category": "Category",
+      "actual": "This month",
+      "share": "% of income",
+      "reference": "Reference",
+      "referenceLine": "Reference: {{share}} of income",
+      "above": "Above the reference",
+      "noIncome": "No income this month yet: the split shows up after payday.",
+      "over": "{{category}} takes {{actual}} of your income, above the reference's {{reference}}. It is something to review, not a mistake.",
+      "within": "Your spending is within the reference and you set aside {{saved}} of your income.",
+      "note": "Movements without a category count as wants until you categorize them."
+    },
+    "cat": {
+      "50/30/20": {
+        "needs": "Needs",
+        "wants": "Wants",
+        "savings": "Savings"
+      },
+      "70/20/10": {
+        "needs": "Fixed and variable expenses",
+        "wants": "Leisure",
+        "savings": "Savings and investing"
+      }
+    },
+    "green": {
+      "title": "Does it close in the green?",
+      "yes": "In the green",
+      "notYet": "Not yet",
+      "withinIncome": "You do not spend more than what comes in during the month",
+      "savedTenPercent": "You set aside at least 10 % of your income",
+      "savingsKept": "You do not take money out of savings for something that is not an emergency",
+      "note": "It is checked when the month closes, on day 30. A month closed in the green opens Pockets and goals."
+    },
+    "todo": {
+      "title": "To categorize",
+      "empty": "There are no uncategorized movements this month.",
+      "suggested": "suggested: {{category}}",
+      "choose": "Category of {{name}}",
+      "done": "Movement categorized",
+      "confirmTitle": "Categorize as {{category}}?",
+      "confirmBody": "{{name}}, for {{amount}}, will count as {{category}} in this month's budget.",
+      "confirmAction": "Categorize as {{category}}"
+    },
+    "months": {
+      "title": "Closed months",
+      "empty": "When you close your first month, you will see here how it went.",
+      "label": "{{from}} to {{to}}",
+      "savedLine": "Set aside:"
+    }
+  },
+  "pockets": {
+    "intro": "Set money aside for what matters: your emergency fund first, then your goals. Each goal adjusts for the scenario's inflation.",
+    "context": "Your pockets",
+    "count_one": "{{count}} pocket",
+    "count_other": "{{count}} pockets",
+    "add": "Set money aside",
+    "withdraw": "Withdraw",
+    "fund": {
+      "title": "Emergency fund",
+      "months": "Covers {{months}} months",
+      "progressLabel": "Months of essential expenses your fund covers",
+      "progress": "{{months}} of 3 months",
+      "essentials": "Essential expenses per month",
+      "three": "3-month goal",
+      "six": "6-month goal",
+      "invest": "With 3 months covered, and no high-rate debt, Invest opens. Up to 6 months is a common reference if your income varies.",
+      "ready": "Your fund covers at least 3 months. Keeping it available and risk-free is what matters now.",
+      "none": "You do not have an emergency fund yet.",
+      "target": "A goal of 3 months of your essential expenses would be",
+      "create": "Create my emergency fund"
+    },
+    "goals": {
+      "title": "Your goals and pockets",
+      "empty": "You have no other goals yet. Create one with the \"New goal\" form.",
+      "reached": "Goal reached",
+      "progressLabel": "Progress of the goal {{name}}",
+      "goal": "Goal adjusted for inflation",
+      "today": "Today's price",
+      "eta": "Estimated date at your pace",
+      "noPace": "No contributions yet",
+      "noGoal": "Pocket without a goal. If you give it one, you will see how much is left and an estimated date.",
+      "setGoal": "Give it a goal"
+    },
+    "new": {
+      "title": "New goal",
+      "name": "Goal name",
+      "nameHelp": "For example: Vacation, English course",
+      "nameMissing": "Write a name for your goal.",
+      "price": "What it costs today",
+      "priceHelp": "Amount in pesos, for example: 900.000",
+      "priceMissing": "Write what it costs today, for example: 900.000.",
+      "term": "Term",
+      "termHelp": "How long you want to take to get there.",
+      "months_one": "{{count}} month",
+      "months_other": "{{count}} months",
+      "futurePrice": "Estimated price at the end:",
+      "monthly": "To get there, set aside per month:",
+      "assumption": "Example scenario: {{inflation}} monthly inflation, no yield. It is a scenario, not a prediction.",
+      "create": "Create goal",
+      "saved": "Goal created",
+      "stripTitle": "Create a goal",
+      "stripBody": "Give it a name, what it costs today and when you want to get there. We adjust it for the scenario's inflation."
+    },
+    "move": {
+      "inTitle": "Set aside in {{name}}",
+      "outTitle": "Withdraw from {{name}}",
+      "goalTitle": "Goal for {{name}}",
+      "goalBody": "Write the amount you want to reach.",
+      "available": "The pocket is part of your same account: the money is still yours.",
+      "balance": "Available balance:",
+      "inPocket": "In this pocket:",
+      "warning": "This money is for your future or for a real emergency. If you withdraw it for something else, the month no longer closes in the green.",
+      "amount": "Amount",
+      "amountHelp": "Amount in pesos, for example: 50.000",
+      "missing": "Write an amount greater than zero, for example: 50.000.",
+      "done": {
+        "in": "Money set aside",
+        "out": "Money withdrawn: it went back to your available balance",
+        "goal": "Goal saved"
+      },
+      "goesTo": "What you withdraw goes back to your available balance, which today is"
+    },
+    "errors": {
+      "amount_not_positive": "The amount has to be greater than zero.",
+      "insufficient_balance": "The available balance is not enough to set aside that amount.",
+      "insufficient_pocket": "The pocket does not have that amount.",
+      "unknown_pocket": "We could not find that pocket.",
+      "protected_pocket": "This pocket cannot be deleted."
+    },
+    "delete": {
+      "action": "Delete",
+      "title": "Delete the goal \"{{name}}\"?",
+      "bodyMoney": "The {{amount}} in this pocket go back to your available balance. The goal cannot be recovered.",
+      "bodyEmpty": "The pocket is empty, so your balance does not change. The goal cannot be recovered.",
+      "confirm": "Delete goal",
+      "done": "Goal deleted: the money went back to your balance"
+    },
+    "summary": {
+      "available": "Available balance",
+      "availableNote": "What you withdraw from a pocket, or from a goal you delete, comes back here.",
+      "setAside": "Set aside in pockets",
+      "setAsideNote_one": "In {{count}} pocket, inside your same account.",
+      "setAsideNote_other": "In {{count}} pockets, inside your same account."
+    }
+  },
+  "crypto": {
+    "intro": "What a cryptocurrency is, how much it can swing and who holds the keys. Only concepts and risks: nothing is bought here.",
+    "notice": "Educational content. It is not financial advice or an investment recommendation. Alcancía never tells you which one or how much to buy.",
+    "challenge": "Level 8 challenge",
+    "challengeDetail": "Module 16 questions · your best attempt counts",
+    "verifyTitle": "Before using a crypto app",
+    "verifyBody": "Crypto-asset services are offered by providers registered in the CNV's PSAV Registry. Being registered is not an endorsement or a guarantee.",
+    "verifyRegistry": "Where to check",
+    "verifyRegistryDetail": "Official registries and the wallets and fintech sheet",
+    "backToInvest": "Your practice brokerage account",
+    "backToInvestDetail": "Back to Invest"
+  },
+  "credit": {
+    "intro": "Your practice card, credit offers and your debts. Before deciding, look at the total financial cost (CFT) and how much you pay in total.",
+    "context": "Your credit data",
+    "debtCount_one": "{{count}} active debt",
+    "debtCount_other": "{{count}} active debts",
+    "example": "Example offer",
+    "legal": "Educational content. It is not financial advice or a recommendation. The card, the lender and the shop are fictitious, and the rates are example values from the scenario: check current values in the official sources.",
+    "card": {
+      "limit": "Example limit:",
+      "financed": "Financed balance",
+      "due": "Due on {{date}}",
+      "clear": "No balance",
+      "nothing_one": "You have nothing to pay. You paid {{count}} statement in full: you did not generate interest.",
+      "nothing_other": "You have nothing to pay. You paid {{count}} statements in full: you did not generate interest.",
+      "belowMinimum": "The previous statement was paid below the minimum. On a real card that adds penalty interest and is recorded in the BCRA's Central de Deudores (debtor registry).",
+      "total": "Statement total",
+      "minimum": "Minimum payment",
+      "dueDate": "Due date",
+      "firstBody": "These are last month's purchases. If you pay the total before the due date, you pay no interest; what you do not pay is financed and shows up on the next statement with interest.",
+      "financedBody": "This statement includes interest on what was not paid last month. It is a high-rate debt until you pay it in full.",
+      "paidSoFar": "You paid",
+      "left": "left",
+      "howMuch": "How much do you pay?",
+      "payTotal": "The total: {{amount}}",
+      "payTotalHelp": "You pay no interest and the card has no balance.",
+      "payMinimum": "The minimum: {{amount}}",
+      "payMinimumHelp": "You avoid default, but {{amount}} is financed with interest.",
+      "payOther": "Another amount",
+      "otherLabel": "Amount to pay",
+      "otherHelp": "Amount in pesos, up to {{max}}. For example: 100.000",
+      "amountMissing": "Write the amount you want to pay.",
+      "pay": "Pay statement",
+      "paid": "Payment of {{amount}} recorded",
+      "simulate": "Simulate the minimum payment",
+      "ratesLabel": "Card rates",
+      "tna": "TNA {{value}}",
+      "tea": "TEA {{value}}",
+      "exampleRates": "Example rates",
+      "payOtherHelp": "What you do not pay before the due date is financed with interest. If you pay less than the minimum, a real card charges penalty interest."
+    },
+    "loan": {
+      "title": "Pre-approved loan",
+      "lender": "Financiera de Ejemplo S.A. (fictitious)",
+      "body": "They offer you {{principal}} in {{count}} installments of {{installment}}.",
+      "cft": "Total financial cost (CFT)",
+      "tna": "Nominal annual rate (TNA)",
+      "received": "What you receive",
+      "total": "What you pay in total",
+      "explain": "The origination fee ({{commission}}) is taken out when the money is credited, so the CFT is higher than the TNA. In total you pay {{extra}} more than you receive.",
+      "active": "You already have an active practice loan. You can see it in \"Your debts\".",
+      "mission": "Analyze the offer in the mission",
+      "accept": "Accept loan",
+      "confirmTitle": "Accept the loan?",
+      "confirmBody": "You receive {{received}} and an installment of {{installment}} is debited every month for {{count}} months. It is a high-rate debt: while it exists, Invest does not open. You can pay it off early from \"Your debts\".",
+      "accepted": "Loan credited",
+      "terms": "Offer terms",
+      "chipMonths": "{{count}} monthly installments",
+      "chipInstallment": "Installment of {{amount}}",
+      "chipCommission": "Origination fee of {{rate}}"
+    },
+    "purchase": {
+      "title": "Interest-free installments or cash",
+      "body": "They offer you {{item}} in interest-free installments or with a discount if you pay cash.",
+      "installmentsLabel": "{{count}} interest-free installments of",
+      "cashLabel": "Cash, with a 15 % discount",
+      "explain": "Which is better depends on the scenario's inflation: compare today's value of the installments with the cash price. And if you do not need it, the cheapest option is not buying it.",
+      "compare": "Compare in the tool",
+      "installments": "Buy in installments",
+      "cash": "Buy with cash",
+      "confirmInstallmentsTitle": "Buy in 12 installments?",
+      "confirmInstallmentsBody": "An installment of $ 10.000 is debited every month for 12 months. Since it is interest-free, it is not a high-rate debt, but it takes part of your budget every month.",
+      "confirmCashTitle": "Buy with cash?",
+      "confirmCashBody": "{{amount}} is debited from your balance now.",
+      "boughtInstallments": "Installment purchase recorded",
+      "boughtCash": "Cash purchase recorded",
+      "terms": "Offer terms",
+      "chipPrice": "List price: {{amount}}",
+      "chipNoInterest": "Interest-free installments"
+    },
+    "debts": {
+      "title": "Your debts",
+      "empty": "You have no debts. To open Invest you need no high-rate debt, besides the emergency fund.",
+      "intro": "A debt is high-rate when its effective annual rate is above the scenario's annual inflation ({{inflation}}): it costs you more than prices go up.",
+      "orderBy": "Sort debts by",
+      "avalanche": "Avalanche",
+      "snowball": "Snowball",
+      "avalancheHelp": "Highest rate first: it is the order that pays the least interest.",
+      "snowballHelp": "Smallest balance first: you see debts paid off sooner and that helps you stick to the plan.",
+      "noInterest": "Interest-free",
+      "rate": "TEA {{tea}}",
+      "highRate": "High rate",
+      "notHighRate": "Not high-rate",
+      "payOff": "Pay off now",
+      "payOffTitle": "Pay off the debt now?",
+      "payOffBody": "You pay {{amount}} from your balance and {{name}} is paid off. Paying early, you pay only the remaining principal, without the interest of future installments.",
+      "paidOff": "Debt paid off",
+      "simulate": "Compare the methods",
+      "total": "You owe in total",
+      "terms": "Debt details",
+      "monthlyChip": "{{amount}} per month"
+    }
+  },
+  "yield": {
+    "intro": "Choose where your balance earns, compare it with the scenario's inflation and practice with term deposits. Rates are example values, not current ones.",
+    "context": "Grow data",
+    "inflationChip": "Scenario inflation: {{value}} monthly",
+    "legal": "Educational content. It is not financial advice or a recommendation. Rates are example values from the scenario and the options are for practice: check current values in the official sources.",
+    "mode": {
+      "title": "Where your balance earns",
+      "intro": "Yield is calculated every day on your available balance and your pockets. Read each option's sheet before choosing.",
+      "current": "Chosen",
+      "choose": "Choose",
+      "changed": "Your balance is now in: {{name}}",
+      "note": "In a real wallet, the legal notice and each product's terms say whether it is a payment account or a fund, and who manages it.",
+      "none": {
+        "name": "No yield",
+        "risk": "None",
+        "liquidity": "Immediate",
+        "currency": "Pesos",
+        "protection": "It is your payment account: no deposit guarantee"
+      },
+      "remunerated": {
+        "name": "Interest-bearing account",
+        "risk": "Low",
+        "liquidity": "Immediate",
+        "currency": "Pesos",
+        "protection": "Payment account: no deposit guarantee"
+      },
+      "money_market": {
+        "name": "Money market fund",
+        "risk": "Low, and the yield varies daily",
+        "liquidity": "Same day",
+        "currency": "Pesos",
+        "protection": "Investment in a fund regulated by the CNV: no deposit guarantee"
+      }
+    },
+    "sheet": {
+      "rate": "Example rate",
+      "rateValue": "TNA {{value}}",
+      "rateVaries": "TNA {{value}} on average, varies daily",
+      "noRate": "No yield",
+      "risk": "Risk",
+      "liquidity": "Liquidity",
+      "currency": "Currency",
+      "protection": "Protection",
+      "rateVariesNote": "On average: varies daily"
+    },
+    "real": {
+      "title": "Do you beat inflation?",
+      "earned": "Yield this month",
+      "label": "One-month real rate",
+      "beats": "You beat inflation",
+      "loses": "You lose purchasing power",
+      "explain": "With the chosen option, one month yields {{rate}} and the scenario's inflation is {{inflation}}. The real rate compares both over the same period.",
+      "explainNone": "With no yield, your balance loses what prices go up: {{inflation}} per month in this scenario.",
+      "simulate": "Calculate the real rate"
+    },
+    "deposit": {
+      "title": "Practice term deposit",
+      "intro": "The money leaves your balance and comes back at maturity with its interest. Meanwhile you cannot use it.",
+      "kind": "Term deposit type",
+      "traditional": "Traditional term deposit",
+      "traditionalHelp": "Fixed rate: example TNA {{rate}}. You know from the start how much you will get.",
+      "uva": "UVA term deposit",
+      "uvaHelp": "The principal adjusts for inflation (CER) and adds an example rate of {{rate}}. Not every bank offers it.",
+      "term": "Term",
+      "days_one": "{{count}} day",
+      "days_other": "{{count}} days",
+      "amount": "Amount",
+      "amountHelp": "Amount in pesos that leaves your balance, for example: 200.000",
+      "amountMissing": "Write the term deposit amount.",
+      "final_one": "You get in {{count}} day",
+      "final_other": "You get in {{count}} days",
+      "power": "In today's purchasing power",
+      "assumptions": "Practice assumptions: 30-day minimum term, no early withdrawal and no taxes. Real conditions depend on each bank.",
+      "assumptionsUva": "Practice assumptions: the UVA is approximated with the scenario's inflation (the real one follows the CER with a lag), 90-day minimum term and no early withdrawal. Real conditions depend on each bank.",
+      "make": "Open term deposit",
+      "compare": "Compare traditional and UVA",
+      "made": "Term deposit opened",
+      "active": "Your term deposits",
+      "none": "You have no practice term deposits yet.",
+      "maturity": "matures on {{date}}",
+      "atMaturity": "At maturity:",
+      "confirmTitle_traditional": "Open the traditional term deposit?",
+      "confirmTitle_uva": "Open the UVA term deposit?",
+      "confirmBody_one": "{{amount}} leaves your balance and you cannot use it until maturity, in {{count}} day. At maturity you get {{final}}.",
+      "confirmBody_other": "{{amount}} leaves your balance and you cannot use it until maturity, in {{count}} days. At maturity you get {{final}}."
+    },
+    "learn": {
+      "tool": "Tool"
+    },
+    "scenarioChoice": {
+      "title": "How does inflation go from today?",
+      "body": "What comes next is a scenario, not a prediction. Choose how it goes: the rates and inflation of your practice wallet follow it from tomorrow. What already happened does not change.",
+      "label": "Your wallet's scenario",
+      "option": "{{name}} · {{value}}",
+      "names": {
+        "low": "Low",
+        "medium": "Medium",
+        "high": "High"
+      },
+      "real": "For reference, last month's real inflation was {{value}} ({{asOf}}).",
+      "done": "Scenario changed"
+    }
+  },
+  "invest": {
+    "intro": "Your practice brokerage account at a fictitious broker. You buy and sell with fictitious money, example prices and example costs, to learn how it works before doing it for real.",
+    "context": "Your brokerage account data",
+    "brokerChip": "{{name}} (fictitious)",
+    "profileChip": "Profile: {{profile}}",
+    "profile": {
+      "conservative": "conservative",
+      "moderate": "moderate",
+      "aggressive": "aggressive"
+    },
+    "legal": "Educational content. It is not financial advice or an investment recommendation. The broker, prices, series and costs are examples and fictitious. Past returns do not guarantee future returns.",
+    "back": "Back to Invest",
+    "sheet": {
+      "label": "Instrument sheet",
+      "risk": {
+        "low": "Low risk",
+        "medium": "Medium risk",
+        "high": "High risk"
+      },
+      "liquidity": {
+        "same_day": "Same-day redemption",
+        "ci_24h": "Immediate or 24-hour settlement"
+      },
+      "currency": {
+        "ARS": "In pesos",
+        "ARS_USD": "In pesos, asset in dollars"
+      }
+    },
+    "instrument": {
+      "cedear-sp500": {
+        "name": "CEDEAR of an ETF that tracks the S&P 500 (example)",
+        "body": "It gives you access to a foreign ETF that follows the 500 largest US companies. You pay in pesos, but its price changes with the ETF in dollars and with the exchange rate."
+      },
+      "mm-fund": {
+        "name": "Practice money market fund",
+        "body": "A low-risk, very short-term mutual fund. Its unit grows a little every day and is redeemed the same day. It has no deposit guarantee."
+      },
+      "bond-example": {
+        "name": "Example peso bond",
+        "body": "You lend money to an issuer in exchange for a rate. Its market price also goes up and down, though less than a stock's."
+      }
+    },
+    "instruments": {
+      "title": "Example instruments",
+      "intro": "Each one with its sheet: risk, liquidity and currency. None is a recommendation.",
+      "perUnit": "per unit, today",
+      "howTitle": "How to read the sheet",
+      "how": {
+        "risk": {
+          "title": "Risk",
+          "body": "How much the price can go up or down. The more risk, the more it can swing along the way."
+        },
+        "liquidity": {
+          "title": "Liquidity",
+          "body": "When you can have the money if you sell or redeem: same day, immediate settlement or 24 hours."
+        },
+        "currency": {
+          "title": "Currency",
+          "body": "Which currency you pay in and which one the asset is in. A CEDEAR is paid in pesos, but it follows an asset in dollars."
+        }
+      },
+      "practice": "Practice with the tools"
+    },
+    "open": {
+      "title": "Open your practice brokerage account",
+      "broker": "{{name}}, fictitious registration",
+      "intro": "The same steps as at a real broker, with no real data.",
+      "steps": {
+        "verify": {
+          "title": "Check the agent",
+          "body": "In real life, in the CNV's Public Registry of Agents. This broker is fictitious."
+        },
+        "identity": {
+          "title": "Verify your identity",
+          "body": "Simulated: no real data is asked for here."
+        },
+        "profile": {
+          "title": "Investor profile test",
+          "body": "It is educational: it describes how much risk you tolerate and never turns into a recommended portfolio."
+        },
+        "fund": {
+          "title": "Fund the account",
+          "body": "With a practice transfer from your wallet."
+        }
+      },
+      "noProfile": "You have not taken the investor profile test yet. You can open the account with an example moderate profile.",
+      "takeTest": "Take the test",
+      "button": "Open practice account",
+      "done": "Brokerage account opened",
+      "mission": "Do it with the mission"
+    },
+    "account": {
+      "title": "Your brokerage account",
+      "custody": "Your securities, in your custody sub-account (practice)",
+      "practice": "Practice account",
+      "total": "Total value",
+      "cash": "Available to invest",
+      "result": "Result compared with what you paid",
+      "paperLoss": "Your investment is worth less than you paid. As long as you do not sell, it is a paper loss: if you do not need that money and you have your emergency fund, you can wait.",
+      "data": "Account data",
+      "opened": "Opened on {{date}}",
+      "trades_one": "{{count}} trade",
+      "trades_other": "{{count}} trades",
+      "invested": "Invested, at today's price",
+      "split": "How your account is split",
+      "splitInvested": "Invested: {{value}}",
+      "splitCash": "Available: {{value}}",
+      "custodyNote": "In real life, what you buy through a registered agent is held in a custody sub-account in your name at Caja de Valores, and you can check it on its channels. Here it is a practice sub-account."
+    },
+    "holdings": {
+      "title": "Your holdings",
+      "empty": "You have not bought anything yet. Choose an instrument from the list to see its sheet and price.",
+      "data": "Holding data",
+      "units_one": "{{count}} unit",
+      "units_other": "{{count}} units",
+      "paid": "You paid {{amount}}",
+      "pending_one": "{{count}} is credited tomorrow",
+      "pending_other": "{{count}} are credited tomorrow",
+      "seeCedear": "See the example CEDEAR",
+      "mission": "Buy with the mission"
+    },
+    "transfer": {
+      "title": "Move money with your wallet",
+      "walletBalance": "Your wallet balance:",
+      "amount": "Amount",
+      "help": "Amount in pesos, for example: 100.000",
+      "missing": "Write the amount you want to move.",
+      "fund": "Transfer to the account",
+      "withdraw": "Withdraw to the wallet",
+      "funded": "You transferred {{amount}} to your brokerage account",
+      "withdrawn": "You withdrew {{amount}} to your wallet"
+    },
+    "brokers": {
+      "title": "Brokers registered with the CNV",
+      "intro": "Some settlement and clearing agents (ALyC) registered with the CNV. The list is for information and is not a recommendation; there are many more. Always check the registration in the CNV's Public Registry of Agents before opening an account.",
+      "registration": "{{category}} · registration {{number}}",
+      "verified": "Registrations verified on {{date}}.",
+      "cnv": "Search the CNV registry"
+    },
+    "price": {
+      "title": "Example price",
+      "example": "Example series",
+      "today": "Today, {{date}}",
+      "cedear": "The peso price changes for two reasons: if the ETF goes up or down in dollars, and if the implied exchange rate goes up or down.",
+      "chartTitle": "Price by month",
+      "up": "In this example period it went from {{from}} to {{to}}.",
+      "down": "In this example period it fell from {{from}} to {{to}}.",
+      "unit": "Price per unit",
+      "month": "Month",
+      "showTable": "See as a table",
+      "hideTable": "Hide the table",
+      "past": "Synthetic example series, not real data. Past returns do not guarantee future returns.",
+      "noHistory": "The chart builds up as time passes since you opened the account. Use \"Advance a month\" in Home to see how the example price changes.",
+      "formulaShort": "Dollars ÷ ratio × exchange rate",
+      "realPrices": "The prices in this account are examples and do not move with the market. To see real prices, check",
+      "bymadata": "BYMADATA, BYMA's data site"
+    },
+    "order": {
+      "title": "Buy or sell",
+      "noAccount": "To trade, first open your practice brokerage account.",
+      "openLink": "Open the account",
+      "cash": "Available to invest:",
+      "quantity": "Number of units",
+      "quantityHelp": "A whole number, for example: 4",
+      "quantityError": "Write a whole number greater than zero.",
+      "settlement": "Settlement term",
+      "ci": "Immediate settlement",
+      "24h": "24-hour settlement",
+      "ciHelp": "It is credited today, in your custody sub-account.",
+      "24hHelp": "It is credited the next day, at today's price.",
+      "gross": "Price × quantity",
+      "commission": "Broker fee (example, 0,5 %)",
+      "marketFee": "Market fees (example, 0,08 %)",
+      "total": "Purchase total",
+      "costsNote": "Agents must disclose their costs before trading. These are examples and do not include taxes.",
+      "buy": "Buy",
+      "sell": "Sell",
+      "confirmBuyTitle_one": "Buy {{count}} unit?",
+      "confirmBuyTitle_other": "Buy {{count}} units?",
+      "confirmBuyBody": "You pay {{total}} from your brokerage account, settled as: {{settlement}}. The price can drop after you buy.",
+      "confirmSellTitle_one": "Sell {{count}} unit?",
+      "confirmSellTitle_other": "Sell {{count}} units?",
+      "confirmSellBody": "You receive about {{total}} in your brokerage account, after costs. If the price is below what you paid, the loss becomes real.",
+      "bought": "Purchase recorded",
+      "sold": "Sale recorded",
+      "youHave": "You have {{count}} to sell{{pending}}."
+    },
+    "errors": {
+      "insufficient_balance": "Your wallet balance is not enough.",
+      "insufficient_broker_cash": "Your brokerage account's available cash is not enough. Transfer more from your wallet.",
+      "not_enough_units": "You do not have that many credited units to sell.",
+      "quantity_not_positive": "Write a whole number greater than zero.",
+      "amount_not_positive": "Write an amount greater than zero.",
+      "no_brokerage": "First open your practice brokerage account.",
+      "unknown_instrument": "We could not find that instrument."
+    },
+    "trades": {
+      "title": "Latest trades",
+      "empty": "No trades yet. When you buy or sell, they show up here with their date, term and total.",
+      "buy_one": "Buy · {{count}} unit",
+      "buy_other": "Buy · {{count}} units",
+      "sell_one": "Sell · {{count}} unit",
+      "sell_other": "Sell · {{count}} units"
     }
   }
 }
