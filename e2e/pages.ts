@@ -19,6 +19,8 @@ export interface CheckedPage {
   partner?: 'hornero';
   /** "Ver todo desbloqueado" of the demo mode (5.0), to check sections not yet opened by the rule. */
   unlockAll?: boolean;
+  /** D-322: the page in the dark theme. */
+  dark?: boolean;
 }
 
 export const PAGES: CheckedPage[] = [
@@ -124,6 +126,19 @@ export const PAGES: CheckedPage[] = [
   { id: 'c2-hornero-home-joaquin', path: '/#/app', as: 'p-joaquin' },
   { id: 'c2-hornero-pay-joaquin', path: '/#/app/pay', as: 'p-joaquin' },
   { id: 'd1-sponsor', path: '/#/sponsor', as: 'p-ricardo' },
+  // D-322: the dark theme on a screen of each area
+  { id: 'dark-g0-landing', path: '/#/', dark: true },
+  { id: 'dark-g1-login', path: '/#/login', dark: true },
+  { id: 'dark-p1-home', path: '/#/app', as: 'p-mariana', dark: true },
+  { id: 'dark-p4-budget', path: '/#/app/save/budget', as: 'p-mariana', dark: true },
+  { id: 'dark-p6-yield', path: '/#/app/save/yield', as: 'p-mariana', dark: true },
+  { id: 'dark-p9-learn', path: '/#/app/learn', as: 'p-mariana', dark: true },
+  { id: 'dark-p10-guide', path: '/#/app/learn/guides/module-06-guide-1', as: 'p-mariana', dark: true },
+  { id: 'dark-p9-escape', path: '/#/app/learn/escape', as: 'p-mariana', dark: true },
+  { id: 'dark-hornero', path: '/#/app/hornero', as: 'p-joaquin', dark: true },
+  { id: 'dark-t1-tutor', path: '/#/tutor', as: 'p-kevin', dark: true },
+  { id: 'dark-o1-admin', path: '/#/admin', as: 'p-julieta', dark: true },
+  { id: 'dark-d1-sponsor', path: '/#/sponsor', as: 'p-ricardo', dark: true },
   { id: 'x1-hornero', path: '/#/app/hornero', as: 'p-mariana' },
   { id: 'x1-hornero-wallet', path: '/#/app', as: 'p-mariana', partner: 'hornero' },
   // Contexts of use (5.5, step 23): Instituto Superior Ceibo and Hornero
@@ -166,6 +181,7 @@ const ROLES = {
  * merged over the seed by Zustand, so only the consents need to be written.
  */
 export async function prepareSession(page: Page, target: CheckedPage) {
+  if (target.dark) await page.addInitScript(() => localStorage.setItem('alcancia-ui:theme', 'dark'));
   if (!target.as && !target.pendingMfa) return;
   const now = new Date().toISOString();
   const session = target.as

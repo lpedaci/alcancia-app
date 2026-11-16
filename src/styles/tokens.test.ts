@@ -9,19 +9,24 @@ import { contrast as contrastRatio } from '@/lib/contrast';
  */
 const lightBlock = css.slice(css.indexOf(':root {'), css.indexOf("[data-theme='dark']"));
 
-function rawValue(name: string): string {
-  const match = lightBlock.match(new RegExp(`--${name}:\\s*([^;]+);`));
+// D-322: the dark roles override the light ones; what they do not override is inherited
+const darkStart = css.indexOf(":root[data-theme='dark'] {");
+const darkBlock = css.slice(darkStart, css.indexOf('}', darkStart));
+
+function rawValue(name: string, theme: 'light' | 'dark' = 'light'): string {
+  const pattern = new RegExp(`--${name}:\\s*([^;]+);`);
+  const match = (theme === 'dark' ? darkBlock.match(pattern) : null) ?? lightBlock.match(pattern);
   if (!match?.[1]) throw new Error(`Token --${name} not found`);
   return match[1].trim();
 }
 
-/** Resolves var(--x) chains down to a hex value. */
-function token(name: string, depth = 0): string {
-  const value = rawValue(name);
+/** Resolves var(--x) chains down to a hex value, in the light theme or the dark one. */
+function resolve(name: string, theme: 'light' | 'dark' = 'light', depth = 0): string {
+  const value = rawValue(name, theme);
   const ref = value.match(/^var\(--([\w-]+)\)$/);
   if (ref?.[1]) {
     if (depth > 5) throw new Error(`Too deep: --${name}`);
-    return token(ref[1], depth + 1);
+    return resolve(ref[1], theme, depth + 1);
   }
   if (!/^#[0-9a-fA-F]{6}$/.test(value)) throw new Error(`--${name} is not a hex color: ${value}`);
   return value;
@@ -56,7 +61,10 @@ describe('token architecture (CLAUDE.md 2.1)', () => {
   });
 });
 
-describe('color tokens: WCAG 2.2 AA contrast', () => {
+// Every pair is checked in the light theme and in the dark one (D-322)
+for (const theme of ['light', 'dark'] as const)
+describe(`color tokens (${theme}): WCAG 2.2 AA contrast`, () => {
+  const token = (name: string) => resolve(name, theme);
   for (const [prefix, role] of roles) {
     it(`${role}: on-${role} text on the base color`, () => {
       expect(contrast(token(`${prefix}-on-${role}`), token(`${prefix}-${role}`))).toBeGreaterThanOrEqual(TEXT);

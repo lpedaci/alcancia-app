@@ -4,6 +4,10 @@ import './app/zod-config';
 import './app/i18n';
 import './styles/index.css';
 import { App } from './app/App';
+import { applyTheme } from './lib/theme';
+
+// D-322: the chosen theme before the first paint, so there is no flash of the light one
+applyTheme();
 
 const container = document.getElementById('root');
 if (!container) {

@@ -1238,7 +1238,13 @@
     "partnerHornero": "Ver dentro de Hornero",
     "partnerHorneroHelp": "Modo integrado con un socio ficticio",
     "contextLabel": "Contexto de uso",
-    "contextHelp": "Primero el contexto, después la persona"
+    "contextHelp": "Primero el contexto, después la persona",
+    "theme": {
+      "label": "Tema",
+      "light": "Claro",
+      "dark": "Oscuro",
+      "system": "Del sistema"
+    }
   },
   "staff": {
     "hello": "Hola,",
@@ -4075,6 +4081,11 @@
       }
     },
     "patterns": [
+      [
+        "D-322",
+        "Modo oscuro",
+        "Los mismos roles en su versión oscura, verificados en los dos temas; se elige en el menú de la persona: claro, oscuro o del sistema."
+      ],
       [
         "D-319",
         "Reproductor simulado",

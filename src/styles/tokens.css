@@ -211,10 +211,11 @@
 }
 
 /*
- * Dark color roles: PREPARED, NOT ENABLED in phase A (CLAUDE.md 2.1). Tonal counterparts of the
- * light roles; contrast must be verified before enabling `data-theme="dark"`.
+ * Dark color roles (F17, D-322): enabled with the theme of the person's menu (light, dark or the
+ * system's). Tonal counterparts of the light roles; tokens.test.ts verifies their contrast too.
  */
 :root[data-theme='dark'] {
+  color-scheme: dark;
   --md-sys-color-primary: #b9c3ff;
   --md-sys-color-on-primary: #1f2f78;
   --md-sys-color-primary-container: #34478f;
@@ -261,4 +262,28 @@
   --md-sys-color-outline-variant: #42474e;
   --md-sys-color-inverse-surface: #e1e3e6;
   --md-sys-color-inverse-on-surface: #2e3133;
+
+  /* Role colors and chart series, lighter so they keep 3:1 on the dark surfaces */
+  --role-org-admin: #b9c3ff;
+  --role-org-admin-container: #34478f;
+  --role-tutor: #84d5c6;
+  --role-tutor-container: #005048;
+  --role-participant: #d6bbf7;
+  --role-participant-container: #5a3590;
+  --role-sponsor: #c4d38a;
+  --role-sponsor-container: #434f1c;
+
+  --chart-1: #b9c3ff;
+  --chart-2: #84d5c6;
+  --chart-3: #8f9de6;
+  --chart-4: #5fb3a6;
+  --chart-5: #9aa1ab;
+  --chart-area-opacity: 0.2;
+
+  /* Hornero, the fictitious partner (D-248): the same dusk, lighter, so its text reads on dark */
+  --partner-hornero: #f0b3bc;
+  --partner-on-hornero: #3a1018;
+  --partner-hornero-accent: #d88d99;
+  --partner-hornero-container: #5c2330;
+  --partner-on-hornero-container: #f7e1e4;
 }

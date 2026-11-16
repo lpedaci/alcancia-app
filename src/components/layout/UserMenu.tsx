@@ -8,11 +8,14 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/DropdownMenu';
 import { findPerson, resetDemo, signOut } from '@/features/auth/auth-service';
 import { can } from '@/lib/permissions';
+import { THEME_CHOICES, type ThemeChoice, useTheme } from '@/lib/theme';
 import { HORNERO_HOME, usePartnerMode } from '@/features/partner/partner-mode';
 import { useCurrentUser } from '@/store/session-store';
 
@@ -20,12 +23,15 @@ import { useCurrentUser } from '@/store/session-store';
  * Avatar menu of the top bar (CLAUDE.md 5.3 and 7): "Restablecer demo" with confirmation and
  * "Cerrar sesión", and for participants "Perfil, seguridad y comprobantes" (P14).
  */
+const THEME_ICON = { light: 'light_mode', dark: 'dark_mode', system: 'contrast' } as const;
+
 export function UserMenu() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const user = useCurrentUser();
   const partner = usePartnerMode();
   const [confirmReset, setConfirmReset] = useState(false);
+  const [theme, setTheme] = useTheme();
   const person = user ? findPerson(user.personId) : undefined;
   if (!user || !person) return null;
 
@@ -55,6 +61,19 @@ export function UserMenu() {
               {t('demo.profile')}
             </DropdownMenuItem>
           )}
+          {/* D-322: the theme, a choice of this browser */}
+          <DropdownMenuSeparator />
+          <DropdownMenuLabel>
+            <span className="block text-label-medium text-on-surface-variant">{t('demo.theme.label')}</span>
+          </DropdownMenuLabel>
+          <DropdownMenuRadioGroup value={theme} onValueChange={(v) => setTheme(v as ThemeChoice)}>
+            {THEME_CHOICES.map((c) => (
+              <DropdownMenuRadioItem key={c} value={c} icon={THEME_ICON[c]}>
+                {t(`demo.theme.${c}`)}
+              </DropdownMenuRadioItem>
+            ))}
+          </DropdownMenuRadioGroup>
+          <DropdownMenuSeparator />
           {can(user, 'demo.reset') && (
             <DropdownMenuItem icon="restart_alt" onSelect={() => setConfirmReset(true)}>
               {t('demo.reset')}
