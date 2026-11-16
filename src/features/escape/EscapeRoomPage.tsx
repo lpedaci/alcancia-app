@@ -65,7 +65,6 @@ export function EscapeRoomPage() {
   const [state, setStateRaw] = useState<EscapeState | undefined>(() => readLocal(personId).escape);
   const [mood, setMood] = useState<{ state: FuerteState; key: string }>({ state: 'greeting', key: 'hello' });
   const [confirmReset, setConfirmReset] = useState(false);
-  const [confirmAgain, setConfirmAgain] = useState(false);
   // The version chosen for the next game (D-310): the first one whose badge is still missing
   const [version, setVersion] = useState<Version>(() => nextVersion(readLocal(personId).escape?.badges ?? []));
   const title = t('escape.title');
@@ -179,8 +178,14 @@ export function EscapeRoomPage() {
                 setMood={setMood}
               />
             )}
-            {state.current === ROOMS.length && <Door state={state} setState={setState} setMood={setMood} />}
-            {state.current > ROOMS.length && <Exit state={state} version={version} onVersion={setVersion} onAgain={() => setConfirmAgain(true)} />}
+            {state.current === ROOMS.length && <Door
+                state={state}
+                setState={setState}
+                setMood={setMood}
+                // D-314: the next game is preselected in the first version whose badge is still missing
+                onOpened={(badges) => setVersion(nextVersion(badges))}
+              />}
+            {state.current > ROOMS.length && <Exit state={state} version={version} onVersion={setVersion} onAgain={start} />}
           </>
         )}
       </div>
@@ -192,15 +197,6 @@ export function EscapeRoomPage() {
         description={t('escape.resetBody')}
         confirmLabel={t('escape.reset')}
         onConfirm={resetAll}
-      />
-      <ConfirmDialog
-        open={confirmAgain}
-        onOpenChange={setConfirmAgain}
-        title={t('escape.againTitle')}
-        description={t('escape.againBody', { version: t(`escape.versions.${VERSIONS[version]}.title`).toLowerCase() })}
-        confirmLabel={t('escape.again')}
-        destructive={false}
-        onConfirm={start}
       />
     </WalletShell>
   );
@@ -533,7 +529,17 @@ function RoomView({
   );
 }
 
-function Door({ state, setState, setMood }: { state: EscapeState; setState: (u: (s: EscapeState) => EscapeState) => void; setMood: (m: { state: FuerteState; key: string }) => void }) {
+function Door({
+  state,
+  setState,
+  setMood,
+  onOpened,
+}: {
+  state: EscapeState;
+  setState: (u: (s: EscapeState) => EscapeState) => void;
+  setMood: (m: { state: FuerteState; key: string }) => void;
+  onOpened: (badges: EscapeState['badges']) => void;
+}) {
   const { t } = useTranslation();
   const [text, setText] = useState('');
   const [msg, setMsg] = useState<string | undefined>();
@@ -543,6 +549,7 @@ function Door({ state, setState, setMood }: { state: EscapeState; setState: (u: 
     const result = tryDoor(state, text);
     if (result === 'open') {
       setState(openDoor);
+      onOpened(openDoor(state).badges);
       setMood({ state: 'celebration', key: 'out' });
       return;
     }
@@ -615,8 +622,9 @@ function Exit({ state, version, onVersion, onAgain }: { state: EscapeState; vers
       </section>
       <div className="flex flex-col gap-4">
         <VersionPicker value={version} onChange={onVersion} badges={state.badges} />
-        <Button variant="outlined" leadingIcon="restart_alt" className="w-full medium:w-auto medium:self-end" onClick={onAgain}>
-          {t('escape.again')}
+        {/* D-314: the chosen version is entered with a button that names it; finished games lose nothing */}
+        <Button trailingIcon="arrow_forward" className="w-full medium:w-auto medium:self-end" onClick={onAgain}>
+          {t('escape.playVersion', { version: t(`escape.versions.${VERSIONS[version]}.title`).toLowerCase() })}
         </Button>
       </div>
       <ListLinkRow to="/app/learn" icon="school" title={t('escape.backToLearn')} detail={t('escape.backToLearnDetail')} />

@@ -111,6 +111,11 @@ for (const width of [375, 768, 1280]) {
     await expect(page.getByText('Ganaste la insignia de bronce')).toBeVisible();
     await axe(page);
     await shot('exit');
+
+    // D-314: the next version is chosen at the exit and entered with a button that names it
+    await expect(page.getByRole('radio', { name: /Intermedia/ })).toBeChecked();
+    await page.getByRole('button', { name: 'Jugar la versión intermedia' }).press('Enter');
+    await expect(page.getByText('Escape room · Versión intermedia')).toBeVisible();
   });
 }
 

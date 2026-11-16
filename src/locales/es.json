@@ -4874,9 +4874,6 @@
     "reset": "Empezar de cero",
     "resetTitle": "¿Empezar de cero?",
     "resetBody": "Se borran tu avance, tus reflexiones y tus insignias del escape room. No se puede deshacer.",
-    "again": "Jugar otra partida",
-    "againTitle": "¿Jugar una partida nueva?",
-    "againBody": "Empiezas de nuevo en la versión {{version}}, con otra palabra en la puerta. Tus insignias se conservan.",
     "roomOf": "Sala {{n}} de {{total}} · {{place}}",
     "inspectTitle": "Inspecciona los objetos",
     "inspect": "Inspeccionar",
@@ -4995,7 +4992,8 @@
       "endPending": "Te faltan {{n}} candados para la insignia de esta versión.",
       "offer": "¿Prefieres responder sin la capa de juego?",
       "cta": "Usar el modo simple"
-    }
+    },
+    "playVersion": "Jugar la versión {{version}}"
   },
   "rights": {
     "notice": "© 2026 Lourdes Pedaci · Todos los derechos reservados",
