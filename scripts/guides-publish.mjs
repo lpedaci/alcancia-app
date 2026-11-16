@@ -27,6 +27,17 @@ for (const g of approved) {
   published.guides.push(guide);
 }
 drafts.guides = drafts.guides.filter((g) => g.review?.batch !== batch);
+if (approvedQuestions.length > 0) {
+  const banks = JSON.parse(readFileSync(file('src/data/question-banks.json'), 'utf8'));
+  const known = new Set(banks.questions.map((q) => q.id));
+  for (const q of approvedQuestions) {
+    if (known.has(q.id)) throw new Error(`${q.id} is already in the banks`);
+    const { review: _review, ...question } = q;
+    banks.questions.push(question);
+  }
+  drafts.questions = drafts.questions.filter((q) => q.review?.batch !== batch);
+  writeFileSync(file('src/data/question-banks.json'), `${JSON.stringify(banks, null, 2)}\n`);
+}
 writeFileSync(file('src/data/guides.json'), `${JSON.stringify(published, null, 1)}\n`);
 writeFileSync(file('src/data/guides-drafts.json'), `${JSON.stringify(drafts, null, 1)}\n`);
 

@@ -531,7 +531,9 @@
       "map": "Mapa de niveles",
       "tools": "Herramientas",
       "profile": "Perfil",
-      "sources": "Fuentes"
+      "sources": "Fuentes",
+      "brokerage": "Cuenta comitente",
+      "crypto": "Cripto"
     },
     "home": {
       "date": "{{date}}",
@@ -616,7 +618,8 @@
       "level-4": "Apartados y metas",
       "level-5": "Tarjeta y préstamos",
       "level-6": "Rendir",
-      "level-7": "Invertir"
+      "level-7": "Invertir",
+      "level-8": "Cripto"
     },
     "levelCard": {
       "title": "Tu avance",
@@ -4765,5 +4768,17 @@
       "reasonHelp": "Breve y sin juicio, por ejemplo: incluye datos personales",
       "reasonError": "Escribe un motivo de al menos 5 caracteres."
     }
+  },
+  "crypto": {
+    "intro": "Qué es una criptomoneda, cuánto puede variar y quién guarda las claves. Solo conceptos y riesgos: acá no se compra nada.",
+    "notice": "Contenido educativo. No es asesoramiento financiero ni una recomendación de inversión. Alcancía nunca te dice cuál ni cuánto comprar.",
+    "challenge": "Desafío del nivel 8",
+    "challengeDetail": "Preguntas del módulo 16 · cuenta el mejor intento",
+    "verifyTitle": "Antes de usar una app de cripto",
+    "verifyBody": "Los servicios con criptoactivos los dan proveedores inscriptos en el Registro PSAV de la CNV. Estar inscripto no es un aval ni una garantía.",
+    "verifyRegistry": "Dónde verificar",
+    "verifyRegistryDetail": "Registros oficiales y la ficha de billeteras y fintech",
+    "backToInvest": "Tu cuenta comitente de práctica",
+    "backToInvestDetail": "Volver a Invertir"
   }
 }

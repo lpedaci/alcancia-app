@@ -85,7 +85,8 @@ function evaluateCondition(condition: UnlockCondition, ctx: LevelContext, comple
 /** Evaluates the levels in order (a level can depend on the previous one being completed). */
 export function evaluateLevels(levels: LevelDef[], ctx: LevelContext): LevelStatus[] {
   const completed = new Set<string>();
-  const ordered = [...levels].filter((l) => l.phase === 'A').sort((a, b) => a.order - b.order);
+  // Level 8 (Cripto, F22, D-302) is built now: every level is evaluated in order
+  const ordered = [...levels].sort((a, b) => a.order - b.order);
   return ordered.map((level) => {
     const conditions = level.unlock.all.map((c) => evaluateCondition(c, ctx, completed));
     const byRule = conditions.every((c) => c.met);
@@ -135,7 +136,7 @@ export function nextUnlock(statuses: LevelStatus[]): LevelStatus | undefined {
 
 /** How many levels from 1 to 7 are completed: Fuerte's lights (D-134). */
 export function completedLights(statuses: LevelStatus[]): number {
-  return statuses.filter((s) => s.level.order >= 1 && s.status === 'completed').length;
+  return statuses.filter((s) => s.level.order >= 1 && s.level.order <= 7 && s.status === 'completed').length;
 }
 
 /** Snapshot to keep in the person's browser (local-store), so nothing unlocked is lost. */

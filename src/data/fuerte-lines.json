@@ -428,6 +428,18 @@
         "Aprender con otros ayuda. Eso sí: conceptos sí, montos no.",
         "Una buena pregunta acá le sirve a toda tu cohorte."
       ]
+    },
+    "crypto.fuerte.locked": {
+      "state": "thinking",
+      "variants": [
+        "Cripto se abre cuando completes Invertir. Primero entender el riesgo; después, lo más volátil."
+      ]
+    },
+    "crypto.fuerte.home": {
+      "state": "neutral",
+      "variants": [
+        "Acá no se compra nada: se aprende qué es, cuánto varía y quién guarda las claves. Ojo con esto: si te prometen ganancias, es una alerta."
+      ]
     }
   }
 }

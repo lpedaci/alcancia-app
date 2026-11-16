@@ -29,6 +29,7 @@ describe('levels of the demo states (CLAUDE.md 7, demo-states.json)', () => {
       'level-5': 'completed',
       'level-6': 'completed',
       'level-7': 'locked',
+      'level-8': 'locked',
     });
     const invest = nextUnlock(statuses)!;
     expect(invest.level.id).toBe('level-7');
@@ -92,7 +93,11 @@ describe('unlock rules (5.0)', () => {
     expect(Object.values(statusOf(contextOf('p-diego', { freeMode: true }))).includes('locked')).toBe(false);
   });
 
-  it('phase B levels are not part of phase A', () => {
-    expect(evaluateLevels(levels, contextOf('p-diego')).some((s) => s.level.id === 'level-8')).toBe(false);
+  it('D-302: level 8 (Cripto) opens only when level 7 is completed, and Fuerte keeps 7 lights', () => {
+    const statuses = evaluateLevels(levels, contextOf('p-mariana'));
+    const crypto = statuses.find((s) => s.level.id === 'level-8')!;
+    expect(crypto.status).toBe('locked');
+    expect(crypto.conditions.map((c) => [c.condition.type, c.met])).toEqual([['level_completed', false]]);
+    expect(completedLights(statuses)).toBeLessThanOrEqual(7);
   });
 });

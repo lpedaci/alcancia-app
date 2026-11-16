@@ -470,6 +470,18 @@
         "guideId": "module-18-guide-1",
         "part": 5
       }
+    },
+    "crypto": {
+      "body": "Las billeteras con CVU no pueden operar con criptoactivos: lo hacen proveedores inscriptos en el Registro PSAV de la CNV, y esa inscripción no es un aval ni una garantía. Y quien guarda las claves controla las monedas.",
+      "sourceIds": [
+        "B-18",
+        "B-27",
+        "A-50"
+      ],
+      "guide": {
+        "guideId": "module-16-guide-2",
+        "part": 4
+      }
     }
   }
 }

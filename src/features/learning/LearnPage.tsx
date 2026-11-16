@@ -34,7 +34,7 @@ const STATE_TONE = { completed: 'success', unlocked: 'primary', locked: 'neutral
 const pct = (n: number) => `${Math.round(n * 100)}${NBSP}%`;
 
 /** Badges listed in Logros, and how many show before "Ver todas" (D-236). */
-const BADGE_MODULES = MODULES.filter((m) => m.phase === 'A' && guideOfModule(m.id));
+const BADGE_MODULES = MODULES.filter((m) => guideOfModule(m.id));
 const BADGES_VISIBLE = 4;
 
 export function LearnPage() {
@@ -94,7 +94,7 @@ export function LearnPage() {
               {statuses.map((s, i) => {
                 const isCurrent = current?.level.id === s.level.id;
                 const expanded = open.has(s.level.id);
-                const phaseB = s.level.phase === 'B';
+                const phaseB = false; // Level 8 is built (D-302): every level shows its state
                 const last = i === statuses.length - 1;
                 const name = t(`wallet.sections.${s.level.id}`, { defaultValue: t('learn.map.crypto') });
                 return (

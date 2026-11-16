@@ -31,6 +31,8 @@ export const AREA_LEVEL: Record<string, string> = {
   pockets: 'level-4',
   yield: 'level-6',
   invest: 'level-7',
+  brokerage: 'level-7',
+  crypto: 'level-8',
 };
 
 /**

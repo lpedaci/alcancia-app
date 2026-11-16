@@ -62,8 +62,8 @@ function rightAnswer(q: LearningQuestion): Answer {
 }
 
 describe('content of levels 1 to 7 (D-61)', () => {
-  it('has one guide for each phase A module of levels 1 to 7, with the Gagné sequence', () => {
-    const modules = levels.filter((l) => ['level-1', 'level-2', 'level-3', 'level-4', 'level-5', 'level-6', 'level-7'].includes(l.id)).flatMap((l) => l.guideModuleIds);
+  it('has a guide 1 for each module of levels 1 to 8, with the Gagné sequence', () => {
+    const modules = levels.filter((l) => ['level-1', 'level-2', 'level-3', 'level-4', 'level-5', 'level-6', 'level-7', 'level-8'].includes(l.id)).flatMap((l) => l.guideModuleIds);
     // Guide 1 of each module is the one its level asks for; guides 2 and 3 go deeper (D-276)
     expect(GUIDES.filter((g) => g.id.endsWith('-guide-1')).map((g) => g.moduleId).sort()).toEqual([...modules].sort());
     expect(GUIDES.every((g) => modules.includes(g.moduleId))).toBe(true);
@@ -190,10 +190,10 @@ describe('challenges (D-57)', () => {
     expect(scoreAttempt(drawn, answers)).toEqual({ score: 0.5, moduleScores: { 'module-01': 1, 'module-02': 0 }, right: 3, total: 6 });
   });
 
-  it('has a level challenge for levels 1 to 7 and a mastery challenge for levels 2 to 7', () => {
-    expect(CHALLENGES.filter((c) => !c.mastery).map((c) => c.levelId)).toEqual(['level-1', 'level-2', 'level-3', 'level-4', 'level-5', 'level-6', 'level-7']);
-    expect(CHALLENGES.filter((c) => c.mastery).map((c) => c.levelId)).toEqual(['level-2', 'level-3', 'level-4', 'level-5', 'level-6', 'level-7']);
-    for (const level of levels.filter((l) => ['level-2', 'level-3', 'level-4', 'level-5', 'level-6', 'level-7'].includes(l.id))) {
+  it('has a level challenge for levels 1 to 8 and a mastery challenge for levels 2 to 8 (D-302)', () => {
+    expect(CHALLENGES.filter((c) => !c.mastery).map((c) => c.levelId)).toEqual(['level-1', 'level-2', 'level-3', 'level-4', 'level-5', 'level-6', 'level-7', 'level-8']);
+    expect(CHALLENGES.filter((c) => c.mastery).map((c) => c.levelId)).toEqual(['level-2', 'level-3', 'level-4', 'level-5', 'level-6', 'level-7', 'level-8']);
+    for (const level of levels.filter((l) => ['level-2', 'level-3', 'level-4', 'level-5', 'level-6', 'level-7', 'level-8'].includes(l.id))) {
       expect(CHALLENGES.map((c) => c.id)).toContain(level.masteryChallengeId);
     }
   });

@@ -17,6 +17,8 @@ export interface CheckedPage {
   pendingMfa?: 'p-julieta' | 'p-ricardo';
   /** Integrated mode inside a fictitious partner app (D-75, D-242). */
   partner?: 'hornero';
+  /** "Ver todo desbloqueado" of the demo mode (5.0), to check sections not yet opened by the rule. */
+  unlockAll?: boolean;
 }
 
 export const PAGES: CheckedPage[] = [
@@ -77,6 +79,8 @@ export const PAGES: CheckedPage[] = [
   { id: 'p12-mission-4-mariana', path: '/#/app/missions/mission-4', as: 'p-mariana' },
   { id: 'p8-invest-mariana', path: '/#/app/invest', as: 'p-mariana' },
   { id: 'p8-instrument-mariana', path: '/#/app/invest/cedear-sp500', as: 'p-mariana' },
+  { id: 'p8-crypto-locked-mariana', path: '/#/app/invest/crypto', as: 'p-mariana' },
+  { id: 'p8-crypto-mariana', path: '/#/app/invest/crypto', as: 'p-mariana', unlockAll: true },
   { id: 'p9-sources-diego', path: '/#/app/learn/sources', as: 'p-diego' },
   { id: 'p12-mission-broker-mariana', path: '/#/app/missions/mission-broker-account', as: 'p-mariana' },
   { id: 'p12-mission-cedear-mariana', path: '/#/app/missions/mission-first-cedear', as: 'p-mariana' },
@@ -157,14 +161,14 @@ export async function prepareSession(page: Page, target: CheckedPage) {
     : null;
   const consents = target.as && !target.noConsent ? [{ personId: target.as, version: '1.0', acceptedAt: now }] : [];
   await page.addInitScript(
-    ({ session, pending, consents, partner }) => {
+    ({ session, pending, consents, partner, unlockAll }) => {
       localStorage.setItem(
         'alcancia-session',
-        JSON.stringify({ state: { session, pending, returnTo: null, authAttempts: {}, demoUnlockAll: false }, version: 1 }),
+        JSON.stringify({ state: { session, pending, returnTo: null, authAttempts: {}, demoUnlockAll: unlockAll }, version: 1 }),
       );
       localStorage.setItem('alcancia-data', JSON.stringify({ state: { consents }, version: 3 }));
       if (partner) sessionStorage.setItem('alcancia-partner', partner);
     },
-    { session, pending, consents, partner: target.partner ?? null },
+    { session, pending, consents, partner: target.partner ?? null, unlockAll: target.unlockAll ?? false },
   );
 }

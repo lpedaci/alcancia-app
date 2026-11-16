@@ -63,7 +63,15 @@ export const DESTINATIONS: Destination[] = [
       { key: 'yield', to: '/app/save/yield' },
     ],
   },
-  { id: 'invest', to: '/app/invest', icon: 'trending_up' },
+  {
+    id: 'invest',
+    to: '/app/invest',
+    icon: 'trending_up',
+    subsections: [
+      { key: 'brokerage', to: '/app/invest' },
+      { key: 'crypto', to: '/app/invest/crypto' },
+    ],
+  },
   { id: 'learn', to: '/app/learn', icon: 'school', subsections: [{ key: 'map', to: '/app/learn' }, { key: 'tools', to: '/app/tools' }, { key: 'sources', to: '/app/learn/sources' }] },
 ];
 

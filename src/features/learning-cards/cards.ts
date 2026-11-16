@@ -56,7 +56,7 @@ export interface ScreenWhy {
   guide: GuideLink;
 }
 
-export type WhyScreen = 'account' | 'pay' | 'transfer' | 'qr' | 'bills' | 'credit' | 'budget' | 'pockets' | 'yield' | 'invest' | 'profile';
+export type WhyScreen = 'account' | 'pay' | 'transfer' | 'qr' | 'bills' | 'credit' | 'budget' | 'pockets' | 'yield' | 'invest' | 'crypto' | 'profile';
 
 export const LEARNING_CARDS = cardsJson.cards as LearningCardDef[];
 export const SCREEN_WHY = cardsJson.screens as Record<WhyScreen, ScreenWhy>;

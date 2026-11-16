@@ -18,6 +18,7 @@ export const LEVEL_ROUTE: Record<string, string> = {
   "level-5": "/app/pay/credit",
   "level-6": "/app/save/yield",
   "level-7": "/app/invest",
+  "level-8": "/app/invest/crypto",
 };
 
 /** D-67: the educational investor profile test, offered from here even while Invertir is locked. */

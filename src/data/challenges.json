@@ -148,6 +148,24 @@
         "module-15": 2
       },
       "passingScore": 0.7
+    },
+    {
+      "id": "challenge-level-8",
+      "levelId": "level-8",
+      "mastery": false,
+      "questionsPerModule": {
+        "module-16": 4
+      },
+      "passingScore": 0.7
+    },
+    {
+      "id": "mastery-level-8",
+      "levelId": "level-8",
+      "mastery": true,
+      "questionsPerModule": {
+        "module-16": 4
+      },
+      "passingScore": 0.7
     }
   ]
 }

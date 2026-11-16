@@ -1,5 +1,7 @@
 # Tanda 9 del paso 27: guías para revisar
 
+> **Aprobada por Lourdes el 15/11/2026.** Las guías pasaron a `src/data/guides.json` y se ven en la app. Las ampliaciones siguen pendientes de revisión del Lic. Kevin Giampieri.
+
 > Borradores de `src/data/guides-drafts.json`, generados con `node scripts/guides-review.mjs 9`. **No se muestran en la app** hasta que Lourdes los apruebe; las ampliaciones quedan marcadas para el Lic. Kevin Giampieri (D-276).
 
 Cómo revisar: marca en cada guía "Aprobada", "Con cambios" (y cuáles) o "No va". Lo validado viene del taller o de la presentación y no cambia datos; las ampliaciones son lo nuevo.
@@ -9,7 +11,7 @@ Cómo revisar: marca en cada guía "Aprobada", "Con cambios" (y cuáles) o "No v
 - **Id:** `module-16-guide-1` · **Fuentes:** A-48, A-49, A-51
 - **Validado (sin cambiar datos):** Bitcoin como reserva de valor digital, descentralizada y finita (máximo 21 millones); ethereum como infraestructura de aplicaciones y contratos inteligentes; alta volatilidad, solo dinero que no necesites a corto plazo (A-48, A-49); Para qué sirve cada una: BTC, ETH y USDT con valor cercano al dólar (A-51)
 - **Ampliación, pendiente del Lic. Kevin Giampieri:** Ejemplo de tres preguntas y la aclaración de que la guía no dice cuál ni cuánto comprar (1.2)
-- **Decisión de Lourdes:** ☐ Aprobada · ☐ Con cambios · ☐ No va
+- **Decisión de Lourdes:** ☑ Aprobada (15/11/2026)
 
 **Situación:** Escuchas hablar de bitcoin en la radio, en el trabajo y en las redes. Unos dicen que es el futuro; otros, que es una burbuja. Antes de opinar, conviene saber qué es.
 
@@ -57,7 +59,7 @@ No todas sirven para lo mismo. Hay **monedas estables**, como **USDT**, que busc
 - **Id:** `module-16-guide-2` · **Fuentes:** A-50, B-18, B-27
 - **Validado (sin cambiar datos):** Custodia: "not your keys, not your coins" y billeteras frías (A-50); Los PSPCP no pueden operar con criptoactivos (B-18); Registro PSAV de la CNV; la inscripción no implica recomendación, aval ni garantía; la autocustodia queda excluida (B-27)
 - **Ampliación, pendiente del Lic. Kevin Giampieri:** Explicación de qué pasa si se pierden las claves y ejemplo de revisión de una app, sin nombrar entidades; Aclaración de que los criptoactivos no tienen la garantía de los depósitos (B-01, por contraste)
-- **Decisión de Lourdes:** ☐ Aprobada · ☐ Con cambios · ☐ No va
+- **Decisión de Lourdes:** ☑ Aprobada (15/11/2026)
 
 **Situación:** Una app te deja comprar criptomonedas en dos toques y dice estar "inscripta en la CNV". ¿Eso significa que tu dinero está protegido?
 
@@ -103,7 +105,7 @@ Una criptomoneda se controla con **claves**. Si la app las guarda por ti, depend
 - **Id:** `module-16-guide-3` · **Fuentes:** A-49, A-50, F-39
 - **Validado (sin cambiar datos):** DCA: monto fijo todos los meses sin mirar el precio; 90/10 como forma de gestionar el riesgo; halving de 6,25 a 3,125 BTC que no garantiza suba (A-50); Solo dinero que no necesites a corto plazo (A-49)
 - **Ampliación, pendiente del Lic. Kevin Giampieri:** El 90/10 se presenta como ejemplo de cómo se razona la asignación, no como recomendación (1.2, Anexo A); Costo promedio de compras periódicas: nueva fórmula F-39 con test (USD 42,86 en el ejemplo y USD 60 en la práctica), con precios de ejemplo
-- **Decisión de Lourdes:** ☐ Aprobada · ☐ Con cambios · ☐ No va
+- **Decisión de Lourdes:** ☑ Aprobada (15/11/2026)
 
 **Situación:** El precio de una criptomoneda puede caer a la mitad en meses. Hay quienes, en lugar de adivinar el momento, compran un monto fijo todos los meses. ¿Qué cambia eso?
 
@@ -149,7 +151,7 @@ El taller muestra una forma de **pensar la asignación**: por ejemplo, 90 % en a
 - **Id:** `module-18-guide-2` · **Fuentes:** T, B-24
 - **Validado (sin cambiar datos):** Página parecida como forma habitual de estafa y no compartir códigos (T); Señales: urgencia y entidades que no figuran en registros; alertas al inversor de la CNV (B-24)
 - **Ampliación, pendiente del Lic. Kevin Giampieri:** Detalle de cómo se ve una dirección parecida y el hábito de entrar por la app; Segundo factor como protección (práctica de la billetera, misión "Configura tu seguridad")
-- **Decisión de Lourdes:** ☐ Aprobada · ☐ Con cambios · ☐ No va
+- **Decisión de Lourdes:** ☑ Aprobada (15/11/2026)
 
 **Situación:** Te llega un correo con el logo de tu billetera: "Detectamos un acceso inusual, verifica tu cuenta aquí". El enlace lleva a una página idéntica a la real.
 
@@ -194,7 +196,7 @@ Una **página parecida** copia el diseño de una real para que escribas tu usuar
 - **Id:** `module-18-guide-3` · **Fuentes:** T, B-23, B-24, F-37
 - **Validado (sin cambiar datos):** No compartir códigos y reportar el mensaje (T); Reclamos y denuncias ante la CNV por ofertas de inversión (B-23, B-24); Caso F-37 de docs/formulas.md, con test: $ 70.000 si se reporta y $ 40.000 si no
 - **Ampliación, pendiente del Lic. Kevin Giampieri:** Orden de los primeros pasos (entrar por la app, cambiar la contraseña, avisar por canales oficiales), como guía general y sin prometer recuperos; Mensaje sin culpa para la persona (2.9)
-- **Decisión de Lourdes:** ☐ Aprobada · ☐ Con cambios · ☐ No va
+- **Decisión de Lourdes:** ☑ Aprobada (15/11/2026)
 
 **Situación:** Compartiste el código y, un minuto después, te diste cuenta. Lo que hagas en la próxima hora importa.
 

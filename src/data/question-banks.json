@@ -3183,6 +3183,161 @@
         "A-46",
         "B-31"
       ]
+    },
+    {
+      "id": "m16-cap",
+      "moduleId": "module-16",
+      "type": "single",
+      "prompt": "¿Cuántas unidades de bitcoin pueden existir como máximo?",
+      "options": [
+        {
+          "id": "a",
+          "text": "21 millones"
+        },
+        {
+          "id": "b",
+          "text": "Ilimitadas, como el dinero de un banco central"
+        },
+        {
+          "id": "c",
+          "text": "Depende de cada app"
+        }
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "feedback": {
+        "a": "Correcto. Bitcoin es finita: el máximo es de 21 millones de unidades.",
+        "b": "No: bitcoin es finita, con un máximo de 21 millones. No tiene un banco central que la emita.",
+        "c": "No depende de la app: el máximo de bitcoin es de 21 millones de unidades."
+      },
+      "sourceIds": [
+        "A-48"
+      ]
+    },
+    {
+      "id": "m16-volatile",
+      "moduleId": "module-16",
+      "type": "true_false_why",
+      "prompt": "Una criptomoneda es un buen lugar para tu fondo de emergencia.",
+      "options": [
+        {
+          "id": "true",
+          "text": "Verdadero"
+        },
+        {
+          "id": "false",
+          "text": "Falso"
+        }
+      ],
+      "correctOptionIds": [
+        "false"
+      ],
+      "why": {
+        "prompt": "¿Por qué?",
+        "options": [
+          {
+            "id": "w1",
+            "text": "Porque su volatilidad es alta: puede valer mucho menos justo cuando la necesitas"
+          },
+          {
+            "id": "w2",
+            "text": "Porque las criptomonedas no se pueden vender"
+          }
+        ],
+        "correct": "w1"
+      },
+      "feedback": {
+        "correct": "Correcto. El fondo de emergencia necesita liquidez y bajo riesgo; una criptomoneda puede caer fuerte en poco tiempo.",
+        "incorrect": "Es falso: el fondo de emergencia necesita bajo riesgo, y una criptomoneda puede caer fuerte justo cuando la necesitas."
+      },
+      "sourceIds": [
+        "A-36",
+        "A-49"
+      ]
+    },
+    {
+      "id": "m16-registry",
+      "moduleId": "module-16",
+      "type": "single",
+      "prompt": "Una app ofrece comprar criptoactivos. ¿Dónde verificas que esté inscripta?",
+      "options": [
+        {
+          "id": "a",
+          "text": "En el Registro PSAV de la CNV"
+        },
+        {
+          "id": "b",
+          "text": "En el registro de proveedores de servicios de pago del BCRA"
+        },
+        {
+          "id": "c",
+          "text": "En las reseñas de la tienda de apps"
+        }
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "feedback": {
+        "a": "Correcto. Los proveedores de servicios de activos virtuales se inscriben en el Registro PSAV de la CNV.",
+        "b": "Ese registro es para billeteras con CVU, que no pueden operar con criptoactivos. El registro correcto es el PSAV de la CNV.",
+        "c": "Las reseñas no son un registro oficial. Se verifica en el Registro PSAV de la CNV."
+      },
+      "sourceIds": [
+        "B-18",
+        "B-27"
+      ]
+    },
+    {
+      "id": "m16-keys",
+      "moduleId": "module-16",
+      "type": "single",
+      "prompt": "¿Qué significa \"not your keys, not your coins\"?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Que si otro guarda tus claves, dependes de él para usar tus criptomonedas"
+        },
+        {
+          "id": "b",
+          "text": "Que las criptomonedas no se pueden perder"
+        },
+        {
+          "id": "c",
+          "text": "Que necesitas una cuenta bancaria para comprarlas"
+        }
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "feedback": {
+        "a": "Correcto. Quien controla las claves controla las monedas: si las guarda una app, tu acceso depende de ella.",
+        "b": "Al contrario: si pierdes las claves o quien las guarda falla, puedes perderlas.",
+        "c": "No tiene que ver con una cuenta bancaria: habla de quién controla las claves."
+      },
+      "sourceIds": [
+        "A-50"
+      ]
+    },
+    {
+      "id": "m16-dca-bank",
+      "moduleId": "module-16",
+      "type": "numeric",
+      "prompt": "Inviertes USD 100 por mes durante dos meses. Los precios de ejemplo por unidad son USD 50 y USD 25. ¿Cuál es tu costo promedio por unidad? (con dos decimales)",
+      "numeric": {
+        "answer": "33.33",
+        "tolerance": "0.01",
+        "unit": "USD"
+      },
+      "help": "Monto en dólares, con dos decimales, por ejemplo: 40,00",
+      "feedback": {
+        "correct": "Correcto. Unidades: 2 + 4 = 6 por USD 200: USD 33,33 cada una.",
+        "incorrect": "Unidades: 100 ÷ 50 = 2 y 100 ÷ 25 = 4. Son 6 unidades por USD 200: USD 33,33 cada una."
+      },
+      "sourceIds": [
+        "A-50",
+        "F-39"
+      ]
     }
   ]
 }
