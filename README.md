@@ -441,8 +441,6 @@ La CI corre lint, tipos, tests unitarios, `npm audit` y las pruebas de producci�
 
 **Imágenes:** las fotos de las personas de la demo son de stock, "Designed by Magnific" ([magnific.com](https://www.magnific.com/)), con su licencia gratuita.
 
-**Licencia:** todos los derechos reservados. El contenido de finanzas pertenece a sus autores.
-
 ### Referencias
 
 Anderson, L. W., & Krathwohl, D. R. (Eds.). (2001). *A taxonomy for learning, teaching, and assessing: A revision of Bloom's taxonomy of educational objectives*. Longman.
@@ -464,3 +462,11 @@ Kolb, D. A. (1984). *Experiential learning: Experience as the source of learning
 World Wide Web Consortium. (2023). *Web Content Accessibility Guidelines (WCAG) 2.2*. https://www.w3.org/TR/WCAG22/
 
 Wiggins, G., & McTighe, J. (2005). *Understanding by design* (2.ª ed. ampliada). ASCD.
+
+## Licencia
+
+Copyright (c) 2026 Lourdes Pedaci. Todos los derechos reservados.
+
+Este repositorio y su contenido (código fuente, diseño, textos, contenido instruccional, ilustraciones e íconos) son obra de Lourdes Pedaci y están protegidos por la Ley 11.723 de Propiedad Intelectual de la República Argentina y por los tratados internacionales aplicables. Que el repositorio sea visible públicamente no otorga ninguna licencia: queda prohibido copiar, modificar, distribuir, sublicenciar o crear obras derivadas, total o parcialmente, sin autorización previa y por escrito de la autora. Las marcas "Hornero" e "Instituto Superior Ceibo" son ficticias y se usan solo con fines de demostración.
+
+Texto completo en [LICENSE](LICENSE).

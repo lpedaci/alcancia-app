@@ -1,6 +1,8 @@
 /** External links of the project (CLAUDE.md F0). Always opened with rel="noopener noreferrer" (8.2). */
 export const REPO_URL = 'https://github.com/lpedaci/alcancia-app';
 export const DOCS_URL = `${REPO_URL}/blob/main/docs/README.md`;
+/** All rights reserved (D-306). */
+export const LICENSE_URL = `${REPO_URL}/blob/main/LICENSE`;
 
 /** Case study in Lourdes's portfolio. Until it exists, the portfolio home (F0). */
 export const CASE_STUDY_URL = 'https://lpedaci.github.io/portfolio/';

@@ -12,6 +12,16 @@ import { parseDecimalInput } from '@/lib/money';
  */
 export interface EscapeObject {
   id: string;
+  /** What the object is, so it is drawn as such (D-305). */
+  kind: 'receipt' | 'postit' | 'list' | 'statement' | 'flyer' | 'envelope' | 'tag' | 'phone';
+  company?: string;
+  companyId?: string;
+  meta?: { label: string; value: string }[];
+  earnings?: { label: string; unit: string; value: string }[];
+  deductions?: { label: string; unit: string }[];
+  gross?: string;
+  stained?: string;
+  messages?: { channel: string; from: string; text: string }[];
   icon: IconName;
   name: string;
   summary: string;

@@ -1,4 +1,5 @@
 import { Dialog as DialogPrimitive } from 'radix-ui';
+import { RightsNotice } from '@/components/layout/RightsNotice';
 import { type ReactNode, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
@@ -436,7 +437,10 @@ export function DesignSystemPage() {
       <footer className="border-t border-outline-variant bg-surface-container-lowest px-(--space-gutter) py-8">
         <div className={cn(container, 'flex flex-col gap-5')}>
           <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-            <p className="text-body-small text-on-surface-variant">{t('landing.footer.credit')} © 2026</p>
+            <div className="flex flex-col gap-1">
+              <p className="text-body-small text-on-surface-variant">{t('landing.footer.credit')}</p>
+              <RightsNotice />
+            </div>
             <ul className="-ml-3 flex items-center gap-1 md:-mr-3 md:ml-0" aria-label={t('landing.footer.profiles')}>
               {(
                 [

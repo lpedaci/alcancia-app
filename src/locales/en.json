@@ -555,5 +555,10 @@
       "education": "Instituto Superior Ceibo",
       "product": "Hornero"
     }
+  },
+  "rights": {
+    "notice": "© 2026 Lourdes Pedaci · All rights reserved",
+    "license": "License",
+    "newTab": "(opens in a new tab)"
   }
 }

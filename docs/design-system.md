@@ -171,6 +171,10 @@ La billetera ficticia que muestra Alcancía integrada en otra app (D-75, D-84). 
 - **Escape room (D-304):** se arma con los componentes de siempre: `QuestionView` para cada candado, `Dialog` para inspeccionar objetos, `ListLinkRow` para ir a la guía, `InlineAlert` para el resultado y `TextArea` para la reflexión. Las pistas van en `warning-container`, como "¿Por qué importa?"; los candados abiertos, en `tertiary-container`, el color de los logros.
 - **Diálogos (D-304):** al abrirse enfocan el propio diálogo, no el botón "Cerrar", para que Escape lo cierre a la primera.
 
+- **"Qué falta" en todos lados (D-305, `ConditionList`):** la tarjeta de desbloqueo y el mapa de niveles usan la misma lista; no hay chips de condiciones.
+- **Objetos del escape room (D-305):** cada objeto se dibuja como lo que es (recibo, post-it, lista, resumen, folleto, sobre, etiqueta, celular) con tokens, para la inmersión del juego.
+- **Pie de autoría (D-306, `RightsNotice`):** "© 2026 Lourdes Pedaci · Todos los derechos reservados" con enlace a `LICENSE`, en `body-small` y `on-surface-variant`, al pie de todas las pantallas.
+
 ### Valores reales (D-264)
 
 - **Tarjeta "Valores reales de hoy" (`RealValues`):** cada valor real en una celda con su nombre, la cifra en `title-large` y "Valor al DD/MM/AAAA · Fuente: …"; si no se pudo actualizar, lo dice. Abajo, el recordatorio de que lo que viene es un escenario y el aviso legal, y los enlaces a las fuentes oficiales. Sin snapshot, un aviso en `info` y la pantalla sigue con los escenarios de ejemplo.

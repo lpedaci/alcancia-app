@@ -135,6 +135,24 @@ function ConditionLine({ status }: { status: ConditionStatus }) {
   );
 }
 
+/** "Qué falta" (D-287, D-294, D-305): a light list at every width, what is missing first, two columns on
+ *  wide containers; every pending condition with a place to act on it is a whole-row link. */
+export function ConditionList({ conditions, className }: { conditions: ConditionStatus[]; className?: string }) {
+  const { t } = useTranslation();
+  return (
+    <ul className={cn("-my-1 grid grid-cols-1 divide-y divide-outline-variant @lg:grid-cols-2 @lg:gap-x-6 @lg:divide-y-0", className)} aria-label={t("wallet.unlock.missing")}>
+      {conditions
+        .filter((c) => c.condition.type !== "first_sign_in")
+        .sort((a, b) => Number(a.met) - Number(b.met))
+        .map((c, index) => (
+          <li key={index} className="min-w-0">
+            <ConditionLine status={c} />
+          </li>
+        ))}
+    </ul>
+  );
+}
+
 export function ConditionChip({ status }: { status: ConditionStatus }) {
   const { t } = useTranslation();
   const text = useConditionText()(status);
@@ -267,17 +285,7 @@ export function UnlockCard({
           tone="tertiary"
         />
       </div>
-      {/* A light list at every width, what is missing first (D-287); two columns on wide cards */}
-      <ul className="-my-1 grid grid-cols-1 divide-y divide-outline-variant @lg:grid-cols-2 @lg:gap-x-6 @lg:divide-y-0" aria-label={t("wallet.unlock.missing")}>
-        {status.conditions
-          .filter((c) => c.condition.type !== "first_sign_in")
-          .sort((a, b) => Number(a.met) - Number(b.met))
-          .map((c, index) => (
-            <li key={index} className="min-w-0">
-              <ConditionLine status={c} />
-            </li>
-          ))}
-      </ul>
+      <ConditionList conditions={status.conditions} />
     </section>
   );
 }

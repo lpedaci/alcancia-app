@@ -1,6 +1,8 @@
 {
   "name": "alcancia-app",
   "private": true,
+  "license": "UNLICENSED",
+  "author": "Lourdes Pedaci",
   "version": "0.1.0",
   "description": "Alcancía: plataforma corporativa de aprendizaje en finanzas personales, presentada como una billetera de práctica. Prototipo de portfolio de Lourdes Pedaci.",
   "type": "module",

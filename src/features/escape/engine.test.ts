@@ -102,6 +102,10 @@ describe('escape room rules', () => {
     expect([0, 1, 2, 4, 5].map(sealOf)).toEqual(['gold', 'gold', 'silver', 'silver', 'bronze']);
   });
 
+  it('never breaks an amount between the sign and the number (D-68)', () => {
+    expect(JSON.stringify(ROOMS)).not.toMatch(/\$ \d/);
+  });
+
   it('keeps the voice rules: tú, no exclamations and no em dashes', () => {
     expect(JSON.stringify(ROOMS)).not.toMatch(/—|¡|\b(vos|tenés|podés|sabés|fijate|probá|mirá)\b/);
   });

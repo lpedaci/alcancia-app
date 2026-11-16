@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { RightsFooter } from '@/components/layout/RightsNotice';
 import { useTranslation } from 'react-i18next';
 import { toast } from '@/components/ui/toast-store';
 import { useNavigate } from 'react-router';
@@ -190,6 +191,7 @@ export function HorneroPage() {
           <Icon name="lock" size={16} className="mt-0.5 shrink-0" />
           {t('partner.hornero.privacy')}
         </p>
+        <RightsFooter />
       </main>
     </div>
   );

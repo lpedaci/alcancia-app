@@ -1,4 +1,5 @@
 import { InPageLink, SkipLink } from '@/components/layout/InPageLink';
+import { RightsNotice } from '@/components/layout/RightsNotice';
 import { type ReactNode, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
@@ -424,7 +425,7 @@ export function LandingPage() {
                     {t(`landing.faq.q${n}`)}
                     <Icon name="keyboard_arrow_down" className="shrink-0 transition-transform group-open:rotate-180" />
                   </summary>
-                  <p className="max-w-prose px-(--space-card-padding) pb-4 text-body-medium text-on-surface-variant">{t(`landing.faq.a${n}`)}</p>
+                  <p className="px-(--space-card-padding) pb-4 text-body-medium text-on-surface-variant">{t(`landing.faq.a${n}`)}</p>
                 </details>
               ))}
             </div>
@@ -490,9 +491,9 @@ export function LandingPage() {
           <div className={cn(container, 'flex flex-col gap-3 py-6 text-body-small text-on-surface-variant')}>
             <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
               <div className="flex flex-col gap-1">
-                <p>
-                  {t('landing.footer.credit')} © 2026
-                </p>
+                <p>{t('landing.footer.credit')}</p>
+                {/* Authorship and rights (D-306) */}
+                <RightsNotice />
                 {/* Attribution required by the free license of the profile photos (D-71) */}
                 <p className="text-label-medium text-on-surface-variant">
                   {t('landing.footer.photos')}{' '}

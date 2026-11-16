@@ -114,3 +114,5 @@
 | 15/11/2026 | 27 · F22, nivel 8 Cripto | Pantalla Cripto dentro de Invertir con las guías del módulo 16, su desafío y dónde verificar; se abre al completar el nivel 7 (D-302). Paso 27 completo: guías 2 y 3 de los 16 módulos, módulos 16 y 18 (F11) y nivel 8 (F22) | Hecho |
 | 15/11/2026 | 28 · Escape room, recorrido | Mecánicas del escape room original documentadas en `docs/learning-design.md` (sección 11.1) y propuesta de adaptación (11.2) | Esperando la confirmación de Lourdes |
 | 16/11/2026 | 28 · Escape room, primera tanda | Cinco salas en versión inicial, motor, puerta final, llaves, sello e insignia de bronce, con prueba de punta a punta (D-304); documento `docs/content-review/escape-1.md` | Esperando la revisión de Lourdes |
+| 16/11/2026 | Ajuste de Lourdes | "Qué falta" como lista en el mapa, escape room con objetos realistas y tiempo con el ojo (D-305); licencia y pie de autoría en todas las pantallas (D-306) | Hecho |
+| (pendiente) | Cierre de la fase B | Después del informe final (`docs/review.md`, paso 36), crear la Release `v1.0.0` en GitHub con notas que resuman las funcionalidades (D-306). Es el último paso del plan | Pendiente |

@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/Button';
 import { ConfirmDialog, Dialog, DialogContent, DialogTrigger } from '@/components/ui/Dialog';
 import { Icon } from '@/components/ui/Icon';
+import { IconButton } from '@/components/ui/IconButton';
 import { InlineAlert } from '@/components/ui/InlineAlert';
 import { ListLinkRow } from '@/components/ui/ListLinkRow';
 import { TextArea } from '@/components/ui/TextArea';
@@ -16,6 +17,7 @@ import { WalletShell } from '@/features/wallet/WalletShell';
 import { cn } from '@/lib/utils';
 import { readLocal, writeLocal } from '@/store/local-store';
 import { useCurrentUser } from '@/store/session-store';
+import { EscapeObjectView } from './EscapeObjects';
 import {
   type EscapeObject,
   type EscapeRoom,
@@ -109,15 +111,7 @@ export function EscapeRoomPage() {
           </div>
           {state && (
             <div className="flex flex-wrap gap-2">
-              <Button
-                variant="outlined"
-                size="xs"
-                leadingIcon={state.timeVisible ? 'visibility_off' : 'schedule'}
-                aria-pressed={state.timeVisible}
-                onClick={() => setState((s) => ({ ...s, timeVisible: !s.timeVisible }))}
-              >
-                {state.timeVisible ? t('escape.time.hide') : t('escape.time.show')}
-              </Button>
+
               <Button variant="text" size="xs" leadingIcon="restart_alt" onClick={() => setConfirmReset(true)}>
                 {t('escape.reset')}
               </Button>
@@ -129,7 +123,7 @@ export function EscapeRoomPage() {
           <Intro onStart={start} />
         ) : (
           <>
-            <Progress state={state} />
+            <Progress state={state} onToggleTime={() => setState((s) => ({ ...s, timeVisible: !s.timeVisible }))} />
             {state.current < ROOMS.length && (
               <RoomView key={ROOMS[state.current]!.id} room={ROOMS[state.current]!} index={state.current} state={state} setState={setState} setMood={setMood} />
             )}
@@ -173,7 +167,7 @@ function Intro({ onStart }: { onStart: () => void }) {
         {t('escape.storyTitle')}
       </h2>
       {(t('escape.story', { returnObjects: true }) as string[]).map((p) => (
-        <p key={p} className="max-w-prose text-body-large text-on-surface">
+        <p key={p} className="text-body-large text-on-surface">
           {p}
         </p>
       ))}
@@ -199,7 +193,7 @@ function Intro({ onStart }: { onStart: () => void }) {
 }
 
 /** The five locks with their habit, the keys, the hints used, the letters and the hidden clock. */
-function Progress({ state }: { state: EscapeState }) {
+function Progress({ state, onToggleTime }: { state: EscapeState; onToggleTime: () => void }) {
   const { t } = useTranslation();
   const letters = lettersOf(state);
   return (
@@ -234,7 +228,22 @@ function Progress({ state }: { state: EscapeState }) {
           value={letters.map((l) => l ?? '·').join(' ')}
           valueLabel={t('escape.lettersValue', { count: letters.filter(Boolean).length, total: ROOMS.length })}
         />
-        <Stat icon="schedule" label={t('escape.time.label')} value={state.timeVisible ? formatTime(state.timeMs) : t('escape.time.hidden')} />
+        {/* The time is hidden by default (original game); the eye shows or hides it, right beside it */}
+        <div className="flex min-w-0 items-center gap-2">
+          <Icon name="schedule" size={18} className="shrink-0 text-primary" />
+          <dt className="text-body-small text-on-surface-variant">{t('escape.time.label')}</dt>
+          <dd className="ml-auto flex items-center gap-1 text-label-large text-on-surface tabular-nums">
+            {state.timeVisible && <span>{formatTime(state.timeMs)}</span>}
+            <IconButton
+              icon={state.timeVisible ? 'visibility_off' : 'visibility'}
+              size="xs"
+              label={state.timeVisible ? t('escape.time.hide') : t('escape.time.show')}
+              selected={state.timeVisible}
+              onClick={onToggleTime}
+              className="-my-1"
+            />
+          </dd>
+        </div>
       </dl>
     </section>
   );
@@ -273,25 +282,8 @@ function ObjectButton({ object }: { object: EscapeObject }) {
           <Icon name="search" size={20} className="shrink-0 text-on-surface-variant" />
         </button>
       </DialogTrigger>
-      <DialogContent title={object.name} description={object.title}>
-        {object.rows && (
-          <dl className="flex flex-col divide-y divide-outline-variant rounded-lg border border-outline-variant">
-            {object.rows.map((r) => (
-              <div key={r.label} className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 px-3 py-2">
-                <dt className={cn('text-body-medium', r.strong ? 'text-on-surface' : 'text-on-surface-variant')}>{r.label}</dt>
-                <dd className={cn('text-right tabular-nums', r.strong ? 'text-title-small text-on-surface' : 'text-body-medium text-on-surface')}>{r.value}</dd>
-              </div>
-            ))}
-          </dl>
-        )}
-        {object.lines && (
-          <ul className="flex flex-col gap-1 rounded-lg bg-warning-container px-4 py-3 text-body-medium text-on-warning-container">
-            {object.lines.map((l) => (
-              <li key={l}>{l}</li>
-            ))}
-          </ul>
-        )}
-        {object.note && <p className="text-body-small text-on-surface-variant">{object.note}</p>}
+      <DialogContent title={object.name} description={object.summary}>
+        <EscapeObjectView object={object} />
       </DialogContent>
     </Dialog>
   );

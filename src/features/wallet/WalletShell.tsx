@@ -1,4 +1,5 @@
 import { type ReactNode, useEffect, useRef, useState } from 'react';
+import { RightsFooter } from '@/components/layout/RightsNotice';
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router';
 import { SkipLink } from '@/components/layout/InPageLink';
@@ -444,6 +445,7 @@ export function WalletShell({ section, children, fuerte }: { section: string; ch
             {/* Printed pages (receipts, simulator summaries) keep the notice: "dinero ficticio" is never removed (D-69). */}
             <p className="mb-4 hidden border-b border-outline-variant pb-2 text-label-large text-on-surface print:block">{t('wallet.printBanner')}</p>
             <MaskAmountsContext.Provider value={amountsHidden}>{children}</MaskAmountsContext.Provider>
+            <RightsFooter className="mt-10 border-t border-outline-variant pt-4" />
           </main>
         </div>
       </div>

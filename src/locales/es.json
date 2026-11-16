@@ -4170,6 +4170,16 @@
         "D-303",
         "Globo de Fuerte oscuro",
         "El aviso breve junto a Fuerte va en inverse-surface con su cola, como un tooltip, para que se lea sobre cualquier tarjeta."
+      ],
+      [
+        "D-305",
+        "Qué falta, una sola lista",
+        "La tarjeta de desbloqueo y el mapa de niveles comparten ConditionList: ícono y texto, lo pendiente primero, filas que se tocan enteras."
+      ],
+      [
+        "D-306",
+        "Pie de autoría",
+        "Todas las pantallas terminan con el aviso de derechos reservados y el enlace a la licencia."
       ]
     ],
     "money": {
@@ -4895,6 +4905,22 @@
       "next": "Siguiente sala. Inspecciona antes de probar.",
       "door": "Ya tienes todas las letras. Vamos a la puerta.",
       "out": "Saliste. Cinco luces encendidas."
+    },
+    "objects": {
+      "payslip": "Recibo de haberes",
+      "example": "Recibo de ejemplo",
+      "concept": "Concepto",
+      "unit": "Unidad",
+      "earnings": "Haberes",
+      "deductions": "Deducciones",
+      "toCalculate": "A calcular",
+      "gross": "Total bruto",
+      "stain": "Mancha de café"
     }
+  },
+  "rights": {
+    "notice": "© 2026 Lourdes Pedaci · Todos los derechos reservados",
+    "license": "Licencia",
+    "newTab": "(se abre en una pestaña nueva)"
   }
 }

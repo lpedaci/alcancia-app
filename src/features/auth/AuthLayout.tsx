@@ -1,4 +1,5 @@
 import { SkipLink } from '@/components/layout/InPageLink';
+import { RightsFooter } from '@/components/layout/RightsNotice';
 import type { ReactNode } from 'react';
 import { Link } from 'react-router';
 import { Logo } from '@/components/layout/Logo';
@@ -36,6 +37,7 @@ export function AuthLayout({ children, aside, showcase, wide }: AuthLayoutProps)
             <Logo />
           </Link>
           {children}
+          <RightsFooter />
         </div>
       </main>
       <aside className="hidden min-h-0 min-w-0 overflow-hidden rounded-xl bg-primary-container px-10 pt-10 lg:flex lg:flex-col xl:px-14">
@@ -74,6 +76,7 @@ function PlainLayout({ children, aside, wide }: { children: ReactNode; aside?: R
           </aside>
         )}
       </div>
+      <RightsFooter className="px-1 text-center" />
     </div>
   );
 }

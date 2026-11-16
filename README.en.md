@@ -134,8 +134,6 @@ Content is grounded in official Argentine sources: BCRA, CNV, INDEC, BYMA, Caja 
 
 Design and development: **Lourdes Pedaci, Experience Designer (Learning and UX/UI)**. Finance content is based on material by Lic. Kevin Giampieri for the workshop "Del aula al primer trabajo". Demo profile photos: "Designed by Magnific" ([magnific.com](https://www.magnific.com/)).
 
-**License:** all rights reserved. The finance content belongs to its authors.
-
 ### References
 
 Gottfredson, C., & Mosher, B. (2011). *Innovative performance support: Strategies and practices for learning in the workflow*. McGraw-Hill.
@@ -147,3 +145,7 @@ Knowles, M. S., Holton, E. F., III, & Swanson, R. A. (2015). *The adult learner:
 Kolb, D. A. (1984). *Experiential learning: Experience as the source of learning and development*. Prentice Hall.
 
 World Wide Web Consortium. (2023). *Web Content Accessibility Guidelines (WCAG) 2.2*. https://www.w3.org/TR/WCAG22/
+
+## License
+
+Copyright (c) 2026 Lourdes Pedaci. All rights reserved. No license is granted. See [LICENSE](LICENSE).

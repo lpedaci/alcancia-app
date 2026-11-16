@@ -296,7 +296,7 @@ Las capturas de las pantallas tocadas están en `docs/screenshots/` (`<página>-
 | D-218 a D-221 | Tarjetas de opción en Rendir; orden de Apartados y metas, y dónde se crea una meta; eliminar una meta y qué pasa con su dinero; orden de Perfil y cómo se explica el límite diario |
 | D-224 a D-232 | Menú plegado que se abre al apoyar el puntero; pantalla de error con Fuerte; layout de los paneles; confirmación al categorizar; íconos a la izquierda y barra inferior solo con íconos; pantallas de sistema; cuentas de demo en el SSO; cada sección se abre arriba; módulos del programa en una tabla por nivel |
 | D-233 a D-240 | "Ya sé esto" arriba a la derecha; listas largas con scroll interno; "¿Por qué importa?" en cada tamaño; Logros con "Ver todas"; barra inferior del tutor y el admin; acciones sobre personas y cohortes, con los filtros de las alertas; "(obligatorio)" en rojo y ayuda de acceso; marco de 1440 px y separaciones en múltiplos de 8 |
-| README | La licencia: hoy dice "Todos los derechos reservados". Si prefieres otra (por ejemplo, código abierto con el contenido reservado), la cambio |
+| README | La licencia: hoy dice "Todos los derechos reservados". Si prefieres otra (por ejemplo, código abierto con el contenido reservado), la cambio. **Cerrada el 16/11/2026: licencia confirmada, todos los derechos reservados (D-306)** |
 
 D-217 ya está confirmada, D-215 quedó revertida y D-241 es una corrección (los avisos no se cerraban).
 

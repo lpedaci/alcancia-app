@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/Button';
 import { ListLinkRow } from '@/components/ui/ListLinkRow';
 import { Icon, type IconName } from '@/components/ui/Icon';
 import { StatusPill } from '@/components/ui/StatusPill';
-import { ConditionChip } from '@/features/levels/UnlockCard';
+import { ConditionList } from '@/features/levels/UnlockCard';
 import { completedLights, type LevelStatus } from '@/features/levels/engine';
 import { MISSIONS, useLevels } from '@/features/levels/use-levels';
 import { WalletShell } from '@/features/wallet/WalletShell';
@@ -313,15 +313,8 @@ function LevelDetail({
       {locked && (
         <div className="flex flex-col gap-2">
           <p className="pb-1 text-title-small text-on-surface">{t('wallet.unlock.missing')}</p>
-          <ul className="flex flex-wrap gap-2">
-            {status.conditions
-              .filter((c) => c.condition.type !== 'first_sign_in')
-              .map((c, i) => (
-                <li key={i}>
-                  <ConditionChip status={c} />
-                </li>
-              ))}
-          </ul>
+          {/* The same light list as the unlock card (D-305), not chips */}
+          <ConditionList conditions={status.conditions} />
         </div>
       )}
 

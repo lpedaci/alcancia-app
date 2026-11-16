@@ -1,4 +1,5 @@
 import { type ReactNode, useEffect, useRef, useState } from 'react';
+import { RightsFooter } from '@/components/layout/RightsNotice';
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router';
 import { SkipLink } from '@/components/layout/InPageLink';
@@ -258,6 +259,7 @@ export function StaffShell({ children, nav = [], home, navLabel }: { children: R
           </header>
           <main id="main-content" tabIndex={-1} className={cn('mx-auto flex w-full max-w-[120rem] min-w-0 flex-col gap-6 px-(--space-gutter) pt-6 pb-16 focus:outline-none medium:px-6 large:px-0 print:p-0', hasNav && 'pb-28 large:pb-16')}>
             {children}
+            <RightsFooter className="mt-4 border-t border-outline-variant pt-4" />
           </main>
         </div>
       </div>

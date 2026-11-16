@@ -1,4 +1,5 @@
 import { SkipLink } from '@/components/layout/InPageLink';
+import { RightsFooter } from '@/components/layout/RightsNotice';
 import type { ReactNode } from 'react';
 import { cn } from '@/lib/utils';
 
@@ -23,6 +24,7 @@ export function PageShell({ children, width = 'narrow' }: PageShellProps) {
         )}
       >
         {children}
+        <RightsFooter />
       </main>
     </>
   );
