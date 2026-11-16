@@ -26,7 +26,7 @@ import { useCurrentUser } from '@/store/session-store';
 const THEME_ICON = { light: 'light_mode', dark: 'dark_mode', system: 'contrast' } as const;
 
 export function UserMenu() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const user = useCurrentUser();
   const partner = usePartnerMode();
@@ -72,6 +72,19 @@ export function UserMenu() {
                 {t(`demo.theme.${c}`)}
               </DropdownMenuRadioItem>
             ))}
+          </DropdownMenuRadioGroup>
+          {/* D-322: the language of the interface; the learning content stays in Spanish */}
+          <DropdownMenuSeparator />
+          <DropdownMenuLabel>
+            <span className="block text-label-medium text-on-surface-variant">{t('demo.language')}</span>
+          </DropdownMenuLabel>
+          <DropdownMenuRadioGroup value={i18n.language === 'en' ? 'en' : 'es'} onValueChange={(v) => void i18n.changeLanguage(v)}>
+            <DropdownMenuRadioItem value="es" icon="language">
+              <span lang="es">Español</span>
+            </DropdownMenuRadioItem>
+            <DropdownMenuRadioItem value="en" icon="language">
+              <span lang="en">English</span>
+            </DropdownMenuRadioItem>
           </DropdownMenuRadioGroup>
           <DropdownMenuSeparator />
           {can(user, 'demo.reset') && (

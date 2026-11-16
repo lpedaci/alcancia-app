@@ -1,7 +1,10 @@
 {
   "app": {
     "name": "Alcancía",
-    "skipToContent": "Saltar al contenido"
+    "skipToContent": "Saltar al contenido",
+    "language": {
+      "switchTo": "Cambiar el idioma a {{lng}}"
+    }
   },
   "landing": {
     "disclaimer": "Contenido educativo. No es asesoramiento financiero ni una recomendación de inversión.",
@@ -923,7 +926,8 @@
       "reportAfter": "Reportar ahora para frenar otro intento",
       "labelPending_one": "Mensajes y avisos: {{count}} pendiente",
       "labelPending_other": "Mensajes y avisos: {{count}} pendientes"
-    }
+    },
+    "contentInSpanish": "La interfaz está en inglés; el contenido de aprendizaje (guías, misiones, preguntas, glosario y escape room) está en español."
   },
   "roles": {
     "participant": "Participante",
@@ -1244,7 +1248,8 @@
       "light": "Claro",
       "dark": "Oscuro",
       "system": "Del sistema"
-    }
+    },
+    "language": "Idioma"
   },
   "staff": {
     "hello": "Hola,",

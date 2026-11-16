@@ -1,7 +1,10 @@
 {
   "app": {
     "name": "Alcancía",
-    "skipToContent": "Skip to content"
+    "skipToContent": "Skip to content",
+    "language": {
+      "switchTo": "Switch the language to {{lng}}"
+    }
   },
   "landing": {
     "disclaimer": "Educational content. It is not financial advice or an investment recommendation.",
@@ -501,7 +504,430 @@
   },
   "wallet": {
     "practiceBanner": "Personal finance simulator · play money",
-    "practiceBannerShort": "Play money"
+    "practiceBannerShort": "Play money",
+    "help": "Help",
+    "profileMenu": "{{name}}’s menu: profile, security and receipts",
+    "breadcrumbs": "You are in",
+    "nav": {
+      "label": "Main navigation",
+      "home": "Home",
+      "pay": "Pay",
+      "save": "Save",
+      "invest": "Invest",
+      "learn": "Learn",
+      "locked": "locked",
+      "groupWallet": "Your wallet",
+      "groupLearn": "Learning",
+      "menuCollapse": "Collapse the menu",
+      "menuExpand": "Expand the menu",
+      "showSub": "Show the {{name}} options",
+      "hideSub": "Hide the {{name}} options",
+      "menuPin": "Keep the menu open"
+    },
+    "sub": {
+      "transfer": "Transfer",
+      "qr": "Pay with QR",
+      "bills": "Bills",
+      "credit": "Card and loans",
+      "budget": "Budget",
+      "pockets": "Pockets and goals",
+      "yield": "Grow",
+      "map": "Level map",
+      "tools": "Tools",
+      "profile": "Profile",
+      "sources": "Sources",
+      "brokerage": "Brokerage account",
+      "crypto": "Crypto"
+    },
+    "home": {
+      "date": "{{date}}",
+      "day": "wallet day {{day}}",
+      "hello": "Hi,",
+      "context": "Your progress",
+      "chipLevel": "Level {{level}} · {{section}}",
+      "chipNext": "Next unlock: {{section}}",
+      "advance": {
+        "day": "Move ahead one day",
+        "month": "Move ahead one month",
+        "week": "Move ahead one week"
+      },
+      "balance": {
+        "title": "Available balance",
+        "power": "Purchasing power today",
+        "alias": "Alias",
+        "cvu": "Sample CVU",
+        "hide": "Hide amounts",
+        "show": "Show amounts",
+        "account": "Account details",
+        "accountHide": "Hide account details",
+        "accountHint": "Your practice alias and CVU, to receive transfers."
+      },
+      "actions": {
+        "title": "Quick actions",
+        "transfer": "Transfer",
+        "qr": "Pay QR",
+        "bills": "Bills",
+        "pockets": "Set aside"
+      },
+      "pockets": {
+        "total": "In pockets",
+        "empty": "You have not set money aside in pockets yet.",
+        "show": "Show pockets",
+        "hide": "Hide pockets"
+      },
+      "unlock": {
+        "go": "Go to {{section}}"
+      },
+      "movements": {
+        "title": "Latest movements",
+        "all": "See all",
+        "empty": "No movements yet. The first one comes with your salary.",
+        "showAll_one": "See the movement ({{count}})",
+        "showAll_other": "See all movements ({{count}})",
+        "showLess": "See less",
+        "allLabel_one": "{{count}} movement",
+        "allLabel_other": "All movements: {{count}}"
+      },
+      "mission": {
+        "kicker": "Active mission",
+        "minutes_one": "{{count}} minute",
+        "minutes_other": "{{count}} minutes",
+        "objective": "Choose where to keep your balance after reading each option’s sheet, and explain the difference.",
+        "progress": "Mission progress",
+        "stepOf": "Step {{step}} of {{steps}}",
+        "continue": "Continue the mission",
+        "kickerMinutes": "Active mission · {{minutes}} min",
+        "start": "Start the mission",
+        "none": "You have no pending missions in the open sections.",
+        "kickerEarlier": "Pending from level {{level}} · {{minutes}} min"
+      },
+      "time": {
+        "label": "Move time ahead",
+        "day": "One day",
+        "week": "One week",
+        "month": "One month",
+        "done_one": "You moved ahead {{count}} day: {{movements}} new movements.",
+        "done_other": "You moved ahead {{count}} days: {{movements}} new movements.",
+        "pending": "The balance was not enough to pay {{name}} ({{amount}}). Move money from a pocket to continue.",
+        "notYet": "Time moves ahead after your first payday (mission 1)."
+      },
+      "dayChip": "Wallet day {{day}}",
+      "dateLabel": "Wallet date"
+    },
+    "sections": {
+      "level-0": "Open your account",
+      "level-1": "Account",
+      "level-2": "Pay",
+      "level-3": "Budget",
+      "level-4": "Pockets and goals",
+      "level-5": "Card and loans",
+      "level-6": "Grow",
+      "level-7": "Invest",
+      "level-8": "Crypto"
+    },
+    "levelCard": {
+      "title": "Your progress",
+      "levels": "{{level}} of 7 levels",
+      "nextLabel": "Next",
+      "allOpen": "Every section open",
+      "linkHint": ": {{met}} of {{total}} conditions met. See what is missing"
+    },
+    "unlock": {
+      "kicker": "Next unlock · Level {{level}}",
+      "met": "{{met}} of {{total}} conditions met",
+      "progressLabel": "Conditions to open {{section}}",
+      "investBody": "First what protects you, then what makes you grow.",
+      "body": "This is what is missing to open this section.",
+      "metLabel": "met",
+      "pendingLabel": "pending",
+      "doProfile": "Take the profile test",
+      "c": {
+        "first_sign_in": "Sign in",
+        "level_completed": "Complete level {{level}}",
+        "mission_completed": "Mission: {{title}}",
+        "challenge_passed": "Level {{level}} challenge",
+        "challengeScore": "Level {{level}} challenge · best: {{score}}",
+        "categorized_movements": "Categorized movements · {{current}} of {{goal}}",
+        "months_closed_green": "Months in the green · {{current}} of {{goal}}",
+        "emergency_pocket": "Emergency fund created",
+        "emergency_months": "Emergency fund · {{current}} of {{goal}} months",
+        "high_rate_debt": "No high-rate debts",
+        "investor_profile_done": "Investor profile test"
+      },
+      "goTo": "Go to {{section}}",
+      "missing": "What is missing",
+      "mastery": "I already know this",
+      "masteryLabel": "I already know this: show it in the {{section}} challenge"
+    },
+    "categorize": {
+      "none": "No category",
+      "suggested": "Suggested: {{category}}",
+      "button": "Category of {{name}}: {{state}}",
+      "legend": "Which category does it go in?",
+      "help": "Confirming the category brings you closer to Budget.",
+      "needs": "Needs",
+      "wants": "Wants",
+      "savings": "Savings",
+      "saved": "Category saved",
+      "suggestedShort": "suggested"
+    },
+    "fuerte": {
+      "open": "Open Fuerte’s message",
+      "unread": "Fuerte has a message for you",
+      "title": "Fuerte",
+      "close": "Close",
+      "whyTitle": "Why does it matter?",
+      "dragHint": "You can drag me somewhere else or use the move button.",
+      "moveLeft": "Move to the left",
+      "moveRight": "Move to the right",
+      "noticesTitle": "Your notices",
+      "noticesEmpty": "All up to date. When something is pending, I will let you know here.",
+      "badge_one": "Fuerte has {{count}} notice",
+      "badge_other": "Fuerte has {{count}} notices",
+      "peekOpen": "See Fuerte’s notices",
+      "peekClose": "Close the notice",
+      "kinds": {
+        "alert": "Attention",
+        "pending": "Pending",
+        "invest": "Your investments",
+        "goal": "Goals",
+        "progress": "Your progress"
+      },
+      "notices": {
+        "debit": "The balance was not enough to pay {{name}} ({{amount}}). Move money from a pocket to continue.",
+        "card_zero": "The card statement is due today. Paying the full balance avoids interest.",
+        "card_one": "The card statement is due tomorrow. Paying the full balance avoids interest.",
+        "card_other": "The card statement is due in {{count}} days. Paying the full balance avoids interest.",
+        "installment_zero": "Installment {{n}} of {{total}} of {{name}} is charged today.",
+        "installment_one": "Installment {{n}} of {{total}} of {{name}} is charged tomorrow.",
+        "installment_other": "Installment {{n}} of {{total}} of {{name}} is charged in {{count}} days.",
+        "messages_one": "You have {{count}} unread message. Heads up: check who sends it.",
+        "messages_other": "You have {{count}} unread messages. Heads up: check who sends them.",
+        "mission": "Pending mission: {{title}} ({{minutes}} min).",
+        "reminder_weekly": "Weekly challenge: {{title}}. Due on {{date}}.",
+        "reminder_review": "Review of {{module}}: a few short questions to make it stick.",
+        "reminder_guide": "The {{module}} guide is waiting for you.",
+        "reminder_due": "The program closes on {{date}}.",
+        "depositToday": "Your term deposit matures today: the money goes back to your account.",
+        "deposit_one": "Your term deposit matures tomorrow.",
+        "deposit_other": "Your term deposit matures in {{count}} days.",
+        "settling_one": "Your purchase is credited tomorrow, when it settles.",
+        "settling_other": "Your purchase is credited in {{count}} days, when it settles.",
+        "heldOne_one": "You have held {{name}} for {{count}} day. What matters is the horizon you chose, not each day.",
+        "heldOne_other": "You have held {{name}} for {{count}} days. What matters is the horizon you chose, not each day.",
+        "heldMany_one": "You invested in {{instruments}} instruments {{count}} day ago. What matters is the horizon, not each day.",
+        "heldMany_other": "You invested in {{instruments}} instruments {{count}} days ago. What matters is the horizon, not each day.",
+        "goal": "{{name}}: you are at {{pct}} % of your goal.",
+        "goalReached": "Saved. You reached the {{name}} goal.",
+        "unlock": "{{section}}: {{met}} of {{total}} conditions met.",
+        "reminder_followup": "30 days have passed: three questions about what you applied."
+      },
+      "upToDate": "You are up to date with everything. Saved.",
+      "moreNotices_one": "See {{count}} more notice",
+      "moreNotices_other": "See {{count}} more notices",
+      "fewerNotices": "See less",
+      "dragHintClose": "Got it, close the tip",
+      "badgeAlert": "Fuerte has something that needs your attention"
+    },
+    "placeholder": {
+      "lockedTitle": "{{section}} is locked",
+      "pendingTitle": "{{section}} is built in step {{step}}",
+      "pending": "This screen arrives in step {{step}} of the work plan. Meanwhile, you can continue in Home.",
+      "backHome": "Back to Home"
+    },
+    "expenses": {
+      "rent": "the rent",
+      "groceries": "the groceries",
+      "electricity": "the electricity",
+      "gas": "the gas",
+      "phone": "the phone plan",
+      "transport": "the transport",
+      "outings": "the outings",
+      "clothes": "the clothes",
+      "streaming": "the streaming",
+      "subscription": "the subscription"
+    },
+    "profile": {
+      "kicker": "Module 13 · Investor profile",
+      "title": "Investor profile test",
+      "intro": "Brokers ask for it before opening an account, to offer you products that fit your horizon and how much risk you tolerate. Taking it here shows you what it is like and what it is for.",
+      "notAdvice": "Educational content. Your result is not a recommendation and never becomes a portfolio: it only helps you understand the questions you will be asked.",
+      "required": "Choose an option.",
+      "submit": "See my profile",
+      "again": "Take the test again",
+      "resultTitle": "Your practice profile: {{profile}}",
+      "names": {
+        "conservative": "conservative",
+        "moderate": "moderate",
+        "aggressive": "aggressive"
+      },
+      "meaning": {
+        "conservative": "You put not losing what you invest first, even if it grows less. Brokers usually show low-risk, high-liquidity instruments first.",
+        "moderate": "You look for a balance: you accept some ups and downs so your money can grow in the medium term.",
+        "aggressive": "You tolerate sharp drops in search of more long-term growth. It still makes sense to invest only money you will not need soon."
+      },
+      "why": "Your result stays only in this browser. When you open your practice brokerage account in Invest, it is reused.",
+      "q": {
+        "horizon": {
+          "legend": "When might you need this money?",
+          "o0": "In less than 1 year",
+          "o1": "In 1 to 3 years",
+          "o2": "In more than 3 years"
+        },
+        "drop": {
+          "legend": "If your investment fell 20 % in a month, what would you do?",
+          "o0": "Sell everything so I do not lose more",
+          "o1": "Wait for it to recover",
+          "o2": "Buy more, if I can"
+        },
+        "priority": {
+          "legend": "What matters most to you?",
+          "o0": "Not losing what I put in",
+          "o1": "A balance between protecting and growing",
+          "o2": "That it grows, even if it swings a lot"
+        },
+        "knowledge": {
+          "legend": "How much do you know about stocks, bonds or funds?",
+          "o0": "A little",
+          "o1": "Some",
+          "o2": "Quite a lot"
+        },
+        "base": {
+          "legend": "Do you have an emergency fund and no expensive debts?",
+          "o0": "No",
+          "o1": "Partly",
+          "o2": "Yes"
+        }
+      }
+    },
+    "mission": {
+      "lockedTitle": "The mission \"{{title}}\" is locked",
+      "kicker": "Mission · {{minutes}} min",
+      "objective": "Goal:",
+      "plan": "To complete it",
+      "freshNote": "It is played in a new practice account: it does not change your wallet balance.",
+      "currentNote": "What you set up stays saved in your wallet.",
+      "alreadyDone": "You already completed this mission. You can repeat it whenever you want: nothing is lost.",
+      "start": "Start the mission",
+      "replay": "Repeat to practice",
+      "progress": "Mission progress",
+      "stepOf": "Step {{step}} of {{total}}",
+      "freshWallet": "Mission practice account",
+      "yourWallet": "Your wallet",
+      "balance": "Balance:",
+      "pockets": "In pockets:",
+      "sources": "Sources: {{ids}}",
+      "understood": "Got it",
+      "actionTitle": "Your turn",
+      "questionTitle": "Question",
+      "decisionTitle": "You decide",
+      "calcTitle": "Calculate",
+      "choose": "Choose an option to answer.",
+      "answer": "Answer",
+      "change": "Change my decision",
+      "amountMissing": "Type an amount to check, for example: 150.000.",
+      "check": "Check",
+      "next": "Continue",
+      "back": "Back",
+      "exit": "Leave and continue later",
+      "nextHint": "Answer to continue. If you leave, the step you are on is saved.",
+      "summaryTitle": "Review what you did",
+      "doneTitle": "Mission complete",
+      "criteria": "Mission criteria",
+      "met": "met",
+      "notMet": "pending",
+      "complete": "Complete the mission",
+      "missing": "A criterion is still missing: go back to its step with \"Back\".",
+      "doneBody": "It is recorded in your progress. Your tutor only sees that you completed it, never your amounts or your answers.",
+      "salaryNote": "It is played in a practice account with your first salary already paid: it does not change your wallet balance.",
+      "classifyTitle": "Classify",
+      "classifyHelp": "Choose a category for this message.",
+      "ownNote": "It is played in your wallet: what you do is recorded (balance, movements, debts, pockets) and is undone with actions, as in real life.",
+      "replayNote": "You already completed this mission. Repeating it is practice: it is played in a copy and does not change your wallet.",
+      "practiceOnlyNote": "This mission is a practice scenario: it moves ahead more than a year with a sample price drop. It starts from your real portfolio if you already have CEDEARs (if not, from a sample one) and does not change your wallet.",
+      "practiceBannerTitle": "Practice scenario",
+      "practiceBanner": "This repeat is played in a copy: nothing you do changes your wallet.",
+      "practiceOnlyReason": "This mission is played in a copy: it moves ahead more than a year and needs a fixed price drop. Nothing you do changes your wallet.",
+      "decisionFinal": "In your wallet, this decision is already made. If you want to undo it, do it with an action: for example, pay off the loan in Your debts.",
+      "errors": {
+        "insufficient_balance": "Your balance is not enough for this step. Move ahead to your next payday from Home or move money from a pocket, and come back: the mission waits for you here.",
+        "insufficient_pocket": "The pocket does not have that amount. Choose a smaller amount.",
+        "insufficient_broker_cash": "Your brokerage account does not have enough cash. Transfer from your wallet and come back.",
+        "loan_active": "You already have an active loan from this offer. To take another, first pay it off in Your debts.",
+        "daily_limit": "You are over your daily limit. Change it in Profile or wait until the next day.",
+        "generic": "This step could not be done with your wallet as it is. Check your balance and try again."
+      },
+      "scenarioOwn": "It starts from your real portfolio: your CEDEARs and the cash of your brokerage account, with the sample price series from today. Your wallet does not change; the decision you take in the face of the drop is recorded.",
+      "scenarioExample": "You do not have CEDEARs yet, so we use a sample portfolio. Your wallet does not change; the decision you take in the face of the drop is recorded.",
+      "objectiveLead": "By the end you will be able to",
+      "cardKicker": "Good to know",
+      "eventKicker": "Something happened in your wallet",
+      "reflectTitle": "Take a moment"
+    },
+    "printBanner": "Alcancía · Personal finance simulator · fictitious money · Educational content, not financial advice",
+    "inbox": {
+      "label": "Messages",
+      "labelUnread_one": "Messages: {{count}} unread",
+      "labelUnread_other": "Messages: {{count}} unread",
+      "title": "Messages",
+      "empty": "You have no messages yet. Wallet notices show up here.",
+      "report": "Report as suspicious",
+      "reportedPill": "Reported",
+      "reported": "Message reported. Well spotted: do not share codes or open links you do not know.",
+      "reportedLegit": "You reported it, but this notice came from the wallet’s official channel and did not ask for data. When in doubt, reporting is always fine.",
+      "templates": {
+        "statement-ready": {
+          "from": "Alcancía · app notices",
+          "body": "Your monthly statement is ready in Profile, under Receipts and statement."
+        },
+        "security-tip": {
+          "from": "Alcancía · app notices",
+          "body": "Remember: nobody from Alcancía will ask for your code or your password by message."
+        },
+        "fake-support": {
+          "from": "Wallet support · unknown number",
+          "body": "We detected a problem with your account. To avoid losing your balance, reply now with the code you got by SMS.",
+          "signals": [
+            "It asks for the code you got by SMS: nobody legitimate asks for it",
+            "It rushes you with losing your balance and asks you to reply now",
+            "It comes from an unknown number, not the app’s official channel"
+          ]
+        },
+        "lookalike-link": {
+          "from": "Alcancia-security (fictitious)",
+          "body": "Your account will be suspended today. Validate your data at alcancia-verificar.example before 6 p.m.",
+          "signals": [
+            "The domain looks like the app’s but it is not the official one",
+            "It threatens to suspend your account",
+            "It gives you a deadline of hours so you do not think it over"
+          ]
+        },
+        "guaranteed-return": {
+          "from": "Quick Investments (fictitious)",
+          "body": "Double your money in 30 days with a guaranteed return. Few spots left: transfer today.",
+          "signals": [
+            "It promises a guaranteed return: no investment guarantees it",
+            "It rushes you with few spots left",
+            "It asks you to transfer today to someone who is not registered"
+          ]
+        }
+      },
+      "bait": {
+        "reply_code": "Reply with the code",
+        "open_link": "Open the link",
+        "transfer": "Transfer to invest"
+      },
+      "baitNote": "It is practice: nothing leaves the app.",
+      "reportedTitle": "Well spotted. These were the signals:",
+      "fellTitle": "It was a scam attempt. What happens in real life happened; look at the signals it had:",
+      "fellReal": "In real life: stop replying, change your password, tell your wallet through its official channel and file a report. Reporting it stops new attempts, but what already left does not come back.",
+      "legitNote": "This notice is legitimate: it comes from the official channel and does not ask for data.",
+      "fell": "You fell for the practice message. Read the signals to recognize it next time.",
+      "reportAfter": "Report it now to stop another attempt",
+      "labelPending_one": "Messages and notices: {{count}} pending",
+      "labelPending_other": "Messages and notices: {{count}} pending"
+    },
+    "contentInSpanish": "The interface is in English; the learning content (guides, missions, questions, glossary and escape room) is available in Spanish."
   },
   "partner": {
     "hornero": {
@@ -513,7 +939,30 @@
         "guide": "You completed the guide \"{{name}}\"",
         "mission": "You completed the mission \"{{name}}\"",
         "challenge": "You passed: {{name}}"
-      }
+      },
+      "name": "Hornero",
+      "fictitiousBrand": "Fictitious demo brand",
+      "practice": "Personal finance simulator · fictitious money",
+      "greeting": "Hi, {{name}}",
+      "intro": "This is how Alcancía would look inside a partner’s app. Hornero is a fictitious wallet made for this demo: it does not exist and does not imitate any real app.",
+      "savingTitle": "Your nest grows",
+      "savingLabel": "Saved in your nest",
+      "grew": "Your nest grew {{amount}} this month",
+      "grewNone": "A nest is built little by little: you have not added to it this month yet.",
+      "added": "You added {{amount}} to your nest",
+      "solidityTitle": "A nest that holds",
+      "holds_one": "Your nest holds {{months}} month of expenses",
+      "holds_other": "Your nest holds {{months}} months of expenses",
+      "holdsNone": "When you build your emergency fund, you will see how many months of expenses your nest holds.",
+      "resisted": "Your nest held: you did not transfer to a stranger",
+      "resistedNone": "If you get a suspicious message, report it: that is how your nest holds.",
+      "learnTitle": "Learn finance by using your wallet",
+      "learnBody": "Alcancía lives inside Hornero: you practice with fictitious money and learn at the right moment, with no second sign-in.",
+      "open": "Open Alcancía",
+      "privacy": "Hornero only gets notices of your progress, like a mission or a guide completed. It never gets your amounts, your movements or your goals.",
+      "leave": "Leave the integrated mode",
+      "back": "Back to Hornero",
+      "inside": "Alcancía inside Hornero"
     }
   },
   "market": {
@@ -567,6 +1016,328 @@
       "light": "Light",
       "dark": "Dark",
       "system": "System"
+    },
+    "viewAs": "View as",
+    "viewAsCurrent": "View as: {{name}}",
+    "viewAsMenu": "Explore the demo as",
+    "people": {
+      "p-mariana": "Participant · office · level 6",
+      "p-diego": "Participant · phone · level 2",
+      "p-kevin": "Financial wellbeing tutor",
+      "p-ricardo": "Sponsor",
+      "p-lucia": "Student · phone · new account",
+      "p-martin": "Personal finance tutor",
+      "p-hector": "Leadership",
+      "p-joaquin": "User · comes in from the Hornero app",
+      "p-sofia": "Product team · adoption",
+      "p-nicolas": "Product team · impact",
+      "p-julieta": "L&D and Benefits admin",
+      "p-bettyna": "Academic coordination"
+    },
+    "unlockAll": "See everything unlocked",
+    "unlockAllHelp": "In the wallet, to explore every section",
+    "switched": "You now see the demo as {{name}}.",
+    "userMenu": "{{name}}’s menu",
+    "profile": "Profile, security and receipts",
+    "reset": "Reset demo",
+    "resetTitle": "Reset the demo",
+    "resetBody": "Everyone’s sample data comes back and the session closes. What you did in this demo is erased from this browser.",
+    "signOut": "Sign out",
+    "help": "Help",
+    "notifications": "Notifications",
+    "partnerHornero": "View inside Hornero",
+    "partnerHorneroHelp": "Integrated mode with a fictitious partner",
+    "contextLabel": "Context of use",
+    "contextHelp": "First the context, then the person",
+    "language": "Language"
+  },
+  "roles": {
+    "participant": "Participant",
+    "tutor": "Tutoring",
+    "ld_admin": "L&D and Benefits admin",
+    "sponsor": "Sponsor",
+    "participant_education": "Student",
+    "ld_admin_education": "Academic coordination",
+    "sponsor_education": "Leadership",
+    "participant_product": "Hornero user",
+    "ld_admin_product": "Product team",
+    "sponsor_product": "Product team · impact"
+  },
+  "auth": {
+    "login": {
+      "title": "Sign in",
+      "subtitle": "Use your Andina work account.",
+      "ssoMicrosoft": "Continue with Microsoft",
+      "ssoGoogle": "Continue with Google",
+      "or": "or",
+      "emailToggle": "Sign in with email and password",
+      "emailLabel": "Work email",
+      "emailHelp": "Your Andina email, for example: name.surname@andina.demo",
+      "passwordLabel": "Password",
+      "passwordHelp": "The password of your work account.",
+      "showPassword": "Show password",
+      "hidePassword": "Hide password",
+      "submit": "Sign in",
+      "submitting": "Checking…",
+      "invalid": "The email or the password is not right. Check them and try again.",
+      "attemptsWarning": "After {{max}} failed attempts, the account is locked for security.",
+      "lockedTitle": "Account locked for security",
+      "lockedBody": "There were too many failed attempts. To unlock it, ask the Andina help desk.",
+      "troubleLink": "Trouble signing in?",
+      "logout": {
+        "manual": "You signed out.",
+        "expired": "Your session closed after inactivity. Sign in again to continue.",
+        "reset": "You reset the demo: the sample data is back."
+      },
+      "demoNotice": "Demo with fictitious data. The demo people’s emails end in @andina.demo and their password is {{password}}",
+      "subtitle_education": "Use your Ceibo institutional account.",
+      "subtitle_product": "Use your Hornero team account."
+    },
+    "showcase": {
+      "eyebrow": "Financial wellbeing 2026",
+      "body": "Fictitious money, real decisions. Your company sees your progress, never your amounts.",
+      "titleStart": "The wallet where",
+      "titleKey": "you learn finance",
+      "titleEnd": "by using it",
+      "body_education": "Fictitious money, real decisions. Your institution sees your progress, never your amounts.",
+      "eyebrow_education": "Personal finance to start 2026",
+      "eyebrow_product": "Alcancía in Hornero",
+      "body_product": "Fictitious money, real decisions. Hornero only sees aggregated figures, never your amounts."
+    },
+    "methods": {
+      "sso_microsoft": "Microsoft",
+      "sso_google": "Google",
+      "password": "email and password"
+    },
+    "sso": {
+      "title": "Sign in with {{provider}}",
+      "simulation": "A simulation of signing in with {{provider}}. In a real company, you would see your identity provider’s page here.",
+      "branding": "This screen is neutral on purpose: it never imitates the Microsoft or Google pages.",
+      "accountLegend": "Demo work account",
+      "accountHelp": "Choose who to explore the demo as.",
+      "continue": "Continue",
+      "back": "Back to Sign in",
+      "stepsLabel": "Steps of signing in with {{provider}}",
+      "steps": {
+        "redirect": "Redirecting you to {{provider}}",
+        "account": "Work account: {{email}}",
+        "verified": "{{provider}} confirmed your identity"
+      },
+      "stepDone": "done",
+      "stepPending": "pending",
+      "allDone": "{{provider}} confirmed your identity."
+    },
+    "mfa": {
+      "title": "Two-step verification",
+      "subtitle": "Enter the 6-digit code from your authenticator app.",
+      "required": "Your role asks for this step every time you sign in.",
+      "signingAs": "You are signing in as {{name}}.",
+      "demoCode": "Demo: the code {{code}} is already filled in.",
+      "demoCodeManual": "Demo: use the code {{code}}.",
+      "codeLabel": "Verification code",
+      "codeHelp": "6 digits, no spaces. For example: 123456",
+      "invalid": "The code is not right. Check your app and try again.",
+      "submit": "Verify",
+      "cancel": "Cancel and sign in with another account"
     }
+  },
+  "accessHelp": {
+    "title": "Trouble signing in?",
+    "intro": "Andina accounts are work accounts: access is handled by the company’s help desk. Tell us what is going on and they will contact you.",
+    "channelsTitle": "Other help desk channels",
+    "email": "Email: mesadeayuda@andina.demo",
+    "phone": "Internal phone: 4357 (fictitious)",
+    "hours": "Monday to Friday, 8 a.m. to 6 p.m.",
+    "ssoTitle": "If you sign in with Microsoft or Google",
+    "ssoBody": "The password is your work account’s, and the help desk can reset it. Nobody from Andina or Alcancía will ever ask for passwords or codes by email or chat.",
+    "formTitle": "Ask for help",
+    "formIntro": "Every field is required, except the comment.",
+    "reasonLegend": "What is going on?",
+    "reasonHelp": "Choose the option closest to your situation.",
+    "reasons": {
+      "locked": "My account is locked",
+      "forgot_password": "I do not remember the password",
+      "mfa_issue": "I do not have the verification code",
+      "other": "Another problem"
+    },
+    "reasonRequired": "Choose what is going on.",
+    "commentLabel": "Comment",
+    "commentHelp": "Up to 500 characters. Do not write passwords or codes.",
+    "demoTip": "Demo: type #error in the comment to see how a server error looks.",
+    "submit": "Send request",
+    "sending": "Sending…",
+    "serverErrorTitle": "We could not send the request",
+    "serverErrorBody": "The service did not answer. Your data is still filled in: try again.",
+    "retry": "Try again",
+    "confirmTitle": "Request sent",
+    "confirmNumber": "Request number: {{id}}",
+    "confirmBody": "If the email belongs to an Andina account, the help desk will contact you through the company’s channels.",
+    "confirmKeep": "Keep the number to follow up.",
+    "backToLogin": "Back to Sign in"
+  },
+  "consent": {
+    "eyebrow": "Before you start",
+    "title": "Your privacy in Alcancía",
+    "summary": {
+      "participant": "Your company sees your progress in the modules, never your amounts or your answers about habits.",
+      "staff": "You see learning progress, never anyone’s practice money or habits.",
+      "participant_education": "Your institution sees your progress in the modules, never your amounts or your answers about habits.",
+      "participant_product": "Hornero only sees aggregated learning figures, never your personal progress, your amounts or your answers about habits."
+    },
+    "step": "Step {{n}} of {{total}}",
+    "version": "Notice version {{version}}",
+    "check": "I read the notice and agree to use Alcancía under these conditions.",
+    "checkRequired": "Check the box to continue.",
+    "previous": "Back",
+    "next": "Continue",
+    "accept": "Accept and continue",
+    "accepted": "Notice accepted",
+    "signOutHelp": "If you do not want to accept it now, you can sign out.",
+    "signOut": "Sign out",
+    "steps": {
+      "participant": [
+        {
+          "title": "What your company sees",
+          "icon": "visibility",
+          "items": [
+            "Your progress in the modules: guides read, level challenges and missions completed.",
+            "Your answers to the knowledge questions of \"Conocerte\", to measure how much you learned.",
+            "Whether you did a weekly challenge. Not your reflection."
+          ]
+        },
+        {
+          "title": "What it never sees",
+          "icon": "visibility_off",
+          "items": [
+            "Your amounts: balance, movements, pockets, goals and what you enter in the tools.",
+            "Your answers about habits in \"Conocerte\".",
+            "Which sections of your wallet are locked or unlocked."
+          ]
+        },
+        {
+          "title": "Where your data stays",
+          "icon": "lock",
+          "items": [
+            "Your practice money and your answers about habits stay only in this browser.",
+            "Reports show groups of 5 people or more, so nobody can be identified.",
+            "You can start over whenever you want from your profile."
+          ]
+        }
+      ],
+      "staff": [
+        {
+          "title": "What you see",
+          "icon": "visibility",
+          "items": [
+            "Learning progress: per person only if you accompany a cohort as a tutor; otherwise, aggregated.",
+            "Metrics of groups of 5 people or more, so nobody can be identified."
+          ]
+        },
+        {
+          "title": "What you never see",
+          "icon": "visibility_off",
+          "items": [
+            "Anyone’s balances, movements, goals or decisions in the wallet.",
+            "Answers about habits in \"Conocerte\" or personal reflections.",
+            "Whether a section of the wallet is locked or unlocked for a person."
+          ]
+        }
+      ],
+      "participant_education": [
+        {
+          "title": "What your institution sees",
+          "icon": "visibility",
+          "items": [
+            "Your progress in the modules: guides read, level challenges and missions completed.",
+            "Your answers to the knowledge questions of \"Conocerte\", to measure how much you learned.",
+            "Whether you did a weekly challenge from your tutor. Not your reflection."
+          ]
+        },
+        {
+          "title": "What it never sees",
+          "icon": "visibility_off",
+          "items": [
+            "Your amounts: balance, movements, pockets, goals and what you enter in the tools.",
+            "Your answers about habits in \"Conocerte\".",
+            "Which sections of your wallet are locked or unlocked."
+          ]
+        },
+        {
+          "title": "Where your data stays",
+          "icon": "lock",
+          "items": [
+            "Your practice money and your answers about habits stay only in this browser.",
+            "Reports show groups of 5 people or more, so nobody can be identified.",
+            "You can start over whenever you want from your profile."
+          ]
+        }
+      ],
+      "participant_product": [
+        {
+          "title": "What Hornero sees",
+          "icon": "visibility",
+          "items": [
+            "Aggregated figures of groups of 5 people or more: how many people read guides, pass challenges and complete missions.",
+            "Learning events with no financial data, like \"mission completed\" or \"challenge passed\".",
+            "Nothing individual: there is no tutoring and nobody sees your personal progress."
+          ]
+        },
+        {
+          "title": "What it never sees",
+          "icon": "visibility_off",
+          "items": [
+            "Your amounts: balance, movements, pockets, goals and what you enter in the tools.",
+            "Your answers about habits in \"Conocerte\".",
+            "Which sections of your wallet are locked or unlocked."
+          ]
+        },
+        {
+          "title": "Where your data stays",
+          "icon": "lock",
+          "items": [
+            "Your practice money and your answers about habits stay only in this browser.",
+            "Reports show groups of 5 people or more, so nobody can be identified.",
+            "You can start over whenever you want from your profile."
+          ]
+        }
+      ]
+    }
+  },
+  "session": {
+    "warningTitle": "Your session is about to close",
+    "warningBody": "For security, the session closes after {{minutes}} minutes without activity.",
+    "countdown": "Time left: {{time}}",
+    "stay": "Stay signed in",
+    "signOut": "Sign out"
+  },
+  "forbidden": {
+    "title": "Access not allowed",
+    "body": "This section is not available for your role. If you think you should see it, ask the Andina help desk.",
+    "backHome": "Go to my home",
+    "code": "Error 403",
+    "back": "Back to the previous page",
+    "suggestionsTitle": "You can also go to",
+    "help": "Write to the help desk",
+    "landing": "Alcancía home",
+    "body_education": "This section is not available for your role. If you think you should see it, ask the Instituto Superior Ceibo help desk.",
+    "body_product": "This section is not available for your role. If you think you should see it, ask the Hornero product team."
+  },
+  "errorPage": {
+    "title": "Something went wrong",
+    "body": "The screen had an unexpected error. Your demo data is still saved in this browser.",
+    "reload": "Reload",
+    "home": "Go home",
+    "resetHint": "If the error happens again, reset the demo to go back to the sample data.",
+    "reset": "Reset demo",
+    "details": "Technical details",
+    "code": "Unexpected error"
+  },
+  "staff": {
+    "hello": "Hi,",
+    "context": "Program context",
+    "programName": "Financial wellbeing 2026"
+  },
+  "layout": {
+    "backToTop": "Back to top"
   }
 }

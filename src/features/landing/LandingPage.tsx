@@ -23,6 +23,7 @@ import type { Role } from '@/types/domain';
 import { AppPhone, AppTopBar, BottomNav, type PhoneScreen, PhoneFrame, StatusBar } from './PhoneMockup';
 import { PieceKpi, PieceLevelMap, PieceSimResult, SceneBudget, SceneCard, SceneInflation } from './ProductPieces';
 import { ResetDemoButton } from './ResetDemoButton';
+import { LanguageToggle } from '@/components/layout/LanguageToggle';
 import { FictitiousBrandChip } from '@/features/partner/FictitiousBrandChip';
 import { HorneroMark } from '@/features/partner/HorneroMark';
 import { CountUp, Reveal } from './Reveal';
@@ -166,9 +167,13 @@ export function LandingPage() {
               ))}
             </ul>
           </nav>
-          <Button asChild size="s" className="col-start-3">
-            <InPageLink to="recorridos">{t('landing.chooseJourney')}</InPageLink>
-          </Button>
+          <div className="col-start-3 flex items-center gap-1">
+            {/* At 320 px the top bar has no room: the language is also in the footer */}
+            <LanguageToggle compact className="hidden min-[22.5rem]:inline-flex" />
+            <Button asChild size="s">
+              <InPageLink to="recorridos">{t('landing.chooseJourney')}</InPageLink>
+            </Button>
+          </div>
         </div>
       </header>
 
@@ -484,6 +489,7 @@ export function LandingPage() {
               {t('landing.roles.cta', { name: 'Diego' })}
             </Link>
             <ResetDemoButton />
+            <LanguageToggle className="-ml-2 self-start" />
           </nav>
         </div>
         <div className="border-t border-outline-variant">

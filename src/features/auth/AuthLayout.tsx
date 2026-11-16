@@ -1,3 +1,4 @@
+import { LanguageToggle } from '@/components/layout/LanguageToggle';
 import { SkipLink } from '@/components/layout/InPageLink';
 import { RightsFooter } from '@/components/layout/RightsNotice';
 import type { ReactNode } from 'react';
@@ -33,9 +34,12 @@ export function AuthLayout({ children, aside, showcase, wide }: AuthLayoutProps)
       >
         <div className="flex w-full max-w-md min-w-0 flex-col gap-8 [@media(max-height:50rem)]:gap-6">
           {/* The logo goes back to the landing (G0). */}
-          <Link to="/" className="flex min-h-12 w-fit items-center rounded-sm md:min-h-0">
-            <Logo />
-          </Link>
+          <div className="flex items-center justify-between gap-3">
+            <Link to="/" className="flex min-h-12 w-fit items-center rounded-sm md:min-h-0">
+              <Logo />
+            </Link>
+            <LanguageToggle />
+          </div>
           {children}
           <RightsFooter />
         </div>

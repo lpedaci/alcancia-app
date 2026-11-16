@@ -35,7 +35,7 @@ const ICONS = [
   'open_in_new', 'visibility', 'visibility_off', 'refresh', 'send', 'table_view', 'print', 'save',
   'compare_arrows', 'swap_vert', 'tune', 'restart_alt', 'link', 'pause', 'play_arrow',
   // Status
-  'check_circle', 'radio_button_unchecked', 'radio_button_checked', 'format_list_numbered', 'public', 'edit_note', 'history', 'domain', 'gavel', 'light_mode', 'dark_mode', 'contrast', 'pending', 'hourglass_empty', 'error', 'warning', 'info',
+  'check_circle', 'radio_button_unchecked', 'radio_button_checked', 'format_list_numbered', 'public', 'edit_note', 'history', 'domain', 'gavel', 'light_mode', 'dark_mode', 'contrast', 'language', 'pending', 'hourglass_empty', 'error', 'warning', 'info',
   'block', 'progress_activity', 'trending_down', 'trending_flat',
   // Misc
   'computer', 'mobile', 'mail', 'chat', 'forum', 'support_agent', 'palette', 'layers',

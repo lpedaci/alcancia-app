@@ -114,7 +114,7 @@ const LONG_PRESS_MS = 500;
 const LABEL_MS = 1800;
 
 export function WalletShell({ section, children, fuerte }: { section: string; children: ReactNode; fuerte?: FuerteNote }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { pathname } = useLocation();
   const user = useCurrentUser();
   const { statuses, next, isOpen, activeMission, wallet } = useLevels(user?.personId ?? '');
@@ -444,6 +444,13 @@ export function WalletShell({ section, children, fuerte }: { section: string; ch
           >
             {/* Printed pages (receipts, simulator summaries) keep the notice: "dinero ficticio" is never removed (D-69). */}
             <p className="mb-4 hidden border-b border-outline-variant pb-2 text-label-large text-on-surface print:block">{t('wallet.printBanner')}</p>
+            {/* D-322: in English, the interface is translated and the learning content stays in Spanish */}
+            {i18n.language === 'en' && (
+              <p lang="en" className="mb-4 flex items-start gap-2 rounded-md bg-info-container px-3 py-2 text-body-small text-on-info-container print:hidden">
+                <Icon name="language" size={18} className="mt-px shrink-0" />
+                {t('wallet.contentInSpanish')}
+              </p>
+            )}
             <MaskAmountsContext.Provider value={amountsHidden}>{children}</MaskAmountsContext.Provider>
             <RightsFooter className="mt-10 border-t border-outline-variant pt-4" />
           </main>
