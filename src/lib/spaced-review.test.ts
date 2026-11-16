@@ -58,4 +58,10 @@ describe('program reminders', () => {
     expect(goal).toMatchObject({ kind: 'goal', params: { name: 'Vacaciones' }, to: '/app/save/pockets' });
     expect(JSON.stringify(goal)).not.toMatch(/\d{3}/);
   });
+
+  it('the 30-day follow-up is due 30 days after Conocerte and leaves once answered (F15, D-316)', () => {
+    expect(programReminders({ ...base, followUp: { startedAt: '2026-10-18', answered: false } })).toEqual([]);
+    expect(programReminders({ ...base, followUp: { startedAt: '2026-10-17', answered: false } })[0]).toMatchObject({ kind: 'followup', to: '/app/learn/follow-up' });
+    expect(programReminders({ ...base, followUp: { startedAt: '2026-08-07', answered: true } })).toEqual([]);
+  });
 });

@@ -16,6 +16,7 @@ import type { OrganizationKind } from '@/types/domain';
 const CHANNEL_ICON: Record<ReminderChannel, IconName> = { email: 'mail', teams: 'chat', slack: 'forum', campus: 'school', app: 'mobile' };
 const SAMPLE: Record<ReminderKind, Record<string, string | number>> = {
   guide: { module: 'Presupuesto y gastos hormiga' },
+  followup: {},
   weekly: { title: 'Registra tus gastos durante 7 días', date: formatDate('2026-11-23') },
   due: { date: formatDate('2026-12-04'), count: 18 },
   review: { module: 'Inflación y poder de compra', count: 7 },
@@ -25,7 +26,7 @@ const SAMPLE: Record<ReminderKind, Record<string, string | number>> = {
 export function ReminderPreview({ channels, kind }: { channels: ReminderChannel[]; kind: OrganizationKind }) {
   const { t } = useTranslation();
   // No tutor in the product context, so no weekly challenges (5.5)
-  const kinds: ReminderKind[] = kind === 'product' ? ['guide', 'review', 'goal'] : ['guide', 'weekly', 'due', 'review', 'goal'];
+  const kinds: ReminderKind[] = kind === 'product' ? ['guide', 'review', 'goal', 'followup'] : ['guide', 'weekly', 'due', 'review', 'goal', 'followup'];
   const [reminder, setReminder] = useState<ReminderKind>('guide');
   const text = t(`reminders.kinds.${reminder}`, SAMPLE[reminder]);
   const subject = t(`reminders.subjects.${reminder}`);

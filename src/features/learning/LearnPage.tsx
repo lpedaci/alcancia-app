@@ -293,6 +293,9 @@ export function LearnPage() {
                     <ListLinkRow to="/app/tools" icon="calculate" title={t('learn.map.tools')} detail={t('learn.map.toolsDetail')} />
                   </li>
                   <li>
+                    <ListLinkRow to="/app/learn/follow-up" icon="fact_check" title={t('learn.map.followUp')} detail={t('learn.map.followUpDetail')} />
+                  </li>
+                  <li>
                     <ListLinkRow to="/app/learn/certificate" icon="workspace_premium" title={t('learn.map.certificate')} detail={t('learn.map.certificateDetail')} />
                   </li>
                   <li>

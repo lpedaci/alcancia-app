@@ -20,6 +20,9 @@ export function useReminders(personId: string): { reminders: Reminder[]; reviews
   const cohorts = useDataStore((s) => s.cohorts);
   const allWeekly = useDataStore((s) => s.weeklyChallenges);
   const allReports = useDataStore((s) => s.weeklyReports);
+  const diagnostics = useDataStore((s) => s.diagnostics);
+  const followUps = useDataStore((s) => s.followUps);
+  const started = diagnostics.find((d) => d.personId === personId && d.kind === 'initial')?.takenAt;
 
   const guides = allGuides.filter((g) => g.personId === personId);
   const reviews = dueReviews(guides, readLocal(personId).reviews ?? [], DEMO_TODAY);
@@ -45,6 +48,7 @@ export function useReminders(personId: string): { reminders: Reminder[]; reviews
     weekly,
     cohortDueDate: myCohorts.map((c) => c.dueDate).find(Boolean),
     goalsReached,
+    followUp: started ? { startedAt: started, answered: followUps.some((f) => f.personId === personId) } : undefined,
   });
   return { reminders, reviews };
 }

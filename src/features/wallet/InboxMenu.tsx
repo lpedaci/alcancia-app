@@ -23,7 +23,7 @@ import type { ReminderKind } from '@/lib/reminders';
  * link that leaves the app ("abrir el enlace" is simulated here); and every suspicious message, when
  * it is reported or when the person takes the bait, ends in feedback with the signals it had (B-24).
  */
-const REMINDER_ICON: Record<ReminderKind, IconName> = { review: 'replay', guide: 'menu_book', weekly: 'flag', due: 'schedule', goal: 'savings' };
+const REMINDER_ICON: Record<ReminderKind, IconName> = { review: 'replay', guide: 'menu_book', weekly: 'flag', due: 'schedule', goal: 'savings', followup: 'fact_check' };
 
 export function InboxMenu({ personId }: { personId: string }) {
   const { t } = useTranslation();

@@ -76,7 +76,7 @@ export function fuerteNotices(input: {
   }
   for (const r of input.reminders) {
     if (r.kind === 'goal') continue; // goals are told below, with their progress
-    const icon: IconName = r.kind === 'review' ? 'replay' : r.kind === 'guide' ? 'menu_book' : r.kind === 'weekly' ? 'checklist' : 'event';
+    const icon: IconName = r.kind === 'review' ? 'replay' : r.kind === 'guide' ? 'menu_book' : r.kind === 'weekly' ? 'checklist' : r.kind === 'followup' ? 'fact_check' : 'event';
     out.push({ id: `pending:${r.id}`, kind: 'pending', icon, key: `reminder_${r.kind}`, params: r.params, to: r.to });
   }
 

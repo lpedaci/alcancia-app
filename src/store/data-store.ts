@@ -148,6 +148,8 @@ interface DataState extends SharedData {
   answerQuestion: (questionId: string, text: string, at: string) => void;
   /** T2: the tutor enables a level for a person or a cohort, with a reason that is recorded (5.0). */
   addUnlockRecord: (record: LevelUnlockRecord) => void;
+  /** F15 (D-316): the person's 30-day self-report, replaced if answered again. */
+  saveFollowUp: (followUp: FollowUp30) => void;
   /** D-80: a tutor sets (or replaces) the collective goal of a cohort. */
   setCollectiveGoal: (goal: CollectiveGoal) => void;
   /** F20: a post or a reply in the cohort's space. */
@@ -228,6 +230,7 @@ export const useDataStore = create<DataState>()(
       addPost: (post) => set((state) => ({ cohortPosts: [...state.cohortPosts, post] })),
       moderatePost: (postId, patch) => set((state) => ({ cohortPosts: state.cohortPosts.map((p) => (p.id === postId ? { ...p, ...patch } : p)) })),
       addUnlockRecord: (record) => set((state) => ({ unlockRecords: [...state.unlockRecords, record] })),
+      saveFollowUp: (followUp) => set((state) => ({ followUps: [...state.followUps.filter((f) => f.personId !== followUp.personId), followUp] })),
       updateProgram: (program, privacyThreshold) =>
         set((state) => ({
           programs: state.programs.map((p) => (p.id === program.id ? program : p)),

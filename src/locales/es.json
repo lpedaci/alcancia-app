@@ -715,7 +715,8 @@
         "heldMany_other": "Hace {{count}} días que invertiste en {{instruments}} instrumentos. Lo que importa es el plazo, no el día a día.",
         "goal": "{{name}}: llevas el {{pct}} % de tu meta.",
         "goalReached": "Guardado. Alcanzaste la meta de {{name}}.",
-        "unlock": "{{section}}: {{met}} de {{total}} condiciones cumplidas."
+        "unlock": "{{section}}: {{met}} de {{total}} condiciones cumplidas.",
+        "reminder_followup": "Ya pasaron 30 días: tres preguntas sobre qué aplicaste."
       },
       "upToDate": "Estás al día con todo. Guardado.",
       "moreNotices_one": "Ver {{count}} aviso más",
@@ -1565,7 +1566,9 @@
       "badgeImageFoot": "{{program}} · Alcancía · {{date}}",
       "badgeFile": "alcancia-insignia-modulo-{{n}}",
       "certificate": "Certificado del programa",
-      "certificateDetail": "Se emite al completar los niveles 1 a 7"
+      "certificateDetail": "Se emite al completar los niveles 1 a 7",
+      "followUp": "Seguimiento a 30 días",
+      "followUpDetail": "Tres preguntas sobre qué aplicaste"
     },
     "sources": {
       "title": "Fuentes",
@@ -4705,21 +4708,24 @@
       "guide": "Te espera la guía «{{module}}».",
       "weekly": "Desafío semanal: {{title}}. Puedes contarlo hasta el {{date}}.",
       "due": "El programa cierra el {{date}}: quedan {{count}} días.",
-      "goal": "Llegaste a tu meta «{{name}}»."
+      "goal": "Llegaste a tu meta «{{name}}».",
+      "followup": "Pasaron 30 días desde que empezaste: tres preguntas sobre qué aplicaste."
     },
     "short": {
       "guide": "Guía pendiente",
       "weekly": "Desafío nuevo",
       "due": "Plazo por vencer",
       "review": "Repaso",
-      "goal": "Meta alcanzada"
+      "goal": "Meta alcanzada",
+      "followup": "Seguimiento"
     },
     "subjects": {
       "guide": "Tienes una guía pendiente en Alcancía",
       "weekly": "Nuevo desafío semanal",
       "due": "El programa está por cerrar",
       "review": "Es momento de repasar",
-      "goal": "Llegaste a tu meta"
+      "goal": "Llegaste a tu meta",
+      "followup": "¿Qué aplicaste en estos 30 días?"
     },
     "preview": {
       "title": "Cómo llega cada recordatorio",
@@ -5038,5 +5044,39 @@
     "issuer": "Emitido por",
     "issuerValue": "{{organization}} · Alcancía",
     "disclaimer": "Certificado de demostración de un prototipo de portfolio, sin validez oficial. Simulador de finanzas personales · dinero ficticio."
+  },
+  "followUp": {
+    "kicker": "Aprender",
+    "title": "Seguimiento a 30 días",
+    "intro": "A {{days}} días de empezar, tres preguntas sobre qué pusiste en práctica fuera de la app. Se responde en un minuto.",
+    "fuerte": "Sin respuestas correctas: lo que cuenta es lo que hiciste de verdad.",
+    "fuerteDone": "Guardado. Gracias por contarlo: así se mejora el programa.",
+    "notYetTitle": "Todavía no es momento",
+    "notYetBody": "El seguimiento se abre {{days}} días después de Conocerte, que hiciste el {{date}}.",
+    "noStart": "El seguimiento se abre 30 días después de Conocerte. Empieza por ahí.",
+    "formTitle": "¿Qué aplicaste en estos 30 días?",
+    "privacy": "Tu respuesta no la ve tu tutor. L&D y la dirección ven solo el porcentaje del programa que aplicó cada cosa, y solo si hay 5 personas o más. No hay montos.",
+    "answeredOn": "Ya respondiste el {{date}}. Puedes actualizar tus respuestas.",
+    "items": {
+      "budget": {
+        "question": "¿Armaste un presupuesto para el mes?",
+        "help": "Con cualquier método: una planilla, una app o un papel."
+      },
+      "emergencyFund": {
+        "question": "¿Empezaste un fondo de emergencia?",
+        "help": "Aunque sea con poco: lo que importa es que exista y esté separado."
+      },
+      "fullCardPayment": {
+        "question": "¿Pagaste el total de la tarjeta este mes?",
+        "help": "Si no usas tarjeta de crédito, responde \"No\"."
+      }
+    },
+    "yes": "Sí",
+    "no": "No",
+    "missing": "Elige una opción.",
+    "send": "Enviar respuestas",
+    "update": "Actualizar respuestas",
+    "doneTitle": "Respuestas guardadas",
+    "doneBody": "Gracias. Suman al seguimiento del programa, sin tu nombre."
   }
 }
