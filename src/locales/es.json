@@ -1569,7 +1569,11 @@
       "certificate": "Certificado del programa",
       "certificateDetail": "Se emite al completar los niveles 1 a 7",
       "followUp": "Seguimiento a 30 días",
-      "followUpDetail": "Tres preguntas sobre qué aplicaste"
+      "followUpDetail": "Tres preguntas sobre qué aplicaste",
+      "glossary": "Glosario",
+      "glossaryDetail": "Los términos del programa, con su fuente",
+      "library": "Biblioteca",
+      "libraryDetail": "Un resumen imprimible de cada módulo"
     },
     "sources": {
       "title": "Fuentes",
@@ -5513,5 +5517,29 @@
       }
     },
     "sent": "Pedido enviado"
+  },
+  "glossaryPage": {
+    "title": "Glosario",
+    "intro": "{{count}} términos del programa, explicados en lenguaje simple y con su fuente oficial o del taller.",
+    "fuerte": "¿Una sigla que no recuerdas? Búscala acá.",
+    "search": "Buscar un término",
+    "searchHelp": "Por ejemplo: CFT, plazo fijo o inflación. No importan los acentos.",
+    "results_one": "{{count}} término encontrado",
+    "results_other": "{{count}} términos encontrados",
+    "empty": "No hay términos con \"{{query}}\". Prueba con otra palabra o con la sigla.",
+    "studied": "Se estudia en el módulo {{n}}: {{title}}"
+  },
+  "library": {
+    "title": "Biblioteca",
+    "intro": "Un resumen de una página de cada módulo, para imprimir o guardar como PDF: el objetivo, las ideas clave, un ejemplo resuelto, los términos y \"Para tu vida\".",
+    "fuerte": "Para tener a mano, en papel o en PDF.",
+    "summary": "Resumen imprimible",
+    "back": "Volver a la biblioteca",
+    "kicker": "Resumen del módulo {{n}}",
+    "print": "Imprimir o guardar como PDF",
+    "ideas": "Ideas clave",
+    "example": "Ejemplo: {{title}}",
+    "terms": "Términos",
+    "footer": "Alcancía · Simulador de finanzas personales · dinero ficticio."
   }
 }

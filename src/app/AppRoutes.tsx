@@ -27,6 +27,9 @@ const MissionPage = lazyPage(() => import('@/features/missions/MissionPage'), 'M
 const WelcomePage = lazyPage(() => import('@/features/onboarding/WelcomePage'), 'WelcomePage');
 const ProfilePage = lazyPage(() => import('@/features/profile/ProfilePage'), 'ProfilePage');
 const PrivacyPage = lazyPage(() => import('@/features/profile/PrivacyPage'), 'PrivacyPage');
+const GlossaryPage = lazyPage(() => import('@/features/glossary/GlossaryPage'), 'GlossaryPage');
+const LibraryPage = lazyPage(() => import('@/features/learning/LibraryPage'), 'LibraryPage');
+const ModuleSummaryPage = lazyPage(() => import('@/features/learning/LibraryPage'), 'ModuleSummaryPage');
 const LearnPage = lazyPage(() => import('@/features/learning/LearnPage'), 'LearnPage');
 const ReviewPage = lazyPage(() => import('@/features/learning/ReviewPage'), 'ReviewPage');
 const CommunityPage = lazyPage(() => import('@/features/learning/CommunityPage'), 'CommunityPage');
@@ -103,6 +106,9 @@ export function AppRoutes() {
           <Route path="/app/learn/follow-up" element={<FollowUpPage />} />
           <Route path="/app/learn/lessons/:lessonId" element={<CustomLessonPage />} />
           <Route path="/app/learn/sessions/:sessionId" element={<SessionRecordingPage />} />
+          <Route path="/app/learn/glossary" element={<GlossaryPage />} />
+          <Route path="/app/learn/library" element={<LibraryPage />} />
+          <Route path="/app/learn/library/:moduleId" element={<ModuleSummaryPage />} />
           <Route path="/app/learn/guides/:guideId" element={<GuidePage />} />
           <Route path="/app/learn/review/:moduleId" element={<ReviewPage />} />
           <Route path="/app/learn/community" element={<CommunityPage />} />

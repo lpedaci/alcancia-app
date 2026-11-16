@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { describeSources } from '@/app/content-sources';
-import { distributeTerms, findTerms, GLOSSARY, introducedTerms } from './glossary';
+import { distributeTerms, findTerms, fold, GLOSSARY, introducedTerms, searchGlossary } from './glossary';
 
 describe('integrated glossary (1.1.1, RF-47)', () => {
   it('covers the terms of the spec, each with a definition and an official source', () => {
@@ -25,5 +25,21 @@ describe('integrated glossary (1.1.1, RF-47)', () => {
 
   it('gives a term to the first part of a block that has it', () => {
     expect(distributeTerms(['La TNA', 'otra TNA y la TEA'], new Set(['tna', 'tea'])).map((s) => [...s])).toEqual([['tna'], ['tea']]);
+  });
+
+  it('searches ignoring accents and case, in alphabetical order (F10, D-321)', () => {
+    expect(searchGlossary('inflacion').map((g) => g.id)).toContain('inflacion');
+    expect(searchGlossary('CFT').map((g) => g.id)).toContain('cft');
+    expect(searchGlossary('zzz')).toEqual([]);
+    const all = searchGlossary('');
+    expect(all).toHaveLength(GLOSSARY.length);
+    expect(all.map((g) => fold(g.term))).toEqual([...all.map((g) => fold(g.term))].sort((a, b) => a.localeCompare(b, 'es')));
+  });
+
+  it('every term of the glossary page names a module that exists, and has no em dashes', () => {
+    for (const g of GLOSSARY) {
+      expect(g.definition, g.id).not.toMatch(/—/);
+      if (g.moduleId) expect(g.moduleId).toMatch(/^module-\d{2}$/);
+    }
   });
 });

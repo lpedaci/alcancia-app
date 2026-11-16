@@ -126,4 +126,5 @@
 | 16/11/2026 | 32 · Sesiones con el tutor (F13) | Agenda del tutor con pedidos 1:1, próximos, pasados con grabación simulada y formulario; encuentros, calendario .ics, grabaciones y pedido 1:1 para quien participa (D-319) | Hecho; D-319 confirmada |
 | 16/11/2026 | 33 · Mi privacidad (F16) | Qué hay sobre la persona y dónde, descarga de sus datos y pedidos de acceso, corrección y borrado con los plazos de la Ley 25.326 (D-320) | Hecho; D-320 confirmada |
 | 16/11/2026 | Ajuste de Lourdes | En el perfil, "Empezar de cero" y "Guardar límite" a todo el ancho en celular, como el resto de las acciones (D-308) | Hecho |
+| 16/11/2026 | 34 · Glosario y biblioteca (F10) | 54 términos con búsqueda sin acentos y el módulo de cada uno; biblioteca con un resumen imprimible por módulo (D-321); `docs/content-review/glosario-1.md` | Hecho; los 39 términos nuevos esperan la revisión de Lourdes |
 | (pendiente) | Cierre de la fase B | Después del informe final (`docs/review.md`, paso 36), crear la Release `v1.0.0` en GitHub con notas que resuman las funcionalidades (D-306). Es el último paso del plan | Pendiente |

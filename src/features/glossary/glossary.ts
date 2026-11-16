@@ -8,6 +8,8 @@ export interface GlossaryEntry {
   name: string;
   definition: string;
   sourceIds: string[];
+  /** F10 (D-321): the module where it is studied, for the glossary page. */
+  moduleId?: string;
 }
 
 export const GLOSSARY = glossaryJson.terms as GlossaryEntry[];
@@ -15,6 +17,17 @@ export const GLOSSARY = glossaryJson.terms as GlossaryEntry[];
 const byMatch = new Map(GLOSSARY.flatMap((g) => g.match.map((m) => [m, g] as const)));
 // Longest first, so "PSPCP" wins over "PSP"; an optional plural "s" ("CEDEARs", "ETFs").
 const alternatives = [...byMatch.keys()].sort((a, b) => b.length - a.length).map((m) => m.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+/** F10 (D-321): accent and case insensitive, for the search of the glossary page. */
+export const fold = (text: string) => text.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+
+/** The terms whose name, short form or definition contain the query, in alphabetical order. */
+export function searchGlossary(query: string, entries: GlossaryEntry[] = GLOSSARY): GlossaryEntry[] {
+  const q = fold(query.trim());
+  const sorted = [...entries].sort((a, b) => fold(a.term).localeCompare(fold(b.term), 'es'));
+  if (!q) return sorted;
+  return sorted.filter((g) => fold(`${g.term} ${g.name} ${g.definition}`).includes(q));
+}
+
 const PATTERN = new RegExp(`(?<![\\p{L}\\p{N}])(${alternatives.join('|')})s?(?![\\p{L}\\p{N}])`, 'gu');
 
 export const glossaryById = (id: string) => GLOSSARY.find((g) => g.id === id);

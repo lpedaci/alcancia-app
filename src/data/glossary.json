@@ -1,20 +1,639 @@
 {
-  "note": "Integrated glossary (CLAUDE.md 1.1.1, RF-47, D-204). Each term is explained the first time it appears in a guide, with a chip that opens the definition. Definitions follow the official sources of Annex B (B-xx) or the workshop presentation (A-xx). `match` is the text searched for, case-sensitive, with an optional plural s.",
+  "note": "Integrated glossary (CLAUDE.md 1.1.1, RF-47, D-204). Each term is explained the first time it appears in a guide, with a chip that opens the definition. Definitions follow the official sources of Annex B (B-xx) or the workshop presentation (A-xx). `match` is the text searched for, case-sensitive, with an optional plural s. Step 34 (F10, D-321) adds terms for the glossary page; most have no `match`, so they do not add chips to the guides: only acronyms (SAC, IPC, ON, PSAV) do.",
   "terms": [
-    { "id": "tna", "term": "TNA", "match": ["TNA"], "name": "Tasa nominal anual", "definition": "La tasa que se informa por año, sin sumar el interés que se gana sobre los intereses. Sirve para comparar ofertas del mismo plazo, pero no dice cuánto rinde o cuesta en realidad.", "sourceIds": ["B-04"] },
-    { "id": "tem", "term": "TEM", "match": ["TEM"], "name": "Tasa efectiva mensual", "definition": "La tasa de un mes. A partir de la TNA se calcula como TNA × 30 ÷ 365 para un plazo de 30 días.", "sourceIds": ["B-04"] },
-    { "id": "tea", "term": "TEA", "match": ["TEA"], "name": "Tasa efectiva anual", "definition": "Lo que rinde o cuesta algo en un año si los intereses se reinvierten en cada período. Es igual o mayor que la TNA.", "sourceIds": ["B-04"] },
-    { "id": "cft", "term": "CFT", "match": ["CFT"], "name": "Costo financiero total", "definition": "Todo lo que pagas por un crédito: la tasa más las comisiones y los cargos. Las entidades deben informarlo destacado, junto con la TNA y la TEA.", "sourceIds": ["B-04", "B-06"] },
-    { "id": "uva", "term": "UVA", "match": ["UVA"], "name": "Unidad de valor adquisitivo", "definition": "Una unidad que se actualiza todos los días por inflación, a través del CER. En un plazo fijo UVA, el capital mantiene su poder de compra y suma una tasa adicional.", "sourceIds": ["B-03"] },
-    { "id": "cer", "term": "CER", "match": ["CER"], "name": "Coeficiente de estabilización de referencia", "definition": "Un índice diario que publica el BCRA y que sigue la inflación medida por el INDEC. Con él se actualiza la UVA.", "sourceIds": ["B-03", "B-40"] },
-    { "id": "cvu", "term": "CVU", "match": ["CVU"], "name": "Clave virtual uniforme", "definition": "Identifica una cuenta de pago en una billetera virtual. Puede tener un alias, igual que el CBU.", "sourceIds": ["B-16"] },
-    { "id": "cbu", "term": "CBU", "match": ["CBU"], "name": "Clave bancaria uniforme", "definition": "Identifica una cuenta en un banco. Puede tener un alias.", "sourceIds": ["B-16"] },
-    { "id": "pspcp", "term": "PSPCP", "match": ["PSPCP", "PSP"], "name": "Proveedor de servicios de pago que ofrece cuentas de pago", "definition": "La empresa detrás de muchas billeteras con CVU. Se inscribe en un registro del BCRA, y el dinero en sus cuentas de pago no tiene la garantía de los depósitos.", "sourceIds": ["B-10", "B-12", "B-19"] },
-    { "id": "fci", "term": "FCI", "match": ["FCI"], "name": "Fondo común de inversión", "definition": "Un patrimonio formado con el dinero de muchas personas, las cuotapartistas, regulado por la CNV. No tiene la garantía de los depósitos.", "sourceIds": ["B-25"] },
-    { "id": "money-market", "term": "money market", "match": ["money market"], "name": "Fondo de mercado de dinero", "definition": "Un FCI de bajo riesgo y muy corto plazo, pensado para manejar liquidez, con rescate en el día. Su rendimiento varía a diario y no tiene la garantía de los depósitos.", "sourceIds": ["B-26", "B-14"] },
-    { "id": "alyc", "term": "ALyC", "match": ["ALyC"], "name": "Agente de liquidación y compensación", "definition": "El bróker registrado en la CNV que liquida y compensa tus operaciones en el mercado. Su matrícula se verifica en el Registro Público de Agentes de la CNV.", "sourceIds": ["B-20", "B-21"] },
-    { "id": "etf", "term": "ETF", "match": ["ETF"], "name": "Fondo cotizado (exchange-traded fund)", "definition": "Un fondo que se compra y se vende en la bolsa como una acción, y que suele replicar un índice, como el S&P 500. Desde Argentina se accede a algunos con CEDEARs.", "sourceIds": ["B-33"] },
-    { "id": "cedear", "term": "CEDEAR", "match": ["CEDEAR"], "name": "Certificado de depósito argentino", "definition": "Un instrumento que se opera en el mercado local y representa una acción o un ETF del exterior, según un ratio de conversión.", "sourceIds": ["B-30", "B-31"] },
-    { "id": "dca", "term": "DCA", "match": ["DCA"], "name": "Compras periódicas (dollar-cost averaging)", "definition": "Invertir un monto fijo todos los meses sin mirar el precio, para no depender de elegir el mejor momento.", "sourceIds": ["A-49"] }
+    {
+      "id": "tna",
+      "term": "TNA",
+      "match": [
+        "TNA"
+      ],
+      "name": "Tasa nominal anual",
+      "definition": "La tasa que se informa por año, sin sumar el interés que se gana sobre los intereses. Sirve para comparar ofertas del mismo plazo, pero no dice cuánto rinde o cuesta en realidad.",
+      "sourceIds": [
+        "B-04"
+      ]
+    },
+    {
+      "id": "tem",
+      "term": "TEM",
+      "match": [
+        "TEM"
+      ],
+      "name": "Tasa efectiva mensual",
+      "definition": "La tasa de un mes. A partir de la TNA se calcula como TNA × 30 ÷ 365 para un plazo de 30 días.",
+      "sourceIds": [
+        "B-04"
+      ]
+    },
+    {
+      "id": "tea",
+      "term": "TEA",
+      "match": [
+        "TEA"
+      ],
+      "name": "Tasa efectiva anual",
+      "definition": "Lo que rinde o cuesta algo en un año si los intereses se reinvierten en cada período. Es igual o mayor que la TNA.",
+      "sourceIds": [
+        "B-04"
+      ]
+    },
+    {
+      "id": "cft",
+      "term": "CFT",
+      "match": [
+        "CFT"
+      ],
+      "name": "Costo financiero total",
+      "definition": "Todo lo que pagas por un crédito: la tasa más las comisiones y los cargos. Las entidades deben informarlo destacado, junto con la TNA y la TEA.",
+      "sourceIds": [
+        "B-04",
+        "B-06"
+      ]
+    },
+    {
+      "id": "uva",
+      "term": "UVA",
+      "match": [
+        "UVA"
+      ],
+      "name": "Unidad de valor adquisitivo",
+      "definition": "Una unidad que se actualiza todos los días por inflación, a través del CER. En un plazo fijo UVA, el capital mantiene su poder de compra y suma una tasa adicional.",
+      "sourceIds": [
+        "B-03"
+      ]
+    },
+    {
+      "id": "cer",
+      "term": "CER",
+      "match": [
+        "CER"
+      ],
+      "name": "Coeficiente de estabilización de referencia",
+      "definition": "Un índice diario que publica el BCRA y que sigue la inflación medida por el INDEC. Con él se actualiza la UVA.",
+      "sourceIds": [
+        "B-03",
+        "B-40"
+      ]
+    },
+    {
+      "id": "cvu",
+      "term": "CVU",
+      "match": [
+        "CVU"
+      ],
+      "name": "Clave virtual uniforme",
+      "definition": "Identifica una cuenta de pago en una billetera virtual. Puede tener un alias, igual que el CBU.",
+      "sourceIds": [
+        "B-16"
+      ]
+    },
+    {
+      "id": "cbu",
+      "term": "CBU",
+      "match": [
+        "CBU"
+      ],
+      "name": "Clave bancaria uniforme",
+      "definition": "Identifica una cuenta en un banco. Puede tener un alias.",
+      "sourceIds": [
+        "B-16"
+      ]
+    },
+    {
+      "id": "pspcp",
+      "term": "PSPCP",
+      "match": [
+        "PSPCP",
+        "PSP"
+      ],
+      "name": "Proveedor de servicios de pago que ofrece cuentas de pago",
+      "definition": "La empresa detrás de muchas billeteras con CVU. Se inscribe en un registro del BCRA, y el dinero en sus cuentas de pago no tiene la garantía de los depósitos.",
+      "sourceIds": [
+        "B-10",
+        "B-12",
+        "B-19"
+      ]
+    },
+    {
+      "id": "fci",
+      "term": "FCI",
+      "match": [
+        "FCI"
+      ],
+      "name": "Fondo común de inversión",
+      "definition": "Un patrimonio formado con el dinero de muchas personas, las cuotapartistas, regulado por la CNV. No tiene la garantía de los depósitos.",
+      "sourceIds": [
+        "B-25"
+      ]
+    },
+    {
+      "id": "money-market",
+      "term": "money market",
+      "match": [
+        "money market"
+      ],
+      "name": "Fondo de mercado de dinero",
+      "definition": "Un FCI de bajo riesgo y muy corto plazo, pensado para manejar liquidez, con rescate en el día. Su rendimiento varía a diario y no tiene la garantía de los depósitos.",
+      "sourceIds": [
+        "B-26",
+        "B-14"
+      ]
+    },
+    {
+      "id": "alyc",
+      "term": "ALyC",
+      "match": [
+        "ALyC"
+      ],
+      "name": "Agente de liquidación y compensación",
+      "definition": "El bróker registrado en la CNV que liquida y compensa tus operaciones en el mercado. Su matrícula se verifica en el Registro Público de Agentes de la CNV.",
+      "sourceIds": [
+        "B-20",
+        "B-21"
+      ]
+    },
+    {
+      "id": "etf",
+      "term": "ETF",
+      "match": [
+        "ETF"
+      ],
+      "name": "Fondo cotizado (exchange-traded fund)",
+      "definition": "Un fondo que se compra y se vende en la bolsa como una acción, y que suele replicar un índice, como el S&P 500. Desde Argentina se accede a algunos con CEDEARs.",
+      "sourceIds": [
+        "B-33"
+      ]
+    },
+    {
+      "id": "cedear",
+      "term": "CEDEAR",
+      "match": [
+        "CEDEAR"
+      ],
+      "name": "Certificado de depósito argentino",
+      "definition": "Un instrumento que se opera en el mercado local y representa una acción o un ETF del exterior, según un ratio de conversión.",
+      "sourceIds": [
+        "B-30",
+        "B-31"
+      ]
+    },
+    {
+      "id": "dca",
+      "term": "DCA",
+      "match": [
+        "DCA"
+      ],
+      "name": "Compras periódicas (dollar-cost averaging)",
+      "definition": "Invertir un monto fijo todos los meses sin mirar el precio, para no depender de elegir el mejor momento.",
+      "sourceIds": [
+        "A-49"
+      ]
+    },
+    {
+      "id": "bruto",
+      "term": "Sueldo bruto",
+      "match": [],
+      "name": "Sueldo bruto",
+      "definition": "El total que figura en el recibo antes de los descuentos: básico, horas extras y adicionales remunerativos.",
+      "sourceIds": [
+        "T"
+      ],
+      "moduleId": "module-01"
+    },
+    {
+      "id": "neto",
+      "term": "Sueldo neto",
+      "match": [],
+      "name": "Sueldo neto",
+      "definition": "Lo que cobras de verdad: el bruto menos tus aportes. Es el número con el que se arma el presupuesto del mes.",
+      "sourceIds": [
+        "T"
+      ],
+      "moduleId": "module-01"
+    },
+    {
+      "id": "aportes",
+      "term": "Aportes",
+      "match": [],
+      "name": "Aportes del trabajador",
+      "definition": "Lo que se descuenta de tu sueldo bruto: jubilación (11 %), obra social (3 %) y Ley 19.032 o PAMI (3 %), entre otros según el convenio.",
+      "sourceIds": [
+        "T"
+      ],
+      "moduleId": "module-01"
+    },
+    {
+      "id": "contribuciones",
+      "term": "Contribuciones",
+      "match": [],
+      "name": "Contribuciones patronales",
+      "definition": "Lo que la empresa paga a la seguridad social además de tu sueldo. No se descuenta de lo que cobras.",
+      "sourceIds": [
+        "T"
+      ],
+      "moduleId": "module-01"
+    },
+    {
+      "id": "costo-laboral",
+      "term": "Costo laboral",
+      "match": [],
+      "name": "Costo laboral",
+      "definition": "Lo que le cuesta tu trabajo a la empresa: el sueldo bruto más las contribuciones patronales.",
+      "sourceIds": [
+        "T"
+      ],
+      "moduleId": "module-01"
+    },
+    {
+      "id": "sac",
+      "term": "Aguinaldo",
+      "match": [
+        "SAC"
+      ],
+      "name": "Aguinaldo (sueldo anual complementario, SAC)",
+      "definition": "Un sueldo extra por año que se cobra en dos partes, en junio y en diciembre. Cada parte equivale a la mitad del mejor sueldo del semestre.",
+      "sourceIds": [
+        "T"
+      ],
+      "moduleId": "module-01"
+    },
+    {
+      "id": "gastos-hormiga",
+      "term": "Gastos hormiga",
+      "match": [],
+      "name": "Gastos hormiga",
+      "definition": "Gastos chicos y repetidos (un café, una suscripción sin uso) que parecen poco pero suman mucho en el mes. Anotarlo todo durante un mes ayuda a verlos.",
+      "sourceIds": [
+        "A-34"
+      ],
+      "moduleId": "module-03"
+    },
+    {
+      "id": "regla-50-30-20",
+      "term": "Regla 50/30/20",
+      "match": [],
+      "name": "Regla 50/30/20",
+      "definition": "Un punto de partida para repartir el ingreso: 50 % para lo esencial, 30 % para deseos y 20 % para ahorro e inversión. Con gastos fijos altos, una variante es 70/20/10.",
+      "sourceIds": [
+        "A-32",
+        "A-33"
+      ],
+      "moduleId": "module-03"
+    },
+    {
+      "id": "fondo-emergencia",
+      "term": "Fondo de emergencia",
+      "match": [],
+      "name": "Fondo de emergencia",
+      "definition": "Dinero separado para imprevistos reales, como un problema de salud o quedarte sin trabajo: de 3 a 6 meses de gastos básicos, en un lugar líquido y de bajo riesgo.",
+      "sourceIds": [
+        "A-35",
+        "A-36"
+      ],
+      "moduleId": "module-04"
+    },
+    {
+      "id": "liquidez",
+      "term": "Liquidez",
+      "match": [],
+      "name": "Liquidez",
+      "definition": "Qué tan rápido puedes usar tu dinero sin perder valor. Una cuenta es líquida al instante; un plazo fijo, recién al vencimiento.",
+      "sourceIds": [
+        "A-36"
+      ],
+      "moduleId": "module-04"
+    },
+    {
+      "id": "inflacion",
+      "term": "Inflación",
+      "match": [],
+      "name": "Inflación",
+      "definition": "La suba general de los precios. Con inflación, el mismo dinero alcanza para comprar menos: pierde poder de compra.",
+      "sourceIds": [
+        "A-21",
+        "B-40"
+      ],
+      "moduleId": "module-09"
+    },
+    {
+      "id": "poder-de-compra",
+      "term": "Poder de compra",
+      "match": [],
+      "name": "Poder de compra",
+      "definition": "Lo que puedes comprar con un monto. Si los precios suben más que tu dinero, tu poder de compra baja aunque tengas los mismos pesos.",
+      "sourceIds": [
+        "A-21"
+      ],
+      "moduleId": "module-09"
+    },
+    {
+      "id": "ipc",
+      "term": "IPC",
+      "match": [
+        "IPC"
+      ],
+      "name": "Índice de precios al consumidor",
+      "definition": "El índice que publica el INDEC cada mes para medir la inflación: cuánto cambia el precio de una canasta de bienes y servicios.",
+      "sourceIds": [
+        "B-40"
+      ],
+      "moduleId": "module-09"
+    },
+    {
+      "id": "tasa-real",
+      "term": "Tasa real",
+      "match": [],
+      "name": "Tasa real",
+      "definition": "Lo que rinde o cuesta tu dinero descontada la inflación del mismo período. Si es negativa, pierdes poder de compra aunque ganes pesos.",
+      "sourceIds": [
+        "B-04"
+      ],
+      "moduleId": "module-10"
+    },
+    {
+      "id": "plazo-fijo",
+      "term": "Plazo fijo tradicional",
+      "match": [],
+      "name": "Plazo fijo tradicional",
+      "definition": "Un depósito en un banco por un plazo mínimo de 30 días, a una tasa que se conoce al constituirlo. Tiene la garantía de los depósitos hasta el tope vigente.",
+      "sourceIds": [
+        "B-02",
+        "B-01"
+      ],
+      "moduleId": "module-11"
+    },
+    {
+      "id": "plazo-fijo-uva",
+      "term": "Plazo fijo UVA",
+      "match": [],
+      "name": "Plazo fijo UVA",
+      "definition": "Un plazo fijo cuyo capital se ajusta por UVA, que sigue a la inflación, más una tasa adicional. Los bancos no están obligados a ofrecerlo y las condiciones dependen de cada uno.",
+      "sourceIds": [
+        "B-03"
+      ],
+      "moduleId": "module-11"
+    },
+    {
+      "id": "cuenta-remunerada",
+      "term": "Cuenta remunerada",
+      "match": [],
+      "name": "Cuenta remunerada",
+      "definition": "Una cuenta que paga un interés diario por el saldo. En una billetera, a veces lo que \"rinde\" es en realidad un fondo money market: conviene leer los términos.",
+      "sourceIds": [
+        "B-13",
+        "B-14"
+      ],
+      "moduleId": "module-11"
+    },
+    {
+      "id": "garantia-depositos",
+      "term": "Garantía de los depósitos",
+      "match": [],
+      "name": "Garantía de los depósitos",
+      "definition": "Una cobertura de los depósitos en bancos, hasta un tope por persona y por entidad (desde el 01/04/2026, $ 50.000.000). Los fondos en una cuenta de pago o en un fondo money market no la tienen.",
+      "sourceIds": [
+        "B-01",
+        "B-12"
+      ],
+      "moduleId": "module-17"
+    },
+    {
+      "id": "interes-compuesto",
+      "term": "Interés compuesto",
+      "match": [],
+      "name": "Interés compuesto",
+      "definition": "Ganar intereses sobre los intereses ya ganados. Con el tiempo, el capital crece cada vez más rápido: C = P × (1 + r)^n.",
+      "sourceIds": [
+        "A-39"
+      ],
+      "moduleId": "module-12"
+    },
+    {
+      "id": "costo-oportunidad",
+      "term": "Costo de oportunidad",
+      "match": [],
+      "name": "Costo de oportunidad",
+      "definition": "Lo que dejas de ganar por elegir una opción en lugar de otra: cada peso que se gasta hoy deja de crecer si se invierte.",
+      "sourceIds": [
+        "A-19"
+      ],
+      "moduleId": "module-12"
+    },
+    {
+      "id": "bola-de-nieve",
+      "term": "Bola de nieve",
+      "match": [],
+      "name": "Método bola de nieve",
+      "definition": "Una forma de salir de deudas: pagas el mínimo de todas y pones el extra en la de menor saldo. Al saldarla, su cuota se suma a la siguiente.",
+      "sourceIds": [
+        "A-24",
+        "A-27"
+      ],
+      "moduleId": "module-07"
+    },
+    {
+      "id": "avalancha",
+      "term": "Avalancha",
+      "match": [],
+      "name": "Método avalancha",
+      "definition": "Una forma de salir de deudas: pagas el mínimo de todas y pones el extra en la de mayor tasa. Es el método que menos intereses paga.",
+      "sourceIds": [
+        "A-28",
+        "A-29"
+      ],
+      "moduleId": "module-07"
+    },
+    {
+      "id": "pago-minimo",
+      "term": "Pago mínimo",
+      "match": [],
+      "name": "Pago mínimo de la tarjeta",
+      "definition": "La parte del resumen que hay que pagar para no entrar en mora. El resto queda financiado y genera intereses, más IVA sobre esos intereses.",
+      "sourceIds": [
+        "B-05"
+      ],
+      "moduleId": "module-06"
+    },
+    {
+      "id": "cuotas-sin-interes",
+      "term": "Cuotas sin interés",
+      "match": [],
+      "name": "Cuotas sin interés",
+      "definition": "Una compra pagada en cuotas que suman el precio de contado. Con inflación pueden convenir, pero si hay descuento por pagar de contado conviene comparar.",
+      "sourceIds": [
+        "T"
+      ],
+      "moduleId": "module-08"
+    },
+    {
+      "id": "cuenta-comitente",
+      "term": "Cuenta comitente",
+      "match": [],
+      "name": "Cuenta comitente",
+      "definition": "La cuenta que abres en un bróker para comprar y vender instrumentos. Lo que compras queda a tu nombre en una subcuenta en Caja de Valores.",
+      "sourceIds": [
+        "B-22"
+      ],
+      "moduleId": "module-13"
+    },
+    {
+      "id": "perfil-inversor",
+      "term": "Perfil de inversor",
+      "match": [],
+      "name": "Perfil de inversor",
+      "definition": "Un test que piden los brókers para conocer cuánto riesgo puedes asumir: conservador, moderado o agresivo. Es orientativo, no una recomendación.",
+      "sourceIds": [
+        "A-54"
+      ],
+      "moduleId": "module-13"
+    },
+    {
+      "id": "accion",
+      "term": "Acción",
+      "match": [],
+      "name": "Acción",
+      "definition": "Una parte de una empresa. Su precio sube o baja según cómo le va a la empresa y al mercado; puede pagar dividendos.",
+      "sourceIds": [
+        "B-30"
+      ],
+      "moduleId": "module-14"
+    },
+    {
+      "id": "bono",
+      "term": "Bono",
+      "match": [],
+      "name": "Bono",
+      "definition": "Un préstamo que le haces a un gobierno o a una empresa, que te devuelve el capital con intereses en fechas pactadas. Su precio también cambia en el mercado.",
+      "sourceIds": [
+        "B-20"
+      ],
+      "moduleId": "module-14"
+    },
+    {
+      "id": "on",
+      "term": "Obligación negociable",
+      "match": [
+        "ON"
+      ],
+      "name": "Obligación negociable (ON)",
+      "definition": "Un bono que emite una empresa para financiarse. Paga intereses y devuelve el capital en fechas pactadas.",
+      "sourceIds": [
+        "B-20"
+      ],
+      "moduleId": "module-14"
+    },
+    {
+      "id": "indice",
+      "term": "Índice",
+      "match": [],
+      "name": "Índice bursátil",
+      "definition": "Una canasta de acciones que representa a un mercado, como el S&P 500 (500 grandes empresas de EE. UU.) o el ACWI (empresas de todo el mundo).",
+      "sourceIds": [
+        "A-40",
+        "A-45"
+      ],
+      "moduleId": "module-14"
+    },
+    {
+      "id": "diversificacion",
+      "term": "Diversificación",
+      "match": [],
+      "name": "Diversificación",
+      "definition": "Repartir el dinero entre distintos instrumentos, sectores o países, para que una caída no afecte todo a la vez.",
+      "sourceIds": [
+        "A-45"
+      ],
+      "moduleId": "module-14"
+    },
+    {
+      "id": "ratio",
+      "term": "Ratio de conversión",
+      "match": [],
+      "name": "Ratio de conversión",
+      "definition": "Cuántos CEDEARs equivalen a una acción o cuotaparte en su mercado de origen; por ejemplo, 20:1 son 20 CEDEARs por acción. Puede cambiar.",
+      "sourceIds": [
+        "B-31"
+      ],
+      "moduleId": "module-15"
+    },
+    {
+      "id": "ccl",
+      "term": "Tipo de cambio implícito",
+      "match": [],
+      "name": "Tipo de cambio implícito",
+      "definition": "El tipo de cambio que surge de comparar el precio en pesos de un CEDEAR con el precio en dólares del activo y su ratio.",
+      "sourceIds": [
+        "B-36"
+      ],
+      "moduleId": "module-15"
+    },
+    {
+      "id": "alias",
+      "term": "Alias",
+      "match": [],
+      "name": "Alias",
+      "definition": "Un nombre fácil de recordar asociado a un CBU o a un CVU. Antes de transferir, revisa el nombre del titular que muestra la app.",
+      "sourceIds": [
+        "B-16"
+      ],
+      "moduleId": "module-17"
+    },
+    {
+      "id": "qr",
+      "term": "QR interoperable",
+      "match": [],
+      "name": "QR interoperable",
+      "definition": "Un código QR de pago que cualquier billetera o app bancaria puede leer, sin importar quién lo generó.",
+      "sourceIds": [
+        "B-15"
+      ],
+      "moduleId": "module-17"
+    },
+    {
+      "id": "transferencia-inmediata",
+      "term": "Transferencia inmediata",
+      "match": [],
+      "name": "Transferencia inmediata",
+      "definition": "Una transferencia entre CBU y CVU que se acredita en segundos. No se puede deshacer desde la app: por eso conviene revisar el titular antes de confirmar.",
+      "sourceIds": [
+        "B-15"
+      ],
+      "moduleId": "module-17"
+    },
+    {
+      "id": "psav",
+      "term": "PSAV",
+      "match": [
+        "PSAV"
+      ],
+      "name": "Proveedor de servicios de activos virtuales",
+      "definition": "Las empresas que ofrecen servicios con criptoactivos y deben inscribirse en el registro de la CNV. La inscripción no implica que la CNV garantice sus servicios.",
+      "sourceIds": [
+        "B-27"
+      ],
+      "moduleId": "module-16"
+    },
+    {
+      "id": "central-deudores",
+      "term": "Central de Deudores",
+      "match": [],
+      "name": "Central de Deudores del BCRA",
+      "definition": "Un registro del BCRA donde puedes consultar tu situación crediticia: si pagaste a término tarjetas y préstamos.",
+      "sourceIds": [
+        "B-06"
+      ],
+      "moduleId": "module-06"
+    },
+    {
+      "id": "phishing",
+      "term": "Phishing",
+      "match": [],
+      "name": "Phishing",
+      "definition": "Un engaño por mensaje, correo o llamada que se hace pasar por una entidad para robarte códigos, claves o datos. Ninguna entidad te pide códigos por mensaje.",
+      "sourceIds": [
+        "B-24"
+      ],
+      "moduleId": "module-18"
+    }
   ]
 }
