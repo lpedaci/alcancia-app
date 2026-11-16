@@ -29,3 +29,8 @@ export function accumulatedInflation(monthlyInflation: Num, months: Num): Decima
 export function annualInflation(monthlyInflation: Num): Decimal {
   return accumulatedInflation(monthlyInflation, 12);
 }
+
+/** F-38 · Rise needed to recover a drop: 1 / (1 − drop) − 1 (a 20 % drop needs a 25 % rise). */
+export function recoveryRise(drop: Num): Decimal {
+  return ONE.div(ONE.minus(drop)).minus(1);
+}

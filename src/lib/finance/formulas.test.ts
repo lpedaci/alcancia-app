@@ -283,3 +283,12 @@ describe('wallet engine formulas', () => {
     expect(isHighRateDebt('0', annualInflation('0.03'))).toBe(false);
   });
 });
+
+describe('F-38 · rise needed to recover a drop (module 14, guide 3)', () => {
+  it('a 20 % drop needs 25 %, a 30 % drop needs 42,86 % and a 50 % drop needs 100 %', async () => {
+    const { recoveryRise } = await import('./rates');
+    expect(recoveryRise('0.2').toFixed(4)).toBe('0.2500');
+    expect(recoveryRise('0.3').times(100).toFixed(2)).toBe('42.86');
+    expect(recoveryRise('0.5').toFixed(4)).toBe('1.0000');
+  });
+});

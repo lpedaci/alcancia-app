@@ -63,6 +63,7 @@ export const PAGES: CheckedPage[] = [
   { id: 'p10-guide-2-m06-mariana', path: '/#/app/learn/guides/module-06-guide-2', as: 'p-mariana' },
   { id: 'p10-guide-2-m11-mariana', path: '/#/app/learn/guides/module-11-guide-2', as: 'p-mariana' },
   { id: 'p10-guide-2-m15-mariana', path: '/#/app/learn/guides/module-15-guide-2', as: 'p-mariana' },
+  { id: 'p10-guide-3-m14-mariana', path: '/#/app/learn/guides/module-14-guide-3', as: 'p-mariana' },
   { id: 'p11-challenge-diego', path: '/#/app/learn/challenges/challenge-level-2', as: 'p-diego' },
   { id: 'p10-guide-m06-mariana', path: '/#/app/learn/guides/module-06-guide-1', as: 'p-mariana' },
   { id: 'p10-guide-part-from-yield', path: '/#/app/learn/guides/module-09-guide-1?part=5&from=%2Fapp%2Fsave%2Fyield', as: 'p-mariana' },

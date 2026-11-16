@@ -108,3 +108,4 @@
 | 15/11/2026 | 27 · Contenido, tanda 7 | Guías 3 de los módulos 9, 10, 11 y 17 en borrador, validadas con tests y documento `docs/content-review/tanda-7.md` | Esperando la revisión de Lourdes |
 | 15/11/2026 | 27 · Contenido, tanda 7 aprobada | Las guías 3 de los módulos 9, 10, 11 y 17 pasan a la app como guías para profundizar | Hecho |
 | 15/11/2026 | 27 · Contenido, tanda 8 | Guías 3 de los módulos 12, 13, 14 y 15 en borrador, validadas con tests y documento `docs/content-review/tanda-8.md`. Con esta tanda quedan escritas las guías 2 y 3 de los 16 módulos de fase A | Esperando la revisión de Lourdes |
+| 15/11/2026 | 27 · Contenido, tanda 8 aprobada | Las guías 3 de los módulos 12 a 15 pasan a la app. Los 16 módulos de fase A tienen sus tres guías publicadas (D-61) | Hecho |

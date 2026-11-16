@@ -297,6 +297,8 @@ Datos, costos y serie en `src/data/invest.json`; todo es de ejemplo y ficticio (
 
 **Caso F-34** · fondo de práctica a 30 días con TNA 31 % → **$ 1.025,80**; bono de ejemplo a 30 días con TNA 34 % y factor 1,01 → **$ 1.038,22**.
 
+**Caso F-38 · Suba necesaria para recuperar una caída** (`recoveryRise`, guía 3 del módulo 14): `1 / (1 − caída) − 1`. Caída del 20 % → **25 %**; del 30 % → **42,86 %** (la serie de práctica baja a 0,70 en el mes 5); del 50 % → **100 %**. Calculado a mano y con test.
+
 ## 19. Consecuencias en la billetera (D-77, paso 18)
 
 Casos con el escenario medio (préstamo personal TNA 55 %, tarjeta TNA 60 %), calculados a mano con aritmética decimal y redondeo a centavos.
@@ -348,6 +350,7 @@ Casos con el escenario medio (préstamo personal TNA 55 %, tarjeta TNA 60 %), ca
 | F-35 | `acceptLoan(...)`, `planLeft(...)` en la billetera | $ 570.000 netos · cuota $ 41.737,16 · $ 585.762,83 |
 | F-36 | `payCard(...)` y el cierre del resumen | $ 226.652,05 · $ 10.652,05 de intereses |
 | F-37 | `fallForScam(...)`, `markMessage(...)` | $ 70.000 si se reporta · $ 40.000 si no |
+| F-38 | `recoveryRise(...)` | 25 % · 42,86 % · 100 % |
 
 ## Referencias
 
