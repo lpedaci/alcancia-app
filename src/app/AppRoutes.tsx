@@ -26,6 +26,7 @@ const InvestorProfilePage = lazyPage(() => import('@/features/levels/InvestorPro
 const MissionPage = lazyPage(() => import('@/features/missions/MissionPage'), 'MissionPage');
 const WelcomePage = lazyPage(() => import('@/features/onboarding/WelcomePage'), 'WelcomePage');
 const ProfilePage = lazyPage(() => import('@/features/profile/ProfilePage'), 'ProfilePage');
+const PrivacyPage = lazyPage(() => import('@/features/profile/PrivacyPage'), 'PrivacyPage');
 const LearnPage = lazyPage(() => import('@/features/learning/LearnPage'), 'LearnPage');
 const ReviewPage = lazyPage(() => import('@/features/learning/ReviewPage'), 'ReviewPage');
 const CommunityPage = lazyPage(() => import('@/features/learning/CommunityPage'), 'CommunityPage');
@@ -111,6 +112,7 @@ export function AppRoutes() {
           <Route path="/app/missions/:missionId" element={<MissionPage />} />
           <Route path="/app/welcome" element={<WelcomePage />} />
           <Route path="/app/profile" element={<ProfilePage />} />
+          <Route path="/app/profile/privacy" element={<PrivacyPage />} />
           {/* Integrated mode (D-75): the home of Hornero, a fictitious partner app (D-84) */}
           <Route path="/app/hornero" element={<HorneroPage />} />
           <Route path="/tutor" element={<TutorHomePage />} />

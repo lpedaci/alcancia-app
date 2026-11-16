@@ -81,3 +81,7 @@ Si Alcancía pasara a producción:
 | Dependencias | `npm audit --audit-level=high` y `npm audit --omit=dev --audit-level=low` | CI |
 | Cada pantalla del build con la CSP activa, más los archivos de indexación | `npm run test:e2e:prod` | CI, antes de publicar |
 | Privacidad entre roles y umbral de 5 | `npm test` (`privacy-boundaries.test.ts`, `metrics.test.ts`) | CI y hook `pre-push` |
+
+## Mi privacidad (F16, D-320)
+
+La persona ve qué datos hay sobre ella y dónde viven, descarga los suyos (un JSON filtrado por su id, que nunca incluye registros de otra persona: lo prueba `src/lib/my-data.test.ts`) y envía pedidos de acceso, corrección y borrado con los plazos de la Ley 25.326 (`src/app/legal.ts`). En producción, los pedidos los atiende la persona responsable de datos de la organización, con registro de cada respuesta.

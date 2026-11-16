@@ -58,6 +58,8 @@ export const PAGES: CheckedPage[] = [
   { id: 'p12-mission-1-diego', path: '/#/app/missions/mission-1', as: 'p-diego' },
   { id: 'p12-mission-security', path: '/#/app/missions/mission-security', as: 'p-mariana' },
   { id: 'p14-profile-mariana', path: '/#/app/profile', as: 'p-mariana' },
+  { id: 'p14-privacy-mariana', path: '/#/app/profile/privacy', as: 'p-mariana' },
+  { id: 'p14-privacy-diego', path: '/#/app/profile/privacy', as: 'p-diego' },
   { id: 'p9-learn-diego', path: '/#/app/learn', as: 'p-diego' },
   { id: 'p9-learn-mariana', path: '/#/app/learn', as: 'p-mariana' },
   { id: 'p10-guide-diego', path: '/#/app/learn/guides/module-17-guide-1', as: 'p-diego' },

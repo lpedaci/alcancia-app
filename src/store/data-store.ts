@@ -19,6 +19,7 @@ import type {
   LevelUnlockRecord,
   CustomCard,
   CustomLesson,
+  PrivacyRequest,
   SessionRequest,
   TutorSession,
   EscapeCompletion,
@@ -59,6 +60,8 @@ export interface OrgData {
   /** F13, D-319: the agenda of sessions with the tutor and the requests for a 1:1. */
   tutorSessions: TutorSession[];
   sessionRequests: SessionRequest[];
+  /** F16, D-320: requests of access, rectification and deletion of one's own data. */
+  privacyRequests: PrivacyRequest[];
   weeklyChallenges: WeeklyChallenge[];
   weeklyReports: WeeklyChallengeReport[];
   followUps: FollowUp30[];
@@ -95,7 +98,7 @@ export function seedData(): SharedData {
   const custom = structuredClone(customContent) as unknown as { lessons: CustomLesson[]; cards: CustomCard[] };
   // F13 (D-319): the demo agenda of sessions with the tutor
   const sessions = structuredClone(sessionsSeed) as unknown as { sessions: TutorSession[]; requests: SessionRequest[] };
-  return { ...copy, accessRequests: [], consents: [], customLessons: custom.lessons, customCards: custom.cards, tutorSessions: sessions.sessions, sessionRequests: sessions.requests };
+  return { ...copy, accessRequests: [], consents: [], customLessons: custom.lessons, customCards: custom.cards, tutorSessions: sessions.sessions, sessionRequests: sessions.requests, privacyRequests: [] };
 }
 
 export const organizationOf = (data: Pick<SharedData, 'organizations'>, orgId: string): Organization =>
@@ -131,6 +134,7 @@ export function scopeToOrg(data: SharedData, orgId: string): OrgData {
     customCards: (data.customCards ?? []).filter((c) => c.orgId === orgId),
     tutorSessions: (data.tutorSessions ?? []).filter((x) => x.orgId === orgId),
     sessionRequests: mine(data.sessionRequests ?? []),
+    privacyRequests: mine(data.privacyRequests ?? []),
     weeklyChallenges: data.weeklyChallenges.filter((w) => cohortIds.has(w.cohortId)),
     weeklyReports: mine(data.weeklyReports),
     followUps: mine(data.followUps),
@@ -179,6 +183,8 @@ interface DataState extends SharedData {
   /** F13 (D-319): schedule, change or cancel a session; request a 1:1 and answer it. */
   saveSession: (session: TutorSession) => void;
   saveSessionRequest: (request: SessionRequest) => void;
+  /** F16 (D-320): a request about one's own data. */
+  addPrivacyRequest: (request: PrivacyRequest) => void;
   /** D-80: a tutor sets (or replaces) the collective goal of a cohort. */
   setCollectiveGoal: (goal: CollectiveGoal) => void;
   /** F20: a post or a reply in the cohort's space. */
@@ -265,6 +271,7 @@ export const useDataStore = create<DataState>()(
       deleteCard: (id) => set((state) => ({ customCards: (state.customCards ?? []).filter((c) => c.id !== id) })),
       saveSession: (session) => set((state) => ({ tutorSessions: [...(state.tutorSessions ?? []).filter((x) => x.id !== session.id), session] })),
       saveSessionRequest: (request) => set((state) => ({ sessionRequests: [...(state.sessionRequests ?? []).filter((x) => x.id !== request.id), request] })),
+      addPrivacyRequest: (request) => set((state) => ({ privacyRequests: [...(state.privacyRequests ?? []), request] })),
       saveFollowUp: (followUp) => set((state) => ({ followUps: [...state.followUps.filter((f) => f.personId !== followUp.personId), followUp] })),
       updateProgram: (program, privacyThreshold) =>
         set((state) => ({

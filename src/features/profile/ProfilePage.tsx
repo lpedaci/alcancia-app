@@ -210,6 +210,16 @@ export function ProfilePage() {
           <p className="text-body-small text-on-surface-variant">{t('profile.receipts.note')}</p>
         </section>
 
+        {/* F16 (D-320): what the platform keeps, the download of one's data and the requests of Ley 25.326 */}
+        <section aria-labelledby="profile-privacy" className={card}>
+          <h2 id="profile-privacy" className="text-title-large text-on-surface">
+            {t('privacy.title')}
+          </h2>
+          <p className="text-body-medium text-on-surface-variant">{t('privacy.profileBody')}</p>
+          <Button asChild variant="tonal" leadingIcon="shield" className="w-full medium:w-auto medium:self-start">
+            <Link to="/app/profile/privacy">{t('privacy.open')}</Link>
+          </Button>
+        </section>
         <section aria-labelledby="profile-reset" className={card}>
           <h2 id="profile-reset" className="text-title-large text-on-surface">
             {t('profile.reset.title')}

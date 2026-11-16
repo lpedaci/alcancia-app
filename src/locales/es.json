@@ -5431,5 +5431,87 @@
       "morning": "A la mañana",
       "afternoon": "A la tarde"
     }
+  },
+  "privacy": {
+    "title": "Mi privacidad",
+    "profileBody": "Qué datos hay sobre ti, cuáles ve tu organización y cuáles nunca salen de tu navegador. Puedes descargarlos y pedir acceso, corrección o borrado.",
+    "open": "Ver mi privacidad",
+    "back": "Volver a tu perfil",
+    "intro": "Lo que Alcancía guarda sobre ti y quién lo ve. Tu organización solo ve tu avance de aprendizaje según tu rol, nunca tus montos ni tus respuestas sobre hábitos.",
+    "fuerte": "Lo tuyo es tuyo. Acá ves qué hay guardado y dónde.",
+    "yes": "Sí",
+    "no": "No",
+    "account": {
+      "name": "Nombre",
+      "email": "Correo de trabajo",
+      "job": "Puesto o carrera",
+      "cohorts": "Cohorte"
+    },
+    "platform": {
+      "title": "En la plataforma de tu organización",
+      "intro": "Datos de aprendizaje. Tu tutoría ve tu avance para acompañarte; L&D y la dirección, solo números de grupos de 5 personas o más.",
+      "diagnostics": "Resultados de Conocerte (solo conocimiento)",
+      "guidesRead": "Guías leídas",
+      "challengeAttempts": "Intentos de desafíos de nivel",
+      "missionsCompleted": "Misiones completadas",
+      "weeklyReports": "Desafíos semanales reportados",
+      "followUps": "Seguimientos a 30 días",
+      "questions": "Consultas a tu tutoría",
+      "sessionRequests": "Pedidos de encuentro 1:1",
+      "escape": "Escape room completado",
+      "consents": "Avisos de privacidad aceptados"
+    },
+    "browser": {
+      "title": "Solo en tu navegador",
+      "intro": "Nunca salen de este dispositivo: nadie más los ve, ni tu organización.",
+      "wallet": "Tu billetera (saldo, movimientos, apartados)",
+      "habitAnswers": "Respuestas sobre hábitos de Conocerte",
+      "reflections": "Reflexiones",
+      "goals": "Metas",
+      "scenarios": "Escenarios guardados",
+      "reviews": "Repasos hechos",
+      "escape": "Partida del escape room",
+      "reset": "Para borrar lo que hay en este navegador, usa \"Empezar de cero\" en",
+      "resetLink": "tu perfil"
+    },
+    "download": {
+      "title": "Descargar mis datos",
+      "body": "Un archivo con todo lo que hay sobre ti: tus registros de aprendizaje en la plataforma y lo que guarda tu navegador. Es tu derecho de acceso, y en la demo es inmediato.",
+      "action": "Descargar mis datos"
+    },
+    "downloaded": "Archivo descargado",
+    "requests": {
+      "title": "Pedir acceso, corrección o borrado",
+      "intro": "La Ley 25.326 de Protección de los Datos Personales te da derecho a saber qué datos hay sobre ti, a corregirlos y a pedir que se borren. La respuesta llega dentro de un plazo según el pedido.",
+      "right": "¿Qué quieres pedir?",
+      "details": "Detalle del pedido (obligatorio)",
+      "detailsHelp": {
+        "access": "Por ejemplo: quiero saber qué datos de aprendizaje tiene mi organización sobre mí.",
+        "rectification": "Qué dato está mal y cómo debería decir. No escribas montos.",
+        "deletion": "Qué datos quieres que se borren. Tu avance de aprendizaje se pierde y no se puede recuperar."
+      },
+      "detailsError": "Escribe al menos 10 caracteres.",
+      "due": "Si lo envías hoy, la respuesta llega hasta el {{date}}.",
+      "send": "Enviar pedido",
+      "mine": "Tus pedidos",
+      "received": "Recibido",
+      "dates": "Enviado el {{from}} · respuesta hasta el {{due}}",
+      "demo": "En la demo nadie responde los pedidos: se muestra cómo los seguirías. En un programa real, los responde quien tu organización designe como responsable de datos."
+    },
+    "rights": {
+      "access": {
+        "label": "Acceso",
+        "help": "Saber qué datos hay sobre ti. Respuesta en {{days}} días corridos."
+      },
+      "rectification": {
+        "label": "Corrección",
+        "help": "Corregir un dato que está mal. Respuesta en {{days}} días hábiles."
+      },
+      "deletion": {
+        "label": "Borrado",
+        "help": "Pedir que se borren tus datos. Respuesta en {{days}} días hábiles."
+      }
+    },
+    "sent": "Pedido enviado"
   }
 }

@@ -244,6 +244,21 @@ export interface GuideProgress {
 
 /** Missions are shared only as aggregated counts per cohort (5.3). */
 /**
+ * A request about one's own data (F16, D-320, Ley 25.326): access, rectification or deletion, with
+ * the date it was made and the last day to answer it. In the demo nobody answers it: it shows how the
+ * person would follow it.
+ */
+export interface PrivacyRequest {
+  id: string;
+  personId: string;
+  right: 'access' | 'rectification' | 'deletion';
+  details: string;
+  requestedAt: IsoDate;
+  dueDate: IsoDate;
+  status: 'received';
+}
+
+/**
  * Sessions with the tutor (F13, step 32, D-319): a simulated agenda of group sessions for a cohort
  * (live, with a simulated recording afterwards) and 1:1 sessions. A request for a 1:1 carries the
  * module and a short note, never amounts. Nothing is sent: there is no real call nor calendar.
