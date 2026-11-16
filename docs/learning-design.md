@@ -229,9 +229,46 @@ Nunca habla más de dos oraciones, nunca recomienda productos y tiene tres nivel
 | **Asistente con IA** | Línea futura; queda previsto el lugar del botón de ayuda flotante |
 | **Academia interna** con varios programas y habilidades | Siguiente proyecto: el modelo academia > programa > módulo > lección ya lo admite |
 
-## 11. Escape room "Tu primer sueldo" (fase B)
+## 11. Escape room "Tu primer sueldo" (paso 28, F18)
 
-Se documentan sus mecánicas antes de adaptarlo (F18). Pendiente para la fase B: recorrerlo completo en `taller-primerempleo/escape/` y registrar salas, candados, tipos de evaluación, pistas, versiones e insignias.
+### 11.1 El original, recorrido el 15/11/2026
+
+Fuente: `https://lpedaci.github.io/taller-primerempleo/escape/` (gamificación y diseño instruccional de Lourdes Pedaci; contenido de finanzas del Lic. Kevin Giampieri). Se leyó el código del sitio (`escape.js` y los datos `escape-finanzas.js`, `escape-versiones.js` y `escape-economia.js`), donde vive todo el contenido.
+
+**Historia.** "Es tu primer día de cobro. Fuiste a la empresa a firmar el recibo y la puerta de la oficina se trabó." Para salir hay que abrir 5 candados, uno por sala; cada candado da letras del código de la puerta final.
+
+**Salas** (se abren en orden; cada una con escena, objetos para inspeccionar, un candado, dos pistas, una explicación de cierre con enlace al taller y una reflexión opcional):
+
+| Sala | Escena | Objetos | Candado (versión inicial) | Errores esperados con mensaje |
+| --- | --- | --- | --- | --- |
+| 1 · Recepción, "El recibo" | El recibo con una mancha de café sobre el neto | Recibo (bruto $ 1.000.000, aportes 11 + 3 + 3 %, contribuciones aparte) y nota de RR. HH. | **Número:** sueldo neto, $ 830.000 | Bruto, solo descuentos, suma parcial, restar contribuciones, costo empresa |
+| 2 · Oficina, "El presupuesto" | Lista de gastos y un post-it | Lista de 6 gastos y post-it del café ($ 3.000 × 22 días hábiles) | **Desafío previo de clasificar** (necesidad o gusto) que "enciende" el candado; después **número:** café por mes, $ 66.000 | Un café, días corridos, una semana |
+| 3 · Caja, "La tarjeta" | Resumen y dos folletos del mismo celular | Resumen ($ 200.000, mínimo $ 20.000) y folletos A (cuota más baja, CFTEA 157 %) y B (CFTEA 92 %) | **Palabra:** el dato a comparar, CFT o CFTEA. **Pregunta extra** de opción única: qué pasa si pagas el mínimo | TNA, TEA, IVA, "cuota" |
+| 4 · Bóveda, "La inflación" | Sobre de ahorro y etiqueta de precio | Sobre con $ 100.000 y zapatillas que subieron 10 % | **Número:** cuánto falta, $ 10.000. **Pregunta extra:** qué importa en un fondo de emergencia (liquidez) | Precio nuevo, cero, calcular una baja |
+| 5 · Salida, "Los mensajes" | Cuatro mensajes en el celular, uno real | SMS con enlace acortado, WhatsApp que pide un código, mail de premio, aviso real de la app | **Selección múltiple:** marcar las tres estafas | El aviso real marcado; cada estafa que falta, con su explicación |
+
+**Versiones.** Cada sala tiene tres: **inicial, intermedia y avanzada** (recibo con horas extras o con suma no remunerativa; dos gastos hormiga con igual o distinta frecuencia; total de la oferta conveniente o diferencia entre ofertas; dos meses de aumentos acumulados o una cuenta remunerada que rindió menos que la inflación; otras estafas: tasa de envío, acceso remoto, cambio de alias, dominio falso de un organismo, trabajo que cobra matrícula, transferencia "por error"). Al empezar, cada sala toma una versión al azar, priorizando las no resueltas; volver a jugar una sala cambia de versión.
+
+**Puerta final.** Una palabra al azar por partida (METAS, RENTA, DISCIPLINA o PLANIFICAR) con su pregunta ("¿Qué necesitás para que tu sueldo te alcance?"). Con 5 letras, cada sala da una; con 10, dos. Se escribe la palabra ordenando las letras; un anagrama válido que no responde tiene su mensaje.
+
+**Economía de pistas** (`escape-economia.js`): 3 llaves iniciales; cada pista cuesta 1; +1 llave por reflexión escrita; tras 3 intentos fallidos seguidos la próxima pista es gratis. **Sello** de salida según pistas usadas: "Salida limpia" (hasta 1), "Buena estrategia" (hasta 4), "Saliste".
+
+**Insignias.** Bronce, plata y oro por resolver las cinco salas en la versión inicial, intermedia o avanzada; se descargan como imagen y se conservan al empezar una partida nueva.
+
+**Fuerte.** Caja fuerte naranja con **5 luces**, una por candado, con niveles de hábito: Claridad, Orden, Prudencia, Previsión y Seguridad. Habla al saludar, ante un error, al dar una pista y al festejar.
+
+**Otras mecánicas.** Sin límite de tiempo ni forma de perder; tiempo oculto que se puede mostrar. Autoevaluación de 5 frases antes y después, con gráfico, "tu fortaleza" y "tu próximo paso". Código de resultado para pegar en un formulario docente. **Modo simple** (`?modo=simple`): las mismas preguntas como cuestionario lineal, sin capa de juego. Tema claro y oscuro, "Saltar al contenido", `prefers-reduced-motion`, objetos como botones, "Empezar de cero" con confirmación. Registro local de eventos.
+
+### 11.2 Propuesta de adaptación a Alcancía (pendiente de confirmación de Lourdes)
+
+1. **Dónde vive:** en Aprender, como **desafío especial desde el nivel 4** (F22). No forma parte del orden de desbloqueo: se juega cuando la persona quiere.
+2. **Lo que se conserva:** historia y cinco salas en el mismo orden, objetos para inspeccionar, tres versiones por sala, letras y palabra de la puerta final, llaves y pistas (3 iniciales, +1 por reflexión, pista gratis tras 3 errores), sello por pistas, insignias de bronce, plata y oro descargables, tiempo oculto, sin forma de perder, "Empezar de cero", modo simple como alternativa accesible.
+3. **Un tipo de evaluación distinto por candado** (spec 5.1): Sala 1 **respuesta numérica** (neto); Sala 2 **clasificar** (necesidad o deseo, que enciende el candado) y su número; Sala 3 **opción única** (qué dato comparar: el CFT) en lugar de escribir la sigla; Sala 4 **ordenar** (los pasos para saber cuánto falta: precio nuevo, restar lo ahorrado) junto a su número; Sala 5 **caso con decisiones** (qué haces ante cada mensaje) en lugar de marcar los tres.
+4. **Textos con tú** y vocabulario de 2.9 ("dinero" en lugar de "plata", "deseo" en lugar de "gusto"); la empresa del recibo pasa a ser Andina Servicios (y la del contexto que corresponda), con los mismos montos del original.
+5. **Fuerte con sus 7 luces de nivel intactas** (D-134): el escape room muestra sus **5 candados** como su propio avance, con los nombres de hábito (Claridad, Orden, Prudencia, Previsión, Seguridad).
+6. **Lo que no se trae:** la autoevaluación antes y después (ya está Conocerte, que mide lo mismo con más precisión) y el código para el formulario docente (lo reemplaza el registro tipo xAPI, F21).
+7. **Privacidad:** al tutor y al admin solo les llega si se completó y qué insignia se obtuvo; nunca las reflexiones ni los montos.
+8. **Contenido en dos tandas de revisión:** primero las cinco salas en versión inicial con el motor y la puerta; después las versiones intermedia y avanzada.
 
 ## 12. Plan de mejora
 
