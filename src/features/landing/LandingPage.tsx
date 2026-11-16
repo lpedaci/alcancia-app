@@ -26,7 +26,7 @@ import { ResetDemoButton } from './ResetDemoButton';
 import { LanguageToggle } from '@/components/layout/LanguageToggle';
 import { FictitiousBrandChip } from '@/features/partner/FictitiousBrandChip';
 import { HorneroMark } from '@/features/partner/HorneroMark';
-import { carouselItem, carouselList, LandingMenu, StickyJourneyBar } from './MobileLanding';
+import { LandingMenu, StickyJourneyBar } from './MobileLanding';
 import { CountUp, Reveal } from './Reveal';
 import { SegmentedButton } from '@/components/ui/SegmentedButton';
 import { ctx } from '@/lib/org-context';
@@ -103,7 +103,7 @@ function SectionTitle({ id, eyebrow, title, intro }: { id: string; eyebrow: stri
       <h2 id={`${id}-title`} className="text-headline-small text-balance text-on-surface md:text-display-small">
         {title}
       </h2>
-      {intro && <p className="max-w-2xl text-body-large text-balance text-on-surface-variant">{intro}</p>}
+      {intro && <p className="max-w-2xl text-body-large text-balance text-on-surface-variant max-medium:hidden">{intro}</p>}
     </Reveal>
   );
 }
@@ -134,6 +134,7 @@ const footerLink = 'w-fit text-body-medium text-on-surface-variant underline-off
 
 export function LandingPage() {
   const { t } = useTranslation();
+  const isPhone = !useMediaQuery('(min-width: 37.5rem)');
   const participants = seed.people.filter((p) => p.role === 'participant').length;
   // "Un recorrido para cada rol" shows one context at a time; the context cards choose it too.
   const [roleContext, setRoleContext] = useState<OrganizationKind>('employer');
@@ -181,15 +182,15 @@ export function LandingPage() {
 
       <main id="main-content" tabIndex={-1} className="focus:outline-none">
         {/* 2 · Hero: text on the left, the app on a real-size phone with feature cards on the right */}
-        <section aria-labelledby="hero-title" className="overflow-hidden pt-10 pb-16 md:pt-16 md:pb-24">
+        <section aria-labelledby="hero-title" className="overflow-hidden pt-6 pb-12 medium:pt-10 md:pt-16 md:pb-24">
           <div className={cn(container, 'grid grid-cols-[minmax(0,1fr)] items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-8')}>
             {/* Phones (D-324): centered, as fintech landings do; from tablets, aligned to the left */}
-            <div className="flex min-w-0 flex-col items-center gap-6 text-center medium:items-start medium:text-left">
+            <div className="flex min-w-0 flex-col items-center gap-4 text-center medium:items-start medium:gap-6 medium:text-left">
               {/* Announcement badge: the case type as a tag, the product category as text */}
               <Reveal>
                 <p className="inline-flex max-w-full flex-wrap items-center gap-x-2 gap-y-1 rounded-lg border border-outline-variant bg-surface-container-lowest p-1 pr-3 text-label-medium text-on-surface-variant max-medium:flex-col max-medium:border-0 max-medium:bg-transparent max-medium:p-0 xl:flex-nowrap xl:rounded-full xl:whitespace-nowrap">
                   <span className="rounded-sm bg-primary-container px-2.5 py-1 text-on-primary-container xl:rounded-full">{t('landing.eyebrowTag')}</span>
-                  <span className="px-1 py-0.5">{t('landing.eyebrowText')}</span>
+                  <span className="px-1 py-0.5 max-medium:hidden">{t('landing.eyebrowText')}</span>
                 </p>
               </Reveal>
               <Reveal delay={STAGGER}>
@@ -198,14 +199,22 @@ export function LandingPage() {
                 </h1>
               </Reveal>
               <Reveal delay={STAGGER * 2}>
-                <p className="max-w-xl text-body-large text-on-surface-variant">{t('landing.hero.body')}</p>
+                {/* Phones: one short line; the full promise from tablets (D-325) */}
+                <p className="max-w-xl text-body-large text-on-surface-variant">
+                  <span className="medium:hidden">{t('landing.hero.bodyShort')}</span>
+                  <span className="max-medium:hidden">{t('landing.hero.body')}</span>
+                </p>
               </Reveal>
               <Reveal delay={STAGGER * 3} className="w-full medium:w-auto">
                 <div className="flex w-full flex-col gap-3 medium:w-auto medium:flex-row">
                   <Button asChild size="m">
                     <InPageLink to="recorridos">{t('landing.chooseJourney')}</InPageLink>
                   </Button>
-                  <Button asChild size="m" variant="outlined" trailingIcon="open_in_new">
+                  {/* One main action on phones: the case study goes as a text link */}
+                  <Button asChild size="m" variant="outlined" trailingIcon="open_in_new" className="max-medium:hidden">
+                    <External href={CASE_STUDY_URL}>{t('landing.hero.caseStudy')}</External>
+                  </Button>
+                  <Button asChild variant="text" trailingIcon="open_in_new" className="self-center medium:hidden">
                     <External href={CASE_STUDY_URL}>{t('landing.hero.caseStudy')}</External>
                   </Button>
                 </div>
@@ -218,17 +227,21 @@ export function LandingPage() {
         {/* 8 · Figures as the band under the hero (the reference's logo band, without logos) */}
         <section aria-labelledby="cifras-title" className="pb-16 md:pb-24">
           <Reveal className={container}>
-            <div className="flex flex-col items-center gap-8 rounded-xl bg-primary px-6 py-10 text-center text-on-primary md:px-10">
+            <div className="flex flex-col items-center gap-6 rounded-xl bg-primary px-6 py-8 text-center text-on-primary medium:gap-8 medium:py-10 md:px-10">
               <div className="flex flex-col gap-1">
                 <h2 id="cifras-title" className="text-title-large">
                   {t('landing.figures.title')}
                 </h2>
-                <p className="text-body-medium">{t('landing.figures.intro')}</p>
+                <p className="text-body-medium max-medium:hidden">{t('landing.figures.intro')}</p>
               </div>
-              <dl className="grid w-full grid-cols-2 gap-x-6 gap-y-8 md:grid-cols-4">
+              {/* Phones (D-326): a 2 x 2 grid with the numbers on one line and a one-word label */}
+              <dl className="grid w-full grid-cols-2 gap-x-6 gap-y-6 medium:gap-y-8 md:grid-cols-4">
                 {figures.map(([value, key]) => (
-                  <div key={key} className="flex flex-col-reverse items-center gap-1">
-                    <dt className="text-body-medium text-balance">{t(key)}</dt>
+                  <div key={key} className="flex flex-col-reverse items-center justify-end gap-1">
+                    <dt className="text-body-medium text-balance">
+                      <span className="medium:hidden">{t(`${key}Short`)}</span>
+                      <span className="max-medium:hidden">{t(key)}</span>
+                    </dt>
                     <dd className="text-display-small tabular-nums">
                       <CountUp value={value} />
                     </dd>
@@ -242,8 +255,7 @@ export function LandingPage() {
         {/* 3 · The problem: tinted cards with a scene on top (reference: "Why choose us") */}
         <Section id="problema" tone="surface">
           <SectionTitle id="problema" eyebrow={t('landing.problem.eyebrow')} title={t('landing.problem.title')} />
-          {/* Phones: a carousel with snap (D-324); the list scrolls with the keyboard too */}
-          <ul tabIndex={0} aria-label={t('landing.carousel', { title: t('landing.problem.title') })} className={cn('grid grid-cols-1 gap-(--space-bento-gap) md:grid-cols-3', carouselList)}>
+          <ul className="grid grid-cols-1 gap-(--space-bento-gap) md:grid-cols-3">
             {(
               [
                 ['budget', 'bg-primary-container', <SceneBudget key="b" />],
@@ -251,7 +263,7 @@ export function LandingPage() {
                 ['card', 'bg-secondary-container', <SceneCard key="c" />],
               ] as const
             ).map(([key, tone, scene], index) => (
-              <Reveal as="li" key={key} delay={index * STAGGER} className={cn('flex min-w-0 flex-col gap-5 rounded-xl p-3 pb-6', tone, carouselItem)}>
+              <Reveal as="li" key={key} delay={index * STAGGER} className={cn('flex min-w-0 flex-col gap-5 rounded-xl p-3 pb-6', tone)}>
                 <div className="flex min-h-36 flex-col justify-center rounded-lg border border-outline-variant bg-surface-container-lowest p-4">{scene}</div>
                 <div className="flex flex-col gap-2 px-3 text-center">
                   <h3 className="text-title-medium text-balance text-on-surface">{t(`landing.problem.${key}.title`)}</h3>
@@ -334,7 +346,7 @@ export function LandingPage() {
         {/* 5b · Three contexts, the same wallet (D-74, D-75, D-83, D-84), each with its honest status */}
         <Section id="contextos">
           <SectionTitle id="contextos" eyebrow={t('landing.contexts.eyebrow')} title={t('landing.contexts.title')} intro={t('landing.contexts.intro')} />
-          <ul aria-label={t('landing.carousel', { title: t('landing.contexts.title') })} className={cn('grid grid-cols-1 gap-(--space-bento-gap) md:grid-cols-2 large:grid-cols-3', carouselList)}>
+          <ul className="grid grid-cols-1 gap-(--space-bento-gap) md:grid-cols-2 large:grid-cols-3">
             <ContextCard index={0} icon="apartment" contextKey="org" status="live">
               <Button asChild variant="tonal" className="mt-auto self-start" trailingIcon="arrow_downward">
                 <InPageLink to="recorridos" onClick={() => setRoleContext('employer')}>{t('landing.contexts.org.cta')}</InPageLink>
@@ -361,12 +373,33 @@ export function LandingPage() {
             label={t('landing.roles.contextLabel')}
             value={roleContext}
             onValueChange={(v) => v && setRoleContext(v as OrganizationKind)}
-            options={CONTEXTS.map((k) => ({ value: k, label: t(`contexts.${k}`) }))}
-            className="mb-6 w-full md:w-auto"
+            options={CONTEXTS.map((k) => ({ value: k, label: isPhone ? t(`landing.roles.contextShort.${k}`) : t(`contexts.${k}`) }))}
+            className="-mt-4 w-full medium:mt-0 medium:mb-6 md:w-auto"
           />
           {/* No holes (2.4): Andina, two participants on the first row and three roles on the second;
               Ceibo, two by two; Hornero, three in a row. On tablets an odd last card takes the full row. */}
-          <ul key={roleContext} aria-label={t('landing.carousel', { title: t('landing.roles.title') })} className={cn('grid grid-cols-1 gap-(--space-bento-gap) md:grid-cols-2 large:grid-cols-6', carouselList)}>
+          {/* Phones and tablets (D-325): one row per person, to compare at a glance and enter in one tap */}
+          <ul key={`${roleContext}-rows`} aria-label={t('landing.roles.listLabel')} className="grid grid-cols-1 gap-2 md:grid-cols-2 large:hidden">
+            {ROLES[roleContext].map((r) => (
+              <li key={r.id}>
+                <Link
+                  to={`/login?demo=${r.id}`}
+                  className="flex min-h-16 items-center gap-3 rounded-xl border border-outline-variant bg-surface-container-lowest px-3 py-2.5 hover:bg-surface-container focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                >
+                  <Avatar name={r.name} role={r.role} personId={`p-${r.id}`} size="md" />
+                  <span className="flex min-w-0 flex-1 flex-col gap-1">
+                    <span className="truncate text-title-small text-on-surface">{r.name}</span>
+                    <span className={cn('w-fit max-w-full truncate rounded-full px-2 py-0.5 text-label-small', ROLE_ACCENT[r.role].chip)}>{t(`landing.roles.${r.id}.chip`)}</span>
+                  </span>
+                  <span className="sr-only">
+                    {t(roleContext === 'product' && r.role === 'participant' ? 'landing.roles.ctaProduct' : 'landing.roles.cta', { name: r.name.split(' ')[0] })}
+                  </span>
+                  <Icon name="arrow_forward" size={20} className="shrink-0 text-primary" />
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <ul key={roleContext} className="hidden gap-(--space-bento-gap) large:grid large:grid-cols-6">
             {ROLES[roleContext].map((r, index) => (
               <Reveal
                 as="li"
@@ -375,7 +408,6 @@ export function LandingPage() {
                 className={cn(
                   'flex min-w-0 flex-col gap-3 overflow-hidden rounded-xl border border-outline-variant bg-surface-container-lowest p-(--space-card-padding) pt-0',
                   roleSpan(roleContext, index),
-                  carouselItem,
                 )}
               >
                 {/* Role color identifies the person (2.1.1), as a flat bar on top */}
@@ -404,9 +436,10 @@ export function LandingPage() {
         {/* 7 · Try a simulator without signing in */}
         <Section id="simulador">
           <SectionTitle id="simulador" eyebrow={t('landing.simulator.eyebrow')} title={t('landing.simulator.title')} intro={t('landing.simulator.intro')} />
-          <Reveal>
+          <Reveal className="max-medium:hidden">
             <InflationSimulator headingLevel="h3" idPrefix="g0-sim3" compare={false} />
           </Reveal>
+          <SimulatorTeaser />
         </Section>
 
         {/* 9 · Three steps and FAQ */}
@@ -442,14 +475,14 @@ export function LandingPage() {
           </Reveal>
         </Section>
 
-        {/* 10 · Final band, same family as the figures band */}
-        <section aria-labelledby="final-title" className="py-16 md:py-24">
+        {/* 10 · Final band, on the same gray as the questions above, so no loose white strip (D-326) */}
+        <section aria-labelledby="final-title" className="bg-surface pb-16 md:pb-24">
           <Reveal className={container}>
             <div className="flex flex-col items-start gap-6 rounded-xl bg-primary px-6 py-10 text-on-primary md:flex-row md:items-center md:justify-between md:px-10">
               <h2 id="final-title" className="max-w-xl text-title-large text-balance md:text-headline-small">
                 {t('landing.final.title')}
               </h2>
-              <Button asChild size="m" variant="tonal">
+              <Button asChild size="m" variant="tonal" className="w-full md:w-auto">
                 <InPageLink to="recorridos">{t('landing.chooseJourney')}</InPageLink>
               </Button>
             </div>
@@ -592,7 +625,7 @@ function ContextCard({
     <Reveal
       as="li"
       delay={index * STAGGER}
-      className={cn('flex min-w-0 flex-col gap-3 rounded-xl border border-outline-variant bg-surface-container-lowest p-(--space-card-padding)', carouselItem, className)}
+      className={cn('flex min-w-0 flex-col gap-3 rounded-xl border border-outline-variant bg-surface-container-lowest p-(--space-card-padding)', className)}
     >
       <div className="flex flex-wrap items-start justify-between gap-2">
         <span
@@ -756,6 +789,33 @@ function GuidePreview() {
           {t('landing.anywhere.optionB')}
         </span>
       </div>
+    </div>
+  );
+}
+
+/**
+ * The inflation tool on phones (D-325): the whole simulator is a lot to read on a small screen, so it
+ * starts as one result and a button; the full tool opens below, on request.
+ */
+function SimulatorTeaser() {
+  const { t } = useTranslation();
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="flex flex-col gap-4 medium:hidden">
+      {!open ? (
+        <div className="flex flex-col gap-3 rounded-xl border border-outline-variant bg-surface-container-lowest p-(--space-card-padding)">
+          <p className="text-body-medium text-on-surface-variant">{t('landing.simulator.teaserLabel')}</p>
+          <p className="text-headline-small text-primary tabular-nums">{t('landing.simulator.teaserValue')}</p>
+          <p className="text-body-medium text-on-surface">{t('landing.simulator.teaserBody')}</p>
+          <Button leadingIcon="calculate" className="w-full" aria-expanded={false} aria-controls="g0-sim3-mobile" onClick={() => setOpen(true)}>
+            {t('landing.simulator.teaserOpen')}
+          </Button>
+        </div>
+      ) : (
+        <div id="g0-sim3-mobile">
+          <InflationSimulator headingLevel="h3" idPrefix="g0-sim3m" compare={false} />
+        </div>
+      )}
     </div>
   );
 }

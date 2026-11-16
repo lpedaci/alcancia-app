@@ -25,7 +25,8 @@
       "titleKey": "se aprende finanzas",
       "titleEnd": "usándola",
       "body": "Dinero ficticio, decisiones reales. Para equipos, aulas y productos: quien la ofrece ve el avance, nunca los montos.",
-      "caseStudy": "Ver el case study"
+      "caseStudy": "Ver el case study",
+      "bodyShort": "Dinero ficticio, decisiones reales. Quien la ofrece ve el avance, nunca los montos."
     },
     "pieces": {
       "simLabel": "$ 100.000 en 12 meses con 3 % de inflación mensual",
@@ -203,12 +204,22 @@
         "chip": "Coordinación académica",
         "does": "Configura el programa, carga estudiantes y arma las cohortes por carrera.",
         "explore": "Panel de adopción con umbral de privacidad, personas, carga por CSV y configuración."
+      },
+      "listLabel": "Personas de la demo",
+      "contextShort": {
+        "employer": "Organización",
+        "education": "Educación",
+        "product": "Producto"
       }
     },
     "simulator": {
       "eyebrow": "Prueba un simulador sin iniciar sesión",
       "title": "¿Cuánto compra tu dinero si lo guardas sin moverlo?",
-      "intro": "Cambia el monto, el escenario o los meses y mira cómo cambia el resultado."
+      "intro": "Cambia el monto, el escenario o los meses y mira cómo cambia el resultado.",
+      "teaserLabel": "$ 100.000 guardados 12 meses, con 3 % de inflación mensual, compran como",
+      "teaserValue": "$ 70.138",
+      "teaserBody": "Pierden casi un 30 % de poder de compra. Prueba con tu monto y otro escenario.",
+      "teaserOpen": "Probar el simulador"
     },
     "figures": {
       "title": "La demo en cifras",
@@ -216,7 +227,11 @@
       "missions": "misiones prácticas",
       "tools": "herramientas",
       "people": "personas participantes en los tres contextos de demo",
-      "intro": "Calculadas desde los datos ficticios de los tres contextos de demo."
+      "intro": "Calculadas desde los datos ficticios de los tres contextos de demo.",
+      "levelsShort": "niveles",
+      "missionsShort": "misiones",
+      "toolsShort": "herramientas",
+      "peopleShort": "personas"
     },
     "steps": {
       "eyebrow": "Recorre la demo en tres pasos",
@@ -386,8 +401,7 @@
     "menu": {
       "open": "Abrir el menú",
       "title": "Menú"
-    },
-    "carousel": "{{title}}: desliza para ver más"
+    }
   },
   "notFound": {
     "title": "No encontramos esta página",
@@ -4094,7 +4108,7 @@
       [
         "D-324",
         "Landing en celular",
-        "Menú, portada centrada con una acción, barra fija abajo después de la portada y carruseles con deslizamiento que dejan ver la tarjeta siguiente."
+        "Menú, portada que entra en una pantalla con una acción, barra fija abajo, sin introducciones ni carruseles, filas para elegir personas, cifras en 2 × 2 y herramientas largas que se abren a pedido."
       ],
       [
         "D-322",

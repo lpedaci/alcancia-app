@@ -25,7 +25,8 @@
       "titleKey": "you learn finance",
       "titleEnd": "by using it",
       "body": "Fictitious money, real decisions. For teams, classrooms and products: whoever offers it sees progress, never the amounts.",
-      "caseStudy": "Read the case study"
+      "caseStudy": "Read the case study",
+      "bodyShort": "Fictitious money, real decisions. Whoever offers it sees progress, never amounts."
     },
     "pieces": {
       "simLabel": "$ 100.000 in 12 months at 3 % monthly inflation",
@@ -203,12 +204,22 @@
         "chip": "Academic coordination",
         "does": "Sets up the program, loads students and builds cohorts by degree.",
         "explore": "Adoption panel with the privacy threshold, people, CSV upload and settings."
+      },
+      "listLabel": "Demo people",
+      "contextShort": {
+        "employer": "Organization",
+        "education": "Education",
+        "product": "Product"
       }
     },
     "simulator": {
       "eyebrow": "Try a simulator without signing in",
       "title": "How much does your money buy if you keep it idle?",
-      "intro": "Change the amount, the scenario or the months and see how the result changes."
+      "intro": "Change the amount, the scenario or the months and see how the result changes.",
+      "teaserLabel": "$ 100,000 kept for 12 months, with 3 % monthly inflation, buys what",
+      "teaserValue": "$ 70,138",
+      "teaserBody": "It loses almost 30 % of its purchasing power. Try your own amount and another scenario.",
+      "teaserOpen": "Try the simulator"
     },
     "figures": {
       "title": "The demo in numbers",
@@ -216,7 +227,11 @@
       "missions": "practice missions",
       "tools": "tools",
       "people": "participants across the three demo contexts",
-      "intro": "Calculated from the fictitious data of the three demo contexts."
+      "intro": "Calculated from the fictitious data of the three demo contexts.",
+      "levelsShort": "levels",
+      "missionsShort": "missions",
+      "toolsShort": "tools",
+      "peopleShort": "people"
     },
     "steps": {
       "eyebrow": "Explore the demo in three steps",
@@ -386,8 +401,7 @@
     "menu": {
       "open": "Open the menu",
       "title": "Menu"
-    },
-    "carousel": "{{title}}: swipe to see more"
+    }
   },
   "notFound": {
     "title": "We could not find this page",

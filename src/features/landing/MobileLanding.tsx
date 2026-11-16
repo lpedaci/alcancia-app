@@ -90,7 +90,3 @@ export function StickyJourneyBar() {
     </div>
   );
 }
-
-/** Horizontal cards with snap on phones; the usual grid from tablets (D-324). */
-export const carouselList = 'max-medium:-mx-(--space-gutter) max-medium:flex max-medium:snap-x max-medium:snap-mandatory max-medium:overflow-x-auto max-medium:px-(--space-gutter) max-medium:pb-3 max-medium:scroll-px-(--space-gutter) max-medium:[scrollbar-width:thin]';
-export const carouselItem = 'max-medium:w-[82%] max-medium:shrink-0 max-medium:snap-start';

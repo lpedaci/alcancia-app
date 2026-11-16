@@ -39,9 +39,9 @@ describe('G0 landing (F0)', () => {
   it('computes the figures from the demo data', () => {
     renderAt('/');
     const figures = screen.getByRole('region', { name: es.landing.figures.title });
-    expect(within(figures).getByText(es.landing.figures.people).nextElementSibling).toHaveTextContent('196');
-    expect(within(figures).getByText(es.landing.figures.missions).nextElementSibling).toHaveTextContent('13');
-    expect(within(figures).getByText(es.landing.figures.tools).nextElementSibling).toHaveTextContent('12');
+    expect(within(figures).getAllByText(es.landing.figures.people)[0].closest('dt')?.nextElementSibling).toHaveTextContent('196');
+    expect(within(figures).getAllByText(es.landing.figures.missions)[0].closest('dt')?.nextElementSibling).toHaveTextContent('13');
+    expect(within(figures).getAllByText(es.landing.figures.tools)[0].closest('dt')?.nextElementSibling).toHaveTextContent('12');
   });
 
   it('runs SIM-3 without signing in: $ 100.000 at 3 % for 12 months buys $ 70.137,99 (F-05)', () => {
