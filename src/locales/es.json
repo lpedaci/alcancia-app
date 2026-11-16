@@ -4047,6 +4047,11 @@
     },
     "patterns": [
       [
+        "D-309",
+        "Datos de avance compactos",
+        "En celular, chips con ícono y valor, con la etiqueta para lectores de pantalla; en tablet y escritorio, ícono, etiqueta y valor en una línea con divisores."
+      ],
+      [
         "D-308",
         "Acciones de un paso a todo el ancho en celular",
         "Bajo 600 px, la acción principal de un paso y sus acciones secundarias ocupan todo el ancho, como pide Material 3 para la ventana compacta; desde 600 px vuelven a su tamaño, a la derecha."

@@ -6,7 +6,7 @@ Cómo revisar: marca en cada sala "Aprobada", "Con cambios" (y cuáles) o "No va
 
 ## Sala 1 · Recepción: "El recibo" (luz de Claridad)
 
-- **Decisión de Lourdes:** ☐ Aprobada · ☐ Con cambios · ☐ No va
+- **Decisión de Lourdes:** ☑ Aprobada (16/11/2026) · ☐ Con cambios · ☐ No va
 
 **Escena:** En el escritorio de recepción quedó tu recibo de sueldo, con una taza de café volcada encima. Al lado hay una nota de Recursos Humanos.
 
@@ -39,7 +39,7 @@ Cómo revisar: marca en cada sala "Aprobada", "Con cambios" (y cuáles) o "No va
 
 ## Sala 2 · Oficina: "El presupuesto" (luz de Orden)
 
-- **Decisión de Lourdes:** ☐ Aprobada · ☐ Con cambios · ☐ No va
+- **Decisión de Lourdes:** ☑ Aprobada (16/11/2026) · ☐ Con cambios · ☐ No va
 
 **Escena:** En el escritorio de la oficina hay una lista con tus gastos del mes. Pegado en la taza, un post-it.
 
@@ -77,7 +77,7 @@ Cómo revisar: marca en cada sala "Aprobada", "Con cambios" (y cuáles) o "No va
 
 ## Sala 3 · Caja: "La tarjeta" (luz de Prudencia)
 
-- **Decisión de Lourdes:** ☐ Aprobada · ☐ Con cambios · ☐ No va
+- **Decisión de Lourdes:** ☑ Aprobada (16/11/2026) · ☐ Con cambios · ☐ No va
 
 **Escena:** Sobre el mostrador de la caja quedaron el resumen de tu tarjeta y dos folletos del mismo celular en 12 cuotas.
 
@@ -105,7 +105,7 @@ Cómo revisar: marca en cada sala "Aprobada", "Con cambios" (y cuáles) o "No va
 
 ## Sala 4 · Bóveda: "La inflación" (luz de Previsión)
 
-- **Decisión de Lourdes:** ☐ Aprobada · ☐ Con cambios · ☐ No va
+- **Decisión de Lourdes:** ☑ Aprobada (16/11/2026) · ☐ Con cambios · ☐ No va
 
 **Escena:** En la caja fuerte está el sobre donde guardaste dinero para las zapatillas que anotaste en el presupuesto. Al lado, la etiqueta de precio.
 
@@ -145,7 +145,7 @@ Cómo revisar: marca en cada sala "Aprobada", "Con cambios" (y cuáles) o "No va
 
 ## Sala 5 · Salida: "Los mensajes" (luz de Seguridad)
 
-- **Decisión de Lourdes:** ☐ Aprobada · ☐ Con cambios · ☐ No va
+- **Decisión de Lourdes:** ☑ Aprobada (16/11/2026) · ☐ Con cambios · ☐ No va
 
 **Escena:** Ya casi estás afuera. Tu celular vibra: llegaron cuatro mensajes. Uno solo es de verdad.
 

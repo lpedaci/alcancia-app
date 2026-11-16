@@ -196,8 +196,11 @@ function Progress({ state, onToggleTime }: { state: EscapeState; onToggleTime: (
   const { t } = useTranslation();
   const letters = lettersOf(state);
   return (
-    <section aria-label={t('escape.progressLabel')} className={cn(card, '@container gap-3')}>
-      <ol className="grid grid-cols-5 gap-1">
+    // D-309: phones show the locks with their habit and the data as icon chips (labels only for screen
+    // readers); wider cards show icon, label and value in one line, and from 64rem everything fits in a
+    // single row, locks on the left and data on the right
+    <section aria-label={t('escape.progressLabel')} className={cn(card, '@container gap-3 @5xl:flex-row @5xl:items-center @5xl:gap-6')}>
+      <ol className="grid grid-cols-5 gap-1 @5xl:flex-1">
         {ROOMS.map((room, i) => {
           const done = state.solved.includes(room.id);
           const current = i === state.current;
@@ -218,24 +221,14 @@ function Progress({ state, onToggleTime }: { state: EscapeState; onToggleTime: (
           );
         })}
       </ol>
-      {/* Four small tiles (D-307): the label on top and its value below, so a value never reads as the
-          next label's; dividers between them on wide cards */}
-      <dl className="grid grid-cols-3 gap-px overflow-hidden rounded-lg bg-outline-variant @lg:grid-cols-4">
+      <dl className="grid grid-cols-3 gap-2 border-t border-outline-variant pt-3 @lg:flex @lg:flex-wrap @lg:items-center @lg:gap-x-0 @5xl:shrink-0 @5xl:border-t-0 @5xl:border-l @5xl:pt-0 @5xl:pl-6">
         <Stat icon="key" label={t('escape.keys')}>
           {state.keys}
         </Stat>
-        <Stat
-          icon="lightbulb"
-          label={
-            <>
-              <span className="@lg:hidden">{t('escape.hints')}</span>
-              <span className="hidden @lg:inline">{t('escape.hintsUsed')}</span>
-            </>
-          }
-        >
+        <Stat icon="lightbulb" label={t('escape.hintsUsed')}>
           {state.hintsUsed}
         </Stat>
-        <Stat icon="door_front" label={t('escape.letters')} className="col-span-3 order-last @lg:order-none @lg:col-span-1">
+        <Stat icon="door_front" label={t('escape.letters')} className="order-last col-span-3 @lg:order-none">
           <span className="sr-only">{t('escape.lettersValue', { count: letters.filter(Boolean).length, total: ROOMS.length })}</span>
           {/* Five slots that fill in, one per room */}
           <span aria-hidden className="flex gap-1">
@@ -244,7 +237,7 @@ function Progress({ state, onToggleTime }: { state: EscapeState; onToggleTime: (
                 key={i}
                 className={cn(
                   'flex size-6 items-center justify-center rounded-sm text-label-large',
-                  l ? 'bg-tertiary-container text-on-tertiary-container' : 'border border-dashed border-outline-variant',
+                  l ? 'bg-tertiary-container text-on-tertiary-container' : 'border border-dashed border-outline',
                 )}
               >
                 {l ?? ''}
@@ -254,32 +247,31 @@ function Progress({ state, onToggleTime }: { state: EscapeState; onToggleTime: (
         </Stat>
         {/* The time is hidden by default (original game); the eye shows or hides it, right beside it */}
         <Stat icon="schedule" label={t('escape.time.label')}>
-          <span className="flex items-center gap-1">
-            {state.timeVisible ? <span>{formatTime(state.timeMs)}</span> : <span className="sr-only">{t('escape.time.hidden')}</span>}
-            <IconButton
-              icon={state.timeVisible ? 'visibility_off' : 'visibility'}
-              size="xs"
-              label={state.timeVisible ? t('escape.time.hide') : t('escape.time.show')}
-              selected={state.timeVisible}
-              onClick={onToggleTime}
-              className="-my-1 -ml-1"
-            />
-          </span>
+          {state.timeVisible ? <span>{formatTime(state.timeMs)}</span> : <span className="sr-only">{t('escape.time.hidden')}</span>}
+          <IconButton
+            icon={state.timeVisible ? 'visibility_off' : 'visibility'}
+            size="xs"
+            label={state.timeVisible ? t('escape.time.hide') : t('escape.time.show')}
+            selected={state.timeVisible}
+            onClick={onToggleTime}
+            className="-my-1 -mr-1.5"
+          />
         </Stat>
       </dl>
     </section>
   );
 }
 
-function Stat({ icon, label, children, className }: { icon: 'key' | 'lightbulb' | 'door_front' | 'schedule'; label: ReactNode; children: ReactNode; className?: string }) {
+function Stat({ icon, label, children, className }: { icon: 'key' | 'lightbulb' | 'door_front' | 'schedule'; label: string; children: ReactNode; className?: string }) {
   return (
-    // Phones and tablets (D-307): keys, hints and time in one row; the letters below at full width
-    <div className={cn('flex min-w-0 flex-col gap-1 bg-surface-container-lowest px-2.5 py-2 @lg:px-3', className)}>
-      <dt className="flex min-w-0 items-center gap-1.5 truncate text-label-small text-on-surface-variant @lg:text-body-small">
-        <Icon name={icon} size={16} className="shrink-0 text-primary" />
-        {label}
+    // Phones: a chip with the icon and the value, three in a row and the letters below. Wider: icon, label and value in one line, with a
+    // divider between items
+    <div className={cn('flex h-9 min-w-0 items-center justify-center gap-2 rounded-full bg-surface-container px-3 @lg:h-8 @lg:justify-start @lg:rounded-none @lg:bg-transparent @lg:px-4 @lg:not-first:border-l @lg:not-first:border-outline-variant @lg:first:pl-0', className)}>
+      <dt className="flex min-w-0 items-center gap-1.5 text-body-small text-on-surface-variant">
+        <Icon name={icon} size={18} className="shrink-0 text-primary" />
+        <span className="sr-only @lg:not-sr-only @lg:whitespace-nowrap">{label}</span>
       </dt>
-      <dd className="flex min-h-8 items-center text-title-medium text-on-surface tabular-nums">{children}</dd>
+      <dd className="flex items-center gap-1 text-title-small text-on-surface tabular-nums">{children}</dd>
     </div>
   );
 }

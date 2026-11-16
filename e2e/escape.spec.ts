@@ -14,7 +14,7 @@ const axe = async (page: Page) => {
   expect(overflow).toBeLessThanOrEqual(1);
 };
 
-for (const width of [375, 1280]) {
+for (const width of [375, 768, 1280]) {
   test(`escape room can be played to the end @ ${width}px`, async ({ page }) => {
     test.setTimeout(90_000);
     await page.setViewportSize({ width, height: 900 });
