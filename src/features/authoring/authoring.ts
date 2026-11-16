@@ -3,15 +3,25 @@ import type { GuideBlock, LearningQuestion } from '@/features/learning/questions
 import type { CustomCard, CustomLesson } from '@/types/domain';
 
 /**
- * Pure rules of the lesson and card builder (F14, D-317): the blocks a tutor or L&D can add, the
- * question types of this batch (single choice, multiple choice, true or false with why, numeric), how
+ * Pure rules of the lesson and card builder (F14, D-317, D-318): the blocks a tutor or L&D can add,
+ * the nine question types of 5.1 (single, multiple, true or false with why, numeric, ordering,
+ * matching, categorize, a case with decisions and an exercise with a tool), how
  * a form becomes a question of 5.1, and what must be filled before publishing. Tested in
  * `authoring.test.ts`.
  */
 export type BlockKind = 'objective' | 'text' | 'example' | 'practice' | 'tool' | 'takeaway';
 export const BLOCK_KINDS: BlockKind[] = ['objective', 'text', 'example', 'practice', 'tool', 'takeaway'];
-export type QuestionKind = 'single' | 'multiple' | 'true_false_why' | 'numeric';
-export const QUESTION_KINDS: QuestionKind[] = ['single', 'multiple', 'true_false_why', 'numeric'];
+export type QuestionKind = 'single' | 'multiple' | 'true_false_why' | 'numeric' | 'ordering' | 'matching' | 'categorize' | 'branching' | 'simulator_task';
+export const QUESTION_KINDS: QuestionKind[] = ['single', 'multiple', 'true_false_why', 'numeric', 'ordering', 'matching', 'categorize', 'branching', 'simulator_task'];
+
+/** One step of a case with decisions as the builder writes it: a situation, the good choice and the one that ends the case. */
+export interface CaseStep {
+  id: string;
+  text: string;
+  good: string;
+  bad: string;
+  badFeedback: string;
+}
 
 /** The editable form of a question, before it becomes a LearningQuestion. */
 export interface QuestionDraft {
@@ -23,10 +33,22 @@ export interface QuestionDraft {
   statementTrue: boolean;
   whyPrompt: string;
   whyOptions: { id: string; text: string; correct: boolean }[];
-  /** numeric: the answer, its tolerance and unit. */
+  /** numeric and simulator_task: the answer, its tolerance and unit. */
   answer: string;
   tolerance: string;
   unit: 'ARS' | 'percent' | 'months';
+  /** ordering: the steps in the right order (the player shuffles them). */
+  items: { id: string; text: string }[];
+  /** matching: each term with its definition. */
+  pairs: { id: string; left: string; right: string }[];
+  /** categorize: the categories and the items with the category each belongs to. */
+  categories: { id: string; label: string }[];
+  catItems: { id: string; text: string; categoryId: string }[];
+  /** branching: a linear case, step by step, and what is said when every choice was good. */
+  steps: CaseStep[];
+  goodOutcome: string;
+  /** simulator_task: the tool to use. */
+  simId: string;
   correctFeedback: string;
   incorrectFeedback: string;
 }
@@ -58,6 +80,32 @@ export function emptyQuestion(): QuestionDraft {
     answer: '',
     tolerance: '1',
     unit: 'ARS',
+    items: [
+      { id: 'i1', text: '' },
+      { id: 'i2', text: '' },
+      { id: 'i3', text: '' },
+    ],
+    pairs: [
+      { id: 'p1', left: '', right: '' },
+      { id: 'p2', left: '', right: '' },
+      { id: 'p3', left: '', right: '' },
+    ],
+    categories: [
+      { id: 'c1', label: '' },
+      { id: 'c2', label: '' },
+    ],
+    catItems: [
+      { id: 'k1', text: '', categoryId: 'c1' },
+      { id: 'k2', text: '', categoryId: 'c1' },
+      { id: 'k3', text: '', categoryId: 'c2' },
+      { id: 'k4', text: '', categoryId: 'c2' },
+    ],
+    steps: [
+      { id: 's1', text: '', good: '', bad: '', badFeedback: '' },
+      { id: 's2', text: '', good: '', bad: '', badFeedback: '' },
+    ],
+    goodOutcome: '',
+    simId: 'SIM-7',
     correctFeedback: '',
     incorrectFeedback: '',
   };
@@ -95,11 +143,24 @@ export function questionErrors(q: QuestionDraft): string[] {
     if (!filled(q.whyPrompt) || q.whyOptions.filter((o) => filled(o.text)).length < 2) errors.push('why');
     if (q.whyOptions.filter((o) => o.correct && filled(o.text)).length !== 1) errors.push('correct');
   }
-  if (q.kind === 'numeric') {
+  if (q.kind === 'numeric' || q.kind === 'simulator_task') {
     if (parseDecimalInput(q.answer) === null) errors.push('answer');
     if (parseDecimalInput(q.tolerance) === null) errors.push('tolerance');
   }
-  if (!filled(q.correctFeedback) || !filled(q.incorrectFeedback)) errors.push('feedback');
+  if (q.kind === 'ordering' && q.items.filter((i) => filled(i.text)).length < 3) errors.push('items');
+  if (q.kind === 'matching' && q.pairs.filter((x) => filled(x.left) && filled(x.right)).length < 3) errors.push('pairs');
+  if (q.kind === 'categorize') {
+    const labeled = q.categories.filter((c) => filled(c.label));
+    const items = q.catItems.filter((i) => filled(i.text));
+    if (labeled.length < 2) errors.push('categories');
+    if (items.length < 4 || items.some((i) => !labeled.some((c) => c.id === i.categoryId)) || labeled.some((c) => !items.some((i) => i.categoryId === c.id))) errors.push('catItems');
+  }
+  if (q.kind === 'branching') {
+    if (q.steps.length < 2 || q.steps.some((st) => !filled(st.text) || !filled(st.good) || !filled(st.bad) || !filled(st.badFeedback))) errors.push('steps');
+    if (!filled(q.goodOutcome)) errors.push('goodOutcome');
+  }
+  // A case with decisions explains each outcome on its own, so it needs no general feedback
+  if (q.kind !== 'branching' && (!filled(q.correctFeedback) || !filled(q.incorrectFeedback))) errors.push('feedback');
   return errors;
 }
 
@@ -160,10 +221,64 @@ export function toQuestion(q: QuestionDraft, id: string, moduleId: string): Lear
         ...base,
         type: 'numeric',
         numeric: { answer: parseDecimalInput(q.answer)?.toString() ?? '0', tolerance: parseDecimalInput(q.tolerance)?.toString() ?? '0', unit: q.unit },
-        help: q.unit === 'percent' ? 'Porcentaje, por ejemplo: 12,5' : q.unit === 'months' ? 'Cantidad de meses, por ejemplo: 6' : 'Monto en pesos, por ejemplo: 150.000',
+        help: helpFor(q.unit),
       };
+    case 'simulator_task':
+      return {
+        ...base,
+        type: 'simulator_task',
+        simulatorTask: { simId: q.simId, preset: {}, answer: parseDecimalInput(q.answer)?.toString() ?? '0', tolerance: parseDecimalInput(q.tolerance)?.toString() ?? '0', unit: q.unit },
+        help: helpFor(q.unit),
+      };
+    case 'ordering': {
+      const items = q.items.filter((i) => filled(i.text)).map((i) => ({ id: i.id, text: i.text.trim() }));
+      return { ...base, type: 'ordering', ordering: { items, correctOrder: items.map((i) => i.id) } };
+    }
+    case 'matching': {
+      const pairs = q.pairs.filter((x) => filled(x.left) && filled(x.right));
+      return {
+        ...base,
+        type: 'matching',
+        matching: {
+          left: pairs.map((x) => ({ id: `${x.id}-l`, text: x.left.trim() })),
+          // Definitions in alphabetical order, so their position never gives the pair away
+          right: pairs.map((x) => ({ id: `${x.id}-r`, text: x.right.trim() })).sort((a, b) => a.text.localeCompare(b.text, 'es')),
+          pairs: pairs.map((x) => [`${x.id}-l`, `${x.id}-r`] as [string, string]),
+        },
+      };
+    }
+    case 'categorize': {
+      const categories = q.categories.filter((c) => filled(c.label)).map((c) => ({ id: c.id, label: c.label.trim() }));
+      const items = q.catItems.filter((i) => filled(i.text)).map((i) => ({ id: i.id, text: i.text.trim(), categoryId: i.categoryId }));
+      return { ...base, type: 'categorize', categorize: { categories, items } };
+    }
+    case 'branching': {
+      // A linear case: each good choice goes on to the next step; each other one ends the case with its feedback
+      const nodes: Record<string, { text: string; choices: { id: string; text: string; next?: string; outcome?: string }[] }> = {};
+      const outcomes: Record<string, { good: boolean; feedback: string }> = { good: { good: true, feedback: q.goodOutcome.trim() } };
+      q.steps.forEach((st, i) => {
+        const next = q.steps[i + 1];
+        nodes[st.id] = {
+          text: st.text.trim(),
+          choices: [
+            { id: `${st.id}-good`, text: st.good.trim(), ...(next ? { next: next.id } : { outcome: 'good' }) },
+            { id: `${st.id}-bad`, text: st.bad.trim(), outcome: `${st.id}-bad` },
+          ],
+        };
+        outcomes[`${st.id}-bad`] = { good: false, feedback: st.badFeedback.trim() };
+      });
+      return {
+        ...base,
+        feedback: { correct: q.goodOutcome.trim(), incorrect: q.steps[0]?.badFeedback.trim() ?? '' },
+        type: 'branching',
+        branching: { startNodeId: q.steps[0]?.id ?? 's1', nodes, outcomes },
+      };
+    }
   }
 }
+
+const helpFor = (unit: QuestionDraft['unit']) =>
+  unit === 'percent' ? 'Porcentaje, por ejemplo: 12,5' : unit === 'months' ? 'Cantidad de meses, por ejemplo: 6' : 'Monto en pesos, por ejemplo: 150.000';
 
 /** The guide blocks of a lesson, in order. */
 export function toBlocks(blocks: BlockDraft[], lessonId: string, moduleId: string): GuideBlock[] {
@@ -216,6 +331,34 @@ function fromQuestion(q: LearningQuestion): QuestionDraft {
       return { ...draft, kind: 'true_false_why', statementTrue: q.correctOptionIds[0] === 'true', whyPrompt: q.why.prompt, whyOptions: q.why.options.map((o) => ({ ...o, correct: o.id === q.why.correct })) };
     case 'numeric':
       return { ...draft, kind: 'numeric', answer: q.numeric.answer, tolerance: q.numeric.tolerance, unit: q.numeric.unit === 'USD' ? 'ARS' : q.numeric.unit };
+    case 'simulator_task': {
+      const st = q.simulatorTask;
+      return { ...draft, kind: 'simulator_task', simId: st.simId, answer: st.answer, tolerance: st.tolerance, unit: st.unit === 'USD' ? 'ARS' : st.unit };
+    }
+    case 'ordering': {
+      const byId = new Map(q.ordering.items.map((i) => [i.id, i]));
+      return { ...draft, kind: 'ordering', items: q.ordering.correctOrder.map((id) => byId.get(id)!).filter(Boolean) };
+    }
+    case 'matching': {
+      const right = new Map(q.matching.right.map((r) => [r.id, r.text]));
+      const left = new Map(q.matching.left.map((l) => [l.id, l.text]));
+      return { ...draft, kind: 'matching', pairs: q.matching.pairs.map(([l, r]) => ({ id: l.replace(/-l$/, ''), left: left.get(l) ?? '', right: right.get(r) ?? '' })) };
+    }
+    case 'categorize':
+      return { ...draft, kind: 'categorize', categories: q.categorize.categories, catItems: q.categorize.items.map((i) => ({ id: i.id, text: i.text, categoryId: i.categoryId })) };
+    case 'branching': {
+      const b = q.branching;
+      const steps: CaseStep[] = [];
+      let id: string | undefined = b.startNodeId;
+      while (id && b.nodes[id] && steps.length < 10) {
+        const node: (typeof b.nodes)[string] = b.nodes[id]!;
+        const good = node.choices.find((c) => c.next || (c.outcome && b.outcomes[c.outcome]?.good));
+        const bad = node.choices.find((c) => c !== good);
+        steps.push({ id, text: node.text, good: good?.text ?? '', bad: bad?.text ?? '', badFeedback: bad?.outcome ? (b.outcomes[bad.outcome]?.feedback ?? '') : '' });
+        id = good?.next;
+      }
+      return { ...draft, kind: 'branching', steps, goodOutcome: b.outcomes.good?.feedback ?? q.feedback.correct ?? '' };
+    }
     default:
       return draft;
   }

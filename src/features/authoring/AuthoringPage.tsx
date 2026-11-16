@@ -422,7 +422,16 @@ function QuestionEditor({ question: q, onChange, errors }: { question: QuestionD
           {optionList('whyOptions', true)}
         </>
       )}
-      {q.kind === 'numeric' && (
+      {q.kind === 'simulator_task' && (
+        <Select
+          label={t('authoring.field.tool')}
+          helperText={t('authoring.q.simHelp')}
+          value={q.simId}
+          onChange={(e) => onChange({ ...q, simId: e.target.value })}
+          options={TOOL_IDS.filter((id) => id !== 'SIM-3').map((id) => ({ value: id, label: t(`sims.${id}.title`) }))}
+        />
+      )}
+      {(q.kind === 'numeric' || q.kind === 'simulator_task') && (
         <div className="grid grid-cols-1 gap-4 medium:grid-cols-3">
           <TextField label={t('authoring.q.answer')} helperText={t('authoring.q.answerHelp')} inputMode="decimal" value={q.answer} onChange={(e) => onChange({ ...q, answer: e.target.value })} error={req('answer')} />
           <TextField label={t('authoring.q.tolerance')} helperText={t('authoring.q.toleranceHelp')} inputMode="decimal" value={q.tolerance} onChange={(e) => onChange({ ...q, tolerance: e.target.value })} error={req('tolerance')} />
@@ -435,12 +444,138 @@ function QuestionEditor({ question: q, onChange, errors }: { question: QuestionD
           />
         </div>
       )}
+      {q.kind === 'ordering' && (
+        <fieldset className="flex flex-col gap-2">
+          <legend className="pb-1 text-label-large text-on-surface">{t('authoring.q.items')}</legend>
+          <p className="text-body-small text-on-surface-variant">{t('authoring.q.itemsHelp')}</p>
+          {q.items.map((item, i) => (
+            <div key={item.id} className="grid grid-cols-[minmax(0,1fr)_auto] items-end gap-2">
+              <TextField label={t('authoring.q.item', { n: i + 1 })} helperText="" value={item.text} onChange={(e) => onChange({ ...q, items: q.items.map((x) => (x.id === item.id ? { ...x, text: e.target.value } : x)) })} />
+              <IconButton icon="delete" size="xs" label={t('authoring.q.removeItem', { n: i + 1 })} disabled={q.items.length <= 3} onClick={() => onChange({ ...q, items: q.items.filter((x) => x.id !== item.id) })} className="mb-1" />
+            </div>
+          ))}
+          {q.items.length < 6 && (
+            <Button variant="text" size="xs" leadingIcon="add" className="self-start" onClick={() => onChange({ ...q, items: [...q.items, { id: newKey('i'), text: '' }] })}>
+              {t('authoring.q.addItem')}
+            </Button>
+          )}
+          {errors.includes('items') && <p className="text-body-small text-error">{t('authoring.qMissing.items')}</p>}
+        </fieldset>
+      )}
+      {q.kind === 'matching' && (
+        <fieldset className="flex flex-col gap-3">
+          <legend className="pb-1 text-label-large text-on-surface">{t('authoring.q.pairs')}</legend>
+          <p className="text-body-small text-on-surface-variant">{t('authoring.q.pairsHelp')}</p>
+          {q.pairs.map((pair, i) => (
+            <div key={pair.id} className="grid grid-cols-1 items-end gap-2 medium:grid-cols-[minmax(0,1fr)_minmax(0,2fr)_auto]">
+              <TextField label={t('authoring.q.term', { n: i + 1 })} helperText="" value={pair.left} onChange={(e) => onChange({ ...q, pairs: q.pairs.map((x) => (x.id === pair.id ? { ...x, left: e.target.value } : x)) })} />
+              <TextField label={t('authoring.q.definition', { n: i + 1 })} helperText="" value={pair.right} onChange={(e) => onChange({ ...q, pairs: q.pairs.map((x) => (x.id === pair.id ? { ...x, right: e.target.value } : x)) })} />
+              <IconButton icon="delete" size="xs" label={t('authoring.q.removePair', { n: i + 1 })} disabled={q.pairs.length <= 3} onClick={() => onChange({ ...q, pairs: q.pairs.filter((x) => x.id !== pair.id) })} className="mb-1 justify-self-end" />
+            </div>
+          ))}
+          {q.pairs.length < 6 && (
+            <Button variant="text" size="xs" leadingIcon="add" className="self-start" onClick={() => onChange({ ...q, pairs: [...q.pairs, { id: newKey('p'), left: '', right: '' }] })}>
+              {t('authoring.q.addPair')}
+            </Button>
+          )}
+          {errors.includes('pairs') && <p className="text-body-small text-error">{t('authoring.qMissing.pairs')}</p>}
+        </fieldset>
+      )}
+      {q.kind === 'categorize' && (
+        <>
+          <fieldset className="flex flex-col gap-2">
+            <legend className="pb-1 text-label-large text-on-surface">{t('authoring.q.categories')}</legend>
+            <p className="text-body-small text-on-surface-variant">{t('authoring.q.categoriesHelp')}</p>
+            <div className="grid grid-cols-1 gap-2 medium:grid-cols-2">
+              {q.categories.map((c, i) => (
+                <TextField key={c.id} label={t('authoring.q.category', { n: i + 1 })} helperText="" value={c.label} onChange={(e) => onChange({ ...q, categories: q.categories.map((x) => (x.id === c.id ? { ...x, label: e.target.value } : x)) })} />
+              ))}
+            </div>
+            <span className="flex flex-wrap gap-2">
+              {q.categories.length < 4 && (
+                <Button variant="text" size="xs" leadingIcon="add" onClick={() => onChange({ ...q, categories: [...q.categories, { id: newKey('c'), label: '' }] })}>
+                  {t('authoring.q.addCategory')}
+                </Button>
+              )}
+              {q.categories.length > 2 && (
+                <Button
+                  variant="text"
+                  size="xs"
+                  leadingIcon="remove"
+                  onClick={() => {
+                    const last = q.categories[q.categories.length - 1]!;
+                    onChange({ ...q, categories: q.categories.slice(0, -1), catItems: q.catItems.map((x) => (x.categoryId === last.id ? { ...x, categoryId: q.categories[0]!.id } : x)) });
+                  }}
+                >
+                  {t('authoring.q.removeCategory')}
+                </Button>
+              )}
+            </span>
+            {errors.includes('categories') && <p className="text-body-small text-error">{t('authoring.qMissing.categories')}</p>}
+          </fieldset>
+          <fieldset className="flex flex-col gap-3">
+            <legend className="pb-1 text-label-large text-on-surface">{t('authoring.q.catItems')}</legend>
+            <p className="text-body-small text-on-surface-variant">{t('authoring.q.catItemsHelp')}</p>
+            {q.catItems.map((item, i) => (
+              <div key={item.id} className="grid grid-cols-1 items-end gap-2 medium:grid-cols-[minmax(0,2fr)_minmax(0,1fr)_auto]">
+                <TextField label={t('authoring.q.item', { n: i + 1 })} helperText="" value={item.text} onChange={(e) => onChange({ ...q, catItems: q.catItems.map((x) => (x.id === item.id ? { ...x, text: e.target.value } : x)) })} />
+                <Select
+                  label={t('authoring.q.itemCategory', { n: i + 1 })}
+                  helperText=""
+                  value={item.categoryId}
+                  onChange={(e) => onChange({ ...q, catItems: q.catItems.map((x) => (x.id === item.id ? { ...x, categoryId: e.target.value } : x)) })}
+                  options={q.categories.map((c, j) => ({ value: c.id, label: c.label.trim() || t('authoring.q.category', { n: j + 1 }) }))}
+                />
+                <IconButton icon="delete" size="xs" label={t('authoring.q.removeItem', { n: i + 1 })} disabled={q.catItems.length <= 4} onClick={() => onChange({ ...q, catItems: q.catItems.filter((x) => x.id !== item.id) })} className="mb-1 justify-self-end" />
+              </div>
+            ))}
+            {q.catItems.length < 10 && (
+              <Button variant="text" size="xs" leadingIcon="add" className="self-start" onClick={() => onChange({ ...q, catItems: [...q.catItems, { id: newKey('k'), text: '', categoryId: q.categories[0]!.id }] })}>
+                {t('authoring.q.addItem')}
+              </Button>
+            )}
+            {errors.includes('catItems') && <p className="text-body-small text-error">{t('authoring.qMissing.catItems')}</p>}
+          </fieldset>
+        </>
+      )}
+      {q.kind === 'branching' && (
+        <fieldset className="flex flex-col gap-3">
+          <legend className="pb-1 text-label-large text-on-surface">{t('authoring.q.steps')}</legend>
+          <p className="text-body-small text-on-surface-variant">{t('authoring.q.stepsHelp')}</p>
+          {q.steps.map((st, i) => {
+            const set = (patch: Partial<typeof st>) => onChange({ ...q, steps: q.steps.map((x) => (x.id === st.id ? { ...x, ...patch } : x)) });
+            return (
+              <div key={st.id} className="flex flex-col gap-3 rounded-md bg-surface-container p-3">
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-title-small text-on-surface">{t('authoring.q.step', { n: i + 1 })}</span>
+                  <IconButton icon="delete" size="xs" label={t('authoring.q.removeStep', { n: i + 1 })} disabled={q.steps.length <= 2} onClick={() => onChange({ ...q, steps: q.steps.filter((x) => x.id !== st.id) })} />
+                </div>
+                <TextArea label={t('authoring.q.situation')} helperText={t('authoring.q.situationHelp')} rows={2} value={st.text} onChange={(e) => set({ text: e.target.value })} />
+                <div className="grid grid-cols-1 gap-3 medium:grid-cols-2">
+                  <TextField label={t('authoring.q.goodChoice')} helperText={t('authoring.q.goodChoiceHelp')} value={st.good} onChange={(e) => set({ good: e.target.value })} />
+                  <TextField label={t('authoring.q.badChoice')} helperText={t('authoring.q.badChoiceHelp')} value={st.bad} onChange={(e) => set({ bad: e.target.value })} />
+                </div>
+                <TextArea label={t('authoring.q.badFeedback')} helperText={t('authoring.q.badFeedbackHelp')} rows={2} value={st.badFeedback} onChange={(e) => set({ badFeedback: e.target.value })} />
+              </div>
+            );
+          })}
+          {q.steps.length < 5 && (
+            <Button variant="text" size="xs" leadingIcon="add" className="self-start" onClick={() => onChange({ ...q, steps: [...q.steps, { id: newKey('s'), text: '', good: '', bad: '', badFeedback: '' }] })}>
+              {t('authoring.q.addStep')}
+            </Button>
+          )}
+          {errors.includes('steps') && <p className="text-body-small text-error">{t('authoring.qMissing.steps')}</p>}
+          <TextArea label={t('authoring.q.goodOutcome')} helperText={t('authoring.q.goodOutcomeHelp')} rows={2} value={q.goodOutcome} onChange={(e) => onChange({ ...q, goodOutcome: e.target.value })} error={errors.includes('goodOutcome') ? t('authoring.required') : undefined} />
+        </fieldset>
+      )}
       {errors.includes('options') && <p className="text-body-small text-error">{t('authoring.qMissing.options')}</p>}
       {errors.includes('correct') && <p className="text-body-small text-error">{t('authoring.qMissing.correct')}</p>}
+      {q.kind !== 'branching' && (
       <div className="grid grid-cols-1 gap-4 medium:grid-cols-2">
         <TextArea label={t('authoring.q.correctFeedback')} helperText={t('authoring.q.correctFeedbackHelp')} rows={2} value={q.correctFeedback} onChange={(e) => onChange({ ...q, correctFeedback: e.target.value })} error={errors.includes('feedback') && !q.correctFeedback.trim() ? t('authoring.required') : undefined} />
         <TextArea label={t('authoring.q.incorrectFeedback')} helperText={t('authoring.q.incorrectFeedbackHelp')} rows={2} value={q.incorrectFeedback} onChange={(e) => onChange({ ...q, incorrectFeedback: e.target.value })} error={errors.includes('feedback') && !q.incorrectFeedback.trim() ? t('authoring.required') : undefined} />
       </div>
+      )}
     </div>
   );
 }
