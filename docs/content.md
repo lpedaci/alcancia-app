@@ -31,9 +31,11 @@
 
 **Tanda 5 (aprobada por Lourdes el 15/11/2026 y publicada):** guías 3 de los módulos 1 a 4, "Controlar tus descuentos", "Lo que se ve y lo que se tiene", "Los gastos que no son de todos los meses" y "Qué protección tiene tu fondo". Documento: [content-review/tanda-5.md](content-review/tanda-5.md).
 
-**Tanda 6 (borrador, esperando la revisión de Lourdes):** guías 3 de los módulos 5 a 8, "Si te ofrecen refinanciar", "La tasa lo cambia todo", "Los dos métodos con números" y "Cambia el escenario, cambia la respuesta". Documento: [content-review/tanda-6.md](content-review/tanda-6.md).
+**Tanda 6 (aprobada por Lourdes el 15/11/2026 y publicada):** guías 3 de los módulos 5 a 8, "Si te ofrecen refinanciar", "La tasa lo cambia todo", "Los dos métodos con números" y "Cambia el escenario, cambia la respuesta". Documento: [content-review/tanda-6.md](content-review/tanda-6.md).
 
-Siguen las guías 3 por tramo (tandas 7 y 8) y los módulos 16 y 18 completos (F11) con el nivel 8 (F22).
+**Tanda 7 (borrador, esperando la revisión de Lourdes):** guías 3 de los módulos 9, 10, 11 y 17, "Lo que vas a pagar mañana", "La misma tasa, dos resultados", "Cuánto rinde por día" y "Dónde está el dinero de las billeteras". Documento: [content-review/tanda-7.md](content-review/tanda-7.md).
+
+Sigue la tanda 8 (guías 3 de los módulos 12 a 15) y los módulos 16 y 18 completos (F11) con el nivel 8 (F22).
 
 ## Resumen
 

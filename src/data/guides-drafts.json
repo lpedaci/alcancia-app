@@ -2,26 +2,26 @@
   "note": "Phase B drafts of guides 2 and 3 (step 27, D-61). NOT shown in the app: each batch goes through Lourdes's review, with the extensions marked for Lic. Kevin Giampieri; after approval a guide moves to guides.json.",
   "guides": [
     {
-      "id": "module-05-guide-3",
-      "moduleId": "module-05",
-      "title": "Si te ofrecen refinanciar",
+      "id": "module-09-guide-3",
+      "moduleId": "module-09",
+      "title": "Lo que vas a pagar mañana",
       "minutes": 6,
       "blocks": [
         {
           "type": "hook",
-          "body": "Te llega una oferta: \"Cancela tu tarjeta con un préstamo y paga menos\". A veces es cierto. A veces solo cambia la deuda de lugar."
+          "body": "Juntas para algo que hoy cuesta $ 200.000. En un año juntaste justo eso, pero el precio ya no es el mismo."
         },
         {
           "type": "objective",
-          "body": "Al terminar vas a poder comparar el costo mensual de dos deudas con su tasa y decidir cuándo refinanciar reduce lo que pagas."
+          "body": "Al terminar vas a poder estimar el precio futuro de algo que quieres comprar en un escenario de inflación y ajustar tu meta de ahorro."
         },
         {
           "type": "recall",
           "question": {
-            "id": "g05c-recall",
-            "moduleId": "module-05",
+            "id": "g09c-recall",
+            "moduleId": "module-09",
             "type": "reflection",
-            "prompt": "¿Alguna vez cambiaste una deuda por otra?",
+            "prompt": "Cuando defines una meta de ahorro, ¿tienes en cuenta que el precio va a subir?",
             "options": [
               {
                 "id": "a",
@@ -33,239 +33,111 @@
               }
             ],
             "feedback": {
-              "a": "Bien. En esta guía ves cómo saber si te convino.",
-              "b": "En esta guía ves qué mirar si te lo ofrecen."
+              "a": "Bien. En esta guía lo calculas con una fórmula corta.",
+              "b": "Es lo más común. En esta guía ves cuánto puede cambiar la meta."
             },
             "sourceIds": []
           }
         },
         {
           "type": "text",
-          "title": "Cambiar una deuda por otra",
-          "body": "**Refinanciar** es tomar una deuda nueva para pagar otra. Solo reduce lo que pagas si la deuda nueva **cuesta menos**: compara el **CFT** de las dos, porque suma la tasa, las comisiones y los cargos. Pagar una deuda cara es un ahorro asegurado; cambiarla por otra igual de cara no lo es."
+          "title": "El precio también se mueve",
+          "body": "Con inflación, lo que hoy cuesta **M** cuesta más en el futuro: **precio futuro = M × (1 + inflación mensual) ^ meses**. Si tu meta es un monto fijo de hoy, cuando llegues puede no alcanzar. Por eso una meta de ahorro se ajusta por el escenario de inflación."
         },
         {
           "type": "text",
-          "title": "La condición que más se olvida",
-          "body": "Si refinancias la tarjeta y la vuelves a usar, ahora tienes **dos deudas**. Refinanciar sirve cuando además dejas de sumar consumos financiados. Y antes de pedir un crédito, puedes revisar tu situación en la **Central de Deudores** del BCRA: es lo que mira la entidad."
+          "title": "Escenarios, no predicciones",
+          "body": "No sabemos la inflación futura: por eso se calculan **escenarios** (baja, media o alta) y se revisa la meta cada tanto. La inflación oficial del pasado es el **IPC** que publica el INDEC; la del futuro siempre es un supuesto."
         },
         {
           "type": "example",
-          "title": "Ejemplo resuelto: $ 100.000 durante 30 días",
+          "title": "Ejemplo resuelto: algo que hoy cuesta $ 100.000",
           "steps": [
-            "Tarjeta con una TNA de ejemplo del 120 %: 100.000 × 1,20 × 30 ÷ 365 = $ 9.863,01 de intereses en el mes.",
-            "Préstamo con una TNA de ejemplo del 70 %: 100.000 × 0,70 × 30 ÷ 365 = $ 5.753,42.",
-            "Diferencia: $ 4.109,59 por mes, sin contar comisiones ni impuestos. Por eso hay que mirar el CFT, no solo la TNA.",
-            "Solo conviene si el CFT del préstamo es menor y no vuelves a financiar con la tarjeta."
+            "Con 3 % mensual durante 12 meses: $ 100.000 × 1,03^12 = $ 142.576,09.",
+            "Con 6 % mensual: $ 100.000 × 1,06^12 = $ 201.219,65, el doble.",
+            "Con inflación anual, la fórmula es la misma con años: en la calculadora del taller, $ 100 con 25 % anual en 5 años compran lo que hoy $ 32,77.",
+            "Tu meta no es el precio de hoy: es el precio del escenario en la fecha en que vas a comprar."
           ]
         },
         {
           "type": "practice",
           "question": {
-            "id": "m05-refinance",
-            "moduleId": "module-05",
-            "type": "single",
-            "prompt": "Te ofrecen un préstamo para cancelar el saldo de tu tarjeta. ¿Cuándo te conviene?",
-            "options": [
-              {
-                "id": "a",
-                "text": "Si su CFT es menor que el de la tarjeta y dejas de financiar con la tarjeta"
-              },
-              {
-                "id": "b",
-                "text": "Si la cuota es más baja que el pago mínimo de la tarjeta"
-              },
-              {
-                "id": "c",
-                "text": "Siempre: así tienes una sola deuda"
-              }
-            ],
-            "correctOptionIds": [
-              "a"
-            ],
+            "id": "m09-future-price",
+            "moduleId": "module-09",
+            "type": "numeric",
+            "prompt": "Algo que quieres comprar hoy cuesta $ 200.000. Con una inflación de ejemplo del 3 % mensual, ¿cuánto costaría en 12 meses?",
+            "numeric": {
+              "answer": "285152.18",
+              "tolerance": "1.00",
+              "unit": "ARS"
+            },
+            "help": "Monto en pesos, con dos decimales, por ejemplo: 250.000,00",
             "feedback": {
-              "a": "Correcto. El CFT dice cuál cuesta menos, y la deuda baja solo si no vuelves a financiar con la tarjeta.",
-              "b": "Una cuota baja puede esconder un plazo largo y un costo total mayor. Compara el CFT y, además, deja de financiar con la tarjeta.",
-              "c": "No siempre: si el préstamo cuesta más, o si vuelves a usar la tarjeta, terminas pagando más. Compara el CFT."
+              "correct": "Correcto. $ 200.000 × 1,03^12 = $ 285.152,18: tu meta tendría que ser ese monto, no $ 200.000.",
+              "incorrect": "Multiplica por (1 + inflación) elevado a los meses: $ 200.000 × 1,03^12 = $ 285.152,18."
             },
             "sourceIds": [
-              "A-23",
-              "B-04"
+              "F-05"
             ]
           }
         },
         {
           "type": "takeaway",
-          "body": "Para tu vida: si tienes una deuda cara, busca el CFT en tu resumen o tu contrato. Ese es el número para comparar cualquier oferta de refinanciación."
+          "body": "Para tu vida: elige algo que quieras comprar y calcula su precio en el escenario medio con la herramienta \"Meta de ahorro con inflación\".",
+          "toolId": "SIM-8"
         }
       ],
       "sourceIds": [
-        "A-23",
-        "B-04",
-        "B-06",
-        "F-01"
-      ],
-      "review": {
-        "status": "draft",
-        "batch": 6,
-        "validated": [
-          "Pagar una deuda cara equivale a un ahorro asegurado (A-23)",
-          "El CFT suma tasa, comisiones y cargos y se informa destacado (B-04)",
-          "La Central de Deudores del BCRA (B-06)"
-        ],
-        "extensions": [
-          "Refinanciar: cuándo reduce el costo y la condición de no volver a financiar",
-          "Ejemplo de interés de 30 días con TNA de ejemplo del 120 % y del 70 % ($ 9.863,01 y $ 5.753,42), con la fórmula F-01 y calculado a mano"
-        ]
-      }
-    },
-    {
-      "id": "module-06-guide-3",
-      "moduleId": "module-06",
-      "title": "La tasa lo cambia todo",
-      "minutes": 6,
-      "blocks": [
-        {
-          "type": "hook",
-          "body": "Dos tarjetas, el mismo saldo de $ 100.000 y el mismo pago mínimo del 10 %. Con una terminas de pagar en cuatro años y medio. Con la otra, en casi veinte."
-        },
-        {
-          "type": "objective",
-          "body": "Al terminar vas a poder explicar cómo la tasa cambia el tiempo y el costo de pagar solo el mínimo, y elegir la forma de pago que menos cuesta."
-        },
-        {
-          "type": "recall",
-          "question": {
-            "id": "g06c-recall",
-            "moduleId": "module-06",
-            "type": "reflection",
-            "prompt": "¿Sabes qué tasa cobra tu tarjeta cuando financias?",
-            "options": [
-              {
-                "id": "a",
-                "text": "Sí"
-              },
-              {
-                "id": "b",
-                "text": "No"
-              }
-            ],
-            "feedback": {
-              "a": "Bien. En esta guía ves cuánto pesa ese número.",
-              "b": "Está en tu resumen, con el CFT destacado. En esta guía ves por qué conviene buscarla."
-            },
-            "sourceIds": []
-          }
-        },
-        {
-          "type": "text",
-          "title": "El mínimo crece con los intereses",
-          "body": "Si pagas solo el **mínimo**, lo que queda se financia y genera intereses todos los meses. Con una tasa alta, buena parte de cada pago son intereses y el saldo baja muy despacio. Por eso la misma deuda puede durar años más."
-        },
-        {
-          "type": "text",
-          "title": "Lo que menos cuesta",
-          "body": "Pagar el **total** antes del vencimiento no genera intereses. Si no puedes, cada peso que pagas por encima del mínimo baja el saldo que se financia. Y para comparar tarjetas, el número es el **CFT**: la simulación usa la tasa, pero el costo real se acerca más al CFT, porque suma comisiones y cargos."
-        },
-        {
-          "type": "example",
-          "title": "Ejemplo resuelto: el mismo saldo con dos tasas",
-          "steps": [
-            "Saldo: $ 100.000, pago mínimo del 10 % con un piso de $ 1.000, sin consumos nuevos y sin impuestos.",
-            "Con una TNA de ejemplo del 60 %: 55 meses y $ 83.880,36 de intereses.",
-            "Con una TNA de ejemplo del 120 %: 237 meses y $ 813.271,16 de intereses.",
-            "Pagando el total el primer mes, en los dos casos: $ 0 de intereses."
-          ]
-        },
-        {
-          "type": "practice",
-          "question": {
-            "id": "m06-rate-effect",
-            "moduleId": "module-06",
-            "type": "single",
-            "prompt": "Tienes un saldo de $ 100.000 en una tarjeta con una TNA de ejemplo del 120 %. Si pagas solo el mínimo del 10 %, ¿cuánto pagas de intereses en total, sin consumos nuevos?",
-            "options": [
-              {
-                "id": "a",
-                "text": "$ 813.271,16, en 237 meses"
-              },
-              {
-                "id": "b",
-                "text": "$ 83.880,36, en 55 meses"
-              },
-              {
-                "id": "c",
-                "text": "$ 120.000, en 12 meses"
-              }
-            ],
-            "correctOptionIds": [
-              "a"
-            ],
-            "feedback": {
-              "a": "Correcto. Con esa tasa, cada mínimo es casi todo interés: el saldo baja muy despacio y los intereses superan ocho veces la deuda.",
-              "b": "Ese es el caso con una TNA del 60 %. Con el 120 % son 237 meses y $ 813.271,16 de intereses.",
-              "c": "El mínimo no cancela la deuda en un año. Con el 120 % son 237 meses y $ 813.271,16 de intereses."
-            },
-            "sourceIds": [
-              "F-14",
-              "F-15"
-            ]
-          }
-        },
-        {
-          "type": "takeaway",
-          "body": "Para tu vida: prueba en la herramienta \"Tarjeta de crédito\" tu saldo con el mínimo y con un pago un poco mayor, y compara los intereses.",
-          "toolId": "SIM-7"
-        }
-      ],
-      "sourceIds": [
+        "A-21",
+        "B-40",
         "T",
-        "B-04",
-        "F-14",
-        "F-15"
+        "F-05",
+        "F-06",
+        "F-07"
       ],
       "review": {
         "status": "draft",
-        "batch": 6,
+        "batch": 7,
         "validated": [
-          "Pago mínimo y saldo financiado con intereses (T)",
-          "TNA, TEA y CFT; el CFT destacado (B-04)",
-          "Casos F-14 (55 meses, $ 83.880,36) y F-15 (237 meses, $ 813.271,16) de docs/formulas.md, con test"
+          "El dinero quieto pierde poder de compra (A-21); el IPC lo publica el INDEC (B-40)",
+          "Calculadora de inflación del taller: $ 100 con 25 % anual en 5 años = $ 32,77 (T, caso F-07)",
+          "Casos F-05 ($ 142.576,09) y F-06 ($ 201.219,65) de docs/formulas.md, con test"
         ],
         "extensions": [
-          "Comparación del mismo saldo con dos tasas de ejemplo y la idea de que pagar algo más que el mínimo baja el costo"
+          "Precio futuro de una meta en un escenario y la idea de revisar la meta",
+          "Práctica con $ 200.000 × 1,03^12 = $ 285.152,18, calculado a mano"
         ]
       }
     },
     {
-      "id": "module-07-guide-3",
-      "moduleId": "module-07",
-      "title": "Los dos métodos con números",
-      "minutes": 7,
+      "id": "module-10-guide-3",
+      "moduleId": "module-10",
+      "title": "La misma tasa, dos resultados",
+      "minutes": 6,
       "blocks": [
         {
           "type": "hook",
-          "body": "Tres deudas, $ 20.000 extra por mes. La avalancha y la bola de nieve terminan el mismo mes. ¿Entonces da igual cuál elijas?"
+          "body": "Un plazo fijo con una TNA del 36 %. Con una inflación pierdes poder de compra; con otra, ganas. La tasa no cambió."
         },
         {
           "type": "objective",
-          "body": "Al terminar vas a poder comparar la avalancha y la bola de nieve con el tiempo, los intereses y la primera deuda saldada, y elegir con tus prioridades."
+          "body": "Al terminar vas a poder calcular la tasa real de un plazo en dos escenarios de inflación y explicar por qué una tasa sola no dice si le ganas a la inflación."
         },
         {
           "type": "recall",
           "question": {
-            "id": "g07c-recall",
-            "moduleId": "module-07",
+            "id": "g10c-recall",
+            "moduleId": "module-10",
             "type": "reflection",
-            "prompt": "Si tuvieras tres deudas, ¿qué te motivaría más?",
+            "prompt": "¿Una TNA alta asegura que le ganes a la inflación?",
             "options": [
               {
                 "id": "a",
-                "text": "Saldar una pronto"
+                "text": "Sí"
               },
               {
                 "id": "b",
-                "text": "Pagar menos intereses"
+                "text": "No"
               },
               {
                 "id": "c",
@@ -273,106 +145,101 @@
               }
             ],
             "feedback": {
-              "a": "Esa es la fuerza de la bola de nieve. En esta guía ves cuánto cuesta en intereses.",
-              "b": "Esa es la fuerza de la avalancha. En esta guía ves la diferencia en números.",
-              "c": "En esta guía tienes los números para decidir."
+              "a": "Es una idea común. En esta guía ves por qué depende de la inflación del mismo período.",
+              "b": "Bien. En esta guía lo pones en números.",
+              "c": "En esta guía lo ves con un ejemplo."
             },
             "sourceIds": []
           }
         },
         {
           "type": "text",
-          "title": "Qué comparar",
-          "body": "Para elegir, mira tres cosas: **cuántos meses** tardas en quedar sin deudas, **cuántos intereses** pagas en total y **cuándo saldas la primera**. La **avalancha** ataca la tasa más alta y paga menos intereses; la **bola de nieve** ataca el saldo más chico y da la primera deuda saldada antes."
+          "title": "Comparar en el mismo período",
+          "body": "La **tasa real** compara lo que rinde un plazo con la inflación **del mismo período**: **tasa real = (1 + tasa del período) ÷ (1 + inflación del período) − 1**. Una TNA anual no se compara con una inflación mensual: primero se pasa la TNA al plazo, **TNA × días ÷ 365**."
         },
         {
           "type": "text",
-          "title": "Lo que no cambia",
-          "body": "En los dos métodos pagas **todos los mínimos** y pones todo el extra en una sola deuda; cuando la saldas, su pago pasa a la siguiente. Lo que no puede pasar es sumar deudas nuevas mientras sales."
+          "title": "El signo es lo que importa",
+          "body": "Si la tasa real es **positiva**, tu dinero compra un poco más al final. Si es **negativa**, tienes más pesos pero compras menos: pierdes poder de compra. Es información, no una falla tuya: depende del escenario."
         },
         {
           "type": "example",
-          "title": "Ejemplo resuelto: las deudas del taller, con supuestos de práctica",
+          "title": "Ejemplo resuelto: TNA del 36 % a 30 días",
           "steps": [
-            "Tarjeta: $ 40.000 al 150 % anual. Financiera: $ 15.000 al 110 %. Crédito bancario: $ 200.000 al 80 % (tasas de ejemplo). Mínimos de práctica: $ 4.000, $ 1.500 y $ 10.000, y $ 20.000 extra por mes.",
-            "Avalancha: 11 meses, $ 109.817,08 de intereses, primera deuda saldada en el mes 2.",
-            "Bola de nieve: 11 meses, $ 111.507,88 de intereses, primera deuda saldada en el mes 1.",
-            "La avalancha ahorra $ 1.690,80; la bola de nieve da la primera victoria un mes antes."
+            "Tasa del período: 36 % × 30 ÷ 365 = 2,96 %.",
+            "Con inflación del 3 % mensual: 1,0296 ÷ 1,03 − 1 = −0,04 %. Pierdes poder de compra.",
+            "Con inflación del 1,5 % mensual: 1,0296 ÷ 1,015 − 1 = +1,44 %. Ganas poder de compra.",
+            "La misma tasa da dos resultados: por eso se mira siempre con la inflación del escenario."
           ]
         },
         {
           "type": "practice",
           "question": {
-            "id": "m07-compare",
-            "moduleId": "module-07",
+            "id": "m10-real-low",
+            "moduleId": "module-10",
             "type": "numeric",
-            "prompt": "En el ejemplo, la avalancha paga $ 109.817,08 de intereses y la bola de nieve, $ 111.507,88. ¿Cuánto ahorras en intereses con la avalancha?",
+            "prompt": "Un plazo fijo a 30 días rinde 2,96 % en el período (TNA del 36 %). Si la inflación del mes es del 1,5 %, ¿cuál es la tasa real del período? (en porcentaje)",
             "numeric": {
-              "answer": "1690.80",
-              "tolerance": "1.00",
-              "unit": "ARS"
+              "answer": "1.44",
+              "tolerance": "0.01",
+              "unit": "percent"
             },
-            "help": "Monto en pesos, con dos decimales, por ejemplo: 1.500,00",
+            "help": "Porcentaje con dos decimales, por ejemplo: 1,20",
             "feedback": {
-              "correct": "Correcto. $ 111.507,88 − $ 109.817,08 = $ 1.690,80. En este caso la diferencia es chica: la motivación también cuenta.",
-              "incorrect": "Resta los intereses: $ 111.507,88 − $ 109.817,08 = $ 1.690,80."
+              "correct": "Correcto. 1,0296 ÷ 1,015 − 1 = 1,44 %: en ese escenario, le ganas a la inflación.",
+              "incorrect": "Divide en lugar de restar: (1 + 0,0296) ÷ (1 + 0,015) − 1 = 1,44 %."
             },
             "sourceIds": [
-              "A-29",
-              "A-30",
-              "F-16",
-              "F-17"
+              "F-03",
+              "F-04"
             ]
           }
         },
         {
           "type": "takeaway",
-          "body": "Para tu vida: carga tus deudas en la herramienta \"Salir de deudas\" y mira los dos métodos lado a lado antes de elegir.",
-          "toolId": "SIM-9"
+          "body": "Para tu vida: en la herramienta \"Tasa real\", prueba la misma TNA con los tres escenarios de inflación y mira cuándo cambia de signo.",
+          "toolId": "SIM-4"
         }
       ],
       "sourceIds": [
-        "A-24",
-        "A-28",
-        "A-29",
-        "A-30",
-        "F-16",
-        "F-17"
+        "B-40",
+        "F-01",
+        "F-03",
+        "F-04"
       ],
       "review": {
         "status": "draft",
-        "batch": 6,
+        "batch": 7,
         "validated": [
-          "Bola de nieve y avalancha, y cuándo usar cada una (A-24, A-28, A-30)",
-          "Deudas y tasas de ejemplo de A-29"
+          "Casos F-03 (−0,04 %) y F-04 (+1,44 %) de docs/formulas.md, con test",
+          "Tasa del período TNA × d ÷ 365 (F-01)"
         ],
         "extensions": [
-          "Los mínimos ($ 4.000, $ 1.500 y $ 10.000) y los $ 20.000 extra no están en A-29: son los supuestos de práctica de la misión \"Sal de tus deudas\" (docs/formulas.md, sección 8), y la guía los rotula así",
-          "Resultados de la simulación con test: 11 meses, $ 109.817,08 y $ 111.507,88, diferencia de $ 1.690,80"
+          "Lectura de la tasa real por su signo, con el tono de 2.1.1 (pérdida de poder de compra como información)"
         ]
       }
     },
     {
-      "id": "module-08-guide-3",
-      "moduleId": "module-08",
-      "title": "Cambia el escenario, cambia la respuesta",
+      "id": "module-11-guide-3",
+      "moduleId": "module-11",
+      "title": "Cuánto rinde por día",
       "minutes": 6,
       "blocks": [
         {
           "type": "hook",
-          "body": "La misma heladera, las mismas 12 cuotas, el mismo descuento por contado. Con una inflación conviene una cosa; con otra, la contraria."
+          "body": "Tu billetera muestra que tu saldo \"rindió\" unos pesos hoy. ¿De dónde sale ese número y qué tipo de producto lo paga?"
         },
         {
           "type": "objective",
-          "body": "Al terminar vas a poder comparar cuotas y contado en distintos escenarios de inflación y explicar por qué importa cuándo se paga la primera cuota."
+          "body": "Al terminar vas a poder calcular el rendimiento diario de un saldo con una TNA y reconocer si viene de una cuenta o de un fondo."
         },
         {
           "type": "recall",
           "question": {
-            "id": "g08c-recall",
-            "moduleId": "module-08",
+            "id": "g11c-recall",
+            "moduleId": "module-11",
             "type": "reflection",
-            "prompt": "Cuando eliges entre cuotas y contado, ¿piensas en la inflación?",
+            "prompt": "¿Tu billetera te muestra cuánto rinde tu saldo por día?",
             "options": [
               {
                 "id": "a",
@@ -381,92 +248,204 @@
               {
                 "id": "b",
                 "text": "No"
+              },
+              {
+                "id": "c",
+                "text": "No uso billetera"
               }
             ],
             "feedback": {
-              "a": "Bien. En esta guía ves cómo cambia la respuesta según el escenario.",
-              "b": "Es muy común. En esta guía ves por qué conviene mirarla."
+              "a": "Bien. En esta guía ves cómo se calcula.",
+              "b": "En esta guía ves de dónde sale ese número.",
+              "c": "En la billetera de práctica lo ves al avanzar el tiempo."
             },
             "sourceIds": []
           }
         },
         {
           "type": "text",
-          "title": "No hay una respuesta fija",
-          "body": "El **valor de hoy** de las cuotas depende de la inflación que esperas: con más inflación, las cuotas futuras pesan menos. Por eso la misma compra puede convenir en cuotas en un escenario y al contado en otro. Son **escenarios**, no predicciones."
+          "title": "El cálculo de cada día",
+          "body": "Con una tasa anual, lo que rinde un día es **saldo × TNA ÷ 365**. Al otro día, si el rendimiento se suma al saldo, también genera rendimiento: interés sobre interés, de a poco. Es lo que ves en la billetera de práctica al avanzar el tiempo."
         },
         {
           "type": "text",
-          "title": "Cuándo se paga la primera cuota",
-          "body": "Si la **primera cuota se paga hoy**, pesa igual que el contado y el valor de hoy de las cuotas sube. Lee las condiciones: ese detalle puede dar vuelta la comparación. Y mira el **CFT**: que de verdad sean sin interés."
+          "title": "Cuenta o fondo",
+          "body": "Si el saldo rinde en una **cuenta remunerada** de una billetera con CVU, el proveedor debe trasladarte **toda** la retribución que cobra por tus pesos depositados en bancos. Si rinde porque suscribe un **fondo money market**, es una inversión en un FCI: el rendimiento **varía a diario** y no tiene la garantía de los depósitos. Mira en los términos de tu billetera cuál de las dos es."
         },
         {
           "type": "example",
-          "title": "Ejemplo resuelto: $ 120.000 en 12 cuotas o $ 102.000 al contado",
+          "title": "Ejemplo resuelto: $ 1.000.000 con una TNA de ejemplo del 30 %",
           "steps": [
-            "Con 3 % mensual, las cuotas valen hoy $ 99.540,04: convienen las cuotas.",
-            "Con 1,5 % mensual, valen $ 109.075,05: conviene el contado.",
-            "Con 6 % mensual, valen $ 83.838,44: convienen todavía más las cuotas.",
-            "Con 3 % mensual y la primera cuota hoy, valen $ 102.526,24: el contado queda apenas más barato."
+            "Un día: $ 1.000.000 × 0,30 ÷ 365 = $ 821,92.",
+            "Al día siguiente, el saldo es $ 1.000.821,92 y rinde un poco más.",
+            "Si es un fondo, la tasa de mañana puede ser otra: el rendimiento varía.",
+            "Para saber si le gana a la inflación, compara con la inflación del mismo período."
           ]
         },
         {
           "type": "practice",
           "question": {
-            "id": "m08-scenarios-compare",
-            "moduleId": "module-08",
-            "type": "single",
-            "prompt": "Precio: $ 120.000 en 12 cuotas de $ 10.000, o $ 102.000 al contado. Si esperas una inflación del 1,5 % mensual, ¿qué conviene en ese escenario?",
+            "id": "m11-daily",
+            "moduleId": "module-11",
+            "type": "numeric",
+            "prompt": "Tienes $ 500.000 con una TNA de ejemplo del 30 %. ¿Cuánto rinde en un día?",
+            "numeric": {
+              "answer": "410.96",
+              "tolerance": "0.01",
+              "unit": "ARS"
+            },
+            "help": "Monto en pesos, con dos decimales, por ejemplo: 400,00",
+            "feedback": {
+              "correct": "Correcto. $ 500.000 × 0,30 ÷ 365 = $ 410,96 en un día.",
+              "incorrect": "Multiplica el saldo por la TNA y divide por 365: $ 500.000 × 0,30 ÷ 365 = $ 410,96."
+            },
+            "sourceIds": [
+              "B-13",
+              "B-14"
+            ]
+          }
+        },
+        {
+          "type": "takeaway",
+          "body": "Para tu vida: en Rendir, elige cuenta o fondo y avanza una semana: mira cuánto rindió cada día y lee qué dice la ficha de cada opción."
+        }
+      ],
+      "sourceIds": [
+        "B-12",
+        "B-13",
+        "B-14",
+        "B-26"
+      ],
+      "review": {
+        "status": "draft",
+        "batch": 7,
+        "validated": [
+          "La retribución de los saldos en pesos se traslada por completo al cliente (B-13)",
+          "Un money market es un FCI, sin garantía y con rendimiento que varía a diario (B-14, B-26); cuentas de pago sin garantía (B-12)",
+          "Rendimiento diario saldo × TNA ÷ 365, la regla de la billetera de práctica (spec 5.3, docs/wallet-engine.md)"
+        ],
+        "extensions": [
+          "Ejemplo ($ 821,92 por día) y práctica ($ 410,96 por día), calculados a mano"
+        ]
+      }
+    },
+    {
+      "id": "module-17-guide-3",
+      "moduleId": "module-17",
+      "title": "Dónde está el dinero de las billeteras",
+      "minutes": 6,
+      "blocks": [
+        {
+          "type": "hook",
+          "body": "Decimos \"tengo el dinero en la billetera\". Pero en Argentina, la mayor parte de ese dinero no está en la cuenta: está invertido en un fondo."
+        },
+        {
+          "type": "objective",
+          "body": "Al terminar vas a poder interpretar los datos oficiales sobre billeteras y explicar por qué importa si tu dinero está en una cuenta o en un fondo."
+        },
+        {
+          "type": "recall",
+          "question": {
+            "id": "g17c-recall",
+            "moduleId": "module-17",
+            "type": "reflection",
+            "prompt": "¿Sabes si tu dinero en la billetera está en la cuenta o en un fondo?",
             "options": [
               {
                 "id": "a",
-                "text": "El contado: las cuotas valen hoy $ 109.075,05"
+                "text": "En la cuenta"
               },
               {
                 "id": "b",
-                "text": "Las cuotas: siempre convienen si son sin interés"
+                "text": "En un fondo"
               },
               {
                 "id": "c",
-                "text": "Da igual: el precio es el mismo"
+                "text": "No lo sé"
+              }
+            ],
+            "feedback": {
+              "a": "En esta guía ves qué protección tiene.",
+              "b": "Bien. En esta guía ves qué implica.",
+              "c": "Es lo más común. En esta guía ves dónde mirarlo."
+            },
+            "sourceIds": []
+          }
+        },
+        {
+          "type": "text",
+          "title": "Lo que dicen los datos",
+          "body": "Según el **Informe de Pagos Minoristas del BCRA** de septiembre de 2026 (datos de agosto): había **70,1 millones de cuentas de pago**, con **$ 0,9 billones** en saldos de esas cuentas y **$ 9 billones** invertidos en **fondos de dinero** a través de las billeteras. El 75 % de las transferencias inmediatas en pesos tuvo una CVU de origen o destino."
+        },
+        {
+          "type": "text",
+          "title": "Por qué importa",
+          "body": "Una **cuenta de pago** y un **fondo money market** no son lo mismo: el fondo es una inversión, su rendimiento varía a diario y ninguno de los dos tiene la garantía de los depósitos. Cuando una billetera dice que tu saldo \"rinde\", muchas veces es porque lo invierte en un fondo. Saberlo te deja comparar con información."
+        },
+        {
+          "type": "example",
+          "title": "Ejemplo resuelto: leer el dato",
+          "steps": [
+            "En fondos de dinero: $ 9 billones. En saldos de cuentas de pago: $ 0,9 billones.",
+            "Total: $ 9,9 billones.",
+            "En fondos: 9 ÷ 9,9 = 90,9 %. De cada $ 10 en billeteras, unos $ 9 estaban en fondos.",
+            "Es un dato con fecha (agosto de 2026): los números cambian, y el informe del BCRA los actualiza."
+          ]
+        },
+        {
+          "type": "practice",
+          "question": {
+            "id": "m17-funds-share",
+            "moduleId": "module-17",
+            "type": "single",
+            "prompt": "Según el informe del BCRA (datos de agosto de 2026), de cada $ 10 que las personas tenían en billeteras, ¿cuántos estaban invertidos en fondos de dinero?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Unos $ 9"
+              },
+              {
+                "id": "b",
+                "text": "Unos $ 5"
+              },
+              {
+                "id": "c",
+                "text": "Unos $ 1"
               }
             ],
             "correctOptionIds": [
               "a"
             ],
             "feedback": {
-              "a": "Correcto. Con inflación baja, las cuotas futuras pesan casi como el dinero de hoy: $ 109.075,05 es más que los $ 102.000 del contado.",
-              "b": "No siempre: depende del escenario. Con 1,5 % mensual las cuotas valen hoy $ 109.075,05, más que el contado de $ 102.000.",
-              "c": "El precio en cuotas es $ 120.000 y el contado, $ 102.000. Con 1,5 % mensual, las cuotas valen hoy $ 109.075,05: conviene el contado."
+              "a": "Correcto. $ 9 billones en fondos contra $ 0,9 billones en cuentas: cerca del 91 % estaba en fondos.",
+              "b": "Era bastante más: $ 9 billones en fondos contra $ 0,9 billones en cuentas, cerca del 91 %.",
+              "c": "Es al revés: lo que quedaba en las cuentas era cerca de $ 1 de cada $ 10. En fondos estaban unos $ 9."
             },
             "sourceIds": [
-              "F-10",
-              "F-11"
+              "B-17"
             ]
           }
         },
         {
           "type": "takeaway",
-          "body": "Para tu vida: en la herramienta \"Cuotas sin interés o contado\", prueba tu próxima compra con los tres escenarios de inflación.",
-          "toolId": "SIM-6"
+          "body": "Para tu vida: abre los términos de tu billetera y busca si tu saldo remunerado es una cuenta o un fondo. Si es un fondo, busca su nombre en la CNV."
         }
       ],
       "sourceIds": [
-        "B-04",
-        "F-10",
-        "F-11",
-        "F-12",
-        "F-13"
+        "B-12",
+        "B-14",
+        "B-17"
       ],
       "review": {
         "status": "draft",
-        "batch": 6,
+        "batch": 7,
         "validated": [
-          "Casos F-10 a F-13 de docs/formulas.md, con test ($ 99.540,04; $ 109.075,05; $ 83.838,44; $ 102.526,24)",
-          "Mirar el CFT para confirmar que sean sin interés (B-04)"
+          "Datos del Informe de Pagos Minoristas del BCRA, septiembre de 2026, con datos de agosto: 70,1 millones de cuentas, $ 0,9 billones en cuentas, $ 9 billones en fondos, 75 % de las transferencias con CVU (B-17)",
+          "Cuentas de pago y money market sin garantía de los depósitos (B-12, B-14)"
         ],
         "extensions": [
-          "Lectura de los casos como escenarios y la importancia de cuándo se paga la primera cuota"
+          "Cálculo de la proporción (9 ÷ 9,9 = 90,9 %), hecho a mano",
+          "Rótulo del dato como fechado y actualizable"
         ]
       }
     }

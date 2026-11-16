@@ -1,5 +1,7 @@
 # Tanda 6 del paso 27: guías para revisar
 
+> **Aprobada por Lourdes el undefined/undefined/15/11/2026.** Las guías pasaron a `src/data/guides.json` y se ven en la app. Las ampliaciones siguen pendientes de revisión del Lic. Kevin Giampieri.
+
 > Borradores de `src/data/guides-drafts.json`, generados con `node scripts/guides-review.mjs 6`. **No se muestran en la app** hasta que Lourdes los apruebe; las ampliaciones quedan marcadas para el Lic. Kevin Giampieri (D-276).
 
 Cómo revisar: marca en cada guía "Aprobada", "Con cambios" (y cuáles) o "No va". Lo validado viene del taller o de la presentación y no cambia datos; las ampliaciones son lo nuevo.
@@ -9,7 +11,7 @@ Cómo revisar: marca en cada guía "Aprobada", "Con cambios" (y cuáles) o "No v
 - **Id:** `module-05-guide-3` · **Fuentes:** A-23, B-04, B-06, F-01
 - **Validado (sin cambiar datos):** Pagar una deuda cara equivale a un ahorro asegurado (A-23); El CFT suma tasa, comisiones y cargos y se informa destacado (B-04); La Central de Deudores del BCRA (B-06)
 - **Ampliación, pendiente del Lic. Kevin Giampieri:** Refinanciar: cuándo reduce el costo y la condición de no volver a financiar; Ejemplo de interés de 30 días con TNA de ejemplo del 120 % y del 70 % ($ 9.863,01 y $ 5.753,42), con la fórmula F-01 y calculado a mano
-- **Decisión de Lourdes:** ☐ Aprobada · ☐ Con cambios · ☐ No va
+- **Decisión de Lourdes:** ☑ Aprobada (undefined/undefined/15/11/2026)
 
 **Situación:** Te llega una oferta: "Cancela tu tarjeta con un préstamo y paga menos". A veces es cierto. A veces solo cambia la deuda de lugar.
 
@@ -54,7 +56,7 @@ Si refinancias la tarjeta y la vuelves a usar, ahora tienes **dos deudas**. Refi
 - **Id:** `module-06-guide-3` · **Fuentes:** T, B-04, F-14, F-15
 - **Validado (sin cambiar datos):** Pago mínimo y saldo financiado con intereses (T); TNA, TEA y CFT; el CFT destacado (B-04); Casos F-14 (55 meses, $ 83.880,36) y F-15 (237 meses, $ 813.271,16) de docs/formulas.md, con test
 - **Ampliación, pendiente del Lic. Kevin Giampieri:** Comparación del mismo saldo con dos tasas de ejemplo y la idea de que pagar algo más que el mínimo baja el costo
-- **Decisión de Lourdes:** ☐ Aprobada · ☐ Con cambios · ☐ No va
+- **Decisión de Lourdes:** ☑ Aprobada (undefined/undefined/15/11/2026)
 
 **Situación:** Dos tarjetas, el mismo saldo de $ 100.000 y el mismo pago mínimo del 10 %. Con una terminas de pagar en cuatro años y medio. Con la otra, en casi veinte.
 
@@ -99,7 +101,7 @@ Pagar el **total** antes del vencimiento no genera intereses. Si no puedes, cada
 - **Id:** `module-07-guide-3` · **Fuentes:** A-24, A-28, A-29, A-30, F-16, F-17
 - **Validado (sin cambiar datos):** Bola de nieve y avalancha, y cuándo usar cada una (A-24, A-28, A-30); Deudas y tasas de ejemplo de A-29
 - **Ampliación, pendiente del Lic. Kevin Giampieri:** Los mínimos ($ 4.000, $ 1.500 y $ 10.000) y los $ 20.000 extra no están en A-29: son los supuestos de práctica de la misión "Sal de tus deudas" (docs/formulas.md, sección 8), y la guía los rotula así; Resultados de la simulación con test: 11 meses, $ 109.817,08 y $ 111.507,88, diferencia de $ 1.690,80
-- **Decisión de Lourdes:** ☐ Aprobada · ☐ Con cambios · ☐ No va
+- **Decisión de Lourdes:** ☑ Aprobada (undefined/undefined/15/11/2026)
 
 **Situación:** Tres deudas, $ 20.000 extra por mes. La avalancha y la bola de nieve terminan el mismo mes. ¿Entonces da igual cuál elijas?
 
@@ -145,7 +147,7 @@ En los dos métodos pagas **todos los mínimos** y pones todo el extra en una so
 - **Id:** `module-08-guide-3` · **Fuentes:** B-04, F-10, F-11, F-12, F-13
 - **Validado (sin cambiar datos):** Casos F-10 a F-13 de docs/formulas.md, con test ($ 99.540,04; $ 109.075,05; $ 83.838,44; $ 102.526,24); Mirar el CFT para confirmar que sean sin interés (B-04)
 - **Ampliación, pendiente del Lic. Kevin Giampieri:** Lectura de los casos como escenarios y la importancia de cuándo se paga la primera cuota
-- **Decisión de Lourdes:** ☐ Aprobada · ☐ Con cambios · ☐ No va
+- **Decisión de Lourdes:** ☑ Aprobada (undefined/undefined/15/11/2026)
 
 **Situación:** La misma heladera, las mismas 12 cuotas, el mismo descuento por contado. Con una inflación conviene una cosa; con otra, la contraria.
 
