@@ -131,4 +131,4 @@ En este paso se regeneraron:
 - **Inglés:** revisión del inglés por una persona nativa y, si hace falta, traducción del contenido de aprendizaje.
 - **Validación:** prueba con usuarios de las proto-personas (plan en [personas.md](personas.md)) y prueba con lector de pantalla de los flujos de la fase B.
 - **Infraestructura:** dominio propio con Cloudflare para los encabezados de seguridad (D-70).
-- **Siguiente proyecto:** la academia corporativa con varios programas, sobre el modelo academia > programa > módulo > lección. Una posible fase C sumaría backend, SSO real y datos cifrados si el prototipo pasa a piloto.
+- **Fase C posible:** sumaría backend, SSO real y datos cifrados si el prototipo pasa a piloto.

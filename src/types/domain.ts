@@ -24,7 +24,7 @@ export interface Organization {
   privacyThreshold: number;
 }
 
-// Ready for the future corporate academy: Academy > Program > Module > Lesson.
+// Hierarchy: Academy > Program > Module > Lesson.
 export interface Program {
   id: string;
   orgId: string;

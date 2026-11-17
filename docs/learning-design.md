@@ -227,7 +227,6 @@ Nunca habla más de dos oraciones, nunca recomienda productos y tiene tres nivel
 | **Gamificación con medida** e insignias | Fase A (niveles, logros); fase B (F12, F18) |
 | **Interoperabilidad** (SCORM, xAPI, cmi5) | Fase A registra eventos tipo xAPI en las misiones; visor en fase B (F21); exportar el programa como paquete, línea futura |
 | **Asistente con IA** | Línea futura; queda previsto el lugar del botón de ayuda flotante |
-| **Academia interna** con varios programas y habilidades | Siguiente proyecto: el modelo academia > programa > módulo > lección ya lo admite |
 
 ## 11. Escape room "Tu primer sueldo" (paso 28, F18)
 

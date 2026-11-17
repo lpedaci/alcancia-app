@@ -81,7 +81,7 @@ El contenido está pensado para **Argentina**: inflación, plazo fijo tradiciona
 
 El objetivo es **mostrar en un portfolio** el diseño de experiencias de aprendizaje corporativo (diagnóstico, rutas adaptativas, módulos, práctica con simuladores, evaluaciones variadas y medición de impacto), flujos con varios roles y privacidad por diseño. No es un producto en producción.
 
-**Pensado para crecer:** el modelo de datos se organiza como academia > programa > módulo > lección, para que este programa de finanzas pueda vivir más adelante dentro de una **academia corporativa interna** con otros programas (ciberseguridad, IA, etc.), que es el siguiente proyecto de Lourdes.
+**Pensado para crecer:** el modelo de datos se organiza como academia > programa > módulo > lección, para que se puedan sumar programas sin cambiarlo.
 
 ### Principios
 
@@ -892,7 +892,6 @@ Documentar en `docs/learning-design.md` qué prácticas actuales incorpora y cu�
 | **Gamificación con medida** e insignias | Fase A (insignias), fase B (F12, F18) |
 | **Estándares de interoperabilidad** (SCORM, xAPI, cmi5) | Fase B (F21, simulado); exportar el programa como paquete, línea futura |
 | **Asistente con IA** que responda dudas sobre los módulos | Línea futura |
-| **Academia interna** con varios programas y **habilidades** asociadas | Siguiente proyecto: este programa se diseña para poder integrarse ahí |
 
 ## 6. Pantallas
 
@@ -975,7 +974,7 @@ interface LearningCard {
 // Valores reales (D-79): public/market/snapshot.json, generado en el build
 interface MarketValue { id: string; label: string; value: string; unit: 'percent' | 'ARS' | 'index'; date: string; sourceId: string }
 
-// Pensado para la futura academia corporativa: Academy > Program > Module > Lesson
+// Jerarquía: Academy > Program > Module > Lesson
 interface Program {
   id: string; orgId: string; academyId?: string; name: string; mode: 'voluntary' | 'assigned';
   moduleIds: string[]; requiredModuleIds: string[]; passingScore: number; maxAttempts: number;
@@ -1100,7 +1099,6 @@ Identidad con SSO (OIDC o SAML) y MFA del proveedor; sesiones en cookies `HttpOn
 - **Escuela secundaria** como contexto educativo: línea futura (D-74).
 - Recomendaciones personalizadas de productos, conexión con cuentas bancarias o billeteras, y cualquier operación real: **fuera por decisión de diseño**, no solo por alcance.
 - Integración real con LMS corporativos (SCORM, xAPI, cmi5) y con Teams o Slack.
-- La academia corporativa con varios programas (ciberseguridad, IA, etc.): siguiente proyecto.
 - **Asistente conversacional** que responda dudas sobre los módulos: línea futura; dejar previsto el lugar del botón de ayuda flotante.
 
 ---
