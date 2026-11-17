@@ -170,7 +170,7 @@ function HomeScreen() {
       <AppTopBar />
       <div className="relative flex min-h-0 flex-1 flex-col gap-2.5 overflow-hidden px-2.5 py-3">
         <div className="flex items-end justify-between gap-2 px-0.5">
-          <div className="flex min-w-0 flex-col gap-1">
+          <div className="flex min-w-0 flex-col gap-2">
             <span className="text-label-small text-on-surface-variant tabular-nums">
               {formatDate(walletDate(MARIANA.day))} · {t('wallet.home.dayChip', { day: MARIANA.day })}
             </span>
