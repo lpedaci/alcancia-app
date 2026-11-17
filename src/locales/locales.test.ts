@@ -26,4 +26,20 @@ describe('English texts', () => {
   it('has no em dashes nor Spanish punctuation left', () => {
     expect(Object.entries(fn).filter(([, v]) => /—|¿|¡/.test(v)).map(([k]) => k)).toEqual([]);
   });
+
+  // F17 (step 35): the whole interface is in English, so a new Spanish text must come with its translation.
+  it('translates every Spanish interface text', () => {
+    expect(Object.keys(fe).filter((k) => !(k in fn))).toEqual([]);
+  });
+
+  // The design system patterns are arrays: an English list out of order would pair a decision with another's text.
+  it('keeps the design system patterns in the same order, with the same decision numbers', () => {
+    expect(en.designSystem.patterns.map((p) => p[0])).toEqual(es.designSystem.patterns.map((p) => p[0]));
+  });
+
+  // Money fields read the Argentine format (150.000 and 2,5), so the English examples keep it too.
+  it('writes amount examples in the format the money fields accept', () => {
+    const usFormat = /(example: |\$\s?)\d{1,3},\d{3}\b/i;
+    expect(Object.entries(fn).filter(([, v]) => usFormat.test(v)).map(([k]) => k)).toEqual([]);
+  });
 });

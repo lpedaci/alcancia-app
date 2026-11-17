@@ -393,7 +393,7 @@ Una frase de Fuerte en `src/data/fuerte-lines.json`:
 
 | Suite | Qué cubre | Al 16/11/2026 |
 | --- | --- | --- |
-| Vitest | Fórmulas financieras con casos calculados a mano, motor de la billetera y de misiones, desbloqueos, tarjetas, umbral de privacidad, permisos, máscaras de dinero, contraste de tokens en los dos temas, textos en los dos idiomas | 777 tests |
+| Vitest | Fórmulas financieras con casos calculados a mano, motor de la billetera y de misiones, desbloqueos, tarjetas, umbral de privacidad, permisos, máscaras de dinero, contraste de tokens en los dos temas, textos en los dos idiomas | 780 tests |
 | Playwright (desarrollo) | Desbordes en 6 anchos, axe en 2 anchos y en modo oscuro, un `h1` por pantalla, flujos de misiones, escape room, constructor, encuentros y privacidad | 1.181 tests |
 | Playwright (producción) | El build real con la CSP activa, sin errores de consola | 130 tests |
 

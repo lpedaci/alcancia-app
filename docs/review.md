@@ -16,7 +16,7 @@ Alcancía es un simulador de finanzas personales en el que se aprende usando una
   - paneles del tutor, el admin y el decisor;
   - tres contextos de uso y el modo integrado en Hornero;
   - modo oscuro e interfaz completa en inglés.
-- **Calidad:** al 16/11/2026 pasan 777 tests unitarios (58 archivos), 1.181 de Playwright en desarrollo y 130 de Playwright sobre el build de producción con la CSP activa.
+- **Calidad:** al 16/11/2026 pasan 780 tests unitarios (58 archivos), 1.181 de Playwright en desarrollo y 130 de Playwright sobre el build de producción con la CSP activa.
 - **Decisiones:** 242 decisiones registradas en [decisions.md](decisions.md), de la D-01 a la D-327.
 - **Pendiente:** contenido y datos que esperan la revisión del Lic. Kevin Giampieri o la lectura de una norma (sección 9). Mientras una pregunta sigue abierta, la app no muestra el dato, o lo muestra con la redacción más prudente.
 
