@@ -20,6 +20,7 @@
 | [Motor económico de la billetera](wallet-engine.md) | 14.13 | Revisado (tanda 2), ampliado en los pasos 6 a 9 |
 | [Auditoría visual](visual-audit.md) | 2.2 | Paso 4 (piloto visual) |
 | [Revisión intermedia de la fase A](review-fase-a.md) | 13 | Paso 14, con la auditoría y el ajuste |
+| [Informe final](review.md) | 13 | Paso 36: cierre de la fase B y release v1.0.0 |
 
 Los diagramas usan Mermaid y las citas, APA 7.
 

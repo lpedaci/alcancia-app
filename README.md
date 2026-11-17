@@ -32,7 +32,7 @@
 > **Contenido educativo. No es asesoramiento financiero ni una recomendación de inversión.** Todo el dinero de la app es ficticio, y las personas, entidades y comercios de la demo son inventados.
 
 <p align="center">
-  <img src="docs/readme/wallet-desktop-and-phone.webp" width="900" alt="La billetera de Mariana en una computadora y en un celular. En la computadora se ven el menú lateral, la misión sugerida 'El préstamo tentador', el saludo con el nivel 6 y el próximo desbloqueo, el saldo disponible de $ 1.372.112,09 con su poder de compra y los apartados. En el celular, la misma pantalla en una columna, con la barra de navegación inferior.">
+  <img src="docs/readme/wallet-desktop-and-phone.webp" width="900" alt="La billetera de Mariana en una computadora y en un celular. En la computadora se ven el menú lateral con su avance, el saludo con el nivel 6, "Avanzar el tiempo" y "¿Por qué importa?", el saldo disponible de $ 1.372.112,09 con su poder de compra, las acciones rápidas, lo separado en apartados y el próximo desbloqueo, Invertir, con lo que falta. En el celular, la misma pantalla en una columna, con la barra de navegación inferior y Fuerte.">
 </p>
 
 La app no tiene tema oscuro activo todavía: los tokens lo dejan preparado, pero falta verificar el contraste de cada combinación. Por eso las imágenes muestran solo el tema claro.
@@ -121,7 +121,7 @@ Cada enlace entra a la demo con esa persona. El acceso con SSO y verificación e
 <table>
   <tr>
     <td width="50%" valign="top">
-      <img src="docs/readme/role-participant.webp" alt="Inicio de Diego en el nivel 2, Pagar: la misión activa 'Transfiere sin errores', el saldo disponible de $ 459.477,09 con su poder de compra, las acciones rápidas y el próximo desbloqueo, Presupuesto.">
+      <img src="docs/readme/role-participant.webp" alt="Inicio de Diego en el nivel 2, Pagar: el saldo disponible de $ 459.477,09 con su poder de compra, las acciones rápidas, lo separado en apartados y el próximo desbloqueo, Presupuesto, con lo que falta y el atajo "Ya sé esto".">
       <h3>Participante</h3>
       <p>Usa la billetera: cobra, paga, ahorra y decide. Diego empieza en el nivel 2, desde el celular; Mariana está en el nivel 6, con el fondo de emergencia a 2 de 3 meses.</p>
       <p><a href="https://lpedaci.github.io/alcancia-app/#/login?demo=diego">Entrar como Diego</a> · <a href="https://lpedaci.github.io/alcancia-app/#/login?demo=mariana">Entrar como Mariana</a></p>
@@ -141,7 +141,7 @@ Cada enlace entra a la demo con esa persona. El acceso con SSO y verificación e
       <p><a href="https://lpedaci.github.io/alcancia-app/#/login?demo=julieta">Entrar como Julieta</a></p>
     </td>
     <td width="50%" valign="top">
-      <img src="docs/readme/role-sponsor.webp" alt="Reporte de impacto de Ricardo, decisor: 80 % de personas activas, satisfacción de 4,6 sobre 5, 17 puntos de mejora en Conocerte y 78 % con presupuesto armado, con el detalle de reacción y conducta. Son cifras agregadas, sin datos de ninguna persona.">
+      <img src="docs/readme/role-sponsor.webp" alt="Reporte de impacto de Ricardo, decisor: 80 % de personas activas, satisfacción de 4,6 sobre 5, 18 puntos de mejora en Conocerte y 78 % con presupuesto armado, con el detalle de reacción y conducta. Son cifras agregadas, sin datos de ninguna persona.">
       <h3>Decisor</h3>
       <p>Lee el reporte de impacto, de solo lectura y exportable, con los niveles 1 a 3 de Kirkpatrick y sin datos individuales.</p>
       <p><a href="https://lpedaci.github.io/alcancia-app/#/login?demo=ricardo">Entrar como Ricardo</a></p>
@@ -339,7 +339,7 @@ npm run dev
 | `npm run icons` | Regenera los íconos SVG de Material Symbols que usa la app |
 | `npm run seed` | Regenera los datos semilla de la demo |
 | `npm run og-image` | Regenera la imagen para redes (con `npm run dev` corriendo) |
-| `npm run market` | Prueba local de valores reales del BCRA (fase B; no lo usa la interfaz todavía) |
+| `npm run market` | Actualiza en local los valores reales del BCRA y el INDEC (la CI lo corre una vez por día) |
 
 ### Agregar contenido sin tocar código
 
@@ -391,11 +391,11 @@ Una frase de Fuerte en `src/data/fuerte-lines.json`:
 
 ### Calidad
 
-| Suite | Qué cubre | Al 14/11/2026 |
+| Suite | Qué cubre | Al 16/11/2026 |
 | --- | --- | --- |
-| Vitest | Fórmulas financieras con casos calculados a mano, motor de la billetera y de misiones, desbloqueos, tarjetas, umbral de privacidad, permisos, máscaras de dinero, contraste de tokens | 599 tests |
-| Playwright (desarrollo) | Desbordes en 6 anchos, axe en 2 anchos, un `h1` por pantalla | 641 tests |
-| Playwright (producción) | El build real con la CSP activa, sin errores de consola | 72 tests |
+| Vitest | Fórmulas financieras con casos calculados a mano, motor de la billetera y de misiones, desbloqueos, tarjetas, umbral de privacidad, permisos, máscaras de dinero, contraste de tokens en los dos temas, textos en los dos idiomas | 777 tests |
+| Playwright (desarrollo) | Desbordes en 6 anchos, axe en 2 anchos y en modo oscuro, un `h1` por pantalla, flujos de misiones, escape room, constructor, encuentros y privacidad | 1.181 tests |
+| Playwright (producción) | El build real con la CSP activa, sin errores de consola | 130 tests |
 
 La CI corre lint, tipos, tests unitarios, `npm audit` y las pruebas de producción antes de publicar. Un hook de `pre-push` repite lint, tipos y tests unitarios en local.
 
@@ -405,7 +405,7 @@ La CI corre lint, tipos, tests unitarios, `npm audit` y las pruebas de producci�
 
 - **Fase A, completa:** acceso simulado, la billetera con sus 8 niveles (0 a 7), 13 misiones, 16 módulos con su guía, 12 herramientas, la cuenta comitente de práctica y los paneles del tutor, el admin y el decisor.
 - **Ajuste de fase A, completo:** tarjetas en el momento justo también en el modo libre, la guía que nace de la acción, consecuencias en la billetera, casos con decisiones en los desafíos y la investigación de valores reales del mercado.
-- **Fase B, en curso:** hechos los valores reales con fecha y fuente del BCRA y el INDEC (paso 22), los tres contextos de uso (paso 23) el registro de actividad tipo xAPI con los avisos al socio (paso 24) el repaso espaciado con los recordatorios por canal (paso 25) y la meta colectiva con el espacio de cada cohorte (paso 26). Siguen las guías 2 y 3 de cada módulo, cripto, el escape room "Tu primer sueldo", certificados y el inglés completo.
+- **Fase B, completa (v1.0.0):** valores reales con fecha y fuente del BCRA y el INDEC, los tres contextos de uso, el modo integrado con registro tipo xAPI, repaso espaciado y recordatorios por canal, meta colectiva y espacio de cada cohorte, las guías 2 y 3 de cada módulo, cripto (nivel 8), el escape room "Tu primer sueldo" con tres versiones e insignias, certificado, seguimiento a 30 días, constructor de lecciones y tarjetas, encuentros con la tutoría, Mi privacidad, glosario y biblioteca, modo oscuro y la interfaz completa en inglés. El informe final está en [docs/review.md](docs/review.md).
 - **Una posible fase C:** un backend con SSO real, roles en el servidor y datos cifrados, si el prototipo pasa a piloto. Sin fecha.
 
 ## Documentación

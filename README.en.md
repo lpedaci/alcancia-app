@@ -32,10 +32,10 @@
 > **Educational content. Not financial advice or an investment recommendation.** All money in the app is fictitious, and the people, entities and merchants in the demo are made up.
 
 > [!NOTE]
-> The app interface is in Spanish (Argentina). The landing page is also available in English; the rest of the app will be translated in phase B.
+> The whole interface is available in English and Spanish (Argentina): choose the language from the globe button or the person's menu. The learning content (guides, missions, questions, glossary and escape room) is in Spanish, with a notice.
 
 <p align="center">
-  <img src="docs/readme/wallet-desktop-and-phone.webp" width="900" alt="Mariana's wallet on a computer and on a phone. On the computer: the side menu, the suggested mission 'El préstamo tentador', the greeting with level 6 and the next unlock, the available balance of $ 1.372.112,09 with its purchasing power, and the pockets. On the phone: the same screen in one column, with the bottom navigation bar.">
+  <img src="docs/readme/wallet-desktop-and-phone.webp" width="900" alt="Mariana's wallet on a computer and on a phone. On the computer: the side menu with her progress, the greeting with level 6, "Advance time" and "Why does it matter?", the available balance of $ 1.372.112,09 with its purchasing power, quick actions, the money in pockets and the next unlock, Invest, with what is missing. On the phone: the same screen in one column, with the bottom navigation bar and Fuerte.">
 </p>
 
 ## What it is and what problem it solves
@@ -83,7 +83,7 @@ There are nine assessment types, each with feedback per option, including a **ca
 <table>
   <tr>
     <td width="50%" valign="top">
-      <img src="docs/readme/role-participant.webp" alt="Diego's home at level 2, Pay: the active mission, the available balance of $ 459.477,09 with its purchasing power, quick actions and the next unlock, Budget.">
+      <img src="docs/readme/role-participant.webp" alt="Diego's home at level 2, Pay: the available balance of $ 459.477,09 with its purchasing power, quick actions, the money in pockets and the next unlock, Budget, with what is missing and the "I already know this" shortcut.">
       <h3>Participant</h3>
       <p>Uses the wallet. Diego starts at level 2 on his phone; Mariana is at level 6.</p>
       <p><a href="https://lpedaci.github.io/alcancia-app/#/login?demo=diego">Sign in as Diego</a> · <a href="https://lpedaci.github.io/alcancia-app/#/login?demo=mariana">Sign in as Mariana</a></p>
@@ -103,7 +103,7 @@ There are nine assessment types, each with feedback per option, including a **ca
       <p><a href="https://lpedaci.github.io/alcancia-app/#/login?demo=julieta">Sign in as Julieta</a></p>
     </td>
     <td width="50%" valign="top">
-      <img src="docs/readme/role-sponsor.webp" alt="Ricardo's impact report: 80 % active, satisfaction 4.6 out of 5, 17 points of improvement and 78 % with a budget, with reaction and behavior details. Aggregated figures only.">
+      <img src="docs/readme/role-sponsor.webp" alt="Ricardo's impact report: 80 % active, satisfaction 4.6 out of 5, 18 points of improvement and 78 % with a budget, with reaction and behavior details. Aggregated figures only.">
       <h3>Sponsor</h3>
       <p>Reads the read-only, exportable impact report, with no individual data.</p>
       <p><a href="https://lpedaci.github.io/alcancia-app/#/login?demo=ricardo">Sign in as Ricardo</a></p>
