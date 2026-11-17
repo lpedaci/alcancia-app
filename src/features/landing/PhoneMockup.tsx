@@ -159,8 +159,8 @@ const QUICK: { key: 'transfer' | 'qr' | 'bills' | 'pockets'; icon: IconName }[] 
 
 /**
  * P1 on a phone, as the wallet draws it today: the greeting as the page header with the time and
- * "¿Por qué importa?" buttons on the right, the full balance, the quick actions in a row, and Fuerte
- * telling the pending mission in his bubble (D-287 to D-293).
+ * "¿Por qué importa?" buttons on the right, the full balance, the quick actions in a row and the
+ * latest movements, without Fuerte so the mockup stays light (D-287 to D-293, D-327).
  */
 function HomeScreen() {
   const { t } = useTranslation();
@@ -170,7 +170,7 @@ function HomeScreen() {
       <AppTopBar />
       <div className="relative flex min-h-0 flex-1 flex-col gap-2.5 overflow-hidden px-2.5 py-3">
         <div className="flex items-end justify-between gap-2 px-0.5">
-          <div className="flex min-w-0 flex-col gap-0.5">
+          <div className="flex min-w-0 flex-col gap-1">
             <span className="text-label-small text-on-surface-variant tabular-nums">
               {formatDate(walletDate(MARIANA.day))} · {t('wallet.home.dayChip', { day: MARIANA.day })}
             </span>
@@ -230,7 +230,8 @@ function HomeScreen() {
             </span>
           ))}
         </div>
-        <FloatingFuerte state="thinking" count={2} bubble={t('wallet.fuerte.notices.mission', { title: ACTIVE_MISSION, minutes: 5 })} />
+        {/* D-327: no Fuerte on the home mockup. At this size he covered the movements' amounts and
+            competed with the balance; he still appears on the mission screen of the rotation. */}
       </div>
       <BottomNav active="home" />
     </>
