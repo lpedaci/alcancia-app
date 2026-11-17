@@ -489,7 +489,7 @@ Priorizadas con la misma matriz de decisión que Rumbo (valor para el usuario 40
 8. **Cifras** calculadas desde los datos de demo.
 9. **Recorre la demo en tres pasos** y **Preguntas frecuentes** (incluida "¿Es asesoramiento financiero?").
 10. Franja final con "Elegir un recorrido" y **pie** con columnas "Explorar", "El proyecto" (case study, documentación, sistema de diseño) y "La demo"; abajo, "Diseño y desarrollo: Lourdes Pedaci, Experience Designer (Learning y UX/UI)" con enlaces a LinkedIn, portfolio y GitHub, el aviso legal y el copyright.
-- URL del case study en `CASE_STUDY_URL` (mientras no exista, el portfolio: `https://lpedaci.github.io/portfolio/`).
+- URL del case study en `CASE_STUDY_URL`: `https://lpedaci.github.io/portfolio/casos/alcancia/`.
 - Sin logos de empresas "que confían" ni testimonios inventados.
 
 **Acceso (G1 a G5)**, igual que Rumbo:

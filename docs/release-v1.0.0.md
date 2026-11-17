@@ -1,6 +1,6 @@
 Primera versión completa de **Alcancía**, el simulador de finanzas personales donde se aprende usando una billetera virtual con dinero ficticio. Prototipo de portfolio de Lourdes Pedaci, Experience Designer (Learning y UX/UI).
 
-**Demo:** https://lpedaci.github.io/alcancia-app/
+**Demo:** https://lpedaci.github.io/alcancia-app/ · **Case study:** https://lpedaci.github.io/portfolio/casos/alcancia/
 
 ## Qué incluye
 
@@ -25,7 +25,7 @@ Primera versión completa de **Alcancía**, el simulador de finanzas personales 
 
 ## Calidad
 
-- 777 tests unitarios, 1.181 tests de Playwright en desarrollo y 130 sobre el build de producción con la CSP activa.
+- 780 tests unitarios, 1.181 tests de Playwright en desarrollo y 130 sobre el build de producción con la CSP activa.
 - Informe final con lo verificado, lo que no se pudo verificar y los próximos pasos: [docs/review.md](https://github.com/lpedaci/alcancia-app/blob/main/docs/review.md).
 
 ## Aviso

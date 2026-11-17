@@ -23,6 +23,7 @@
 <p align="center">
   <a href="https://lpedaci.github.io/alcancia-app/"><strong>Demo</strong></a> ·
   <a href="https://lpedaci.github.io/alcancia-app/#/login?demo=mariana"><strong>Sign in as Mariana</strong></a> ·
+  <a href="https://lpedaci.github.io/portfolio/casos/alcancia/"><strong>Case study (Spanish)</strong></a> ·
   <a href="docs/README.md">Documentation (Spanish)</a> ·
   <a href="CLAUDE.md">Specification (Spanish)</a> ·
   <a href="README.md">Español</a>

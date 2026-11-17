@@ -4,8 +4,8 @@ export const DOCS_URL = `${REPO_URL}/blob/main/docs/README.md`;
 /** All rights reserved (D-306). */
 export const LICENSE_URL = `${REPO_URL}/blob/main/LICENSE`;
 
-/** Case study in Lourdes's portfolio. Until it exists, the portfolio home (F0). */
-export const CASE_STUDY_URL = 'https://lpedaci.github.io/portfolio/';
+/** Case study in Lourdes's portfolio (F0). */
+export const CASE_STUDY_URL = 'https://lpedaci.github.io/portfolio/casos/alcancia/';
 
 /** Lourdes's portfolio and profiles, in the G0 footer (F0). */
 export const PORTFOLIO_URL = 'https://lpedaci.github.io/portfolio/';
