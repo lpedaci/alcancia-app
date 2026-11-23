@@ -4106,6 +4106,11 @@
     },
     "patterns": [
       [
+        "D-329",
+        "Menús no modales",
+        "Abrir un menú no traba la página ni esconde la barra de desplazamiento; se cierra con Escape o con un clic afuera."
+      ],
+      [
         "D-324",
         "Landing en celular",
         "Menú, portada que entra en una pantalla con una acción, barra fija abajo, sin introducciones ni carruseles, filas para elegir personas, cifras en 2 × 2 y herramientas largas que se abren a pedido."

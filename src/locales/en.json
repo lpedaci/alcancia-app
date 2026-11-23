@@ -5396,6 +5396,11 @@
     },
     "patterns": [
       [
+        "D-329",
+        "Non-modal menus",
+        "Opening a menu does not lock the page or hide the scrollbar; it closes with Escape or a click outside."
+      ],
+      [
         "D-324",
         "Landing on phones",
         "Menu, a hero that fits one screen with one action, a sticky bar at the bottom, no section intros or carousels, rows to choose people, figures in a 2 × 2 grid and long tools that open on request."

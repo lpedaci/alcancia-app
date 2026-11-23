@@ -1,9 +1,15 @@
 import { DropdownMenu as Menu } from 'radix-ui';
-import type { ReactNode } from 'react';
+import type { ComponentProps, ReactNode } from 'react';
 import { cn } from '@/lib/utils';
 import { Icon, type IconName } from './Icon';
 
-export const DropdownMenu = Menu.Root;
+/**
+ * Menus are not modal (D-329): opening one does not lock the page scroll, so the scrollbar stays and the
+ * page does not jump. It still closes with Escape or a click outside, and focus returns to its trigger.
+ */
+export function DropdownMenu({ modal = false, ...props }: ComponentProps<typeof Menu.Root>) {
+  return <Menu.Root modal={modal} {...props} />;
+}
 export const DropdownMenuTrigger = Menu.Trigger;
 export const DropdownMenuGroup = Menu.Group;
 

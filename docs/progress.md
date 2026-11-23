@@ -139,4 +139,5 @@
 | 16/11/2026 | 35 · Inglés, tanda 6 | Sistema de diseño público en inglés (unos 690 textos); el vocabulario de voz y tono conserva los términos en español con su traducción. Con esto, toda la interfaz está en inglés; el contenido de aprendizaje sigue en español con el aviso | Hecho |
 | 16/11/2026 | Ajuste de Lourdes | Maqueta del teléfono de la portada sin Fuerte en la pantalla de inicio (D-327) | Hecho |
 | 16/11/2026 | 36 · Informe final y release | `docs/review.md`; imágenes del README, imagen para compartir y capturas regeneradas; README al día en los dos idiomas; release v1.0.0 en GitHub | Hecho |
+| 23/11/2026 | Ajuste de Lourdes | Los menús desplegables ("Ver como", el del avatar y los de las listas) ya no traban el desplazamiento: la página no salta al abrirlos (D-329) | Hecho |
 | (pendiente) | Cierre de la fase B | Después del informe final (`docs/review.md`, paso 36), crear la Release `v1.0.0` en GitHub con notas que resuman las funcionalidades (D-306). Es el último paso del plan | Pendiente |
