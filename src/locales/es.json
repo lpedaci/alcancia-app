@@ -4112,6 +4112,11 @@
     },
     "patterns": [
       [
+        "D-332",
+        "Tarjetas en fila, sin huecos",
+        "Dos tarjetas lado a lado, de la misma altura; las listas largas a todo el ancho, en dos columnas."
+      ],
+      [
         "D-331",
         "Orden de las acciones",
         "Secundarios a la izquierda, principal a la derecha; en celular, apilados con el principal arriba."

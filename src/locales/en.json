@@ -5402,6 +5402,11 @@
     },
     "patterns": [
       [
+        "D-332",
+        "Cards in a row, no gaps",
+        "Two cards side by side, the same height; long lists full width, in two columns."
+      ],
+      [
         "D-331",
         "Action order",
         "Secondary on the left, primary on the right; on phones, stacked with the primary on top."

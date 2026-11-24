@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 import { DEMO_TODAY } from "@/app/config";
 import { Button } from "@/components/ui/Button";
-import { ActionRow } from '@/components/ui/ActionRow';
+import { ActionRow } from "@/components/ui/ActionRow";
 import { Icon } from "@/components/ui/Icon";
 import { IconTile } from "@/components/ui/IconTile";
 import { InlineAlert } from "@/components/ui/InlineAlert";
@@ -40,8 +40,8 @@ import {
   scoreKnowledge,
 } from "./conocerte";
 import { MasteryButton } from "@/features/levels/MasteryButton";
-import { fuerteLine } from '@/features/companion/fuerte-lines';
-import { ctx, useOrgKind } from '@/lib/org-context';
+import { fuerteLine } from "@/features/companion/fuerte-lines";
+import { ctx, useOrgKind } from "@/lib/org-context";
 
 /**
  * P2, "Abrir tu cuenta" (level 0, flows.md 2.1): a guided welcome with Fuerte, the simulated sign-up
@@ -103,7 +103,10 @@ export function WelcomePage() {
       state: "neutral" as const,
       message: fuerteLine("welcome.fuerte.account"),
     },
-    quiz: { state: "thinking" as const, message: fuerteLine("welcome.fuerte.quiz") },
+    quiz: {
+      state: "thinking" as const,
+      message: fuerteLine("welcome.fuerte.quiz"),
+    },
     result: {
       state: "celebration" as const,
       message: fuerteLine("welcome.fuerte.result"),
@@ -189,7 +192,9 @@ export function WelcomePage() {
               })}
             </h1>
             <p className="text-body-large text-on-surface">
-              {t(`welcome.intro.${INTRO_SLIDES[slide]}.body`, { context: ctx(orgKind) })}
+              {t(`welcome.intro.${INTRO_SLIDES[slide]}.body`, {
+                context: ctx(orgKind),
+              })}
             </p>
             {/* Secondary on the left, primary on the right (D-331); on phones, stacked with the primary on top */}
             <div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-end">
@@ -411,6 +416,7 @@ function Scores({ scores }: { scores: Record<Dimension, number> }) {
           variant="text"
           size="xs"
           leadingIcon={asTable ? "bar_chart" : "table_rows"}
+          className="-mx-2"
           onClick={() => setAsTable(!asTable)}
         >
           {asTable ? t("welcome.result.asChart") : t("welcome.result.asTable")}
@@ -452,7 +458,7 @@ function Scores({ scores }: { scores: Record<Dimension, number> }) {
           </Table>
         </TableContainer>
       ) : (
-        <ul className="flex flex-col gap-4">
+        <ul className="flex flex-1 flex-col justify-between gap-4">
           {(Object.keys(scores) as Dimension[]).map((d) => {
             const level = levelOf(scores[d]);
             return (
@@ -478,6 +484,7 @@ function Scores({ scores }: { scores: Record<Dimension, number> }) {
           })}
         </ul>
       )}
+      {/* The bars spread over the card's height, so the note lines up with the route's note (D-332) */}
       <p className="text-body-small text-on-surface-variant">
         {t("welcome.result.onlyKnowledge")}
       </p>
@@ -539,7 +546,7 @@ function Route({ scores }: { scores: Record<Dimension, number> }) {
           );
         })}
       </ol>
-      <p className="text-body-small text-on-surface-variant">
+      <p className="mt-auto text-body-small text-on-surface-variant">
         {t("welcome.result.routeNote")}
       </p>
     </section>
@@ -577,55 +584,56 @@ function Result({
           )}
         </h1>
       </header>
-      <div className="grid grid-cols-[minmax(0,1fr)] gap-6 large:grid-cols-2 large:items-start">
+      {/* D-332: the result and the route side by side, the same height; the explanations below, full width */}
+      <div className="grid grid-cols-[minmax(0,1fr)] gap-6 large:grid-cols-2">
         <Scores scores={diagnostic.scores} />
-        <section
-          aria-labelledby="feedback-title"
-          className="flex flex-col gap-4 rounded-xl border border-outline-variant bg-surface-container-lowest p-(--space-card-padding)"
-        >
-          <h2 id="feedback-title" className="text-title-large text-on-surface">
-            {t("welcome.result.feedbackTitle")}
-          </h2>
-          <ul className="flex flex-col gap-3">
-            {KNOWLEDGE.map((q) => {
-              const right = answers[q.id] === q.correct;
-              return (
-                <li
-                  key={q.id}
-                  className={cn(
-                    "flex flex-col gap-1 rounded-lg px-4 py-3",
-                    right
-                      ? "bg-success-container text-on-success-container"
-                      : "bg-info-container text-on-info-container",
-                  )}
-                >
-                  <p className="flex items-start gap-2 text-title-small">
-                    <Icon
-                      name={right ? "check_circle" : "info"}
-                      size={20}
-                      className={cn(
-                        "mt-0.5 shrink-0",
-                        right ? "text-success" : "text-info",
-                      )}
-                    />
-                    <span>
-                      <span className="sr-only">
-                        {right
-                          ? t("welcome.result.right")
-                          : t("welcome.result.toReview")}
-                        :{" "}
-                      </span>
-                      {q.prompt}
-                    </span>
-                  </p>
-                  <p className="pl-7 text-body-medium">{q.explanation}</p>
-                </li>
-              );
-            })}
-          </ul>
-        </section>
+        <Route scores={diagnostic.scores} />
       </div>
-      <Route scores={diagnostic.scores} />
+      <section
+        aria-labelledby="feedback-title"
+        className="@container flex flex-col gap-4 rounded-xl border border-outline-variant bg-surface-container-lowest p-(--space-card-padding)"
+      >
+        <h2 id="feedback-title" className="text-title-large text-on-surface">
+          {t("welcome.result.feedbackTitle")}
+        </h2>
+        <ul className="grid grid-cols-[minmax(0,1fr)] gap-3 @3xl:grid-cols-2">
+          {KNOWLEDGE.map((q) => {
+            const right = answers[q.id] === q.correct;
+            return (
+              <li
+                key={q.id}
+                className={cn(
+                  "flex flex-col gap-1 rounded-lg px-4 py-3 @3xl:last:odd:col-span-2",
+                  right
+                    ? "bg-success-container text-on-success-container"
+                    : "bg-info-container text-on-info-container",
+                )}
+              >
+                <p className="flex items-start gap-2 text-title-small">
+                  <Icon
+                    name={right ? "check_circle" : "info"}
+                    size={20}
+                    className={cn(
+                      "mt-0.5 shrink-0",
+                      right ? "text-success" : "text-info",
+                    )}
+                  />
+                  <span>
+                    <span className="sr-only">
+                      {right
+                        ? t("welcome.result.right")
+                        : t("welcome.result.toReview")}
+                      :{" "}
+                    </span>
+                    {q.prompt}
+                  </span>
+                </p>
+                <p className="pl-7 text-body-medium">{q.explanation}</p>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
       <section className="flex flex-col items-start gap-3 rounded-xl border border-primary bg-surface-container-lowest p-(--space-card-padding)">
         <h2 className="text-title-large text-on-surface">
           {t(
@@ -696,7 +704,7 @@ function Overview({
         </h2>
         <AccountData name={person?.name ?? ""} />
       </section>
-      <div className="grid grid-cols-[minmax(0,1fr)] gap-6 large:grid-cols-2 large:items-start">
+      <div className="grid grid-cols-[minmax(0,1fr)] gap-6 large:grid-cols-2">
         <Scores scores={diagnostic.scores} />
         <Route scores={diagnostic.scores} />
       </div>
