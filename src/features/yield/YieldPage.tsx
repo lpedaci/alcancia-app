@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import { MoneyInput } from '@/components/money/MoneyInput';
 import { MoneyText } from '@/components/money/MoneyText';
 import { Button } from '@/components/ui/Button';
+import { ActionRow } from '@/components/ui/ActionRow';
 import { ConfirmDialog } from '@/components/ui/Dialog';
 import { Icon, type IconName } from '@/components/ui/Icon';
 import { IconTile } from '@/components/ui/IconTile';
@@ -340,14 +341,14 @@ function DepositSection() {
       )}
       <p className="text-body-small text-on-surface-variant">{t(kind === 'uva' ? 'yield.deposit.assumptionsUva' : 'yield.deposit.assumptions')}</p>
       {failure && <InlineAlert tone="info">{failure}</InlineAlert>}
-      <div className="flex flex-wrap gap-3">
-        <Button leadingIcon="lock_clock" onClick={ask}>
-          {t('yield.deposit.make')}
-        </Button>
+      <ActionRow>
         <Button asChild variant="text" trailingIcon="arrow_forward">
           <Link to="/app/tools/SIM-5">{t('yield.deposit.compare')}</Link>
         </Button>
-      </div>
+        <Button leadingIcon="lock_clock" onClick={ask}>
+          {t('yield.deposit.make')}
+        </Button>
+      </ActionRow>
 
       <h3 className="border-t border-outline-variant pt-4 text-title-medium text-on-surface">{t('yield.deposit.active')}</h3>
       {deposits.length === 0 ? (

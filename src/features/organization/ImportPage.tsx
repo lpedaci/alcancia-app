@@ -116,11 +116,11 @@ export function ImportPage() {
           </div>
         </div>
         <div className="flex flex-wrap gap-3">
-          <Button leadingIcon="table_view" onClick={() => preview(text)} disabled={!text.trim()}>
-            {t('org.import.preview')}
-          </Button>
           <Button variant="outlined" leadingIcon="upload_file" onClick={() => fileRef.current?.click()}>
             {t('org.import.upload')}
+          </Button>
+          <Button leadingIcon="table_view" onClick={() => preview(text)} disabled={!text.trim()}>
+            {t('org.import.preview')}
           </Button>
           <input
             ref={fileRef}

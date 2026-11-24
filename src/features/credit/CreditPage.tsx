@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import { MoneyInput } from '@/components/money/MoneyInput';
 import { MoneyText } from '@/components/money/MoneyText';
 import { Button } from '@/components/ui/Button';
+import { ActionRow } from '@/components/ui/ActionRow';
 import { ConfirmDialog } from '@/components/ui/Dialog';
 import { Icon, type IconName } from '@/components/ui/Icon';
 import { IconTile } from '@/components/ui/IconTile';
@@ -419,14 +420,14 @@ function CardStatementSection() {
                 <MoneyInput label={t('credit.card.otherLabel')} helperText={t('credit.card.otherHelp', { max: formatMoney(left) })} value={other} onChange={(e) => setOther(e.target.value)} />
               )}
               {failure && <InlineAlert tone="info">{failure}</InlineAlert>}
-              <div className="flex flex-wrap gap-3">
-                <Button leadingIcon="payments" onClick={pay}>
-                  {t('credit.card.pay')}
-                </Button>
+              <ActionRow>
                 <Button asChild variant="text" trailingIcon="arrow_forward">
                   <Link to="/app/tools/SIM-7">{t('credit.card.simulate')}</Link>
                 </Button>
-              </div>
+                <Button leadingIcon="payments" onClick={pay}>
+                  {t('credit.card.pay')}
+                </Button>
+              </ActionRow>
             </div>
           )}
         </>

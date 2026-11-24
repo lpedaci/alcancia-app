@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Link, useLocation, useNavigate, useParams } from 'react-router';
 import { DEMO_TODAY } from '@/app/config';
 import { Button } from '@/components/ui/Button';
+import { ActionRow } from '@/components/ui/ActionRow';
 import { Icon } from '@/components/ui/Icon';
 import { IconTile } from '@/components/ui/IconTile';
 import { InlineAlert } from '@/components/ui/InlineAlert';
@@ -264,7 +265,10 @@ function ChallengeRunner({ challenge }: { challenge: ChallengeDef }) {
                   );
                 })}
               </ul>
-              <div className="flex flex-wrap gap-3">
+              <ActionRow>
+                <Button asChild variant="outlined" leadingIcon="school">
+                  <Link to="/app/learn">{t('learn.guide.backToLearn')}</Link>
+                </Button>
                 {result.score >= passing ? (
                   <Button asChild trailingIcon="arrow_forward">
                     <Link to={LEVEL_ROUTE[level.id] ?? '/app/learn'}>{t('learn.challenge.goSection', { section })}</Link>
@@ -276,10 +280,7 @@ function ChallengeRunner({ challenge }: { challenge: ChallengeDef }) {
                     </Button>
                   )
                 )}
-                <Button asChild variant="outlined" leadingIcon="school">
-                  <Link to="/app/learn">{t('learn.guide.backToLearn')}</Link>
-                </Button>
-              </div>
+              </ActionRow>
             </section>
             <section aria-labelledby="review-title" className="flex flex-col gap-4 rounded-xl border border-outline-variant bg-surface-container-lowest p-(--space-card-padding)">
               <h2 id="review-title" className="text-title-large text-on-surface">

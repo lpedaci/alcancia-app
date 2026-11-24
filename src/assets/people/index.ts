@@ -6,6 +6,7 @@ import lucia from './lucia.webp';
 import mariana from './mariana.webp';
 import martin from './martin.webp';
 import nicolas from './nicolas.webp';
+import juana from './juana.webp';
 import julieta from './julieta.webp';
 import ricardo from './ricardo.webp';
 import bettyna from './bettyna.webp';
@@ -20,6 +21,7 @@ import sofia from './sofia.webp';
 export const PERSON_PHOTOS: Record<string, string> = {
   'p-mariana': mariana,
   'p-diego': diego,
+  'p-juana': juana,
   'p-kevin': kevin,
   'p-julieta': julieta,
   'p-ricardo': ricardo,

@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 import { DEMO_TODAY } from "@/app/config";
 import { Button } from "@/components/ui/Button";
+import { ActionRow } from '@/components/ui/ActionRow';
 import { Icon } from "@/components/ui/Icon";
 import { IconTile } from "@/components/ui/IconTile";
 import { InlineAlert } from "@/components/ui/InlineAlert";
@@ -190,9 +191,22 @@ export function WelcomePage() {
             <p className="text-body-large text-on-surface">
               {t(`welcome.intro.${INTRO_SLIDES[slide]}.body`, { context: ctx(orgKind) })}
             </p>
-            <div className="flex flex-wrap gap-3">
+            {/* Secondary on the left, primary on the right (D-331); on phones, stacked with the primary on top */}
+            <div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-end">
+              {slide > 0 && (
+                <Button
+                  variant="text"
+                  leadingIcon="arrow_back"
+                  className="w-fit sm:mr-auto sm:-ml-3"
+                  onClick={() => setSlide(slide - 1)}
+                >
+                  {t("welcome.back")}
+                </Button>
+              )}
               <Button
                 trailingIcon="arrow_forward"
+                fullWidth
+                className="sm:w-auto"
                 onClick={() =>
                   slide < INTRO_SLIDES.length - 1
                     ? setSlide(slide + 1)
@@ -201,15 +215,6 @@ export function WelcomePage() {
               >
                 {t("welcome.continue")}
               </Button>
-              {slide > 0 && (
-                <Button
-                  variant="text"
-                  leadingIcon="arrow_back"
-                  onClick={() => setSlide(slide - 1)}
-                >
-                  {t("welcome.back")}
-                </Button>
-              )}
             </div>
           </section>
         )}
@@ -361,20 +366,24 @@ function QuizStep({
         value={value}
         onChange={(e) => onAnswer(question.id, e.target.value)}
       />
-      <div className="flex flex-wrap gap-3">
+      <ActionRow
+        start={
+          index > 0 && (
+            <Button
+              variant="text"
+              leadingIcon="arrow_back"
+              className="-ml-3"
+              onClick={() => onMove(index - 1)}
+            >
+              {t("welcome.back")}
+            </Button>
+          )
+        }
+      >
         <Button type="submit" trailingIcon={last ? "check" : "arrow_forward"}>
           {last ? t("welcome.quiz.finish") : t("welcome.continue")}
         </Button>
-        {index > 0 && (
-          <Button
-            variant="text"
-            leadingIcon="arrow_back"
-            onClick={() => onMove(index - 1)}
-          >
-            {t("welcome.back")}
-          </Button>
-        )}
-      </div>
+      </ActionRow>
       <p className="text-body-small text-on-surface-variant">
         {t("welcome.quiz.saved")}
       </p>

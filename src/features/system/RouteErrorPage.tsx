@@ -34,11 +34,11 @@ export function RouteErrorPage() {
       fuerte="sorry"
       actions={
         <>
-          <Button leadingIcon="refresh" onClick={() => window.location.reload()}>
-            {t('errorPage.reload')}
-          </Button>
           <Button variant="outlined" leadingIcon="home" onClick={goHome}>
             {t('errorPage.home')}
+          </Button>
+          <Button leadingIcon="refresh" onClick={() => window.location.reload()}>
+            {t('errorPage.reload')}
           </Button>
         </>
       }

@@ -27,11 +27,13 @@ export const MFA_REQUIRED_ROLES: Role[] = ['ld_admin', 'sponsor'];
 /**
  * The demo people of the three contexts (CLAUDE.md 4.2 and 5.5), in the order of "Ver como". Mariana
  * and Diego open in their demo states (level 6 and level 2, CLAUDE.md 7): choosing them is how the
- * example states load. Lucía and Joaquín start their account in the demo itself.
+ * example states load. Lucía and Joaquín start their account in the demo itself, and Juana (D-330)
+ * starts it from scratch every time she is chosen: her first sign-in, at level 0.
  */
 export const DEMO_KEYS = {
   mariana: 'p-mariana',
   diego: 'p-diego',
+  juana: 'p-juana',
   kevin: 'p-kevin',
   julieta: 'p-julieta',
   ricardo: 'p-ricardo',
@@ -48,7 +50,7 @@ export const DEMO_PERSON_IDS: string[] = Object.values(DEMO_KEYS);
 
 /** "Ver como" goes context first, then person (5.5): the demo people of each context. */
 export const DEMO_CONTEXTS: { kind: OrganizationKind; personIds: string[] }[] = [
-  { kind: 'employer', personIds: ['p-mariana', 'p-diego', 'p-kevin', 'p-julieta', 'p-ricardo'] },
+  { kind: 'employer', personIds: ['p-mariana', 'p-diego', 'p-juana', 'p-kevin', 'p-julieta', 'p-ricardo'] },
   { kind: 'education', personIds: ['p-lucia', 'p-martin', 'p-bettyna', 'p-hector'] },
   { kind: 'product', personIds: ['p-joaquin', 'p-sofia', 'p-nicolas'] },
 ];
@@ -154,8 +156,21 @@ function homeOf(person: Person, session: Session | null): string {
   return kind === 'product' && person.role === 'participant' ? HORNERO_HOME : homePath(session);
 }
 
+/**
+ * Demo people who start from scratch every time they are chosen (D-330): their first sign-in, with the
+ * privacy notice, the welcome, "Conocerte" and the security mission, so the journey can always be shown.
+ */
+export const FRESH_START_IDS: string[] = ['p-juana'];
+
+function startOver(personId: string) {
+  data().restartPerson(personId);
+  clearLocal(personId);
+  clearWallet(personId);
+}
+
 /** Opens the session and returns where to go: the notice first (G5), then the requested route or home. */
 function openSession(person: Person, method: AuthMethod, via: Session['via']): string {
+  if (FRESH_START_IDS.includes(person.id)) startOver(person.id);
   const now = new Date().toISOString();
   const next: Session = { personId: person.id, role: person.role, method, via, startedAt: now, lastActivityAt: now };
   session().startSession(next);

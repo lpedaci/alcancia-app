@@ -2,6 +2,7 @@ import { type FormEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 import { Button } from '@/components/ui/Button';
+import { ActionRow } from '@/components/ui/ActionRow';
 import { Icon } from '@/components/ui/Icon';
 import { InlineAlert } from '@/components/ui/InlineAlert';
 import { RadioGroup } from '@/components/ui/RadioGroup';
@@ -64,14 +65,14 @@ export function InvestorProfilePage() {
             </h2>
             <p className="text-body-large text-on-surface">{t(`wallet.profile.meaning.${result}`)}</p>
             <p className="text-body-medium text-on-surface-variant">{t('wallet.profile.why')}</p>
-            <div className="flex flex-wrap gap-3">
-              <Button asChild leadingIcon="home">
-                <Link to="/app">{t('wallet.placeholder.backHome')}</Link>
-              </Button>
+            <ActionRow>
               <Button variant="outlined" leadingIcon="refresh" onClick={() => setResult(undefined)}>
                 {t('wallet.profile.again')}
               </Button>
-            </div>
+              <Button asChild leadingIcon="home">
+                <Link to="/app">{t('wallet.placeholder.backHome')}</Link>
+              </Button>
+            </ActionRow>
           </section>
         ) : (
           <form noValidate onSubmit={submit} className="flex flex-col gap-6 rounded-xl border border-outline-variant bg-surface-container-lowest p-(--space-card-padding)">

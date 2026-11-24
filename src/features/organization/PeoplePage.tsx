@@ -95,11 +95,11 @@ export function PeoplePage() {
           <p className="text-body-large text-on-surface-variant">{t('org.people.intro', { count: participants.length })}</p>
         </div>
         <div className="flex flex-wrap gap-3">
-          <Button leadingIcon="person_add" onClick={() => setAdding(true)}>
-            {t('org.people.add')}
-          </Button>
           <Button asChild variant="outlined" leadingIcon="upload_file">
             <Link to="/admin/people/import">{t('org.people.import')}</Link>
+          </Button>
+          <Button leadingIcon="person_add" onClick={() => setAdding(true)}>
+            {t('org.people.add')}
           </Button>
         </div>
       </header>

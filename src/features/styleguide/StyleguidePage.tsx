@@ -300,7 +300,7 @@ export function StyleguidePage() {
 
       <Section id="botones" title="Botones: jerarquía de M3 Expressive">
         <Panel className="flex flex-col gap-6">
-          <div className="flex flex-wrap items-center gap-3">
+          <div data-button-catalog className="flex flex-wrap items-center gap-3">
             <Button variant="filled" leadingIcon="add">
               Crear apartado
             </Button>
@@ -313,14 +313,14 @@ export function StyleguidePage() {
               Eliminar meta
             </Button>
           </div>
-          <div className="flex flex-wrap items-center gap-3">
+          <div data-button-catalog className="flex flex-wrap items-center gap-3">
             <Button size="xs" variant="outlined">
               XS · 32 px
             </Button>
             <Button size="s">S · 40 px</Button>
             <Button size="m">M · 56 px</Button>
           </div>
-          <div className="flex flex-wrap items-center gap-3">
+          <div data-button-catalog className="flex flex-wrap items-center gap-3">
             <Button loading loadingText="Guardando…">
               Guardar meta
             </Button>

@@ -86,8 +86,8 @@ There are nine assessment types, each with feedback per option, including a **ca
     <td width="50%" valign="top">
       <img src="docs/readme/role-participant.webp" alt="Diego's home at level 2, Pay: the available balance of $ 459.477,09 with its purchasing power, quick actions, the money in pockets and the next unlock, Budget, with what is missing and the "I already know this" shortcut.">
       <h3>Participant</h3>
-      <p>Uses the wallet. Diego starts at level 2 on his phone; Mariana is at level 6.</p>
-      <p><a href="https://lpedaci.github.io/alcancia-app/#/login?demo=diego">Sign in as Diego</a> · <a href="https://lpedaci.github.io/alcancia-app/#/login?demo=mariana">Sign in as Mariana</a></p>
+      <p>Uses the wallet. Juana just joined: she opens her account at level 0 (privacy notice, welcome, Get to know you and security) and starts from scratch every time she is chosen. Diego is at level 2 on his phone; Mariana is at level 6.</p>
+      <p><a href="https://lpedaci.github.io/alcancia-app/#/login?demo=juana">Sign in as Juana</a> · <a href="https://lpedaci.github.io/alcancia-app/#/login?demo=diego">Sign in as Diego</a> · <a href="https://lpedaci.github.io/alcancia-app/#/login?demo=mariana">Sign in as Mariana</a></p>
     </td>
     <td width="50%" valign="top">
       <img src="docs/readme/role-tutor.webp" alt="Kevin's tutor dashboard: 80 % participation, modules completed, challenge average and weekly challenges met, and a 'to attend' list with deadlines and people who have not started a module.">

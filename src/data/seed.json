@@ -1638,12 +1638,12 @@
    "activatedAt": "2026-08-21"
   },
   {
-   "id": "p-silvana-maldonado",
+   "id": "p-juana",
    "orgId": "org-andina",
    "role": "participant",
-   "name": "Silvana Maldonado",
-   "email": "silvana.maldonado@andina.demo",
-   "jobOrProgram": "Ejecutivo de cuentas",
+   "name": "Juana Erling",
+   "email": "juana.erling@andina.demo",
+   "jobOrProgram": "Analista Comercial",
    "area": "commercial",
    "cohortIds": [
     "cohort-commercial"
@@ -1651,7 +1651,7 @@
    "status": "active",
    "device": "desktop",
    "invitedAt": "2026-07-28",
-   "activatedAt": "2026-09-10"
+   "activatedAt": "2026-11-16"
   },
   {
    "id": "p-sebastian-benitez",
@@ -4405,18 +4405,6 @@
     "debt": 0.54,
     "inflation_rates": 0.38,
     "goals": 0.37
-   }
-  },
-  {
-   "personId": "p-silvana-maldonado",
-   "kind": "initial",
-   "takenAt": "2026-09-10",
-   "scores": {
-    "budget": 0.71,
-    "savings": 0.76,
-    "debt": 0.51,
-    "inflation_rates": 0.73,
-    "goals": 0.53
    }
   },
   {
@@ -8760,59 +8748,6 @@
    ],
    "satisfaction": 4,
    "completedAt": "2026-09-14"
-  },
-  {
-   "personId": "p-silvana-maldonado",
-   "moduleId": "module-01",
-   "guideIdsDone": [
-    "module-01-guide-1"
-   ],
-   "satisfaction": 5,
-   "completedAt": "2026-09-23"
-  },
-  {
-   "personId": "p-silvana-maldonado",
-   "moduleId": "module-02",
-   "guideIdsDone": [
-    "module-02-guide-1"
-   ],
-   "satisfaction": 5,
-   "completedAt": "2026-09-21"
-  },
-  {
-   "personId": "p-silvana-maldonado",
-   "moduleId": "module-17",
-   "guideIdsDone": [
-    "module-17-guide-1"
-   ],
-   "satisfaction": 4,
-   "completedAt": "2026-09-29"
-  },
-  {
-   "personId": "p-silvana-maldonado",
-   "moduleId": "module-18",
-   "guideIdsDone": [
-    "module-18-guide-1"
-   ],
-   "satisfaction": 5,
-   "completedAt": "2026-10-01"
-  },
-  {
-   "personId": "p-silvana-maldonado",
-   "moduleId": "module-03",
-   "guideIdsDone": [
-    "module-03-guide-1"
-   ],
-   "satisfaction": 4,
-   "completedAt": "2026-10-07"
-  },
-  {
-   "personId": "p-silvana-maldonado",
-   "moduleId": "module-04",
-   "guideIdsDone": [
-    "module-04-guide-1"
-   ],
-   "completedAt": "2026-10-18"
   },
   {
    "personId": "p-sebastian-benitez",
@@ -14642,65 +14577,6 @@
    },
    "startedAt": "2026-09-18T09:00:00.000Z",
    "finishedAt": "2026-09-18T10:00:00.000Z"
-  },
-  {
-   "personId": "p-silvana-maldonado",
-   "challengeId": "challenge-level-1",
-   "number": 1,
-   "score": 0.47,
-   "moduleScores": {
-    "module-01": 0.41,
-    "module-02": 0.49
-   },
-   "startedAt": "2026-09-24T09:00:00.000Z",
-   "finishedAt": "2026-09-24T10:00:00.000Z"
-  },
-  {
-   "personId": "p-silvana-maldonado",
-   "challengeId": "challenge-level-1",
-   "number": 2,
-   "score": 0.76,
-   "moduleScores": {
-    "module-01": 0.72,
-    "module-02": 0.81
-   },
-   "startedAt": "2026-09-25T09:00:00.000Z",
-   "finishedAt": "2026-09-25T10:00:00.000Z"
-  },
-  {
-   "personId": "p-silvana-maldonado",
-   "challengeId": "challenge-level-2",
-   "number": 1,
-   "score": 0.59,
-   "moduleScores": {
-    "module-17": 0.61,
-    "module-18": 0.65
-   },
-   "startedAt": "2026-10-01T09:00:00.000Z",
-   "finishedAt": "2026-10-01T10:00:00.000Z"
-  },
-  {
-   "personId": "p-silvana-maldonado",
-   "challengeId": "challenge-level-2",
-   "number": 2,
-   "score": 0.93,
-   "moduleScores": {
-    "module-17": 0.9,
-    "module-18": 1
-   },
-   "startedAt": "2026-10-02T09:00:00.000Z",
-   "finishedAt": "2026-10-02T10:00:00.000Z"
-  },
-  {
-   "personId": "p-silvana-maldonado",
-   "challengeId": "challenge-level-3",
-   "number": 1,
-   "score": 0.74,
-   "moduleScores": {
-    "module-03": 0.8
-   },
-   "startedAt": "2026-10-10T09:00:00.000Z",
-   "finishedAt": "2026-10-10T10:00:00.000Z"
   },
   {
    "personId": "p-sebastian-benitez",
@@ -27314,237 +27190,6 @@
    "challengeId": "challenge-level-3",
    "questionId": "m03-20",
    "correct": true
-  },
-  {
-   "personId": "p-silvana-maldonado",
-   "challengeId": "challenge-level-1",
-   "questionId": "m01-plan",
-   "correct": false,
-   "optionIds": [
-    "true"
-   ]
-  },
-  {
-   "personId": "p-silvana-maldonado",
-   "challengeId": "challenge-level-1",
-   "questionId": "m01-net",
-   "correct": false
-  },
-  {
-   "personId": "p-silvana-maldonado",
-   "challengeId": "challenge-level-1",
-   "questionId": "m01-gross",
-   "correct": false,
-   "optionIds": [
-    "b"
-   ]
-  },
-  {
-   "personId": "p-silvana-maldonado",
-   "challengeId": "challenge-level-1",
-   "questionId": "m02-minimal",
-   "correct": false,
-   "optionIds": [
-    "true"
-   ]
-  },
-  {
-   "personId": "p-silvana-maldonado",
-   "challengeId": "challenge-level-1",
-   "questionId": "m02-dopamine",
-   "correct": false
-  },
-  {
-   "personId": "p-silvana-maldonado",
-   "challengeId": "challenge-level-1",
-   "questionId": "m02-hyperbolic",
-   "correct": false,
-   "optionIds": [
-    "b"
-   ]
-  },
-  {
-   "personId": "p-silvana-maldonado",
-   "challengeId": "challenge-level-1",
-   "questionId": "m01-gross",
-   "correct": false,
-   "optionIds": [
-    "b"
-   ]
-  },
-  {
-   "personId": "p-silvana-maldonado",
-   "challengeId": "challenge-level-1",
-   "questionId": "m01-concepts",
-   "correct": true
-  },
-  {
-   "personId": "p-silvana-maldonado",
-   "challengeId": "challenge-level-1",
-   "questionId": "m01-cost",
-   "correct": true,
-   "optionIds": [
-    "a"
-   ]
-  },
-  {
-   "personId": "p-silvana-maldonado",
-   "challengeId": "challenge-level-1",
-   "questionId": "m02-48h",
-   "correct": true,
-   "optionIds": [
-    "b"
-   ]
-  },
-  {
-   "personId": "p-silvana-maldonado",
-   "challengeId": "challenge-level-1",
-   "questionId": "m02-hyperbolic",
-   "correct": true,
-   "optionIds": [
-    "a"
-   ]
-  },
-  {
-   "personId": "p-silvana-maldonado",
-   "challengeId": "challenge-level-1",
-   "questionId": "m02-dopamine",
-   "correct": false
-  },
-  {
-   "personId": "p-silvana-maldonado",
-   "challengeId": "challenge-level-2",
-   "questionId": "m17-transfer",
-   "correct": true,
-   "optionIds": [
-    "a"
-   ]
-  },
-  {
-   "personId": "p-silvana-maldonado",
-   "challengeId": "challenge-level-2",
-   "questionId": "m17-cap",
-   "correct": true
-  },
-  {
-   "personId": "p-silvana-maldonado",
-   "challengeId": "challenge-level-2",
-   "questionId": "m17-guarantee",
-   "correct": true,
-   "optionIds": [
-    "b"
-   ]
-  },
-  {
-   "personId": "p-silvana-maldonado",
-   "challengeId": "challenge-level-2",
-   "questionId": "m18-report",
-   "correct": false,
-   "optionIds": [
-    "b"
-   ]
-  },
-  {
-   "personId": "p-silvana-maldonado",
-   "challengeId": "challenge-level-2",
-   "questionId": "m18-link",
-   "correct": false,
-   "optionIds": [
-    "true"
-   ]
-  },
-  {
-   "personId": "p-silvana-maldonado",
-   "challengeId": "challenge-level-2",
-   "questionId": "m18-code",
-   "correct": true,
-   "optionIds": [
-    "b"
-   ]
-  },
-  {
-   "personId": "p-silvana-maldonado",
-   "challengeId": "challenge-level-2",
-   "questionId": "m17-transfer",
-   "correct": true,
-   "optionIds": [
-    "a"
-   ]
-  },
-  {
-   "personId": "p-silvana-maldonado",
-   "challengeId": "challenge-level-2",
-   "questionId": "m17-guarantee",
-   "correct": true,
-   "optionIds": [
-    "b"
-   ]
-  },
-  {
-   "personId": "p-silvana-maldonado",
-   "challengeId": "challenge-level-2",
-   "questionId": "m17-cap",
-   "correct": true
-  },
-  {
-   "personId": "p-silvana-maldonado",
-   "challengeId": "challenge-level-2",
-   "questionId": "m18-link",
-   "correct": true,
-   "optionIds": [
-    "false"
-   ]
-  },
-  {
-   "personId": "p-silvana-maldonado",
-   "challengeId": "challenge-level-2",
-   "questionId": "m18-messages",
-   "correct": true
-  },
-  {
-   "personId": "p-silvana-maldonado",
-   "challengeId": "challenge-level-2",
-   "questionId": "m18-code",
-   "correct": true,
-   "optionIds": [
-    "b"
-   ]
-  },
-  {
-   "personId": "p-silvana-maldonado",
-   "challengeId": "challenge-level-3",
-   "questionId": "m03-702010",
-   "correct": true,
-   "optionIds": [
-    "a"
-   ]
-  },
-  {
-   "personId": "p-silvana-maldonado",
-   "challengeId": "challenge-level-3",
-   "questionId": "m03-50",
-   "correct": true
-  },
-  {
-   "personId": "p-silvana-maldonado",
-   "challengeId": "challenge-level-3",
-   "questionId": "m03-classify",
-   "correct": true
-  },
-  {
-   "personId": "p-silvana-maldonado",
-   "challengeId": "challenge-level-3",
-   "questionId": "m03-20",
-   "correct": false
-  },
-  {
-   "personId": "p-silvana-maldonado",
-   "challengeId": "challenge-level-3",
-   "questionId": "m03-ant",
-   "correct": true,
-   "optionIds": [
-    "false"
-   ]
   },
   {
    "personId": "p-sebastian-benitez",
@@ -41000,48 +40645,6 @@
    "completed": false
   },
   {
-   "personId": "p-silvana-maldonado",
-   "levelId": "level-1",
-   "guidesRead": 2,
-   "guidesTotal": 2,
-   "challenge": "passed",
-   "firstScore": 0.47,
-   "bestScore": 0.76,
-   "attempts": 2,
-   "completed": true
-  },
-  {
-   "personId": "p-silvana-maldonado",
-   "levelId": "level-2",
-   "guidesRead": 2,
-   "guidesTotal": 2,
-   "challenge": "passed",
-   "firstScore": 0.59,
-   "bestScore": 0.93,
-   "attempts": 2,
-   "completed": true
-  },
-  {
-   "personId": "p-silvana-maldonado",
-   "levelId": "level-3",
-   "guidesRead": 1,
-   "guidesTotal": 1,
-   "challenge": "passed",
-   "firstScore": 0.74,
-   "bestScore": 0.74,
-   "attempts": 1,
-   "completed": true
-  },
-  {
-   "personId": "p-silvana-maldonado",
-   "levelId": "level-4",
-   "guidesRead": 1,
-   "guidesTotal": 1,
-   "challenge": "not_started",
-   "attempts": 0,
-   "completed": false
-  },
-  {
    "personId": "p-sebastian-benitez",
    "levelId": "level-1",
    "guidesRead": 2,
@@ -45600,42 +45203,6 @@
    "completedAt": "2026-09-17"
   },
   {
-   "personId": "p-silvana-maldonado",
-   "missionId": "mission-security",
-   "attempts": 1,
-   "completedAt": "2026-09-10"
-  },
-  {
-   "personId": "p-silvana-maldonado",
-   "missionId": "mission-1",
-   "attempts": 1,
-   "completedAt": "2026-09-24"
-  },
-  {
-   "personId": "p-silvana-maldonado",
-   "missionId": "mission-2",
-   "attempts": 1,
-   "completedAt": "2026-10-01"
-  },
-  {
-   "personId": "p-silvana-maldonado",
-   "missionId": "mission-3",
-   "attempts": 1,
-   "completedAt": "2026-10-01"
-  },
-  {
-   "personId": "p-silvana-maldonado",
-   "missionId": "mission-6",
-   "attempts": 1,
-   "completedAt": "2026-10-01"
-  },
-  {
-   "personId": "p-silvana-maldonado",
-   "missionId": "mission-7",
-   "attempts": 1,
-   "completedAt": "2026-10-09"
-  },
-  {
    "personId": "p-sebastian-benitez",
    "missionId": "mission-security",
    "attempts": 1,
@@ -48470,12 +48037,6 @@
   },
   {
    "challengeId": "weekly-commercial-1",
-   "personId": "p-silvana-maldonado",
-   "result": "done",
-   "reportedAt": "2026-09-12"
-  },
-  {
-   "challengeId": "weekly-commercial-1",
    "personId": "p-sebastian-benitez",
    "result": "not_done",
    "reportedAt": "2026-09-10"
@@ -48485,12 +48046,6 @@
    "personId": "p-carlos-ojeda",
    "result": "done",
    "reportedAt": "2026-09-14"
-  },
-  {
-   "challengeId": "weekly-commercial-2",
-   "personId": "p-silvana-maldonado",
-   "result": "not_done",
-   "reportedAt": "2026-10-11"
   },
   {
    "challengeId": "weekly-commercial-2",
@@ -48509,12 +48064,6 @@
    "personId": "p-carlos-ojeda",
    "result": "partial",
    "reportedAt": "2026-10-09"
-  },
-  {
-   "challengeId": "weekly-commercial-3",
-   "personId": "p-silvana-maldonado",
-   "result": "not_done",
-   "reportedAt": "2026-11-15"
   },
   {
    "challengeId": "weekly-commercial-3",

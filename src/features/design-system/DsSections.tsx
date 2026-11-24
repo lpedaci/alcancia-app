@@ -56,7 +56,7 @@ export function ComponentsSection() {
     <div className="grid grid-cols-[minmax(0,1fr)] gap-(--space-bento-gap) xl:grid-cols-2">
       <Specimen title={c('buttons')} note={c('buttonsNote')}>
         <div className="flex flex-col gap-4">
-          <div className="flex flex-wrap gap-3">
+          <div data-button-catalog className="flex flex-wrap gap-3">
             <Button leadingIcon="save">{c('filled')}</Button>
             <Button variant="tonal" leadingIcon="table_view">
               {c('tonal')}
@@ -66,13 +66,13 @@ export function ComponentsSection() {
               {c('text')}
             </Button>
           </div>
-          <div className="flex flex-wrap gap-3">
+          <div data-button-catalog className="flex flex-wrap gap-3">
             <Button variant="danger" leadingIcon="delete">
               {c('danger')}
             </Button>
             <Button disabledReason={t('designSystem.components.alertWarning')}>{c('disabled')}</Button>
           </div>
-          <div className="flex flex-wrap items-end gap-3">
+          <div data-button-catalog className="flex flex-wrap items-end gap-3">
             <Button size="xs" variant="tonal">
               {c('xs')} · 32 px
             </Button>

@@ -127,7 +127,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
   if (asChild) {
     // Slottable puts the icons inside the child element (for example a router Link).
     return (
-      <Slot.Root ref={ref} className={cn(buttonVariants({ variant, size, fullWidth }), className)} {...props}>
+      <Slot.Root ref={ref} data-variant={variant ?? 'filled'} className={cn(buttonVariants({ variant, size, fullWidth }), className)} {...props}>
         {leadingIcon && <Icon name={leadingIcon} size={iconSize} />}
         <Slot.Slottable>{children}</Slot.Slottable>
         {trailingIcon && <Icon name={trailingIcon} size={iconSize} />}
@@ -139,6 +139,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
     <button
       ref={ref}
       type={type ?? 'button'}
+      // The variant is readable by the button-order check (D-331): primary on the right, secondary on the left
+      data-variant={variant ?? 'filled'}
       className={cn(buttonVariants({ variant, size, fullWidth }), className)}
       disabled={disabled && !disabledReason}
       aria-disabled={softDisabled || undefined}

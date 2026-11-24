@@ -199,6 +199,8 @@ interface DataState extends SharedData {
   updatePerson: (personId: string, patch: Partial<Pick<Person, 'name' | 'email' | 'jobOrProgram' | 'cohortIds' | 'status'>>) => void;
   /** O2 (D-238): remove a person from the program; their learning records leave the aggregates too. */
   removePerson: (personId: string) => void;
+  /** D-330: a demo person who starts from scratch every time (Juana): no record of hers is kept, consent included. */
+  restartPerson: (personId: string) => void;
   /** O2: a new cohort with its tutor and deadline (F8). */
   addCohort: (cohort: Cohort) => void;
   /** O2 (D-238): edit a cohort's name, tutor or deadline. */
@@ -295,6 +297,24 @@ export const useDataStore = create<DataState>()(
           diagnostics: state.diagnostics.filter((d) => d.personId !== personId),
           cohortPosts: state.cohortPosts.filter((p) => p.personId !== personId),
         })),
+      restartPerson: (personId) =>
+        set((state) => ({
+          consents: state.consents.filter((c) => c.personId !== personId),
+          diagnostics: state.diagnostics.filter((d) => d.personId !== personId),
+          guideProgress: state.guideProgress.filter((g) => g.personId !== personId),
+          challengeAttempts: state.challengeAttempts.filter((a) => a.personId !== personId),
+          itemResponses: state.itemResponses.filter((i) => i.personId !== personId),
+          levelLearning: state.levelLearning.filter((l) => l.personId !== personId),
+          unlockRecords: state.unlockRecords.filter((u) => !(u.target.kind === 'person' && u.target.personId === personId)),
+          missionCompletions: state.missionCompletions.filter((m) => m.personId !== personId),
+          escapeCompletions: state.escapeCompletions.filter((e) => e.personId !== personId),
+          weeklyReports: state.weeklyReports.filter((w) => w.personId !== personId),
+          followUps: state.followUps.filter((f) => f.personId !== personId),
+          tutorQuestions: state.tutorQuestions.filter((q) => q.personId !== personId),
+          cohortPosts: state.cohortPosts.filter((c) => c.personId !== personId),
+          sessionRequests: state.sessionRequests.filter((r) => r.personId !== personId),
+          privacyRequests: state.privacyRequests.filter((r) => r.personId !== personId),
+        })),
       addCohort: (cohort) => set((state) => ({ cohorts: [...state.cohorts, cohort] })),
       updateCohort: (cohortId, patch) =>
         set((state) => ({
@@ -325,21 +345,22 @@ export const useDataStore = create<DataState>()(
       // with new ids; older demo data goes back to the seed with the accepted notices moved to the new ids.
       // Version 4 (D-317): demo data saved before the builder gets its example lesson and card.
       // Version 5 (D-319): and the demo agenda of sessions with the tutor.
-      version: 5,
+      // Version 6 (D-330): Juana Erling takes the place of the generated person she replaces in Comercial.
+      version: 6,
       storage: createJSONStorage(() => localStorage),
       migrate: (persisted, version) => {
         const old = (persisted ?? {}) as Partial<SharedData>;
-        if (version >= 5) return persisted as DataState;
+        if (version >= 6) return persisted as DataState;
         if (version >= 3) {
           const fresh = seedData();
           const kept = persisted as DataState;
-          return {
+          return withJuana({
             ...kept,
             customLessons: kept.customLessons ?? fresh.customLessons,
             customCards: kept.customCards ?? fresh.customCards,
             tutorSessions: kept.tutorSessions ?? fresh.tutorSessions,
             sessionRequests: kept.sessionRequests ?? fresh.sessionRequests,
-          } as DataState;
+          } as DataState);
         }
         const renamed: Record<string, string> = { 'p-paula': 'p-julieta', 'p-silvia': 'p-bettyna' };
         const consents = (old.consents ?? []).map((c) => ({ ...c, personId: renamed[c.personId] ?? c.personId }));
@@ -348,6 +369,34 @@ export const useDataStore = create<DataState>()(
     },
   ),
 );
+
+/**
+ * D-330: demo data saved before Juana keeps everything, but the generated person she replaces in
+ * Comercial becomes Juana (from the seed), with no learning record, so the cohort stays under 5.
+ */
+const REPLACED_BY_JUANA = 'p-silvana-maldonado';
+function withJuana(state: DataState): DataState {
+  // A partial saved state (for example only the accepted notices) is merged over the seed, which has Juana already
+  if (!Array.isArray(state.people) || state.people.some((p) => p.id === 'p-juana')) return state;
+  const juana = seedData().people.find((p) => p.id === 'p-juana');
+  if (!juana) return state;
+  const gone = (r: { personId: string }) => r.personId !== REPLACED_BY_JUANA;
+  return {
+    ...state,
+    people: [...state.people.filter((p) => p.id !== REPLACED_BY_JUANA), juana],
+    diagnostics: state.diagnostics.filter(gone),
+    guideProgress: state.guideProgress.filter(gone),
+    challengeAttempts: state.challengeAttempts.filter(gone),
+    itemResponses: state.itemResponses.filter(gone),
+    levelLearning: state.levelLearning.filter(gone),
+    missionCompletions: state.missionCompletions.filter(gone),
+    escapeCompletions: state.escapeCompletions.filter(gone),
+    weeklyReports: state.weeklyReports.filter(gone),
+    followUps: state.followUps.filter(gone),
+    tutorQuestions: state.tutorQuestions.filter(gone),
+    cohortPosts: state.cohortPosts.filter(gone),
+  };
+}
 
 export const personById = (people: Person[], id: string) => people.find((p) => p.id === id);
 

@@ -210,6 +210,11 @@
         "employer": "Organización",
         "education": "Educación",
         "product": "Producto"
+      },
+      "juana": {
+        "chip": "Participante · recién ingresa",
+        "does": "Abre su cuenta por primera vez: aviso de privacidad, bienvenida, Conocerte y seguridad.",
+        "explore": "El primer ingreso completo, en el nivel 0. Empieza de cero cada vez que la eliges."
       }
     },
     "simulator": {
@@ -1245,7 +1250,8 @@
       "p-sofia": "Equipo de producto · adopción",
       "p-nicolas": "Equipo de producto · impacto",
       "p-julieta": "Admin de L&D y Beneficios",
-      "p-bettyna": "Coordinación académica"
+      "p-bettyna": "Coordinación académica",
+      "p-juana": "Participante · primer ingreso · nivel 0"
     },
     "unlockAll": "Ver todo desbloqueado",
     "unlockAllHelp": "En la billetera, para recorrer todas las secciones",
@@ -3961,7 +3967,7 @@
     },
     "components": {
       "buttons": "Botones",
-      "buttonsNote": "Uno solo Filled por región. El Filled de error solo confirma acciones destructivas y repite la consecuencia.",
+      "buttonsNote": "Uno solo Filled por región. El Filled de error solo confirma acciones destructivas y repite la consecuencia. En una fila de acciones, los secundarios van a la izquierda y el principal a la derecha; en celular se apilan con el principal arriba (D-331).",
       "filled": "Guardar meta",
       "tonal": "Ver como tabla",
       "outlined": "Cancelar",
@@ -4105,6 +4111,11 @@
       }
     },
     "patterns": [
+      [
+        "D-331",
+        "Orden de las acciones",
+        "Secundarios a la izquierda, principal a la derecha; en celular, apilados con el principal arriba."
+      ],
       [
         "D-329",
         "Menús no modales",

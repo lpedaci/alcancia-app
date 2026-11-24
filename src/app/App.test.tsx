@@ -30,6 +30,7 @@ describe('G0 landing (F0)', () => {
     expect(links.map((l) => l.getAttribute('href'))).toEqual([
       '/login?demo=mariana',
       '/login?demo=diego',
+      '/login?demo=juana',
       '/login?demo=kevin',
       '/login?demo=julieta',
       '/login?demo=ricardo',

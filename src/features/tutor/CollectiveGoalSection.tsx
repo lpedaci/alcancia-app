@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { DEMO_TODAY } from '@/app/config';
 import { Button } from '@/components/ui/Button';
+import { ActionRow } from '@/components/ui/ActionRow';
 import { IconTile } from '@/components/ui/IconTile';
 import { Select } from '@/components/ui/Select';
 import { TextField } from '@/components/ui/TextField';
@@ -87,14 +88,14 @@ export function CollectiveGoalSection({ cohort }: { cohort: Cohort }) {
           />
           <TextField label={t('community.goal.share')} helperText={t('community.goal.shareHelp')} value={share} onChange={(e) => setShare(e.target.value.replace(/\D/g, ''))} error={shareError} inputMode="numeric" />
           <TextField type="date" label={t('community.goal.dueLabel')} helperText={t('community.goal.dueHelp')} value={due} min={DEMO_TODAY} onChange={(e) => setDue(e.target.value)} error={dueError} />
-          <div className="flex flex-wrap gap-3">
-            <Button leadingIcon="check" onClick={save}>
-              {t('community.goal.save')}
-            </Button>
+          <ActionRow>
             <Button variant="outlined" onClick={() => setEditing(false)}>
               {t('ui.cancel')}
             </Button>
-          </div>
+            <Button leadingIcon="check" onClick={save}>
+              {t('community.goal.save')}
+            </Button>
+          </ActionRow>
         </div>
       )}
     </section>

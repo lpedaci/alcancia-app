@@ -149,6 +149,13 @@ function generateOrg(cfg) {
       let device;
       let forced;
       const demo = cfg.forced.find((f) => f.cohortId === c.id && f.index === i);
+      if (demo?.keepSequence) {
+        // Draws the same numbers as the generated person it replaces, so every later record stays the same (D-330)
+        newName();
+        pick(c.jobs);
+        rand();
+        if (!(rand() < c.activeRate)) rand();
+      }
       if (demo) {
         ({ name, id, job, device } = demo);
         forced = 'active';
@@ -462,25 +469,29 @@ function generateOrg(cfg) {
     escapeCompletions.push({ personId: l.personId, badges, completedAt: iso(DEMO_TODAY - Math.floor(2 + hash(`${l.personId}-day`) * 40) * DAY) });
   }
 
+  // People who start from scratch in the demo (D-330): no learning record, whatever the generator drew for them.
+  const blank = new Set(cfg.blankIds ?? []);
+  const keep = (r) => !blank.has(r.personId);
   return {
-    escapeCompletions,
+    escapeCompletions: escapeCompletions.filter(keep),
     collectiveGoals,
-    cohortPosts,
+    cohortPosts: cohortPosts.filter(keep),
     organization,
     program,
     cohorts,
-    people: [...staff, ...participants],
-    diagnostics,
-    guideProgress,
-    challengeAttempts,
-    itemResponses,
-    levelLearning,
-    unlockRecords,
-    missionCompletions,
+    // Juana joins on the demo date (D-330): her account was activated today, she has no progress yet.
+    people: [...staff, ...participants.map((p) => (blank.has(p.id) ? { ...p, activatedAt: iso(DEMO_TODAY) } : p))],
+    diagnostics: diagnostics.filter(keep),
+    guideProgress: guideProgress.filter(keep),
+    challengeAttempts: challengeAttempts.filter(keep),
+    itemResponses: itemResponses.filter(keep),
+    levelLearning: levelLearning.filter(keep),
+    unlockRecords: unlockRecords.filter((r) => !(r.target?.kind === 'person' && blank.has(r.target.personId))),
+    missionCompletions: missionCompletions.filter(keep),
     weeklyChallenges,
-    weeklyReports,
-    followUps,
-    tutorQuestions,
+    weeklyReports: weeklyReports.filter(keep),
+    followUps: followUps.filter(keep),
+    tutorQuestions: tutorQuestions.filter(keep),
   };
 }
 
@@ -553,8 +564,11 @@ const ANDINA = {
   forced: [
     { cohortId: 'cohort-operations', index: 0, id: 'p-mariana', name: 'Mariana López', job: 'Analista de Operaciones', device: 'desktop' },
     { cohortId: 'cohort-operations', index: 1, id: 'p-diego', name: 'Diego Suárez', job: 'Operario de depósito', device: 'mobile' },
+    // D-330: Juana just joined (level 0); she replaces a generated person without changing the rest of the data.
+    { cohortId: 'cohort-commercial', index: 0, id: 'p-juana', name: 'Juana Erling', job: 'Analista Comercial', device: 'desktop', keepSequence: true },
   ],
   freshIds: [],
+  blankIds: ['p-juana'],
   levelBase: { operations: 2.4, administration: 3.6, technology: 4.4, commercial: 3.2 },
   goals: [
     { cohortId: 'cohort-operations', kind: 'mission', targetId: 'mission-emergency-fund', targetShare: 0.6, dueDate: '2026-12-18' },

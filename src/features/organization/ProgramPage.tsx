@@ -337,9 +337,6 @@ export function ProgramPage() {
       >
         {dirty && <StatusPill tone="warning" icon="edit" label={t('org.program.unsaved')} className="hidden sm:inline-flex" />}
         <span className="hidden flex-1 sm:block" />
-        <Button leadingIcon="check" onClick={save} disabled={!dirty} className="flex-1 sm:flex-none">
-          {t('org.program.save')}
-        </Button>
         <Button
           variant="outlined"
           className="flex-1 sm:flex-none"
@@ -351,6 +348,9 @@ export function ProgramPage() {
         >
           <span className="sm:hidden">{t('org.program.discardShort')}</span>
           <span className="hidden sm:inline">{t('org.program.discard')}</span>
+        </Button>
+        <Button leadingIcon="check" onClick={save} disabled={!dirty} className="flex-1 sm:flex-none">
+          {t('org.program.save')}
         </Button>
       </div>
 

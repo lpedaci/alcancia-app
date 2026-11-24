@@ -29,11 +29,11 @@ export function AccessDeniedPage() {
       ]}
       actions={
         <>
-          <Button asChild leadingIcon="home">
-            <Link to={homePath(user)}>{t('forbidden.backHome')}</Link>
-          </Button>
           <Button variant="outlined" leadingIcon="arrow_back" onClick={() => navigate(-1)}>
             {t('forbidden.back')}
+          </Button>
+          <Button asChild leadingIcon="home">
+            <Link to={homePath(user)}>{t('forbidden.backHome')}</Link>
           </Button>
         </>
       }

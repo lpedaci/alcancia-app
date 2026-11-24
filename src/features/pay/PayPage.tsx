@@ -5,6 +5,7 @@ import { Link, useParams } from 'react-router';
 import { MoneyInput } from '@/components/money/MoneyInput';
 import { MoneyText } from '@/components/money/MoneyText';
 import { Button } from '@/components/ui/Button';
+import { ActionRow } from '@/components/ui/ActionRow';
 import { ConfirmDialog } from '@/components/ui/Dialog';
 import { Icon, type IconName } from '@/components/ui/Icon';
 import { IconTile } from '@/components/ui/IconTile';
@@ -349,14 +350,14 @@ function TransferFlow() {
               <p className="text-body-small text-on-surface-variant">
                 {t('pay.balance')} <MoneyText value={wallet.balance} />
               </p>
-              <div className="flex flex-wrap gap-3 border-t border-outline-variant pt-4">
-                <Button type="submit" trailingIcon="arrow_forward">
-                  {t('pay.transfer.continue')}
-                </Button>
+              <ActionRow className="border-t border-outline-variant pt-4">
                 <Button asChild variant="text">
                   <Link to="/app/pay">{t('pay.back')}</Link>
                 </Button>
-              </div>
+                <Button type="submit" trailingIcon="arrow_forward">
+                  {t('pay.transfer.continue')}
+                </Button>
+              </ActionRow>
             </form>
           )}
           {stage === 'confirm' && payee && parsed && (
@@ -382,17 +383,17 @@ function TransferFlow() {
                   </div>
                 ))}
               </dl>
-              <div className="flex flex-wrap gap-3 border-t border-outline-variant pt-4">
-                <Button leadingIcon="check" onClick={confirm}>
-                  {t('pay.transfer.confirm')}
+              <ActionRow className="border-t border-outline-variant pt-4">
+                <Button asChild variant="text">
+                  <Link to="/app/pay">{t('pay.cancel')}</Link>
                 </Button>
                 <Button variant="outlined" leadingIcon="edit" onClick={() => setStage('form')}>
                   {t('pay.transfer.edit')}
                 </Button>
-                <Button asChild variant="text">
-                  <Link to="/app/pay">{t('pay.cancel')}</Link>
+                <Button leadingIcon="check" onClick={confirm}>
+                  {t('pay.transfer.confirm')}
                 </Button>
-              </div>
+              </ActionRow>
             </section>
           )}
           {stage === 'receipt' && movement && payee && (
@@ -406,7 +407,10 @@ function TransferFlow() {
                   [t('pay.transfer.entity'), `${payee.entity} (${payee.accountType})`],
                 ]}
               />
-              <div className="flex flex-wrap gap-3">
+              <ActionRow>
+                <Button asChild variant="outlined">
+                  <Link to="/app/pay">{t('pay.back')}</Link>
+                </Button>
                 <Button
                   leadingIcon="send_money"
                   onClick={() => {
@@ -418,10 +422,7 @@ function TransferFlow() {
                 >
                   {t('pay.transfer.another')}
                 </Button>
-                <Button asChild variant="outlined">
-                  <Link to="/app/pay">{t('pay.back')}</Link>
-                </Button>
-              </div>
+              </ActionRow>
             </>
           )}
         </div>
@@ -504,20 +505,23 @@ function QrFlow() {
                   <MoneyText value={merchant.amount} />
                 </span>
               </div>
-              <div className="flex flex-wrap gap-3 border-t border-outline-variant pt-4">
-                <Button leadingIcon="check" onClick={pay}>
-                  {t('pay.qr.pay')}
-                </Button>
+              <ActionRow className="border-t border-outline-variant pt-4">
                 <Button variant="text" onClick={() => setMerchant(undefined)}>
                   {t('pay.cancel')}
                 </Button>
-              </div>
+                <Button leadingIcon="check" onClick={pay}>
+                  {t('pay.qr.pay')}
+                </Button>
+              </ActionRow>
             </section>
           )}
           {stage === 'receipt' && movement && merchant && (
             <>
               <Receipt movement={movement} headingRef={headingRef} rows={[[t('pay.qr.merchant'), merchant.name], [t('pay.qr.method'), t('pay.qr.methodValue')]]} />
-              <div className="flex flex-wrap gap-3">
+              <ActionRow>
+                <Button asChild variant="outlined">
+                  <Link to="/app/pay">{t('pay.back')}</Link>
+                </Button>
                 <Button
                   leadingIcon="qr_code_scanner"
                   onClick={() => {
@@ -527,10 +531,7 @@ function QrFlow() {
                 >
                   {t('pay.qr.another')}
                 </Button>
-                <Button asChild variant="outlined">
-                  <Link to="/app/pay">{t('pay.back')}</Link>
-                </Button>
-              </div>
+              </ActionRow>
             </>
           )}
         </div>

@@ -140,4 +140,5 @@
 | 16/11/2026 | Ajuste de Lourdes | Maqueta del teléfono de la portada sin Fuerte en la pantalla de inicio (D-327) | Hecho |
 | 16/11/2026 | 36 · Informe final y release | `docs/review.md`; imágenes del README, imagen para compartir y capturas regeneradas; README al día en los dos idiomas; release v1.0.0 en GitHub | Hecho |
 | 23/11/2026 | Ajuste de Lourdes | Los menús desplegables ("Ver como", el del avatar y los de las listas) ya no traban el desplazamiento: la página no salta al abrirlos (D-329) | Hecho |
+| 24/11/2026 | Ajuste de Lourdes | Juana Erling, recorrido de primer ingreso en el nivel 0 (D-330); botones principales a la derecha en toda la plataforma, con `ActionRow` y una prueba en todas las pantallas (D-331) | Hecho |
 | (pendiente) | Cierre de la fase B | Después del informe final (`docs/review.md`, paso 36), crear la Release `v1.0.0` en GitHub con notas que resuman las funcionalidades (D-306). Es el último paso del plan | Pendiente |

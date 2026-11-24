@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import { MoneyInput } from '@/components/money/MoneyInput';
 import { MoneyText } from '@/components/money/MoneyText';
 import { Button } from '@/components/ui/Button';
+import { ActionRow } from '@/components/ui/ActionRow';
 import { ConfirmDialog, Dialog, DialogClose, DialogContent } from '@/components/ui/Dialog';
 import { Icon } from '@/components/ui/Icon';
 import { IconTile } from '@/components/ui/IconTile';
@@ -218,14 +219,14 @@ function Pockets() {
                   ))}
                 </dl>
                 <p className="text-body-medium text-on-surface-variant">{months.gte(3) ? t('pockets.fund.ready') : t('pockets.fund.invest')}</p>
-                <div className="flex flex-wrap gap-3">
-                  <Button leadingIcon="add" onClick={() => setMove({ pocket: fund, kind: 'in' })}>
-                    {t('pockets.add')}
-                  </Button>
+                <ActionRow>
                   <Button variant="outlined" leadingIcon="remove" onClick={() => setMove({ pocket: fund, kind: 'out' })}>
                     {t('pockets.withdraw')}
                   </Button>
-                </div>
+                  <Button leadingIcon="add" onClick={() => setMove({ pocket: fund, kind: 'in' })}>
+                    {t('pockets.add')}
+                  </Button>
+                </ActionRow>
               </>
             ) : (
               <>
@@ -371,23 +372,24 @@ function GoalCard({ pocket, onMove }: { pocket: Pocket; onMove: (m: Move) => voi
         <p className="text-body-medium text-on-surface-variant">{t('pockets.goals.noGoal')}</p>
       )}
       <div className="mt-auto flex flex-wrap gap-2 border-t border-outline-variant pt-4">
-        <Button size="xs" leadingIcon="add" onClick={() => onMove({ pocket, kind: 'in' })}>
-          {t('pockets.add')}
-        </Button>
-        <Button size="xs" variant="outlined" leadingIcon="remove" onClick={() => onMove({ pocket, kind: 'out' })}>
-          {t('pockets.withdraw')}
-        </Button>
-        {!pocket.goal && (
-          <Button size="xs" variant="text" leadingIcon="flag" onClick={() => onMove({ pocket, kind: 'goal' })}>
-            {t('pockets.goals.setGoal')}
-          </Button>
-        )}
+        {/* Secondary actions first, "Separar dinero" last and on the right (D-331) */}
         {removable && (
-          <Button size="xs" variant="text" leadingIcon="delete" className="ml-auto" onClick={() => setDeleting(true)}>
+          <Button size="xs" variant="text" leadingIcon="delete" className="mr-auto" onClick={() => setDeleting(true)}>
             {t('pockets.delete.action')}
             <span className="sr-only"> {pocket.name}</span>
           </Button>
         )}
+        {!pocket.goal && (
+          <Button size="xs" variant="text" leadingIcon="flag" className={removable ? undefined : 'mr-auto'} onClick={() => onMove({ pocket, kind: 'goal' })}>
+            {t('pockets.goals.setGoal')}
+          </Button>
+        )}
+        <Button size="xs" variant="outlined" leadingIcon="remove" className={removable || !pocket.goal ? undefined : 'ml-auto'} onClick={() => onMove({ pocket, kind: 'out' })}>
+          {t('pockets.withdraw')}
+        </Button>
+        <Button size="xs" leadingIcon="add" onClick={() => onMove({ pocket, kind: 'in' })}>
+          {t('pockets.add')}
+        </Button>
       </div>
       {removable && (
         <ConfirmDialog

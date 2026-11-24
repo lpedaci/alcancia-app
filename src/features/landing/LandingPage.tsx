@@ -55,6 +55,7 @@ const ROLES: Record<OrganizationKind, { id: string; name: string; role: Role }[]
   employer: [
     { id: 'mariana', name: 'Mariana López', role: 'participant' },
     { id: 'diego', name: 'Diego Suárez', role: 'participant' },
+    { id: 'juana', name: 'Juana Erling', role: 'participant' },
     { id: 'kevin', name: 'Kevin Giovanni', role: 'tutor' },
     { id: 'julieta', name: 'Julieta Martorelli', role: 'ld_admin' },
     { id: 'ricardo', name: 'Ricardo Benítez', role: 'sponsor' },
@@ -75,7 +76,8 @@ const CONTEXTS: OrganizationKind[] = ['employer', 'education', 'product'];
 
 /** Columns of each card on the 6-column grid, with no holes (2.4). */
 function roleSpan(kind: OrganizationKind, index: number): string {
-  if (kind === 'employer') return cn(index < 2 ? 'large:col-span-3' : 'large:col-span-2', index === 4 && 'md:col-span-2');
+  // Six people since D-330: two rows of three, the participants first
+  if (kind === 'employer') return 'large:col-span-2';
   if (kind === 'education') return 'large:col-span-3';
   return cn('large:col-span-2', index === 2 && 'md:col-span-2');
 }

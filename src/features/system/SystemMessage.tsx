@@ -62,7 +62,8 @@ export function SystemMessage({
               </p>
               <h1 className="text-headline-medium text-balance text-on-surface">{title}</h1>
               <p className="text-body-large text-on-surface-variant">{body}</p>
-              <div className="flex w-full flex-col gap-3 pt-2 sm:w-auto sm:flex-row">{actions}</div>
+              {/* Secondary first and on the left, primary last and on the right; on phones the primary goes on top (D-331) */}
+              <div className="flex w-full flex-col-reverse gap-3 pt-2 sm:w-auto sm:flex-row">{actions}</div>
               {children}
             </div>
             {fuerte && (

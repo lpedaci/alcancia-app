@@ -210,6 +210,11 @@
         "employer": "Organization",
         "education": "Education",
         "product": "Product"
+      },
+      "juana": {
+        "chip": "Participant · just joined",
+        "does": "Opens her account for the first time: privacy notice, welcome, Get to know you and security.",
+        "explore": "The whole first sign-in, at level 0. She starts from scratch every time you choose her."
       }
     },
     "simulator": {
@@ -1051,7 +1056,8 @@
       "p-sofia": "Product team · adoption",
       "p-nicolas": "Product team · impact",
       "p-julieta": "L&D and Benefits admin",
-      "p-bettyna": "Academic coordination"
+      "p-bettyna": "Academic coordination",
+      "p-juana": "Participant · first sign-in · level 0"
     },
     "unlockAll": "See everything unlocked",
     "unlockAllHelp": "In the wallet, to explore every section",
@@ -5193,7 +5199,7 @@
     ],
     "components": {
       "buttons": "Buttons",
-      "buttonsNote": "Only one Filled per region. The error Filled only confirms destructive actions and repeats the consequence.",
+      "buttonsNote": "Only one Filled per region. The error Filled only confirms destructive actions and repeats the consequence. In a row of actions, secondary ones go on the left and the primary on the right; on phones they stack with the primary on top (D-331).",
       "filled": "Save goal",
       "tonal": "See as a table",
       "outlined": "Cancel",
@@ -5395,6 +5401,11 @@
       "chip": "Fixed label"
     },
     "patterns": [
+      [
+        "D-331",
+        "Action order",
+        "Secondary on the left, primary on the right; on phones, stacked with the primary on top."
+      ],
       [
         "D-329",
         "Non-modal menus",

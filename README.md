@@ -124,8 +124,8 @@ Cada enlace entra a la demo con esa persona. El acceso con SSO y verificación e
     <td width="50%" valign="top">
       <img src="docs/readme/role-participant.webp" alt="Inicio de Diego en el nivel 2, Pagar: el saldo disponible de $ 459.477,09 con su poder de compra, las acciones rápidas, lo separado en apartados y el próximo desbloqueo, Presupuesto, con lo que falta y el atajo "Ya sé esto".">
       <h3>Participante</h3>
-      <p>Usa la billetera: cobra, paga, ahorra y decide. Diego empieza en el nivel 2, desde el celular; Mariana está en el nivel 6, con el fondo de emergencia a 2 de 3 meses.</p>
-      <p><a href="https://lpedaci.github.io/alcancia-app/#/login?demo=diego">Entrar como Diego</a> · <a href="https://lpedaci.github.io/alcancia-app/#/login?demo=mariana">Entrar como Mariana</a></p>
+      <p>Usa la billetera: cobra, paga, ahorra y decide. Juana recién ingresa: abre su cuenta en el nivel 0, con el aviso de privacidad, la bienvenida, Conocerte y la seguridad, y empieza de cero cada vez que se la elige. Diego está en el nivel 2, desde el celular; Mariana, en el nivel 6, con el fondo de emergencia a 2 de 3 meses.</p>
+      <p><a href="https://lpedaci.github.io/alcancia-app/#/login?demo=juana">Entrar como Juana</a> · <a href="https://lpedaci.github.io/alcancia-app/#/login?demo=diego">Entrar como Diego</a> · <a href="https://lpedaci.github.io/alcancia-app/#/login?demo=mariana">Entrar como Mariana</a></p>
     </td>
     <td width="50%" valign="top">
       <img src="docs/readme/role-tutor.webp" alt="Panel de Kevin, tutor: participación del 80 %, módulos completados, promedio de desafíos y desafíos semanales cumplidos, y una lista 'Para atender' con plazos y personas que no empezaron un módulo.">

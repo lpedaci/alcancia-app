@@ -5,6 +5,7 @@ import brokersJson from '@/data/brokers.json';
 import { MoneyInput } from '@/components/money/MoneyInput';
 import { MoneyText } from '@/components/money/MoneyText';
 import { Button } from '@/components/ui/Button';
+import { ActionRow } from '@/components/ui/ActionRow';
 import { ConfirmDialog } from '@/components/ui/Dialog';
 import { Icon, type IconName } from '@/components/ui/Icon';
 import { IconTile } from '@/components/ui/IconTile';
@@ -273,7 +274,10 @@ function OpenSection() {
           {t('invest.open.noProfile')}
         </InlineAlert>
       )}
-      <div className="flex flex-wrap gap-3">
+      <ActionRow>
+        <Button asChild variant="tonal" leadingIcon="flag">
+          <Link to="/app/missions/mission-broker-account">{t('invest.open.mission')}</Link>
+        </Button>
         <Button
           leadingIcon="account_balance"
           onClick={() => {
@@ -283,10 +287,7 @@ function OpenSection() {
         >
           {t('invest.open.button')}
         </Button>
-        <Button asChild variant="tonal" leadingIcon="flag">
-          <Link to="/app/missions/mission-broker-account">{t('invest.open.mission')}</Link>
-        </Button>
-      </div>
+      </ActionRow>
     </section>
   );
 }
@@ -453,14 +454,14 @@ function AccountSection() {
           </p>
           <MoneyInput label={t('invest.transfer.amount')} helperText={t('invest.transfer.help')} value={amount} onChange={(e) => setAmount(e.target.value)} />
           {failure && <InlineAlert tone="info">{failure}</InlineAlert>}
-          <div className="flex flex-wrap gap-3">
-            <Button leadingIcon="arrow_forward" onClick={() => move('in')}>
-              {t('invest.transfer.fund')}
-            </Button>
+          <ActionRow>
             <Button variant="outlined" leadingIcon="arrow_back" onClick={() => move('out')}>
               {t('invest.transfer.withdraw')}
             </Button>
-          </div>
+            <Button leadingIcon="arrow_forward" onClick={() => move('in')}>
+              {t('invest.transfer.fund')}
+            </Button>
+          </ActionRow>
           <InlineAlert tone="info" live="none">
             {t('invest.account.custodyNote')}
           </InlineAlert>
@@ -731,14 +732,14 @@ function Instrument() {
                 )}
                 <p className="text-body-small text-on-surface-variant">{t('invest.order.costsNote')}</p>
                 {failure && <InlineAlert tone="info">{failure}</InlineAlert>}
-                <div className="flex flex-wrap gap-3">
-                  <Button leadingIcon="add" disabled={!validUnits} onClick={() => setConfirm('buy')}>
-                    {t('invest.order.buy')}
-                  </Button>
+                <ActionRow>
                   <Button variant="outlined" leadingIcon="remove" disabled={!validUnits || !position || position.settled < units} onClick={() => setConfirm('sell')}>
                     {t('invest.order.sell')}
                   </Button>
-                </div>
+                  <Button leadingIcon="add" disabled={!validUnits} onClick={() => setConfirm('buy')}>
+                    {t('invest.order.buy')}
+                  </Button>
+                </ActionRow>
                 {position && (
                   <p className="text-body-small text-on-surface-variant">{t('invest.order.youHave', { count: position.settled, pending: position.pending > 0 ? t('invest.holdings.pending', { count: position.pending }).replace(/^/, ' · ') : '' })}</p>
                 )}

@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { Link, useParams, useSearchParams } from 'react-router';
 import { DEMO_TODAY } from '@/app/config';
 import { Button } from '@/components/ui/Button';
+import { ActionRow } from '@/components/ui/ActionRow';
 import { ChoiceGroup } from '@/components/ui/ChoiceGroup';
 import { Icon } from '@/components/ui/Icon';
 import { IconTile } from '@/components/ui/IconTile';
@@ -245,21 +246,8 @@ function GuideReader({ guide, start = 0, from, custom }: { guide: Guide; start?:
             >
               <IconTile icon="task_alt" tone="tertiary" />
               <p className="text-body-large text-on-surface">{t('learn.guide.doneBody', { title: guide.title })}</p>
-              <div className="flex flex-wrap gap-3">
-                {/* The next guide of the module, to go deeper (D-276) */}
-                {(() => {
-                  const next = custom ? undefined : guidesOfModule(guide.moduleId).find((g) => guideNumber(g.id) === guideNumber(guide.id) + 1);
-                  return next ? (
-                    <Button asChild trailingIcon="arrow_forward">
-                      <Link to={`/app/learn/guides/${next.id}`}>{t('learn.guide.toNext', { title: next.title })}</Link>
-                    </Button>
-                  ) : null;
-                })()}
-                {challengeId && !custom && (
-                  <Button asChild trailingIcon="arrow_forward">
-                    <Link to={`/app/learn/challenges/${challengeId}`}>{t('learn.guide.toChallenge', { level: level?.order })}</Link>
-                  </Button>
-                )}
+              {/* Back on the left, the next steps on the right; one filled button: the challenge when there is one (D-331) */}
+              <ActionRow className="w-full">
                 {from ? (
                   <Button asChild variant="outlined" leadingIcon="arrow_back">
                     <Link to={from}>{t('learn.guide.backTo', { section: returnLabel(from, t) })}</Link>
@@ -269,7 +257,21 @@ function GuideReader({ guide, start = 0, from, custom }: { guide: Guide; start?:
                     <Link to="/app/learn">{t('learn.guide.backToLearn')}</Link>
                   </Button>
                 )}
-              </div>
+                {/* The next guide of the module, to go deeper (D-276) */}
+                {(() => {
+                  const next = custom ? undefined : guidesOfModule(guide.moduleId).find((g) => guideNumber(g.id) === guideNumber(guide.id) + 1);
+                  return next ? (
+                    <Button asChild variant={challengeId && !custom ? 'tonal' : 'filled'} trailingIcon="arrow_forward">
+                      <Link to={`/app/learn/guides/${next.id}`}>{t('learn.guide.toNext', { title: next.title })}</Link>
+                    </Button>
+                  ) : null;
+                })()}
+                {challengeId && !custom && (
+                  <Button asChild trailingIcon="arrow_forward">
+                    <Link to={`/app/learn/challenges/${challengeId}`}>{t('learn.guide.toChallenge', { level: level?.order })}</Link>
+                  </Button>
+                )}
+              </ActionRow>
             </motion.section>
           ) : (
             <section aria-labelledby="block-title" className="flex flex-col gap-6 overflow-hidden rounded-xl border border-outline-variant bg-surface-container-lowest p-(--space-card-padding)">

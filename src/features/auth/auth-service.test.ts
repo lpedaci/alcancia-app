@@ -126,3 +126,24 @@ describe('"Restablecer demo" (CLAUDE.md 7)', () => {
     expect(localStorage.getItem(localKey('p-mariana'))).toBeNull();
   });
 });
+
+describe('first sign-in journey (D-330)', () => {
+  it('starts Juana from scratch every time she is chosen: notice, no records, level 0', () => {
+    const data = () => useDataStore.getState();
+    expect(data().people.find((p) => p.id === 'p-juana')).toMatchObject({ name: 'Juana Erling', status: 'active' });
+    expect(data().guideProgress.some((g) => g.personId === 'p-juana')).toBe(false);
+    // She went through the notice and read a guide...
+    expect(switchPerson('p-juana')).toBe('/consent');
+    acceptPrivacyNotice('p-juana');
+    data().markGuideDone('p-juana', 'module-01', 'module-01-guide-1', '2026-11-16T12:00:00.000Z');
+    writeLocal('p-juana', (local) => local);
+    expect(localStorage.getItem(localKey('p-juana'))).not.toBeNull();
+    expect(data().guideProgress.some((g) => g.personId === 'p-juana')).toBe(true);
+    // ...and choosing her again opens her first sign-in once more
+    switchPerson('p-mariana');
+    expect(switchPerson('p-juana')).toBe('/consent');
+    expect(hasConsent('p-juana')).toBe(false);
+    expect(data().guideProgress.some((g) => g.personId === 'p-juana')).toBe(false);
+    expect(localStorage.getItem(localKey('p-juana'))).toBeNull();
+  });
+});

@@ -27,11 +27,11 @@ export function NotFoundPage() {
       suggestions={suggestions}
       actions={
         <>
-          <Button asChild leadingIcon="home">
-            <Link to={home}>{t('notFound.home')}</Link>
-          </Button>
           <Button variant="outlined" leadingIcon="arrow_back" onClick={() => navigate(-1)}>
             {t('notFound.back')}
+          </Button>
+          <Button asChild leadingIcon="home">
+            <Link to={home}>{t('notFound.home')}</Link>
           </Button>
         </>
       }
